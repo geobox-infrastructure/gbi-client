@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('export project overview') }}{% endblock %}
+
+{% block content %}
+  <h1>{{_('projects export')}}
+       {{ generate_tooltip(_('tooltip - overview over all raster export projects') ) }}
+  </h1>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{{ _('title') }}</th>
+      <th>{{ _('download size') }}</th>
+      <th>{{ _('updated') }}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for proj in export_projects %}
+      <tr>
+        <td>{{ proj.title }}</td>
+        <td>
+          {% if proj.download_size %}
+             {{ proj.download_size}} {{ _('MB') }}
+          {% endif %}
+        </td>
+        <td>{{ proj.time_updated.strftime('%d.%m.%Y')}}</td>
+        <td>
+          <a href="{{ url_for('project.export_edit', id=proj.id) }}" class="btn btn-small" >{{ _('edit') }}</a>
+          <button class="btn btn-small remove_layer" data-layer_remove_url="{{ url_for('project.remove', id=proj.id) }}">{{ _('remove') }}</button>
+        </td>
+      </tr>
+      <tr class="project_layers">
+        <td colspan="4">
+          <ul>
+          {% for layer in (proj.export_raster_layers + proj.export_vector_layers) %}
+            <li>
+              <div>{{ layer.layer_type}}</div>
+            </li>
+            {% endfor %}
+            {% if not proj.export_raster_layers and not proj.export_vector_layers %}
+                <li>{{ _('export project has no layer') }}</li>
+            {% endif %}
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+  <form action="{{ url_for('.export_new') }}" method="POST">
+    <button type="submit" class="btn btn-small">{{ _('new export project') }}</button>
+   </form>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/projects.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% from "macros.html" import generate_tooltip %}
+
+
+{% macro map_tools(coverage_form) -%}
+    <script type="text/javascript">
+        var MULTIPOLYGON_CONTROL = 'multipolygon_control';
+        var BOX_CONTROL = 'box_control';
+        var MODIFY_CONTROL = 'modify_control';
+        var DELETE_FEATURE = 'delete_feature';
+        var DELETE_ALL_FEATURES = 'delete_all_features';
+    </script>
+    <div class="more_map_tools">
+      <h5>{{ _('drawing options') }}
+       {{ generate_tooltip(_('tooltip - drawing options') ) }}
+       </h5>
+      <div class="map_tools tool">
+        <div id="box_control" title="{{ _('info_button draw_feautre bbox') }}"
+            class="draw_control_element box deactive" ></div>
+        <div id="multipolygon_control" title="{{ _('info_button draw mulitpolgon') }}"
+            class="draw_control_element multipolygon deactive"></div>
+        <div id="modify_control" title="{{ _('info_button edit feature') }}"
+            class="draw_control_element modify deactive" ></div>
+        <div id="delete_feature" title="{{ _('info_button delete feature') }}"
+            class="delete_element_control delete deactive" disabled="disabled"></div>
+      </div>
+        <div class="tool">
+           <button id="delete_all_features" class="btn btn-small">
+            {{ _('delete all features') }}</button>
+        </div>
+        <div class="tool">
+            {{ coverage_form.select_coverage.label }}
+            {{ coverage_form.select_coverage }}
+            <button id="load_coverage" class="btn btn-small">
+             {{ _('load coverage') }}</button>
+        </div>
+    </div>
+
+{%- endmacro %}
+
+{% macro download_volume(free_disk_space, export=False) -%}
+    <script type="text/javascript">
+        var get_data_volume_url = "{{ url_for('.data_volume', export=export) }}";
+    </script>
+    <h3>{{ _('Information') }}
+        {{ generate_tooltip(_('tooltip - information about data volumen') ) }}
+    </h3>
+    <p>{{ _('Data volume') }}: <span id="data_volume">0</span> {{ _('MB') }}</p>
+    <p>{{ _('free disk space') }}: {{ free_disk_space }} {{ _('MB') }}</p>
+{%- endmacro %}

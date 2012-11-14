@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('log_view') }}{% endblock %}
+
+{% block content %}
+
+<h1>{{_('logs')}}</h1>
+<pre class="pre-scrollable" id="log_view">{{ log }}</pre>
+
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/log_view.js') }}"></script>
+{% endblock %}

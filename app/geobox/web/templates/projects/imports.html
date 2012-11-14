@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('import project overview') }}{% endblock %}
+
+{% block content %}
+  <h1>{{_('projects import')}}
+        {{ generate_tooltip(_('tooltip - overview over all raster import projects') ) }}
+  </h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{{ _('title') }}</th>
+        <th>{{ _('updated') }}</th>
+        <th>{{ _('layer name') }}</th>
+        <th>{{ _('zoom level') }}</th>
+        <th>{{ _('download size') }}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for proj in import_projects %}
+      <tr>
+        <td>{{ proj.title }}</td>
+        <td>{{ proj.time_updated.strftime('%d.%m.%Y')}}</td>
+
+        {% if proj.import_raster_layers %}
+        <td>{{ proj.import_raster_layers[0].source.layer }}</td>
+        <td>({{ proj.import_raster_layers[0].start_level }}
+            -{{ proj.import_raster_layers[0].end_level }})</td>
+        {% else %}
+        <td></td>
+        <td></td>
+        {% endif %}
+        <td>
+          {% if proj.download_size %}
+             {{ proj.download_size}} {{ _('MB') }}
+          {% endif %}
+        </td>
+        <td>
+          <a href="{{ url_for('project.import_edit', id=proj.id) }}" class="btn btn-small" >{{ _('edit') }}</a>
+          <button class="btn btn-small remove_layer" data-layer_remove_url="{{ url_for('project.remove', id=proj.id) }}">{{ _('remove') }}</button>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+    <form action="{{ url_for('.import_new') }}" method="POST">
+      <button type="submit" class="btn btn-small">{{ _('new import project') }}</button>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/projects.js') }}"></script>
+{% endblock %}

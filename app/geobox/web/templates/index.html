@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %} {{_('home')}} {% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+
+  <div class="span12">
+    <div class="head">
+      <h1>{{_('Welcome to GeoBox')}}</h1>
+    </div>
+    <p>{{_('welcome info text')}} <a href="{{ url_for('static', filename='pdf/usermanual-0.1.pdf') }}" target="_blank">{{ _('download usermanual') }}</a></p>
+  </div>
+
+  <div class="span12">
+    <h2>{{_('import')}}</h2>
+    <ul class="nav nav-list">
+      <li><a href="{{ url_for('project.import_list') }}">{{ _('import raster') }}</a></li>
+      <li><a href="{{ url_for('vector.import_vector') }}">{{ _('import vector') }}</a></li>
+    </ul>
+  </div>
+
+  <div class="span12">
+    <h2>{{_('export')}}</h2>
+    <ul class="nav nav-list">
+      <li><a href="{{ url_for('project.export_list') }}">{{ _('export raster/vector') }}</a></li>
+    </ul>
+  </div>
+
+  <div class="span12">
+    <h2>{{_('tasks')}}</h2>
+    <ul class="nav nav-list">
+      <li><a href="{{ url_for('tasks.list') }}">{{ _('tasks') }}</a></li>
+      <li><a href="{{ url_for('downloads.download_list') }}">{{ _('downloads') }}</a></li>
+    </ul>
+  </div>
+
+  <div class="span12">
+    <h2>{{_('map')}}</h2>
+    <ul class="nav nav-list">
+      <li><a href="{{ url_for('map_view.map') }}">{{ _('map') }}</a></li>
+    </ul>
+  </div>
+  {% if is_local %}
+  <div class="span12">
+    <h2>{{_('settings')}}</h2>
+    <ul class="nav nav-list">
+      <li><a href="{{ url_for('admin.admin') }}">{{ _('administation') }}</a></li>
+    </ul>
+  </div>
+  {% endif %}
+
+</div>
+
+
+{% endblock %}

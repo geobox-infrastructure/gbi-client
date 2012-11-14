@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+<meta http-equiv="refresh" content="3; url={{ login_url }}"> 
+{% endblock %}
+
+{% block title %}{{ _('Not allowed.')}}{% endblock %}
+{% block content %}
+<h1>{{ _('Not allowed.')}}</h1>
+<p>{{ _('You will redirect automatically to the login page. 
+	If this does not happen, please click on the following link')}}: 
+	<a href="{{ login_url }}">{{ _( 'Login page' ) }}</a>
+</p>
+{% endblock %}

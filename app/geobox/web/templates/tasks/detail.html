@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('task detail') }}{% endblock %}
+
+{% block content %}
+<h1>{{ task.task_type }}</h1>
+
+<ul>
+    <li>{{ _('id') }}: {{ task.id }}</li>
+    <li>{{ _('error') }}: {{ task.error }}</li>
+    <li>{{ _('is running') }}: {{ task.is_running }}</li>
+    <li>{{ _('is active') }}: {{ task.is_active }}</li>
+    <li>{{ _('is paused') }}: {{ task.is_paused }}</li>
+</ul>
+
+{% endblock %}

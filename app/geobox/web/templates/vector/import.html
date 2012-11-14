@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('vector import') }}{% endblock %}
+
+{% from "form_macros.html" import input, select %}
+
+{% block content %}
+    <h1>{{_('vector import')}}</h1>
+    <form id="upload_form" method="POST" enctype="multipart/form-data">
+        <div>
+            <input type="file" id="file_upload" name="file_upload" multiple>
+        </div>
+        <button type="submit" class="btn btn-small" id="save_btn">{{ _('upload') }}</button>
+    </form>
+    <form id="import_form" method="POST">
+        {{ form.csrf_token }}
+        {{ select(form.file_name) }}
+        {{ select(form.mapping_name) }}
+        <br>
+        <button type="submit" class="btn btn-small" id="save_btn">{{ _('import') }}</button>
+    </from>
+{% endblock %}
+
+

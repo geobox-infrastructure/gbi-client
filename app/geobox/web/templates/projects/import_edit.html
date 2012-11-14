@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('import project edit') }}{% endblock %}
+
+{% from "form_macros.html" import input, select, checkbox %}
+{% from 'projects/macros.html' import map_tools, download_volume %}
+{% from "macros.html" import generate_base_layer, generate_sources %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span3">
+            <form method="POST">
+                {{ form.csrf_token }}
+                <h3>{{_('Import Editor')}}</h3>
+                {{ input(form.title) }}
+                {{ map_tools(coverage_form) }}
+                <hr>
+                <div class="raster_layer">
+                    {{ select(form.raster_source) }}
+                    <div class='error_zoomlevel'>{{ _('start level needs to be lower or equal to end level') }}</div>
+                    {{ select(form.start_level) }}
+                    {{ select(form.end_level) }}
+                </div>
+
+                {{ form.coverage }}
+                {{ form.download_size }}
+                {{ form.start }}
+                {{ checkbox(form.update_tiles) }}
+                <button type="submit" class="btn btn-small" id="save_btn">{{ _('save') }}</button>
+                <button class="btn btn-small" id="start_btn">{{ _('start') }}</button>
+            </form>
+            <hr>
+            {{ download_volume( free_disk_space|round(1, 'common'), export=False ) }}
+        </div>
+        <div class="span8">
+            <div class="map" id='map'></div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers-Control-ZoomStatus.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/map_base.js') }}"></script>
+    <script type="text/javascript">
+        {{ generate_base_layer(base_layer) }}
+        var has_zoom_level = {{ has_zoom_level}};
+        var load_coverage_url = '{{ url_for('project.load_coverage') }}';
+        {{ generate_sources(sources) }}
+
+        {% autoescape false %}
+            coverage = {{ coverage }};
+        {% endautoescape %}
+
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/project_utils.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/import_edit.js') }}"></script>
+{% endblock %}

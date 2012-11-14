@@ -1,0 +1,7 @@
+build/
+packaging/dist/
+packaging/opt/
+packaging/pkgs/
+.DS_Store
+*.pyc
+*.egg-info

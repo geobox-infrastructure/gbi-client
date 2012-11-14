@@ -1,0 +1,698 @@
+# Translations template for PROJECT.
+# Copyright (C) 2012 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2012-11-14 15:58+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: geobox/web/__init__.py:92
+msgid "Sorry, method not allowed"
+msgstr ""
+
+#: geobox/web/__init__.py:98
+msgid "Sorry, page not found"
+msgstr ""
+
+#: geobox/web/__init__.py:104
+msgid "Sorry, not allowed"
+msgstr ""
+
+#: geobox/web/__init__.py:105
+msgid "Please log in first..."
+msgstr ""
+
+#: geobox/web/__init__.py:112
+msgid "Sorry, an error has occurred"
+msgstr ""
+
+#: geobox/web/__init__.py:118
+msgid "Login required"
+msgstr ""
+
+#: geobox/web/__init__.py:119
+msgid "Please login to see this page"
+msgstr ""
+
+#: geobox/web/forms.py:153 geobox/web/templates/downloads.html:12
+#: geobox/web/templates/projects/exports.html:12
+#: geobox/web/templates/projects/imports.html:12
+#: geobox/web/templates/tasks/task_list.html:87
+msgid "title"
+msgstr ""
+
+#: geobox/web/forms.py:158
+msgid "level needs to be bigger or equal to start level"
+msgstr ""
+
+#: geobox/web/forms.py:161
+msgid "username"
+msgstr ""
+
+#: geobox/web/forms.py:162
+msgid "Password"
+msgstr ""
+
+#: geobox/web/forms.py:176
+msgid "select coverage"
+msgstr ""
+
+#: geobox/web/forms.py:179 geobox/web/forms.py:190
+msgid "start level"
+msgstr ""
+
+#: geobox/web/forms.py:180 geobox/web/forms.py:191
+msgid "end level"
+msgstr ""
+
+#: geobox/web/forms.py:181 geobox/web/forms.py:192
+msgid "raster_source"
+msgstr ""
+
+#: geobox/web/forms.py:182
+msgid "update_tiles"
+msgstr ""
+
+#: geobox/web/forms.py:188 geobox/web/templates/admin.html:12
+msgid "format"
+msgstr ""
+
+#: geobox/web/forms.py:189
+msgid "srs"
+msgstr ""
+
+#: geobox/web/forms.py:193 geobox/web/forms.py:200
+msgid "mapping name"
+msgstr ""
+
+#: geobox/web/forms.py:199
+msgid "file name"
+msgstr ""
+
+#: geobox/web/forms.py:204
+msgid "path"
+msgstr ""
+
+#: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:32
+#: geobox/web/templates/index.html:46
+msgid "settings"
+msgstr ""
+
+#: geobox/web/templates/admin.html:7
+msgid "local raster sources"
+msgstr ""
+
+#: geobox/web/templates/admin.html:10
+msgid "name"
+msgstr ""
+
+#: geobox/web/templates/admin.html:11
+msgid "layer"
+msgstr ""
+
+#: geobox/web/templates/admin.html:13
+#: geobox/web/templates/projects/imports.html:15
+msgid "zoom level"
+msgstr ""
+
+#: geobox/web/templates/admin.html:25 geobox/web/templates/admin.html:79
+#: geobox/web/templates/projects/exports.html:30
+#: geobox/web/templates/projects/imports.html:41
+#: geobox/web/templates/tasks/task_list.html:52
+msgid "remove"
+msgstr ""
+
+#: geobox/web/templates/admin.html:33
+msgid "local net access"
+msgstr ""
+
+#: geobox/web/templates/admin.html:34
+msgid "tooltip local net access"
+msgstr ""
+
+#: geobox/web/templates/admin.html:38
+#: geobox/web/templates/tasks/task_list.html:28
+#: geobox/web/templates/tasks/task_list.html:88
+msgid "status"
+msgstr ""
+
+#: geobox/web/templates/admin.html:40
+msgid "activated"
+msgstr ""
+
+#: geobox/web/templates/admin.html:42
+msgid "deactivated"
+msgstr ""
+
+#: geobox/web/templates/admin.html:48
+msgid "deactivate"
+msgstr ""
+
+#: geobox/web/templates/admin.html:50
+msgid "activate"
+msgstr ""
+
+#: geobox/web/templates/admin.html:54
+msgid "Context documents"
+msgstr ""
+
+#: geobox/web/templates/admin.html:60
+msgid "load context"
+msgstr ""
+
+#: geobox/web/templates/admin.html:65
+msgid "Logging"
+msgstr ""
+
+#: geobox/web/templates/admin.html:66
+msgid "open logview"
+msgstr ""
+
+#: geobox/web/templates/admin.html:68
+msgid "Files"
+msgstr ""
+
+#: geobox/web/templates/admin.html:69
+msgid "open external file explorer"
+msgstr ""
+
+#: geobox/web/templates/admin.html:72
+msgid "External tile box"
+msgstr ""
+
+#: geobox/web/templates/admin.html:78
+msgid "add and start tilebox"
+msgstr ""
+
+#: geobox/web/templates/base.html:24 geobox/web/templates/index.html:3
+msgid "home"
+msgstr ""
+
+#: geobox/web/templates/base.html:28 geobox/web/templates/login.html:3
+#: geobox/web/templates/login.html:10 geobox/web/templates/login.html:22
+msgid "login"
+msgstr ""
+
+#: geobox/web/templates/base.html:30
+msgid "logout"
+msgstr ""
+
+#: geobox/web/templates/downloads.html:4 geobox/web/templates/downloads.html:7
+msgid "Downloads"
+msgstr ""
+
+#: geobox/web/templates/downloads.html:13
+#: geobox/web/templates/projects/exports.html:14
+#: geobox/web/templates/projects/imports.html:13
+#: geobox/web/templates/tasks/task_list.html:25
+msgid "updated"
+msgstr ""
+
+#: geobox/web/templates/downloads.html:14
+msgid "files"
+msgstr ""
+
+#: geobox/web/templates/downloads.html:24
+msgid "go to export details"
+msgstr ""
+
+#: geobox/web/templates/downloads.html:26
+msgid "no project for export"
+msgstr ""
+
+#: geobox/web/templates/downloads.html:36
+msgid "as zip file"
+msgstr ""
+
+#: geobox/web/templates/downloads.html:44
+msgid "open export on external explorer"
+msgstr ""
+
+#: geobox/web/templates/index.html:10
+msgid "Welcome to GeoBox"
+msgstr ""
+
+#: geobox/web/templates/index.html:12
+msgid "welcome info text"
+msgstr ""
+
+#: geobox/web/templates/index.html:12
+msgid "download usermanual"
+msgstr ""
+
+#: geobox/web/templates/index.html:16
+#: geobox/web/templates/vector/import.html:20
+msgid "import"
+msgstr ""
+
+#: geobox/web/templates/index.html:18
+msgid "import raster"
+msgstr ""
+
+#: geobox/web/templates/index.html:19
+msgid "import vector"
+msgstr ""
+
+#: geobox/web/templates/index.html:24
+msgid "export"
+msgstr ""
+
+#: geobox/web/templates/index.html:26
+msgid "export raster/vector"
+msgstr ""
+
+#: geobox/web/templates/index.html:31 geobox/web/templates/index.html:33
+#: geobox/web/templates/tasks/task_list.html:83
+msgid "tasks"
+msgstr ""
+
+#: geobox/web/templates/index.html:34
+msgid "downloads"
+msgstr ""
+
+#: geobox/web/templates/index.html:39 geobox/web/templates/index.html:41
+msgid "map"
+msgstr ""
+
+#: geobox/web/templates/index.html:48
+msgid "administation"
+msgstr ""
+
+#: geobox/web/templates/log_view.html:3
+msgid "log_view"
+msgstr ""
+
+#: geobox/web/templates/log_view.html:7
+msgid "logs"
+msgstr ""
+
+#: geobox/web/templates/map.html:2
+msgid "map and information"
+msgstr ""
+
+#: geobox/web/templates/map.html:16
+msgid "local maps"
+msgstr ""
+
+#: geobox/web/templates/map.html:17
+msgid "tooltip - show all imported maps"
+msgstr ""
+
+#: geobox/web/templates/errors/403.html:7
+#: geobox/web/templates/errors/403.html:9
+msgid "Not allowed."
+msgstr ""
+
+#: geobox/web/templates/errors/403.html:10
+msgid ""
+"You will redirect automatically to the login page. \n"
+"\tIf this does not happen, please click on the following link"
+msgstr ""
+
+#: geobox/web/templates/errors/403.html:12
+msgid "Login page"
+msgstr ""
+
+#: geobox/web/templates/errors/404.html:2
+#: geobox/web/templates/errors/404.html:4
+msgid "File not found."
+msgstr ""
+
+#: geobox/web/templates/errors/405.html:2
+#: geobox/web/templates/errors/405.html:4
+msgid "Method not allowed"
+msgstr ""
+
+#: geobox/web/templates/errors/500.html:2
+#: geobox/web/templates/errors/500.html:4
+msgid "Internal error."
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:3
+msgid "export project edit"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:11
+msgid "projects exporteditor"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:18
+msgid "raster layers"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:19
+msgid "tooltip - export rasterlayer"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:27
+#: geobox/web/templates/projects/export_edit.html:36
+#: geobox/web/templates/projects/import_edit.html:19
+msgid "start level needs to be lower or equal to end level"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:30
+#: geobox/web/templates/projects/export_edit.html:39
+msgid "remove raster"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:43
+msgid "add raster"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:47
+msgid "vector layer"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:48
+msgid "tooltip - export vectorlayer"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:53
+#: geobox/web/templates/projects/export_edit.html:80
+msgid "remove vector"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:61
+#: geobox/web/templates/projects/import_edit.html:28
+msgid "save"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:62
+#: geobox/web/templates/projects/import_edit.html:29
+msgid "start"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:81
+msgid "add vector"
+msgstr ""
+
+#: geobox/web/templates/projects/export_edit.html:83
+msgid "level"
+msgstr ""
+
+#: geobox/web/templates/projects/exports.html:3
+msgid "export project overview"
+msgstr ""
+
+#: geobox/web/templates/projects/exports.html:6
+msgid "projects export"
+msgstr ""
+
+#: geobox/web/templates/projects/exports.html:7
+msgid "tooltip - overview over all raster export projects"
+msgstr ""
+
+#: geobox/web/templates/projects/exports.html:13
+#: geobox/web/templates/projects/imports.html:16
+msgid "download size"
+msgstr ""
+
+#: geobox/web/templates/projects/exports.html:24
+#: geobox/web/templates/projects/imports.html:36
+#: geobox/web/templates/projects/macros.html:47
+#: geobox/web/templates/projects/macros.html:48
+msgid "MB"
+msgstr ""
+
+#: geobox/web/templates/projects/exports.html:29
+#: geobox/web/templates/projects/imports.html:40
+msgid "edit"
+msgstr ""
+
+#: geobox/web/templates/projects/exports.html:42
+msgid "export project has no layer"
+msgstr ""
+
+#: geobox/web/templates/projects/exports.html:51
+msgid "new export project"
+msgstr ""
+
+#: geobox/web/templates/projects/import_edit.html:3
+msgid "import project edit"
+msgstr ""
+
+#: geobox/web/templates/projects/import_edit.html:13
+msgid "Import Editor"
+msgstr ""
+
+#: geobox/web/templates/projects/imports.html:3
+msgid "import project overview"
+msgstr ""
+
+#: geobox/web/templates/projects/imports.html:6
+msgid "projects import"
+msgstr ""
+
+#: geobox/web/templates/projects/imports.html:7
+msgid "tooltip - overview over all raster import projects"
+msgstr ""
+
+#: geobox/web/templates/projects/imports.html:14
+msgid "layer name"
+msgstr ""
+
+#: geobox/web/templates/projects/imports.html:49
+msgid "new import project"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:13
+msgid "drawing options"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:14
+msgid "tooltip - drawing options"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:17
+msgid "info_button draw_feautre bbox"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:19
+msgid "info_button draw mulitpolgon"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:21
+msgid "info_button edit feature"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:23
+msgid "info_button delete feature"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:28
+msgid "delete all features"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:34
+msgid "load coverage"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:44
+msgid "Information"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:45
+msgid "tooltip - information about data volumen"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:47
+msgid "Data volume"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:48
+msgid "free disk space"
+msgstr ""
+
+#: geobox/web/templates/tasks/detail.html:3
+msgid "task detail"
+msgstr ""
+
+#: geobox/web/templates/tasks/detail.html:9
+msgid "id"
+msgstr ""
+
+#: geobox/web/templates/tasks/detail.html:10
+msgid "error"
+msgstr ""
+
+#: geobox/web/templates/tasks/detail.html:11
+msgid "is running"
+msgstr ""
+
+#: geobox/web/templates/tasks/detail.html:12
+msgid "is active"
+msgstr ""
+
+#: geobox/web/templates/tasks/detail.html:13
+msgid "is paused"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:3
+msgid "task overview"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:32
+msgid "progress"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:39
+msgid "tooltip - task the page reload every 5 second"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:42
+msgid "type"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:46
+msgid "pause"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:49
+msgid "continue"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:63
+msgid "running"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:65
+msgid "not running"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:89
+msgid "date created"
+msgstr ""
+
+#: geobox/web/templates/tasks/task_list.html:99
+msgid "tasks without project"
+msgstr ""
+
+#: geobox/web/templates/vector/import.html:3
+#: geobox/web/templates/vector/import.html:8 geobox/model/tasks.py:78
+msgid "vector import"
+msgstr ""
+
+#: geobox/web/templates/vector/import.html:13
+msgid "upload"
+msgstr ""
+
+#: geobox/web/views/admin.py:55
+msgid "load context document successful"
+msgstr ""
+
+#: geobox/web/views/admin.py:57
+msgid "password not correct"
+msgstr ""
+
+#: geobox/web/views/admin.py:93
+msgid "delete sucessful"
+msgstr ""
+
+#: geobox/web/views/admin.py:95
+msgid "delete not sucessful"
+msgstr ""
+
+#: geobox/web/views/admin.py:107
+msgid "settings changed. restart required"
+msgstr ""
+
+#: geobox/web/views/project.py:62 geobox/web/views/project.py:156
+msgid "added new project"
+msgstr ""
+
+#: geobox/web/views/project.py:125 geobox/web/views/project.py:240
+#: geobox/web/views/vector.py:78
+msgid "form error"
+msgstr ""
+
+#: geobox/web/views/tasks.py:59
+msgid "paused task successful"
+msgstr ""
+
+#: geobox/web/views/tasks.py:70
+msgid "start task successful"
+msgstr ""
+
+#: geobox/web/views/tasks.py:80
+msgid "delete task successful"
+msgstr ""
+
+#: geobox/web/views/user.py:46
+msgid "username or password not correct"
+msgstr ""
+
+#: geobox/web/views/vector.py:65
+msgid "invalid mapping"
+msgstr ""
+
+#: geobox/web/views/vector.py:68
+msgid "invalid shapefile"
+msgstr ""
+
+#: geobox/web/views/vector.py:81
+#, python-format
+msgid "file %(name)s missing"
+msgstr ""
+
+#: geobox/web/views/vector.py:83
+#, python-format
+msgid "failed to upload %(name)s"
+msgstr ""
+
+#: geobox/web/views/vector.py:85
+#, python-format
+msgid "filetype of %(name)s not allowed"
+msgstr ""
+
+#: geobox/web/views/vector.py:87
+#, python-format
+msgid "file %(name)s uploaded"
+msgstr ""
+
+#: geobox/model/layer.py:24 geobox/model/tasks.py:109
+msgid "raster import"
+msgstr ""
+
+#: geobox/model/layer.py:35 geobox/model/tasks.py:128
+msgid "raster export"
+msgstr ""
+
+#: geobox/model/layer.py:47 geobox/model/tasks.py:87
+msgid "vector export"
+msgstr ""
+
+#: geobox/model/project.py:59
+msgid "project export"
+msgstr ""
+
+#: geobox/model/project.py:70
+msgid "project import"
+msgstr ""
+
+#: geobox/model/tasks.py:96
+msgid "replication"
+msgstr ""
+
+#: geobox/lib/trayicon.py:58
+msgid "GeoBox"
+msgstr ""
+
+#: geobox/lib/trayicon.py:112
+msgid "Close"
+msgstr ""
+
+#: geobox/lib/trayicon.py:128
+msgid "Open"
+msgstr ""
+

@@ -1,0 +1,57 @@
+{% macro generate_base_layer(layer) -%}
+    var max_extent = null;
+    {% if layer.view_level_end %}
+    var view_zoom_level_end = {{ layer.view_level_end }};
+    {% else %}
+     var view_zoom_level_end = 18;
+    {% endif %}
+    {% if layer.bbox %}
+        max_extent = new OpenLayers.Bounds{{ layer.bbox }};
+    {% endif %}
+    var base_layer  = new OpenLayers.Layer.WMTS({
+        name: '{{ layer.title }}',
+        url: '{{ layer.url }}',
+        getURL: tileUrl,
+        layer: '{{ layer.layer }}',
+        matrixSet: '{{ layer.matrix_set }}',
+        format: '{{ layer.format }}',
+        style: 'default',
+        isBaseLayer: true,
+        requestEncoding: 'REST',
+        maxExtent: max_extent
+    });
+{%- endmacro %}
+
+{% macro generate_sources(sources, cache_url) -%}
+    var raster_sources = {};
+    {% for source in sources %}
+        {% if source.wmts_source %}
+          {% set map_source = source.wmts_source %}
+        {% else %}
+           {% set map_source = source %}
+        {% endif %}
+        raster_sources[{{ source.id }}] = new OpenLayers.Layer.WMTS({
+            name: '{{ map_source.title }}',
+            url: {% if source.url %} '{{add_auth_to_url(source.url, source.username, source.password)}}' {% else %} '{{ cache_url }}' {% endif %},
+            getURL: tileUrl,
+            layer: '{{ map_source.layer }}',
+            matrixSet: '{{ map_source.matrix_set }}',
+            format: '{{ map_source.format }}',
+            style: 'default',
+            isBaseLayer: false,
+            requestEncoding: 'REST',
+            download_level_start: {{ source.download_level_start }},
+            download_level_end: {{ source.download_level_end }}
+        });
+    {% endfor %}
+{%- endmacro %}
+
+
+{% macro generate_tooltip(content) -%}
+    <span class="tooltip_element">
+      <span class="icon-info-sign"></span>
+      <span class="tooltip_content">
+        {{ content }}
+       </span>
+    </span>
+{%- endmacro %}

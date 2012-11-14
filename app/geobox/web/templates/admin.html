@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% from "form_macros.html" import input %}
+
+{% block title %} {{_('settings')}} {% endblock %}
+
+{% block content %}
+    <h3>{{ _('local raster sources') }}</h3>
+    <table class="table table-striped">
+        <thead>
+            <th>{{ _('name') }}</th>
+            <th>{{ _('layer') }}</th>
+            <th>{{ _('format') }}</th>
+            <th>{{ _('zoom level') }}</th>
+            <th></th>
+        </thead>
+        <tbody>
+        {% for source in raster_sources %}
+            <tr>
+                <td>{{ source.wmts_source.name }}</td>
+                <td>{{ source.wmts_source.layer }}</td>
+                <td>{{ source.wmts_source.format }}</td>
+                <td>{{ source.zoom_level }}</td>
+                <td>
+                    <button data-remove-url="{{ url_for('.remove_source', id=source.id) }}" class="btn btn-small remove">
+                        {{ _('remove') }}
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h3>{{ _('settings') }}</h3>
+    <h4>{{ _('local net access') }}
+        {{ generate_tooltip(_('tooltip local net access') ) }}
+    </h4>
+
+    <p id="localnet_status">
+        {{_('status')}}:
+        {% if localnet %}
+            {{ _('activated') }}
+        {% else %}
+            {{ _('deactivated') }}
+        {% endif %}
+    </p>
+
+    <button class="btn btn-small" id="localnet" data-toggle_localnet_access_url="{{ url_for('.localnet_access') }}">
+        {% if localnet %}
+            {{ _('deactivate') }}
+        {% else %}
+            {{ _('activate') }}
+        {% endif %}
+    </button>
+
+    <h4>{{ _('Context documents') }}</h4>
+    <form method="POST" action="{{ url_for('.refresh_context') }} " class="form-horizontal">
+        {{ form.csrf_token }}
+        {{ input(form.password) }}
+        <div class="control-group">
+          <div class="controls">
+            <button type="submit" class="btn btn-small">{{ _('load context')}}</button>
+          </div>
+        </div>
+    </form>
+
+    <h4>{{ _('Logging') }}</h4>
+    <a href="{{ url_for('.log_view') }}">{{ _('open logview') }}</a>
+
+    <h4>{{ _('Files') }}</h4>
+    <a href="{{ url_for('.file_browser') }}">{{ _('open external file explorer') }}</a>
+
+
+    <h4>{{ _('External tile box') }}</h4>
+    <form method="POST" action="{{ url_for('.tilebox_restart') }} " class="form-horizontal">
+        {{ tilebox_form.csrf_token }}
+        {{ input(tilebox_form.path) }}
+        <div class="control-group">
+          <div class="controls">
+            <button type="submit" name="restart" class="btn btn-small">{{ _('add and start tilebox')}}</button>
+            <button type="submit" name="stop" class="btn btn-small">{{ _('remove')}}</button>
+          </div>
+        </div>
+    </form>
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

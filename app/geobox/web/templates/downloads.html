@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% from "form_macros.html" import input %}
+
+{% block title %} {{_('Downloads')}} {% endblock %}
+
+{% block content %}
+<h2>{{_('Downloads')}}</h2>
+
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{{ _('title') }}</th>
+      <th>{{ _('updated') }}</th>
+      <th>{{ _('files') }}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for exports in exports_overview %}
+    <tr>
+        <td>
+            {% if exports.title %}
+                {{ exports.title }}<br>
+                <a href="{{ url_for('project.export_edit', id=exports.id) }}">( {{ _('go to export details') }} )</a>
+            {% else %}
+                {{_('no project for export')}}
+            {% endif %}
+
+        </td>
+        <td>{{ exports.updated }}</td>
+        <td>
+        {% for files in exports.files %}
+            <a href="{{ url_for('downloads.download_file',export_dir=exports.name, filename=files) }}">
+             {{ files }}
+              {% if '.shp' in files %}
+                ({{ _('as zip file') }})
+              {% endif %}
+           </a>
+           <br>
+        {% endfor %}
+        </td>
+        <td>
+          {% if file_browser %}
+            <a href="{{ url_for('downloads.export_file_browser', export_dir=exports.name) }}">{{ _('open export on external explorer') }}</a>
+          {% endif %}
+        </td>
+       </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

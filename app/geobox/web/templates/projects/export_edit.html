@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('export project edit') }}{% endblock %}
+
+{% from "form_macros.html" import input, select %}
+{% from 'projects/macros.html' import map_tools, download_volume %}
+{% from "macros.html" import generate_base_layer, generate_sources %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span3">
+            <h3>{{_('projects exporteditor')}}</h3>
+
+            <form method="POST">
+
+                {{ input(form.title) }}
+                <hr>
+                <div id="raster_form">
+                    <h4>{{ _('raster layers') }}
+                        {{ generate_tooltip(_('tooltip - export rasterlayer') ) }}
+                    </h4>
+                    {{ form.format }}
+                    {{ form.srs }}
+                    {{ map_tools(coverage_form) }}
+                    <hr>
+                    <div class="raster_layer" id="rl_0">
+                        {{ select(form.raster_source) }}
+                        <div class='error_zoomlevel'>{{ _('start level needs to be lower or equal to end level') }}</div>
+                        {{ select(form.start_level) }}
+                        {{ select(form.end_level) }}
+                        <button id="remove_layer" class="btn btn-small">{{ _('remove raster') }}</button>
+                    </div>
+                    {% if layers %}
+                        {% for layer in layers %}
+                            <div class="raster_layer" id="rl_{{layer.id}}">
+                                {{ select(form.raster_source) }}
+                                <div class='error_zoomlevel'>{{ _('start level needs to be lower or equal to end level') }}</div>
+                                {{ select(form.start_level) }}
+                                {{ select(form.end_level) }}
+                                <button id="remove_layer" class="btn btn-small">{{ _('remove raster') }}</button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <button id="add_layer" class="btn btn-small">{{ _('add raster') }}</button>
+                </div>
+                <hr>
+                <div id="vector_form">
+                    <h4>{{ _('vector layer') }}
+                        {{ generate_tooltip(_('tooltip - export vectorlayer') ) }}
+                    </h4>
+                    <div class="vector_source" id="vs_1">
+                        {{ select(form.mapping_name) }}
+                    </div>
+                    <button id="vector_add_remove" class="btn btn-small">{{ _('remove vector') }}</button>
+                </div>
+                <hr>
+                {{ form.csrf_token }}
+                {{ form.raster_layers }}
+                {{ form.coverage }}
+                {{ form.download_size }}
+                {{ form.start }}
+                <button type="submit" class="btn btn-small" id='save_btn'>{{ _('save') }}</button>
+                <button class="btn btn-small" id="start_btn">{{ _('start') }}</button>
+            </form>
+            {{ download_volume( free_disk_space|round(1, 'common'), export=True ) }}
+        </div>
+        <div class="span8">
+            <div class="map" id='map'></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers-Control-ZoomStatus.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/map_base.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/project_utils.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/export_edit.js') }}"></script>
+    <script type="text/javascript">
+        var load_coverage_url = '{{ url_for('project.load_coverage') }}';
+        var remove_vector_text = '{{ _('remove vector') }}';
+        var add_vector_text = '{{ _('add vector') }}';
+        var start_level_text = '{{ form.start_level.label.text }}';
+        var level_text = '{{ _('level') }}';
+        {{ generate_base_layer(base_layer) }}
+        {{ generate_sources(raster_sources, cache_url) }}
+        {% autoescape false %}
+            coverage = {{ coverage }};
+        {% endautoescape %}
+        export_edit = true;
+        $(document).ready(function() {
+            init();
+            {% if layers %}
+                {% for layer in layers %}
+                    set_layer_data({{ layer.id }}, {{ layer.source_id }}, {{ layer.start_level }}{% if layer.end_level %}, {{ layer.end_level}}{% endif %});
+                {% endfor %}
+                get_data_volume();
+            {% endif %}
+            {% if not proj.export_vector_layers %}
+                $('#vector_add_remove').click();
+            {% endif %}
+            toggle_start_button();
+        });
+    </script>
+{% endblock %}
