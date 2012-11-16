@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from datetime import date
+from datetime import datetime
 
 from geobox.process.base import ProcessBase
 from geobox.lib.couchdb import CouchDB
@@ -57,8 +57,8 @@ class VectorImportProcess(ProcessBase):
             with self.task() as task:
                 mapping = mappings[task.mapping_name].copy()
                 mapping.json_defaults = mapping.json_defaults.copy()
-                mapping.json_defaults['timestamp'] = date.today().isoformat();
-                mapping.json_defaults['from_file'] = task.file_name;
+                mapping.json_defaults['import_timestamp'] = datetime.now().isoformat();
+                mapping.json_defaults['import_file'] = task.file_name;
 
                 input_file = self.app_state.user_data_path('import', task.file_name)
                 couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
