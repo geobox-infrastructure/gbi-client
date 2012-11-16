@@ -1,3 +1,4 @@
+# -:- encoding: utf-8 -:-
 # This file is part of the GBI project.
 # Copyright (C) 2012 Omniscale GmbH & Co. KG <http://omniscale.com>
 #
@@ -27,7 +28,10 @@ class Mapping(object):
     fields = ()
     field_filter = ()
 
-    def __init__(self, couchdb, geom_type, fields=None, field_filter=None, json_defaults=None, shp_defaults=None, other_srs='EPSG:3857'):
+    def __init__(self, name, couchdb, geom_type, fields=None, field_filter=None,
+        json_defaults=None, shp_defaults=None, other_srs='EPSG:3857',
+        shp_encoding='latin1'):
+        self.name = name
         self.srs = SRS('EPSG:3857')
         self.couchdb = couchdb
         self.geom_type = geom_type
@@ -36,6 +40,7 @@ class Mapping(object):
         self.json_defaults = json_defaults or {}
         self.shp_defaults = shp_defaults or {}
         self.other_srs = SRS(other_srs)
+        self.shp_encoding = shp_encoding
 
     def copy(self):
         return copy(self)
@@ -44,7 +49,10 @@ class Mapping(object):
         data = self.json_defaults.copy()
         for json, shp, _type in self.fields:
             if record.get('properties', False).get(shp, False):
-                data[json] = record['properties'].get(shp, None)
+                val = record['properties'].get(shp, None)
+                if isinstance(val, str):
+                    val = val.decode(self.shp_encoding)
+                data[json] = val
         if self.other_srs != self.srs:
             data['geometry'] = mapping(transform_geometry(self.other_srs, self.srs, asShape(record.get('geometry', None))))
         else:
@@ -98,49 +106,53 @@ class Mapping(object):
 
 
 default_mappings = {
-    'Polygon': 
-        Mapping(
-            couchdb = 'polygons',
-            geom_type = 'Polygon',
-            fields = (
-                    ('prop1', 'OBJART', 'str'),
-                    ('prop2', 'OBJNR', 'str'),
-                    ('prop3', 'RW', 'float'),
-                    ('prop4', 'HW', 'float'),
-                ),
-            field_filter = ('prop1', '011/2723'),
+    'schlaege he': Mapping(
+        name = u'Schläge Hessen',
+        couchdb = 'flaechen-box',
+        geom_type = 'Polygon',
+        fields = (
+            ('number', 'SCHLAGNR', 'str'),
+            ('year', 'ANSAATJAHR', 'str'),
+            ('use_code', 'NCODE', 'str'),
+            ('size', 'B_BEANTR_G', 'str'),
+            ('use', 'NUTZUNG', 'str'),
+            ('name', 'LAGE_BEZ', 'str'),
         ),
-    'Points':
-        Mapping(
-            couchdb = 'points',
-            geom_type = 'Point',
-            fields = (
-                    ('foo', 'foo', 'str'),
-                    ('bar', 'bar', 'float'),
-                ),
-            json_defaults = {
-                'punktart': 'gute aussicht',
-            }
+        field_filter = ('import_mapping', 'schlaege he'),
+        json_defaults = {
+            'import_mapping': 'schlaege he',
+        },
+        other_srs = 'EPSG:31467',
+    ),
+    'schlaege nds': Mapping(
+        name = u'Schläge Niedersachsen',
+        couchdb = 'flaechen-box',
+        geom_type = 'Polygon',
+        fields = (
+            ('number', 'SCHLAG_NR', 'str'),
+            ('year', 'JAHR', 'str'),
         ),
-    'Lines':
-        Mapping(
-            couchdb = 'lines',
-            geom_type = 'LineString',
-            fields = (
-                    ('foo', 'foo', 'str'),
-                    ('bar', 'bar', 'float'),
-                ),
+        field_filter = ('import_mapping', 'schlaege nds'),
+        json_defaults = {
+            'import_mapping': 'schlaege nds',
+        },
+        other_srs = 'EPSG:31467',
+    ),
+    'schlaege rlp': Mapping(
+        name = u'Schläge Rheinland-Pfalz',
+        couchdb = 'flaechen-box',
+        geom_type = 'Polygon',
+        fields = (
+            ('user', 'BTNR', 'str'),
+            ('number', 'SLNR', 'str'),
+            ('year', 'JAHR', 'str'),
+            ('use_code', 'NUAR', 'str'),
+            ('size', 'SLFL', 'str'),
         ),
-    'EPSG_test':
-        Mapping(
-            couchdb = 'foo_hro',
-            geom_type = 'Polygon',
-            fields = (
-                    ('prop1', 'OBJART', 'str'),
-                    ('prop2', 'OBJNR', 'str'),
-                    ('prop3', 'RW', 'float'),
-                    ('prop4', 'HW', 'float'),
-                ),
-            other_srs = 'EPSG:2398'
-        ),
+        field_filter = ('import_mapping', 'schlaege rlp'),
+        json_defaults = {
+            'import_mapping': 'schlaege rlp',
+        },
+        other_srs = 'EPSG:25832',
+    ),
 }

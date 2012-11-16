@@ -55,7 +55,10 @@ def import_vector():
     form = forms.ImportVectorEdit(request.form)
     shape_files, missing_files = get_shapefile_list()
     form.file_name.choices = [(name, name) for name in shape_files]
-    form.mapping_name.choices = [(name, '%s (%s, %s)' % (name, mapping.geom_type, mapping.other_srs.srs_code)) for name, mapping in mappings.items()]
+    form.mapping_name.choices = [
+        (name, '%s (%s, %s)' % (mapping.name, mapping.geom_type, mapping.other_srs.srs_code))
+        for name, mapping in mappings.items()
+    ]
 
     if not len(request.files):
         if form.validate_on_submit():
