@@ -57,11 +57,12 @@ def write_json_to_shape(records, mapping, filename='default.shp'):
               filename, "w", driver="ESRI Shapefile",
               schema=schema) as shapefile:
             for record in records:
-                if record['geometry']['type'] == schema['geometry']:
+                if record['geometry']['type'] == schema['geometry'] or 'Multi' + record['geometry']['type'] == schema['geometry']:
                     # if a filter is set, write only data and not None
                     shape_val = mapping.as_shape_record(record)
                     if shape_val:
                         shapefile.write(shape_val)
+
     except OSError, e:
         logging.error(e)
 

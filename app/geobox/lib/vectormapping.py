@@ -60,17 +60,28 @@ class Mapping(object):
                 data['geometry'] = mapping(transform_geometry(self.srs, self.other_srs, asShape(record['geometry'])))
             else:
                 data['geometry'] = record['geometry']
+            if data['geometry']['type'] == 'Polygon':
+                # pass Polygons as Multipolygon , Fiona only supports same type for all records
+                data['geometry']['type'] = 'MultiPolygon'
+                data['geometry']['coordinates'] = (data['geometry']['coordinates'], )
             data['properties'] = {}
             for json, shp, _type in self.fields:
                 if record.get(json, False):
-                    data['properties'][shp] = record.get(json)
+                    val = record.get(json)
+                    if isinstance(val, basestring):
+                        val = val.encode(self.shp_encoding)
+                    data['properties'][shp] = val
 
             return data
 
     def create_schema(self):
         # create a schema from the mapping
         schema = {}
-        schema['geometry'] = self.geom_type
+        if self.geom_type.startswith('Multi'):
+            schema['geometry'] = self.geom_type
+        else:
+            # force schema to be Multi* to allow storage of multigeometries
+            schema['geometry'] = 'Multi' + self.geom_type
         schema['properties'] = {}
         for json, shp, _type in self.fields:
             schema['properties'][shp] = _type
