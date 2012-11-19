@@ -142,5 +142,14 @@ function init() {
     $('.raster_layer select').change(get_data_volume).change(verify_zoom_level);
     set_layer_inputs_by_format_type();
     $('#start_btn').click(submit_and_start);
-    $('#load_coverage').click(load_coverage_from_project);
+    $('#load_couchdb_coverage').click(function() {
+        load_coverage_from_project(true)
+        return false;
+    });
+
+    $('#load_coverage').click(function() {
+        load_coverage_from_project(false)   
+        return false;
+    });
+
 };

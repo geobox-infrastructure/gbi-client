@@ -56,5 +56,15 @@ $(document).ready(function() {
     $('#save_btn').click(submit_data);
     limit_download_level($('#raster_source').val());
     toggle_start_button();
-    $('#load_coverage').click(load_coverage_from_project);
+    
+    $('#load_couchdb_coverage').click(function() {
+        load_coverage_from_project(true)
+        return false;
+    });
+
+    $('#load_coverage').click(function() {
+        load_coverage_from_project(false)   
+        return false;
+    });
+
 });
