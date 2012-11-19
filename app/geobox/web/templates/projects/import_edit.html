@@ -48,11 +48,7 @@
         var has_zoom_level = {{ has_zoom_level}};
         var load_coverage_url = '{{ url_for('project.load_coverage') }}';
         {{ generate_sources(sources) }}
-
-        {% autoescape false %}
-            coverage = {{ coverage }};
-        {% endautoescape %}
-
+        coverage = {{ coverage|tojson|safe }};
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/project_utils.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/import_edit.js') }}"></script>

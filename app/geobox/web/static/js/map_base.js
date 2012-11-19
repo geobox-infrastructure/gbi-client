@@ -206,9 +206,10 @@ function load_features(data) {
        });
     } else {
         feature_collection = parser.read(data);
-        draw_layer.addFeatures(feature_collection);
+        if (feature_collection)
+            draw_layer.addFeatures(feature_collection);
     }
-    if (draw_layer.features) {
+    if (draw_layer.features.length > 0) {
         draw_layer.map.zoomToExtent(draw_layer.getDataExtent());
     }
     draw_layer.load_active = false;
