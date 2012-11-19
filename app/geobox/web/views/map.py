@@ -13,10 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from flask import Blueprint, render_template, request, g
+from flask import Blueprint, render_template, request, g, current_app
 
 from ..helper import get_local_cache_url
 from geobox.model import LocalWMTSSource, ExternalWMTSSource
+from geobox.lib.couchdb import CouchDB
 
 map_view = Blueprint('map_view', __name__)
 
@@ -27,8 +28,19 @@ def map():
     base_layer.bbox = base_layer.bbox_from_view_coverage()
     cache_url = get_local_cache_url(request)
 
+    couch = CouchDB('http://%s:%s' % ('127.0.0.1', 
+    	current_app.config.geobox_state.config.get('couchdb', 'port')), 
+    	current_app.config.geobox_state.config.get('web', 'coverages_from_couchdb'))
+
+    records = couch.load_records()
+    vector_geometries = []
+    for record in records:
+    	if record['geometry']: # check if record has geometry type
+    		vector_geometries.append(record)
+
     return render_template('map.html',
         cache_url=cache_url,
         base_layer=base_layer,
-        sources=raster_sources
+        sources=raster_sources,
+        vector_geometries=vector_geometries
     )

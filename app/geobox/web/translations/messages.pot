@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-14 15:58+0100\n"
+"POT-Creation-Date: 2012-11-19 14:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,11 +301,15 @@ msgstr ""
 msgid "map and information"
 msgstr ""
 
-#: geobox/web/templates/map.html:16
+#: geobox/web/templates/map.html:13
+msgid "vector_layer_title"
+msgstr ""
+
+#: geobox/web/templates/map.html:18
 msgid "local maps"
 msgstr ""
 
-#: geobox/web/templates/map.html:17
+#: geobox/web/templates/map.html:19
 msgid "tooltip - show all imported maps"
 msgstr ""
 
@@ -420,8 +424,8 @@ msgstr ""
 
 #: geobox/web/templates/projects/exports.html:24
 #: geobox/web/templates/projects/imports.html:36
-#: geobox/web/templates/projects/macros.html:47
-#: geobox/web/templates/projects/macros.html:48
+#: geobox/web/templates/projects/macros.html:49
+#: geobox/web/templates/projects/macros.html:50
 msgid "MB"
 msgstr ""
 
@@ -498,19 +502,23 @@ msgstr ""
 msgid "load coverage"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:44
+#: geobox/web/templates/projects/macros.html:36
+msgid "load vectorimports as coverage"
+msgstr ""
+
+#: geobox/web/templates/projects/macros.html:46
 msgid "Information"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:45
+#: geobox/web/templates/projects/macros.html:47
 msgid "tooltip - information about data volumen"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:47
+#: geobox/web/templates/projects/macros.html:49
 msgid "Data volume"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:48
+#: geobox/web/templates/projects/macros.html:50
 msgid "free disk space"
 msgstr ""
 
@@ -607,12 +615,12 @@ msgstr ""
 msgid "settings changed. restart required"
 msgstr ""
 
-#: geobox/web/views/project.py:62 geobox/web/views/project.py:156
+#: geobox/web/views/project.py:63 geobox/web/views/project.py:157
 msgid "added new project"
 msgstr ""
 
-#: geobox/web/views/project.py:125 geobox/web/views/project.py:240
-#: geobox/web/views/vector.py:78
+#: geobox/web/views/project.py:126 geobox/web/views/project.py:244
+#: geobox/web/views/vector.py:81
 msgid "form error"
 msgstr ""
 
@@ -632,30 +640,30 @@ msgstr ""
 msgid "username or password not correct"
 msgstr ""
 
-#: geobox/web/views/vector.py:65
+#: geobox/web/views/vector.py:68
 msgid "invalid mapping"
 msgstr ""
 
-#: geobox/web/views/vector.py:68
+#: geobox/web/views/vector.py:71
 msgid "invalid shapefile"
 msgstr ""
 
-#: geobox/web/views/vector.py:81
+#: geobox/web/views/vector.py:84
 #, python-format
 msgid "file %(name)s missing"
 msgstr ""
 
-#: geobox/web/views/vector.py:83
+#: geobox/web/views/vector.py:86
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr ""
 
-#: geobox/web/views/vector.py:85
+#: geobox/web/views/vector.py:88
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr ""
 
-#: geobox/web/views/vector.py:87
+#: geobox/web/views/vector.py:90
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr ""

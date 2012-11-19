@@ -58,17 +58,16 @@ function toggle_start_button() {
     }
 }
 
-function load_coverage_from_project() {
+function load_coverage_from_project(couchdb_coverage) {
     var coverage_id = $("#select_coverage").val();
-    var data = {'id': coverage_id};
-
+    var data = {'id': coverage_id, 'couchdb_coverage': couchdb_coverage};
     $.ajax({
         type: 'POST',
         url: load_coverage_url,
         data: data,
         success: function(data) {
             if (data.coverage)
-                load_features(data.coverage);
+                load_features(data.coverage, couchdb_coverage);
         }
     });
     return false; 
