@@ -72,7 +72,7 @@ function activate_draw_controls(map) {
 
     var sketchSymbolizers = {
          "Point": {
-            pointRadius: 10,
+            pointRadius: 10
         }
     };
 
