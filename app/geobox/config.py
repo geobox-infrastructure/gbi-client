@@ -309,6 +309,7 @@ class GeoBoxConfig(ConfigParser):
             },
             'available_srs': ['EPSG:4326', 'EPSG:3857'],
             'context_document_url': 'http://igreendemo.omniscale.net/context',
+            'coverages_from_couchdb': 'flaechen-box',
         },
         'mapproxy': {
             'port': 8091,

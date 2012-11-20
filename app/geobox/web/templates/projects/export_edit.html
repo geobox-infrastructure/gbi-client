@@ -83,9 +83,7 @@
         var level_text = '{{ _('level') }}';
         {{ generate_base_layer(base_layer) }}
         {{ generate_sources(raster_sources, cache_url) }}
-        {% autoescape false %}
-            coverage = {{ coverage }};
-        {% endautoescape %}
+        coverage = {{ coverage|tojson|safe }};
         export_edit = true;
         $(document).ready(function() {
             init();

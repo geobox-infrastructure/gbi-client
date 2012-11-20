@@ -30,6 +30,7 @@ from mapproxy.grid import tile_grid
 
 from geobox.lib.tiles import estimate_tiles
 from geobox.lib.coverage import coverage_from_feature_collection, coverage_from_geojson, geometry_from_feature_collection
+from geobox.lib.couchdb import CouchDB
 from geobox.lib.fs import diskspace_available_in_mb
 from geobox.lib.mapproxy import write_mapproxy_config
 from geobox import model
@@ -273,12 +274,28 @@ def remove(id):
 
 @project.route('/project/load_coverage', methods=['POST'])
 def load_coverage():
-    project_id = request.form['id']
-    project = g.db.query(model.Project).with_polymorphic('*').filter_by(id = project_id).first()
-    if not project:
+    project_id = request.form.get('id', False)
+    couchdb_coverage = request.form.get('couchdb_coverage', False)
+    if couchdb_coverage == 'true':
+        couch = CouchDB('http://%s:%s' % ('127.0.0.1', 
+            current_app.config.geobox_state.config.get('couchdb', 'port')), 
+            current_app.config.geobox_state.config.get('web', 'coverages_from_couchdb'))
+
+        records = couch.load_records()
+        coverage = []
+        for record in records:
+            # load only poylgons or mulitpolygons for coverages
+            if record['geometry']['type'] in ('Polygon', 'MultiPolygon'): 
+                coverage.append(record)
+
+    else:
+        project = g.db.query(model.Project).with_polymorphic('*').filter_by(id = project_id).first()
+        coverage = project.coverage
+   
+    if not coverage:
         return jsonify(coverage=False)
     else:
-        return jsonify(coverage=project.coverage)
+        return jsonify(coverage=coverage)
 
 @project.route('/data_volume', methods=['POST'])
 def data_volume():

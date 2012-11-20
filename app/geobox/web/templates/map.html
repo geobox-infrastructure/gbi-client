@@ -9,6 +9,8 @@
     <script type="text/javascript">
         {{ generate_base_layer(base_layer) }}
         {{ generate_sources(sources, cache_url)}}
+        var vector_sources = {{ vector_geometries|tojson|safe }}
+        var vector_layer_title = "{{ _('vector_layer_title') }}"
     </script>
 {% endblock %}
 
