@@ -31,7 +31,7 @@ exe = EXE(pyz,
           debug=False,
           strip=None,
           upx=True,
-          console=False)
+          console=${build_with_console})
 
 package_data = (
       package_data_toc('..\\app\\geobox', ('.html', '.css', '.js', '.png', '.gif', '.mo', '.ini', '.ico'))

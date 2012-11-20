@@ -17,6 +17,10 @@ def load_build_conf():
         else:
             config[key.lower()] = value
 
+    # modify version for console builds
+    if config['build_with_console'] == 'True':
+        config['version'] += '-console'
+
     return config
 
 config = load_build_conf()
@@ -135,7 +139,11 @@ def build_installer_command():
 
 def build_app_command():
     """Build GeoBox Python application as .exe"""
-    call(['python', config['pyinstaller_dir'] / 'pyinstaller.py', 'geobox.spec', '-y'])
+    pyinstaller_spec_tpl = open(path('geobox.spec.tpl')).read()
+    template = string.Template(pyinstaller_spec_tpl)
+    pyinstaller_spec = config['build_dir'] / 'geobox.spec'
+    pyinstaller_spec.write_text(template.substitute(config))
+    call(['python', config['pyinstaller_dir'] / 'pyinstaller.py', pyinstaller_spec, '-y'])
 
 if __name__ == '__main__':
     scriptine.run()
