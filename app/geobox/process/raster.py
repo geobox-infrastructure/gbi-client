@@ -91,7 +91,8 @@ class RasterProcess(ProcessBase):
                 start_progress = parse_progress_identifier(task.seed_progress)
                 self.terminate_event = threading.Event()
                 seed_progress = SeedProgress(self.terminate_event, start_progress)
-
+                if seed_task.refresh_timestamp is not None:
+                    seed_task.tile_manager._expire_timestamp = seed_task.refresh_timestamp
                 seed_worker_factory = partial(TileSeedWorker, self.terminate_event)
                 self.tile_worker_pool = TileWorkerPool(seed_task, seed_worker_factory,
                     size=4, progress_logger=progress_logger)

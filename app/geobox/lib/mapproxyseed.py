@@ -238,7 +238,8 @@ def create_import_seed_task(import_task, app_state):
     levels = range(import_task.zoom_level_start,
         import_task.zoom_level_end + 1)
 
-    return create_seed_task(tile_mgr, coverage, levels)
+    return create_seed_task(tile_mgr, coverage, levels,
+        update_tiles=import_task.update_tiles)
 
 def create_mbtiles_export_seed_task(export_task, app_state):
     grid = DEFAULT_GRID
@@ -282,11 +283,16 @@ def create_couchdb_export_seed_task(export_task, app_state, couchdb_port):
     return create_seed_task(tile_mgr, coverage, levels)
 
 
-def create_seed_task(tile_mgr, coverage, levels):
+def create_seed_task(tile_mgr, coverage, levels, update_tiles=None):
     if not coverage:
         coverage = BBOXCoverage(tile_mgr.grid.bbox, tile_mgr.grid.srs)
 
-    return SeedTask(md={}, tile_manager=tile_mgr, levels=levels, refresh_timestamp=None, coverage=coverage)
+    if update_tiles:
+        refresh_timestamp = time.time()
+    else:
+        refresh_timestamp = None
+    return SeedTask(md={}, tile_manager=tile_mgr, levels=levels,
+        refresh_timestamp=refresh_timestamp, coverage=coverage)
 
 
 class FallbackTileClient(object):
