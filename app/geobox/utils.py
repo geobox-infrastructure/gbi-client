@@ -69,7 +69,8 @@ def init_lib_paths():
     for loc in locations:
         if os.path.exists(loc):
             path_found = True
-            os.environ['PATH'] = os.environ['PATH'] + ';' + os.path.abspath(loc)
+            os.environ['PATH'] = os.path.abspath(loc) + ';' + os.environ['PATH']
+    log.info("GeoBox PATH environment: %s", os.environ['PATH'])
     assert path_found
 
 def port_used(port):
