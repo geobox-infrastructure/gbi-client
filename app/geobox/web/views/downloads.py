@@ -43,7 +43,14 @@ def download_list():
             export = {}
             export['name'] = export_dirname
 
-            extensions = ('.shp', '.mbtiles', '.jpeg', '.tiff', '.couchdb')
+            extensions = (
+                '.shp',
+                '.mbtiles',
+                '.jpeg',
+                '.tiff',
+                '.wld',
+                '.couchdb',
+            )
 
             export['files'] = [files for files in listdir(export_dir)
                 if files.lower().endswith(extensions)]
