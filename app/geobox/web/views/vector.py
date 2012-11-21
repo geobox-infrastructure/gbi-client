@@ -95,7 +95,9 @@ def get_shapefile_list():
     shape_file_list = []
     missing_file_list = []
     #XXX kai: also look for .shx and .dbf so .shp can be add to missing_files?
-    for shape_file in (glob.glob(os.path.join(shape_import_dir, '*.shp')) + glob.glob(os.path.join(shape_import_dir, '*.SHP'))):
+
+    shp_files = set((glob.glob(os.path.join(shape_import_dir, '*.shp')) + glob.glob(os.path.join(shape_import_dir, '*.SHP'))))
+    for shape_file in shp_files:
         missing = False
         s_path, s_name = os.path.split(shape_file)
         name, ext = os.path.splitext(s_name)
