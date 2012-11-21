@@ -195,9 +195,14 @@ def create_couchdb_source(layer, app_state, grid):
     source = CacheMapLayer(tile_mgr)
     return source
 
-def create_mbtiles_export_cache(export_filename, app_state):
+def create_mbtiles_export_cache(export_filename, wmts_source, app_state):
     cache = MBTilesCache(export_filename)
     cache.locking_disabled = True
+    cache.update_metadata(
+        name=wmts_source.title,
+        format=wmts_source.format,
+        overlay=wmts_source.is_overlay,
+    )
     return cache
 
 def create_couchdb_export_cache(export_path, db_name, file_ext, couchdb_port, app_state):
@@ -237,13 +242,14 @@ def create_import_seed_task(import_task, app_state):
 
 def create_mbtiles_export_seed_task(export_task, app_state):
     grid = DEFAULT_GRID
+    export_grid = tile_grid('EPSG:3857', origin='sw')
     source = create_couchdb_source(export_task.layer, app_state, grid)
 
     export_filename = app_state.user_data_path('export', export_task.project.title, export_task.layer.wmts_source.name + '.mbtiles', make_dirs=True)
-    cache = create_mbtiles_export_cache(export_filename, app_state)
+    cache = create_mbtiles_export_cache(export_filename, export_task.layer.wmts_source, app_state)
 
     tile_mgr = create_tile_manager(format=export_task.layer.wmts_source.format,
-        cache=cache, sources=[source], grid=grid)
+        cache=cache, sources=[source], grid=export_grid)
 
     source_coverage = coverage_from_geojson(export_task.layer.wmts_source.download_coverage)
     export_coverage = coverage_from_geojson(export_task.coverage)
