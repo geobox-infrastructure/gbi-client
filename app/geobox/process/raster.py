@@ -79,6 +79,16 @@ class TileSeedWorker(TileWorker):
                     else:
                         break
 
+        if self.terminate_event.is_set():
+            # if we are terminating, clear tiles_queue in case the
+            # tilewalker is blocking on tiles_queue.put so that it
+            # is able to terminate too
+            try:
+                while True:
+                    self.tiles_queue.get(timeout=0.5)
+            except Queue.Empty:
+                pass
+
 class RasterProcess(ProcessBase):
     terminate_event = None
 
