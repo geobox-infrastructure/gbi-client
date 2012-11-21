@@ -42,7 +42,7 @@ def import_vector():
                 if not os.path.isdir(import_dir):
                     os.mkdir(import_dir)
 
-                f = open(target, 'w')
+                f = open(target, 'wb')
                 f.write(upload_file.stream.read())
                 f.close()
             except IOError:
@@ -94,14 +94,12 @@ def get_shapefile_list():
     shape_import_dir = current_app.config.geobox_state.user_data_path('import')
     shape_file_list = []
     missing_file_list = []
-    #XXX kai: also look for .shx and .dbf so .shp can be add to missing_files?
 
     shp_files = set((glob.glob(os.path.join(shape_import_dir, '*.shp')) + glob.glob(os.path.join(shape_import_dir, '*.SHP'))))
     for shape_file in shp_files:
         missing = False
         s_path, s_name = os.path.split(shape_file)
         name, ext = os.path.splitext(s_name)
-        #XXX kai: case insensitiv?
         if not os.path.exists(os.path.join(s_path, name +'.shx')):
             missing = True
             missing_file_list.append(name + '.shx')
