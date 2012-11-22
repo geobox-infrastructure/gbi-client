@@ -52,23 +52,16 @@ def import_list():
     return render_template('projects/imports.html', import_projects=import_projects)
 
 
-@project.route('/import/new', methods=['POST'])
-def import_new():
-    proj = model.ImportProject(title=uuid.uuid4().get_hex())
-    g.db.add(proj)
-    g.db.commit()
-    proj.title = 'Import %d' % proj.id
-    g.db.commit()
-
-    flash(_('added new project'), 'success')
-
-    return redirect(url_for('.import_edit', id=proj.id))
-
+@project.route('/import/new', methods=['GET', 'POST'])
 @project.route('/import/<int:id>', methods=['GET', 'POST'])
-def import_edit(id):
-    proj = g.db.query(model.ImportProject).get(id)
-
+def import_edit(id=None):
     sources = g.db.query(model.ExternalWMTSSource).all()
+
+    if id is None:
+        proj = model.ImportProject()
+    else:
+        proj = g.db.query(model.ImportProject).get(id)
+
     if not proj:
         abort(404)
 
@@ -139,35 +132,25 @@ def import_edit(id):
 
     free_disk_space = diskspace_available_in_mb(current_app.config.geobox_state.user_data_path())
 
-
-
     return render_template('projects/import_edit.html',
         proj=proj, form=form, sources=sources, has_zoom_level=has_zoom_level,
         base_layer=base_layer,coverage_form=coverage_form,
         coverage=coverage, free_disk_space=free_disk_space)
 
-@project.route('/export/new', methods=['POST'])
-def export_new():
-    proj = model.ExportProject(title=uuid.uuid4().get_hex())
-    g.db.add(proj)
-    g.db.commit()
-    proj.title = 'Export %d' % proj.id
-    g.db.commit()
-
-    flash(_('added new project'), 'success')
-
-    return redirect(url_for('.export_edit', id=proj.id))
-
+@project.route('/export/new', methods=['GET', 'POST'])
 @project.route('/export/<int:id>', methods=['GET', 'POST'])
-def export_edit(id):
+def export_edit(id=None):
     from ...lib.vectormapping import default_mappings as mappings
 
-    proj = g.db.query(model.ExportProject).get(id)
-
-    raster_sources = g.db.query(model.LocalWMTSSource).order_by(model.LocalWMTSSource.id).all()
+    if id is None:
+        proj = model.ExportProject()
+    else:
+        proj = g.db.query(model.ExportProject).get(id)
 
     if not proj:
         abort(404)
+
+    raster_sources = g.db.query(model.LocalWMTSSource).order_by(model.LocalWMTSSource.id).all()
 
     coverage_form = forms.SelectCoverage()
     form = forms.ExportProjectEdit(request.form)
@@ -277,21 +260,21 @@ def load_coverage():
     project_id = request.form.get('id', False)
     couchdb_coverage = request.form.get('couchdb_coverage', False)
     if couchdb_coverage == 'true':
-        couch = CouchDB('http://%s:%s' % ('127.0.0.1', 
-            current_app.config.geobox_state.config.get('couchdb', 'port')), 
+        couch = CouchDB('http://%s:%s' % ('127.0.0.1',
+            current_app.config.geobox_state.config.get('couchdb', 'port')),
             current_app.config.geobox_state.config.get('web', 'coverages_from_couchdb'))
 
         records = couch.load_records()
         coverage = []
         for record in records:
             # load only poylgons or mulitpolygons for coverages
-            if record['geometry']['type'] in ('Polygon', 'MultiPolygon'): 
+            if record['geometry']['type'] in ('Polygon', 'MultiPolygon'):
                 coverage.append(record)
 
     else:
         project = g.db.query(model.Project).with_polymorphic('*').filter_by(id = project_id).first()
         coverage = project.coverage
-   
+
     if not coverage:
         return jsonify(coverage=False)
     else:

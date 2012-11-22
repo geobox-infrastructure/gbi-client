@@ -47,7 +47,7 @@
     {% endfor %}
   </tbody>
   </table>
-  <form action="{{ url_for('.export_new') }}" method="POST">
+  <form action="{{ url_for('.export_edit') }}" method="GET">
     <button type="submit" class="btn btn-small">{{ _('new export project') }}</button>
    </form>
 {% endblock %}

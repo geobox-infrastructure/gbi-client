@@ -45,7 +45,7 @@
     </tbody>
   </table>
 
-    <form action="{{ url_for('.import_new') }}" method="POST">
+    <form action="{{ url_for('.import_edit') }}" method="GET">
       <button type="submit" class="btn btn-small">{{ _('new import project') }}</button>
     </form>
 {% endblock %}
