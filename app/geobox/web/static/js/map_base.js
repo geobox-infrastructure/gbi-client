@@ -22,7 +22,7 @@ OpenLayers.Tile.Image.prototype.onImageError = function() {
 }
 
 
-function init_map(background_layer) {
+function init_map() {
     OpenLayers.ImgPath = openlayers_image_path;
 
     var extent = new OpenLayers.Bounds(-20037508.34, -20037508.34,
@@ -46,10 +46,8 @@ function init_map(background_layer) {
 
     var map = new OpenLayers.Map( 'map', options );
 
-    if (background_layer) {
-        map.addLayer(base_layer);
-    }
     map.addLayer(basic);
+    map.addLayer(base_layer);
 
     map.addControl(
         new OpenLayers.Control.TouchNavigation({
@@ -58,7 +56,12 @@ function init_map(background_layer) {
             }
         })
     );
-
+    var layerswitcher = new OpenLayers.Control.LayerSwitcher({
+        roundedCorner: true
+    });
+    map.addControl(layerswitcher)
+    layerswitcher.maximizeControl();
+    
     map.addControl(new OpenLayers.Control.PanZoomBar());
     map.addControl(new OpenLayers.Control.Navigation());
     map.addControl(new OpenLayers.Control.ZoomStatus({
@@ -115,6 +118,9 @@ function activate_draw_controls(map) {
                     f.feature.attributes['type'] = $('.draw_control_element.active')[0].id;
                     toggle_start_button();
                 }
+                if (!draw_layer.load_active) {
+                    get_data_volume();
+                }
             },
             featuresadded: function() {
                 toggle_start_button();
@@ -123,6 +129,7 @@ function activate_draw_controls(map) {
                 toggle_start_button();
             },
             featuresremoved: function() {
+                get_data_volume();
                 toggle_start_button();
             },
             beforefeaturemodified: function(f) {
@@ -134,8 +141,13 @@ function activate_draw_controls(map) {
                    draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG 
                    draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
                 }
+            },
+            afterfeaturemodified: function() {
+                get_data_volume()
             }
+
     }});
+
     draw_layer.load_active = false;
     map.addLayer(draw_layer);
 
@@ -201,6 +213,7 @@ function delete_selected_feature() {
 
 function delete_all_features() {
     draw_layer.removeAllFeatures();
+    get_data_volume();
     return false;
 }
 
@@ -233,5 +246,6 @@ function load_features(data) {
     if (draw_layer.features.length > 0) {
         draw_layer.map.zoomToExtent(draw_layer.getDataExtent());
     }
+    get_data_volume();
     draw_layer.load_active = false;
 }

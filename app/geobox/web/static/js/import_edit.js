@@ -29,16 +29,11 @@ function show_selected_source(map, id, selected_source) {
 
 
 $(document).ready(function() {
-    var map = init_map(background_layer=false);
+    var map = init_map();
     draw_layer = activate_draw_controls(map);
     if(coverage) {
         load_features(coverage);
-        get_data_volume();
     }
-    draw_layer.events.on({
-        'featureadded': get_data_volume,
-        'afterfeaturemodified': get_data_volume
-    });
 
     $('#raster_source').change(function() {
         var id = $(this).val();

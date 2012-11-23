@@ -127,6 +127,9 @@ def import_edit(id=None):
         has_zoom_level = 'true'
 
     coverage = proj.coverage if proj.coverage else 'null'
+    if form.coverage.data:
+        coverage = form.coverage.data
+
     base_layer = g.db.query(model.ExternalWMTSSource).filter_by(background_layer=True).first()
     base_layer.bbox = base_layer.bbox_from_view_coverage()
 
@@ -151,7 +154,6 @@ def export_edit(id=None):
         abort(404)
 
     raster_sources = g.db.query(model.LocalWMTSSource).order_by(model.LocalWMTSSource.id).all()
-
     coverage_form = forms.SelectCoverage()
     form = forms.ExportProjectEdit(request.form)
     form.end_level.choices = form.start_level.choices = get_levels(model.LocalWMTSSource)
@@ -231,7 +233,11 @@ def export_edit(id=None):
     form.srs.data = proj.export_srs
     if proj.export_vector_layers:
         form.mapping_name.data = proj.export_vector_layers[0].mapping_name
+    
     coverage = proj.coverage if proj.coverage else 'null'
+    if form.coverage.data:
+        coverage = form.coverage.data
+    
     base_layer = g.db.query(model.ExternalWMTSSource).filter_by(background_layer=True).first()
     base_layer.bbox = base_layer.bbox_from_view_coverage()
 
