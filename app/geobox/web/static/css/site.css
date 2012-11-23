@@ -119,7 +119,7 @@ body {
     background-image: url(../img/draw_rectangle_off.png);
 }
 
-.box.active {
+.box.active, .box.deactive:hover {
     background-image: url(../img/draw_rectangle_on.png);
 }
 
@@ -127,7 +127,7 @@ body {
     background-image: url(../img/draw_polygon_off.png);
 }
 
-.multipolygon.active {
+.multipolygon.active, .multipolygon.deactive:hover {
     background-image: url(../img/draw_polygon_on.png);
 }
 
@@ -135,15 +135,15 @@ body {
     background-image: url(../img/remove_point_off.png);
 }
 
-.modify.active {
+.modify.active, .modify.deactive:hover {
     background-image: url(../img/remove_point_on.png);
 }
 
-.delete.deactive {
+.delete.active, .delete.deactive {
     background-image: url(../img/delete_off.png);
 }
 
-.delete.active {
+.delete.active:hover {
     background-image: url(../img/delete_on.png);
 }
 
