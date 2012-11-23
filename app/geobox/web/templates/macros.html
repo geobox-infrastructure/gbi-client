@@ -20,6 +20,15 @@
         requestEncoding: 'REST',
         maxExtent: max_extent
     });
+
+    var basic = new OpenLayers.Layer.Image('{{_('white background map')}}',
+      '{{ url_for('static', filename='img/blank.gif') }}',
+      new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34),
+      new OpenLayers.Size(500, 500), {
+         maxResolution: 156543.033928
+     }        
+   );
+
 {%- endmacro %}
 
 {% macro generate_sources(sources, cache_url) -%}

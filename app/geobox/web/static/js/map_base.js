@@ -22,7 +22,7 @@ OpenLayers.Tile.Image.prototype.onImageError = function() {
 }
 
 
-function init_map() {
+function init_map(background_layer) {
     OpenLayers.ImgPath = openlayers_image_path;
 
     var extent = new OpenLayers.Bounds(-20037508.34, -20037508.34,
@@ -46,7 +46,11 @@ function init_map() {
 
     var map = new OpenLayers.Map( 'map', options );
 
-    map.addLayer(base_layer);
+    if (background_layer) {
+        map.addLayer(base_layer);
+    }
+    map.addLayer(basic);
+
     map.addControl(
         new OpenLayers.Control.TouchNavigation({
             dragPanOptions: {
@@ -72,18 +76,36 @@ function activate_draw_controls(map) {
 
     var sketchSymbolizers = {
          "Point": {
-            pointRadius: 10
-        }
-    };
+            pointRadius: 8,
+            fillColor: "#ccc",
+            fillOpacity: 1,
+            strokeWidth: 1,
+            strokeOpacity: 1,
+            strokeColor: "#D6311E"
+          },
+          "Line": {
+            strokeWidth: 3,
+            strokeOpacity: 1,
+            strokeColor: "#D6311E",
+            strokeDashstyle: "dash"
+          },
+          "Polygon": {
+            strokeWidth: 2,
+            strokeOpacity: 1,
+            strokeColor: "#D6311E",
+            fillColor: "#D6311E",
+            fillOpacity: 0.6
+          }
+      };
 
     var style = new OpenLayers.Style();
-        style.addRules([
+    style.addRules([
         new OpenLayers.Rule({symbolizer: sketchSymbolizers})
     ]); 
-    var styleMap = new OpenLayers.StyleMap({"default": style});
+    var styleMap = new OpenLayers.StyleMap(
+        {"default": style}
+    );
 
-
-    selected_feature = null;
     var draw_layer = new OpenLayers.Layer.Vector("Draw Layer", {
         displayInLayerSwitcher: false,
         styleMap: styleMap,
@@ -105,24 +127,16 @@ function activate_draw_controls(map) {
             },
             beforefeaturemodified: function(f) {
                 if(f.feature.attributes['type'] == BOX_CONTROL) {
-                    draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG | OpenLayers.Control.ModifyFeature.RESIZE;
+                    draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG;
+                    draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESIZE;
+                    draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
                 } else {
-                    draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG | OpenLayers.Control.ModifyFeature.RESHAPE;
+                   draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG 
+                   draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
                 }
             }
     }});
     draw_layer.load_active = false;
-    draw_layer.events.on({
-                'featureselected': function(feature) {
-                    selected_feature = feature.feature;
-                    $('#'+DELETE_FEATURE).removeAttr('disabled').toggleClass('active');
-                },
-                'featureunselected': function(feature) {
-                    selected_feature = null;
-                    $('#'+DELETE_FEATURE).attr('disabled', 'disabled').toggleClass('active');
-                }
-            });
-
     map.addLayer(draw_layer);
 
     draw_controls = {};
@@ -144,7 +158,7 @@ function activate_draw_controls(map) {
         map.addControl(control);
     });
     $('.draw_control_element').click(toggle_draw_control);
-    $('#'+DELETE_FEATURE).click(delete_feature);
+    $('#'+DELETE_FEATURE).click(delete_selected_feature);
     $('#'+DELETE_ALL_FEATURES).click(delete_all_features);
 
     return draw_layer;
@@ -160,20 +174,27 @@ function toggle_draw_control() {
         if(el.hasClass('active')) {
             el.toggleClass('active');
             draw_controls[el_id].deactivate();
+            if (el_id == MODIFY_CONTROL) {
+                $('#'+DELETE_FEATURE).toggleClass('active').attr('disabled', 'disabled')
+            }
         } else if (el_id == elem.id) {
             el.toggleClass('active');
             draw_controls[el_id].activate();
+            if (el_id == MODIFY_CONTROL) {
+                $('#'+DELETE_FEATURE).toggleClass('active').removeAttr('disabled')
+            }
         }
     });
     return false;
 }
 
-function delete_feature() {
-    if(selected_feature) {
-        var to_delete = selected_feature;
+function delete_selected_feature() {
+    // save selecte features before modify control is deactive
+    var selected_features = draw_layer.selectedFeatures[0];
+    if (selected_features) {
         draw_controls[MODIFY_CONTROL].deactivate();
-        draw_layer.removeFeatures(to_delete);
-        $('#'+MODIFY_CONTROL).toggleClass('active');
+        draw_layer.removeFeatures(selected_features)
+        draw_controls[MODIFY_CONTROL].activate();
     }
     return false;
 }

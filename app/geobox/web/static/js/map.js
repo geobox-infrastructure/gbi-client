@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var map = init_map();
+    var map = init_map(background_layer=true);
     layer_switcher = new OpenLayers.Control.LayerSwitcher({
         roundedCorner: true
     });
