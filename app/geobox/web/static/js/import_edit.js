@@ -35,10 +35,6 @@ $(document).ready(function() {
         load_features(coverage);
         get_data_volume();
     }
-    draw_layer.events.on({
-        'featureadded': get_data_volume,
-        'afterfeaturemodified': get_data_volume
-    });
 
     $('#raster_source').change(function() {
         var id = $(this).val();
