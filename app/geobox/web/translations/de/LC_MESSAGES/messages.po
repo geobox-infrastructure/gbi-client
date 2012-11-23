@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-23 07:38+0100\n"
+"POT-Creation-Date: 2012-11-23 09:50+0100\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -726,4 +726,3 @@ msgstr "Beenden"
 #: geobox/lib/trayicon.py:128
 msgid "Open"
 msgstr "Öffnen"
-
