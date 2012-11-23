@@ -48,7 +48,8 @@ def download_list():
                 '.mbtiles',
                 '.jpeg',
                 '.tiff',
-                '.wld',
+                '.jgw',
+                '.tfw',
                 '.couchdb',
             )
 

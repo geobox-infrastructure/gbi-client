@@ -45,7 +45,7 @@ def create_target_image(x_size, y_size, bbox, res, bands=3, band_type=1, t_name=
     left, bottom, right, top = bbox
     #XXX kai: fetch AttributeError when unsupported format
     driver = gdal.GetDriverByName(t_format)
-    dest = driver.Create(t_name, x_size, y_size, bands, band_type, [])
+    dest = driver.Create(t_name, x_size, y_size, bands, band_type, ["TFW=YES"])
 
     dest.SetGeoTransform([left, res, 0, top, 0, -res])
     dest.SetProjection(srs.ExportToWkt())
@@ -88,7 +88,7 @@ def _merge_tiles(tile_iter, bbox, size, resolution, t_srs='EPSG:3857', t_format=
 
     gdal_file_info = file_info()
 
-    fh, result_filename = mkstemp(suffix='.tif')
+    fh, result_filename = mkstemp(suffix='.tiff')
     os.close(fh)
     log.info('Created %s' % result_filename)
 
@@ -114,8 +114,9 @@ def _merge_tiles(tile_iter, bbox, size, resolution, t_srs='EPSG:3857', t_format=
         del dest
 
         if t_srs != 'EPSG:3857':
-            fh, reproject_filename = mkstemp(suffix='.tif')
+            fh, reproject_filename = mkstemp(suffix='.tiff')
             os.close(fh)
+            os.unlink(splitext(result_filename)[0] + '.tfw')
             log.info('Created %s' % reproject_filename)
             reproject_image(gdalwarp_bin, result_filename, 'EPSG:3857', reproject_filename, t_srs)
             # os.remove(result_filename)
@@ -125,15 +126,17 @@ def _merge_tiles(tile_iter, bbox, size, resolution, t_srs='EPSG:3857', t_format=
         if t_format != 'GTiff':
             fh, convert_filename = mkstemp(suffix=splitext(t_name)[1])
             os.close(fh)
+            os.unlink(splitext(result_filename)[0] + '.tfw')
             log.info('Created %s' % convert_filename)
             convert_image(gdal_translate_bin, result_filename, convert_filename, t_format)
+            move(splitext(convert_filename)[0] + '.wld', splitext(convert_filename)[0] + '.jgw')
             # os.remove(result_filename)
             log.info('Removed %s' % result_filename)
             result_filename = convert_filename
-        copy_files(result_filename, t_name)
+        move_files(result_filename, t_name)
 
 def reproject_image(bin, src, src_srs, dest, dest_srs):
-    p = Popen(['gdalwarp', '-s_srs', src_srs, '-t_srs', dest_srs, src, dest], stdout=PIPE, stderr=STDOUT)
+    p = Popen(['gdalwarp', '-s_srs', src_srs, '-t_srs', dest_srs, '-co', 'TFW=YES', src, dest], stdout=PIPE, stderr=STDOUT)
     if p.wait() != 0:
         msg = 'Failed reprojecting image'
         out_stream = p.communicate()
@@ -150,7 +153,7 @@ def convert_image(bin, src, dest, format='JPEG'):
         log.error(''.join(map(str, out_stream)))
         raise TilemergeError(msg)
 
-def copy_files(src, dest):
+def move_files(src, dest):
     src_basename  = splitext(basename(src))[0]
     dest_basename = splitext(basename(dest))[0]
     dest_dirname  = dirname(abspath(dest))
