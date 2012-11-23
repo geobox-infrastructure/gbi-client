@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-23 09:50+0100\n"
+"POT-Creation-Date: 2012-11-23 13:19+0100\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -43,7 +43,7 @@ msgstr "Einloggen erforderlich"
 
 #: geobox/web/__init__.py:119
 msgid "Please login to see this page"
-msgstr "Sie müssen sich anmelden umd diese Seite aufrufen zu können"
+msgstr "Sie müssen sich anmelden um diese Seite aufrufen zu können"
 
 #: geobox/web/forms.py:153 geobox/web/templates/downloads.html:12
 #: geobox/web/templates/projects/exports.html:12
@@ -98,7 +98,7 @@ msgstr "Typ"
 
 #: geobox/web/forms.py:199
 msgid "file name"
-msgstr "Dateiname"
+msgstr "Shapefile"
 
 #: geobox/web/forms.py:204
 msgid "path"
@@ -140,7 +140,7 @@ msgstr "Zugriff für lokales Netzwerk"
 #: geobox/web/templates/admin.html:34
 msgid "tooltip local net access"
 msgstr ""
-"Erlauben Sie den Zugrif von anderen Computern auf die Anwendung und die "
+"Erlauben Sie den Zugriff von anderen Computern auf die Anwendung und die "
 "erstellten Daten."
 
 #: geobox/web/templates/admin.html:38
@@ -254,7 +254,7 @@ msgid "download usermanual"
 msgstr "Benutzerhandbuch"
 
 #: geobox/web/templates/index.html:16
-#: geobox/web/templates/vector/import.html:20
+#: geobox/web/templates/vector/import.html:35
 msgid "import"
 msgstr "Importieren"
 
@@ -496,7 +496,7 @@ msgstr "Zeichenfunktionen"
 msgid "tooltip - drawing options"
 msgstr ""
 "Sie haben die Möglichkeit ein Rechteck oder ein Polygon zu zeichnen. Um "
-"eine Geometrie zu bearbeiten  aktivieren Sie das Editiermodul und wählen "
+"eine Geometrie zu bearbeiten aktivieren Sie das Editiermodul und wählen "
 "Sie die gewünschte Geometrie aus. "
 
 #: geobox/web/templates/projects/macros.html:17
@@ -614,9 +614,42 @@ msgstr "Aufgaben ohne Projekt"
 msgid "vector import"
 msgstr "Vektorimport"
 
-#: geobox/web/templates/vector/import.html:13
+#: geobox/web/templates/vector/import.html:11
+msgid "Upload Shapefile"
+msgstr "Shapefile hochladen"
+
+#: geobox/web/templates/vector/import.html:12
+msgid "tooltip upload shapefile"
+msgstr ""
+"Laden Sie hier Ihr Shapefile in das System. Dies ist erforderlich um im "
+"nächsten Schritt die Daten importieren zu können. Neben dem Shapefile "
+"(.shp) müssen auch die Dateien mit der Endung .shx und .dbf hochgeladen "
+"werden."
+
+#: geobox/web/templates/vector/import.html:18
 msgid "upload"
 msgstr "Datei(en) hochladen"
+
+#: geobox/web/templates/vector/import.html:21
+msgid ""
+"you can also save your shapefile directly to the geobox import folder. "
+"Reload this site after this."
+msgstr "Sie können das Shapefile auch direkt im Import-Verzeichnis ablegen. Nach dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur Auswahl bereit."
+
+#: geobox/web/templates/vector/import.html:23
+msgid "open external explorer for import"
+msgstr "GeoBox Import-Verzeichnis öffnen"
+
+#: geobox/web/templates/vector/import.html:27
+msgid "import vectordata"
+msgstr "Daten importieren"
+
+#: geobox/web/templates/vector/import.html:28
+msgid "tooltip import vectordata"
+msgstr ""
+"Damit die Vektordaten im System genutzt werden kann, müssen diese "
+"importiert werden. Bitte wählen Sie das entsprechende Shapefile und den "
+"dazu passenden Typ aus."
 
 #: geobox/web/views/admin.py:55
 msgid "load context document successful"
@@ -638,12 +671,8 @@ msgstr "Löschen nicht möglich"
 msgid "settings changed. restart required"
 msgstr "Die Einstellungen wurden verändert - bitte starten Sie die Anwendung neu"
 
-#: geobox/web/views/project.py:63 geobox/web/views/project.py:157
-msgid "added new project"
-msgstr "Neues Projekt hinzugefügt"
-
-#: geobox/web/views/project.py:126 geobox/web/views/project.py:244
-#: geobox/web/views/vector.py:81
+#: geobox/web/views/project.py:119 geobox/web/views/project.py:229
+#: geobox/web/views/vector.py:85
 msgid "form error"
 msgstr "Fehler bei Eingaben"
 
@@ -663,30 +692,30 @@ msgstr "Aufgabe gelöscht"
 msgid "username or password not correct"
 msgstr "Benutzername oder Passwort sind nicht korrekt."
 
-#: geobox/web/views/vector.py:68
+#: geobox/web/views/vector.py:72
 msgid "invalid mapping"
 msgstr "Ungültiges Mapping"
 
-#: geobox/web/views/vector.py:71
+#: geobox/web/views/vector.py:75
 msgid "invalid shapefile"
 msgstr "Ungültiges Shapefile/fehlende Dateien"
 
-#: geobox/web/views/vector.py:84
+#: geobox/web/views/vector.py:88
 #, python-format
 msgid "file %(name)s missing"
 msgstr "Datei %(name)s fehlt"
 
-#: geobox/web/views/vector.py:86
+#: geobox/web/views/vector.py:90
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr "Fehler beim Hochladen der Datei %(name)s"
 
-#: geobox/web/views/vector.py:88
+#: geobox/web/views/vector.py:92
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr "Dateityp der Datei %(name)s ist nicht erlaubt"
 
-#: geobox/web/views/vector.py:90
+#: geobox/web/views/vector.py:94
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr "Datei %(name)s hochgeladen"
@@ -726,3 +755,4 @@ msgstr "Beenden"
 #: geobox/lib/trayicon.py:128
 msgid "Open"
 msgstr "Öffnen"
+

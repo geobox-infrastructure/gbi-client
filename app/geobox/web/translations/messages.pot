@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-23 09:50+0100\n"
+"POT-Creation-Date: 2012-11-23 13:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -252,7 +252,7 @@ msgid "download usermanual"
 msgstr ""
 
 #: geobox/web/templates/index.html:16
-#: geobox/web/templates/vector/import.html:20
+#: geobox/web/templates/vector/import.html:35
 msgid "import"
 msgstr ""
 
@@ -595,8 +595,34 @@ msgstr ""
 msgid "vector import"
 msgstr ""
 
-#: geobox/web/templates/vector/import.html:13
+#: geobox/web/templates/vector/import.html:11
+msgid "Upload Shapefile"
+msgstr ""
+
+#: geobox/web/templates/vector/import.html:12
+msgid "tooltip upload shapefile"
+msgstr ""
+
+#: geobox/web/templates/vector/import.html:18
 msgid "upload"
+msgstr ""
+
+#: geobox/web/templates/vector/import.html:21
+msgid ""
+"you can also save your shapefile directly to the geobox import folder. "
+"Reload this site after this."
+msgstr ""
+
+#: geobox/web/templates/vector/import.html:23
+msgid "open external explorer for import"
+msgstr ""
+
+#: geobox/web/templates/vector/import.html:27
+msgid "import vectordata"
+msgstr ""
+
+#: geobox/web/templates/vector/import.html:28
+msgid "tooltip import vectordata"
 msgstr ""
 
 #: geobox/web/views/admin.py:55
@@ -619,12 +645,8 @@ msgstr ""
 msgid "settings changed. restart required"
 msgstr ""
 
-#: geobox/web/views/project.py:63 geobox/web/views/project.py:157
-msgid "added new project"
-msgstr ""
-
-#: geobox/web/views/project.py:126 geobox/web/views/project.py:244
-#: geobox/web/views/vector.py:81
+#: geobox/web/views/project.py:119 geobox/web/views/project.py:229
+#: geobox/web/views/vector.py:85
 msgid "form error"
 msgstr ""
 
@@ -644,30 +666,30 @@ msgstr ""
 msgid "username or password not correct"
 msgstr ""
 
-#: geobox/web/views/vector.py:68
+#: geobox/web/views/vector.py:72
 msgid "invalid mapping"
 msgstr ""
 
-#: geobox/web/views/vector.py:71
+#: geobox/web/views/vector.py:75
 msgid "invalid shapefile"
-msgstr ""
-
-#: geobox/web/views/vector.py:84
-#, python-format
-msgid "file %(name)s missing"
-msgstr ""
-
-#: geobox/web/views/vector.py:86
-#, python-format
-msgid "failed to upload %(name)s"
 msgstr ""
 
 #: geobox/web/views/vector.py:88
 #, python-format
-msgid "filetype of %(name)s not allowed"
+msgid "file %(name)s missing"
 msgstr ""
 
 #: geobox/web/views/vector.py:90
+#, python-format
+msgid "failed to upload %(name)s"
+msgstr ""
+
+#: geobox/web/views/vector.py:92
+#, python-format
+msgid "filetype of %(name)s not allowed"
+msgstr ""
+
+#: geobox/web/views/vector.py:94
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr ""
