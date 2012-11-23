@@ -29,7 +29,7 @@ function show_selected_source(map, id, selected_source) {
 
 
 $(document).ready(function() {
-    var map = init_map();
+    var map = init_map(background_layer=false);
     draw_layer = activate_draw_controls(map);
     if(coverage) {
         load_features(coverage);

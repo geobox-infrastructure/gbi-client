@@ -115,7 +115,7 @@ function select_option(option_list, value) {
 }
 
 function init() {
-    map_obj = init_map();
+    map_obj = init_map(background_layer=false);
     // save global map object 
     map_obj.addControl(new OpenLayers.Control.LayerSwitcher({
         roundedCorner: true

@@ -22,7 +22,7 @@ OpenLayers.Tile.Image.prototype.onImageError = function() {
 }
 
 
-function init_map() {
+function init_map(background_layer) {
     OpenLayers.ImgPath = openlayers_image_path;
 
     var extent = new OpenLayers.Bounds(-20037508.34, -20037508.34,
@@ -46,7 +46,11 @@ function init_map() {
 
     var map = new OpenLayers.Map( 'map', options );
 
-    map.addLayer(base_layer);
+    if (background_layer) {
+        map.addLayer(base_layer);
+    }
+    map.addLayer(basic);
+
     map.addControl(
         new OpenLayers.Control.TouchNavigation({
             dragPanOptions: {
