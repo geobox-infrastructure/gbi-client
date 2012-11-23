@@ -128,9 +128,12 @@ function activate_draw_controls(map) {
             },
             beforefeaturemodified: function(f) {
                 if(f.feature.attributes['type'] == BOX_CONTROL) {
-                    draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG | OpenLayers.Control.ModifyFeature.RESIZE;
+                    draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG;
+                    draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESIZE;
+                    draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
                 } else {
-                    draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG | OpenLayers.Control.ModifyFeature.RESHAPE;
+                   draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG 
+                   draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
                 }
             }
     }});
