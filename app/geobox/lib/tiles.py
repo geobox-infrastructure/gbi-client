@@ -45,10 +45,6 @@ def estimate_tiles(grid, levels, coverage=None):
         level_tiles = grid_size[0] * grid_size[1]
         level_tiles = int(math.ceil(level_tiles * ratio))
 
-        if level_tiles < 16:
-        # improve estimation for small exports/imports
-        # by size of a meta tile
-            level_tiles = 16
         tiles += level_tiles
 
     return tiles
