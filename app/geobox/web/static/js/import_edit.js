@@ -33,7 +33,6 @@ $(document).ready(function() {
     draw_layer = activate_draw_controls(map);
     if(coverage) {
         load_features(coverage);
-        get_data_volume();
     }
 
     $('#raster_source').change(function() {
