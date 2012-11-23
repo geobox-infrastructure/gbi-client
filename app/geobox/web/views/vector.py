@@ -21,8 +21,12 @@ from flask import Blueprint, render_template, g, url_for, redirect, request, fla
 from flaskext.babel import _
 
 from geobox.lib.vectorconvert import is_valid_shapefile, ConvertError
+from geobox.lib.fs import open_file_explorer
 from geobox.model import VectorImportTask
 from geobox.web import forms
+
+from ..utils import request_is_local
+from ..helper import redirect_back
 
 vector = Blueprint('vector', __name__)
 
@@ -88,7 +92,9 @@ def import_vector():
         flash(_('filetype of %(name)s not allowed', name=not_allowed_file), 'error')
     for uploaded_shape in uploaded_shapes:
         flash(_('file %(name)s uploaded', name=uploaded_shape), 'info')
-    return render_template('vector/import.html', form=form)
+
+    file_browser = request_is_local()
+    return render_template('vector/import.html', form=form, file_browser=file_browser)
 
 def get_shapefile_list():
     shape_import_dir = current_app.config.geobox_state.user_data_path('import')
@@ -109,3 +115,8 @@ def get_shapefile_list():
         if not missing:
             shape_file_list.append((s_name))
     return (shape_file_list, missing_file_list)
+
+@vector.route('/file_browser/import_dir')
+def import_file_browser():
+    open_file_explorer(current_app.config.geobox_state.user_data_path('import'))
+    return redirect_back('.import_vector')
