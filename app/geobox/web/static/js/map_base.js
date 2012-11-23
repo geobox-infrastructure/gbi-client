@@ -22,7 +22,7 @@ OpenLayers.Tile.Image.prototype.onImageError = function() {
 }
 
 
-function init_map(background_layer) {
+function init_map() {
     OpenLayers.ImgPath = openlayers_image_path;
 
     var extent = new OpenLayers.Bounds(-20037508.34, -20037508.34,
@@ -46,10 +46,8 @@ function init_map(background_layer) {
 
     var map = new OpenLayers.Map( 'map', options );
 
-    if (background_layer) {
-        map.addLayer(base_layer);
-    }
     map.addLayer(basic);
+    map.addLayer(base_layer);
 
     map.addControl(
         new OpenLayers.Control.TouchNavigation({
@@ -58,7 +56,12 @@ function init_map(background_layer) {
             }
         })
     );
-
+    var layerswitcher = new OpenLayers.Control.LayerSwitcher({
+        roundedCorner: true
+    });
+    map.addControl(layerswitcher)
+    layerswitcher.maximizeControl();
+    
     map.addControl(new OpenLayers.Control.PanZoomBar());
     map.addControl(new OpenLayers.Control.Navigation());
     map.addControl(new OpenLayers.Control.ZoomStatus({

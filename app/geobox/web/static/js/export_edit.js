@@ -115,11 +115,7 @@ function select_option(option_list, value) {
 }
 
 function init() {
-    map_obj = init_map(background_layer=false);
-    // save global map object 
-    map_obj.addControl(new OpenLayers.Control.LayerSwitcher({
-        roundedCorner: true
-    }));
+    map_obj = init_map();
     draw_layer = activate_draw_controls(map_obj);
     if(coverage) {
         load_features(coverage);
