@@ -25,6 +25,12 @@ function get_data_volume() {
         'raster_data': prepare_raster_layer_json_data($('.raster_layer')),
         'coverage': parser.write(draw_layer.features)
     };
+    
+    if (export_edit) {
+        data['format'] = $("#format").val();
+        data['srs'] = $("#srs").val();
+    }    
+
     $.post(get_data_volume_url, data, function(result) { 
         var volume_mb = Math.round(parseFloat(result['volume_mb']) * 100 ) / 100
         $('#data_volume').text(volume_mb)});
