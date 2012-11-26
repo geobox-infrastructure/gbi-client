@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import codecs
+
 from flask import Blueprint, render_template, current_app, abort, flash, g, request, redirect, url_for, session
 from flaskext.babel import _
 from ...model.sources import LocalWMTSSource
@@ -109,8 +111,8 @@ def localnet_access():
 
 @admin_view.route('/log_view', methods=['GET'])
 def log_view():
-    log = open(current_app.config.geobox_state.user_data_path('log', 'geobox.log')).read()
-    return render_template('log_view.html', log=unicode(log, errors='ignore'))
+    log = codecs.open(current_app.config.geobox_state.user_data_path('log', 'geobox.log'), "r", "utf-8").read()
+    return render_template('log_view.html', log=log)
 
 @admin_view.route('/file_browser', methods=['GET'])
 def file_browser():
