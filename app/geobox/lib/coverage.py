@@ -15,11 +15,28 @@
 
 from __future__ import absolute_import
 
+import platform
 import json
 
 from mapproxy.srs import SRS
-from mapproxy.util.coverage import coverage
+from mapproxy.util.coverage import GeomCoverage as GeomCoverage_, BBOXCoverage
 from shapely.geometry import asShape, MultiPolygon
+
+if platform.release() == 'XP':
+    # disable prepared geometries to work around
+    # http://trac.osgeo.org/geos/ticket/603
+    class GeomCoverage(GeomCoverage_):
+        @property
+        def prepared_geom(self):
+            return self.geom
+else:
+    GeomCoverage = GeomCoverage_
+
+def coverage(geom, srs):
+    if isinstance(geom, (list, tuple)):
+        return BBOXCoverage(geom, srs)
+    else:
+        return GeomCoverage(geom, srs)
 
 def geometry_from_feature_collection(feature_collection):
     polygons = []
