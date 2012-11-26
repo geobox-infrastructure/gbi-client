@@ -225,6 +225,22 @@ class CouchDB(object):
             return False
         return resp.content
 
+    def update_or_create_doc(self, doc_id, doc):
+        doc_url = self.couch_db_url + '/' + doc_id
+        resp = self.req_session.get(doc_url)
+        if resp.status_code == 200:
+            rev = resp.json['_rev']
+            doc['_rev'] = rev
+        elif resp.status_code != 404:
+            raise UnexpectedResponse('got unexpected resp (%d) from CouchDB: %s' % (resp.status_code, resp.content))
+
+        resp = self.req_session.put(doc_url,
+            headers={'Accept': 'application/json'},
+            data=json.dumps(doc),
+        )
+        if resp.status_code != 201:
+            raise UnexpectedResponse('got unexpected resp (%d) from CouchDB: %s' % (resp.status_code, resp.content))
+
     def replicate_pull(self, remote_url, remote_db_name):
         source = '%s/%s' % (remote_url.rstrip('/'), remote_db_name.lower())
         self._replicate(source, self.couch_db_url)

@@ -153,10 +153,18 @@ class RasterExportCouchDBProcess(RasterProcess):
         try:
             with self.task() as task:
                 export_path = self.app_state.user_data_path('export', task.project.title, 'couchdb', make_dirs=True)
+                export_name = task.layer.wmts_source.name
             couchdb = TempCouchDB(self.app_state, export_path)
             self.couchdb_port = couchdb.port
             with couchdb.run():
                 RasterProcess.process(self)
+                couchdb_client = CouchDB(
+                    url='http://127.0.0.1:%d' % couchdb.port,
+                    db_name=export_name,
+                )
+                couchdb_client.update_or_create_doc('geobox_info',
+                    {'type': 'raster'}
+                )
         except Exception, e:
             self.task_failed(e)
 
