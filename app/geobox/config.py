@@ -325,9 +325,9 @@ class GeoBoxConfig(ConfigParser):
             # use installed path for couchdb since couchdb in packaging/build
             # is only usable after installation
             'bin_dir': path(
-                dev=['c:/Program Files/GeoBox/couchdb/bin', '/usr/local/bin'],
+                dev=['c:/Program Files/GeoBox/couchdb/bin', 'c:/Programme/GeoBox/couchdb/bin', '/usr/local/bin'],
                 frozen=['../couchdb/bin'],
-                test=['c:/Program Files/GeoBox/couchdb/bin', '/usr/local/bin'],
+                test=['c:/Program Files/GeoBox/couchdb/bin', 'c:/Programme/GeoBox/couchdb/bin', '/usr/local/bin'],
             ),
             'erl_cmd': 'erl -noinput -noshell -sasl errlog_type error -couch_ini',
             'env': [
