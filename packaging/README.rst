@@ -210,14 +210,16 @@ We don't need a binary version since we ship our own version of GEOS (which Shap
 GEOS
 ~~~~
 
-`Download GEOS 3.3.5 <http://download.osgeo.org/geos/geos-3.3.5.tar.bz2>`_ and untar to `c:\\src\\geos-3.3.5`.
+`Download GEOS 3.2.3 <http://download.osgeo.org/geos/geos-3.2.3.tar.bz2>`_ and untar to `c:\\src\\geos-3.3.5`.
+
+GEOS 3.3.0 and newer has a bug that returns wrong ``intersects`` results on Windows XP: See http://trac.osgeo.org/geos/ticket/603
 
 - Start *SDK Command Prompt*
 - `setenv /release /x86`
 
 ::
 
-    cd \src\geos-3.3.5
+    cd \src\geos-3.2.3
     nmake /f makefile.vc
     copy geos*.dll path_to\packaging\pkgs\geos\
 
