@@ -36,14 +36,16 @@
     {% for source in sources %}
         {% if source.wmts_source %}
           {% set map_source = source.wmts_source %}
+          {% set layer_name = source.wmts_source.name %}
         {% else %}
            {% set map_source = source %}
+           {% set layer_name = source.layer %}
         {% endif %}
         raster_sources[{{ source.id }}] = new OpenLayers.Layer.WMTS({
             name: '{{ map_source.title }}',
             url: {% if source.url %} '{{add_auth_to_url(source.url, source.username, source.password)}}' {% else %} '{{ cache_url }}' {% endif %},
             getURL: tileUrl,
-            layer: '{{ map_source.layer }}',
+            layer: '{{ layer_name }}',
             matrixSet: '{{ map_source.matrix_set }}',
             format: '{{ map_source.format }}',
             style: 'default',

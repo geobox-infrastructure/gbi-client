@@ -16,8 +16,8 @@
         <tbody>
         {% for source in raster_sources %}
             <tr>
+                <td>{{ source.wmts_source.title }}</td>
                 <td>{{ source.wmts_source.name }}</td>
-                <td>{{ source.wmts_source.layer }}</td>
                 <td>{{ source.wmts_source.format }}</td>
                 <td>{{ source.zoom_level }}</td>
                 <td>

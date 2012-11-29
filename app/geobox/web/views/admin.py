@@ -85,7 +85,7 @@ def remove_source(id):
         # delete from couch db
         couch = CouchDB('http://127.0.0.1:%s' %
             (current_app.config.geobox_state.config.get('couchdb', 'port'), ),
-            source.wmts_source.layer
+            source.wmts_source.name
         )
         # if delete from couch is successfull delete from db
         if couch.delete_db():
