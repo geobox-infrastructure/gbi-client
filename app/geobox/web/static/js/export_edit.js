@@ -7,16 +7,19 @@ function limit_download_level_wrapper() {
 function _limit_download_level(source_id, parent) {
     var min_lvl = raster_sources[source_id]['download_level_start'];
     var max_lvl = raster_sources[source_id]['download_level_end'];
-    $.each(parent.find('#start_level > option, #end_level > option'), function(idx, elem) {
-        elem = $(elem);
-        if(elem.val() < min_lvl || elem.val() > max_lvl) {
-            elem.css('display', 'none');
-        } else {
-            elem.css('display', 'block');
-        }
-    })
-    parent.find('#start_level option:visible').first().attr('selected', 'selected');
-    parent.find('#end_level option:visible').last().attr('selected', 'selected');
+
+    $(parent.find('#start_level > option, #end_level > option')).remove();
+
+    for (i=min_lvl; i <= max_lvl;i++) {
+        $(parent.find('#start_level, #end_level'))
+         .append($("<option></option>")
+            .attr("value",i)
+            .text(i)
+        );
+    }
+
+    parent.find('#start_level option').first().attr('selected', 'selected');
+    parent.find('#end_level option').last().attr('selected', 'selected');
 }
 
 function add_raster_layer() {
