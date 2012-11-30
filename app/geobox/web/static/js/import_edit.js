@@ -11,10 +11,10 @@ function limit_download_level(source_id) {
          .attr("value",i)
          .text(i));
     }
-
-    if(!has_zoom_level) {
-        $('#start_level option:visible').first().attr('selected', 'selected');
-        $('#end_level option:visible').first().attr('selected', 'selected');
+    if(set_selected_level) {
+        $('#start_level option[value="'+select_start_level+'"]').attr("selected", "selected");
+        $('#end_level option[value="'+select_end_level+'"]').attr("selected", "selected");
+        set_selected_level = false;
     }
 }
 

@@ -118,12 +118,12 @@ def import_edit(id=None):
         flash(_('form error'), 'error')
 
     form.title.data = proj.title
-    has_zoom_level = 'false'
     if proj.import_raster_layers:
         form.raster_source.data = proj.import_raster_layers[0].source
-        form.start_level.data = proj.import_raster_layers[0].start_level
-        form.end_level.data = proj.import_raster_layers[0].end_level
-        has_zoom_level = 'true'
+        if not request.form.get('start_level'):
+            form.start_level.data = proj.import_raster_layers[0].start_level
+        if not request.form.get('end_level'):
+            form.end_level.data = proj.import_raster_layers[0].end_level
 
     coverage = proj.coverage if proj.coverage else 'null'
     if form.coverage.data:
@@ -135,7 +135,7 @@ def import_edit(id=None):
     free_disk_space = diskspace_available_in_mb(current_app.config.geobox_state.user_data_path())
 
     return render_template('projects/import_edit.html',
-        proj=proj, form=form, sources=sources, has_zoom_level=has_zoom_level,
+        proj=proj, form=form, sources=sources,
         base_layer=base_layer,coverage_form=coverage_form,
         coverage=coverage, free_disk_space=free_disk_space)
 
