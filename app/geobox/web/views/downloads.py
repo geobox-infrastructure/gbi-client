@@ -89,5 +89,8 @@ def download_file(export_dir, filename):
         download_file = open(download_path, 'rb')
 
     return Response(download_file, direct_passthrough=True,
-        headers={'Content-disposition': 'attachment; filename=%s' % (filename)})
+        headers={
+            'Content-disposition': 'attachment; filename=%s' % (filename),
+            'Content-type': 'application/octet-stream',
+        })
 

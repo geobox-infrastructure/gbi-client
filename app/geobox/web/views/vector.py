@@ -118,5 +118,5 @@ def get_shapefile_list():
 
 @vector.route('/file_browser/import_dir')
 def import_file_browser():
-    open_file_explorer(current_app.config.geobox_state.user_data_path('import'))
+    open_file_explorer(current_app.config.geobox_state.user_data_path('import', make_dirs=True))
     return redirect_back('.import_vector')
