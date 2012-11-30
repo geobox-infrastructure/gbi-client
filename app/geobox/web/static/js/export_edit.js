@@ -73,9 +73,16 @@ function set_layer_inputs_by_format_type() {
 
 }
 
-function show_selected_source() {
-    var source = $(this);
-    var id = source.val();
+function show_selected_source(layer_id, source_id) {
+    var id;
+    var source;
+    if (source_id) {
+        source = $("#rl_"+ layer_id +"> select#raster_source");
+        id = source_id;
+    } else {
+        source = $(this);
+        id = source.val();
+    }
 
     if(typeof source.data('ol_layer') !== "undefined") {
         map_obj.removeLayer(source.data('ol_layer'));
@@ -83,7 +90,6 @@ function show_selected_source() {
     layer = raster_sources[id].clone();
     source.data('ol_layer', layer);
     map_obj.addLayer(layer);
-
     if (draw_layer) {
         map_obj.raiseLayer(draw_layer, map_obj.layers.length +1);
     }
@@ -107,6 +113,7 @@ function set_layer_data(layer_id, source_id, zoom_start, zoom_end) {
     select_option(layer.find('#start_level option'), zoom_start);
     if(zoom_end!=='undefined')
         select_option(layer.find('#end_level option'), zoom_end);
+    show_selected_source(layer_id, source_id)
 }
 
 function select_option(option_list, value) {
@@ -136,8 +143,7 @@ function init() {
     $('form').submit(submit_data);
     $('.raster_layer #raster_source')
         .change(limit_download_level_wrapper)
-        .change(show_selected_source)
-        .change();
+        .change(show_selected_source);
     $('.raster_layer select').change(get_data_volume).change(verify_zoom_level);
     
     $('#format, #srs').change(get_data_volume)
@@ -153,5 +159,4 @@ function init() {
         load_coverage_from_project(false)   
         return false;
     });
-
 };
