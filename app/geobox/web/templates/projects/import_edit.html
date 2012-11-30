@@ -45,10 +45,18 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/map_base.js') }}"></script>
     <script type="text/javascript">
         {{ generate_base_layer(base_layer) }}
-        var has_zoom_level = {{ has_zoom_level}};
         var load_coverage_url = '{{ url_for('project.load_coverage') }}';
         {{ generate_sources(sources) }}
         coverage = {{ coverage|tojson|safe }};
+
+        var select_start_level = false;
+        var select_end_level = false;
+        var set_selected_level = false;
+        {% if form.start_level.data or form.end_level.data %}
+            select_start_level = {{ form.start_level.data}};
+            select_end_level = {{ form.end_level.data}};
+            set_selected_level = true;
+        {% endif %}
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/project_utils.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/import_edit.js') }}"></script>
