@@ -1,14 +1,17 @@
 function limit_download_level(source_id) {
     var min_lvl = raster_sources[source_id]['download_level_start'];
     var max_lvl = raster_sources[source_id]['download_level_end'];
-    $.each($('#start_level > option, #end_level > option'), function(idx, elem) {
-        elem = $(elem);
-        if(elem.val() < min_lvl || elem.val() > max_lvl) {
-            elem.css('display', 'none');
-        } else {
-            elem.css('display', 'block');
-        }
-    })
+    
+    $('#start_level > option').remove();
+    $('#end_level > option').remove();
+
+    for (i=min_lvl; i <= max_lvl;i++) {
+        $('#start_level, #end_level')
+         .append($("<option></option>")
+         .attr("value",i)
+         .text(i));
+    }
+
     if(!has_zoom_level) {
         $('#start_level option:visible').first().attr('selected', 'selected');
         $('#end_level option:visible').first().attr('selected', 'selected');
