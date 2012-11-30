@@ -263,3 +263,8 @@ class CouchDB(object):
             return True
         return False
 
+    def clear_db(self):
+        self.delete_db()
+        self.init_db()
+
+

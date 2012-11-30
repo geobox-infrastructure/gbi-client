@@ -47,6 +47,11 @@ def create_target_image(x_size, y_size, bbox, res, bands=3, band_type=1, t_name=
     driver = gdal.GetDriverByName(t_format)
     dest = driver.Create(t_name, x_size, y_size, bands, band_type, ["TFW=YES"])
 
+    for i in range(1, bands+1):
+        band = dest.GetRasterBand(i)
+        band.Fill(255)
+        band.SetNoDataValue(255)
+
     dest.SetGeoTransform([left, res, 0, top, 0, -res])
     dest.SetProjection(srs.ExportToWkt())
     return dest

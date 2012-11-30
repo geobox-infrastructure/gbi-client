@@ -1,6 +1,6 @@
 function tileUrl(bounds) {
     var tileInfo = this.getTileInfo(bounds.getCenterLonLat());
-    return this.url + this.layer + '/' + this.matrixSet + '-' + this.matrix.identifier + '-' 
+    return this.url + this.layer + '/' + this.matrixSet + '-' + this.matrix.identifier + '-'
         + tileInfo.col + '-'
         + tileInfo.row + '/tile';
 }
@@ -28,10 +28,13 @@ function init_map() {
     var extent = new OpenLayers.Bounds(-20037508.34, -20037508.34,
                                          20037508.34, 20037508.34);
     var numZoomLevels = view_zoom_level_end;
-   
-    if (base_layer.getMaxExtent()) {
+
+    if (base_layer.restrictedExtent) {
+        extent = base_layer.restrictedExtent;
+    } else if (base_layer.getMaxExtent()) {
         extent = base_layer.getMaxExtent();
     }
+
     var options = {
         projection: new OpenLayers.Projection("EPSG:3857"),
         units: "m",
@@ -61,7 +64,7 @@ function init_map() {
     });
     map.addControl(layerswitcher)
     layerswitcher.maximizeControl();
-    
+
     map.addControl(new OpenLayers.Control.PanZoomBar());
     map.addControl(new OpenLayers.Control.Navigation());
     map.addControl(new OpenLayers.Control.ZoomStatus({
@@ -104,7 +107,7 @@ function activate_draw_controls(map) {
     var style = new OpenLayers.Style();
     style.addRules([
         new OpenLayers.Rule({symbolizer: sketchSymbolizers})
-    ]); 
+    ]);
     var styleMap = new OpenLayers.StyleMap(
         {"default": style}
     );
@@ -138,7 +141,7 @@ function activate_draw_controls(map) {
                     draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESIZE;
                     draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
                 } else {
-                   draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG 
+                   draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG
                    draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
                 }
             },

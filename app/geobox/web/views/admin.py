@@ -1,3 +1,4 @@
+# -:- encoding: utf-8 -:-
 # This file is part of the GBI project.
 # Copyright (C) 2012 Omniscale GmbH & Co. KG <http://omniscale.com>
 #
@@ -47,8 +48,9 @@ def admin():
     query = g.db.query(LocalWMTSSource)
     raster_sources = query.all()
 
+    vector_dbs = [{'title': u'Flächen-Box', 'name': 'flaechen-box'}]
     return render_template('admin.html', raster_sources=raster_sources, localnet=get_localnet_status(),
-        form=form, tilebox_form=tilebox_form)
+        form=form, tilebox_form=tilebox_form, vector_dbs=vector_dbs)
 
 
 @admin_view.route('/admin/refresh_context', methods=['POST'])
@@ -76,6 +78,19 @@ def tilebox_restart():
     return redirect_back(url_for('.admin'))
 
 
+@admin_view.route('/admin/clear/<name>', methods=['POST'])
+def clear_couchdb(name):
+    # delete from couch db
+    couch = CouchDB('http://127.0.0.1:%s' %
+        (current_app.config.geobox_state.config.get('couchdb', 'port'), ),
+        name
+    )
+    couch.clear_db()
+    flash(_('cleared database'))
+
+    return redirect(url_for('.admin'))
+
+
 @admin_view.route('/admin/delete/<int:id>', methods=['POST'])
 def remove_source(id):
     query = g.db.query(LocalWMTSSource).filter_by(id=id)
@@ -85,7 +100,7 @@ def remove_source(id):
         # delete from couch db
         couch = CouchDB('http://127.0.0.1:%s' %
             (current_app.config.geobox_state.config.get('couchdb', 'port'), ),
-            source.wmts_source.layer
+            source.wmts_source.name
         )
         # if delete from couch is successfull delete from db
         if couch.delete_db():
