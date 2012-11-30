@@ -29,6 +29,29 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <h3>{{ _('local vector sources') }}</h3>
+    <table class="table table-striped">
+        <thead>
+            <th>{{ _('name') }}</th>
+            <th>{{ _('layer') }}</th>
+            <th></th>
+        </thead>
+        <tbody>
+        {% for db in vector_dbs %}
+            <tr>
+                <td>{{ db.title }}</td>
+                <td>{{ db.name }}</td>
+                <td>
+                    <button data-remove-url="{{ url_for('.clear_couchdb', name=db.name) }}" class="btn btn-small remove">
+                        {{ _('remove') }}
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
     <h3>{{ _('settings') }}</h3>
     <h4>{{ _('local net access') }}
         {{ generate_tooltip(_('tooltip local net access') ) }}
