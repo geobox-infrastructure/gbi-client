@@ -20,6 +20,8 @@ from contextlib import contextmanager
 from geobox.model.tasks import Task
 from geobox.utils import join_threads
 
+from geobox.lib.server_logging import send_task_logging
+
 import logging
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
@@ -72,6 +74,7 @@ class ProcessThread(threading.Thread):
 
     def start_task_process(self, task):
         log.debug('starting new process for %s', task)
+        send_task_logging(self.app_state, task)
         process_class = self.task_process_mapping[task.type]
         p = process_class(self.app_state, task)
         self.background_threads[task.id] = p
