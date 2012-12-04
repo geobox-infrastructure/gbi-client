@@ -297,6 +297,7 @@ class GeoBoxConfig(ConfigParser):
             'name': 'GeoBox',
             'host': '127.0.0.1',
             'locale': 'de_DE', # 'en_UK'
+            'logging_server': '',
         },
         'web': {
             'port': 8090,
