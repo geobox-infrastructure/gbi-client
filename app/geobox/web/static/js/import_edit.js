@@ -52,7 +52,6 @@ $(document).ready(function() {
 
     $('#start_btn').click(submit_and_start);
     $('#save_btn').click(submit_data);
-    limit_download_level($('#raster_source').val());
     toggle_start_button();
     
     $('#load_couchdb_coverage').click(function() {
