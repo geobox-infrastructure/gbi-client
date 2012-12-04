@@ -200,7 +200,7 @@ def export_edit(id=None):
                     export_srs=proj.export_srs,
                     zoom_level_start=start_level,
                     zoom_level_end=end_level,
-                    coverage=raster_coverage,
+                    coverage=prepare_task_coverage(raster_coverage),
                     project=proj
                 ))
                 redirect_url = url_for('tasks.list')
