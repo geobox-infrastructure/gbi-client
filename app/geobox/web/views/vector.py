@@ -20,6 +20,7 @@ from flask import Blueprint, render_template, g, url_for, redirect, request, fla
 
 from flaskext.babel import _
 
+from geobox.lib.server_logging import send_task_logging
 from geobox.lib.vectorconvert import is_valid_shapefile, ConvertError
 from geobox.lib.fs import open_file_explorer
 from geobox.model import VectorImportTask
@@ -74,11 +75,13 @@ def import_vector():
             except OSError:
                 flash(_('invalid shapefile'), 'error')
                 return render_template('vector/import.html', form=form)
-
-            g.db.add(VectorImportTask(
+            task = VectorImportTask(
                 mapping_name=form.mapping_name.data,
                 db_name=mappings[form.mapping_name.data].couchdb,
-                file_name=form.file_name.data))
+                file_name=form.file_name.data
+            )
+            send_task_logging(current_app.config.geobox_state, task)
+            g.db.add(task)
             g.db.commit()
             return redirect(url_for('tasks.list'))
         elif request.method == 'POST':
