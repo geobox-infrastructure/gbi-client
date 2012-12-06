@@ -1,23 +1,23 @@
 Translation
 ===========
 
-GBI-Client use `Babel <http://babel.edgewall.org/>`_, an extension to Flask that adds i18n support to the application. The default language of the application is german. The dummy texts are in english. 
+GBI-Client uses `Babel <http://babel.edgewall.org/>`_ for i18n support. The default language of the application is German.
 
 Babel uses ``babel.cfg`` as configuration file.
 
-To initalize, update or compile the tranlsation files you have to use the The :ref:`commandline tool <manage_script>` a from the GBI-Client. 
+To initalize, update or compile the tranlsation files you have to use the :ref:`manage tool <manage_script>` from the GBI-Client.
 
-Initialize a new language for example to translate to English use this command::
+To initialize a new language use this command, where ``en`` is the language code::
 
 	python manage.py babel-init-lang en
 
 
-If strings changed you have to extract and update the translation file. You have to use the following command for this::
+If strings changed you have to extract and update the translation file with::
 
 	python manage.py babel_refresh
 
 
-Afterwards some strings might be marked as `fuzzy`. Babel tried to figure out if a translation matched a changed key. If you have entries flaged with `fuzzy`, make sure to check them and remove the `fuzzy` flag before compiling. Finally you have to compile the translation for use:: 
+Afterwards some strings might be marked as `fuzzy`. Babel tried to figure out if a translation matched a changed key. If you have entries flaged with `fuzzy`, make sure to check them and remove the `fuzzy` flag before compiling. Finally you have to compile the translation for use::
 
 	python manage.py babel_compile
 

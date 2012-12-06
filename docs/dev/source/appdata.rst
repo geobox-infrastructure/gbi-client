@@ -1,18 +1,17 @@
 Appdata Folder
 ==============
 
-The GBI-Client use the appdata folder from the operating system to save the application data. In this directory the application creates a ``GeoBox`` folder including folders for the logs, the import- and export-data and the couchdb. 
+The GBI-Client use the appdata folder from the operating system to save the application data. In this directory the application creates a ``GeoBox`` folder including folders for the logs, the import- and export-data and the CouchDB.
 
-Here you will find the the GeoBox directory::
+Locations
+---------
 
-        Windows: %APPDATA%/GeoBox
-        Linux: ~/.config/geobox and
-        Mac OS X: ~/Library/Application Support/GeoBox
+Windows:
+    ``%APPDATA%/GeoBox`` where ``%APPDATA%`` defaults to ``C:\Documents and Settings\<User Name>\Application Data\Roaming`` on Windows XP and ``C:\Users\AppData\Roaming`` on Vista and 7. The directory is hidden by default.
 
+Linux:
+    ``~/.config/geobox``
 
-Windows
--------
+Mac OS X:
+    ``~/Library/Application Support/GeoBox``
 
-Using Windows XP the application folder is hidden by default. You will find it at ``C:\Documents and Settings\<User Name>\Application Data\Roaming``.
-
-On Windows 7 or Windows Vista you will find it at ``C:\Users\AppData\Roaming``
