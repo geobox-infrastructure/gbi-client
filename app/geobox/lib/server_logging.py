@@ -9,7 +9,10 @@ log = logging.getLogger(__name__)
 
 def send_task_logging(app_state, task):
     logging_server = app_state.config.get('app', 'logging_server')
-    
+
+    if not logging_server:
+        return
+
     json_log = {
         'user': app_state.config.get('user', 'name'),
         'time': datetime.datetime.now().isoformat(),
@@ -49,4 +52,3 @@ def send_task_logging(app_state, task):
             log.warn("Could not log to server. Server response status code %r" % (r.status_code))
     except requests.exceptions.RequestException, ex:
         log.warn("An error occured. Error was: %r" % (ex))
-    
