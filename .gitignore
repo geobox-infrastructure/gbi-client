@@ -2,6 +2,7 @@ build/
 packaging/dist/
 packaging/opt/
 packaging/pkgs/
+packaging/geobox.spec
 .DS_Store
 *.pyc
 *.egg-info
