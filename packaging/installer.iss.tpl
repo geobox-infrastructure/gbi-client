@@ -54,6 +54,9 @@ Source: "${dist_dir}\geobox\*.*"; DestDir: "{app}\geobox"; Flags: ignoreversion 
 Source: "${geocouch_dir}\ebin\*.*"; DestDir: "{app}\couchdb\lib\geocouch\ebin"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 Source: "${geocouch_dir}\etc\*.*"; DestDir: "{app}\couchdb\etc"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 
+Source: "${mapproxy_templates_dir}\*.*"; DestDir: "{app}\geobox\mapproxy_templates"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
+
+
 ; custom stuff...
 ; ./etc/default.ini is unconditional
 Source: "${erl_dir}\etc\couchdb\default.ini"; DestDir: "{app}\couchdb\etc\couchdb"; Flags: ignoreversion uninsrestartdelete restartreplace

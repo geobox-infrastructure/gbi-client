@@ -258,6 +258,28 @@ class GeoBoxState(object):
             shutil.rmtree(self._temp_dir)
             self._temp_dir = None
 
+    def data_path(self, name):
+        if name == 'mapproxy_templates':
+            if getattr(sys, 'frozen', None):
+                # running from pyinstaller .exe
+                basedir = sys._MEIPASS
+                print basedir
+                # for testing the .exe from packaging/dist
+                testing_dir = os.path.join(basedir, '..', '..', 'build', 'mapproxy_templates')
+                print testing_dir
+                if os.path.exists(testing_dir):
+                    return testing_dir
+
+                # for deployed .exe inside the inno setup destination
+                deploy_dir = os.path.join(basedir, 'mapproxy_templates')
+                print deploy_dir
+                if os.path.exists(deploy_dir):
+                    return deploy_dir
+        else:
+            raise ValueError('unknown data_path name "%s"' % name)
+        print 'None'
+        return None
+
 class TileBoxServer(object):
     def __init__(self, app_state):
         self.server = None

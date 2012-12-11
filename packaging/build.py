@@ -43,7 +43,7 @@ def unpack_command():
     with config['build_dir'].as_working_dir():
         for fname in [config['geocouch_pkg'], config['couchdb_pkg'],
             config['openssl_pkg'], config['gdal_pkg'], config['geos_pkg'],
-            config['proj4_pkg']]:
+            config['proj4_pkg'], config['mapproxy_templates_pkg']]:
 
             log.info('unpacking %s', fname)
             tar = tarfile.open(fname)
