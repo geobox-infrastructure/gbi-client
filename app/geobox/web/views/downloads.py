@@ -15,6 +15,7 @@
 
 from os import listdir
 from os.path import isdir, join
+import unicodedata
 
 from flask import Blueprint, render_template, g, current_app, Response
 
@@ -35,7 +36,8 @@ def download_list():
     exports_overview = []
 
     if isdir(export_path):
-        for export_dirname in listdir(export_path):
+        # listdir returns unicode when we provide a unicode dir
+        for export_dirname in listdir(unicode(export_path)):
             export_dir = join(export_path, export_dirname)
             if not isdir(export_dir):
                 continue
@@ -55,6 +57,10 @@ def download_list():
 
             export['files'] = [files for files in listdir(export_dir)
                 if files.lower().endswith(extensions)]
+
+            # normalize dirname (e.g. Mac OS uses combining diaresis for
+            # umlauts which are not handled by comparision)
+            export_dirname = unicodedata.normalize('NFC', export_dirname)
 
             for project in export_projects:
                 if export_dirname == project.title:
