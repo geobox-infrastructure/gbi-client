@@ -21,6 +21,42 @@ OpenLayers.Tile.Image.prototype.onImageError = function() {
         }
 }
 
+/**
+ * style for the vector elemenets
+ **/
+var sketchSymbolizers = {
+  "Point": {
+    pointRadius: 8,
+    fillColor: "#ccc",
+    fillOpacity: 1,
+    strokeWidth: 1,
+    strokeOpacity: 1,
+    strokeColor: "#D6311E"
+  },
+  "Line": {
+    strokeWidth: 3,
+    strokeOpacity: 1,
+    strokeColor: "#D6311E",
+    strokeDashstyle: "dash"
+   },
+   "Polygon": {
+    strokeWidth: 2,
+    strokeOpacity: 1,
+    strokeColor: "#D6311E",
+    fillColor: "#D6311E",
+    fillOpacity: 0.6
+   }
+};
+
+var style = new OpenLayers.Style();
+style.addRules([
+    new OpenLayers.Rule({symbolizer: sketchSymbolizers})
+]);
+
+var styleMap = new OpenLayers.StyleMap(
+    {"default": style}
+);
+
 
 function init_map() {
     OpenLayers.ImgPath = openlayers_image_path;
@@ -79,38 +115,6 @@ function init_map() {
 
 function activate_draw_controls(map) {
     var draw_type = null;
-
-    var sketchSymbolizers = {
-         "Point": {
-            pointRadius: 8,
-            fillColor: "#ccc",
-            fillOpacity: 1,
-            strokeWidth: 1,
-            strokeOpacity: 1,
-            strokeColor: "#D6311E"
-          },
-          "Line": {
-            strokeWidth: 3,
-            strokeOpacity: 1,
-            strokeColor: "#D6311E",
-            strokeDashstyle: "dash"
-          },
-          "Polygon": {
-            strokeWidth: 2,
-            strokeOpacity: 1,
-            strokeColor: "#D6311E",
-            fillColor: "#D6311E",
-            fillOpacity: 0.6
-          }
-      };
-
-    var style = new OpenLayers.Style();
-    style.addRules([
-        new OpenLayers.Rule({symbolizer: sketchSymbolizers})
-    ]);
-    var styleMap = new OpenLayers.StyleMap(
-        {"default": style}
-    );
 
     var draw_layer = new OpenLayers.Layer.Vector("Draw Layer", {
         displayInLayerSwitcher: false,

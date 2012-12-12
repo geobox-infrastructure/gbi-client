@@ -10,7 +10,9 @@ $(document).ready(function() {
 
 function load_vector_geometries(map, geometries) {
     if (geometries.length > 0) {
-        var vector_layer = new OpenLayers.Layer.Vector(vector_layer_title, {
+        var vector_layer = new OpenLayers.Layer.Vector(vector_layer_title, 
+        {
+            styleMap: styleMap,
             displayInLayerSwitcher: true
         });
         map.addLayer(vector_layer);
