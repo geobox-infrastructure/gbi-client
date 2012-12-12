@@ -1,9 +1,9 @@
 {% macro generate_base_layer(layer) -%}
     var max_extent = new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34);
     {% if layer.view_level_end %}
-    var view_zoom_level_end = {{ layer.view_level_end }};
+    var view_zoom_level_end = {{ layer.view_level_end }} + 1;
     {% else %}
-     var view_zoom_level_end = 18;
+    var view_zoom_level_end = 18;
     {% endif %}
     var base_layer  = new OpenLayers.Layer.WMTS({
         name: '{{ layer.title }}',
