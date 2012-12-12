@@ -223,6 +223,23 @@ def remove(id):
 
     return redirect_back('.export_list')
 
+
+@project.route('/import/<int:id>/start', methods=['POST'])
+def start_raster_import(id):
+    proj = g.db.query(model.ImportProject).get(id)
+    if not proj:
+        abort(404)
+    create_raster_import_task(proj)
+    return redirect_back('.import_list')
+
+@project.route('/export/<int:id>/start', methods=['POST'])
+def start_export(id):
+    proj = g.db.query(model.ExportProject).get(id)
+    if not proj:
+        abort(404)
+    create_export_tasks(proj)
+    return redirect_back('.export_list')
+
 @project.route('/project/load_coverage', methods=['POST'])
 def load_coverage():
     project_id = request.form.get('id', False)
