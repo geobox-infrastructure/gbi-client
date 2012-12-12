@@ -35,7 +35,13 @@
           <ul>
           {% for layer in (proj.export_raster_layers + proj.export_vector_layers) %}
             <li>
-              <div>{{ layer.layer_type}}</div>
+              <div>{{ layer.layer_type}} -
+                  {% if layer.source %}
+                   {{ layer.source.wmts_source.title }} (Level: {{ layer.start_level }}-{{ layer.end_level}})
+                  {% else %}
+                   {{ layer.mapping_name }}
+                  {% endif %}
+              </div>
             </li>
             {% endfor %}
             {% if not proj.export_raster_layers and not proj.export_vector_layers %}
