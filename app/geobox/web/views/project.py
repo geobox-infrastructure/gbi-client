@@ -35,6 +35,7 @@ from geobox.lib.mapproxy import write_mapproxy_config
 from geobox import model
 from geobox.web import forms
 from geobox.web.helper import redirect_back, get_local_cache_url
+from geobox.lib.server_logging import send_task_logging
 
 project = Blueprint('project', __name__)
 
@@ -101,7 +102,7 @@ def import_edit(id=None):
                     download_level_end=int(form.end_level.data),
                     wmts_source_id=form.raster_source.data.id
                 )
-            g.db.add(model.RasterImportTask(
+            task = model.RasterImportTask(
                 source=form.raster_source.data,
                 zoom_level_start=int(form.start_level.data),
                 zoom_level_end=int(form.end_level.data),
@@ -109,7 +110,9 @@ def import_edit(id=None):
                 coverage=prepare_task_coverage(form.coverage.data),
                 update_tiles=form.update_tiles.data,
                 project=proj
-            ))
+            )
+            send_task_logging(current_app.config.geobox_state, task)
+            g.db.add(task)
             redirect_url = url_for('tasks.list')
             g.db.commit()
             write_mapproxy_config(current_app.config.geobox_state)
@@ -194,15 +197,17 @@ def export_edit(id=None):
             ))
 
             if form.start.data == 'start':
-                g.db.add(model.RasterExportTask(
+                task = model.RasterExportTask(
                     layer=raster_source,
                     export_format=proj.export_format,
                     export_srs=proj.export_srs,
                     zoom_level_start=start_level,
                     zoom_level_end=end_level,
-                    coverage=raster_coverage,
+                    coverage=prepare_task_coverage(raster_coverage),
                     project=proj
-                ))
+                )
+                send_task_logging(current_app.config.geobox_state, task)
+                g.db.add(task)
                 redirect_url = url_for('tasks.list')
 
         if form.data['mapping_name'] != 'None':
@@ -212,11 +217,13 @@ def export_edit(id=None):
             ))
 
             if form.start.data == 'start':
-                g.db.add(model.VectorExportTask(
+                task = model.VectorExportTask(
                     db_name=mappings[form.data['mapping_name']].couchdb,
                     mapping_name=form.data['mapping_name'],
                     project=proj,
-                ))
+                )
+                send_task_logging(current_app.config.geobox_state, task)
+                g.db.add(task)
                 redirect_url = url_for('tasks.list')
 
 

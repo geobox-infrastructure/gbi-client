@@ -1,7 +1,7 @@
 Configuration
 =============
 
-The application loads the configuration from the configuration file in the :doc:`appdata folder <appdata>` and from the default configuration. The default configration is loaced at the source code at ``geobox/config.py``
+The application loads the configuration from the configuration file in the :doc:`appdata folder <appdata>` and from the default configuration. The default configration is located in the source code in ``geobox/config.py``
 
 With the configuration file it is possible to overwrite the default configuration. To overwrite the values you have to add the group and the keyword::
 
@@ -9,4 +9,4 @@ With the configuration file it is possible to overwrite the default configuratio
     locale = 'en_UK' # changes the default language
 
     [watermark]
-    text = 'GBI- Client'
+    text = 'GBI-Client'
