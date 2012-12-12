@@ -27,6 +27,11 @@
         <td>{{ proj.time_updated.strftime('%d.%m.%Y')}}</td>
         <td>
           <a href="{{ url_for('project.export_edit', id=proj.id) }}" class="btn btn-small" >{{ _('edit') }}</a>
+         
+          {% if not proj.tasks %}
+            <button class="btn btn-small start_task" data-start_task_url="{{ url_for('project.start_export', id=proj.id) }}">{{ _('start export') }}</button>
+          {% endif %}
+         
           <button class="btn btn-small remove_layer" data-layer_remove_url="{{ url_for('project.remove', id=proj.id) }}">{{ _('remove') }}</button>
         </td>
       </tr>
@@ -35,7 +40,13 @@
           <ul>
           {% for layer in (proj.export_raster_layers + proj.export_vector_layers) %}
             <li>
-              <div>{{ layer.layer_type}}</div>
+              <div>{{ layer.layer_type}} -
+                  {% if layer.source %}
+                   {{ layer.source.wmts_source.title }} (Level: {{ layer.start_level }}-{{ layer.end_level}})
+                  {% else %}
+                   {{ layer.mapping_name }}
+                  {% endif %}
+              </div>
             </li>
             {% endfor %}
             {% if not proj.export_raster_layers and not proj.export_vector_layers %}

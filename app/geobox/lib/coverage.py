@@ -40,10 +40,11 @@ def coverage(geom, srs):
 
 def geometry_from_feature_collection(feature_collection):
     polygons = []
-    for feature in feature_collection['features']:
-        geometry = feature['geometry']
-        if geometry['type'] == 'Polygon':
-            polygons.append(asShape(geometry))
+    if 'features' in feature_collection:
+        for feature in feature_collection['features']:
+            geometry = feature['geometry']
+            if geometry['type'] == 'Polygon':
+                polygons.append(asShape(geometry))
 
     if polygons:
         mp = MultiPolygon(polygons)

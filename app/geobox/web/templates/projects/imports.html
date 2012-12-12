@@ -38,6 +38,11 @@
         </td>
         <td>
           <a href="{{ url_for('project.import_edit', id=proj.id) }}" class="btn btn-small" >{{ _('edit') }}</a>
+
+          {% if not proj.tasks and proj.coverage %}
+          <button class="btn btn-small start_task" data-start_task_url="{{ url_for('project.start_raster_import', id=proj.id) }}">{{ _('start import') }}</button>
+          {% endif %}
+          
           <button class="btn btn-small remove_layer" data-layer_remove_url="{{ url_for('project.remove', id=proj.id) }}">{{ _('remove') }}</button>
         </td>
       </tr>

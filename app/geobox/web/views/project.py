@@ -32,6 +32,8 @@ from geobox.lib.coverage import coverage as make_coverage
 from geobox.lib.couchdb import CouchDB
 from geobox.lib.fs import diskspace_available_in_mb
 from geobox.lib.mapproxy import write_mapproxy_config
+from geobox.lib.vectormapping import default_mappings as mappings
+
 from geobox import model
 from geobox.web import forms
 from geobox.web.helper import redirect_back, get_local_cache_url
@@ -92,30 +94,8 @@ def import_edit(id=None):
         ))
         g.db.commit()
         if form.start.data == 'start':
-            local_raster_source = g.db.query(model.LocalWMTSSource).filter_by(wmts_source=form.raster_source.data).first()
-            if local_raster_source:
-                local_raster_source.download_level_start = min(local_raster_source.download_level_start, int(form.start_level.data))
-                local_raster_source.download_level_end = max(local_raster_source.download_level_end, int(form.end_level.data))
-            else:
-                local_raster_source = model.LocalWMTSSource(
-                    download_level_start=int(form.start_level.data),
-                    download_level_end=int(form.end_level.data),
-                    wmts_source_id=form.raster_source.data.id
-                )
-            task = model.RasterImportTask(
-                source=form.raster_source.data,
-                zoom_level_start=int(form.start_level.data),
-                zoom_level_end=int(form.end_level.data),
-                layer=local_raster_source,
-                coverage=prepare_task_coverage(form.coverage.data),
-                update_tiles=form.update_tiles.data,
-                project=proj
-            )
-            send_task_logging(current_app.config.geobox_state, task)
-            g.db.add(task)
+            create_raster_import_task(proj)
             redirect_url = url_for('tasks.list')
-            g.db.commit()
-            write_mapproxy_config(current_app.config.geobox_state)
         return redirect(redirect_url)
     elif request.method == 'POST':
         flash(_('form error'), 'error')
@@ -145,8 +125,6 @@ def import_edit(id=None):
 @project.route('/export/new', methods=['GET', 'POST'])
 @project.route('/export/<int:id>', methods=['GET', 'POST'])
 def export_edit(id=None):
-    from ...lib.vectormapping import default_mappings as mappings
-
     if id is None:
         proj = model.ExportProject()
     else:
@@ -196,38 +174,16 @@ def export_edit(id=None):
                 project=proj
             ))
 
-            if form.start.data == 'start':
-                task = model.RasterExportTask(
-                    layer=raster_source,
-                    export_format=proj.export_format,
-                    export_srs=proj.export_srs,
-                    zoom_level_start=start_level,
-                    zoom_level_end=end_level,
-                    coverage=prepare_task_coverage(raster_coverage),
-                    project=proj
-                )
-                send_task_logging(current_app.config.geobox_state, task)
-                g.db.add(task)
-                redirect_url = url_for('tasks.list')
-
         if form.data['mapping_name'] != 'None':
             g.db.add(model.ExportVectorLayer(
                 mapping_name=form.data['mapping_name'],
                 project=proj
             ))
-
-            if form.start.data == 'start':
-                task = model.VectorExportTask(
-                    db_name=mappings[form.data['mapping_name']].couchdb,
-                    mapping_name=form.data['mapping_name'],
-                    project=proj,
-                )
-                send_task_logging(current_app.config.geobox_state, task)
-                g.db.add(task)
-                redirect_url = url_for('tasks.list')
-
-
         g.db.commit()
+
+        if form.start.data == 'start':
+            create_export_tasks(proj)
+            redirect_url = url_for('tasks.list')
 
         return redirect(redirect_url)
 
@@ -265,6 +221,23 @@ def remove(id):
     g.db.delete(project)
     g.db.commit()
 
+    return redirect_back('.export_list')
+
+
+@project.route('/import/<int:id>/start', methods=['POST'])
+def start_raster_import(id):
+    proj = g.db.query(model.ImportProject).get(id)
+    if not proj:
+        abort(404)
+    create_raster_import_task(proj)
+    return redirect_back('.import_list')
+
+@project.route('/export/<int:id>/start', methods=['POST'])
+def start_export(id):
+    proj = g.db.query(model.ExportProject).get(id)
+    if not proj:
+        abort(404)
+    create_export_tasks(proj)
     return redirect_back('.export_list')
 
 @project.route('/project/load_coverage', methods=['POST'])
@@ -360,3 +333,74 @@ def prepare_task_coverage(feature_collection):
     if not task_coverage_geometry:
         return None
     return json.dumps(shapely.geometry.mapping(task_coverage_geometry))
+
+
+def create_export_tasks(proj):
+    for raster_layer in proj.export_raster_layers:
+        raster_source = g.db.query(model.LocalWMTSSource).get(raster_layer.source_id)
+        start_level = raster_layer.start_level
+        end_level = raster_layer.end_level or raster_layer.start_level
+        
+        if not proj.coverage:
+            raster_coverage = raster_source.wmts_source.download_coverage
+            proj.coverage = raster_coverage
+        else:
+            raster_coverage = proj.coverage
+       
+        task = model.RasterExportTask(
+            layer=raster_source,
+            export_format=proj.export_format,
+            export_srs=proj.export_srs,
+            zoom_level_start=start_level,
+            zoom_level_end=end_level,
+            coverage=prepare_task_coverage(raster_coverage),
+            project=proj
+        )
+        g.db.add(task)
+        send_task_logging(current_app.config.geobox_state, task)
+
+    
+    for vector_layers in proj.export_vector_layers:
+        task = model.VectorExportTask(
+            db_name=mappings[vector_layers.mapping_name].couchdb,
+            mapping_name=vector_layers.mapping_name,
+                project=proj,
+        )
+        g.db.add(task)
+        send_task_logging(current_app.config.geobox_state, task)
+
+    g.db.commit()
+    return True
+
+def create_raster_import_task(proj):
+    raster_source = proj.import_raster_layers[0].source
+    start_level = proj.import_raster_layers[0].start_level
+    end_level = proj.import_raster_layers[0].end_level
+
+    local_raster_source = g.db.query(model.LocalWMTSSource).filter_by(
+        wmts_source=raster_source).first()
+    
+    if local_raster_source:
+        local_raster_source.download_level_start = min(local_raster_source.download_level_start, start_level)
+        local_raster_source.download_level_end = max(local_raster_source.download_level_end, end_level)
+    else:
+        local_raster_source = model.LocalWMTSSource(
+            download_level_start=start_level,
+            download_level_end=end_level,
+            wmts_source_id=raster_source.id,
+        )
+
+    task = model.RasterImportTask(
+        source=raster_source,
+        zoom_level_start=start_level,
+        zoom_level_end=end_level,
+        layer=local_raster_source,
+        coverage=prepare_task_coverage(proj.coverage),
+        update_tiles=proj.update_tiles,
+        project=proj
+    )
+    send_task_logging(current_app.config.geobox_state, task)
+    g.db.add(task)
+    g.db.commit()
+    write_mapproxy_config(current_app.config.geobox_state)
+    return True
