@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-23 13:19+0100\n"
+"POT-Creation-Date: 2012-12-12 10:49+0100\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -104,7 +104,7 @@ msgstr "Shapefile"
 msgid "path"
 msgstr "Verzeichnis"
 
-#: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:32
+#: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:55
 #: geobox/web/templates/index.html:46
 msgid "settings"
 msgstr "Einstellungen"
@@ -113,11 +113,11 @@ msgstr "Einstellungen"
 msgid "local raster sources"
 msgstr "Lokale Rasterquelle"
 
-#: geobox/web/templates/admin.html:10
+#: geobox/web/templates/admin.html:10 geobox/web/templates/admin.html:36
 msgid "name"
 msgstr "Name"
 
-#: geobox/web/templates/admin.html:11
+#: geobox/web/templates/admin.html:11 geobox/web/templates/admin.html:37
 msgid "layer"
 msgstr "Layer"
 
@@ -126,74 +126,79 @@ msgstr "Layer"
 msgid "zoom level"
 msgstr "Level"
 
-#: geobox/web/templates/admin.html:25 geobox/web/templates/admin.html:79
-#: geobox/web/templates/projects/exports.html:30
-#: geobox/web/templates/projects/imports.html:41
+#: geobox/web/templates/admin.html:25 geobox/web/templates/admin.html:47
+#: geobox/web/templates/admin.html:102
+#: geobox/web/templates/projects/exports.html:35
+#: geobox/web/templates/projects/imports.html:46
 #: geobox/web/templates/tasks/task_list.html:52
 msgid "remove"
 msgstr "Entfernen"
 
 #: geobox/web/templates/admin.html:33
+msgid "local vector sources"
+msgstr "Lokale Vektorquelle"
+
+#: geobox/web/templates/admin.html:56
 msgid "local net access"
 msgstr "Zugriff für lokales Netzwerk"
 
-#: geobox/web/templates/admin.html:34
+#: geobox/web/templates/admin.html:57
 msgid "tooltip local net access"
 msgstr ""
 "Erlauben Sie den Zugriff von anderen Computern auf die Anwendung und die "
 "erstellten Daten."
 
-#: geobox/web/templates/admin.html:38
+#: geobox/web/templates/admin.html:61
 #: geobox/web/templates/tasks/task_list.html:28
 #: geobox/web/templates/tasks/task_list.html:88
 msgid "status"
 msgstr "Status"
 
-#: geobox/web/templates/admin.html:40
+#: geobox/web/templates/admin.html:63
 msgid "activated"
 msgstr "Aktiv"
 
-#: geobox/web/templates/admin.html:42
+#: geobox/web/templates/admin.html:65
 msgid "deactivated"
 msgstr "Inaktiv"
 
-#: geobox/web/templates/admin.html:48
+#: geobox/web/templates/admin.html:71
 msgid "deactivate"
 msgstr "Deaktivieren"
 
-#: geobox/web/templates/admin.html:50
+#: geobox/web/templates/admin.html:73
 msgid "activate"
 msgstr "Aktivieren"
 
-#: geobox/web/templates/admin.html:54
+#: geobox/web/templates/admin.html:77
 msgid "Context documents"
 msgstr "Kontextdokument"
 
-#: geobox/web/templates/admin.html:60
+#: geobox/web/templates/admin.html:83
 msgid "load context"
 msgstr "Daten aktualisieren"
 
-#: geobox/web/templates/admin.html:65
+#: geobox/web/templates/admin.html:88
 msgid "Logging"
 msgstr "Logging"
 
-#: geobox/web/templates/admin.html:66
+#: geobox/web/templates/admin.html:89
 msgid "open logview"
 msgstr "Log öffnen"
 
-#: geobox/web/templates/admin.html:68
+#: geobox/web/templates/admin.html:91
 msgid "Files"
 msgstr "Dateien"
 
-#: geobox/web/templates/admin.html:69
+#: geobox/web/templates/admin.html:92
 msgid "open external file explorer"
 msgstr "GeoBox-Verzeichnis öffnen"
 
-#: geobox/web/templates/admin.html:72
+#: geobox/web/templates/admin.html:95
 msgid "External tile box"
 msgstr "Externe TileBox einbinden"
 
-#: geobox/web/templates/admin.html:78
+#: geobox/web/templates/admin.html:101
 msgid "add and start tilebox"
 msgstr "Hinzufügen/Neustarten"
 
@@ -254,7 +259,7 @@ msgid "download usermanual"
 msgstr "Benutzerhandbuch"
 
 #: geobox/web/templates/index.html:16
-#: geobox/web/templates/vector/import.html:35
+#: geobox/web/templates/vector/import.html:36
 msgid "import"
 msgstr "Importieren"
 
@@ -450,11 +455,15 @@ msgstr "MB"
 msgid "edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/projects/exports.html:42
+#: geobox/web/templates/projects/exports.html:32
+msgid "start export"
+msgstr "Export Starten"
+
+#: geobox/web/templates/projects/exports.html:53
 msgid "export project has no layer"
 msgstr "Export beinhaltet keine Daten"
 
-#: geobox/web/templates/projects/exports.html:51
+#: geobox/web/templates/projects/exports.html:62
 msgid "new export project"
 msgstr "Neuer Export"
 
@@ -484,7 +493,11 @@ msgstr ""
 msgid "layer name"
 msgstr "Layer Name"
 
-#: geobox/web/templates/projects/imports.html:49
+#: geobox/web/templates/projects/imports.html:43
+msgid "start import"
+msgstr "Import Starten"
+
+#: geobox/web/templates/projects/imports.html:54
 msgid "new import project"
 msgstr "Neuer Import"
 
@@ -634,45 +647,52 @@ msgstr "Datei(en) hochladen"
 msgid ""
 "you can also save your shapefile directly to the geobox import folder. "
 "Reload this site after this."
-msgstr "Sie können das Shapefile auch direkt im Import-Verzeichnis ablegen. Nach dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur Auswahl bereit."
+msgstr ""
+"Sie können das Shapefile auch direkt im Import-Verzeichnis ablegen. Nach "
+"dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur "
+"Auswahl bereit."
 
-#: geobox/web/templates/vector/import.html:23
+#: geobox/web/templates/vector/import.html:24
 msgid "open external explorer for import"
 msgstr "GeoBox Import-Verzeichnis öffnen"
 
-#: geobox/web/templates/vector/import.html:27
+#: geobox/web/templates/vector/import.html:28
 msgid "import vectordata"
 msgstr "Daten importieren"
 
-#: geobox/web/templates/vector/import.html:28
+#: geobox/web/templates/vector/import.html:29
 msgid "tooltip import vectordata"
 msgstr ""
 "Damit die Vektordaten im System genutzt werden kann, müssen diese "
 "importiert werden. Bitte wählen Sie das entsprechende Shapefile und den "
 "dazu passenden Typ aus."
 
-#: geobox/web/views/admin.py:55
+#: geobox/web/views/admin.py:59
 msgid "load context document successful"
 msgstr "Daten wurden erfolgreich aktualisiert."
 
-#: geobox/web/views/admin.py:57
+#: geobox/web/views/admin.py:61
 msgid "password not correct"
 msgstr "Passwort ist nicht korrekt"
 
-#: geobox/web/views/admin.py:93
+#: geobox/web/views/admin.py:89
+msgid "cleared database"
+msgstr ""
+
+#: geobox/web/views/admin.py:110
 msgid "delete sucessful"
 msgstr "Erfolgreich gelöscht"
 
-#: geobox/web/views/admin.py:95
+#: geobox/web/views/admin.py:112
 msgid "delete not sucessful"
 msgstr "Löschen nicht möglich"
 
-#: geobox/web/views/admin.py:107
+#: geobox/web/views/admin.py:124
 msgid "settings changed. restart required"
 msgstr "Die Einstellungen wurden verändert - bitte starten Sie die Anwendung neu"
 
-#: geobox/web/views/project.py:119 geobox/web/views/project.py:229
-#: geobox/web/views/vector.py:85
+#: geobox/web/views/project.py:101 geobox/web/views/project.py:191
+#: geobox/web/views/vector.py:88
 msgid "form error"
 msgstr "Fehler bei Eingaben"
 
@@ -692,30 +712,30 @@ msgstr "Aufgabe gelöscht"
 msgid "username or password not correct"
 msgstr "Benutzername oder Passwort sind nicht korrekt."
 
-#: geobox/web/views/vector.py:72
+#: geobox/web/views/vector.py:73
 msgid "invalid mapping"
 msgstr "Ungültiges Mapping"
 
-#: geobox/web/views/vector.py:75
+#: geobox/web/views/vector.py:76
 msgid "invalid shapefile"
 msgstr "Ungültiges Shapefile/fehlende Dateien"
 
-#: geobox/web/views/vector.py:88
+#: geobox/web/views/vector.py:91
 #, python-format
 msgid "file %(name)s missing"
 msgstr "Datei %(name)s fehlt"
 
-#: geobox/web/views/vector.py:90
+#: geobox/web/views/vector.py:93
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr "Fehler beim Hochladen der Datei %(name)s"
 
-#: geobox/web/views/vector.py:92
+#: geobox/web/views/vector.py:95
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr "Dateityp der Datei %(name)s ist nicht erlaubt"
 
-#: geobox/web/views/vector.py:94
+#: geobox/web/views/vector.py:97
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr "Datei %(name)s hochgeladen"
