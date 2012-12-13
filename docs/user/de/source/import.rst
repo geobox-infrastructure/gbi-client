@@ -1,7 +1,7 @@
 Importieren von Raster- und Vektordaten
 =======================================
 
-Sie haben die Möglichkeit Raster- und Vektordaten von der GeoBox-Infrastruktur herunterzuladen und lokal auf Ihrem PC zu speichern. Dieser Vorgang wird importieren genannt. Sie können hier zwischen Raster- und Vektordaten wählen.
+Sie haben die Möglichkeit Raster- und Vektordaten von der GeoBox-Infrastruktur herunterzuladen und lokal auf Ihrem PC zu speichern. Dieser Vorgang wird importieren genannt. Sie können zwischen Raster- und Vektordaten wählen.
 
 Der Rasterimport unterteilt sich in eine Rasterimport Übersicht und einen Rasterimport-Editor aus.
 
@@ -9,12 +9,11 @@ Der Rasterimport unterteilt sich in eine Rasterimport Übersicht und einen Raste
 Übersicht Rasterimporte
 -----------------------
 
-In der Übersicht sind alle gespeicherten Rasterimportvorgänge aufgelistet. Sie können von hier einzelne Vorgänge editieren oder entfernen. Um einen Importvorgang zu starten, wählen Sie Editieren aus und Starten Sie den Importvorgang im Rasterimport-Editor über "Speichern & Starten".
+In der Übersicht sind alle gespeicherten Rasterimportvorgänge aufgelistet. Sie können von hier einzelne Vorgänge editieren oder entfernen. Wenn Rasterimportvorgänge fertig konfiguriert sind, können diese aus der Übersicht oder aus dem Editermodus gestartet werden. 
 
 Um einen neuen Rasterimport zu erstellen wählen Sie "Neuer Import" - dieses öffnet den Rasterimport-Editor.
 
 .. attention :: Das Löschen eines Imports kann nicht rückgängig gemacht werden.
-
 
 Rasterimport-Editor
 -------------------
@@ -47,7 +46,7 @@ Gelöscht wird die ausgewählte Geometrie. Wählen Sie diese über den Editier-M
 Alle Geometrien in dem angezeigten Projekt werden gelöscht. Ein Wiederherstellen der Geometrie nach dem Löschen ist nicht möglich.
 
 **Geometrie laden:**
-Neben dem Zeichen können Sie Geometrien aus bereits bestehenden Projekten übernehmen. Wählen Sie hierfür das Projekt aus und klicken Sie auf "Laden".
+Neben dem Zeichen können Sie Geometrien aus bereits bestehenden Projekten oder aus Ihrer Flächenbox übernehmen. Wählen Sie hierfür das Projekt oder dieaus und klicken Sie auf "Laden".
 
 .. attention:: Ohne Auswahl eines Bereichs ist kein Import möglich.
 

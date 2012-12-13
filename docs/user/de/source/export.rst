@@ -7,7 +7,7 @@ Sie haben die Möglichkeit Raster- und Vektordaten aus Ihrer GeoBox-Infrastruktu
 Exportübersicht
 ---------------
 
-In der Übersicht sind alle gespeicherten Exportvorgänge aufgelistet. Sie können hier einzelne Vorgänge editieren oder direkt entfernen. Um einen Exportvorgang zu starten, wählen Sie Editieren aus und Starten Sie den Exportvorgang im Rasterimport-Editor über "Speichern & Starten".
+In der Übersicht sind alle gespeicherten Exportvorgänge aufgelistet. Sie können hier einzelne Vorgänge editieren oder direkt entfernen. Wenn Exportvorgänge fertig konfiguriert sind, können diese aus der Übersicht oder aus dem Editermodus gestartet werden. 
 
 Um einen neuen Export zu erstellen wählen Sie "Neuer Export" - dieser öffnet den Exporteditor.
 
