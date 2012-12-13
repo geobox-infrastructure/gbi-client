@@ -11,7 +11,13 @@ def babel_init_lang_command(lang):
 
 def babel_refresh_command():
     "Extract messages and update translation files."
-    sh('pybabel extract -F babel.cfg -k lazy_gettext -k _l -o geobox/web/translations/messages.pot geobox/web geobox/model geobox/lib')
+
+    # get directory of all extension that also use translations
+    import wtforms
+    wtforms_dir = os.path.dirname(wtforms.__file__)
+    extensions = ' '.join([wtforms_dir])
+
+    sh('pybabel extract -F babel.cfg -k lazy_gettext -k _l -o geobox/web/translations/messages.pot geobox/web geobox/model geobox/lib ' + extensions)
     sh('pybabel update -i geobox/web/translations/messages.pot -d geobox/web/translations')
 
 def babel_compile_command():
