@@ -58,6 +58,29 @@ var styleMap = new OpenLayers.StyleMap(
 );
 
 
+/**
+ * style for the vector elemenets
+ **/
+var download_area_symbolizers = {
+   "Polygon": {
+        strokeWidth: 2,
+        strokeOpacity: 1,
+        strokeColor: "#24D0D6",
+        fillOpacity: 0
+   }
+};
+
+var download_area_style = new OpenLayers.Style();
+download_area_style.addRules([
+    new OpenLayers.Rule({symbolizer: download_area_symbolizers})
+]);
+
+var download_area_style_map = new OpenLayers.StyleMap(
+    {"default": download_area_style}
+);
+
+
+
 function init_map() {
     OpenLayers.ImgPath = openlayers_image_path;
 

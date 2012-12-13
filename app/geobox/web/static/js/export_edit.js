@@ -49,6 +49,7 @@ function add_raster_layer() {
 function remove_raster_layer() {
     var $this = $(this);
     map_obj.removeLayer($this.parent().find('#raster_source').data('ol_layer'));
+    map_obj.removeLayer($this.parent().find('#raster_source').data('ol_coverage_layer'));
     $this.parent().remove();
     return false;
 }
@@ -70,7 +71,6 @@ function set_layer_inputs_by_format_type() {
         })
         $('#srs').removeAttr('disabled');
     }
-
 }
 
 function show_selected_source(layer_id, source_id) {
@@ -85,11 +85,26 @@ function show_selected_source(layer_id, source_id) {
     }
 
     if(typeof source.data('ol_layer') !== "undefined") {
-        map_obj.removeLayer(source.data('ol_layer'));
+        var removed_layer = source.data('ol_layer');
+        var removed_vector_layer = source.data('ol_coverage_layer');
+
+        map_obj.removeLayer(removed_layer);
+        map_obj.removeLayer(removed_vector_layer);
     }
+
     layer = raster_sources[id].clone();
+    coverage_layer = raster_sources[layer.source_id+'_coverage'].clone();
+
     source.data('ol_layer', layer);
+    source.data('ol_coverage_layer', coverage_layer);
+
     map_obj.addLayer(layer);
+    map_obj.addLayer(coverage_layer);
+
+    if (coverage_layer) {
+       map_obj.raiseLayer(coverage_layer, map_obj.layers.length +1);
+    }
+
     if (draw_layer) {
         map_obj.raiseLayer(draw_layer, map_obj.layers.length +1);
     }

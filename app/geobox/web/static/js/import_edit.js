@@ -20,11 +20,22 @@ function limit_download_level(source_id) {
 
 function show_selected_source(map, id, selected_source) {
     if(typeof selected_source.data('ol_layer') !== "undefined") {
-        map.removeLayer(selected_source.data('ol_layer'));
+        var removed_layer = selected_source.data('ol_layer');
+        var remove_coverage_layer = raster_sources[removed_layer.source_id + '_coverage'];
+        map.removeLayer(removed_layer);
+        map.removeLayer(remove_coverage_layer);
     }
     layer = raster_sources[id].clone();
     selected_source.data('ol_layer', layer);
     map.addLayer(layer);
+    
+    coverage_layer = raster_sources[id+'_coverage']
+    map.addLayer(coverage_layer);
+
+    if (coverage_layer) {
+       map.raiseLayer(coverage_layer, map.layers.length +1);
+    }
+
     if (draw_layer) {
         map.raiseLayer(draw_layer, map.layers.length +1);
     }

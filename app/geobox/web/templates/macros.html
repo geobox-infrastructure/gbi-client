@@ -5,6 +5,7 @@
     {% else %}
     var view_zoom_level_end = 18;
     {% endif %}
+
     var base_layer  = new OpenLayers.Layer.WMTS({
         name: '{{ layer.title }}',
         url: '{{ layer.url }}',
@@ -51,9 +52,27 @@
             style: 'default',
             isBaseLayer: false,
             requestEncoding: 'REST',
+            source_id: {{ map_source.id }},
             download_level_start: {{ source.download_level_start }},
             download_level_end: {{ source.download_level_end }}
         });
+ 
+        // add download coverage as vectorlayer
+        raster_sources['{{ map_source.id }}_coverage'] = new OpenLayers.Layer.Vector(
+            '{{_('download coverage')}} {{ map_source.title }}', 
+          {
+            styleMap: download_area_style_map,
+            displayInLayerSwitcher: true,
+            source_id: {{ map_source.id }}
+          });
+        var geojson_format = new OpenLayers.Format.GeoJSON();
+         {%if map_source.download_coverage %}
+          var coverage = {{ map_source.download_coverage|tojson|safe }};
+         {% else %}
+          var coverage = {{ map_source.wmts_source.download_coverage|tojson|safe }};
+         {% endif %}
+         raster_sources['{{ map_source.id }}_coverage'].addFeatures(geojson_format.read(coverage));
+    
     {% endfor %}
 {%- endmacro %}
 
