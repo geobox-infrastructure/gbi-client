@@ -10,6 +10,12 @@ body {
     height: 768px;
 }
 
+
+.olControlLayerSwitcher {
+    width: auto;
+}
+
+
 /* Overwrite max-width from bootstrap */
 .map img { 
     max-width: 512px; 
