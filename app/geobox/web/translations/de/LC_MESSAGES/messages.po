@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-12-12 10:49+0100\n"
+"POT-Creation-Date: 2012-12-13 09:40+0100\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -45,62 +45,62 @@ msgstr "Einloggen erforderlich"
 msgid "Please login to see this page"
 msgstr "Sie müssen sich anmelden um diese Seite aufrufen zu können"
 
-#: geobox/web/forms.py:153 geobox/web/templates/downloads.html:12
+#: geobox/web/forms.py:164 geobox/web/templates/downloads.html:12
 #: geobox/web/templates/projects/exports.html:12
 #: geobox/web/templates/projects/imports.html:12
 #: geobox/web/templates/tasks/task_list.html:87
 msgid "title"
 msgstr "Titel"
 
-#: geobox/web/forms.py:158
+#: geobox/web/forms.py:169
 msgid "level needs to be bigger or equal to start level"
 msgstr "Das Endlevel muss größer oder gleich dem Startlevel sein"
 
-#: geobox/web/forms.py:161
+#: geobox/web/forms.py:172
 msgid "username"
 msgstr "Benutzername"
 
-#: geobox/web/forms.py:162
+#: geobox/web/forms.py:173
 msgid "Password"
 msgstr "Passwort"
 
-#: geobox/web/forms.py:176
+#: geobox/web/forms.py:187
 msgid "select coverage"
 msgstr "Geometrie auswählen"
 
-#: geobox/web/forms.py:179 geobox/web/forms.py:190
+#: geobox/web/forms.py:190 geobox/web/forms.py:201
 msgid "start level"
 msgstr "Startlevel"
 
-#: geobox/web/forms.py:180 geobox/web/forms.py:191
+#: geobox/web/forms.py:191 geobox/web/forms.py:202
 msgid "end level"
 msgstr "Endlevel"
 
-#: geobox/web/forms.py:181 geobox/web/forms.py:192
+#: geobox/web/forms.py:192 geobox/web/forms.py:203
 msgid "raster_source"
 msgstr "Rasterdatenquelle"
 
-#: geobox/web/forms.py:182
+#: geobox/web/forms.py:193
 msgid "update_tiles"
 msgstr "Kacheln aktualisieren"
 
-#: geobox/web/forms.py:188 geobox/web/templates/admin.html:12
+#: geobox/web/forms.py:199 geobox/web/templates/admin.html:12
 msgid "format"
 msgstr "Format"
 
-#: geobox/web/forms.py:189
+#: geobox/web/forms.py:200
 msgid "srs"
 msgstr "Koordinatensystem"
 
-#: geobox/web/forms.py:193 geobox/web/forms.py:200
+#: geobox/web/forms.py:204 geobox/web/forms.py:211
 msgid "mapping name"
 msgstr "Typ"
 
-#: geobox/web/forms.py:199
+#: geobox/web/forms.py:210
 msgid "file name"
 msgstr "Shapefile"
 
-#: geobox/web/forms.py:204
+#: geobox/web/forms.py:215
 msgid "path"
 msgstr "Verzeichnis"
 
@@ -775,4 +775,164 @@ msgstr "Beenden"
 #: geobox/lib/trayicon.py:128
 msgid "Open"
 msgstr "Öffnen"
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:55
+#, python-format
+msgid "Invalid field name '%s'."
+msgstr "Ungültiger Feldname  '%s'."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:62
+#, python-format
+msgid "Field must be equal to %(other_name)s."
+msgstr "Das Feld muss mit dem %(other_name)s übereinstimmen."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:94
+#, python-format
+msgid "Field must be at least %(min)d character long."
+msgid_plural "Field must be at least %(min)d characters long."
+msgstr[0] "Feld muss mindestens %(min)d Zeichen lang sein"
+msgstr[1] "Feld muss mindestens %(min)d Zeichen lang sein"
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:97
+#, python-format
+msgid "Field cannot be longer than %(max)d character."
+msgid_plural "Field cannot be longer than %(max)d characters."
+msgstr[0] "Der Inhalt kann nicht länger als %(max)d Buchstabe sein."
+msgstr[1] "Der Inhalt kann nicht länger als %(max)d Buchstaben sein."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:100
+#, python-format
+msgid "Field must be between %(min)d and %(max)d characters long."
+msgstr "Eingabe muss zwischen %(min)d und %(max)d Zeichen lang sein."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:135
+#, python-format
+msgid "Number must be greater than %(min)s."
+msgstr "Die Zahl muss größer als %(min)s sein "
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:137
+#, python-format
+msgid "Number must be less than %(max)s."
+msgstr "Zahl muss kleiner sein als %(max)s"
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:139
+#, python-format
+msgid "Number must be between %(min)s and %(max)s."
+msgstr "Die Zahl muss zwischen %(min)s und %(max)s liegen"
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:188
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:221
+msgid "This field is required."
+msgstr "Dieses Feld muss ausgefüllt werden."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:249
+msgid "Invalid input."
+msgstr "Ungültige Eingabe."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:268
+msgid "Invalid email address."
+msgstr "Ungültige E-Mail Adresse"
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:297
+msgid "Invalid IP address."
+msgstr "Ungültige IP Adresse."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:345
+msgid "Invalid Mac address."
+msgstr "Ungültige MAC-Adresse"
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:370
+msgid "Invalid URL."
+msgstr "Ungültige URL."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:388
+msgid "Invalid UUID."
+msgstr "Ungültige UUID."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:415
+#, python-format
+msgid "Invalid value, must be one of: %(values)s."
+msgstr "Ungültiger Wert. Der Wert muss eines der folgenen sein: %(values)s."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:442
+#, python-format
+msgid "Invalid value, can't be any of: %(values)s."
+msgstr "Ungültiger Wert: %(values)s sind nicht möglich."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:419
+msgid "Not a valid choice"
+msgstr "Keine gültige Auswahl."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:109
+msgid "Not a valid list"
+msgstr "Keine gültige Liste."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/form.py:47
+msgid "Invalid CSRF Token"
+msgstr ""
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:57
+msgid "CSRF token missing"
+msgstr ""
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:65
+msgid "CSRF failed"
+msgstr ""
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:70
+msgid "CSRF token expired"
+msgstr ""
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:50
+msgid "Please input a date/time value"
+msgstr "Bitte geben Sie Datun/Zeit ein."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:62
+msgid "Invalid date/time input"
+msgstr "Ungültiger Datumswert."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/validators.py:33
+msgid "Already exists."
+msgstr "Bereits vorhanden."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:412
+msgid "Invalid Choice: could not coerce"
+msgstr "Keine gültige Auswahl."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:445
+msgid "Invalid choice(s): one or more data inputs could not be coerced"
+msgstr ""
+"Ungültige Auswahl: Einer oder mehrere Eingaben konnten nicht verarbeitet "
+"werden."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:452
+#, python-format
+msgid "'%(value)s' is not a valid choice for this field"
+msgstr "'%(value)s' ist keine gültige Wahl für dieses Feld."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:507
+msgid "Not a valid integer value"
+msgstr "Kein gültiger Integer-Zahlenwert angegeben."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:554
+msgid "Not a valid decimal value"
+msgstr "Kein gültiger Dezimal-Zahlenwert angegeben."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:581
+msgid "Not a valid float value"
+msgstr "Kein gültiger Float-Zahlenwert angegeben."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:632
+msgid "Not a valid datetime value"
+msgstr "Kein gültigen Zeitpunkt angegeben."
+
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:649
+#, fuzzy
+msgid "Not a valid date value"
+msgstr "Kein gültiges Datum angegeben."
 

@@ -26,8 +26,17 @@ from wtforms.ext.csrf.session import SessionSecureForm
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 
-from flaskext.babel import lazy_gettext
+from flaskext.babel import lazy_gettext, gettext, ngettext
 from geobox.model import LocalWMTSSource, ExternalWMTSSource, Project
+
+class BabelTranslations(object):
+    def gettext(self, string):
+        return gettext(string)
+
+    def ngettext(self, singular, pluaral, n):
+        return ngettext(singular, pluaral, n)
+
+babel = BabelTranslations()
 
 class _Auto():
     '''Placeholder for unspecified variables that should be set to defaults.
@@ -148,6 +157,8 @@ class Form(SessionSecureForm):
         """
         return self.is_submitted() and self.validate()
 
+    def _get_translations(self):
+        return babel
 
 class ProjectEdit(Form):
     title = TextField(lazy_gettext('title'), validators=[Required()])
