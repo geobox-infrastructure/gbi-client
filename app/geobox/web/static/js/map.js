@@ -21,9 +21,6 @@ function load_vector_geometries(map, geometries) {
         $.each(geometries, function(index, geom) {
             vector_layer.addFeatures(geojson_format.read(geom.geometry));
         });
-        
-        var extent = vector_layer.getDataExtent();
-        vector_layer.map.setCenter(extent.getCenterLonLat(), 12);
     }
 };
 
