@@ -61,7 +61,7 @@ class MapProxyConfiguration(object):
                 'cache': {
                     'type': 'couchdb',
                     'url': '%s' % self.couchdb_url,
-                    'db_name': wmts_source.layer,
+                    'db_name': wmts_source.name,
                     'tile_metadata': {
                         'tile_col': '{{x}}',
                         'tile_row': '{{y}}',
