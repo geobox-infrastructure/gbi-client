@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-12-13 13:06+0100\n"
+"POT-Creation-Date: 2012-12-19 09:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,8 +126,7 @@ msgstr ""
 msgid "zoom level"
 msgstr ""
 
-#: geobox/web/templates/admin.html:25 geobox/web/templates/admin.html:47
-#: geobox/web/templates/admin.html:102
+#: geobox/web/templates/admin.html:25 geobox/web/templates/admin.html:102
 #: geobox/web/templates/projects/exports.html:35
 #: geobox/web/templates/projects/imports.html:46
 #: geobox/web/templates/tasks/task_list.html:52
@@ -136,6 +135,10 @@ msgstr ""
 
 #: geobox/web/templates/admin.html:33
 msgid "local vector sources"
+msgstr ""
+
+#: geobox/web/templates/admin.html:47
+msgid "clear database"
 msgstr ""
 
 #: geobox/web/templates/admin.html:56

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-12-13 13:06+0100\n"
+"POT-Creation-Date: 2012-12-19 09:31+0100\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -126,8 +126,7 @@ msgstr "Layer"
 msgid "zoom level"
 msgstr "Level"
 
-#: geobox/web/templates/admin.html:25 geobox/web/templates/admin.html:47
-#: geobox/web/templates/admin.html:102
+#: geobox/web/templates/admin.html:25 geobox/web/templates/admin.html:102
 #: geobox/web/templates/projects/exports.html:35
 #: geobox/web/templates/projects/imports.html:46
 #: geobox/web/templates/tasks/task_list.html:52
@@ -137,6 +136,10 @@ msgstr "Entfernen"
 #: geobox/web/templates/admin.html:33
 msgid "local vector sources"
 msgstr "Lokale Vektorquelle"
+
+#: geobox/web/templates/admin.html:47
+msgid "clear database"
+msgstr "Einträge löschen"
 
 #: geobox/web/templates/admin.html:56
 msgid "local net access"
@@ -439,8 +442,8 @@ msgstr "Export"
 msgid "tooltip - overview over all raster export projects"
 msgstr ""
 "Hier finden Sie eine Übersicht über alle Exportprojekte. Um einen Export "
-"zu erstellen klicken Sie auf 'Neuer Export'. Über den Button "
-"'Editieren' können Sie Exporte nachträglich bearbeiten."
+"zu erstellen klicken Sie auf 'Neuer Export'. Über den Button 'Editieren' "
+"können Sie Exporte nachträglich bearbeiten."
 
 #: geobox/web/templates/projects/exports.html:13
 #: geobox/web/templates/projects/imports.html:16
@@ -489,7 +492,10 @@ msgstr "Rasterimporte"
 
 #: geobox/web/templates/projects/imports.html:7
 msgid "tooltip - overview over all raster import projects"
-msgstr "Übersicht über alle Rasterimporte. Um einen Import zu erstellen wählen Sie 'Neuer Import' aus. Über die Funktion 'Editieren' können Sie den Import nachträglich bearbeiten."
+msgstr ""
+"Übersicht über alle Rasterimporte. Um einen Import zu erstellen wählen "
+"Sie 'Neuer Import' aus. Über die Funktion 'Editieren' können Sie den "
+"Import nachträglich bearbeiten."
 
 #: geobox/web/templates/projects/imports.html:14
 msgid "layer name"
@@ -679,7 +685,7 @@ msgstr "Passwort ist nicht korrekt"
 
 #: geobox/web/views/admin.py:89
 msgid "cleared database"
-msgstr ""
+msgstr "Einträge aus der Datenbank gelöscht"
 
 #: geobox/web/views/admin.py:110
 msgid "delete sucessful"
