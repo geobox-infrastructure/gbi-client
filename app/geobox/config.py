@@ -263,21 +263,17 @@ class GeoBoxState(object):
             if getattr(sys, 'frozen', None):
                 # running from pyinstaller .exe
                 basedir = sys._MEIPASS
-                print basedir
                 # for testing the .exe from packaging/dist
                 testing_dir = os.path.join(basedir, '..', '..', 'build', 'mapproxy_templates')
-                print testing_dir
                 if os.path.exists(testing_dir):
                     return testing_dir
 
                 # for deployed .exe inside the inno setup destination
                 deploy_dir = os.path.join(basedir, 'mapproxy_templates')
-                print deploy_dir
                 if os.path.exists(deploy_dir):
                     return deploy_dir
         else:
             raise ValueError('unknown data_path name "%s"' % name)
-        print 'None'
         return None
 
 class TileBoxServer(object):
@@ -323,13 +319,6 @@ class GeoBoxConfig(ConfigParser):
         },
         'web': {
             'port': 8090,
-            'base_layer': {
-                'title': 'OSM Omniscale',
-                'url': 'http://x.osm.omniscale.net/proxy/service?',
-                'layer': 'osm',
-                'format': 'image/png',
-                'srs': 'EPSG:3857',
-            },
             'available_srs': ['EPSG:4326', 'EPSG:3857', 'EPSG:31467', 'EPSG:25832'],
             'context_document_url': 'http://igreendemo.omniscale.net/context',
             'coverages_from_couchdb': 'flaechen-box',
