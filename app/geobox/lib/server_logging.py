@@ -23,12 +23,12 @@ def send_task_logging(app_state, task):
         json_log['mapping'] = task.mapping_name
         json_log['source'] = task.file_name
         json_log['format'] = 'SHP'
-    if isinstance(task, VectorExportTask):
+    elif isinstance(task, VectorExportTask):
         json_log['action'] = 'vector_export'
         json_log['mapping'] = task.mapping_name
         json_log['source'] = app_state.config.get('web', 'coverages_from_couchdb')
         json_log['format'] = 'SHP'
-    if isinstance(task, RasterImportTask):
+    elif isinstance(task, RasterImportTask):
         json_log['action'] = 'raster_import'
         json_log['geometry'] = json.loads(task.coverage)
         json_log['source'] = task.source.url
@@ -36,7 +36,7 @@ def send_task_logging(app_state, task):
         json_log['zoom_level_start'] = task.zoom_level_start
         json_log['zoom_level_end'] = task.zoom_level_end
         json_log['refreshed'] = task.update_tiles
-    if isinstance(task, RasterExportTask):
+    elif isinstance(task, RasterExportTask):
         json_log['action'] = 'raster_export'
         json_log['format'] = task.export_format
         if task.export_srs:
