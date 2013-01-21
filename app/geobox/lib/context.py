@@ -30,6 +30,8 @@ class Context(object):
         for lyr in self.doc.get('wmts_sources', []):
             yield lyr
 
+    def logging_server(self):
+        return self.doc.get('logging', {}).get('url')
 
 class ContextModelUpdater(object):
     """
@@ -54,8 +56,8 @@ class ContextModelUpdater(object):
         source.name = layer['name']
         source.title = layer['title']
         source.url = layer['url']
-        source.username = layer['username']
-        source.password = layer['password']
+        source.username = layer.get('username')
+        source.password = layer.get('password')
         source.format = layer['format']
         source.is_baselayer = layer['baselayer']
         source.is_overlay = layer['overlay']
@@ -96,7 +98,7 @@ class ContextModelUpdater(object):
 
         return json.dumps(restriction['geometry'])
 
-def update_sources_from_context(app_state, user, password):
+def reload_context_document(app_state, user, password):
     session = app_state.user_db_session()
     result = requests.get(app_state.config.get('web', 'context_document_url'), auth=(user, password))
 
@@ -122,6 +124,9 @@ def update_sources_from_context(app_state, user, password):
     for source in session.query(model.ExternalWMTSSource):
         if source != first_source:
             source.background_layer = False
+
+    app_state.config.set('app', 'logging_server', context.logging_server())
+    app_state.config.write()
 
     session.commit()
 

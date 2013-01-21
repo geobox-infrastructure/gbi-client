@@ -25,7 +25,7 @@ from ..helper import redirect_back
 
 from geobox.lib.fs import open_file_explorer
 from geobox.lib.couchdb import CouchDB
-from geobox.lib.context import update_sources_from_context
+from geobox.lib.context import reload_context_document
 from geobox.lib.mapproxy import write_mapproxy_config
 from geobox.web import forms
 
@@ -55,7 +55,7 @@ def admin():
 
 @admin_view.route('/admin/refresh_context', methods=['POST'])
 def refresh_context():
-    if update_sources_from_context(current_app.config.geobox_state, session['username'], request.form['password']):
+    if reload_context_document(current_app.config.geobox_state, session['username'], request.form['password']):
         flash(_('load context document successful'), 'sucess')
     else:
         flash(_('password not correct'), 'error')

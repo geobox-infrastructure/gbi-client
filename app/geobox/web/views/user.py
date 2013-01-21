@@ -16,7 +16,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app
 from flaskext.babel import _
 
-from geobox.lib.context import update_sources_from_context
+from geobox.lib.context import reload_context_document
 from geobox.web.forms import LoginForm
 from ..helper import get_redirect_target, redirect_back
 
@@ -37,7 +37,7 @@ def login():
         user = request.form['username']
         password = request.form['password']
 
-        if update_sources_from_context(current_app.config.geobox_state, user, password):
+        if reload_context_document(current_app.config.geobox_state, user, password):
             session['username'] = user
             session.permanent = True
             current_app.config.geobox_state.config.set('user', 'name', user)
