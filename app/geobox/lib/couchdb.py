@@ -241,21 +241,24 @@ class CouchDB(object):
         if resp.status_code != 201:
             raise UnexpectedResponse('got unexpected resp (%d) from CouchDB: %s' % (resp.status_code, resp.content))
 
-    def replicate_pull(self, remote_url, remote_db_name):
-        source = '%s/%s' % (remote_url.rstrip('/'), remote_db_name.lower())
-        self._replicate(source, self.couch_db_url)
+    def replication(self, repl_id, source, target, continuous=False):
+        repl_doc = {
+            "_id": repl_id,
+            "source":  source,
+            "target":  target,
+            "continuous": continuous,
+            "worker_processes": 1,
+            "user_ctx": {
+                "roles": ["_admin"],
+            }
+        }
 
-    def replicate_push(self, remote_url, remote_db_name):
-        target = '%s/%s' % (remote_url.rstrip('/'), remote_db_name.lower())
-        self._replicate(self.couch_db_url, target)
+        doc_url = self.couch_db_url + '/' + repl_id
+        resp = requests.get(doc_url)
+        if resp.status_code == 200:
+            requests.delete(doc_url, params={'rev': resp.json['_rev']})
 
-
-    def _replicate(self, source, target):
-        self.init_db(target)
-        data = json.dumps({"source": source ,"target":target})
-        resp = self.req_session.post(self.couch_url + '/_replicate', data=data, headers={'Content-type': 'application/json'})
-        if resp.status_code != 200:
-            raise UnexpectedResponse('got unexpected resp (%d) from CouchDB: %s' % (resp.status_code, resp.content))
+        self.update_or_create_doc(repl_id, repl_doc)
 
     def delete_db(self):
         resp = self.req_session.delete(self.couch_db_url)
