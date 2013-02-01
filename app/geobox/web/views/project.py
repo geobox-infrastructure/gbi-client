@@ -252,8 +252,9 @@ def load_coverage():
         records = couch.load_records()
         coverage = []
         for record in records:
+            geometry = record.get('geometry')
             # load only poylgons or mulitpolygons for coverages
-            if record['geometry']['type'] in ('Polygon', 'MultiPolygon'):
+            if geometry and isinstance(geometry, dict) and geometry.get('type') in ('Polygon', 'MultiPolygon'):
                 coverage.append(record)
 
     else:
@@ -340,13 +341,13 @@ def create_export_tasks(proj):
         raster_source = g.db.query(model.LocalWMTSSource).get(raster_layer.source_id)
         start_level = raster_layer.start_level
         end_level = raster_layer.end_level or raster_layer.start_level
-        
+
         if not proj.coverage:
             raster_coverage = raster_source.wmts_source.download_coverage
             proj.coverage = raster_coverage
         else:
             raster_coverage = proj.coverage
-       
+
         task = model.RasterExportTask(
             layer=raster_source,
             export_format=proj.export_format,
@@ -359,7 +360,7 @@ def create_export_tasks(proj):
         g.db.add(task)
         send_task_logging(current_app.config.geobox_state, task)
 
-    
+
     for vector_layers in proj.export_vector_layers:
         task = model.VectorExportTask(
             db_name=mappings[vector_layers.mapping_name].couchdb,
@@ -379,7 +380,7 @@ def create_raster_import_task(proj):
 
     local_raster_source = g.db.query(model.LocalWMTSSource).filter_by(
         wmts_source=raster_source).first()
-    
+
     if local_raster_source:
         local_raster_source.download_level_start = min(local_raster_source.download_level_start, start_level)
         local_raster_source.download_level_end = max(local_raster_source.download_level_end, end_level)
