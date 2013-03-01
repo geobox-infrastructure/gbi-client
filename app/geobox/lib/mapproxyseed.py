@@ -152,7 +152,7 @@ def create_source(raster_source, app_state):
     format = raster_source.format
 
     url_template = TileURLTemplate(
-        '%s/%s/%s-%%(z)s-%%(x)s-%%(y)s/tile' % (url, raster_source.layer, raster_source.matrix_set),
+        '%s/%s/%s-%%(z)s-%%(x)s-%%(y)s/tile' % (url.rstrip('/'), raster_source.layer, raster_source.matrix_set),
         format=format)
     client = TileClient(url_template, http_client=http_client, grid=grid)
 
