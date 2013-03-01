@@ -208,13 +208,14 @@ class CouchDB(object):
 
     def _load_records(self, rows):
         for record in rows:
-            yield record['doc']
+            if 'doc' in record:
+                yield record['doc']
 
     def load_records(self):
         resp = self.req_session.get(self.couch_db_url + '/_all_docs?include_docs=true', headers={'Accept': 'application/json'})
         if resp.status_code == 200:
             doc = json.loads(resp.content)
-            return self._load_records(doc['rows'])
+            return self._load_records(doc.get('rows', []))
         return []
 
     def get_tile(self, matrix_set, x, y, z):
