@@ -98,9 +98,14 @@ class Mapping(object):
 
     def filter_json(self, record):
         if self.field_filter:
-            key, value = self.field_filter
-            if record.get(key, False):
-                return record[key] == value
+            filters = self.field_filter
+            if not isinstance(filters, list):
+                filters = [filters]
+
+            for key, value in filters:
+                if record.get(key, False):
+                    if record[key] == value:
+                        return True
             return False
         return True
 
@@ -149,7 +154,10 @@ default_mappings = {
             ('use_code', 'NUAR', 'str'),
             ('size', 'SLFL', 'str'),
         ),
-        field_filter = ('import_mapping', 'schlaege rlp'),
+        field_filter = [
+            ('import_mapping', 'schlaege rlp'),
+            ('layer', 'baselayer'),
+        ],
         json_defaults = {
             'import_mapping': 'schlaege rlp',
         },
