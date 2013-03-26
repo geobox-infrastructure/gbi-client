@@ -10,13 +10,13 @@ The setup requires [homebrew](http://mxcl.github.com/homebrew/)
 1. Install / Update python and dependencies
 --------------------------------------------
 
-```
+```sh
 $ brew update && brew install python
 ```
 
 These will take ages ...
 
-```
+```sh
 $ pip install numpy
 $ brew install gdal
 ```
@@ -24,7 +24,7 @@ $ brew install gdal
 2. Clone GBI-client repo
 --------------------------
 
-```
+```sh
 $ git clone git://github.com/omniscale/gbi-client.git
 $ cd gbi-client
 ```
@@ -32,7 +32,7 @@ $ cd gbi-client
 3. Download omniscale packages
 --------------------------------
 
-```
+```sh
 $ mkdir packaging/pkgs
 $ mkdir packaging/pkgs/python
 $ wget -O packaging/pkgs/gdal-1.9.1.tar.gz http://download.omniscale.de/geobox/pkgs/gdal-1.9.1.tar.gz
@@ -64,7 +64,7 @@ $ wget -O packagwng/pkgs/python/speaklater-1.3.tar.gz http://download.omniscale.
 4. Install dependencies
 -------------------------
 
-```
+```sh
 $ easy_install http://bitbucket.org/olt/scriptine/get/default.zip
 $ easy_install no-magic-import
 $ easy_install --no-deps packaging/pkgs/python/Babel-0.9.6-py2.7.egg
@@ -85,7 +85,7 @@ $ easy_install --no-deps packaging/pkgs/python/WTForms-1.0.2.zip
 5. Unzip Inno Setup and PyInstaller
 -------------------------------------
 
-```
+```sh
 $ mkdir packaging/opt
 $ unzip packaging/pkgs/inno5.zip -d packaging/opt/
 $ unzip packaging/pkgs/pyinstaller.zip -d packaging/opt/
@@ -94,11 +94,10 @@ $ unzip packaging/pkgs/pyinstaller.zip -d packaging/opt/
 6. Build
 ----------
 
-```
+```sh
 $ cd packaging
-$ python build.py unpack
-$ python build.py prepare
-$ python build.py build-app
+/packaging$ python build.py unpack
+/packaging$ python build.py prepare
+/packaging$ cd ..
+$ python -m geobox.app
 ```
-
-
