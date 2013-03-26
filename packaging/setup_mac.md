@@ -45,16 +45,16 @@ $ wget -O packaging/pkgs/otp_R14B04_win32.tar.gz http://download.omniscale.de/ge
 $ wget -O packaging/pkgs/proj4.tar.gz http://download.omniscale.de/geobox/pkgs/proj4.tar.gz
 $ wget -O packaging/pkgs/pyinstaller.zip http://download.omniscale.de/geobox/pkgs/pyinstaller.zip
 $ wget -O packaging/pkgs/python/Babel-0.9.6-py2.7.egg http://download.omniscale.de/geobox/pkgs/python/Babel-0.9.6-py2.7.egg
-$ wget -O packaging/pkgs/Fiona-0.7.tar.gz https://pypi.python.org/packages/source/F/Fiona/Fiona-0.7.tar.gz
+$ wget -O packaging/pkgs/python/Fiona-0.7.tar.gz https://pypi.python.org/packages/source/F/Fiona/Fiona-0.7.tar.gz
 $ wget -O packaging/pkgs/python/Flask-0.9.tar.gz http://download.omniscale.de/geobox/pkgs/python/Flask-0.9.tar.gz
 $ wget -O packaging/pkgs/python/Flask-Babel-0.8.tar.gz http://download.omniscale.de/geobox/pkgs/python/Flask-Babel-0.8.tar.gz
 $ wget -O packaging/pkgs/python/Flask-WTF-0.8.tar.gz http://download.omniscale.de/geobox/pkgs/python/Flask-WTF-0.8.tar.gz
-$ wget -O packaging/pkgs/python/GDAL-1.9.1-py2.7-win32.egg http://download.omniscale.de/geobox/pkgs/python/GDAL-1.9.1-py2.7-win32.egg
+$ wget -O packaging/pkgs/python/GDAL-1.9.1.tar.gz https://pypi.python.org/packages/source/G/GDAL/GDAL-1.9.1.tar.gz
 $ wget -O packaging/pkgs/python/Jinja2-2.6.tar.gz http://download.omniscale.de/geobox/pkgs/python/Jinja2-2.6.tar.gz
 $ wget -O packaging/pkgs/python/MapProxy-1.5.0a-20121121.tar.gz http://download.omniscale.de/geobox/pkgs/python/MapProxy-1.5.0a-20121121.tar.gz
-$ wget -O packaging/pkgs/python/PIL-1.1.7.win32-py2.7.exe http://download.omniscale.de/geobox/pkgs/python/PIL-1.1.7.win32-py2.7.exe
+$ wget -O packaging/pkgs/python/PIL-1.1.7-py2.7.tar.gz http://effbot.org/downloads/Imaging-1.1.7.tar.gz
 $ wget -O packaging/pkgs/python/SQLAlchemy-0.7.8.tar.gz http://download.omniscale.de/geobox/pkgs/python/SQLAlchemy-0.7.8.tar.gz
-$ wget -O packaging/pkgs/python/Shapely-1.2.14-py2.7-win32.egg http://download.omniscale.de/geobox/pkgs/python/Shapely-1.2.14-py2.7-win32.wgg
+$ wget -O packaging/pkgs/python/Shapely-1.2.4.tar.gz https://pypi.python.org/packages/source/S/Shapely/Shapely-1.2.4.tar.gz
 $ wget -O packaging/pkgs/python/WTForms-1.0.2.zip http://download.omniscale.de/geobox/pkgs/python/WTForms-1.0.2.zip
 $ wget -O packaging/pkgs/python/pytz-2012d-py2.7.egg http://download.omniscale.de/geobox/pkgs/python/pytz-2012d-py2.7.egg
 $ wget -w packaging/pkgs/python/requests-0.14.0.tar.gz http://download.omniscale.de/geobox/pkgs/python/requests-0.14.0.tar.gz
@@ -67,13 +67,19 @@ $ wget -O packagwng/pkgs/python/speaklater-1.3.tar.gz http://download.omniscale.
 ```
 $ easy_install scriptine
 $ easy_install no-magic-import
-$ easy_install --no-deps packaging/pkgs/Fiona-0.7.tar.gz
-$ easy_install --no-deps packaging/pkgs/gdal-1.9.1.tar.gz
-$ easy_install --no-deps packaging/pkgs/geocouch.tar.gz
-$ easy_install --no-deps packaging/pkgs/geos-3.2.3.tar.gz
-$ easy_install --no-deps packaging/pkgs/mapproxy_templates-1.5.0.tar.gz
-$ easy_install --no-deps packaging/pkgs/openssl.tar.gz
-$ easy_install --no-deps packaging/pkgs/proj4.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/Babel-0.9.6-py2.7.egg
+$ easy_install --no-deps packaging/pkgs/python/Fiona-0.7.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/Flask-0.9.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/Flask-Babel-0.8.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/Flask-WTF-0.8.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/GDAL-1.9.1.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/Jinja2-2.6.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/MapProxy-1.5.0a-20121121.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/PIL-1.1.7-py2.7.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/pytz-2012d-py2.7.egg
+$ easy_install --no-deps packaging/pkgs/python/Shapely-1.2.4.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/SQLAlchemy-0.7.8.tar.gz
+$ easy_install --no-deps packaging/pkgs/python/WTForms-1.0.2.zip
 ```
 
 5. Unzip Inno Setup and PyInstaller
@@ -83,6 +89,14 @@ $ easy_install --no-deps packaging/pkgs/proj4.tar.gz
 $ mkdir packaging/opt
 $ unzip packaging/pkgs/inno5.zip -d packaging/opt/
 $ unzip packaging/pkgs/pyinstaller.zip -d packaging/opt/
+```
+
+6. Build
+----------
+
+```
+$ cd packaging
+$ python build.py
 ```
 
 
