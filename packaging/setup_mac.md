@@ -7,11 +7,18 @@ the install steps for Macs.
 The setup requires [homebrew](http://mxcl.github.com/homebrew/)
 
 
-1. Install / Update python
-----------------------------
+1. Install / Update python and dependencies
+--------------------------------------------
 
 ```
 $ brew update && brew install python
+```
+
+These will take ages ...
+
+```
+$ pip install numpy
+$ brew install gdal
 ```
 
 2. Clone GBI-client repo
@@ -77,3 +84,5 @@ $ mkdir packaging/opt
 $ unzip packaging/pkgs/inno5.zip -d packaging/opt/
 $ unzip packaging/pkgs/pyinstaller.zip -d packaging/opt/
 ```
+
+
