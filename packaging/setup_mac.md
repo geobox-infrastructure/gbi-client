@@ -67,7 +67,7 @@ $ wget -O packagwng/pkgs/python/speaklater-1.3.tar.gz http://download.omniscale.
 ```sh
 $ easy_install http://bitbucket.org/olt/scriptine/get/default.zip
 $ easy_install https://github.com/olt/werkzeug/zipball/no-magic-import
-$ easy_install requests
+$ easy_install 'requests<=0.99'
 $ easy_install --no-deps packaging/pkgs/python/Babel-0.9.6-py2.7.egg
 $ easy_install --no-deps packaging/pkgs/python/Fiona-0.7.tar.gz
 $ easy_install --no-deps packaging/pkgs/python/Flask-0.9.tar.gz
