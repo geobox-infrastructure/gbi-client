@@ -109,3 +109,9 @@ $ cd packaging
 $ cd app
 /app$ python -m geobox.app
 ```
+
+When the app is running, access it at:
+
+1. http://127.0.0.1:8090 (web)
+1. http://127.0.0.1:8091 (mapproxy)
+1. http://127.0.0.1:8099 (couchdb)
