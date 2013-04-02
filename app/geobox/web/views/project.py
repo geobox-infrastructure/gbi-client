@@ -259,6 +259,8 @@ def load_coverage():
 
     else:
         project = g.db.query(model.Project).with_polymorphic('*').filter_by(id = project_id).first()
+        if not project:
+            abort(404)
         coverage = project.coverage
 
     if not coverage:
