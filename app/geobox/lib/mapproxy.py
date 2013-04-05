@@ -138,7 +138,7 @@ def write_mapproxy_config(app_state):
         db_session=app_state.user_db_session(),
         srs=app_state.config.get('web', 'available_srs'),
         target_dir=app_state.user_data_path(),
-        couchdb_url='http://127.0.0.1:%d' % app_state.config.get('couchdb', 'port'),
+        couchdb_url='http://127.0.0.1:%s' % app_state.config.get('couchdb', 'port'),
         template_dir=app_state.data_path('mapproxy_templates'),
         )
     mpc._load_sources()
