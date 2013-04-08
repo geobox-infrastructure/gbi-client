@@ -59,10 +59,5 @@
 
 
 {% macro generate_tooltip(content) -%}
-    <span class="tooltip_element">
-      <span class="icon-info-sign"></span>
-      <span class="tooltip_content">
-        {{ content }}
-       </span>
-    </span>
+    <span class="tooltip_element icon-info-sign" title="{{ content }}"></span>
 {%- endmacro %}

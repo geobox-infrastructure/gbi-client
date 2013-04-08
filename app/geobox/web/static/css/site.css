@@ -10,17 +10,14 @@ body {
     height: 768px;
 }
 
-
 .olControlLayerSwitcher {
     width: auto;
 }
-
 
 /* Overwrite max-width from bootstrap */
 .map img {
     max-width: 512px;
 }
-
 
 #show_zoomlevel {
     position: absolute;
@@ -215,13 +212,8 @@ table.task-overview {
 }
 
 /****/
-.tooltip_content {
-    display: none
-}
-
 .tooltip_element {
     cursor: pointer;
-    display: inline;
 }
 
 .tooltip_element span.icon-info-sign {

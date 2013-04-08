@@ -9,6 +9,9 @@
         }
     });
 
-    $(".tooltip_element").tooltip({content:"tooltip_content"})
+    $('.tooltip_element').tooltip({
+        delay: { show: 500, hide: 100 },
+        placement: 'right'
+    });
 
 })(jQuery);
