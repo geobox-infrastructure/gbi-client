@@ -16,7 +16,7 @@
 
 {% macro task_item(task) -%}
 
-  <div class="task_item" data-running="{{ task.is_running }}" data-active="{{ task.is_active }}" 
+  <div class="task_item" data-running="{{ task.is_running }}" data-active="{{ task.is_active }}"
     data-paused="{{ task.is_paused }}" data-status="{{ task.status }}">
     <div class="span1 inline">
         <span class="task_header">ID: {{task.id}}</span>
@@ -25,21 +25,21 @@
         <span class="task_header">{{ _('updated') }}: </span>
         {{ task.time_updated.strftime('%H:%M %d.%m.%Y') }}</div>
     <div class="span2 inline">
-        <span class="task_header">{{ _('status') }}</span>: 
+        <span class="task_header">{{ _('status') }}</span>:
         {{ task.status }}
      </div>
     <div class="span3 inline">
         <span class="task_header">{{ _('progress') }}: </span>
-        {% if task.progress %}        
+        {% if task.progress %}
           {{ task.progress|round(4, 'common') *100 }}
         {% else %}
          0
         {% endif %}
-         %  
+         %
          {{ generate_tooltip(_('tooltip - task the page reload every 5 second') ) }}
     </div>
     <div class="span2 inline">
-        <span class="task_header">{{ _('type') }}</span>: 
+        <span class="task_header">{{ _('type') }}</span>:
         {{ task.task_type }}</div>
     <div class="controls span4 inline">
       <button class="btn btn-small pause" data-task_pause_url="{{ url_for('tasks.pause', id=task.id) }}">
@@ -92,9 +92,9 @@
     <tbody>
         {% for project in projects %}
           {{ project_item(project) }}
-        {% endfor %}     
+        {% endfor %}
 
-        {% if tasks %}   
+        {% if tasks %}
         <tr>
           <td colspan="4">{{_('tasks without project')}}</td>
         </tr>
@@ -111,5 +111,5 @@
 {% endblock %}
 
 {% block javascript %}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/task_list.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/task_list.js') }}"></script>
 {% endblock %}
