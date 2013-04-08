@@ -17,8 +17,8 @@ body {
 
 
 /* Overwrite max-width from bootstrap */
-.map img { 
-    max-width: 512px; 
+.map img {
+    max-width: 512px;
 }
 
 
@@ -105,7 +105,7 @@ body {
 
 #update_tiles {
     float: left;
-} 
+}
 
 .checkbox_label {
     margin-bottom: 20px;
@@ -164,6 +164,9 @@ body {
     width: 220px;
 }
 
+div.tool hr {
+    margin: 10px 0;
+}
 .inline {
     display: inline;
 }
