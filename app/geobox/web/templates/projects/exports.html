@@ -27,11 +27,11 @@
         <td>{{ proj.time_updated.strftime('%d.%m.%Y')}}</td>
         <td>
           <a href="{{ url_for('project.export_edit', id=proj.id) }}" class="btn btn-small" >{{ _('edit') }}</a>
-         
+
           {% if not proj.tasks %}
             <button class="btn btn-small start_task" data-start_task_url="{{ url_for('project.start_export', id=proj.id) }}">{{ _('start export') }}</button>
           {% endif %}
-         
+
           <button class="btn btn-small remove_layer" data-layer_remove_url="{{ url_for('project.remove', id=proj.id) }}">{{ _('remove') }}</button>
         </td>
       </tr>
@@ -64,5 +64,5 @@
 {% endblock %}
 
 {% block javascript %}
-  <script type="text/javascript" src="{{ url_for('static', filename='js/projects.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/views/projects.js') }}"></script>
 {% endblock %}

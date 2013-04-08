@@ -42,7 +42,7 @@
           {% if not proj.tasks and proj.coverage %}
           <button class="btn btn-small start_task" data-start_task_url="{{ url_for('project.start_raster_import', id=proj.id) }}">{{ _('start import') }}</button>
           {% endif %}
-          
+
           <button class="btn btn-small remove_layer" data-layer_remove_url="{{ url_for('project.remove', id=proj.id) }}">{{ _('remove') }}</button>
         </td>
       </tr>
@@ -56,5 +56,5 @@
 {% endblock %}
 
 {% block javascript %}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/projects.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/projects.js') }}"></script>
 {% endblock %}

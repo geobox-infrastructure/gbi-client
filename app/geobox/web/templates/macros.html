@@ -42,7 +42,7 @@
         // add download coverage as vectorlayer
         raster_sources['{{ map_source.id }}_coverage'] = new gbi.Layers.Vector({
             name: '{{_('download coverage')}} {{ map_source.title }}',
-            styleMap: download_area_style_map,
+            styleMap: downloadAreaStyleMap,
             displayInLayerSwitcher: true,
             source_id: {{ map_source.id }}
         });
