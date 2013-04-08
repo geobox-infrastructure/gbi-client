@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% from "macros.html" import generate_base_layer, generate_sources %}
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers-Control-ZoomStatus.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/style.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/project_map.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/gbi-editor/gbi.js') }}">
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/project_utils.js') }}"></script>
+	{% block map_js %}
+
+	{% endblock %}
+{% endblock %}

@@ -1,22 +1,20 @@
-{% extends "base.html" %}
+{% extends "base_map.html" %}
 {% block title %}{{ _('map and information') }}{% endblock %}
-{% from "macros.html" import generate_base_layer, generate_sources %}
-{% block javascript %}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers-Control-ZoomStatus.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/map_base.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/map.js') }}"></script>
-    <script type="text/javascript">
-        {{ generate_base_layer(base_layer) }}
-        {{ generate_sources(sources, cache_url)}}
-        var vector_sources = {{ vector_geometries|tojson|safe }}
-        var vector_layer_title = "{{ _('vector_layer_title') }}"
-    </script>
-{% endblock %}
 
 {% block content %}
     <h1>{{_('local maps')}}
       {{ generate_tooltip(_('tooltip - show all imported maps') ) }}
     </h1>
     <div class="map" id='map'></div>
+{% endblock %}
+
+
+{% block map_js %}
+    <script type="text/javascript">
+        {{ generate_base_layer(base_layer) }}
+        {{ generate_sources(sources, cache_url)}}
+        var vector_sources = {{ vector_geometries|tojson|safe }}
+        var vector_layer_title = "{{ _('vector_layer_title') }}"
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/map.js') }}"></script>
 {% endblock %}

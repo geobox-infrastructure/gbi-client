@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_map.html" %}
 
 {% block title %}{{ _('import project edit') }}{% endblock %}
 
@@ -16,7 +16,9 @@
                 <hr>
                 <div class="raster_layer">
                     {{ select(form.raster_source) }}
-                    <div class='error_zoomlevel'>{{ _('start level needs to be lower or equal to end level') }}</div>
+                    <div class='error_zoomlevel'>
+                        {{ _('start level needs to be lower or equal to end level') }}
+                    </div>
                     {{ select(form.start_level) }}
                     {{ select(form.end_level) }}
                 </div>
@@ -38,15 +40,11 @@
 
 {% endblock %}
 
-{% block javascript %}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers-Control-ZoomStatus.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/views/project_map.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/gbi-editor/gbi.js') }}">
-    </script>
+{% block map_js %}
     <script type="text/javascript">
-        {{ generate_base_layer(base_layer) }}
         var load_coverage_url = '{{ url_for('project.load_coverage') }}';
+
+        {{ generate_base_layer(base_layer) }}
         {{ generate_sources(sources) }}
         coverage = {{ coverage|tojson|safe }};
 
@@ -59,6 +57,5 @@
             set_selected_level = true;
         {% endif %}
     </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/project_utils.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/views/project_import.js') }}"></script>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_map.html" %}
 
 {% block title %}{{ _('export project edit') }}{% endblock %}
 
@@ -69,12 +69,7 @@
     </div>
 {% endblock %}
 
-{% block javascript %}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers-Control-ZoomStatus.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/map_base.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/project_utils.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/export_edit.js') }}"></script>
+{% block map_js %}
     <script type="text/javascript">
         var load_coverage_url = '{{ url_for('project.load_coverage') }}';
         var remove_vector_text = '{{ _('remove vector') }}';
