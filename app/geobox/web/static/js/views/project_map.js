@@ -35,7 +35,15 @@ function initProjectEditor(options) {
     layerSwitcher.maximize();
 
     if (options.toolbar) {
-        new gbi.Toolbar(editor, {element: 'toolbar'});
+        new gbi.Toolbar(editor, {
+            element: 'toolbar',
+            tools: {
+                drawPolygon: true,
+                drawRect: true,
+                edit: true,
+                delete: true
+            }
+        });
     }
 
     // vectorlayer for drawing
