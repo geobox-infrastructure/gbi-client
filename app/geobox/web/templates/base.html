@@ -66,9 +66,8 @@
 
   <script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
   <script type="text/javascript">
-      var openlayers_theme_url = "{{ url_for('static', filename='css/openlayers.css') }}";
-      var openlayers_image_path = "{{ url_for('static', filename='img/') }}";
-      var openlayers_blank_image = "{{ url_for('static', filename='img/blank.gif') }}";
+      var OpenlayersThemeURL = "{{ url_for('static', filename='css/openlayers.css') }}";
+      var OpenlayersImageURL = "{{ url_for('static', filename='img/') }}";
   </script>
  {% block javascript %}
  {% endblock %}
