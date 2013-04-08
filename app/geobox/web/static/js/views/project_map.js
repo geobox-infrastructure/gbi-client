@@ -16,63 +16,9 @@
 /**
  * style for the vector elemenets
  **/
-var sketchSymbolizers = {
-  "Point": {
-    pointRadius: 8,
-    fillColor: "#ccc",
-    fillOpacity: 1,
-    strokeWidth: 1,
-    strokeOpacity: 1,
-    strokeColor: "#D6311E"
-  },
-  "Line": {
-    strokeWidth: 3,
-    strokeOpacity: 1,
-    strokeColor: "#D6311E",
-    strokeDashstyle: "dash"
-   },
-   "Polygon": {
-    strokeWidth: 2,
-    strokeOpacity: 1,
-    strokeColor: "#D6311E",
-    fillColor: "#D6311E",
-    fillOpacity: 0.6
-   }
-};
-
-var style = new OpenLayers.Style();
-style.addRules([
-    new OpenLayers.Rule({symbolizer: sketchSymbolizers})
-]);
-
-var styleMap = new OpenLayers.StyleMap(
-    {"default": style}
-);
 
 
-/**
- * style for the vector elemenets
- **/
-var download_area_symbolizers = {
-   "Polygon": {
-        strokeWidth: 2,
-        strokeOpacity: 1,
-        strokeColor: "#24D0D6",
-        fillOpacity: 0
-   }
-};
-
-var download_area_style = new OpenLayers.Style();
-download_area_style.addRules([
-    new OpenLayers.Rule({symbolizer: download_area_symbolizers})
-]);
-
-var download_area_style_map = new OpenLayers.StyleMap(
-    {"default": download_area_style}
-);
-
-
-function initProjectEditor() {
+function initProjectEditor(options) {
     var editor = new gbi.Editor({
        map: {
             element: 'map',
@@ -115,16 +61,6 @@ function initProjectEditor() {
                 get_data_volume();
                 toggle_start_button();
             },
-            // beforefeaturemodified: function(f) {
-            //     if(f.feature.attributes['type'] == BOX_CONTROL) {
-            //         draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG;
-            //         draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESIZE;
-            //         draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
-            //     } else {
-            //        draw_controls[MODIFY_CONTROL].mode = OpenLayers.Control.ModifyFeature.DRAG
-            //        draw_controls[MODIFY_CONTROL].mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
-            //     }
-            // },
             afterfeaturemodified: function() {
                 get_data_volume()
             }
@@ -300,21 +236,7 @@ function delete_all_features() {
     get_data_volume();
     return false;
 }
-/*
-function save_features(target_url) {
-    var parser = new OpenLayers.Format.GeoJSON();
-    geojson = parser.write(draw_layer.features);
-    $.ajax({
-        type: 'POST',
-        url: target_url,
-        data: {'feature_collection': geojson},
-        success: function() {
-            $('#output').text(geojson);
-        },
-        dataType: 'json'
-    });
-}
-*/
+
 function load_features(editor, data) {
     var layer = editor.layerManager.active();
     var drawLayer = layer.olLayer;
