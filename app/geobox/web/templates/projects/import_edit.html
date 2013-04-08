@@ -20,7 +20,6 @@
                     {{ select(form.start_level) }}
                     {{ select(form.end_level) }}
                 </div>
-
                 {{ form.coverage }}
                 {{ form.download_size }}
                 {{ form.start }}
@@ -42,7 +41,9 @@
 {% block javascript %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/OpenLayers-Control-ZoomStatus.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/map_base.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/project_map.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/gbi-editor/gbi.js') }}">
+    </script>
     <script type="text/javascript">
         {{ generate_base_layer(base_layer) }}
         var load_coverage_url = '{{ url_for('project.load_coverage') }}';
@@ -59,5 +60,5 @@
         {% endif %}
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/project_utils.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/import_edit.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/project_import.js') }}"></script>
 {% endblock %}

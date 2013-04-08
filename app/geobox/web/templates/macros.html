@@ -1,35 +1,21 @@
 {% macro generate_base_layer(layer) -%}
-    var max_extent = new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34);
     {% if layer.view_level_end %}
-    var view_zoom_level_end = {{ layer.view_level_end }} + 1;
+    var numZoomLevels = {{ layer.view_level_end }} + 1;
     {% else %}
-    var view_zoom_level_end = 18;
+    var numZoomLevels = 18;
     {% endif %}
 
-    var base_layer  = new OpenLayers.Layer.WMTS({
+    var backgroundLayer = new gbi.Layers.WMTS({
         name: '{{ layer.title }}',
         url: '{{ layer.url }}',
-        getURL: tileUrl,
         layer: '{{ layer.layer }}',
-        matrixSet: '{{ layer.matrix_set }}',
         format: '{{ layer.format }}',
-        style: 'default',
-        isBaseLayer: true,
-        requestEncoding: 'REST',
+        background: true,
+        // isBaseLayer: true,
         {% if layer.bbox %}
-        restrictedExtent: new OpenLayers.Bounds{{ layer.bbox }},
+        restrictedExtent: new OpenLayers.Bounds{{ layer.bbox }}
         {% endif %}
-        maxExtent: max_extent
     });
-
-    var basic = new OpenLayers.Layer.Image('{{_('white background map')}}',
-      '{{ url_for('static', filename='img/blank.gif') }}',
-      new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34),
-      new OpenLayers.Size(500, 500), {
-         maxResolution: 156543.033928
-     }
-   );
-
 {%- endmacro %}
 
 {% macro generate_sources(sources, cache_url) -%}
@@ -42,37 +28,32 @@
            {% set map_source = source %}
            {% set layer_name = source.layer %}
         {% endif %}
-        raster_sources[{{ source.id }}] = new OpenLayers.Layer.WMTS({
+
+        raster_sources[{{ source.id }}] = new gbi.Layers.WMTS({
             name: '{{ map_source.title }}',
             url: {% if source.url %} '{{add_auth_to_url(source.url, source.username, source.password)}}' {% else %} '{{ cache_url }}' {% endif %},
-            getURL: tileUrl,
             layer: '{{ layer_name }}',
-            matrixSet: '{{ map_source.matrix_set }}',
             format: '{{ map_source.format }}',
-            style: 'default',
-            isBaseLayer: false,
-            requestEncoding: 'REST',
             source_id: {{ map_source.id }},
             download_level_start: {{ source.download_level_start }},
             download_level_end: {{ source.download_level_end }}
         });
- 
+
         // add download coverage as vectorlayer
-        raster_sources['{{ map_source.id }}_coverage'] = new OpenLayers.Layer.Vector(
-            '{{_('download coverage')}} {{ map_source.title }}', 
-          {
+        raster_sources['{{ map_source.id }}_coverage'] = new gbi.Layers.Vector({
+            name: '{{_('download coverage')}} {{ map_source.title }}',
             styleMap: download_area_style_map,
             displayInLayerSwitcher: true,
             source_id: {{ map_source.id }}
-          });
+        });
+
         var geojson_format = new OpenLayers.Format.GeoJSON();
-         {%if map_source.download_coverage %}
+        {%if map_source.download_coverage %}
           var coverage = {{ map_source.download_coverage|tojson|safe }};
-         {% else %}
+        {% else %}
           var coverage = {{ map_source.wmts_source.download_coverage|tojson|safe }};
-         {% endif %}
-         raster_sources['{{ map_source.id }}_coverage'].addFeatures(geojson_format.read(coverage));
-    
+        {% endif %}
+        raster_sources['{{ map_source.id }}_coverage'].olLayer.addFeatures(geojson_format.read(coverage));
     {% endfor %}
 {%- endmacro %}
 

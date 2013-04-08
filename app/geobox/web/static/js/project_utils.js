@@ -25,13 +25,13 @@ function get_data_volume() {
         'raster_data': prepare_raster_layer_json_data($('.raster_layer')),
         'coverage': parser.write(draw_layer.features)
     };
-    
+
     if (export_edit) {
         data['format'] = $("#format").val();
         data['srs'] = $("#srs").val();
-    }    
+    }
 
-    $.post(get_data_volume_url, data, function(result) { 
+    $.post(get_data_volume_url, data, function(result) {
         var volume_mb = Math.round(parseFloat(result['volume_mb']) * 100 ) / 100
         $('#data_volume').text(volume_mb)});
 }
@@ -53,7 +53,7 @@ function verify_zoom_level() {
 function toggle_start_button() {
     var start_btn = $('#start_btn');
 
-    if( ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && draw_layer.features.length) || 
+    if( ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && draw_layer.features.length) ||
         ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && export_edit) )
     {
         start_btn.removeAttr('disabled');
@@ -64,7 +64,7 @@ function toggle_start_button() {
     }
 }
 
-function load_coverage_from_project(couchdb_coverage) {
+function load_coverage_from_project(editor, couchdb_coverage) {
     var coverage_id = $("#select_coverage").val();
     var data = {'id': coverage_id, 'couchdb_coverage': couchdb_coverage};
     $.ajax({
@@ -73,10 +73,10 @@ function load_coverage_from_project(couchdb_coverage) {
         data: data,
         success: function(data) {
             if (data.coverage)
-                load_features(data.coverage, couchdb_coverage);
+                load_features(editor, data.coverage, couchdb_coverage);
         }
     });
-    return false; 
+    return false;
 }
 
 function submit_and_start() {
@@ -88,11 +88,12 @@ function submit_data() {
     if (export_edit) {
        $('#raster_layers').val(prepare_raster_layer_json_data($('.raster_layer')));
     }
-   
+
     var parser = new OpenLayers.Format.GeoJSON();
     // deacative controls before saving the feautre
-    draw_controls.modify_control.deactivate();
-    if (draw_layer.features.length != 0 ) {
+    // draw_controls.modify_control.deactivate();
+    // todo
+    if (draw_layer.features.length !== 0 ) {
         $('#coverage').val(parser.write(draw_layer.features));
     } else {
         $('#coverage').val(false);
