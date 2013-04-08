@@ -59,8 +59,9 @@ $(document).ready(function() {
     $('#start_level').change(get_data_volume).change(verify_zoom_level);
     $('#end_level').change(get_data_volume).change(verify_zoom_level);
 
-    $('#start_btn').click(submit_and_start);
-    $('#save_btn').click(submit_data);
+    $('#start_btn').click(function() {submit_and_start(editor)});
+    $('#save_btn').click(function() {submit_data(editor)});
+
     toggle_start_button();
 
     $('#load_couchdb_coverage').click(function() {

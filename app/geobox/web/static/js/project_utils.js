@@ -79,20 +79,21 @@ function load_coverage_from_project(editor, couchdb_coverage) {
     return false;
 }
 
-function submit_and_start() {
+function submit_and_start(editor) {
     $('#start').val("start");
-    submit_data();
+    submit_data(editor);
 }
 
-function submit_data() {
+function submit_data(editor) {
     if (export_edit) {
        $('#raster_layers').val(prepare_raster_layer_json_data($('.raster_layer')));
     }
 
     var parser = new OpenLayers.Format.GeoJSON();
+
     // deacative controls before saving the feautre
-    // draw_controls.modify_control.deactivate();
-    // todo
+    editor.map.toolbar.deactivateAllControls();
+
     if (draw_layer.features.length !== 0 ) {
         $('#coverage').val(parser.write(draw_layer.features));
     } else {
