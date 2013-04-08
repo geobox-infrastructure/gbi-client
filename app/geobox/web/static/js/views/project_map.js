@@ -34,7 +34,9 @@ function initProjectEditor(options) {
     editor.addControl(layerSwitcher);
     layerSwitcher.maximize();
 
-    var toolbar = new gbi.Toolbar(editor, {element: 'toolbar'});
+    if (options.toolbar) {
+        new gbi.Toolbar(editor, {element: 'toolbar'});
+    }
 
     // vectorlayer for drawing
     var drawLayer = new gbi.Layers.Vector({

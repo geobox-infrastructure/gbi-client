@@ -42,7 +42,7 @@ function showSelectedLayer(editor, id, selectedLayer) {
 
 
 $(document).ready(function() {
-    var editor = initProjectEditor();
+    var editor = initProjectEditor({toolbar: true});
     if(coverage) {
         load_features(editor, coverage);
     }
