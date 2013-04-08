@@ -42,7 +42,7 @@
 
 {% block map_js %}
     <script type="text/javascript">
-        var load_coverage_url = '{{ url_for('project.load_coverage') }}';
+        var loadCoverageURL = '{{ url_for('project.load_coverage') }}';
 
         {{ generate_base_layer(base_layer) }}
         {{ generate_sources(sources) }}
@@ -50,11 +50,11 @@
 
         var select_start_level = false;
         var select_end_level = false;
-        var set_selected_level = false;
+        var selectedLevel = false;
         {% if form.start_level.data or form.end_level.data %}
             select_start_level = {{ form.start_level.data}};
             select_end_level = {{ form.end_level.data}};
-            set_selected_level = true;
+            selectedLevel = true;
         {% endif %}
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/views/project_import.js') }}"></script>

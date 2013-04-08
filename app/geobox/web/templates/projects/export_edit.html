@@ -71,27 +71,28 @@
 
 {% block map_js %}
     <script type="text/javascript">
-        var load_coverage_url = '{{ url_for('project.load_coverage') }}';
-        var remove_vector_text = '{{ _('remove vector') }}';
-        var add_vector_text = '{{ _('add vector') }}';
-        var start_level_text = '{{ form.start_level.label.text }}';
-        var level_text = '{{ _('level') }}';
+        var loadCoverageURL = '{{ url_for('project.load_coverage') }}';
+        var buttonRemoveVector = '{{ _('remove vector') }}';
+        var buttonAddVector = '{{ _('add vector') }}';
+        var startLevelText = '{{ form.start_level.label.text }}';
+        var level = '{{ _('level') }}';
         {{ generate_base_layer(base_layer) }}
         {{ generate_sources(raster_sources, cache_url) }}
         coverage = {{ coverage|tojson|safe }};
-        export_edit = true;
-        $(document).ready(function() {
-            init();
-            {% if layers %}
-                {% for layer in layers %}
-                    set_layer_data({{ layer.id }}, {{ layer.source_id }}, {{ layer.start_level }}{% if layer.end_level %}, {{ layer.end_level}}{% endif %});
-                {% endfor %}
-                get_data_volume();
-            {% endif %}
-            {% if not proj.export_vector_layers %}
-                $('#vector_add_remove').click();
-            {% endif %}
-            toggle_start_button();
-        });
+        exportEdit = true;
+        var savedLayers = {}
+        {% if layers %}
+            var i = 0;
+            {% for layer in layers %}
+                 savedLayers[i++] = {
+                    layerID: {{ layer.id }},
+                    sourceID: {{ layer.source_id }},
+                    startLevel: {{ layer.start_level }}
+                    {% if layer.end_level %},
+                        endLevel: {{ layer.end_level}}
+                    {% endif %} };
+            {% endfor %}
+        {% endif %}
     </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/project_export.js') }}"></script>
 {% endblock %}

@@ -4,16 +4,16 @@ function downloadLevel(id) {
     $('#start_level > option').remove();
     $('#end_level > option').remove();
 
-    for (i=minLevel; i <= maxLevel;i++) {
+    for (i=minLevel; i <= maxLevel; i++) {
         $('#start_level, #end_level')
          .append($("<option></option>")
          .attr("value",i)
          .text(i));
     }
-    if(set_selected_level) {
+    if(selectedLevel) {
         $('#start_level option[value="'+select_start_level+'"]').attr("selected", "selected");
         $('#end_level option[value="'+select_end_level+'"]').attr("selected", "selected");
-        set_selected_level = false;
+        selectedLevel = false;
     }
 }
 
@@ -32,48 +32,48 @@ function showSelectedLayer(editor, id, selectedLayer) {
     editor.addLayers([layer, coverageLayer]);
 
     if (coverageLayer) {
-       editor.layerManager.up(coverageLayer, 10);
+       editor.layerManager.top(coverageLayer);
     }
-
-    if (draw_layer) {
-       editor.layerManager.up(draw_layer, 11);
-    }
+    editor.layerManager.top(editor.layerManager.active());
 }
 
 
 $(document).ready(function() {
     var editor = initProjectEditor({toolbar: true});
     if(coverage) {
-        load_features(editor, coverage);
+        loadFeatures(editor, coverage);
     }
-
     $('#raster_source').change(function() {
         var id = $(this).val();
-        var selectedLayer = $(this);
         downloadLevel(id);
-        get_data_volume();
-        showSelectedLayer(editor, id, selectedLayer);
+        getDataVolume(editor);
+        showSelectedLayer(editor, id, $(this));
     });
     $('#raster_source').change();
 
-    $('#start_level').change(get_data_volume).change(verify_zoom_level);
-    $('#end_level').change(get_data_volume).change(verify_zoom_level);
+    $('#start_level #end_level').change(function() {
+        verifyZoomLevel(editor)
+        getDataVolume(editor)
+    });
 
-    $('#start_btn').click(function() {submit_and_start(editor)});
-    $('#save_btn').click(function() {submit_data(editor)});
 
-    toggle_start_button();
+    $('#start_btn').click(function() {submitAndStart(editor)});
+    $('#save_btn').click(function() {submitData(editor)});
+
+    toggleStartButton(editor);
 
     $('#load_couchdb_coverage').click(function() {
-        load_coverage_from_project(editor, true)
+        loadProjectCoverage(editor, true)
         return false;
     });
 
     $('#load_coverage').click(function() {
-        load_coverage_from_project(editor, false)
+        loadProjectCoverage(editor, false)
         return false;
     });
 
-    $('#delete_all_features').click(delete_all_features);
+    $('#delete_all_features').click(function() {
+        deleteAllFeatures(editor)
+    });
 
 });

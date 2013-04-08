@@ -26,7 +26,7 @@
 
 {% macro download_volume(free_disk_space, export=False) -%}
     <script type="text/javascript">
-        var get_data_volume_url = "{{ url_for('.data_volume', export=export) }}";
+        var getDataVolumeURL = "{{ url_for('.data_volume', export=export) }}";
     </script>
     <h3>{{ _('Information') }}
         {{ generate_tooltip(_('tooltip - information about data volumen') ) }}

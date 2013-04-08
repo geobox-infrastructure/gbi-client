@@ -6,22 +6,21 @@ $(document).ready(function() {
         editor.addLayer(layer);
     });
 
-    load_vector_geometries(editor, vector_sources)
+    loadVectorGeometries(editor, geometries)
 });
 
 
-function load_vector_geometries(editor, geometries) {
+function loadVectorGeometries(editor, geometries) {
     if (geometries.length > 0) {
-        var vector_layer = new gbi.Layers.Vector(vector_layer_title,
-        {
-            styleMap: styleMap,
-            displayInLayerSwitcher: true
+        var vectorLayer = new gbi.Layers.Vector({
+            name: vectorLayerTitle,
+            styleMap: styleMap
         });
-        editor.addLayer(vector_layer);
+        editor.addLayer(vectorLayer);
 
-        var geojson_format = new OpenLayers.Format.GeoJSON();
+        var geojson = new OpenLayers.Format.GeoJSON();
         $.each(geometries, function(index, geom) {
-            vector_layer.addFeatures(geojson_format.read(geom.geometry));
+            vectorLayer.addFeatures(geojson.read(geom.geometry));
         });
     }
 };

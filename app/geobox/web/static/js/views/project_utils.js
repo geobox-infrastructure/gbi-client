@@ -1,101 +1,102 @@
-var export_edit = false;
+var exportEdit = false;
 
-function prepare_raster_layer_json_data(raster_layers) {
+function prepareRasterLayerJSON(rasterLayers) {
     var data = [];
-    $.each(raster_layers, function(idx, elem) {
+    $.each(rasterLayers, function(idx, elem) {
         var elem = $(elem);
-        var end_level = elem.find('#end_level:enabled');
-        if(end_level.length) {
-            end_level = end_level.val();
+        var endLevel = elem.find('#end_level:enabled');
+        if(endLevel.length) {
+            endLevel = endLevel.val();
         } else {
-            end_level = null;
+            endLevel = null;
         }
         data.push({
             'source_id': elem.find('#raster_source').val(),
             'start_level': parseInt(elem.find('#start_level').val()),
-            'end_level': parseInt(end_level)
+            'end_level': parseInt(endLevel)
         });
     });
     return JSON.stringify(data);
 }
 
-function get_data_volume() {
+function getDataVolume(editor) {
     var parser = new OpenLayers.Format.GeoJSON();
+    var activeLayer = editor.layerManager.active();
     var data = {
-        'raster_data': prepare_raster_layer_json_data($('.raster_layer')),
-        'coverage': parser.write(draw_layer.features)
+        'raster_data': prepareRasterLayerJSON($('.raster_layer')),
+        'coverage': parser.write(activeLayer.olLayer.features)
     };
 
-    if (export_edit) {
+    if (exportEdit) {
         data['format'] = $("#format").val();
         data['srs'] = $("#srs").val();
     }
 
-    $.post(get_data_volume_url, data, function(result) {
-        var volume_mb = Math.round(parseFloat(result['volume_mb']) * 100 ) / 100
-        $('#data_volume').text(volume_mb)});
+    $.post(getDataVolumeURL, data, function(result) {
+        var volumenMB = Math.round(parseFloat(result['volume_mb']) * 100 ) / 100
+        $('#data_volume').text(volumenMB)});
 }
 
-function verify_zoom_level() {
-    var raster_layer_div = $(this).parent();
-    var start_level = parseInt(raster_layer_div.find('#start_level').val());
-    var end_level = parseInt(raster_layer_div.find('#end_level').val());
+function verifyZoomLevel(editor) {
+    var rasterLayer = $(this).parent();
+    var startLevel = parseInt(rasterLayer.find('#start_level').val());
+    var endLevel = parseInt(rasterLayer.find('#end_level').val());
 
-    if(raster_layer_div.find('#end_level:visible').length && start_level > end_level) {
-        raster_layer_div.find('.error_zoomlevel').show();
-        toggle_start_button();
+    if(rasterLayer.find('#end_level:visible').length && startLevel > endLevel) {
+        rasterLayer.find('.error_zoomlevel').show();
+        toggleStartButton(editor);
     } else {
-        raster_layer_div.find('.error_zoomlevel').hide();
-        toggle_start_button();
+        rasterLayer.find('.error_zoomlevel').hide();
+        toggleStartButton(editor);
     }
 }
 
-function toggle_start_button() {
-    var start_btn = $('#start_btn');
-
-    if( ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && draw_layer.features.length) ||
-        ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && export_edit) )
+function toggleStartButton(editor) {
+    var startButton = $('#start_btn');
+    var activeLayer = editor.layerManager.active();
+    if( ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && activeLayer.olLayer.features.length) ||
+        ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && exportEdit) )
     {
-        start_btn.removeAttr('disabled');
+        startButton.removeAttr('disabled');
     } else if($('.vector_source:visible').length && !$('.raster_layer:visible').length) {
-        start_btn.removeAttr('disabled');
+        startButton.removeAttr('disabled');
     } else {
-        start_btn.attr('disabled', 'disabled');
+        startButton.attr('disabled', 'disabled');
     }
 }
 
-function load_coverage_from_project(editor, couchdb_coverage) {
-    var coverage_id = $("#select_coverage").val();
-    var data = {'id': coverage_id, 'couchdb_coverage': couchdb_coverage};
+function loadProjectCoverage(editor, couchdbCoverage) {
+    var coverageID = $("#select_coverage").val();
+    var data = {'id': coverageID, 'couchdb_coverage': couchdbCoverage};
     $.ajax({
         type: 'POST',
-        url: load_coverage_url,
+        url: loadCoverageURL,
         data: data,
         success: function(data) {
             if (data.coverage)
-                load_features(editor, data.coverage, couchdb_coverage);
+                loadFeatures(editor, data.coverage, couchdbCoverage);
         }
     });
     return false;
 }
 
-function submit_and_start(editor) {
+function submitAndStart(editor) {
     $('#start').val("start");
-    submit_data(editor);
+    submitData(editor);
 }
 
-function submit_data(editor) {
-    if (export_edit) {
-       $('#raster_layers').val(prepare_raster_layer_json_data($('.raster_layer')));
+function submitData(editor) {
+    if (exportEdit) {
+       $('#raster_layers').val(prepareRasterLayerJSON($('.raster_layer')));
     }
 
     var parser = new OpenLayers.Format.GeoJSON();
-
     // deacative controls before saving the feautre
     editor.map.toolbar.deactivateAllControls();
+    var activeLayer = editor.layerManager.active();
 
-    if (draw_layer.features.length !== 0 ) {
-        $('#coverage').val(parser.write(draw_layer.features));
+    if (activeLayer.olLayer.features.length !== 0 ) {
+        $('#coverage').val(parser.write(activeLayer.olLayer.features));
     } else {
         $('#coverage').val(false);
     }

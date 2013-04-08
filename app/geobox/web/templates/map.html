@@ -13,8 +13,8 @@
     <script type="text/javascript">
         {{ generate_base_layer(base_layer) }}
         {{ generate_sources(sources, cache_url)}}
-        var vector_sources = {{ vector_geometries|tojson|safe }}
-        var vector_layer_title = "{{ _('vector_layer_title') }}"
+        var geometries = {{ vector_geometries|tojson|safe }}
+        var vectorLayerTitle = "{{ _('vector_layer_title') }}"
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/views/map.js') }}"></script>
 {% endblock %}

@@ -31,11 +31,7 @@ var styleMap = new OpenLayers.StyleMap(
     {"default": style}
 );
 
-
-/**
- * style for the vector elemenets
- **/
-var download_area_symbolizers = {
+var downloadAreaSymbolizers  = {
    "Polygon": {
         strokeWidth: 2,
         strokeOpacity: 1,
@@ -44,11 +40,11 @@ var download_area_symbolizers = {
    }
 };
 
-var download_area_style = new OpenLayers.Style();
-download_area_style.addRules([
-    new OpenLayers.Rule({symbolizer: download_area_symbolizers})
+var downloadAreaStyle = new OpenLayers.Style();
+downloadAreaStyle.addRules([
+    new OpenLayers.Rule({symbolizer: downloadAreaSymbolizers})
 ]);
 
-var download_area_style_map = new OpenLayers.StyleMap(
-    {"default": download_area_style}
+var downloadAreaStyleMap = new OpenLayers.StyleMap(
+    {"default": downloadAreaStyle}
 );
