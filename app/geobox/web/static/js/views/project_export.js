@@ -86,20 +86,19 @@ function showSelectedSource(element, editor) {
     var id = source.val();
 
     if(typeof source.data('ol_layer') !== "undefined") {
-        var removedLayer = source.data('ol_layer');
-        var removedCoverageLayer = raster_sources[removedLayer.olLayer.source_id  + '_coverage'];
-        editor.removeLayer(removedLayer);
-        editor.removeLayer(removedCoverageLayer);
+        var removeLayer = source.data('ol_layer');
+        var removeCoverageLayer = source.data('ol_coverage_layer');
+        editor.removeLayer(removeLayer);
+        editor.removeLayer(removeCoverageLayer);
     }
 
     layer = raster_sources[id].clone();
-    coverageLayer = raster_sources[layer.olLayer.source_id+'_coverage'];
+    coverageLayer = raster_sources[layer.olLayer.source_id+'_coverage'].clone();
 
     source.data('ol_layer', layer);
     source.data('ol_coverage_layer', coverageLayer);
 
     editor.addLayers([layer, coverageLayer]);
-
     if (coverageLayer) {
        editor.layerManager.top(coverageLayer);
     }
