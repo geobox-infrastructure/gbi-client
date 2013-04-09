@@ -102,7 +102,7 @@ function loadFeatures(editor, data) {
         if (featureCollection)
             drawLayer.addFeatures(featureCollection);
     }
-    if (drawLayer.olLayer.features.length > 0) {
+    if (drawLayer.features.length > 0) {
         editor.map.olMap.zoomToExtent(drawLayer.olLayer.getDataExtent());
     }
     getDataVolume(editor);

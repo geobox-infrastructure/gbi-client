@@ -24,7 +24,7 @@ function getDataVolume(editor) {
     var activeLayer = editor.layerManager.active();
     var data = {
         'raster_data': prepareRasterLayerJSON($('.raster_layer')),
-        'coverage': parser.write(activeLayer.olLayer.features)
+        'coverage': parser.write(activeLayer.features)
     };
 
     if (exportEdit) {
@@ -54,7 +54,7 @@ function verifyZoomLevel(editor) {
 function toggleStartButton(editor) {
     var startButton = $('#start_btn');
     var activeLayer = editor.layerManager.active();
-    if( ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && activeLayer.olLayer.features.length) ||
+    if( ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && activeLayer.features.length) ||
         ($('.raster_layer:visible').length && !$('.error_zoomlevel:visible').length && exportEdit) )
     {
         startButton.removeAttr('disabled');
@@ -95,8 +95,8 @@ function submitData(editor) {
     editor.map.toolbar.deactivateAllControls();
     var activeLayer = editor.layerManager.active();
 
-    if (activeLayer.olLayer.features.length !== 0 ) {
-        $('#coverage').val(parser.write(activeLayer.olLayer.features));
+    if (activeLayer.features.length !== 0 ) {
+        $('#coverage').val(parser.write(activeLayer.features));
     } else {
         $('#coverage').val(false);
     }
