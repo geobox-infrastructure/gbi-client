@@ -1,0 +1,69 @@
+{% extends "base_map.html" %}
+{% block title %}{{ _('editor') }}{% endblock %}
+
+{% from "macros.html" import generate_base_layer, generate_sources %}
+
+{% block project_js %}
+   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
+
+{% endblock %}
+
+{% block map_js %}
+
+    <script type="text/javascript">
+      {{ generate_base_layer(base_layer) }}
+      {{ generate_sources(sources, cache_url)}}
+
+      var vector_sources = {{ vector_geometries|tojson|safe }}
+      var vector_layer_title = "{{ _('vector_layer_title') }}";
+
+      $('#myTab a').click(function (e) {
+        e.preventDefault();
+      $(this).tab('show');
+      })
+
+  </script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/views/editor.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <h1>{{_('editor')}}
+      {{ generate_tooltip(_('tooltip - show all imported maps') ) }}
+    </h1>
+
+    <div class="span8 map" id='map'></div>
+    <div class="span4">
+       <div class="bs-docs-example">
+          <ul id="myTab" class="nav nav-tabs">
+              <li class="active">
+                <a href="#layermanager" data-toggle="tab">layermanager</a>
+              </li>
+              <li>
+                <a href="#layer" data-toggle="tab">layer</a>
+              </li>
+              <li>
+                <a href="#edit" data-toggle="tab">edit</a>
+              </li>
+              <li>
+                <a href="#measure" data-toggle="tab">measure</a>
+              </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade in active" id="layermanager">
+                <!-- load layermanager widget -->
+              </div>
+              <div class="tab-pane fade in active" id="layer">
+              </div>
+              <div class="tab-pane fade" id="edit">
+              </div>
+              <div class="tab-pane fade" id="measure">
+              </div>
+            </div>
+          </div>
+    </div>
+
+</div>
+
+{% endblock %}

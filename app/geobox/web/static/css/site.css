@@ -211,19 +211,16 @@ table.task-overview {
     max-height: 540px;
 }
 
-/****/
-.tooltip_element {
-    cursor: pointer;
+li.layerElement {
+    padding: 10px 10px 10px 0;
 }
 
-.tooltip_element span.icon-info-sign {
-    margin-top: -4px;
+li.layerElement input {
+    margin-right: 5px;
+    margin-top: -2px;
 }
 
-#tooltip_bubble {
-    z-index: 3000;
-    border: 1px solid #111;
-    background-color: #eee;
-    padding: 5px;
-    opacity: 0.98;
+.controls {
+    margin-top: 10px;
 }
+

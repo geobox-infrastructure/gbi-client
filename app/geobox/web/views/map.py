@@ -44,3 +44,30 @@ def map():
         sources=raster_sources,
         vector_geometries=vector_geometries
     )
+
+@map_view.route('/editor')
+def editor():
+    raster_sources = g.db.query(LocalWMTSSource).all()
+    base_layer = g.db.query(ExternalWMTSSource).filter_by(background_layer=True).first()
+    base_layer.bbox = base_layer.bbox_from_view_coverage()
+    cache_url = get_local_cache_url(request)
+
+    couch = CouchDB('http://%s:%s' % ('127.0.0.1',
+        current_app.config.geobox_state.config.get('couchdb', 'port')),
+        current_app.config.geobox_state.config.get('web', 'coverages_from_couchdb'))
+
+    records = couch.load_records()
+    vector_geometries = []
+    for record in records:
+        if 'geometry' in record: # check if record has geometry type
+            vector_geometries.append(record)
+
+    return render_template('editor.html',
+        cache_url=cache_url,
+        base_layer=base_layer,
+        sources=raster_sources,
+        vector_geometries=vector_geometries
+    )
+
+
+
