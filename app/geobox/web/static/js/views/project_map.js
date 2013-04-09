@@ -27,7 +27,7 @@ function initProjectEditor(options) {
     editor.addLayer(backgroundLayer)
 
     // layerswitcher
-    var layerSwitcher = new gbi.Controls.LayerSwitcher();
+    var layerSwitcher = new gbi.Controls.LayerSwitcher({roundedCorner: true});
     editor.addControl(layerSwitcher);
     layerSwitcher.maximize();
 
