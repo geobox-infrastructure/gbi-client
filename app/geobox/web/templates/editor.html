@@ -4,8 +4,8 @@
 {% from "macros.html" import generate_base_layer, generate_sources %}
 
 {% block project_js %}
-   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/proj4js-compressed.js') }}"></script>
-   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/proj4js.defs.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js-compressed.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js.defs.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
 {% endblock %}
@@ -65,7 +65,7 @@
                 <div id="measure-toolbar">
                 </div>
                 <div id="point-output" style="display:none">
-                  <h5>{{ _('coords') }}:<h5>
+                  <h5>{{ _('coords') }}:</h5>
                     <span></span>
                 </div>
                 <div id="measure-output" style="display:none">
