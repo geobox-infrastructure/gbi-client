@@ -8,9 +8,9 @@ function initEditor() {
        map: {
             element: 'map',
             numZoomLevels : numZoomLevels,
-            theme: "{{ url_for('static', filename='css/openlayers.css') }}"
+            theme: OpenlayersThemeURL
         },
-        imgPath: "{{ url_for('static', filename='img/') }}"
+        imgPath: OpenlayersImageURL
     });
     editor.addLayer(backgroundLayer)
 
