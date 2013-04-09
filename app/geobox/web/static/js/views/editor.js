@@ -21,6 +21,11 @@ function initEditor() {
     var layermanager = new gbi.widgets.LayerManager(editor, {
         element: 'layermanager'
     });
+
+    var measure = new gbi.widgets.Measure(editor, {
+    	element: 'measure-toolbar',
+        srs: ['EPSG:3857', 'EPSG:4326', 'EPSG:25832', 'EPSG:25833', 'EPSG:31466', 'EPSG:31467', 'EPSG:31468']
+    });
 	return editor;
 }
 

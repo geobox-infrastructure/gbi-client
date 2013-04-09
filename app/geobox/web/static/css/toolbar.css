@@ -1,0 +1,138 @@
+/* Draw Control */
+.customEditingToolbar div {
+    float: left;
+    margin: 5px;
+    width: 24px;
+    height: 24px;
+}
+.olControlNavigationItemActive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -103px -23px;
+}
+.olControlNavigationItemInactive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -103px -0px;
+}
+.olControlDrawFeaturePolygonItemInactive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -26px 0px;
+}
+.olControlDrawFeaturePolygonItemActive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -26px -23px ;
+}
+.olControlModifyFeatureItemActive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -128px -23px;
+}
+.olControlModifyFeatureItemInactive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -128px 0px;
+}
+
+/* Draw Rectangle */
+.olControlDrawFeatureRectItemInactive {
+    background-image: url(../img/draw_rectangle_off.png);
+    background-repeat: no-repeat;
+}
+.olControlDrawFeatureRectItemActive {
+    background-image: url(../img/draw_rectangle_on.png);
+    background-repeat: no-repeat;
+}
+
+
+/* Delete */
+.olControlDeleteFeatureItemActive {
+    background-image: url(../img/delete_on.png);
+    background-repeat: no-repeat;
+}
+.olControlDeleteFeatureItemInactive {
+    background-image: url(../img/delete_off.png);
+    background-repeat: no-repeat;
+}
+
+
+/* Measure Toolbar */
+div.olControlMeasureLineItemActive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -228px -23px
+}
+div.olControlMeasureLineItemInactive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -228px 0px;
+}
+
+div.olControlMeasurePointItemInactive {
+    background-image: url(../img/measure_point_off.png);
+    background-repeat: no-repeat;
+}
+div.olControlMeasurePointItemActive {
+    background-image: url(../img/measure_point_on.png);
+    background-repeat: no-repeat;
+}
+
+div.olControlMeasurePolygonItemInactive {
+    background-image: url(../img/measure_polygon_off.png);
+    background-repeat: no-repeat;
+}
+div.olControlMeasurePolygonItemActive {
+    background-image: url(../img/measure_polygon_on.png);
+    background-repeat: no-repeat;
+}
+
+
+div.olControlSaveFeaturesItemActive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -178px -23px;
+}
+div.olControlSaveFeaturesItemInactive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -178px 0px;
+}
+div.olControlSelectFeatureItemActive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -253px -23px;
+}
+div.olControlSelectFeatureItemInactive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -253px 0px;
+}
+div.olControlCopyFeatureItemActive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -77px -23px;
+}
+div.olControlCopyFeatureItemInactive {
+    background-image: url(../img/multi_toolbar.png);
+    background-repeat: no-repeat;
+    background-position: -77px 0px;
+}
+
+div.olControlDrawFeaturePointItemActive,
+div.olControlDrawFeatureLineItemActive,
+div.olControlMergeFeatureItemActive,
+div.olControlSplitFeatureItemActive,
+div.olControlSnappItemActive {
+    background-image: url(../img/missing_on.png);
+    background-repeat: no-repeat;
+}
+div.olControlDrawFeaturePointItemInactive,
+div.olControlDrawFeatureLineItemInactive,
+div.olControlMergeFeatureItemInactive,
+div.olControlSplitFeatureItemInactive,
+div.olControlSnappItemInactive {
+    background-image: url(../img/missing_off.png);
+    background-repeat: no-repeat;
+}

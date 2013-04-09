@@ -224,3 +224,7 @@ li.layerElement input {
     margin-top: 10px;
 }
 
+#measure_toolbar div {
+    cursor: pointer;
+}
+

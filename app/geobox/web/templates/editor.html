@@ -4,9 +4,10 @@
 {% from "macros.html" import generate_base_layer, generate_sources %}
 
 {% block project_js %}
+   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/proj4js-compressed.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/proj4js.defs.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
-
 {% endblock %}
 
 {% block map_js %}
@@ -38,16 +39,16 @@
        <div class="bs-docs-example">
           <ul id="myTab" class="nav nav-tabs">
               <li class="active">
-                <a href="#layermanager" data-toggle="tab">layermanager</a>
+                <a href="#layermanager" data-toggle="tab">{{ _('manager') }}</a>
               </li>
               <li>
-                <a href="#layer" data-toggle="tab">layer</a>
+                <a href="#layer" data-toggle="tab">{{ _('layer') }}</a>
               </li>
               <li>
-                <a href="#edit" data-toggle="tab">edit</a>
+                <a href="#edit" data-toggle="tab">{{ _('edit') }}</a>
               </li>
               <li>
-                <a href="#measure" data-toggle="tab">measure</a>
+                <a href="#measure" data-toggle="tab">{{ _('measure') }}</a>
               </li>
             </ul>
             <div id="myTabContent" class="tab-content">
@@ -59,6 +60,18 @@
               <div class="tab-pane fade" id="edit">
               </div>
               <div class="tab-pane fade" id="measure">
+                <h4>{{ _('Measure') }}</h4>
+                <p>{{ _('infotext - measure control') }}</p>
+                <div id="measure-toolbar">
+                </div>
+                <div id="point-output" style="display:none">
+                  <h5>{{ _('coords') }}:<h5>
+                    <span></span>
+                </div>
+                <div id="measure-output" style="display:none">
+                  <h5>{{ _('measure result') }}:</h5>
+                   <span></span>
+                </div>
               </div>
             </div>
           </div>
