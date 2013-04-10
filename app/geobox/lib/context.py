@@ -110,7 +110,7 @@ def reload_context_document(app_state, user, password):
     if result.status_code != 200:
         return False
 
-    context = Context(result.json)
+    context = Context(result.json())
     all_active_sources = set(session.query(model.ExternalWMTSSource).filter_by(active=True).all())
     updater = ContextModelUpdater(session)
 

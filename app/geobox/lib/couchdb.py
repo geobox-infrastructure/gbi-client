@@ -174,21 +174,18 @@ class TempCouchDB(object):
 class UnexpectedResponse(Exception):
     pass
 
-class CouchDB(object):
-    def __init__(self, url, db_name):
 
+class CouchDBBase(object):
+    def __init__(self, url, db_name):
         if requests is None:
             raise ImportError("CouchDB backend requires 'requests' package.")
 
         if json is None:
             raise ImportError("CouchDB backend requires 'simplejson' package or Python 2.6+.")
         self.couch_url = url.rstrip('/')
-        self.couch_db_url = '%s/%s' % (self.couch_url, db_name.lower())
+        self.db_name = db_name.lower()
+        self.couch_db_url = '%s/%s' % (self.couch_url, self.db_name)
         self.req_session = requests.Session()
-        self.init_db()
-
-    def init_db(self, couch_db_url=None):
-        self.req_session.put(couch_db_url if couch_db_url else self.couch_db_url)
 
     def _store_bulk(self, records):
         doc = {'docs': list(records)}
@@ -196,12 +193,6 @@ class CouchDB(object):
         resp = self.req_session.post(self.couch_db_url + '/_bulk_docs', data=data, headers={'Content-type': 'application/json'})
         if resp.status_code != 201:
             raise UnexpectedResponse('got unexpected resp (%d) from CouchDB: %s' % (resp.status_code, resp.content))
-
-        # resp_doc = json.loads(resp.content)
-        # print resp_doc
-
-    def store_record(self, record):
-        return self._store_bulk([record])
 
     def store_records(self, records):
         return self._store_bulk(records)
@@ -218,19 +209,11 @@ class CouchDB(object):
             return self._load_records(doc.get('rows', []))
         return []
 
-    def get_tile(self, matrix_set, x, y, z):
-        tile_url = self.couch_db_url + '/%s-%s-%s-%s/tile' % (matrix_set, z, x, y)
-        resp = self.req_session.get(tile_url)
-        if resp.status_code != 200:
-            log.error('Tile %s not found', tile_url)
-            return False
-        return resp.content
-
     def update_or_create_doc(self, doc_id, doc):
         doc_url = self.couch_db_url + '/' + doc_id
         resp = self.req_session.get(doc_url)
         if resp.status_code == 200:
-            rev = resp.json['_rev']
+            rev = resp.json()['_rev']
             doc['_rev'] = rev
         elif resp.status_code != 404:
             raise UnexpectedResponse('got unexpected resp (%d) from CouchDB: %s' % (resp.status_code, resp.content))
@@ -257,7 +240,7 @@ class CouchDB(object):
         doc_url = self.couch_db_url + '/' + repl_id
         resp = requests.get(doc_url)
         if resp.status_code == 200:
-            requests.delete(doc_url, params={'rev': resp.json['_rev']})
+            requests.delete(doc_url, params={'rev': resp.json()['_rev']})
 
         self.update_or_create_doc(repl_id, repl_doc)
 
@@ -271,4 +254,46 @@ class CouchDB(object):
         self.delete_db()
         self.init_db()
 
+class CouchDB(CouchDBBase):
+    def __init__(self, url, db_name):
+        CouchDBBase.__init__(self, url, db_name)
+        self.init_db()
 
+    def init_db(self, couch_db_url=None):
+        self.req_session.put(couch_db_url if couch_db_url else self.couch_db_url)
+
+    def get_tile(self, matrix_set, x, y, z):
+        tile_url = self.couch_db_url + '/%s-%s-%s-%s/tile' % (matrix_set, z, x, y)
+        resp = self.req_session.get(tile_url)
+        if resp.status_code != 200:
+            log.error('Tile %s not found', tile_url)
+            return False
+        return resp.content
+
+def vector_layers_metadata(couchdb_url):
+    couchdb_url = couchdb_url.rstrip('/')
+    sess = requests.Session()
+    resp = sess.get(couchdb_url + '/_all_dbs')
+    for dbname in resp.json():
+        metadata = sess.get(couchdb_url + '/' + dbname + '/metadata')
+        if metadata.status_code == 200:
+            doc = metadata.json()
+            if doc.get('type') == 'GeoJSON':
+                yield doc
+
+class VectorCouchDB(CouchDBBase):
+    def __init__(self, url, layername):
+        self.layername = layername
+        CouchDB.__init__(self, url, dbname=layername)
+
+    def init_layer(self, metadata=None):
+        if metadata is None:
+            metadata = {'title': self.db_name}
+        metadata['type'] = 'GeoJSON'
+        CouchDB.init_db()
+        self.update_or_create_doc('metadata', metadata)
+
+    def metadata(self):
+        resp = self.req_session.get(self.couch_url + '/metadata')
+        if resp.status_code == 200:
+            return resp.json()
