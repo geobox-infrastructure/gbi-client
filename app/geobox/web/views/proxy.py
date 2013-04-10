@@ -1,5 +1,5 @@
 # This file is part of the GBI project.
-# Copyright (C) 2012 Omniscale GmbH & Co. KG <http://omniscale.com>
+# Copyright (C) 2013 Omniscale GmbH & Co. KG <http://omniscale.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,19 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__all__ = [
-    'main', 'map', 'tasks', 'project', 'user',
-    'admin', 'vector', 'downloads',
-    'proxy',
-]
+from flask import Blueprint, request
 
+from geobox.lib.proxy import proxy_couchdb_request
 
-from .main import main
-from .map import map_view as map
-from .tasks import tasks_view as tasks
-from .project import project
-from .user import user_view as user
-from .admin import admin_view as admin
-from .vector import vector
-from .downloads import download_view as downloads
-from .proxy import proxy
+proxy = Blueprint('proxy', __name__)
+
+@proxy.route('/proxy/<path:url>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def proxy_request(url):
+    return proxy_couchdb_request(request, url)
