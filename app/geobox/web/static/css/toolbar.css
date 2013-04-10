@@ -15,15 +15,34 @@
     background-repeat: no-repeat;
     background-position: -103px -0px;
 }
-.olControlDrawFeaturePolygonItemInactive {
-    background-image: url(../img/multi_toolbar.png);
+
+.olControlDrawFeaturePointItemInactive {
+    background-image: url(../img/draw_point_off.png);
     background-repeat: no-repeat;
-    background-position: -26px 0px;
+}
+
+.olControlDrawFeaturePointItemActive {
+    background-image: url(../img/draw_point_on.png);
+    background-repeat: no-repeat;
+}
+
+.olControlDrawFeatureLineItemInactive {
+    background-image: url(../img/draw_line_off.png);
+    background-repeat: no-repeat;
+}
+
+.olControlDrawFeatureLineItemActive {
+    background-image: url(../img/draw_line_on.png);
+    background-repeat: no-repeat;
+}
+
+.olControlDrawFeaturePolygonItemInactive {
+    background-image: url(../img/draw_polygon_off.png);
+    background-repeat: no-repeat;
 }
 .olControlDrawFeaturePolygonItemActive {
-    background-image: url(../img/multi_toolbar.png);
+    background-image: url(../img/draw_polygon_on.png);
     background-repeat: no-repeat;
-    background-position: -26px -23px ;
 }
 .olControlModifyFeatureItemActive {
     background-image: url(../img/multi_toolbar.png);
@@ -45,6 +64,28 @@
     background-image: url(../img/draw_rectangle_on.png);
     background-repeat: no-repeat;
 }
+
+.olControlSplitFeatureItemInactive {
+    background-image: url(../img/cut_off.png);
+    background-repeat: no-repeat;
+}
+
+.olControlSplitFeatureItemActive {
+    background-image: url(../img/cut_on.png);
+    background-repeat: no-repeat;
+}
+
+.olControlMergeFeatureItemInactive {
+    background-image: url(../img/union_off.png);
+    background-repeat: no-repeat;
+}
+
+.olControlMergeFeatureItemActive {
+    background-image: url(../img/union_on.png);
+    background-repeat: no-repeat;
+}
+
+
 
 
 /* Delete */
@@ -120,18 +161,10 @@ div.olControlCopyFeatureItemInactive {
     background-position: -77px 0px;
 }
 
-div.olControlDrawFeaturePointItemActive,
-div.olControlDrawFeatureLineItemActive,
-div.olControlMergeFeatureItemActive,
-div.olControlSplitFeatureItemActive,
 div.olControlSnappItemActive {
     background-image: url(../img/missing_on.png);
     background-repeat: no-repeat;
 }
-div.olControlDrawFeaturePointItemInactive,
-div.olControlDrawFeatureLineItemInactive,
-div.olControlMergeFeatureItemInactive,
-div.olControlSplitFeatureItemInactive,
 div.olControlSnappItemInactive {
     background-image: url(../img/missing_off.png);
     background-repeat: no-repeat;
