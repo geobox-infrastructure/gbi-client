@@ -8,6 +8,8 @@
    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js.defs.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/attribute.js') }}"></script>
+
 {% endblock %}
 
 {% block map_js %}
@@ -19,9 +21,9 @@
       var vector_sources = {{ vector_geometries|tojson|safe }}
       var vector_layer_title = "{{ _('vector_layer_title') }}";
 
-      $('#myTab a').click(function (e) {
+      $('#tabs a').click(function (e) {
         e.preventDefault();
-      $(this).tab('show');
+        $(this).tab('show');
       })
 
   </script>
@@ -37,7 +39,7 @@
     <div class="span8 map" id='map'></div>
     <div class="span4">
        <div class="bs-docs-example">
-          <ul id="myTab" class="nav nav-tabs">
+          <ul id="tabs" class="nav nav-tabs">
               <li class="active">
                 <a href="#layermanager" data-toggle="tab">{{ _('manager') }}</a>
               </li>
@@ -51,18 +53,26 @@
                 <a href="#measure" data-toggle="tab">{{ _('measure') }}</a>
               </li>
             </ul>
-            <div id="myTabContent" class="tab-content">
+            <div class="tab-content">
               <div class="tab-pane fade in active" id="layermanager">
                 <!-- load layermanager widget -->
               </div>
               <div class="tab-pane fade in active" id="layer">
+                  <!--  load style widget -->
               </div>
+
               <div class="tab-pane fade" id="edit">
+                  <!--  load attributeEditor widget -->
+                 <div id="attributeEditor"></div>
+                 <button id="save" disabled="disabled">Save</button>
               </div>
+
               <div class="tab-pane fade" id="measure">
+
                 <h4>{{ _('Measure') }}</h4>
                 <p>{{ _('infotext - measure control') }}</p>
                 <div id="measure-toolbar">
+                  <!--  load measure widget -->
                 </div>
                 <div id="point-output" style="display:none">
                   <h5>{{ _('coords') }}:</h5>
