@@ -1,6 +1,8 @@
 Building and Packaging GBI Client
 =================================
 
+This documents the build process of the GBI client .exe and installer for Windows.
+
 Getting started
 ---------------
 
@@ -27,11 +29,6 @@ Start `cmd.exe` and install distribute by calling the `.py` file.
 
 Dependencies
 ~~~~~~~~~~~~
-
-The build script requires `scriptine`::
-
-    python c:\Python27\Scripts\easy_install-script.py http://bitbucket.org/olt/scriptine/get/default.zip
-
 
 The application requires::
 
