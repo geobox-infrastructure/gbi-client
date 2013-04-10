@@ -74,6 +74,7 @@ $(document).ready(function() {
 
     $('#delete_all_features').click(function() {
         deleteAllFeatures(editor)
+        return false;
     });
 
 });

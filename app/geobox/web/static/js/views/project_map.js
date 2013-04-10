@@ -13,8 +13,6 @@ OpenLayers.Tile.Image.prototype.onImageError = function() {
         }
 }
 
-var test;
-
 function initProjectEditor(options) {
     var editor = new gbi.Editor({
        map: {

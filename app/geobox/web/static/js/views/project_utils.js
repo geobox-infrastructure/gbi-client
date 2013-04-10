@@ -92,9 +92,10 @@ function submitData(editor) {
 
     var parser = new OpenLayers.Format.GeoJSON();
     // deacative controls before saving the feautre
-    editor.map.toolbar.deactivateAllControls();
-    var activeLayer = editor.layerManager.active();
+    // editor.map.toolbars.deactivateAllControls();
+    editor.map.toolbars[0].deactivateAllControls()
 
+    var activeLayer = editor.layerManager.active();
     if (activeLayer.features.length !== 0 ) {
         $('#coverage').val(parser.write(activeLayer.features));
     } else {
