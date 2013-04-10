@@ -82,7 +82,6 @@ gbi.widgets.LayerManager.prototype = {
         this.element.find('#add_vector_layer').click(function() {
             var newLayer = $('#new_vector_layer').val();
             if(newLayer) {
-                var vectorLayer = new gbi.Layers.Vector({name: newLayer});
                 var couchLayer = new gbi.Layers.Couch({
                     name: newLayer,
                     url: OpenlayersCouchURL,
@@ -95,7 +94,7 @@ gbi.widgets.LayerManager.prototype = {
                         }
                     }
                 });
-                self.layerManager.addLayer(vectorLayer);
+                self.layerManager.addLayer(couchLayer);
                 self.render(self.findAccordion(this));
             }
         });
