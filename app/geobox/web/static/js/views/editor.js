@@ -27,8 +27,23 @@ function initEditor() {
         srs: ['EPSG:3857', 'EPSG:4326', 'EPSG:25832', 'EPSG:25833', 'EPSG:31466', 'EPSG:31467', 'EPSG:31468']
     });
 
+    var toolbar = new gbi.Toolbar(editor, {
+        element: 'edit-toolbar',
+        tools: {
+            select: true,
+            drawPoint: true,
+            drawLine: true,
+            drawPolygon: true,
+            split: true,
+            merge: true,
+            edit: true,
+            delete: true
+        }
+    });
+
+
     var attributeEditor = new gbi.widgets.AttributeEditor(editor, {
-        element: 'attributeEditor'
+        element: 'edit-attributes'
     });
 
 	return editor;

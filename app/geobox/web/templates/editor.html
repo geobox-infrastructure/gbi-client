@@ -4,6 +4,9 @@
 {% from "macros.html" import generate_base_layer, generate_sources %}
 
 {% block project_js %}
+   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/javascript.util.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jsts.js') }}"></script>
+
    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js-compressed.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js.defs.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
@@ -62,15 +65,24 @@
               </div>
 
               <div class="tab-pane fade" id="edit">
-                  <!--  load attributeEditor widget -->
-                 <div id="attributeEditor"></div>
+                <div>
+                 <h4>{{ _('Edit') }}</h4>
+                 <p>{{ _('infotext - edit controls') }}</p>
+                 <div id="edit-toolbar" class="span11"></div>
+               </div>
+
+               <div>
+                 <h4>{{ _('Attributes') }}</h4>
+                 <p>{{ _('infotext - attributes') }}</p>
+                 <div id="edit-attributes"></div>
                  <button id="save" disabled="disabled">Save</button>
+                </div>
               </div>
 
               <div class="tab-pane fade" id="measure">
 
                 <h4>{{ _('Measure') }}</h4>
-                <p>{{ _('infotext - measure control') }}</p>
+                <p>{{ _('infotext - measure controls') }}</p>
                 <div id="measure-toolbar">
                   <!--  load measure widget -->
                 </div>
