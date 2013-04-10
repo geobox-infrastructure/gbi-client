@@ -83,6 +83,18 @@ gbi.widgets.LayerManager.prototype = {
             var newLayer = $('#new_vector_layer').val();
             if(newLayer) {
                 var vectorLayer = new gbi.Layers.Vector({name: newLayer});
+                var couchLayer = new gbi.Layers.Couch({
+                    name: newLayer,
+                    url: OpenlayersCouchURL,
+                    callbacks: {
+                        changes: function(unsavedChanges) {
+                            if(unsavedChanges)
+                                $('#save').removeAttr('disabled');
+                             else
+                                $('#save').attr('disabled', 'disabled');
+                        }
+                    }
+                });
                 self.layerManager.addLayer(vectorLayer);
                 self.render(self.findAccordion(this));
             }
