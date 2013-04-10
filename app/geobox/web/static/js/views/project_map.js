@@ -83,7 +83,8 @@ function initProjectEditor(options) {
 
 function deleteAllFeatures(editor) {
     var drawLayer = editor.layerManager.active();
-    drawLayer.removeAllFeatures();
+    drawLayer.olLayer.removeAllFeatures();
+    drawLayer.features = [];
     getDataVolume(editor);
     return false;
 }
