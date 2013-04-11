@@ -45,10 +45,9 @@ function initEditor() {
         }
     });
 
+    var attributeEditor = new gbi.widgets.AttributeEditor(editor);
 
-    var attributeEditor = new gbi.widgets.AttributeEditor(editor, {
-        element: 'edit-attributes'
-    });
+    var styleeditor = new gbi.widgets.StyleEditor(editor);
 
     $('#save').click(function() {
         var layer = editor.layerManager.active();
