@@ -50,14 +50,13 @@ gbi.widgets.StyleEditor.prototype = {
 
         if(this.stylingLayer.symbolizers) {
             $.each(this.stylingLayer.symbolizers, function(type, style) {
-                if(!type.startsWith('_')) {
+                if (!type.match(/^_/)) {
                     $.each(style, function(key, value) {
                         var cssClass = '.' + type.toLowerCase() + '_' + key;
-
-                        if (key.endsWith('Color')) {
+                        if (key.match('Color')) {
                             $(cssClass).minicolors('value', value);
                         }
-                        if (key.endsWith('Opacity')) {
+                        if (key.match('Opacity')) {
                             value = value * 100;
                             $(cssClass+".noUiSlider").val(value);
                         }
