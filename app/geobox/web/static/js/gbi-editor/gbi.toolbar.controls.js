@@ -478,6 +478,7 @@ $.extend(gbi.Controls.Measure.prototype, {
         var olControl = new OpenLayers.Control.Measure(this.drawHandler, {
             persist: true,
             displayClass: this.options.displayClass,
+            geodesic: true,
             handlerOptions: {
                 layerOptions: {
                     styleMap: this.styleMap

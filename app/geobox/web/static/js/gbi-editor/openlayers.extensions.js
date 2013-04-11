@@ -219,7 +219,7 @@ OpenLayers.Format.CouchDB = OpenLayers.Class(OpenLayers.Format.GeoJSON, {
         }
         return results
     },
-    write: function(obj, pretty) {
+    writeBulk: function(obj, pretty) {
         var bulk = {
             "docs": []
         };
@@ -227,29 +227,36 @@ OpenLayers.Format.CouchDB = OpenLayers.Class(OpenLayers.Format.GeoJSON, {
             var numFeatures = obj.length;
             features = new Array(numFeatures);
             for(var i=0; i<numFeatures; i++) {
-                var element = obj[i];
-                if(!element instanceof OpenLayers.Feature.Vector) {
-                    var msg = "FeatureCollection only supports collections " +
-                              "of features: " + element;
-                    throw msg;
-                }
-                var geojson = OpenLayers.Format.GeoJSON.prototype.extract.feature.apply(this, [element]);
-                if(element.fid) {
-                    geojson._id = element.fid;
-                }
-                if(element._rev) {
-                    geojson._rev = element._rev;
-                }
-                if(element._deleted) {
-                    geojson._deleted = element._deleted;
-                }
-                if(element._drawType) {
-                    geojson.drawType = element._drawType;
-                }
+                var geojson = this._prepareGeoJSON(obj[i]);
                 bulk.docs.push(geojson)
             }
         }
         return OpenLayers.Format.JSON.prototype.write.apply(this, [bulk, pretty]);
+    },
+    write: function(obj, pretty) {
+        var geojson = this._prepareGeoJSON(obj);
+        return OpenLayers.Format.JSON.prototype.write.apply(this, [geojson, pretty]);
+    },
+    _prepareGeoJSON: function(element) {
+        if(!element instanceof OpenLayers.Feature.Vector) {
+            var msg = "Only OpenLayers.Feature.Vector is supported. " +
+                      "Feature was: " + element;
+            throw msg;
+        }
+        var geojson = OpenLayers.Format.GeoJSON.prototype.extract.feature.apply(this, [element]);
+        if(element.fid) {
+            geojson._id = element.fid;
+        }
+        if(element._rev) {
+            geojson._rev = element._rev;
+        }
+        if(element._deleted) {
+            geojson._deleted = element._deleted;
+        }
+        if(element._drawType) {
+            geojson.drawType = element._drawType;
+        }
+        return geojson;
     },
 
     CLASS_NAME: "OpenLayers.Format.GeoCouch"
@@ -257,7 +264,7 @@ OpenLayers.Format.CouchDB = OpenLayers.Class(OpenLayers.Format.GeoJSON, {
 
 OpenLayers.Protocol.CouchDB = OpenLayers.Class(OpenLayers.Protocol.HTTP, {
     initialize: function(options) {
-        OpenLayers.Util.extend(options, {'headers': {'Content-Type': 'application/json'}});
+        OpenLayers.Util.extend(options, {'headers': {'Content-Type': 'application/json'}, callback: this.cb});
         OpenLayers.Protocol.HTTP.prototype.initialize.apply(this, arguments);
 
     },
@@ -267,30 +274,72 @@ OpenLayers.Protocol.CouchDB = OpenLayers.Class(OpenLayers.Protocol.HTTP, {
         return OpenLayers.Protocol.HTTP.prototype.read.apply(this, [options]);
     },
     commit: function(features, options) {
-        var toCommit = [];
+        var self = this;
+        var bulkCommit = [];
+        var updates = [];
+        var inserts = [];
         options = OpenLayers.Util.applyDefaults(options, this.options);
-        options.url = this.options.url + this.options.saveExt;
 
         for(var i=0; i < features.length; i++) {
             if(features[i].state != null) {
                 if(features[i].state == OpenLayers.State.DELETE) {
                     features[i]._deleted = true;
+                    bulkCommit.push(features[i]);
+                } else if(features[i].state == OpenLayers.State.UPDATE) {
+                    updates.push(features[i]);
+                } else {
+                    inserts.push(features[i]);
                 }
-                toCommit.push(features[i]);
             }
         }
-        if(toCommit.length > 0) {
-            var resp = new OpenLayers.Protocol.Response({reqFeatures: toCommit});
+        if(bulkCommit.length > 0) {
+            var resp = new OpenLayers.Protocol.Response({reqFeatures: bulkCommit});
             resp.priv = OpenLayers.Request.POST({
-                url: options.url,
+                url: this.options.url + this.options.bulkExt,
                 headers: options.headers,
-                data: this.format.write(toCommit),
-                callback: this.createCallback(this.handleResponse, resp, options)
+                data: this.format.writeBulk(bulkCommit),
+                callback: this.createCallback(this.handleResponse, resp, options),
+                success: function(response) {
+                    self.handleCommitResponse(resp);
+                }
             });
-            return resp;
+        }
+        for(var i=0;i<inserts.length; i++) {
+            var resp = new OpenLayers.Protocol.Response({reqFeatures: [inserts[i]]});
+            resp.priv = OpenLayers.Request.POST({
+                url: this.options.url,
+                headers: options.headers,
+                data: this.format.write(inserts[i]),
+                callback: this.createCallback(this.handleResponse, resp, options),
+                success: function() {
+                    self.handleCommitResponse(resp);
+                }
+            });
+        }
+        for(var i=0;i<updates.length; i++) {
+            var resp = new OpenLayers.Protocol.Response({reqFeatures: [updates[i]]});
+            resp.priv = OpenLayers.Request.PUT({
+                url: this.options.url + updates[i].fid,
+                headers: options.headers,
+                data: this.format.write(updates[i]),
+                callback: this.createCallback(this.handleResponse, resp, options),
+                success: function() {
+                    self.handleCommitResponse(resp);
+                }
+            });
         }
     },
+    handleCommitResponse: function(response) {
+        var format = new OpenLayers.Format.JSON();
+        var responseJSON = format.read(response.priv.responseText);
 
+        //only deletes handle more than one feature at a time
+        if(response.reqFeatures.length == 1) {
+            var feature = response.reqFeatures[0];
+            feature.fid = responseJSON.id;
+            feature._rev = responseJSON.rev;
+        }
+    },
     CLASS_NAME: "OpenLayers.Protocol.CouchDB"
 });
 

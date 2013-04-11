@@ -5,7 +5,20 @@ gbi.Editor = function(options) {
     this.options = options;
 
     OpenLayers.ImgPath = this.options.imgPath || "../css/theme/default/img/";
-
+    OpenLayers.Tile.Image.prototype.onImageError = function() {
+            var img = this.imgDiv;
+            if (img.src != null) {
+                this.imageReloadAttempts++;
+                if (this.imageReloadAttempts <= OpenLayers.IMAGE_RELOAD_ATTEMPTS) {
+                    this.setImgSrc(this.layer.getURL(this.bounds));
+                } else {
+                    OpenLayers.Element.addClass(img, "olImageLoadError");
+                    this.events.triggerEvent("loaderror");
+                    img.src = OpenLayers.ImgPath+"/blank.gif";
+                    this.onImageLoad();
+                }
+            }
+    }
 
     this.map = new gbi.Map(this, this.options.map);
     this.layerManager = new gbi.LayerManager(this.map.olMap);

@@ -288,7 +288,7 @@ gbi.Layers.Couch = function(options) {
     var self = this;
     var defaults = {
         readExt: '_all_docs?include_docs=true',
-        saveExt: '_bulk_docs',
+        bulkExt: '_bulk_docs?include_docs=true',
         createDB: true
     };
     options = $.extend({}, defaults, options);
@@ -301,7 +301,7 @@ gbi.Layers.Couch = function(options) {
         protocol: new OpenLayers.Protocol.CouchDB({
             url: options.url,
             readExt: options.readExt,
-            saveExt: options.saveExt,
+            bulkExt: options.bulkExt,
             format: new OpenLayers.Format.CouchDB()
         }),
         strategies: [
@@ -310,7 +310,7 @@ gbi.Layers.Couch = function(options) {
     };
 
     delete options.readExt;
-    delete options.saveExt;
+    delete options.bulkExt;
 
     gbi.Layers.SaveableVector.call(this, $.extend({}, defaults, options, couchExtension));
 
