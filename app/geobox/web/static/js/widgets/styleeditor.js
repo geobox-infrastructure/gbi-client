@@ -106,8 +106,8 @@ gbi.widgets.StyleEditor.prototype = {
     _setStyleProperty: function(id, obj) {
         var value = $(id).val();
         if(value) {
-            value = id.endsWith('Color') ? value : parseFloat(value);
-            value = id.endsWith('Opacity') ? value / 100 : value;
+            value = id.match('Color') ? value : parseFloat(value);
+            value = id.match('Opacity') ? value / 100 : value;
             obj[id.split('_')[1]] = value;
         }
     }
