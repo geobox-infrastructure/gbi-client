@@ -37,6 +37,9 @@ gbi.widgets.LayerManager.prototype = {
                 layers.push(gbiLayer);
             }
         });
+
+
+
         if (!accordion) {
             accordion = 'collapseBackground';
         }
@@ -94,9 +97,17 @@ gbi.widgets.LayerManager.prototype = {
                         }
                     }
                 });
+                if (!couchLayer.couchExists) {
                 self.layerManager.addLayer(couchLayer);
+                    self.layerManager.active(couchLayer);
                 self.render(self.findAccordion(this));
+                    $("#help_text").attr('class','alert alert-success').html("added successful").show().fadeOut(6000);
+                } else {
+                    $("#help_text").attr('class','alert alert-error').html("already added").show().fadeOut(6000);
+                    delete couchLayer;
+                }
             }
+
         });
 
     },
@@ -201,6 +212,7 @@ gbi.widgets.LayerManager.template = '\
                 <input class="span5" id="new_vector_layer" name="new_vector_layer" type="text"> \
                 <button class="btn" id="add_vector_layer" type="button">Add Vector Layer</button> \
             </div> \
+            <div id="help_text"></div> \
         </div>\
     </div> \
 </div> \

@@ -18,6 +18,28 @@
     });
 {%- endmacro %}
 
+{% macro generate_couch_layers(layers) -%}
+    var couchLayers = [];
+    {% for layer in layers %}
+        couchLayers.push(new gbi.Layers.Couch({
+            name: "{{layer.title}}",
+            url: OpenlayersCouchURL,
+            createDB: false,
+            callbacks: {
+                changes: function(unsavedChanges) {
+                    console.log(unsavedChanges)
+                    if(unsavedChanges)
+                        $('#save').removeAttr('disabled');
+                    else
+                        $('#save').attr('disabled', 'disabled');
+                    }
+                }
+          })
+        );
+    {% endfor %}
+{%- endmacro %}
+
+
 {% macro generate_sources(sources, cache_url) -%}
     var raster_sources = {};
     {% for source in sources %}

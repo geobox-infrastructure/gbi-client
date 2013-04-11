@@ -1,7 +1,7 @@
 {% extends "base_map.html" %}
 {% block title %}{{ _('editor') }}{% endblock %}
 
-{% from "macros.html" import generate_base_layer, generate_sources %}
+{% from "macros.html" import generate_base_layer, generate_sources, generate_couch_layers %}
 
 {% block project_js %}
    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/javascript.util.js') }}"></script>
@@ -18,11 +18,15 @@
 {% block map_js %}
 
     <script type="text/javascript">
+      OpenLayers.ProxyHost = "{{ url_for('proxy.proxy_request') }}";
+
       {{ generate_base_layer(base_layer) }}
       {{ generate_sources(sources, cache_url)}}
 
-      var vector_sources = {{ vector_geometries|tojson|safe }}
-      var vector_layer_title = "{{ _('vector_layer_title') }}";
+      {{ generate_couch_layers(couch_layers)}}
+
+      // var vector_sources = {{ vector_geometries|tojson|safe }}
+      // var vector_layer_title = "{{ _('vector_layer_title') }}";
 
       $('#tabs a').click(function (e) {
         e.preventDefault();

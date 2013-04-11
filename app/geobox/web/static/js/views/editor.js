@@ -18,6 +18,10 @@ function initEditor() {
         editor.addLayer(layer);
     });
 
+    $.each(couchLayers, function(index, layer) {
+        editor.addLayer(layer);
+    });
+
     var layermanager = new gbi.widgets.LayerManager(editor, {
         element: 'layermanager'
     });
@@ -44,6 +48,11 @@ function initEditor() {
 
     var attributeEditor = new gbi.widgets.AttributeEditor(editor, {
         element: 'edit-attributes'
+    });
+
+    $('#save').click(function() {
+        var layer = editor.layerManager.active();
+        layer.save();
     });
 
 	return editor;
