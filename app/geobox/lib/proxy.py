@@ -126,9 +126,12 @@ def proxy_couchdb_request(request, url):
     headers = end_to_end_headers(resp.headers, ('content-encoding', ))
 
     if chunked_response:
-        # gunicorn supports chunked encoding, no need to
+        # gunicorn/werkzeug supports chunked encoding, no need to
         # encode it manually
-        native_chunk_support = 'gunicorn' in request.environ['SERVER_SOFTWARE']
+        native_chunk_support = (
+            'gunicorn' in request.environ['SERVER_SOFTWARE'] or
+            'Werkzeug' in request.environ['SERVER_SOFTWARE']
+        )
         if not native_chunk_support:
             headers.append(('Transfer-Encoding', 'chunked'))
 
