@@ -73,8 +73,6 @@ gbi.widgets.LayerManager.prototype = {
             });
         });
 
-        // this.setActiveLayer(this.layerManager.active());
-
         this.element.find('.vectorLayer').click(function() {
             var id = parseInt($(this).attr('id'));
             var layer = self.layerManager.layerById(id);
@@ -98,9 +96,9 @@ gbi.widgets.LayerManager.prototype = {
                     }
                 });
                 if (!couchLayer.couchExists) {
-                self.layerManager.addLayer(couchLayer);
+                    self.layerManager.addLayer(couchLayer);
                     self.layerManager.active(couchLayer);
-                self.render(self.findAccordion(this));
+                    self.render(self.findAccordion(this));
                     $("#help_text").attr('class','alert alert-success').html("added successful").show().fadeOut(6000);
                 } else {
                     $("#help_text").attr('class','alert alert-error').html("already added").show().fadeOut(6000);
@@ -114,12 +112,6 @@ gbi.widgets.LayerManager.prototype = {
     findAccordion: function(element) {
        var accordion = $(element).closest('.accordion-body ');
        return $(accordion).attr('id');
-    },
-    setActiveLayer: function(layer) {
-        if(layer) {
-            this.element.find('input:radio').removeProp('checked');
-            this.element.find('#active_' + layer.id).prop('checked', 'checked');
-        }
     }
 };
 gbi.widgets.LayerManager.template = '\
