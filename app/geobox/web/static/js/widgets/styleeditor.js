@@ -112,33 +112,45 @@ gbi.widgets.StyleEditor.prototype = {
         }
     }
 };
+
+var label = {
+    'line': OpenLayers.i18n('line'),
+    'polygon': OpenLayers.i18n('polygon'),
+    'strokeColor': OpenLayers.i18n('strokeColor'),
+    'strokeWidth': OpenLayers.i18n('strokeWidth'),
+    'fillColor': OpenLayers.i18n('fillColor'),
+    'fillOpacity': OpenLayers.i18n('fillOpacity'),
+    'saveStyling':  OpenLayers.i18n('saveStyling')
+}
+
 gbi.widgets.StyleEditor.template = '\
-<h3>Line</h3>\
+<h3>'+label.line+'</h3>\
 <div>\
-    <label for="line_strokeWidth">Stroke width:</label><input id="line_strokeWidth" class="line_strokeWidth" />\
+    <label for="line_strokeWidth">'+label.strokeWidth+':</label>\
+    <input id="line_strokeWidth" class="line_strokeWidth" />\
 </div>\
 <div>\
-    <label for="line_strokeColor">Stroke color:</label>\
+    <label for="line_strokeColor">'+label.strokeColor+':</label>\
     <input class="color_picker line_strokeColor"/>\
 </div>\
 </div>\
 <h3>Polygon</h3>\
 <div>\
-    <label for="polygon_strokeWidth">Stroke width:</label>\
+    <label for="polygon_strokeWidth">'+label.strokeWidth+':</label>\
     <input id="polygon_strokeWidth" class="polygon_strokeWidth" />\
 </div>\
 <div>\
-    <label for="polygon_strokeColor">Stroke color:</label>\
+    <label for="polygon_strokeColor">'+label.strokeColor+':</label>\
     <input id="polygon_strokeColor" class="color_picker polygon_strokeColor"/>\
 </div>\
 <div>\
-    <label for="polygon_fillColor">Fill color:</label>\
+    <label for="polygon_fillColor">'+label.fillColor+':</label>\
     <input id="polygon_fillColor" class="color_picker polygon_fillColor"/>\
 </div>\
 <div>\
-    <label for="polygon_fillOpacity">Fill opacity:</label>\
+    <label for="polygon_fillOpacity">'+label.fillOpacity+':</label>\
     <input id="polygon_fillOpacity" class="polygon_fillOpacity" />\
     <div class="noUiSlider polygon_fillOpacity"></div>\
 </div>\
-<button id="set_style">Style layer</button>\
+<button id="set_style" class="btn btn-small">'+label.saveStyling+'</button>\
 ';

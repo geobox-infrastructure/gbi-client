@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2012 ORGANIZATION
+# Copyright (C) 2013 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-12-19 09:31+0100\n"
+"POT-Creation-Date: 2013-04-11 16:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,7 +105,7 @@ msgid "path"
 msgstr ""
 
 #: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:55
-#: geobox/web/templates/index.html:46
+#: geobox/web/templates/index.html:47
 msgid "settings"
 msgstr ""
 
@@ -118,6 +118,7 @@ msgid "name"
 msgstr ""
 
 #: geobox/web/templates/admin.html:11 geobox/web/templates/admin.html:37
+#: geobox/web/templates/editor.html:61
 msgid "layer"
 msgstr ""
 
@@ -203,16 +204,16 @@ msgstr ""
 msgid "add and start tilebox"
 msgstr ""
 
-#: geobox/web/templates/base.html:24 geobox/web/templates/index.html:3
+#: geobox/web/templates/base.html:28 geobox/web/templates/index.html:3
 msgid "home"
 msgstr ""
 
-#: geobox/web/templates/base.html:28 geobox/web/templates/login.html:3
+#: geobox/web/templates/base.html:32 geobox/web/templates/login.html:3
 #: geobox/web/templates/login.html:10 geobox/web/templates/login.html:22
 msgid "login"
 msgstr ""
 
-#: geobox/web/templates/base.html:30
+#: geobox/web/templates/base.html:34
 msgid "logout"
 msgstr ""
 
@@ -245,6 +246,67 @@ msgstr ""
 
 #: geobox/web/templates/downloads.html:44
 msgid "open export on external explorer"
+msgstr ""
+
+#: geobox/web/templates/editor.html:2 geobox/web/templates/editor.html:49
+#: geobox/web/templates/index.html:39 geobox/web/templates/index.html:41
+msgid "editor"
+msgstr ""
+
+#: geobox/web/templates/editor.html:50
+msgid "tooltip - editor"
+msgstr ""
+
+#: geobox/web/templates/editor.html:58
+msgid "manager"
+msgstr ""
+
+#: geobox/web/templates/editor.html:64
+#: geobox/web/templates/projects/exports.html:29
+#: geobox/web/templates/projects/imports.html:40
+msgid "edit"
+msgstr ""
+
+#: geobox/web/templates/editor.html:67
+msgid "measure"
+msgstr ""
+
+#: geobox/web/templates/editor.html:76
+msgid "Styling"
+msgstr ""
+
+#: geobox/web/templates/editor.html:77
+msgid "infotext - edit styling"
+msgstr ""
+
+#: geobox/web/templates/editor.html:84
+msgid "Edit"
+msgstr ""
+
+#: geobox/web/templates/editor.html:85
+msgid "infotext - edit controls"
+msgstr ""
+
+#: geobox/web/templates/editor.html:90
+msgid "Attributes"
+msgstr ""
+
+#: geobox/web/templates/editor.html:91
+msgid "infotext - attributes"
+msgstr ""
+
+#: geobox/web/templates/editor.html:93
+#: geobox/web/templates/projects/export_edit.html:61
+#: geobox/web/templates/projects/import_edit.html:29
+msgid "save"
+msgstr ""
+
+#: geobox/web/templates/editor.html:99
+msgid "Measure"
+msgstr ""
+
+#: geobox/web/templates/editor.html:100
+msgid "infotext - measure controls"
 msgstr ""
 
 #: geobox/web/templates/index.html:10
@@ -289,11 +351,11 @@ msgstr ""
 msgid "downloads"
 msgstr ""
 
-#: geobox/web/templates/index.html:39 geobox/web/templates/index.html:41
+#: geobox/web/templates/index.html:42
 msgid "map"
 msgstr ""
 
-#: geobox/web/templates/index.html:48
+#: geobox/web/templates/index.html:49
 msgid "administation"
 msgstr ""
 
@@ -305,11 +367,7 @@ msgstr ""
 msgid "logs"
 msgstr ""
 
-#: geobox/web/templates/macros.html:25
-msgid "white background map"
-msgstr ""
-
-#: geobox/web/templates/macros.html:62
+#: geobox/web/templates/macros.html:67
 msgid "download coverage"
 msgstr ""
 
@@ -317,16 +375,16 @@ msgstr ""
 msgid "map and information"
 msgstr ""
 
-#: geobox/web/templates/map.html:13
-msgid "vector_layer_title"
-msgstr ""
-
-#: geobox/web/templates/map.html:18
+#: geobox/web/templates/map.html:5
 msgid "local maps"
 msgstr ""
 
-#: geobox/web/templates/map.html:19
+#: geobox/web/templates/map.html:6
 msgid "tooltip - show all imported maps"
+msgstr ""
+
+#: geobox/web/templates/map.html:17
+msgid "vector_layer_title"
 msgstr ""
 
 #: geobox/web/templates/errors/403.html:7
@@ -359,6 +417,86 @@ msgstr ""
 msgid "Internal error."
 msgstr ""
 
+#: geobox/web/templates/js/translation.js:3
+msgid "add layer successful"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:4
+msgid "not possible to add layer"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:5
+msgid "background map"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:6
+msgid "raster map"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:7
+msgid "vector map"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:8
+msgid "add vector map"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:11
+msgid "coordinates"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:12
+msgid "mesasure result"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:15
+msgid "no attributes"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:16
+msgid "key"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:17
+msgid "value"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:18
+msgid "add "
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:19
+msgid "add new attribute"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:22
+msgid "line"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:23
+msgid "polygon"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:24
+msgid "stroke width"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:25
+msgid "stroke color"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:26
+msgid "fill color"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:27
+msgid "fill opacity"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:28
+msgid "save styling"
+msgstr ""
+
 #: geobox/web/templates/projects/export_edit.html:3
 msgid "export project edit"
 msgstr ""
@@ -377,7 +515,7 @@ msgstr ""
 
 #: geobox/web/templates/projects/export_edit.html:27
 #: geobox/web/templates/projects/export_edit.html:36
-#: geobox/web/templates/projects/import_edit.html:19
+#: geobox/web/templates/projects/import_edit.html:20
 msgid "start level needs to be lower or equal to end level"
 msgstr ""
 
@@ -399,25 +537,20 @@ msgid "tooltip - export vectorlayer"
 msgstr ""
 
 #: geobox/web/templates/projects/export_edit.html:53
-#: geobox/web/templates/projects/export_edit.html:80
+#: geobox/web/templates/projects/export_edit.html:75
 msgid "remove vector"
 msgstr ""
 
-#: geobox/web/templates/projects/export_edit.html:61
-#: geobox/web/templates/projects/import_edit.html:28
-msgid "save"
-msgstr ""
-
 #: geobox/web/templates/projects/export_edit.html:62
-#: geobox/web/templates/projects/import_edit.html:29
+#: geobox/web/templates/projects/import_edit.html:30
 msgid "start"
 msgstr ""
 
-#: geobox/web/templates/projects/export_edit.html:81
+#: geobox/web/templates/projects/export_edit.html:76
 msgid "add vector"
 msgstr ""
 
-#: geobox/web/templates/projects/export_edit.html:83
+#: geobox/web/templates/projects/export_edit.html:78
 msgid "level"
 msgstr ""
 
@@ -440,14 +573,9 @@ msgstr ""
 
 #: geobox/web/templates/projects/exports.html:24
 #: geobox/web/templates/projects/imports.html:36
-#: geobox/web/templates/projects/macros.html:49
-#: geobox/web/templates/projects/macros.html:50
+#: geobox/web/templates/projects/macros.html:34
+#: geobox/web/templates/projects/macros.html:35
 msgid "MB"
-msgstr ""
-
-#: geobox/web/templates/projects/exports.html:29
-#: geobox/web/templates/projects/imports.html:40
-msgid "edit"
 msgstr ""
 
 #: geobox/web/templates/projects/exports.html:32
@@ -494,55 +622,39 @@ msgstr ""
 msgid "new import project"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:13
+#: geobox/web/templates/projects/macros.html:6
 msgid "drawing options"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:14
+#: geobox/web/templates/projects/macros.html:7
 msgid "tooltip - drawing options"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:17
-msgid "info_button draw_feautre bbox"
-msgstr ""
-
-#: geobox/web/templates/projects/macros.html:19
-msgid "info_button draw mulitpolgon"
-msgstr ""
-
-#: geobox/web/templates/projects/macros.html:21
-msgid "info_button edit feature"
-msgstr ""
-
-#: geobox/web/templates/projects/macros.html:23
-msgid "info_button delete feature"
-msgstr ""
-
-#: geobox/web/templates/projects/macros.html:28
+#: geobox/web/templates/projects/macros.html:12
 msgid "delete all features"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:34
+#: geobox/web/templates/projects/macros.html:18
 msgid "load coverage"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:36
+#: geobox/web/templates/projects/macros.html:21
 msgid "load vectorimports as coverage"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:46
+#: geobox/web/templates/projects/macros.html:31
 msgid "Information"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:47
+#: geobox/web/templates/projects/macros.html:32
 msgid "tooltip - information about data volumen"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:49
+#: geobox/web/templates/projects/macros.html:34
 msgid "Data volume"
 msgstr ""
 
-#: geobox/web/templates/projects/macros.html:50
+#: geobox/web/templates/projects/macros.html:35
 msgid "free disk space"
 msgstr ""
 

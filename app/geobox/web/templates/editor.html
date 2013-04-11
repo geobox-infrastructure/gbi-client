@@ -47,7 +47,7 @@
 {% block content %}
 <div class="row-fluid">
     <h1>{{_('editor')}}
-      {{ generate_tooltip(_('tooltip - show all imported maps') ) }}
+      {{ generate_tooltip(_('tooltip - editor') ) }}
     </h1>
 
     <div class="span8 map" id='map'></div>
@@ -90,7 +90,8 @@
                  <h4>{{ _('Attributes') }}</h4>
                  <p>{{ _('infotext - attributes') }}</p>
                  <div id="attribute-editor"></div>
-                 <button id="save" disabled="disabled">Save</button>
+                 <hr>
+                 <button id="save" class="btn btn-small" disabled="disabled">{{ _('save') }}</button>
                 </div>
               </div>
 
@@ -101,13 +102,7 @@
                 <div id="measure-toolbar">
                   <!--  load measure widget -->
                 </div>
-                <div id="point-output" style="display:none">
-                  <h5>{{ _('coords') }}:</h5>
-                    <span></span>
-                </div>
-                <div id="measure-output" style="display:none">
-                  <h5>{{ _('measure result') }}:</h5>
-                   <span></span>
+                <div id="measure-output">
                 </div>
               </div>
             </div>

@@ -44,6 +44,7 @@ gbi.widgets.AttributeEditor.prototype = {
             var key = $('#newKey').val();
             var val = $('#newValue').val();
             self.add(key, val);
+            return false;
         });
     },
     add: function(key, value) {
@@ -72,9 +73,19 @@ gbi.widgets.AttributeEditor.prototype = {
         this.render();
     }
 };
+
+var label = {
+    'noAttributes': OpenLayers.i18n("noAttributes"),
+    'key': OpenLayers.i18n("key"),
+    'val': OpenLayers.i18n("value"),
+    'add': OpenLayers.i18n("add"),
+    'formTitle': OpenLayers.i18n("addNewAttributesTitle"),
+}
+
+
 gbi.widgets.AttributeEditor.template = '\
 <% if(Object.keys(attributes).length == 0) { %>\
-    <span>No attributes</span>\
+    <span>'+label.noAttributes+'</span>\
 <% } else { %>\
     <% for(var key in attributes) { %>\
         <form class="form-inline">\
@@ -86,20 +97,20 @@ gbi.widgets.AttributeEditor.template = '\
         </form>\
     <% } %>\
 <% } %>\
-<h4>Add new attribute</h4>\
+<h4>'+label.formTitle+'</h4>\
 <form class="form-horizontal"> \
 	 <div class="control-group"> \
-		<label class="control-label" for="newKey">Key</label> \
+		<label class="control-label" for="newKey">'+label.key+'</label> \
 		<div>\
-			<input type="text" id="newKey" class="input-small" placeholder="Key">\
+			<input type="text" id="newKey" class="input-small">\
 		</div>\
 	</div>\
 	 <div class="control-group"> \
-		<label class="control-label" for="newValue">Value</label> \
+		<label class="control-label" for="newValue">'+label.val+'</label> \
 		<div>\
-			<input type="text" id="newValue" class="input-small" placeholder="100">\
+			<input type="text" id="newValue" class="input-small">\
 		</div>\
 	</div>\
-    <button id="addKeyValue" class="btn btn-small">Add</button>\
+    <button id="addKeyValue" class="btn btn-small">'+label.add+'</button>\
 </form>\
 ';

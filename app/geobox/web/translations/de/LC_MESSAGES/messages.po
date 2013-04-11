@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-12-19 09:31+0100\n"
+"POT-Creation-Date: 2013-04-11 16:10+0200\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -105,7 +105,7 @@ msgid "path"
 msgstr "Verzeichnis"
 
 #: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:55
-#: geobox/web/templates/index.html:46
+#: geobox/web/templates/index.html:47
 msgid "settings"
 msgstr "Einstellungen"
 
@@ -118,6 +118,7 @@ msgid "name"
 msgstr "Name"
 
 #: geobox/web/templates/admin.html:11 geobox/web/templates/admin.html:37
+#: geobox/web/templates/editor.html:61
 msgid "layer"
 msgstr "Layer"
 
@@ -205,16 +206,16 @@ msgstr "Externe TileBox einbinden"
 msgid "add and start tilebox"
 msgstr "Hinzufügen/Neustarten"
 
-#: geobox/web/templates/base.html:24 geobox/web/templates/index.html:3
+#: geobox/web/templates/base.html:28 geobox/web/templates/index.html:3
 msgid "home"
 msgstr "Startseite"
 
-#: geobox/web/templates/base.html:28 geobox/web/templates/login.html:3
+#: geobox/web/templates/base.html:32 geobox/web/templates/login.html:3
 #: geobox/web/templates/login.html:10 geobox/web/templates/login.html:22
 msgid "login"
 msgstr "Anmelden"
 
-#: geobox/web/templates/base.html:30
+#: geobox/web/templates/base.html:34
 msgid "logout"
 msgstr "Abmelden"
 
@@ -248,6 +249,79 @@ msgstr "als ZIP-Datei"
 #: geobox/web/templates/downloads.html:44
 msgid "open export on external explorer"
 msgstr "Export-Verzeichnis öffnen"
+
+#: geobox/web/templates/editor.html:2 geobox/web/templates/editor.html:49
+#: geobox/web/templates/index.html:39 geobox/web/templates/index.html:41
+msgid "editor"
+msgstr "Editor"
+
+#: geobox/web/templates/editor.html:50
+msgid "tooltip - editor"
+msgstr "In dieser Ansicht können Sie Geometrien bearbeiten"
+
+#: geobox/web/templates/editor.html:58
+msgid "manager"
+msgstr "Auswahl"
+
+#: geobox/web/templates/editor.html:64
+#: geobox/web/templates/projects/exports.html:29
+#: geobox/web/templates/projects/imports.html:40
+msgid "edit"
+msgstr "Editieren"
+
+#: geobox/web/templates/editor.html:67
+msgid "measure"
+msgstr "Messen"
+
+#: geobox/web/templates/editor.html:76
+msgid "Styling"
+msgstr "Aussehen der Geometrien"
+
+#: geobox/web/templates/editor.html:77
+msgid "infotext - edit styling"
+msgstr ""
+"Hier ändern Sie das Aussehen der Geometrien. In jeder Ebene kann ein "
+"bestimmtes Aussehen verwendet werden. Bitte beachtne Sie dass die "
+"Änderungen erst nach dem Speichern auf der Karte sichtbar sind."
+
+#: geobox/web/templates/editor.html:84
+msgid "Edit"
+msgstr "Editieren"
+
+#: geobox/web/templates/editor.html:85
+msgid "infotext - edit controls"
+msgstr ""
+"Wählen Sie aus den unterschiedlichen Bearbeitungswerkzeugen. Sie können "
+"einen Punkt, eine Linie oder eine Fläche zeichnen. Zudem besteht die "
+"Möglichkeit, dass Sie Geometrien zusammenfassen, aufteilen oder löschen. "
+"Über das Auswahlwerkzeug können Sie eine entsprechnede Geometrie "
+"selektieren."
+
+#: geobox/web/templates/editor.html:90
+msgid "Attributes"
+msgstr "Eigenschaften"
+
+#: geobox/web/templates/editor.html:91
+msgid "infotext - attributes"
+msgstr ""
+"Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie "
+"hierzu eine Geometrie mit dem Auswahlwerkezug aus."
+
+#: geobox/web/templates/editor.html:93
+#: geobox/web/templates/projects/export_edit.html:61
+#: geobox/web/templates/projects/import_edit.html:29
+msgid "save"
+msgstr "Speichern"
+
+#: geobox/web/templates/editor.html:99
+msgid "Measure"
+msgstr "Messen"
+
+#: geobox/web/templates/editor.html:100
+msgid "infotext - measure controls"
+msgstr ""
+"Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen,"
+" oder Strecken und Flächen messen."
 
 #: geobox/web/templates/index.html:10
 msgid "Welcome to GeoBox"
@@ -291,11 +365,11 @@ msgstr "Aufgaben"
 msgid "downloads"
 msgstr "Downloads"
 
-#: geobox/web/templates/index.html:39 geobox/web/templates/index.html:41
+#: geobox/web/templates/index.html:42
 msgid "map"
 msgstr "Karte"
 
-#: geobox/web/templates/index.html:48
+#: geobox/web/templates/index.html:49
 msgid "administation"
 msgstr "Administration"
 
@@ -307,11 +381,7 @@ msgstr "Log Übersicht"
 msgid "logs"
 msgstr "Log Übersicht"
 
-#: geobox/web/templates/macros.html:25
-msgid "white background map"
-msgstr "Ohne Hintergrundkarte"
-
-#: geobox/web/templates/macros.html:62
+#: geobox/web/templates/macros.html:67
 msgid "download coverage"
 msgstr "Downloadberecht."
 
@@ -319,17 +389,17 @@ msgstr "Downloadberecht."
 msgid "map and information"
 msgstr "Karte und Informationen"
 
-#: geobox/web/templates/map.html:13
-msgid "vector_layer_title"
-msgstr "Vektorlayer"
-
-#: geobox/web/templates/map.html:18
+#: geobox/web/templates/map.html:5
 msgid "local maps"
 msgstr "Lokal gespeicherte Karten"
 
-#: geobox/web/templates/map.html:19
+#: geobox/web/templates/map.html:6
 msgid "tooltip - show all imported maps"
 msgstr "Die Kartenanwendung zeigt alle importierten Raster- und Vektordaten an. "
+
+#: geobox/web/templates/map.html:17
+msgid "vector_layer_title"
+msgstr "Vektorlayer"
 
 #: geobox/web/templates/errors/403.html:7
 #: geobox/web/templates/errors/403.html:9
@@ -364,6 +434,86 @@ msgstr "Zugriffsmethode nicht erlabut."
 msgid "Internal error."
 msgstr "Interner Fehler."
 
+#: geobox/web/templates/js/translation.js:3
+msgid "add layer successful"
+msgstr "Karte hinzufgefügt"
+
+#: geobox/web/templates/js/translation.js:4
+msgid "not possible to add layer"
+msgstr "Hinzufügen der Karte nicht möglich."
+
+#: geobox/web/templates/js/translation.js:5
+msgid "background map"
+msgstr "Hintergrundkarte"
+
+#: geobox/web/templates/js/translation.js:6
+msgid "raster map"
+msgstr "Rasterkarte"
+
+#: geobox/web/templates/js/translation.js:7
+msgid "vector map"
+msgstr "Vektorkarte"
+
+#: geobox/web/templates/js/translation.js:8
+msgid "add vector map"
+msgstr "Vektorlayer hinzufügen"
+
+#: geobox/web/templates/js/translation.js:11
+msgid "coordinates"
+msgstr "Koordianten"
+
+#: geobox/web/templates/js/translation.js:12
+msgid "mesasure result"
+msgstr "Messergebnis"
+
+#: geobox/web/templates/js/translation.js:15
+msgid "no attributes"
+msgstr "Keine Eigenschaften gespeichert"
+
+#: geobox/web/templates/js/translation.js:16
+msgid "key"
+msgstr "Schlüssel"
+
+#: geobox/web/templates/js/translation.js:17
+msgid "value"
+msgstr "Wert"
+
+#: geobox/web/templates/js/translation.js:18
+msgid "add "
+msgstr "Hinzufügne"
+
+#: geobox/web/templates/js/translation.js:19
+msgid "add new attribute"
+msgstr "Neue Eigenschaft hinzufügen"
+
+#: geobox/web/templates/js/translation.js:22
+msgid "line"
+msgstr "Linie"
+
+#: geobox/web/templates/js/translation.js:23
+msgid "polygon"
+msgstr "Polygon"
+
+#: geobox/web/templates/js/translation.js:24
+msgid "stroke width"
+msgstr "Linienstärke"
+
+#: geobox/web/templates/js/translation.js:25
+msgid "stroke color"
+msgstr "Linienfarbe"
+
+#: geobox/web/templates/js/translation.js:26
+msgid "fill color"
+msgstr "Flächenfarbe"
+
+#: geobox/web/templates/js/translation.js:27
+msgid "fill opacity"
+msgstr "Flächentransparenz"
+
+#: geobox/web/templates/js/translation.js:28
+msgid "save styling"
+msgstr "Aussehen speichern"
+
 #: geobox/web/templates/projects/export_edit.html:3
 msgid "export project edit"
 msgstr "Exportprojekt editieren"
@@ -384,7 +534,7 @@ msgstr ""
 
 #: geobox/web/templates/projects/export_edit.html:27
 #: geobox/web/templates/projects/export_edit.html:36
-#: geobox/web/templates/projects/import_edit.html:19
+#: geobox/web/templates/projects/import_edit.html:20
 msgid "start level needs to be lower or equal to end level"
 msgstr "Startlevel muss kleiner oder gleich dem Endlevel sein"
 
@@ -408,25 +558,20 @@ msgstr ""
 " kann nur eine Vektordatei erzeugt werden."
 
 #: geobox/web/templates/projects/export_edit.html:53
-#: geobox/web/templates/projects/export_edit.html:80
+#: geobox/web/templates/projects/export_edit.html:75
 msgid "remove vector"
 msgstr "Vektorlayer entfernen"
 
-#: geobox/web/templates/projects/export_edit.html:61
-#: geobox/web/templates/projects/import_edit.html:28
-msgid "save"
-msgstr "Speichern"
-
 #: geobox/web/templates/projects/export_edit.html:62
-#: geobox/web/templates/projects/import_edit.html:29
+#: geobox/web/templates/projects/import_edit.html:30
 msgid "start"
 msgstr "Speichern & Starten"
 
-#: geobox/web/templates/projects/export_edit.html:81
+#: geobox/web/templates/projects/export_edit.html:76
 msgid "add vector"
 msgstr "Vektorlayer hinzufügen"
 
-#: geobox/web/templates/projects/export_edit.html:83
+#: geobox/web/templates/projects/export_edit.html:78
 msgid "level"
 msgstr "Level"
 
@@ -452,15 +597,10 @@ msgstr "Datenmenge"
 
 #: geobox/web/templates/projects/exports.html:24
 #: geobox/web/templates/projects/imports.html:36
-#: geobox/web/templates/projects/macros.html:49
-#: geobox/web/templates/projects/macros.html:50
+#: geobox/web/templates/projects/macros.html:34
+#: geobox/web/templates/projects/macros.html:35
 msgid "MB"
 msgstr "MB"
-
-#: geobox/web/templates/projects/exports.html:29
-#: geobox/web/templates/projects/imports.html:40
-msgid "edit"
-msgstr "Editieren"
 
 #: geobox/web/templates/projects/exports.html:32
 msgid "start export"
@@ -509,60 +649,44 @@ msgstr "Import Starten"
 msgid "new import project"
 msgstr "Neuer Import"
 
-#: geobox/web/templates/projects/macros.html:13
+#: geobox/web/templates/projects/macros.html:6
 msgid "drawing options"
 msgstr "Zeichenfunktionen"
 
-#: geobox/web/templates/projects/macros.html:14
+#: geobox/web/templates/projects/macros.html:7
 msgid "tooltip - drawing options"
 msgstr ""
 "Sie haben die Möglichkeit ein Rechteck oder ein Polygon zu zeichnen. Um "
 "eine Geometrie zu bearbeiten aktivieren Sie das Editiermodul und wählen "
 "Sie die gewünschte Geometrie aus. "
 
-#: geobox/web/templates/projects/macros.html:17
-msgid "info_button draw_feautre bbox"
-msgstr "Rechteck zeichnen"
-
-#: geobox/web/templates/projects/macros.html:19
-msgid "info_button draw mulitpolgon"
-msgstr "Polygon zeichnen"
-
-#: geobox/web/templates/projects/macros.html:21
-msgid "info_button edit feature"
-msgstr "Geometrie editieren"
-
-#: geobox/web/templates/projects/macros.html:23
-msgid "info_button delete feature"
-msgstr "Ausgewählte Geometrie löschen"
-
-#: geobox/web/templates/projects/macros.html:28
+#: geobox/web/templates/projects/macros.html:12
 msgid "delete all features"
 msgstr "Alle Geometrien löschen"
 
-#: geobox/web/templates/projects/macros.html:34
+#: geobox/web/templates/projects/macros.html:18
 msgid "load coverage"
 msgstr "Laden"
 
-#: geobox/web/templates/projects/macros.html:36
+#: geobox/web/templates/projects/macros.html:21
 msgid "load vectorimports as coverage"
 msgstr "Vektordaten aus Flächenbox laden"
 
-#: geobox/web/templates/projects/macros.html:46
+#: geobox/web/templates/projects/macros.html:31
 msgid "Information"
 msgstr "Informationen"
 
-#: geobox/web/templates/projects/macros.html:47
+#: geobox/web/templates/projects/macros.html:32
 msgid "tooltip - information about data volumen"
 msgstr ""
 "Der Speicherplatz wird beim Im- oder Export mindestens auf Ihrem PC "
 "benötigt."
 
-#: geobox/web/templates/projects/macros.html:49
+#: geobox/web/templates/projects/macros.html:34
 msgid "Data volume"
 msgstr "Datenmenge"
 
-#: geobox/web/templates/projects/macros.html:50
+#: geobox/web/templates/projects/macros.html:35
 msgid "free disk space"
 msgstr "Freier Speicherplatz"
 
@@ -942,4 +1066,7 @@ msgstr "Kein gültigen Zeitpunkt angegeben."
 #: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:649
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
+
+#~ msgid "Save"
+#~ msgstr "Speichern"
 

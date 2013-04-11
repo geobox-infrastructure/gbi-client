@@ -115,9 +115,11 @@ gbi.widgets.LayerManager.prototype = {
                     self.layerManager.addLayer(couchLayer);
                     self.layerManager.active(couchLayer);
                     self.render(self.findAccordion(this));
-                    $("#help_text").attr('class','alert alert-success').html("added successful").show().fadeOut(6000);
+                    var addSuccessful = OpenLayers.i18n("addLayerSuccessful")
+                    $("#help_text").attr('class','alert alert-success').html(addSuccessful).show().fadeOut(6000);
                 } else {
-                    $("#help_text").attr('class','alert alert-error').html("already added").show().fadeOut(6000);
+                    var notPossible = OpenLayers.i18n("notPossible")
+                    $("#help_text").attr('class','alert alert-error').html(notPossible).show().fadeOut(6000);
                     delete couchLayer;
                 }
             }
@@ -130,13 +132,21 @@ gbi.widgets.LayerManager.prototype = {
        return $(accordion).attr('id');
     }
 };
+
+var label = {
+    'background': OpenLayers.i18n("backgroundTitle"),
+    'raster': OpenLayers.i18n("rasterLayerTitle"),
+    'vector': OpenLayers.i18n("vectorLayerTitle"),
+    'addLayer': OpenLayers.i18n("addvectorLayerButton")
+}
+
 gbi.widgets.LayerManager.template = '\
 <div class="accordion" id="accordion2">\
     <div class="accordion-group">\
         <div class="accordion-heading">\
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseBackground">\
-                Hintergrundlayer\
-            </a>\
+             '+label.background+'\
+             </a>\
         </div>\
         <div id="collapseBackground" class="accordion-body collapse <% if(accordion == "collapseBackground") { %> in <% } %>">\
             <div class="accordion-inner"><ul class="nav nav-pills nav-stacked">\
@@ -162,7 +172,7 @@ gbi.widgets.LayerManager.template = '\
     <div class="accordion-group">\
         <div class="accordion-heading">\
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseRaster">\
-                Rasterlayer\
+             '+label.raster+'\
             </a>\
         </div>\
         <div id="collapseRaster" class="accordion-body collapse <% if(accordion == "collapseRaster") { %> in <% } %> ">\
@@ -189,7 +199,7 @@ gbi.widgets.LayerManager.template = '\
     <div class="accordion-group">\
         <div class="accordion-heading">\
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseVector">\
-                Vektorlayer\
+             '+label.vector+'\
             </a>\
         </div>\
         <div id="collapseVector" class="accordion-body collapse <% if(accordion == "collapseVector") { %> in <% } %>">\
@@ -221,7 +231,7 @@ gbi.widgets.LayerManager.template = '\
             </ul> \
             <div class="input-append"> \
                 <input class="span5" id="new_vector_layer" name="new_vector_layer" type="text"> \
-                <button class="btn" id="add_vector_layer" type="button">Add Vector Layer</button> \
+                <button class="btn" id="add_vector_layer" type="button">'+label.addLayer+'</button> \
             </div> \
             <div id="help_text"></div> \
         </div>\

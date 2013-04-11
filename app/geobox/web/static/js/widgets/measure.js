@@ -21,41 +21,24 @@ gbi.widgets.Measure = function(editor, options) {
             displaySRS: this.options.srs[0]
         }, function(event) { self.measureHandler(event); });
     this.pointMeasure.registerEvent('activate', this, function() {
-        $('#position_srs, #point-output').show();
-        $('#measure-output').hide();
+        $('#position_srs').show();
+        $("#measure-output").empty();
     });
 
     this.pointMeasure.registerEvent('deactivate', this, function() {
-        $('#position_srs, #point-output').hide();
-        $('#measure-output').show();
+        $('#position_srs').hide();
+        $("#measure-output").empty();
     });
 
     this.lineMeasure = new gbi.Controls.Measure({
             measureType: gbi.Controls.Measure.TYPE_LINE
         }, function(event) { self.measureHandler(event); });
 
-    this.lineMeasure.registerEvent('activate', this, function() {
-        $('#measure-output').show();
-    });
-
-    this.lineMeasure.registerEvent('deactivate', this, function() {
-        $('#measure-output').hide();
-    });
-
     this.polygonMeasure = new gbi.Controls.Measure({
             measureType: gbi.Controls.Measure.TYPE_POLYGON
         }, function(event) { self.measureHandler(event); });
 
-    this.polygonMeasure.registerEvent('activate', this, function() {
-        $('#measure-output').show();
-    });
-
-    this.polygonMeasure.registerEvent('deactivate', this, function() {
-        $('#measure-output').hide();
-    });
-
     this.toolbar.addControls([this.pointMeasure, this.lineMeasure, this.polygonMeasure]);
-
 
     $('#position_srs').change(function() {
         self.pointMeasure.updateSRS($(this).val());
@@ -67,18 +50,18 @@ gbi.widgets.Measure.prototype = {
         this.element.append(tmpl(gbi.widgets.Measure.template, {srs: this.options.srs}));
     },
     measureHandler: function(measure) {
-        var element = $('#measure-output span');
-        var output;
+        var element = $('#measure-output');
+        var output = OpenLayers.i18n('measureResult')+': ';
         switch(measure.type) {
             case gbi.Controls.Measure.TYPE_POINT:
-                var element = $('#point-output span');
-                output = measure.measure[0] + ', ' + measure.measure[1];
+                var output = OpenLayers.i18n('coords')+': ';
+                output += measure.measure[0] + ', ' + measure.measure[1];
                 break;
             case gbi.Controls.Measure.TYPE_LINE:
-                output = measure.measure + " " + measure.units;
+                output += measure.measure + " " + measure.units;
                 break;
             case gbi.Controls.Measure.TYPE_POLYGON:
-                output = measure.measure + " " + measure.units + "<sup>2</sup>";
+                output += measure.measure + " " + measure.units + "<sup>2</sup>";
         }
         element.html(output);
     }

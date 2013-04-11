@@ -14,7 +14,7 @@
 # limitations under the License.
 
 import os
-from flask import Blueprint, render_template, current_app, abort, send_from_directory
+from flask import Blueprint, render_template, current_app, abort, send_from_directory, make_response
 
 from ..utils import request_is_local
 
@@ -23,6 +23,12 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def index():
     return render_template('index.html', is_local=request_is_local())
+
+@main.route('/js/map.js')
+def javascript_translation():
+    response = make_response(render_template('js/translation.js'))
+    response.headers['Content-type'] = 'application/javascript'
+    return response
 
 @main.route('/__terminate')
 def terminate():
