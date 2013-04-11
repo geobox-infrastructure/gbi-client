@@ -55,28 +55,37 @@ gbi.widgets.LayerManager.prototype = {
         $.each(layers, function(idx, layer) {
             self.element.find('#visible_' + layer.id)
                 .prop('checked', layer.visible())
-                .change(function() {
-                    layer.visible($(this).prop('checked'));
+                .click(function(e) {
+                    var status = $(this).prop("checked");
+                    layer.visible(status);
+                    e.stopPropagation()
+
                 });
+
             self.element.find('#up_' + layer.id).click(function() {
                 if(self.layerManager.up(layer)) {
                 self.render(self.findAccordion(this));
                 }
+                return false;
             });
             self.element.find('#down_' + layer.id).click(function() {
                if(self.layerManager.down(layer)) {
                 self.render(self.findAccordion(this));
                 }
+                return false;
             });
-            self.element.find('#data_extent_' + layer.id).click(function() {
+            self.element.find('#data_extent_' + layer.id).click(function(e) {
                 var extent = layer.olLayer.getDataExtent();
                 if (extent) {
                     self.editor.map.olMap.zoomToExtent(extent);
                 }
+                return false;
             });
             self.element.find('#remove_' + layer.id).click(function() {
                 self.layerManager.removeLayer(layer);
                 self.render(self.findAccordion(this));
+                 return false;
+
             });
         });
 
