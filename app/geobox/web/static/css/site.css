@@ -240,3 +240,7 @@ li.layerElement input {
 .key-label{
     width: 100px;
 }
+
+.tab-content {
+    overflow: visible;
+}
