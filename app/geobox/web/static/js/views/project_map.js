@@ -1,18 +1,3 @@
-OpenLayers.Tile.Image.prototype.onImageError = function() {
-        var img = this.imgDiv;
-        if (img.src != null) {
-            this.imageReloadAttempts++;
-            if (this.imageReloadAttempts <= OpenLayers.IMAGE_RELOAD_ATTEMPTS) {
-                this.setImgSrc(this.layer.getURL(this.bounds));
-            } else {
-                OpenLayers.Element.addClass(img, "olImageLoadError");
-                this.events.triggerEvent("loaderror");
-                img.src = OpenlayersImageURL+"/blank.gif";
-                this.onImageLoad();
-            }
-        }
-}
-
 function initProjectEditor(options) {
     var editor = new gbi.Editor({
        map: {
