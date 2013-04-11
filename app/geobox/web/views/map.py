@@ -53,24 +53,13 @@ def editor():
     cache_url = get_local_cache_url(request)
 
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
-
-    couch = CouchDB(couch_url,
-        current_app.config.geobox_state.config.get('web', 'coverages_from_couchdb'))
-
-    records = couch.load_records()
     couch_layers = list(vector_layers_metadata(couch_url))
-
-    vector_geometries = []
-    for record in records:
-        if 'geometry' in record: # check if record has geometry type
-            vector_geometries.append(record)
 
     return render_template('editor.html',
         cache_url=cache_url,
         base_layer=base_layer,
         couch_layers=couch_layers,
-        sources=raster_sources,
-        vector_geometries=vector_geometries
+        sources=raster_sources
     )
 
 

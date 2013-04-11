@@ -27,7 +27,6 @@
             createDB: false,
             callbacks: {
                 changes: function(unsavedChanges) {
-                    console.log(unsavedChanges)
                     if(unsavedChanges)
                         $('#save').removeAttr('disabled');
                     else
@@ -40,7 +39,7 @@
 {%- endmacro %}
 
 
-{% macro generate_sources(sources, cache_url) -%}
+{% macro generate_sources(sources, cache_url, coverages=True) -%}
     var raster_sources = {};
     {% for source in sources %}
         {% if source.wmts_source %}
@@ -61,12 +60,16 @@
             download_level_end: {{ source.download_level_end }}
         });
 
+        {% if coverages %}
+
         // add download coverage as vectorlayer
         raster_sources['{{ map_source.id }}_coverage'] = new gbi.Layers.Vector({
             name: '{{_('download coverage')}} {{ map_source.title }}',
             styleMap: downloadAreaStyleMap,
             displayInLayerSwitcher: true,
-            source_id: {{ map_source.id }}
+            source_id: {{ map_source.id }},
+            editable: false
+
         });
 
         var geojson_format = new OpenLayers.Format.GeoJSON();
@@ -76,6 +79,7 @@
           var coverage = {{ map_source.wmts_source.download_coverage|tojson|safe }};
         {% endif %}
         raster_sources['{{ map_source.id }}_coverage'].olLayer.addFeatures(geojson_format.read(coverage));
+        {% endif %}
     {% endfor %}
 {%- endmacro %}
 

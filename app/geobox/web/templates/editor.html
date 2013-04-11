@@ -4,14 +4,24 @@
 {% from "macros.html" import generate_base_layer, generate_sources, generate_couch_layers %}
 
 {% block project_js %}
+  <!-- JSTS for split and union -->
    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/javascript.util.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jsts.js') }}"></script>
 
+  <!-- Proj4 for transformation -->
    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js-compressed.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js.defs.js') }}"></script>
+
+  <!-- slider and colorpicker for styleeditor -->
+   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jquery.nouislider.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jquery.minicolor.js') }}"></script>
+
+  <!-- widgets -->
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/attribute.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/styleeditor.js') }}"></script>
+
 
 {% endblock %}
 
@@ -21,12 +31,9 @@
       OpenLayers.ProxyHost = "{{ url_for('proxy.proxy_request') }}";
 
       {{ generate_base_layer(base_layer) }}
-      {{ generate_sources(sources, cache_url)}}
+      {{ generate_sources(sources, cache_url, False)}}
 
       {{ generate_couch_layers(couch_layers)}}
-
-      // var vector_sources = {{ vector_geometries|tojson|safe }}
-      // var vector_layer_title = "{{ _('vector_layer_title') }}";
 
       $('#tabs a').click(function (e) {
         e.preventDefault();
@@ -78,7 +85,7 @@
                <div>
                  <h4>{{ _('Attributes') }}</h4>
                  <p>{{ _('infotext - attributes') }}</p>
-                 <div id="edit-attributes"></div>
+                 <div id="attribute-editor"></div>
                  <button id="save" disabled="disabled">Save</button>
                 </div>
               </div>
