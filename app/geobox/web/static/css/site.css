@@ -234,5 +234,9 @@ li.layerElement input {
 
 .form-horizontal .control-label {
     width: 60px;
+    padding-right: 10px;
 }
 
+.key-label{
+    width: 100px;
+}

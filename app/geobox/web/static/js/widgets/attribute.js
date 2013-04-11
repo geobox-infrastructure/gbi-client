@@ -3,7 +3,7 @@ gbi.widgets = gbi.widgets || {};
 gbi.widgets.AttributeEditor = function(editor, options) {
     var self = this;
     var defaults = {
-        element: 'attributeEditor'
+        element: 'attribute-editor'
     };
     this.attributes = {};
     this.attributeLayer = null;
@@ -22,7 +22,6 @@ gbi.widgets.AttributeEditor = function(editor, options) {
             self.attributeFeature = null;
         });
     });
-    this.render();
 };
 
 gbi.widgets.AttributeEditor.prototype = {
@@ -37,7 +36,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 var newVal = $('#' + key).val();
                 self.edit(key, newVal);
             });
-            $('#'+key+'_remove').click(function() {
+            $('#remove_'+key).click(function() {
                 self.remove(key);
             });
         });
@@ -78,24 +77,27 @@ gbi.widgets.AttributeEditor.template = '\
     <span>No attributes</span>\
 <% } else { %>\
     <% for(var key in attributes) { %>\
-        <div>\
-            <label for="<%=key%>"><%=key%></label>\
-            <input type="text" id="<%=key%>" value="<%=attributes[key]%>" />\
-            <button id="<%=key%>_remove">remove</button>\
-        </div>\
+        <form class="form-inline">\
+            <label class="key-label" for="<%=key%>"><%=key%></label>\
+            <input class="input-small" type="text" id="<%=key%>" value="<%=attributes[key]%>" />\
+            <button id="remove_<%=key%>" title="remove" class="btn btn-small"> \
+                <i class="icon-remove"></i>\
+            </button> \
+        </form>\
     <% } %>\
 <% } %>\
+<h4>Add new attribute</h4>\
 <form class="form-horizontal"> \
 	 <div class="control-group"> \
 		<label class="control-label" for="newKey">Key</label> \
-		<div class="controls">\
-			<input type="text" id="newKey" placeholder="Key">\
+		<div>\
+			<input type="text" id="newKey" class="input-small" placeholder="Key">\
 		</div>\
 	</div>\
 	 <div class="control-group"> \
 		<label class="control-label" for="newValue">Value</label> \
-		<div class="controls">\
-			<input type="text" id="newValue" placeholder="100">\
+		<div>\
+			<input type="text" id="newValue" class="input-small" placeholder="100">\
 		</div>\
 	</div>\
     <button id="addKeyValue" class="btn btn-small">Add</button>\
