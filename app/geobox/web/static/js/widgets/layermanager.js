@@ -6,6 +6,7 @@ gbi.widgets.LayerManager = function(editor, options) {
         element: 'layermanager'
     };
 
+    this.editor = editor;
     this.layerManager = editor.layerManager;
     this.options = $.extend({}, defaults, options);
     this.element = $('#' + this.options.element);
@@ -65,6 +66,12 @@ gbi.widgets.LayerManager.prototype = {
             self.element.find('#down_' + layer.id).click(function() {
                if(self.layerManager.down(layer)) {
                 self.render(self.findAccordion(this));
+                }
+            });
+            self.element.find('#data_extent_' + layer.id).click(function() {
+                var extent = layer.olLayer.getDataExtent();
+                if (extent) {
+                    self.editor.map.olMap.zoomToExtent(extent);
                 }
             });
             self.element.find('#remove_' + layer.id).click(function() {
@@ -186,13 +193,16 @@ gbi.widgets.LayerManager.template = '\
                             <%=vectorLayers[i].olLayer.name%> \
                         </span><br>\
                         <div class="btn-group controls"> \
-                            <button id="up_<%=vectorLayers[i].id%>" class="btn btn-small">\
+                            <button id="up_<%=vectorLayers[i].id%>" title="up" class="btn btn-small">\
                                 <i class="icon-chevron-up"></i>\
                             </button> \
-                            <button id="down_<%=vectorLayers[i].id%>" class="btn btn-small"> \
+                            <button id="down_<%=vectorLayers[i].id%>" title="down" class="btn btn-small"> \
                                 <i class="icon-chevron-down"></i>\
                             </button> \
-                            <button id="remove_<%=vectorLayers[i].id%>" class="btn btn-small"> \
+                            <button id="data_extent_<%=vectorLayers[i].id%>" title="data extent" class="btn btn-small"> \
+                                <i class="icon-search"></i>\
+                            </button> \
+                            <button id="remove_<%=vectorLayers[i].id%>" title="remove" class="btn btn-small"> \
                                 <i class="icon-remove"></i>\
                             </button> \
                         </div> \
