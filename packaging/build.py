@@ -139,6 +139,9 @@ def build_installer_command():
 
 def build_app_command():
     """Build GeoBox Python application as .exe"""
+    geobox_conf = config.get('appconfig')
+    if geobox_conf:
+        path(geobox_conf).copy(path('../app/geobox/appconfig.py'))
     pyinstaller_spec_tpl = open(path('geobox.spec.tpl')).read()
     template = string.Template(pyinstaller_spec_tpl)
     pyinstaller_spec = path('geobox.spec')
