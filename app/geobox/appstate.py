@@ -1,5 +1,5 @@
 # This file is part of the GBI project.
-# Copyright (C) 2012 Omniscale GmbH & Co. KG <http://omniscale.com>
+# Copyright (C) 2013 Omniscale GmbH & Co. KG <http://omniscale.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ import uuid
 import threading
 import tempfile
 import shutil
-import time
-import ConfigParser as _ConfigParser
 
 import babel.support
 
@@ -33,99 +31,8 @@ from geobox.utils import port_used
 import logging
 log = logging.getLogger(__name__)
 
-class ConfigParser(object):
-    """
-    Utility class for parsing ini-style configurations with
-    predefined default values..
-    """
-
-    """Default values, set by subclass"""
-    defaults = {}
-
-    def __init__(self, parser, fname):
-        self.parser = parser
-        self.fname = fname
-
-    @classmethod
-    def from_file(cls, fname):
-        parser = _ConfigParser.ConfigParser()
-        try:
-            with open(fname) as fp:
-                parser.readfp(fp)
-        except Exception, ex:
-            log.warn('Unable to read configuration: %s', ex)
-        return cls(parser, fname)
-
-    def has_option(self, section, name):
-        if self.parser.has_option(section, name):
-            return True
-        return name in self.defaults.get(section, {})
-
-    def get(self, section, name):
-        if self.parser.has_option(section, name):
-            return self.parser.get(section, name)
-        else:
-            return self.defaults[section][name]
-
-    def get_bool(self, section, name):
-        if self.parser.has_option(section, name):
-            return self.parser.getboolean(section, name)
-        else:
-            return self.defaults[section][name]
-
-    def get_int(self, section, name):
-        if self.parser.has_option(section, name):
-            return self.parser.getint(section, name)
-        else:
-            return self.defaults[section][name]
-
-    def set(self, section, name, value):
-        if not self.defaults.has_key(section):
-            raise _ConfigParser.NoSectionError(section)
-        if not self.parser.has_section(section):
-            self.parser.add_section(section)
-        self.parser.set(section, name, value)
-
-    def write(self):
-        self.parser.write(open(self.fname, 'w'))
-
-def path(default=(), dev=(), test=(), frozen=()):
-    """
-    Get path depending on the runtime.
-
-    When executed from PyInstaller .exe, return first
-    existing path from the `frozen` list, then from the `test` list.
-
-    Otherwise it returns the first path from the `dev` list.
-    Returns ``None`` if no path was found.
-    """
-    if getattr(sys, 'frozen', None):
-        basedir = sys._MEIPASS
-        for p in frozen:
-            p = os.path.join(basedir, p)
-            if os.path.exists(p):
-                return p
-        for p in test:
-            p = os.path.join(basedir, p)
-            if os.path.exists(p):
-                return p
-        for p in default:
-            p = os.path.join(basedir, p)
-            if os.path.exists(p):
-                return p
-    else:
-        for p in dev:
-            if os.path.exists(p):
-                return p
-        for p in default:
-            if os.path.exists(p):
-                return p
-
-def env(key, value, platform=None):
-    if platform and not sys.platform.startswith(platform):
-        return
-
-    os.environ[key] = value
+from geobox.lib.tileboxserver import TileBoxServer
+from geobox.defaults import GeoBoxConfig
 
 class GeoBoxState(object):
     """
@@ -275,80 +182,3 @@ class GeoBoxState(object):
         else:
             raise ValueError('unknown data_path name "%s"' % name)
         return None
-
-class TileBoxServer(object):
-    def __init__(self, app_state):
-        self.server = None
-        self.app_state = app_state
-
-    def is_running(self):
-        return self.server and self.server.is_alive()
-
-    def restart(self):
-        if self.server:
-            self.server.shutdown()
-            if self.server:
-                while self.server.is_alive():
-                    self.server.shutdown()
-                    time.sleep(1)
-            self.server = None
-
-        if self.app_state.config.get('tilebox', 'path'):
-            from geobox.lib.couchdb import CouchDBServerThread
-
-            port = self.app_state.config.get_int('tilebox', 'port')
-            erl_cmd = self.app_state.config.get('couchdb', 'erl_cmd')
-            bin_dir = self.app_state.config.get('couchdb', 'bin_dir')
-            data_dir = self.app_state.config.get('tilebox', 'path')
-            self.server = CouchDBServerThread(self.app_state, host='127.0.0.1', port=port,
-                erl_cmd=erl_cmd, bin_dir=bin_dir, data_dir=data_dir)
-
-            self.server.start()
-
-
-class GeoBoxConfig(ConfigParser):
-    """
-    Configuration parser for basic GeoBox configuration.
-    """
-    defaults = {
-        'app': {
-            'name': 'GeoBox',
-            'host': '127.0.0.1',
-            'locale': 'de_DE', # 'en_UK'
-            'logging_server': '',
-        },
-        'web': {
-            'port': 8090,
-            'available_srs': ['EPSG:4326', 'EPSG:3857', 'EPSG:31467', 'EPSG:25832'],
-            'context_document_url': 'http://gbiserver.omniscale.net/context',
-            'coverages_from_couchdb': 'flaechen-box',
-        },
-        'mapproxy': {
-            'port': 8091,
-        },
-        'watermark': {
-            'text': 'GeoBox',
-        },
-        'user': {
-        },
-        'couchdb': {
-            # temp ports count backwards from this port -> leave room to other ports
-            'port': 8099,
-            # use installed path for couchdb since couchdb in packaging/build
-            # is only usable after installation
-            'bin_dir': path(
-                dev=['c:/Program Files/GeoBox/couchdb/bin', 'c:/Programme/GeoBox/couchdb/bin', '/usr/local/bin'],
-                frozen=['../couchdb/bin'],
-                test=['c:/Program Files/GeoBox/couchdb/bin', 'c:/Programme/GeoBox/couchdb/bin', '/usr/local/bin'],
-            ),
-            'erl_cmd': 'erl -noinput -noshell -sasl errlog_type error -couch_ini',
-            'env': [
-                env("ERL_FLAGS", "-pa /usr/local/share/geocouch/ebin", platform='darwin'),
-                env("ERL_LIBS", "/usr/local/lib/couchdb/erlang/lib", platform='darwin'),
-            ]
-        },
-        'tilebox': {
-            'path': None,
-            'port': 8092,
-        }
-    }
