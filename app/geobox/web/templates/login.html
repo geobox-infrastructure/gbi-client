@@ -13,7 +13,7 @@
 
   <div class="control-group">
       {{ form.csrf_token }}
-      {{ input(form.username) }}
+      {{ input(form.username, autofocus=True) }}
       {{ input(form.password) }}
       <input type=hidden value="{{ next or '' }}" name=next>
   </div>
