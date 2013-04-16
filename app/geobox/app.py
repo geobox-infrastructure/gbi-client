@@ -88,7 +88,8 @@ def open_webbrowser_in_background(host, port):
     t.start()
 
 def main(config_filename, port_check=True, open_webbrowser=False):
-    from .config import GeoBoxConfig, GeoBoxState
+    from .appstate import GeoBoxState
+    from .defaults import GeoBoxConfig
     from .lib import log as liblog
 
     if config_filename:
