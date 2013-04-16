@@ -67,7 +67,11 @@ def create_app(app_state):
             g.db.close()
 
     from .helper import css_alert_category, add_auth_to_url
-    app.jinja_env.globals.update(css_alert_category=css_alert_category, add_auth_to_url=add_auth_to_url)
+    app.jinja_env.globals.update(
+        css_alert_category=css_alert_category,
+        add_auth_to_url=add_auth_to_url,
+        app_state=app_state,
+    )
 
     configure_i18n(app, app_state.locale())
     configure_errorhandlers(app)
