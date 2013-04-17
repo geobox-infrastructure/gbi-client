@@ -26,7 +26,7 @@ def babel_compile_command():
 
 
 def fixtures_command():
-    from geobox.config import GeoBoxState
+    from geobox.appstate import GeoBoxState
     from geobox.model.fixtures import add_fixtures
     app_state = GeoBoxState.initialize()
     if os.path.exists(app_state.db_filename):
@@ -40,7 +40,7 @@ def fixtures_command():
     session.commit()
 
 def init_db_command():
-    from geobox.config import GeoBoxState
+    from geobox.appstate import GeoBoxState
     from geobox.model.fixtures import add_fixtures
     app_state = GeoBoxState.initialize()
     if os.path.exists(app_state.db_filename):
@@ -52,7 +52,9 @@ def init_db_command():
     session.commit()
 
 def webserver_command(config='./geobox.ini'):
-    from geobox.config import GeoBoxConfig, GeoBoxState
+    from geobox.appstate import GeoBoxState
+    from geobox.defaults import GeoBoxConfig
+
     config = GeoBoxConfig.from_file(config)
     if not config:
         sys.exit(1)
