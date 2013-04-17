@@ -30,6 +30,7 @@
         </tbody>
     </table>
 
+    {% if app_state.config.get('app', 'vector_im_export') %}
     <h3>{{ _('local vector sources') }}</h3>
     <table class="table table-striped">
         <thead>
@@ -51,6 +52,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% endif %}
 
     <h3>{{ _('settings') }}</h3>
     <h4>{{ _('local net access') }}
