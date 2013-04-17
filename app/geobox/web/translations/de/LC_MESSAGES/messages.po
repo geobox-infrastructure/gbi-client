@@ -514,7 +514,7 @@ msgstr "Flächenfarbe"
 
 #: geobox/web/templates/js/translation.js:27
 msgid "fill opacity"
-msgstr "Flächentransparenz"
+msgstr "Flächentransparenz in \%%"
 
 #: geobox/web/templates/js/translation.js:28
 msgid "save styling"
