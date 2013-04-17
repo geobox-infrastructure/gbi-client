@@ -17,7 +17,7 @@ import os
 import time
 import logging.config
 import threading
-from geobox.config import path
+from geobox.lib.config import path
 
 def init_logging(app_state):
     user_log_dir = app_state.user_data_path('log', make_dirs=True)

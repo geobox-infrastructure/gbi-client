@@ -24,7 +24,7 @@ from geobox.model.layer import RasterLayer
 from scriptine import path
 def server():
     import time
-    from geobox.config import GeoBoxState
+    from geobox.lib.config import GeoBoxState
 
     app_state = GeoBoxState.initialize()
 

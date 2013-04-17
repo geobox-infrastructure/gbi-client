@@ -22,7 +22,7 @@ import timer
 
 import webbrowser
 
-from geobox.config import path
+from geobox.lib.config import path
 
 import logging
 log = logging.getLogger(__name__)
