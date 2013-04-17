@@ -24,6 +24,8 @@ gbi.widgets.StyleEditor = function(editor, options) {
     this.render();
 };
 gbi.widgets.StyleEditor.prototype = {
+
+
     render: function() {
         var self = this;
         this.element.empty();
@@ -31,21 +33,30 @@ gbi.widgets.StyleEditor.prototype = {
         if (!self.stylingLayer) {
             return false;
         }
-        this.element.append(tmpl(gbi.widgets.StyleEditor.template, {symbolizer: this.stylingLayer.symbolizers}));
+        this.element.append(tmpl(gbi.widgets.StyleEditor.template, {symbolizers: this.stylingLayer.symbolizers}));
 
         $('.color_picker').each(function() {
-            $(this).minicolors().minicolors('value', $(this).val());
+            $(this).minicolors({
+                'value': $(this).val(),
+                change: function() {
+                    self.setStyle();
+                }
+            });
         });
 
         var sliderOpts = {
             range: [0, 100],
             start: 100,
             step: 1,
-            handles: 1
+            handles: 1,
+            slide: function() {
+                self.setStyle();
+            }
         }
 
         $('.noUiSlider').each(function() {
-            $(this).noUiSlider($.extend(sliderOpts, {serialization: {to: $(this).prev()}}));
+            $(this).noUiSlider(
+                $.extend(sliderOpts, {serialization: {to: $(this).prev()}}));
         });
 
         if(this.stylingLayer.symbolizers) {
@@ -53,9 +64,6 @@ gbi.widgets.StyleEditor.prototype = {
                 if (!type.match(/^_/)) {
                     $.each(style, function(key, value) {
                         var cssClass = '.' + type.toLowerCase() + '_' + key;
-                        if (key.match('Color')) {
-                            $(cssClass).minicolors('value', value);
-                        }
                         if (key.match('Opacity')) {
                             value = value * 100;
                             $(cssClass+".noUiSlider").val(value);
@@ -67,10 +75,18 @@ gbi.widgets.StyleEditor.prototype = {
             });
         }
 
-        $('#set_style').click(function() {
+        $(".styleControl").keyup(function() {
+            self.setStyle();
+        }).change(function() {
             self.setStyle();
         });
+
+        $('#saveStyle').click(function() {
+            self.saveStyle();
+            return false;
+        });
     },
+
     setStyle: function() {
         var self = this;
         var symbolizers = {};
@@ -98,11 +114,18 @@ gbi.widgets.StyleEditor.prototype = {
         }
         if(Object.keys(symbolizers).length > 0) {
             this.stylingLayer.setStyle(symbolizers);
-            if(this.stylingLayer instanceof gbi.Layers.Couch) {
-                this.stylingLayer._saveStyle();
-            }
+        }
+        return this.stylingLayer;
+    },
+
+    saveStyle: function() {
+        var stylingLayer = this.setStyle();
+
+        if(this.stylingLayer instanceof gbi.Layers.Couch) {
+           this.stylingLayer._saveStyle();
         }
     },
+
     _setStyleProperty: function(id, obj) {
         var value = $(id).val();
         if(value) {
@@ -125,32 +148,46 @@ var label = {
 
 gbi.widgets.StyleEditor.template = '\
 <h3>'+label.line+'</h3>\
-<div>\
-    <label for="line_strokeWidth">'+label.strokeWidth+':</label>\
-    <input id="line_strokeWidth" class="line_strokeWidth" />\
-</div>\
-<div>\
-    <label for="line_strokeColor">'+label.strokeColor+':</label>\
-    <input class="color_picker line_strokeColor"/>\
-</div>\
-</div>\
-<h3>Polygon</h3>\
-<div>\
-    <label for="polygon_strokeWidth">'+label.strokeWidth+':</label>\
-    <input id="polygon_strokeWidth" class="polygon_strokeWidth" />\
-</div>\
-<div>\
-    <label for="polygon_strokeColor">'+label.strokeColor+':</label>\
-    <input id="polygon_strokeColor" class="color_picker polygon_strokeColor"/>\
-</div>\
-<div>\
-    <label for="polygon_fillColor">'+label.fillColor+':</label>\
-    <input id="polygon_fillColor" class="color_picker polygon_fillColor"/>\
-</div>\
-<div>\
-    <label for="polygon_fillOpacity">'+label.fillOpacity+':</label>\
-    <input id="polygon_fillOpacity" class="polygon_fillOpacity" />\
-    <div class="noUiSlider polygon_fillOpacity"></div>\
-</div>\
-<button id="set_style" class="btn btn-small">'+label.saveStyling+'</button>\
+<form class="form-horizontal"> \
+     <div class="control-group">\
+        <label for="line_strokeWidth" class="control-label">'+label.strokeWidth + ':</label>\
+         <div class="controls"> \
+            <input type="text" id="line_strokeWidth" class="line_strokeWidth styleControl input-small" />\
+        </div>\
+    </div>\
+    <div class="control-group">\
+        <label for="line_strokeColor" class="control-label">'+label.strokeColor+':</label>\
+        <div class="controls"> \
+            <input class="color_picker line_strokeColor styleControl input-small" value="<%=symbolizers.Line.strokeColor%>"/>\
+        </div>\
+    </div>\
+    </div>\
+    <h3>Polygon</h3>\
+    <div class="control-group">\
+        <label for="polygon_strokeWidth" class="control-label">'+label.strokeWidth+':</label>\
+        <div class="controls"> \
+            <input id="polygon_strokeWidth" class="polygon_strokeWidth styleControl input-small" />\
+        </div>\
+    </div>\
+    <div class="control-group">\
+        <label for="polygon_strokeColor" class="control-label">'+label.strokeColor+':</label>\
+        <div class="controls"> \
+            <input id="polygon_strokeColor" class="color_picker polygon_strokeColor styleControl input-small" value="<%=symbolizers.Polygon.strokeColor%>" />\
+        </div>\
+   </div>\
+   <div class="control-group">\
+        <label for="polygon_fillColor" class="control-label">'+label.fillColor+':</label>\
+        <div class="controls"> \
+            <input id="polygon_fillColor" class="color_picker polygon_fillColor styleControl input-small" value="<%=symbolizers.Polygon.fillColor %>" />\
+        </div>\
+    </div>\
+    <div class="control-group">\
+        <label for="polygon_fillOpacity" class="control-label">'+label.fillOpacity+':</label>\
+        <div class="controls"> \
+            <input id="polygon_fillOpacity" class="polygon_fillOpacity styleControl input-small" />\
+            <div class="noUiSlider polygon_fillOpacity"></div>\
+        </div> \
+    </div>\
+    <button id="saveStyle" class="btn btn-small">'+label.saveStyling+'</button>\
+</form>\
 ';
