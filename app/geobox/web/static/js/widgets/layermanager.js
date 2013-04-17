@@ -3,15 +3,34 @@ gbi.widgets = gbi.widgets || {};
 gbi.widgets.LayerManager = function(editor, options) {
     var self = this;
     var defaults = {
-        element: 'layermanager'
+        element: 'layermanager',
+        tiny: false
     };
 
     this.editor = editor;
     this.layerManager = editor.layerManager;
     this.options = $.extend({}, defaults, options);
-    this.element = $('#' + this.options.element);
+
+    if(this.options.tiny) {
+        this.element = $('<div></div>');
+        this.element.addClass('gbi_widgets_LayerManager');
+    } else {
+        this.element = $('#' + this.options.element);
+    }
 
     this.render();
+
+    if(this.options.tiny) {
+        $('.olMapViewport').append(this.element);
+    }
+
+    $(gbi).on('gbi.layermanager.layer.remove', function(event, layer) {
+         self.render();
+    });
+
+    $(gbi).on('gbi.layermanager.layer.add', function(event, layer) {
+         self.render();
+    });
 };
 gbi.widgets.LayerManager.prototype = {
     render: function(accordion) {
@@ -21,13 +40,11 @@ gbi.widgets.LayerManager.prototype = {
         var rasterLayers = [];
         var backgroundLayers = [];
         var vectorLayers = [];
-
         $.each(this.layerManager.layers(), function(idx, gbiLayer) {
             if(gbiLayer.options.displayInLayerSwitcher) {
                 if (gbiLayer.isVector) {
                     vectorLayers.push(gbiLayer);
                 }
-
                 if (gbiLayer.isRaster && gbiLayer.isBackground) {
                     backgroundLayers.push(gbiLayer);
                 }
@@ -39,12 +56,13 @@ gbi.widgets.LayerManager.prototype = {
             }
         });
 
-
-
         if (!accordion) {
             accordion = 'collapseBackground';
         }
-        this.element.append(tmpl(gbi.widgets.LayerManager.template, {
+
+        var template = this.options.tiny ? gbi.widgets.LayerManager.templates.tiny : gbi.widgets.LayerManager.templates.normal;
+
+        this.element.append(tmpl(template, {
             backgroundLayers: backgroundLayers,
             rasterLayers: rasterLayers,
             vectorLayers: vectorLayers,
@@ -140,8 +158,9 @@ var label = {
     'addLayer': OpenLayers.i18n("addvectorLayerButton")
 }
 
-gbi.widgets.LayerManager.template = '\
-<div class="accordion" id="accordion2">\
+gbi.widgets.LayerManager.templates = {
+ normal: '\
+ <div class="accordion" id="accordion2">\
     <div class="accordion-group">\
         <div class="accordion-heading">\
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseBackground">\
@@ -237,4 +256,44 @@ gbi.widgets.LayerManager.template = '\
         </div>\
     </div> \
 </div> \
-';
+',
+tiny: '\
+        <h5>'+label.background+'\</h5>\
+        <ul>\
+            <% for(var i=0; i<backgroundLayers.length; i++) { %>\
+                <li class="gbi_layer">\
+                    <input type="checkbox" id="visible_<%=backgroundLayers[i].id%>" />\
+                    <span><%=backgroundLayers[i].olLayer.name%></span>\
+                    <button id="up_<%=backgroundLayers[i].id%>">&uarr;</button>\
+                    <button id="down_<%=backgroundLayers[i].id%>">&darr;</button>\
+                </li>\
+            <% } %>\
+        </ul>\
+        <% if(rasterLayers.length != 0) { %> \
+            <h5>'+label.raster+'\</h5>\
+            <ul>\
+                <% for(var i=0; i<rasterLayers.length; i++) { %>\
+                    <li class="gbi_layer">\
+                        <input type="checkbox" id="visible_<%=rasterLayers[i].id%>" />\
+                        <span><%=rasterLayers[i].olLayer.name%></span>\
+                        <button id="up_<%=rasterLayers[i].id%>">&uarr;</button>\
+                        <button id="down_<%=rasterLayers[i].id%>">&darr;</button>\
+                    </li>\
+                <% } %>\
+            </ul>\
+            <% } %> \
+        <% if(vectorLayers.length != 0) { %> \
+            <h5>'+label.vector+'\</h5>\
+            <ul>\
+                <% for(var i=0; i<vectorLayers.length; i++) { %>\
+                    <li class="gbi_layer">\
+                        <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" />\
+                        <span><%=vectorLayers[i].olLayer.name%></span>\
+                        <button id="up_<%=vectorLayers[i].id%>">&uarr;</button>\
+                        <button id="down_<%=vectorLayers[i].id%>">&darr;</button>\
+                    </li>\
+                <% } %>\
+            </ul>\
+        <% } %> \
+    '
+};

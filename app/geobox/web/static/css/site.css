@@ -244,3 +244,23 @@ li.layerElement input {
 .tab-content {
     overflow: visible;
 }
+
+.gbi_widgets_LayerManager {
+    position: absolute;
+    top: 8px;
+    right: 0px;
+    background-color: darkblue;
+    z-index: 1005;
+    color: white;
+    padding-left: 15px;
+}
+
+.gbi_widgets_LayerManager ul {
+    padding: 0px;
+    list-style-type: none;
+}
+
+.gbi_widgets_LayerManager li {
+    list-style-type: none;
+    margin-left: -20px;
+}
