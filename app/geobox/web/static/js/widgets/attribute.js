@@ -3,76 +3,126 @@ gbi.widgets = gbi.widgets || {};
 gbi.widgets.AttributeEditor = function(editor, options) {
     var self = this;
     var defaults = {
-        element: 'attribute-editor'
+        element: 'attributemanager'
     };
-    this.attributes = {};
-    this.attributeLayer = null;
-    this.attributeFeature = null;
+    this.featuresAttributes = {};
+    this.newAttributes = {};
     this.layerManager = editor.layerManager;
     this.options = $.extend({}, defaults, options);
     this.element = $('#' + this.options.element);
+    this.selectedFeatures = [];
+    this.changed = false;
+
     $.each(this.layerManager.vectorLayers, function(idx, layer) {
-        layer.registerCallback('select', function(feature) {
-            self._attributes(feature);
+        layer.registerEvent('featureselected', self, function(f) {
+            this.selectedFeatures.push(f.feature);
+            this._attributes();
         });
-        layer.registerCallback('unselect', function() {
-            self.element.empty();
-            self.attributes = {};
-            self.attributeLayer = null;
-            self.attributeFeature = null;
+        layer.registerEvent('featureunselected', self, function(f) {
+            var idx = this.selectedFeatures.indexOf(f.feature);
+            if(idx != -1) {
+                this.selectedFeatures.splice(idx, 1);
+                this._attributes();
+            }
         });
     });
 };
 
 gbi.widgets.AttributeEditor.prototype = {
+    CLASS_NAME: 'gbi.widgets.AttributeEditor',
     render: function() {
         var self = this;
         this.element.empty();
-        this.element.append(tmpl(gbi.widgets.AttributeEditor.template, {attributes: this.attributes}));
-
-        //bind events
-        $.each(this.attributes, function(key, value) {
-            $('#'+key).change(function() {
-                var newVal = $('#' + key).val();
-                self.edit(key, newVal);
+        if(this.selectedFeatures.length > 0) {
+            this.element.append(tmpl(
+                gbi.widgets.AttributeEditor.template,
+                {attributes: this.featuresAttributes}
+            ));
+            //bind events
+            $.each(this.featuresAttributes, function(key, value) {
+                $('#'+key).change(function() {
+                    var newVal = $('#' + key).val();
+                    self.edit(key, newVal);
+                });
+                $('#'+key+'_remove').click(function() {
+                    self.remove(key);
+                    return false;
+                });
             });
-            $('#remove_'+key).click(function() {
-                self.remove(key);
+            $('#addKeyValue').click(function() {
+                var key = $('#newKey').val();
+                var val = $('#newValue').val();
+                if (key && val) {
+                    self.add(key, val);
+                    self._applyAttributes();
+                }
+                return false;
             });
-        });
-        $('#addKeyValue').click(function() {
-            var key = $('#newKey').val();
-            var val = $('#newValue').val();
-            self.add(key, val);
-            return false;
-        });
+        }
     },
     add: function(key, value) {
-        if(!this.attributes[key]) {
-            this.edit(key, value);
+        if(!this.newAttributes[key] && !this.featuresAttributes[key]) {
+            this.newAttributes[key] = value;
+            this.changed = true;
+            this.featuresAttributes = $.extend({}, this.featuresAttributes, this.newAttributes);
+            this.newAttributes = {};
+            this.render();
         }
     },
     edit: function(key, value) {
-        this.attributes[key] = value;
-        if(this.attributeLayer instanceof gbi.Layers.Couch) {
-            this.attributeFeature.state = OpenLayers.State.UPDATE;
-            this.attributeLayer.changesMade();
-        }
+        this.featuresAttributes[key] = value;
+        this.changed = true;
         this.render();
     },
     remove: function(key) {
-        delete this.attributes[key];
-        this.attributeFeature.state = OpenLayers.State.UPDATE;
-        this.attributeLayer.changesMade();
+        delete this.featuresAttributes[key];
+        this.changed = true;
         this.render();
     },
-    _attributes: function(feature, features) {
-        this.attributeFeature = feature;
-        this.attributes = feature.attributes;
-        this.attributeLayer = this.layerManager.layerById(feature.layer.gbiId)
+    _applyAttributes: function() {
+        var self = this;
+        $.each(this.selectedFeatures, function(idx, feature) {
+            feature.attributes = $.extend({}, self.featuresAttributes, self.newAttributes);
+            var gbiLayer = self.layerManager.layerById(feature.layer.gbiId);
+            if(gbiLayer instanceof gbi.Layers.SaveableVector) {
+                feature.state = OpenLayers.State.UPDATE;
+                gbiLayer.changesMade();
+            }
+        });
+    },
+    _attributes: function() {
+        var self = this;
+        this.element.empty();
+        this.featuresAttributes = {};
+        var newFeatureAttributes = false;
+        if(this.selectedFeatures.length == 0) {
+            this.attributeLayers = null;
+            this.newAttributes = {};
+            this.changed = false;
+        } else {
+            $.each(this.selectedFeatures, function(idx, feature) {
+                $.each(feature.attributes, function(key, value) {
+                    if(!(key in self.featuresAttributes)) {
+                        self.featuresAttributes[key] = value;
+                        if(idx>0) {
+                            newFeatureAttributes = true;
+                        }
+                    }
+                });
+                if(!newFeatureAttributes) {
+                    $.each(self.featuresAttributes, function(key, value) {
+                        if(!(key in feature.attributes)) {
+                            newFeatureAttributes = true;
+                        }
+                    });
+                }
+            });
+            this.changed = newFeatureAttributes || Object.keys(this.newAttributes).length > 0;
+        }
         this.render();
     }
 };
+
 
 var label = {
     'noAttributes': OpenLayers.i18n("noAttributes"),
@@ -82,7 +132,6 @@ var label = {
     'formTitle': OpenLayers.i18n("addNewAttributesTitle"),
 }
 
-
 gbi.widgets.AttributeEditor.template = '\
 <% if(Object.keys(attributes).length == 0) { %>\
     <span>'+label.noAttributes+'</span>\
@@ -91,7 +140,7 @@ gbi.widgets.AttributeEditor.template = '\
         <form class="form-inline">\
             <label class="key-label" for="<%=key%>"><%=key%></label>\
             <input class="input-small" type="text" id="<%=key%>" value="<%=attributes[key]%>" />\
-            <button id="remove_<%=key%>" title="remove" class="btn btn-small"> \
+            <button id="<%=key%>_remove" title="remove" class="btn btn-small"> \
                 <i class="icon-remove"></i>\
             </button> \
         </form>\
@@ -101,13 +150,13 @@ gbi.widgets.AttributeEditor.template = '\
 <form class="form-horizontal"> \
 	 <div class="control-group"> \
 		<label class="control-label" for="newKey">'+label.key+'</label> \
-		<div>\
+		<div class="controls">\
 			<input type="text" id="newKey" class="input-small">\
 		</div>\
 	</div>\
 	 <div class="control-group"> \
 		<label class="control-label" for="newValue">'+label.val+'</label> \
-		<div>\
+		<div class="controls">\
 			<input type="text" id="newValue" class="input-small">\
 		</div>\
 	</div>\
