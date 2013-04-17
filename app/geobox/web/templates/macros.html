@@ -32,7 +32,8 @@
                     else
                         $('#save').attr('disabled', 'disabled');
                     }
-                }
+            },
+            attributePopup: false
           })
         );
     {% endfor %}
@@ -68,8 +69,8 @@
             styleMap: downloadAreaStyleMap,
             displayInLayerSwitcher: true,
             source_id: {{ map_source.id }},
-            editable: false
-
+            editable: false,
+            attributePopup: false
         });
 
         var geojson_format = new OpenLayers.Format.GeoJSON();
