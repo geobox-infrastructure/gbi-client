@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-17 09:37+0200\n"
+"POT-Creation-Date: 2013-04-17 15:23+0200\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -105,7 +105,7 @@ msgid "path"
 msgstr "Verzeichnis"
 
 #: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:55
-#: geobox/web/templates/index.html:47
+#: geobox/web/templates/index.html:53
 msgid "settings"
 msgstr "Einstellungen"
 
@@ -251,7 +251,7 @@ msgid "open export on external explorer"
 msgstr "Export-Verzeichnis öffnen"
 
 #: geobox/web/templates/editor.html:2 geobox/web/templates/editor.html:49
-#: geobox/web/templates/index.html:39 geobox/web/templates/index.html:41
+#: geobox/web/templates/index.html:45 geobox/web/templates/index.html:47
 msgid "editor"
 msgstr "Editor"
 
@@ -294,8 +294,7 @@ msgstr "Editieren"
 
 #: geobox/web/templates/editor.html:88
 msgid "infotext - edit controls"
-msgstr ""
-"Wählen Sie ein Bearbeitungswerkzeug aus."
+msgstr "Wählen Sie ein Bearbeitungswerkzeug aus."
 
 #: geobox/web/templates/editor.html:93
 msgid "Attributes"
@@ -308,7 +307,7 @@ msgstr ""
 "hierzu eine Geometrie mit dem Auswahlwerkezug aus."
 
 #: geobox/web/templates/editor.html:97
-#: geobox/web/templates/projects/export_edit.html:61
+#: geobox/web/templates/projects/export_edit.html:63
 #: geobox/web/templates/projects/import_edit.html:29
 msgid "save"
 msgstr "Speichern"
@@ -348,32 +347,36 @@ msgstr "Importieren"
 msgid "import raster"
 msgstr "Rasterdaten Importieren"
 
-#: geobox/web/templates/index.html:19
+#: geobox/web/templates/index.html:20
 msgid "import vector"
 msgstr "Vektordaten importieren"
 
-#: geobox/web/templates/index.html:24
+#: geobox/web/templates/index.html:26
 msgid "export"
 msgstr "Exportieren"
 
-#: geobox/web/templates/index.html:26
+#: geobox/web/templates/index.html:29
 msgid "export raster/vector"
 msgstr "Raster- und Vektordaten exportieren"
 
-#: geobox/web/templates/index.html:31 geobox/web/templates/index.html:33
+#: geobox/web/templates/index.html:31
+msgid "export raster"
+msgstr "Rasterdaten Exportieren"
+
+#: geobox/web/templates/index.html:37 geobox/web/templates/index.html:39
 #: geobox/web/templates/tasks/task_list.html:83
 msgid "tasks"
 msgstr "Aufgaben"
 
-#: geobox/web/templates/index.html:34
+#: geobox/web/templates/index.html:40
 msgid "downloads"
 msgstr "Downloads"
 
-#: geobox/web/templates/index.html:42
+#: geobox/web/templates/index.html:48
 msgid "map"
 msgstr "Karte"
 
-#: geobox/web/templates/index.html:49
+#: geobox/web/templates/index.html:55
 msgid "administation"
 msgstr "Administration"
 
@@ -555,31 +558,31 @@ msgstr "Rasterlayer entfernen"
 msgid "add raster"
 msgstr "Rasterlayer hinzufügen"
 
-#: geobox/web/templates/projects/export_edit.html:47
+#: geobox/web/templates/projects/export_edit.html:48
 msgid "vector layer"
 msgstr "Vektorlayer"
 
-#: geobox/web/templates/projects/export_edit.html:48
+#: geobox/web/templates/projects/export_edit.html:49
 msgid "tooltip - export vectorlayer"
 msgstr ""
 "Wählen Sie den Datentyp für den Inhalt des Vektorformates aus. Pro Export"
 " kann nur eine Vektordatei erzeugt werden."
 
-#: geobox/web/templates/projects/export_edit.html:53
-#: geobox/web/templates/projects/export_edit.html:75
+#: geobox/web/templates/projects/export_edit.html:54
+#: geobox/web/templates/projects/export_edit.html:77
 msgid "remove vector"
 msgstr "Vektorlayer entfernen"
 
-#: geobox/web/templates/projects/export_edit.html:62
+#: geobox/web/templates/projects/export_edit.html:64
 #: geobox/web/templates/projects/import_edit.html:30
 msgid "start"
 msgstr "Speichern & Starten"
 
-#: geobox/web/templates/projects/export_edit.html:76
+#: geobox/web/templates/projects/export_edit.html:78
 msgid "add vector"
 msgstr "Vektorlayer hinzufügen"
 
-#: geobox/web/templates/projects/export_edit.html:78
+#: geobox/web/templates/projects/export_edit.html:80
 msgid "level"
 msgstr "Level"
 
@@ -605,8 +608,8 @@ msgstr "Datenmenge"
 
 #: geobox/web/templates/projects/exports.html:24
 #: geobox/web/templates/projects/imports.html:36
-#: geobox/web/templates/projects/macros.html:34
-#: geobox/web/templates/projects/macros.html:35
+#: geobox/web/templates/projects/macros.html:36
+#: geobox/web/templates/projects/macros.html:37
 msgid "MB"
 msgstr "MB"
 
@@ -676,25 +679,25 @@ msgstr "Alle Geometrien löschen"
 msgid "load coverage"
 msgstr "Laden"
 
-#: geobox/web/templates/projects/macros.html:21
+#: geobox/web/templates/projects/macros.html:22
 msgid "load vectorimports as coverage"
 msgstr "Vektordaten aus Flächenbox laden"
 
-#: geobox/web/templates/projects/macros.html:31
+#: geobox/web/templates/projects/macros.html:33
 msgid "Information"
 msgstr "Informationen"
 
-#: geobox/web/templates/projects/macros.html:32
+#: geobox/web/templates/projects/macros.html:34
 msgid "tooltip - information about data volumen"
 msgstr ""
 "Der Speicherplatz wird beim Im- oder Export mindestens auf Ihrem PC "
 "benötigt."
 
-#: geobox/web/templates/projects/macros.html:34
+#: geobox/web/templates/projects/macros.html:36
 msgid "Data volume"
 msgstr "Datenmenge"
 
-#: geobox/web/templates/projects/macros.html:35
+#: geobox/web/templates/projects/macros.html:37
 msgid "free disk space"
 msgstr "Freier Speicherplatz"
 
@@ -832,7 +835,7 @@ msgid "settings changed. restart required"
 msgstr "Die Einstellungen wurden verändert - bitte starten Sie die Anwendung neu"
 
 #: geobox/web/views/project.py:101 geobox/web/views/project.py:191
-#: geobox/web/views/vector.py:88
+#: geobox/web/views/vector.py:93
 msgid "form error"
 msgstr "Fehler bei Eingaben"
 
@@ -852,30 +855,30 @@ msgstr "Aufgabe gelöscht"
 msgid "username or password not correct"
 msgstr "Benutzername oder Passwort sind nicht korrekt."
 
-#: geobox/web/views/vector.py:73
+#: geobox/web/views/vector.py:78
 msgid "invalid mapping"
 msgstr "Ungültiges Mapping"
 
-#: geobox/web/views/vector.py:76
+#: geobox/web/views/vector.py:81
 msgid "invalid shapefile"
 msgstr "Ungültiges Shapefile/fehlende Dateien"
 
-#: geobox/web/views/vector.py:91
+#: geobox/web/views/vector.py:96
 #, python-format
 msgid "file %(name)s missing"
 msgstr "Datei %(name)s fehlt"
 
-#: geobox/web/views/vector.py:93
+#: geobox/web/views/vector.py:98
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr "Fehler beim Hochladen der Datei %(name)s"
 
-#: geobox/web/views/vector.py:95
+#: geobox/web/views/vector.py:100
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr "Dateityp der Datei %(name)s ist nicht erlaubt"
 
-#: geobox/web/views/vector.py:97
+#: geobox/web/views/vector.py:102
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr "Datei %(name)s hochgeladen"
@@ -916,165 +919,162 @@ msgstr "Beenden"
 msgid "Open"
 msgstr "Öffnen"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:55
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:55
 #, python-format
 msgid "Invalid field name '%s'."
 msgstr "Ungültiger Feldname  '%s'."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:62
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:62
 #, python-format
 msgid "Field must be equal to %(other_name)s."
 msgstr "Das Feld muss mit dem %(other_name)s übereinstimmen."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:94
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:94
 #, python-format
 msgid "Field must be at least %(min)d character long."
 msgid_plural "Field must be at least %(min)d characters long."
 msgstr[0] "Feld muss mindestens %(min)d Zeichen lang sein"
 msgstr[1] "Feld muss mindestens %(min)d Zeichen lang sein"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:97
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:97
 #, python-format
 msgid "Field cannot be longer than %(max)d character."
 msgid_plural "Field cannot be longer than %(max)d characters."
 msgstr[0] "Der Inhalt kann nicht länger als %(max)d Buchstabe sein."
 msgstr[1] "Der Inhalt kann nicht länger als %(max)d Buchstaben sein."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:100
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:100
 #, python-format
 msgid "Field must be between %(min)d and %(max)d characters long."
 msgstr "Eingabe muss zwischen %(min)d und %(max)d Zeichen lang sein."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:135
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:135
 #, python-format
 msgid "Number must be greater than %(min)s."
 msgstr "Die Zahl muss größer als %(min)s sein "
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:137
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:137
 #, python-format
 msgid "Number must be less than %(max)s."
 msgstr "Zahl muss kleiner sein als %(max)s"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:139
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:139
 #, python-format
 msgid "Number must be between %(min)s and %(max)s."
 msgstr "Die Zahl muss zwischen %(min)s und %(max)s liegen"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:188
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:221
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:188
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:221
 msgid "This field is required."
 msgstr "Dieses Feld muss ausgefüllt werden."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:249
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:249
 msgid "Invalid input."
 msgstr "Ungültige Eingabe."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:268
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:268
 msgid "Invalid email address."
 msgstr "Ungültige E-Mail Adresse"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:297
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:297
 msgid "Invalid IP address."
 msgstr "Ungültige IP Adresse."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:345
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:345
 msgid "Invalid Mac address."
 msgstr "Ungültige MAC-Adresse"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:370
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:370
 msgid "Invalid URL."
 msgstr "Ungültige URL."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:388
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:388
 msgid "Invalid UUID."
 msgstr "Ungültige UUID."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:415
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:415
 #, python-format
 msgid "Invalid value, must be one of: %(values)s."
 msgstr "Ungültiger Wert. Der Wert muss eines der folgenen sein: %(values)s."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:442
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:442
 #, python-format
 msgid "Invalid value, can't be any of: %(values)s."
 msgstr "Ungültiger Wert: %(values)s sind nicht möglich."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:419
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:419
 msgid "Not a valid choice"
 msgstr "Keine gültige Auswahl."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:109
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:109
 msgid "Not a valid list"
 msgstr "Keine gültige Liste."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/form.py:47
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/form.py:47
 msgid "Invalid CSRF Token"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:57
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:57
 msgid "CSRF token missing"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:65
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:65
 msgid "CSRF failed"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:70
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:70
 msgid "CSRF token expired"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:50
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:50
 msgid "Please input a date/time value"
 msgstr "Bitte geben Sie Datun/Zeit ein."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:62
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:62
 msgid "Invalid date/time input"
 msgstr "Ungültiger Datumswert."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/validators.py:33
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/validators.py:33
 msgid "Already exists."
 msgstr "Bereits vorhanden."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:412
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:412
 msgid "Invalid Choice: could not coerce"
 msgstr "Keine gültige Auswahl."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:445
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:445
 msgid "Invalid choice(s): one or more data inputs could not be coerced"
 msgstr ""
 "Ungültige Auswahl: Einer oder mehrere Eingaben konnten nicht verarbeitet "
 "werden."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:452
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:452
 #, python-format
 msgid "'%(value)s' is not a valid choice for this field"
 msgstr "'%(value)s' ist keine gültige Wahl für dieses Feld."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:507
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:507
 msgid "Not a valid integer value"
 msgstr "Kein gültiger Integer-Zahlenwert angegeben."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:554
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:554
 msgid "Not a valid decimal value"
 msgstr "Kein gültiger Dezimal-Zahlenwert angegeben."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:581
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:581
 msgid "Not a valid float value"
 msgstr "Kein gültiger Float-Zahlenwert angegeben."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:632
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:632
 msgid "Not a valid datetime value"
 msgstr "Kein gültigen Zeitpunkt angegeben."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:649
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:649
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
-
-#~ msgid "attribute"
-#~ msgstr "Eigenschaft"
 
