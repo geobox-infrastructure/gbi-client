@@ -48,7 +48,10 @@ def admin():
     query = g.db.query(LocalWMTSSource)
     raster_sources = query.all()
 
-    vector_dbs = [{'title': u'Flächen-Box', 'name': 'flaechen-box'}]
+    if current_app.config.geobox_state.config.get('app', 'vector_im_export'):
+        vector_dbs = [{'title': u'Flächen-Box', 'name': 'flaechen-box'}]
+    else:
+        vector_dbs = []
     return render_template('admin.html', raster_sources=raster_sources, localnet=get_localnet_status(),
         form=form, tilebox_form=tilebox_form, vector_dbs=vector_dbs)
 
@@ -80,6 +83,8 @@ def tilebox_restart():
 
 @admin_view.route('/admin/clear/<name>', methods=['POST'])
 def clear_couchdb(name):
+    if not current_app.config.geobox_state.config.get('app', 'vector_im_export'):
+        abort(404)
     # delete from couch db
     couch = CouchDB('http://127.0.0.1:%s' %
         (current_app.config.geobox_state.config.get('couchdb', 'port'), ),

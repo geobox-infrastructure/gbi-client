@@ -30,6 +30,7 @@ except ImportError:
                 'host': '127.0.0.1',
                 'locale': 'de_DE', # 'en_UK'
                 'logging_server': '',
+                'vector_im_export': False,
             },
             'web': {
                 'port': 8090,

@@ -115,13 +115,22 @@ def prepare_geocouch_command():
     (config['geocouch_dir'] / 'ebin').copytree(lib_geocouch_dir / 'ebin')
 
 def clean_command():
+    """
+    Clean up build dir.
+    """
     config['build_dir'].rmtree()
 
 def build_command():
+    """
+    Build GeoBox application and installer.
+    """
     build_app_command()
     build_installer_command()
 
 def all_command():
+    """
+    Unpack, prepare and build everything.
+    """
     unpack_command()
     prepare_command()
     build_app_command()
@@ -133,12 +142,13 @@ def create_iss_config_command():
     (config['build_dir'] / 'installer.iss').write_text(template.substitute(config))
 
 def build_installer_command():
+    """Build GeoBox installer."""
     create_iss_config_command()
     config['dist_dir'].ensure_dir()
     call([config['inno_dir'] / 'iscc.exe', config['build_dir'] / 'installer.iss'])
 
 def build_app_command():
-    """Build GeoBox Python application as .exe"""
+    """Build GeoBox Python application as .exe."""
     geobox_conf = config.get('appconfig')
     if geobox_conf:
         path(geobox_conf).copy(path('../app/geobox/appconfig.py'))

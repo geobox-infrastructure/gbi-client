@@ -16,7 +16,7 @@
 import os
 import glob
 
-from flask import Blueprint, render_template, g, url_for, redirect, request, flash, current_app
+from flask import Blueprint, render_template, g, url_for, redirect, request, flash, current_app, abort
 
 from flaskext.babel import _
 
@@ -30,6 +30,11 @@ from ..utils import request_is_local
 from ..helper import redirect_back
 
 vector = Blueprint('vector', __name__)
+
+@vector.before_request
+def only_if_enabled():
+    if not current_app.config.geobox_state.config.get('app', 'vector_im_export'):
+        abort(404)
 
 @vector.route('/vector/import', methods=['GET', 'POST'])
 def import_vector():

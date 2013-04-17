@@ -13,16 +13,16 @@
 ; CouchDB inno installer script
 
 [Setup]
-AppID=GeoBox
-AppName=GeoBox
-AppVerName=GeoBox ${version}
+AppID=${app_title}
+AppName=${app_title}
+AppVerName=${app_title} ${version}
 AppPublisher=Omniscale
 AppPublisherURL=http://github.org/omniscale/
 ; TODO license
 ; LicenseFile=../../LICENSE
-DefaultDirName={pf}\GeoBox
-DefaultGroupName=GeoBox
-OutputBaseFilename=setup-geobox-${version}
+DefaultDirName={pf}\${app_title}
+DefaultGroupName=${app_title}
+OutputBaseFilename=setup-${app_name}-${version}
 OutputDir=${dist_dir}
 ; admin required for AutoStart
 PrivilegesRequired=admin
@@ -82,8 +82,8 @@ Name: "{app}\couchdb\var\run\couchdb"; Permissions: authusers-modify
 Name: "{app}\couchdb\etc\couchdb"; Permissions: authusers-modify
 
 [Icons]
-Name: "{group}\Start GeoBox"; Filename: "{app}\geobox\geobox.exe"; Parameters: "--open-webbrowser"
-Name: "{commonstartup}\GeoBox"; Filename: "{app}\geobox\geobox.exe"
+Name: "{group}\Start ${app_title}"; Filename: "{app}\geobox\geobox.exe"; Parameters: "--open-webbrowser"
+Name: "{commonstartup}\${app_title}"; Filename: "{app}\geobox\geobox.exe"
 
 [Run]
 Filename: "{tmp}\${msvc_redist_name}"; Parameters: "/q"
