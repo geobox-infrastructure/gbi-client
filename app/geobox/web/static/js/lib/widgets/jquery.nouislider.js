@@ -214,7 +214,7 @@
 						var setTo = percentage.to(settings.range, settings.start[i]);
 						handles[i].css(pos, setTo + '%');
 						if (setTo == 100 && handles[i].is(':first-child')) {
-							handles[i].css('z-index', 2);
+							handles[i].css('z-index', 1);
 						}
 
 						var bind = '.noUiSlider',
