@@ -65,13 +65,25 @@
     background-repeat: no-repeat;
 }
 
+.olControlSplitFeatureItemActive {
+    background-image: url(../img/cut_on.png);
+    background-repeat: no-repeat;
+}
+
 .olControlSplitFeatureItemInactive {
     background-image: url(../img/cut_off.png);
     background-repeat: no-repeat;
 }
 
-.olControlSplitFeatureItemActive {
-    background-image: url(../img/cut_on.png);
+.olControlSplitFeatureItemInactive.itemDisabled {
+    background-image: url(../img/cut_disabled.png);
+    background-repeat: no-repeat;
+}
+
+
+
+.olControlMergeFeatureItemInactive.itemDisabled {
+    background-image: url(../img/union_disabled.png);
     background-repeat: no-repeat;
 }
 
@@ -86,11 +98,28 @@
 }
 
 
+div.olControlCopyFeaturesItemActive {
+    background-image: url(../img/copy_on.png);
+    background-repeat: no-repeat;
+}
+div.olControlCopyFeaturesItemInactive {
+    background-image: url(../img/copy_off.png);
+    background-repeat: no-repeat;
+}
+.olControlCopyFeaturesItemInactive.itemDisabled {
+    background-image: url(../img/copy_disabled.png);
+    background-repeat: no-repeat;
+}
 
 
 /* Delete */
 .olControlDeleteFeatureItemActive {
     background-image: url(../img/delete_on.png);
+    background-repeat: no-repeat;
+}
+
+.olControlDeleteFeatureItemInactive.itemDisabled {
+    background-image: url(../img/delete_disabled.png);
     background-repeat: no-repeat;
 }
 .olControlDeleteFeatureItemInactive {

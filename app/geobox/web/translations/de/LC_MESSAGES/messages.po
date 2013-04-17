@@ -295,11 +295,7 @@ msgstr "Editieren"
 #: geobox/web/templates/editor.html:88
 msgid "infotext - edit controls"
 msgstr ""
-"Wählen Sie aus den unterschiedlichen Bearbeitungswerkzeugen. Sie können "
-"einen Punkt, eine Linie oder eine Fläche zeichnen. Zudem besteht die "
-"Möglichkeit, dass Sie Geometrien zusammenfassen, aufteilen oder löschen. "
-"Über das Auswahlwerkzeug können Sie eine entsprechnede Geometrie "
-"selektieren."
+"Wählen Sie ein Bearbeitungswerkzeug aus."
 
 #: geobox/web/templates/editor.html:93
 msgid "Attributes"
@@ -488,7 +484,7 @@ msgstr "Wert"
 
 #: geobox/web/templates/js/translation.js:18
 msgid "add "
-msgstr "Hinzufügne"
+msgstr "Hinzufügen"
 
 #: geobox/web/templates/js/translation.js:19
 msgid "add new attribute"

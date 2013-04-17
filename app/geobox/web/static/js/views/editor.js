@@ -34,13 +34,14 @@ function initEditor() {
     var toolbar = new gbi.Toolbar(editor, {
         element: 'edit-toolbar',
         tools: {
-            select: true,
             drawPoint: true,
             drawLine: true,
             drawPolygon: true,
+            select: true,
+            edit: true,
             split: true,
             merge: true,
-            edit: true,
+            copy: true,
             delete: true
         }
     });
