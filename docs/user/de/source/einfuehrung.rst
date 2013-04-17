@@ -26,8 +26,7 @@ Startseite
 Über die Startseite können Sie die Funktionen der Anwendung auswählen.  Folgende Funktionen stehen Ihnen hier zur Auswahl:
 
   - Importieren von Rasterdaten
-  - Importieren von Vektordaten
-  - Exportieren von Raster- und Vektordaten
+  - Exportieren von Rasterdaten
   - Aufgaben
   - Downloads
   - Karte

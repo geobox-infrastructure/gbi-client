@@ -5,14 +5,9 @@ Lokale Raterquellen
 -------------------
 Alle importierten Rasterquellen werden in der Übersicht aufgelistet. Diese können von der Festplatte entfernt werden. Dabei werden alle Importierten Daten gelöscht. Der Vorgäng kann nicht rückgängig gemacht werden. Bitte beachten Sie das gelöschte Daten neu importiert werden müssen um einen Export erstellen zu können.
 
-Flächen-Box
------------
-Alle importierten Vektordaten können aus der Flächenbox über diese Einstellungen gelöscht werden. Das Löschen der Daten kann nicht rückgängig gemacht werden. 
-
 Zugriff für das lokale Netzwerk
 -------------------------------
 Um von anderen Computern oder mobilen Geräten auf die Anwendung zugreifen zu können, können Sie hier die Anwendung in Ihrem Netzwerk freigeben. Nach dem Aktivieren muss die Anwendung über das Symbol in der Windows-Taskleiste beendet und neu gestartet werden.
-
 
 Aktualisieren
 -------------
