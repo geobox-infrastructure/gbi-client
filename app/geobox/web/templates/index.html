@@ -16,14 +16,20 @@
     <h2>{{_('import')}}</h2>
     <ul class="nav nav-list">
       <li><a href="{{ url_for('project.import_list') }}">{{ _('import raster') }}</a></li>
-      <li><a href="{{ url_for('vector.import_vector') }}">{{ _('import vector') }}</a></li>
+      {% if app_state.config.get('app', 'vector_im_export') %}
+        <li><a href="{{ url_for('vector.import_vector') }}">{{ _('import vector') }}</a></li>
+      {% endif %}
     </ul>
   </div>
 
   <div class="span12">
     <h2>{{_('export')}}</h2>
     <ul class="nav nav-list">
-      <li><a href="{{ url_for('project.export_list') }}">{{ _('export raster/vector') }}</a></li>
+      {% if app_state.config.get('app', 'vector_im_export') %}
+        <li><a href="{{ url_for('project.export_list') }}">{{ _('export raster/vector') }}</a></li>
+      {% else %}
+        <li><a href="{{ url_for('project.export_list') }}">{{ _('export raster') }}</a></li>
+      {% endif %}
     </ul>
   </div>
 

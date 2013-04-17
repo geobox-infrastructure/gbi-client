@@ -16,9 +16,11 @@
             {{ coverage_form.select_coverage }}
             <button id="load_coverage" class="btn btn-small">
              {{ _('load coverage') }}</button>
+          {% if app_state.config.get('app', 'vector_im_export') %}
              <hr>
             <button id="load_couchdb_coverage" class="btn btn-small">
              {{ _('load vectorimports as coverage') }}</button>
+          {% endif %}
         </div>
     </div>
 

@@ -43,6 +43,7 @@
                     <button id="add_layer" class="btn btn-small">{{ _('add raster') }}</button>
                 </div>
                 <hr>
+                {% if app_state.config.get('app', 'vector_im_export') %}
                 <div id="vector_form">
                     <h4>{{ _('vector layer') }}
                         {{ generate_tooltip(_('tooltip - export vectorlayer') ) }}
@@ -52,6 +53,7 @@
                     </div>
                     <button id="vector_add_remove" class="btn btn-small">{{ _('remove vector') }}</button>
                 </div>
+                {% endif %}
                 <hr>
                 {{ form.csrf_token }}
                 {{ form.raster_layers }}
