@@ -1,5 +1,5 @@
 Editor
-=====
+======
 
 Im Editor können Vektorlayer neuerstellt, bearbeitet und gelöscht werden.
 
