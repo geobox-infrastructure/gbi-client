@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-11 16:10+0200\n"
+"POT-Creation-Date: 2013-04-17 09:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: geobox/web/__init__.py:92
+#: geobox/web/__init__.py:96
 msgid "Sorry, method not allowed"
 msgstr ""
 
-#: geobox/web/__init__.py:98
+#: geobox/web/__init__.py:102
 msgid "Sorry, page not found"
 msgstr ""
 
-#: geobox/web/__init__.py:104
+#: geobox/web/__init__.py:108
 msgid "Sorry, not allowed"
 msgstr ""
 
-#: geobox/web/__init__.py:105
+#: geobox/web/__init__.py:109
 msgid "Please log in first..."
 msgstr ""
 
-#: geobox/web/__init__.py:112
+#: geobox/web/__init__.py:116
 msgid "Sorry, an error has occurred"
 msgstr ""
 
-#: geobox/web/__init__.py:118
+#: geobox/web/__init__.py:122
 msgid "Login required"
 msgstr ""
 
-#: geobox/web/__init__.py:119
+#: geobox/web/__init__.py:123
 msgid "Please login to see this page"
 msgstr ""
 
@@ -267,45 +267,53 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:67
+#: geobox/web/templates/editor.html:67 geobox/web/templates/editor.html:102
+msgid "filter"
+msgstr ""
+
+#: geobox/web/templates/editor.html:70
 msgid "measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:76
+#: geobox/web/templates/editor.html:79
 msgid "Styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:77
+#: geobox/web/templates/editor.html:80
 msgid "infotext - edit styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:84
+#: geobox/web/templates/editor.html:87
 msgid "Edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:85
+#: geobox/web/templates/editor.html:88
 msgid "infotext - edit controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:90
+#: geobox/web/templates/editor.html:93
 msgid "Attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:91
+#: geobox/web/templates/editor.html:94
 msgid "infotext - attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:93
+#: geobox/web/templates/editor.html:97
 #: geobox/web/templates/projects/export_edit.html:61
 #: geobox/web/templates/projects/import_edit.html:29
 msgid "save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:99
+#: geobox/web/templates/editor.html:103
+msgid "infotext - filter controls"
+msgstr ""
+
+#: geobox/web/templates/editor.html:108
 msgid "Measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:100
+#: geobox/web/templates/editor.html:109
 msgid "infotext - measure controls"
 msgstr ""
 
@@ -367,7 +375,7 @@ msgstr ""
 msgid "logs"
 msgstr ""
 
-#: geobox/web/templates/macros.html:67
+#: geobox/web/templates/macros.html:68
 msgid "download coverage"
 msgstr ""
 
@@ -495,6 +503,10 @@ msgstr ""
 
 #: geobox/web/templates/js/translation.js:28
 msgid "save styling"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:31
+msgid "loadFilter"
 msgstr ""
 
 #: geobox/web/templates/projects/export_edit.html:3

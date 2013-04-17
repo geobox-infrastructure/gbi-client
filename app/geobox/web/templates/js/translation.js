@@ -25,5 +25,9 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'strokeColor': "{{ _('stroke color') }}",
     'fillColor': "{{ _('fill color') }}",
     'fillOpacity': "{{ _('fill opacity') }}",
-    'saveStyling': "{{ _('save styling') }}"
+    'saveStyling': "{{ _('save styling') }}",
+
+    //  filter - widget
+    'loadFilter': "{{ _('loadFilter') }}"
+
 });

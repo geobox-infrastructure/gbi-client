@@ -46,8 +46,11 @@ function initEditor() {
     });
 
     var attributeEditor = new gbi.widgets.AttributeEditor(editor);
-
     var styleeditor = new gbi.widgets.StyleEditor(editor);
+
+    var layermanager = new gbi.widgets.Filter(editor, {
+        element: 'filtermanager'
+    });
 
     $('#save').click(function() {
         var layer = editor.layerManager.active();

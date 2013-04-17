@@ -21,7 +21,7 @@
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/attribute.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/styleeditor.js') }}"></script>
-
+   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/filter.js') }}"></script>
 
 {% endblock %}
 
@@ -64,6 +64,9 @@
                 <a href="#edit" data-toggle="tab">{{ _('edit') }}</a>
               </li>
               <li>
+                <a href="#filter" data-toggle="tab">{{ _('filter') }}</a>
+              </li>
+              <li>
                 <a href="#measure" data-toggle="tab">{{ _('measure') }}</a>
               </li>
             </ul>
@@ -95,8 +98,13 @@
                 </div>
               </div>
 
-              <div class="tab-pane fade" id="measure">
+                <div class="tab-pane fade" id="filter">
+                <h4>{{ _('filter') }}</h4>
+                <p>{{ _('infotext - filter controls') }}</p>
+                <div id="filtermanager"></div>
+              </div>
 
+              <div class="tab-pane fade" id="measure">
                 <h4>{{ _('Measure') }}</h4>
                 <p>{{ _('infotext - measure controls') }}</p>
                 <div id="measure-toolbar">
@@ -105,6 +113,7 @@
                 <div id="measure-output">
                 </div>
               </div>
+
             </div>
           </div>
     </div>
