@@ -1,6 +1,22 @@
 $(document).ready(function() {
     var editor = initEditor();
 
+   $("#tabs > li > a ").click(function() {
+        if (editor.map.toolbars && editor.map.toolbars.length > 0) {
+            var tab = $(this).attr('href');
+
+            $.each(editor.map.toolbars, function(id, toolbar) {
+                toolbar.deactivateAllControls();
+                if (toolbar.select) {
+                    toolbar.select.olControl.unselectAll();
+                }
+                if (toolbar.select && tab == '#edit') {
+                    toolbar.select.activate();
+                }
+            });
+        }
+   });
+
 });
 
 function initEditor() {
