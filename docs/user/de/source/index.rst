@@ -13,9 +13,10 @@ Benutzerhandbuch
   export
   aufgaben
   karte
+  editor
   einstellungen
   glossar
-  
+
 .. Indices and tables
 .. ==================
 

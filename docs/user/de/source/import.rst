@@ -1,7 +1,7 @@
-Importieren von Raster- und Vektordaten
+Importieren von Rasterdaten
 =======================================
 
-Sie haben die Möglichkeit Raster- und Vektordaten von der GeoBox-Infrastruktur herunterzuladen und lokal auf Ihrem PC zu speichern. Dieser Vorgang wird importieren genannt. Sie können zwischen Raster- und Vektordaten wählen.
+Sie haben die Möglichkeit Rasterdaten von der GeoBox-Infrastruktur herunterzuladen und lokal auf Ihrem PC zu speichern. Dieser Vorgang wird importieren genannt.
 
 Der Rasterimport unterteilt sich in eine Rasterimport Übersicht und einen Rasterimport-Editor aus.
 
@@ -9,7 +9,7 @@ Der Rasterimport unterteilt sich in eine Rasterimport Übersicht und einen Raste
 Übersicht Rasterimporte
 -----------------------
 
-In der Übersicht sind alle gespeicherten Rasterimportvorgänge aufgelistet. Sie können von hier einzelne Vorgänge editieren oder entfernen. Wenn Rasterimportvorgänge fertig konfiguriert sind, können diese aus der Übersicht oder aus dem Editermodus gestartet werden. 
+In der Übersicht sind alle gespeicherten Rasterimportvorgänge aufgelistet. Sie können von hier einzelne Vorgänge editieren oder entfernen. Wenn Rasterimportvorgänge fertig konfiguriert sind, können diese aus der Übersicht oder aus dem Editermodus gestartet werden.
 
 Um einen neuen Rasterimport zu erstellen wählen Sie "Neuer Import" - dieses öffnet den Rasterimport-Editor.
 
@@ -46,7 +46,7 @@ Gelöscht wird die ausgewählte Geometrie. Wählen Sie diese über den Editier-M
 Alle Geometrien in dem angezeigten Projekt werden gelöscht. Ein Wiederherstellen der Geometrie nach dem Löschen ist nicht möglich.
 
 **Geometrie laden:**
-Neben dem Zeichen können Sie Geometrien aus bereits bestehenden Projekten oder aus Ihrer Flächenbox übernehmen. Wählen Sie hierfür das Projekt oder dieaus und klicken Sie auf "Laden".
+Neben dem Zeichnen können Sie Geometrien aus bereits bestehenden Projekten oder aus einem Vektorlayer übernehmen. Wählen Sie hierfür das Projekt oder den Layer aus und klicken Sie auf "Laden".
 
 .. attention:: Ohne Auswahl eines Bereichs ist kein Import möglich.
 
@@ -54,7 +54,7 @@ Neben dem Zeichen können Sie Geometrien aus bereits bestehenden Projekten oder 
 Rasterdatenquelle
 #################
 
-Die Rasterdatenquellen werden für Sie von der GeoBox-Infrasturktur bereitgestellt. Wählen Sie hier die Ebene aus welche Sie auf Ihrem PC speichern möchten.
+Die Rasterdatenquellen werden für Sie von der GeoBox-Infrastruktur bereitgestellt. Wählen Sie hier die Ebene aus welche Sie auf Ihrem PC speichern möchten.
 
 Die jeweilige Karte wird in der Kartenanwendung dargestellt. Das Start- und Endlevel definiert den Bereich in dem die Karten heruntergeladen werden sollen. Das aktuelle Level der Karte wird Ihnen unterhalb des Navigationselements in der Karte angezeigt.
 
@@ -73,12 +73,4 @@ Alle Einstellungen können gespeichert werden und werden anschließend in der Ra
 Informationen
 #############
 Die Datenmenge entspricht der ungefähren Menge an Daten die durch den Import auf Ihren PC heruntergeladen werden.  Der freie Speicherplatz gibt den aktuellen Speicherplatz auf Ihrem System an. Achten Sie darauf das genügend Speicherplatz zur Verfügung steht.
-
-
-Vektorimport
-------------
-
-Nach der Auswahl der Datei muss der dazugehörige Typ der Daten gewählt werden.
-
-Neben den Dateien die von der Flächen-Box zur Verfügung gestellt werden, besteht die Möglichkeit weitere Vektordateien in das System zu laden. Hier bei werden nur Dateien im Shapeformat unterstützt. Achten Sie darauf dass die Shapefiles vollständig hochgeladen werden, nur dann stehen Sie zur Auswahl zur Verfügung.
 

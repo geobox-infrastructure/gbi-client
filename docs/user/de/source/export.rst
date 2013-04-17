@@ -7,7 +7,7 @@ Sie haben die Möglichkeit Raster- und Vektordaten aus Ihrer GeoBox-Infrastruktu
 Exportübersicht
 ---------------
 
-In der Übersicht sind alle gespeicherten Exportvorgänge aufgelistet. Sie können hier einzelne Vorgänge editieren oder direkt entfernen. Wenn Exportvorgänge fertig konfiguriert sind, können diese aus der Übersicht oder aus dem Editermodus gestartet werden. 
+In der Übersicht sind alle gespeicherten Exportvorgänge aufgelistet. Sie können hier einzelne Vorgänge editieren oder direkt entfernen. Wenn Exportvorgänge fertig konfiguriert sind, können diese aus der Übersicht oder aus dem Editermodus gestartet werden.
 
 Um einen neuen Export zu erstellen wählen Sie "Neuer Export" - dieser öffnet den Exporteditor.
 
@@ -44,11 +44,6 @@ Die Daten werden in dem Datenbankformat MBTiles abgespeichert. Hierbei kann eine
 **CouchDB**
 Die Daten werden in dem Datenbankformat CouchDB abgespeichert. Hierbei kann eine Spanne der Level angegeben werden die exportiert werden sollen. Die Daten werden fest im Koordinatensystem EPSG:3857 exportiert.
 
-Vektorlayer
-###########
-In jedem Exportprojekt kann nur ein Vektorlayer erzeugt werden. Hierbei werden alle Elemente vom ausgewählten Typ in einer Shapedatei ausgeliefert.
-
-
 Speichern & Starten des Imports
 ###############################
 
@@ -56,4 +51,4 @@ Alle Einstellungen können gespeichert werden und werden anschließend in der Ra
 
 Informationen
 #############
-Die Datenmenge entspricht der ungefähren Menge an Daten die durch den Export auf Ihren PC erzeugt werden. Der freie Speicherplatz gibt den aktuellen Speicherplatz auf Ihrem System. an Achten Sie darauf das genügend Speicher zur Verfügung steht.
+Die Datenmenge entspricht der ungefähren Menge an Daten die durch den Export auf Ihren PC erzeugt werden. Der freie Speicherplatz gibt den aktuellen Speicherplatz auf Ihrem System an. Achten Sie darauf das genügend Speicher zur Verfügung steht.
