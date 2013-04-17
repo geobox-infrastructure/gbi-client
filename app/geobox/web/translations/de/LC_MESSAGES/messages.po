@@ -285,8 +285,7 @@ msgstr "Aussehen der Geometrien"
 msgid "infotext - edit styling"
 msgstr ""
 "Hier ändern Sie das Aussehen der Geometrien. In jeder Ebene kann ein "
-"bestimmtes Aussehen verwendet werden. Bitte beachtne Sie dass die "
-"Änderungen erst nach dem Speichern auf der Karte sichtbar sind."
+"bestimmtes Aussehen verwendet werden. Ohne Speichern gehen die Änderungen verloren."
 
 #: geobox/web/templates/editor.html:87
 msgid "Edit"
@@ -451,15 +450,15 @@ msgstr "Hinzufügen der Karte nicht möglich."
 
 #: geobox/web/templates/js/translation.js:5
 msgid "background map"
-msgstr "Hintergrundkarte"
+msgstr "Hintergrundkarten"
 
 #: geobox/web/templates/js/translation.js:6
 msgid "raster map"
-msgstr "Rasterkarte"
+msgstr "Lokale Rasterkarten"
 
 #: geobox/web/templates/js/translation.js:7
 msgid "vector map"
-msgstr "Vektorkarte"
+msgstr "Vektorkarten"
 
 #: geobox/web/templates/js/translation.js:8
 msgid "add vector map"

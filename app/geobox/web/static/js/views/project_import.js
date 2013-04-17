@@ -18,22 +18,27 @@ function downloadLevel(id) {
 }
 
 function showSelectedLayer(editor, id, selectedLayer) {
-    if(typeof selectedLayer.data('ol_layer') !== "undefined") {
-        var removedLayer = selectedLayer.data('ol_layer');
-        var removedCoverageLayer = raster_sources[removedLayer.olLayer.source_id  + '_coverage'];
-        editor.removeLayer(removedLayer);
-        editor.removeLayer(removedCoverageLayer);
+// function showSelectedSource(element, editor) {
+    var source = $(selectedLayer);
+
+    if(typeof source.data('ol_layer') !== "undefined") {
+        var removeLayer = source.data('ol_layer');
+        var removeCoverageLayer = source.data('ol_coverage_layer');
+        editor.removeLayer(removeLayer);
+        editor.removeLayer(removeCoverageLayer);
     }
 
     layer = raster_sources[id].clone();
-    selectedLayer.data('ol_layer', layer);
-    coverageLayer = raster_sources[id+'_coverage'];
+    coverageLayer = raster_sources[layer.olLayer.source_id+'_coverage'].clone();
+
+    source.data('ol_layer', layer);
+    source.data('ol_coverage_layer', coverageLayer);
 
     editor.addLayers([layer, coverageLayer]);
-
     if (coverageLayer) {
        editor.layerManager.top(coverageLayer);
     }
+
     editor.layerManager.top(editor.layerManager.active());
 }
 

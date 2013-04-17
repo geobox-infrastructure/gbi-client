@@ -9,10 +9,12 @@ function initProjectEditor(options) {
     });
     editor.addLayer(backgroundLayer)
 
-    // layerswitcher
-    var layerSwitcher = new gbi.Controls.LayerSwitcher({roundedCorner: true});
-    editor.addControl(layerSwitcher);
-    layerSwitcher.maximize();
+    var layermanager = new gbi.widgets.LayerManager(editor, {
+        tiny: true
+    });
+    editor.widgets = {
+        'layermanager': layermanager
+    };
 
     if (options.toolbar) {
         new gbi.Toolbar(editor, {
@@ -61,6 +63,7 @@ function initProjectEditor(options) {
         suffix: '</div>'
     }));
     editor.map.center();
+
     return editor;
 }
 

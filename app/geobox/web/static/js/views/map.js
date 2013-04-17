@@ -6,7 +6,7 @@ $(document).ready(function() {
         editor.addLayer(layer);
     });
 
-    loadVectorGeometries(editor, geometries)
+    loadVectorGeometries(editor, geometries);
 });
 
 

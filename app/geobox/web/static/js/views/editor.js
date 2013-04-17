@@ -65,7 +65,7 @@ function initEditor() {
     var attributeEditor = new gbi.widgets.AttributeEditor(editor);
     var styleeditor = new gbi.widgets.StyleEditor(editor);
 
-    var layermanager = new gbi.widgets.Filter(editor, {
+    var layerfilter = new gbi.widgets.Filter(editor, {
         element: 'filtermanager'
     });
 
