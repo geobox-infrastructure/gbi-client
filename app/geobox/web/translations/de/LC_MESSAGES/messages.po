@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-18 08:37+0200\n"
+"POT-Creation-Date: 2013-04-18 09:00+0200\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -45,66 +45,66 @@ msgstr "Einloggen erforderlich"
 msgid "Please login to see this page"
 msgstr "Sie müssen sich anmelden um diese Seite aufrufen zu können"
 
-#: geobox/web/forms.py:165 geobox/web/templates/downloads.html:12
+#: geobox/web/forms.py:164 geobox/web/templates/downloads.html:12
 #: geobox/web/templates/projects/exports.html:12
 #: geobox/web/templates/projects/imports.html:12
 #: geobox/web/templates/tasks/task_list.html:87
 msgid "title"
 msgstr "Titel"
 
-#: geobox/web/forms.py:170
+#: geobox/web/forms.py:169
 msgid "level needs to be bigger or equal to start level"
 msgstr "Das Endlevel muss größer oder gleich dem Startlevel sein"
 
-#: geobox/web/forms.py:173
+#: geobox/web/forms.py:172
 msgid "username"
 msgstr "Benutzername"
 
-#: geobox/web/forms.py:174
+#: geobox/web/forms.py:173
 msgid "Password"
 msgstr "Passwort"
 
-#: geobox/web/forms.py:187
+#: geobox/web/forms.py:186
 msgid "select coverage"
 msgstr "Geometrie aus Projekt laden"
 
-#: geobox/web/forms.py:190
+#: geobox/web/forms.py:189
 msgid "select couch"
 msgstr "Geometrie aus Editor laden"
 
-#: geobox/web/forms.py:193 geobox/web/forms.py:204
+#: geobox/web/forms.py:192 geobox/web/forms.py:203
 msgid "start level"
 msgstr "Startlevel"
 
-#: geobox/web/forms.py:194 geobox/web/forms.py:205
+#: geobox/web/forms.py:193 geobox/web/forms.py:204
 msgid "end level"
 msgstr "Endlevel"
 
-#: geobox/web/forms.py:195 geobox/web/forms.py:206
+#: geobox/web/forms.py:194 geobox/web/forms.py:205
 msgid "raster_source"
 msgstr "Rasterdatenquelle"
 
-#: geobox/web/forms.py:196
+#: geobox/web/forms.py:195
 msgid "update_tiles"
 msgstr "Kacheln aktualisieren"
 
-#: geobox/web/forms.py:202 geobox/web/templates/admin.html:12
+#: geobox/web/forms.py:201 geobox/web/templates/admin.html:12
 msgid "format"
 msgstr "Format"
 
-#: geobox/web/forms.py:203
+#: geobox/web/forms.py:202
 msgid "srs"
 msgstr "Koordinatensystem"
 
-#: geobox/web/forms.py:207 geobox/web/forms.py:214
+#: geobox/web/forms.py:206 geobox/web/forms.py:213
 msgid "mapping name"
 msgstr "Typ"
 
-#: geobox/web/forms.py:213
+#: geobox/web/forms.py:212
 msgid "file name"
 msgstr "Shapefile"
 
-#: geobox/web/forms.py:218
+#: geobox/web/forms.py:217
 msgid "path"
 msgstr "Verzeichnis"
 
@@ -122,7 +122,7 @@ msgid "name"
 msgstr "Name"
 
 #: geobox/web/templates/admin.html:11 geobox/web/templates/admin.html:38
-#: geobox/web/templates/editor.html:61
+#: geobox/web/templates/editor.html:59
 msgid "layer"
 msgstr "Layer"
 
@@ -254,77 +254,81 @@ msgstr "als ZIP-Datei"
 msgid "open export on external explorer"
 msgstr "Export-Verzeichnis öffnen"
 
-#: geobox/web/templates/editor.html:2 geobox/web/templates/editor.html:49
+#: geobox/web/templates/editor.html:2 geobox/web/templates/editor.html:47
 #: geobox/web/templates/index.html:45 geobox/web/templates/index.html:47
 msgid "editor"
 msgstr "Editor"
 
-#: geobox/web/templates/editor.html:50
+#: geobox/web/templates/editor.html:48
 msgid "tooltip - editor"
 msgstr "In dieser Ansicht können Sie Geometrien bearbeiten"
 
-#: geobox/web/templates/editor.html:58
+#: geobox/web/templates/editor.html:56
 msgid "manager"
 msgstr "Auswahl"
 
-#: geobox/web/templates/editor.html:64
+#: geobox/web/templates/editor.html:62
 #: geobox/web/templates/projects/exports.html:29
 #: geobox/web/templates/projects/imports.html:40
 msgid "edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:67 geobox/web/templates/editor.html:102
+#: geobox/web/templates/editor.html:65 geobox/web/templates/editor.html:104
 msgid "filter"
 msgstr "Filter"
 
-#: geobox/web/templates/editor.html:70
+#: geobox/web/templates/editor.html:68
 msgid "measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:79
+#: geobox/web/templates/editor.html:77
 msgid "Styling"
 msgstr "Aussehen der Geometrien"
 
-#: geobox/web/templates/editor.html:80
+#: geobox/web/templates/editor.html:78
 msgid "infotext - edit styling"
 msgstr ""
 "Hier ändern Sie das Aussehen der Geometrien. In jeder Ebene kann ein "
 "bestimmtes Aussehen verwendet werden. Ohne Speichern gehen die Änderungen"
 " verloren."
 
-#: geobox/web/templates/editor.html:87
+#: geobox/web/templates/editor.html:85
 msgid "Edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:88
+#: geobox/web/templates/editor.html:86
 msgid "infotext - edit controls"
 msgstr "Wählen Sie ein Bearbeitungswerkzeug aus."
 
-#: geobox/web/templates/editor.html:93
+#: geobox/web/templates/editor.html:89
+msgid "remove all features"
+msgstr "Alle Geometrien löschen"
+
+#: geobox/web/templates/editor.html:95
 msgid "Attributes"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:94
+#: geobox/web/templates/editor.html:96
 msgid "infotext - attributes"
 msgstr ""
 "Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie "
 "hierzu eine Geometrie mit dem Auswahlwerkezug aus."
 
-#: geobox/web/templates/editor.html:97
+#: geobox/web/templates/editor.html:99
 #: geobox/web/templates/projects/export_edit.html:63
 #: geobox/web/templates/projects/import_edit.html:29
 msgid "save"
 msgstr "Speichern"
 
-#: geobox/web/templates/editor.html:103
+#: geobox/web/templates/editor.html:105
 msgid "infotext - filter controls"
 msgstr "Hier können Sie Geometrien abhängig von Eigenschaft und Wert auswählen."
 
-#: geobox/web/templates/editor.html:108
+#: geobox/web/templates/editor.html:110
 msgid "Measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:109
+#: geobox/web/templates/editor.html:111
 msgid "infotext - measure controls"
 msgstr ""
 "Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen,"
@@ -408,7 +412,7 @@ msgstr "Lokal gespeicherte Karten"
 msgid "tooltip - show all imported maps"
 msgstr "Die Kartenanwendung zeigt alle importierten Raster- und Vektordaten an. "
 
-#: geobox/web/templates/map.html:17
+#: geobox/web/templates/map.html:18
 msgid "vector_layer_title"
 msgstr "Vektorlayer"
 

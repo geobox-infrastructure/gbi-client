@@ -1,7 +1,12 @@
 $(document).ready(function() {
     var editor = initEditor();
 
-   $("#tabs > li > a ").click(function() {
+    $('#tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
+
+    $("#tabs > li > a ").click(function() {
         if (editor.map.toolbars && editor.map.toolbars.length > 0) {
             var tab = $(this).attr('href');
 
@@ -15,6 +20,15 @@ $(document).ready(function() {
                 }
             });
         }
+   });
+
+   $('#remove_all_features').click(function() {
+        var activeLayer = editor.layerManager.active();
+        if(activeLayer instanceof gbi.Layers.SaveableVector) {
+            editor.map.toolbars[1].delete.olControl.deleteFeatures(activeLayer.features)
+            activeLayer.changesMade();
+        }
+        return false;
    });
 
 });
