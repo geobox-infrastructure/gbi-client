@@ -28,6 +28,10 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'saveStyling': "{{ _('save styling') }}",
 
     //  filter - widget
-    'loadFilter': "{{ _('loadFilter') }}"
+    'loadFilter': "{{ _('loadFilter') }}",
 
+    // point styling - widget
+    'point': "{{ _('point') }}",
+    'radius': "{{ _('radius') }}",
+    'save': "{{ _('save') }}"
 });
