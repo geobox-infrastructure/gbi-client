@@ -77,7 +77,8 @@ function initEditor() {
     });
 
     var attributeEditor = new gbi.widgets.AttributeEditor(editor);
-    var styleeditor = new gbi.widgets.StyleEditor(editor);
+    var styleEditor = new gbi.widgets.StyleEditor(editor);
+    var pointStyleEditor = new gbi.widgets.PointStyleEditor(editor);
 
     var layerfilter = new gbi.widgets.Filter(editor, {
         element: 'filtermanager'

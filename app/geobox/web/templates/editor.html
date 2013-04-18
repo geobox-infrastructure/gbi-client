@@ -19,6 +19,8 @@
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/attribute.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/styleeditor.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/pointstyleeditor.js') }}"></script>
+
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/filter.js') }}"></script>
 
 {% endblock %}
@@ -83,7 +85,6 @@
                  <div class="span11">
                     <button id="remove_all_features" class="btn btn-small">{{ _('remove all features') }}</button>
                  </div>
-
                </div>
 
                <div>
@@ -93,7 +94,12 @@
                  <hr>
                  <button id="save" class="btn btn-small" disabled="disabled">{{ _('save') }}</button>
                 </div>
+
+
+                <div id="point-style-editor"></div>
+
               </div>
+
 
                 <div class="tab-pane fade" id="filter">
                 <h4>{{ _('filter') }}</h4>
