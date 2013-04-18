@@ -4,7 +4,7 @@
 
 {% from "form_macros.html" import input, select, checkbox %}
 {% from 'projects/macros.html' import map_tools, download_volume %}
-{% from "macros.html" import generate_base_layer, generate_sources %}
+{% from "macros.html" import generate_base_layer, generate_sources, generate_couch_layers %}
 {% block content %}
     <div class="row-fluid">
         <div class="span3">
@@ -12,7 +12,7 @@
                 {{ form.csrf_token }}
                 <h3>{{_('Import Editor')}}</h3>
                 {{ input(form.title) }}
-                {{ map_tools(coverage_form) }}
+                {{ map_tools(coverage_form, couchlayers_form) }}
                 <hr>
                 <div class="raster_layer">
                     {{ select(form.raster_source) }}
@@ -46,6 +46,8 @@
 
         {{ generate_base_layer(base_layer) }}
         {{ generate_sources(sources) }}
+        {{ generate_couch_layers(couch_layers, 'false')}}
+
         coverage = {{ coverage|tojson|safe }};
 
         var select_start_level = false;

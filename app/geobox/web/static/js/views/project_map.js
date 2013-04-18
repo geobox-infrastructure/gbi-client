@@ -9,6 +9,11 @@ function initProjectEditor(options) {
     });
     editor.addLayer(backgroundLayer)
 
+    $.each(couchLayers, function(index, layer) {
+        editor.addLayer(layer);
+        layer.olLayer.setVisibility(false);
+    });
+
     var layermanager = new gbi.widgets.LayerManager(editor, {
         tiny: true
     });
@@ -82,7 +87,12 @@ function loadFeatures(editor, data) {
     var parser = new OpenLayers.Format.GeoJSON();
     if (jQuery.isArray(data)) {
        $.each(data, function(index, geom) {
-            drawLayer.addFeatures(parser.read(geom.geometry));
+            // check if data is geojson or openlayers.features e.g. from couch layer
+            if (geom.CLASS_NAME && geom.CLASS_NAME == 'OpenLayers.Feature.Vector') {
+                drawLayer.addFeatures(geom);
+            } else {
+                drawLayer.addFeatures(parser.read(geom.geometry));
+            }
        });
     } else {
         featureCollection = parser.read(data);

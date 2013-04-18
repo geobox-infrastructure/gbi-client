@@ -1,7 +1,7 @@
 {% from "macros.html" import generate_tooltip %}
 
 
-{% macro map_tools(coverage_form) -%}
+{% macro map_tools(coverage_form, couch_form) -%}
     <div class="more_map_tools">
       <h5>{{ _('drawing options') }}
        {{ generate_tooltip(_('tooltip - drawing options') ) }}
@@ -15,6 +15,11 @@
             {{ coverage_form.select_coverage.label }}
             {{ coverage_form.select_coverage }}
             <button id="load_coverage" class="btn btn-small">
+             {{ _('load coverage') }}</button>
+             <hr>
+            {{ couch_form.select_couch.label }}
+            {{ couch_form.select_couch }}
+            <button id="load_couchlayers_coverage" class="btn btn-small">
              {{ _('load coverage') }}</button>
           {% if app_state.config.get('app', 'vector_im_export') %}
              <hr>

@@ -4,7 +4,7 @@
 
 {% from "form_macros.html" import input, select %}
 {% from 'projects/macros.html' import map_tools, download_volume %}
-{% from "macros.html" import generate_base_layer, generate_sources %}
+{% from "macros.html" import generate_base_layer, generate_sources, generate_couch_layers %}
 {% block content %}
     <div class="row-fluid">
         <div class="span3">
@@ -20,7 +20,7 @@
                     </h4>
                     {{ form.format }}
                     {{ form.srs }}
-                    {{ map_tools(coverage_form) }}
+                   {{ map_tools(coverage_form, couchlayers_form) }}
                     <hr>
                     <div class="raster_layer" id="rl_0">
                         {{ select(form.raster_source) }}
@@ -80,6 +80,8 @@
         var level = '{{ _('level') }}';
         {{ generate_base_layer(base_layer) }}
         {{ generate_sources(raster_sources, cache_url) }}
+        {{ generate_couch_layers(couch_layers, 'false')}}
+
         coverage = {{ coverage|tojson|safe }};
         exportEdit = true;
         var savedLayers = {}

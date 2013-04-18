@@ -29,7 +29,7 @@ from mapproxy.grid import tile_grid
 from geobox.lib.tiles import estimate_tiles
 from geobox.lib.coverage import coverage_from_feature_collection, coverage_from_geojson, geometry_from_feature_collection
 from geobox.lib.coverage import coverage as make_coverage
-from geobox.lib.couchdb import CouchDB
+from geobox.lib.couchdb import CouchDB, vector_layers_metadata
 from geobox.lib.fs import diskspace_available_in_mb
 from geobox.lib.mapproxy import write_mapproxy_config
 from geobox.lib.vectormapping import default_mappings as mappings
@@ -117,9 +117,18 @@ def import_edit(id=None):
 
     free_disk_space = diskspace_available_in_mb(current_app.config.geobox_state.user_data_path())
 
+    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
+    couch_layers = list(vector_layers_metadata(couch_url))
+
+    couchlayers_form = forms.SelectCouchLayers()
+    couch_titles = []
+    for key, couch in enumerate(couch_layers):
+        couch_titles.append((key, couch['title']))
+    couchlayers_form.select_couch.choices = couch_titles
+
     return render_template('projects/import_edit.html',
-        proj=proj, form=form, sources=sources,
-        base_layer=base_layer,coverage_form=coverage_form,
+        proj=proj, form=form, sources=sources,couch_layers=couch_layers,
+        base_layer=base_layer,coverage_form=coverage_form,couchlayers_form=couchlayers_form,
         coverage=coverage, free_disk_space=free_disk_space)
 
 @project.route('/export/new', methods=['GET', 'POST'])
@@ -206,9 +215,19 @@ def export_edit(id=None):
     free_disk_space = diskspace_available_in_mb(current_app.config.geobox_state.user_data_path())
     cache_url = get_local_cache_url(request)
 
-    return render_template('projects/export_edit.html', proj=proj, form=form, raster_sources=raster_sources,
+    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
+    couch_layers = list(vector_layers_metadata(couch_url))
+
+    couchlayers_form = forms.SelectCouchLayers()
+    couch_titles = []
+    for key, couch in enumerate(couch_layers):
+        couch_titles.append((key, couch['title']))
+    couchlayers_form.select_couch.choices = couch_titles
+
+    return render_template('projects/export_edit.html', proj=proj, form=form,
+        raster_sources=raster_sources,couch_layers=couch_layers,
         layers=proj.export_raster_layers, base_layer=base_layer, coverage=coverage,
-        free_disk_space=free_disk_space,coverage_form=coverage_form,
+        free_disk_space=free_disk_space,coverage_form=coverage_form, couchlayers_form=couchlayers_form,
         cache_url=cache_url)
 
 @project.route('/project/remove/<int:id>', methods=['POST'])

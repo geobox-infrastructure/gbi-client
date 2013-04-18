@@ -61,7 +61,6 @@ $(document).ready(function() {
         getDataVolume(editor)
     });
 
-
     $('#start_btn').click(function() {submitAndStart(editor)});
     $('#save_btn').click(function() {submitData(editor)});
 
@@ -74,6 +73,11 @@ $(document).ready(function() {
 
     $('#load_coverage').click(function() {
         loadProjectCoverage(editor, false)
+        return false;
+    });
+
+    $('#load_couchlayers_coverage').click(function() {
+        loadCouchCoverage(editor)
         return false;
     });
 

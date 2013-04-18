@@ -182,9 +182,11 @@ def get_all_projects_withs_coverages():
     query = g.db.query(Project).with_polymorphic('*').filter(Project.coverage!=None)
     return query.filter(Project.coverage!='').all()
 
-
 class SelectCoverage(Form):
     select_coverage = QuerySelectField(lazy_gettext('select coverage'), query_factory=get_all_projects_withs_coverages, get_label='title')
+
+class SelectCouchLayers(Form):
+    select_couch = SelectField(lazy_gettext('select couch'), choices=[],)
 
 class ImportProjectEdit(ProjectEdit):
     start_level = SelectField(lazy_gettext('start level'), coerce=int)

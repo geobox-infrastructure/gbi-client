@@ -195,6 +195,12 @@ $(document).ready(function() {
         return false;
     });
 
+    $('#load_couchlayers_coverage').click(function() {
+        loadCouchCoverage(editor)
+        return false;
+    });
+
+
     $('#delete_all_features').click(function() {
         deleteAllFeatures(editor)
     });

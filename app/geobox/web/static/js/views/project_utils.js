@@ -80,6 +80,26 @@ function loadProjectCoverage(editor, couchdbCoverage) {
     return false;
 }
 
+
+function loadCouchCoverage(editor) {
+    var couchID = $("#select_couch").val();
+    var polygons = [];
+    if (couchLayers) {
+        var selectedCouchLayer = couchLayers[couchID];
+        $.each(selectedCouchLayer.features, function(key, feature) {
+            if (feature._drawType == 'polygon') {
+                polygons.push(feature);
+            }
+        });
+
+    }
+    if (polygons.length > 0) {
+        loadFeatures(editor, polygons);
+    }
+    return false;
+}
+
+
 function submitAndStart(editor) {
     $('#start').val("start");
     submitData(editor);
@@ -92,8 +112,7 @@ function submitData(editor) {
 
     var parser = new OpenLayers.Format.GeoJSON();
     // deacative controls before saving the feautre
-    // editor.map.toolbars.deactivateAllControls();
-    editor.map.toolbars[0].deactivateAllControls()
+    editor.map.toolbars[0].deactivateAllControls();
 
     var activeLayer = editor.layerManager.active();
     if (activeLayer.features.length !== 0 ) {

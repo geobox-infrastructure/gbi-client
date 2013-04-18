@@ -9,6 +9,9 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/views/style.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/gbi-editor/gbi.js') }}">
     </script>
+    <script type="text/javascript">
+          OpenLayers.ProxyHost = "{{ url_for('proxy.proxy_request') }}";
+    </script>
     {% block project_js %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
 
