@@ -202,7 +202,8 @@ $(document).ready(function() {
 
 
     $('#delete_all_features').click(function() {
-        deleteAllFeatures(editor)
+        deleteAllFeatures(editor);
+        return false;
     });
 
     $.each(savedLayers, function(index, layerOptions) {
