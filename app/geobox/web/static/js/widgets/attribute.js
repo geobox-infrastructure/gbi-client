@@ -141,7 +141,7 @@ gbi.widgets.AttributeEditor.template = '\
     <% for(var key in attributes) { %>\
         <form id="view_attributes" class="form-inline">\
             <label class="key-label" for="<%=key%>"><%=key%></label>\
-            <input class="input-small" type="text" id="<%=key%>" value="<%=attributes[key]%>" />\
+            <input class="input-medium" type="text" id="<%=key%>" value="<%=attributes[key]%>" />\
             <button id="<%=key%>_remove" title="remove" class="btn btn-small"> \
                 <i class="icon-remove"></i>\
             </button> \
@@ -153,13 +153,13 @@ gbi.widgets.AttributeEditor.template = '\
 	 <div class="control-group"> \
 		<label class="control-label" for="newKey">'+label.key+'</label> \
 		<div class="controls">\
-			<input type="text" id="newKey" class="input-small">\
+			<input type="text" id="newKey" class="input-medium">\
 		</div>\
 	</div>\
 	 <div class="control-group"> \
 		<label class="control-label" for="newValue">'+label.val+'</label> \
 		<div class="controls">\
-			<input type="text" id="newValue" class="input-small">\
+			<input type="text" id="newValue" class="input-medium">\
 		</div>\
 	</div>\
     <button id="addKeyValue" class="btn btn-small">'+label.add+'</button>\
