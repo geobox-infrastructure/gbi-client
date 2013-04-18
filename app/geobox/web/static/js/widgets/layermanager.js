@@ -264,8 +264,14 @@ tiny: '\
                 <li class="gbi_layer">\
                     <input type="checkbox" id="visible_<%=backgroundLayers[i].id%>" />\
                     <span><%=backgroundLayers[i].olLayer.name%></span>\
-                    <button id="up_<%=backgroundLayers[i].id%>">&uarr;</button>\
-                    <button id="down_<%=backgroundLayers[i].id%>">&darr;</button>\
+                        <div class="btn-group"> \
+                            <button id="up_<%=backgroundLayers[i].id%>" title="up" class="btn btn-mini">\
+                                <i class="icon-chevron-up"></i>\
+                            </button> \
+                            <button id="down_<%=backgroundLayers[i].id%>" title="down" class="btn btn-mini"> \
+                                <i class="icon-chevron-down"></i>\
+                            </button> \
+                        </div> \
                 </li>\
             <% } %>\
         </ul>\
@@ -276,8 +282,14 @@ tiny: '\
                     <li class="gbi_layer">\
                         <input type="checkbox" id="visible_<%=rasterLayers[i].id%>" />\
                         <span><%=rasterLayers[i].olLayer.name%></span>\
-                        <button id="up_<%=rasterLayers[i].id%>">&uarr;</button>\
-                        <button id="down_<%=rasterLayers[i].id%>">&darr;</button>\
+                        <div class="btn-group"> \
+                            <button id="up_<%=rasterLayers[i].id%>" title="up" class="btn btn-mini">\
+                                <i class="icon-chevron-up"></i>\
+                            </button> \
+                            <button id="down_<%=rasterLayers[i].id%>" title="down" class="btn btn-mini"> \
+                                <i class="icon-chevron-down"></i>\
+                            </button> \
+                        </div> \
                     </li>\
                 <% } %>\
             </ul>\
@@ -289,8 +301,14 @@ tiny: '\
                     <li class="gbi_layer">\
                         <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" />\
                         <span><%=vectorLayers[i].olLayer.name%></span>\
-                        <button id="up_<%=vectorLayers[i].id%>">&uarr;</button>\
-                        <button id="down_<%=vectorLayers[i].id%>">&darr;</button>\
+                        <div class="btn-group"> \
+                            <button id="up_<%=vectorLayers[i].id%>" title="up" class="btn btn-mini">\
+                                <i class="icon-chevron-up"></i>\
+                            </button> \
+                            <button id="down_<%=vectorLayers[i].id%>" title="down" class="btn btn-mini"> \
+                                <i class="icon-chevron-down"></i>\
+                            </button> \
+                        </div> \
                     </li>\
                 <% } %>\
             </ul>\
