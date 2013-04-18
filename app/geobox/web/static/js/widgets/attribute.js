@@ -43,6 +43,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 $('#'+key).change(function() {
                     var newVal = $('#' + key).val();
                     self.edit(key, newVal);
+                    self._applyAttributes();
                 });
                 $('#'+key+'_remove').click(function() {
                     self.remove(key);
@@ -77,6 +78,7 @@ gbi.widgets.AttributeEditor.prototype = {
     remove: function(key) {
         delete this.featuresAttributes[key];
         this.changed = true;
+        this._applyAttributes();
         this.render();
     },
     _applyAttributes: function() {
@@ -137,7 +139,7 @@ gbi.widgets.AttributeEditor.template = '\
     <span>'+label.noAttributes+'</span>\
 <% } else { %>\
     <% for(var key in attributes) { %>\
-        <form class="form-inline">\
+        <form id="view_attributes" class="form-inline">\
             <label class="key-label" for="<%=key%>"><%=key%></label>\
             <input class="input-small" type="text" id="<%=key%>" value="<%=attributes[key]%>" />\
             <button id="<%=key%>_remove" title="remove" class="btn btn-small"> \
