@@ -75,6 +75,7 @@ function initEditor() {
             delete: true
         }
     });
+    toolbar.select.deactivate();
 
     var attributeEditor = new gbi.widgets.AttributeEditor(editor);
     var styleEditor = new gbi.widgets.StyleEditor(editor);
