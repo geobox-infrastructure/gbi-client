@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var editor = initProjectEditor(
-    	{toolbar: false}
+    	{toolbar: false, couchVisible: true}
     );
     $.each(raster_sources, function(index, layer) {
         editor.addLayer(layer);

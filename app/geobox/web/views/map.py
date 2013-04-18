@@ -38,10 +38,14 @@ def map():
         if 'geometry' in record: # check if record has geometry type
             vector_geometries.append(record)
 
+    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
+    couch_layers = list(vector_layers_metadata(couch_url))
+
     return render_template('map.html',
         cache_url=cache_url,
         base_layer=base_layer,
         sources=raster_sources,
+        couch_layers=couch_layers,
         vector_geometries=vector_geometries
     )
 

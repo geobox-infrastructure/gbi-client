@@ -13,6 +13,7 @@
     <script type="text/javascript">
         {{ generate_base_layer(base_layer) }}
         {{ generate_sources(sources, cache_url)}}
+        {{ generate_couch_layers(couch_layers)}}
         var geometries = {{ vector_geometries|tojson|safe }}
         var vectorLayerTitle = "{{ _('vector_layer_title') }}"
     </script>

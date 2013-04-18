@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% from "macros.html" import generate_base_layer, generate_sources %}
+{% from "macros.html" import generate_base_layer, generate_sources, generate_couch_layers %}
 
 {% block javascript %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/OpenLayers-2.12.js') }}"></script>

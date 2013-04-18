@@ -1,8 +1,6 @@
 {% extends "base_map.html" %}
 {% block title %}{{ _('editor') }}{% endblock %}
 
-{% from "macros.html" import generate_base_layer, generate_sources, generate_couch_layers %}
-
 {% block project_js %}
   <!-- JSTS for split and union -->
    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/javascript.util.js') }}"></script>

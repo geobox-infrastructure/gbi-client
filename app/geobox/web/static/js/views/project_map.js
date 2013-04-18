@@ -11,7 +11,9 @@ function initProjectEditor(options) {
 
     $.each(couchLayers, function(index, layer) {
         editor.addLayer(layer);
-        layer.olLayer.setVisibility(false);
+        if (!options.couchVisible) {
+            layer.olLayer.setVisibility(false);
+        }
     });
 
     var layermanager = new gbi.widgets.LayerManager(editor, {
