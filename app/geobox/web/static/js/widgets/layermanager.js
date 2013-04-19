@@ -100,10 +100,22 @@ gbi.widgets.LayerManager.prototype = {
                 return false;
             });
             self.element.find('#remove_' + layer.id).click(function() {
-                self.layerManager.removeLayer(layer);
-                self.render(self.findAccordion(this));
-                 return false;
+                var element = this;
+                var activeLayer = layer;
 
+                $('#deleteVectorLayer #layer_title').html(activeLayer.options.name)
+                $('#deleteVectorLayer').modal('show');
+
+                $('#remove_layer').click(function() {
+                    self.layerManager.removeLayer(activeLayer);
+                    $('#deleteVectorLayer').modal('hide');
+                    self.render(self.findAccordion(element));
+                });
+                $('#deleteVectorLayer').on('hidden', function () {
+                    $('#remove_layer').off('click');
+                    $('#deleteVectorLayer').off('hidden');
+                })
+                return false;
             });
         });
 
