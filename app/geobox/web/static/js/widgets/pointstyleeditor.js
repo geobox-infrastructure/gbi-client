@@ -32,11 +32,9 @@ gbi.widgets.PointStyleEditor = function(editor, options) {
     $.each(this.layerManager.vectorLayers, function(idx, layer) {
         layer.registerEvent('featureselected', self, function(f) {
             if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
-                var styleBackup = {};
-                jQuery.extend(styleBackup, f.feature.style);
-                f.feature.styleBackup = styleBackup;
+                this.addSelectFeatureStyle(f.feature);
                 this.selectedFeatures.push(f.feature);
-                this._checkFeatureType()
+                this._checkFeatureType();
                 $('#pointTab').show();
             }
         });
@@ -46,18 +44,34 @@ gbi.widgets.PointStyleEditor = function(editor, options) {
                 if(idx != -1) {
                     this.selectedFeatures.splice(idx, 1);
                 }
-                if (f.feature.styleBackup && !jQuery.isEmptyObject(f.feature.styleBackup)) {
-                    f.feature.style = f.feature.styleBackup;
-                }
+                this.removeSelectFeatureStyle(f.feature)
                 this._checkFeatureType()
                 this.activeLayer.olLayer.redraw();
-                $('#attributeTab').tab('show');
-                $('#pointTab').hide();
+                if (this.selectedFeatures.length == 0) {
+                    $('#attributeTab').tab('show');
+                    $('#pointTab').hide();
+                }
             }
         });
     });
 };
 gbi.widgets.PointStyleEditor.prototype = {
+
+    addSelectFeatureStyle: function(feature) {
+        var styleBackup = {};
+        jQuery.extend(styleBackup, feature.style);
+        feature.styleBackup = styleBackup;
+        if (feature.style) {
+            feature.style = $.extend({}, feature.style, this.options.selectDefaults);
+        }
+        this.activeLayer.olLayer.redraw();
+    },
+
+    removeSelectFeatureStyle: function(feature) {
+        if (feature.styleBackup && !jQuery.isEmptyObject(feature.styleBackup)) {
+            feature.style = feature.styleBackup;
+        }
+    },
 
     render: function() {
         var self = this;
@@ -71,12 +85,9 @@ gbi.widgets.PointStyleEditor.prototype = {
         $.each(this.selectedFeatures, function(id, feature) {
             if (feature.style) {
                 pointStyling = feature.style;
-                feature.style = $.extend({}, pointStyling, self.options.selectDefaults);
                 return false;
             }
         });
-        // redraw to show select
-        this.activeLayer.olLayer.redraw();
 
         // load pointstyling from layer if not selcted point has styling
         if (!pointStyling) {
@@ -133,7 +144,7 @@ gbi.widgets.PointStyleEditor.prototype = {
         var pointStyling = this.setStyle();
         var selectCtrl = this.editor.map.toolbars[1].select.olControl;
         $.each(this.selectedFeatures, function(id, feature) {
-            if (feature) {
+            if (feature && !feature.state) {
                 feature.state = OpenLayers.State.UPDATE;
             }
         });
