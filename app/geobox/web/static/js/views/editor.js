@@ -89,7 +89,7 @@ function initEditor() {
     $('#save_changes').click(function() {
         var layer = editor.layerManager.active();
         layer.save();
-        $(this).removeClass('btn-success');
+        $(this).removeClass('btn-success').attr('disabled', 'disabled');
     });
 
 	return editor;
