@@ -28,6 +28,7 @@ $(document).ready(function() {
             editor.map.toolbars[1].delete.olControl.deleteFeatures(activeLayer.features)
             activeLayer.changesMade();
         }
+        $('#deleteAllGeometries').modal('hide');
         return false;
    });
 

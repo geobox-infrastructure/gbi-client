@@ -83,7 +83,7 @@
                  <p>{{ _('infotext - edit controls') }}</p>
                  <div id="edit-toolbar" class="span11"></div>
                  <div class="span11">
-                    <button id="remove_all_features" class="btn btn-small">{{ _('remove all features') }}</button>
+                    <button data-toggle="modal" data-target="#deleteAllGeometries" class="btn btn-small">{{ _('remove all features') }}</button>
                  </div>
                </div>
 
@@ -94,14 +94,9 @@
                  <hr>
                  <button id="save" class="btn btn-small" disabled="disabled">{{ _('save') }}</button>
                 </div>
-
-
                 <div id="point-style-editor"></div>
-
               </div>
-
-
-                <div class="tab-pane fade" id="filter">
+              <div class="tab-pane fade" id="filter">
                 <h4>{{ _('filter') }}</h4>
                 <p>{{ _('infotext - filter controls') }}</p>
                 <div id="filtermanager"></div>
@@ -116,11 +111,25 @@
                 <div id="measure-output">
                 </div>
               </div>
-
             </div>
           </div>
     </div>
 
+
+  <!-- modals for delete -->
+   <div id="deleteVectorLayer" class="modal hide">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>{{_('Sure you want delete layer')}} <span id="layer_title"></span>?</h3>
+    </div>
+    <div class="modal-body">
+      <p>{{ _('infotext delete layer') }}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="abort_remove_layer" class="btn" data-dismiss="modal">Abort</a>
+      <a href="#" id="remove_layer" class="btn btn-primary">{{_('yes delete')}}</a>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
