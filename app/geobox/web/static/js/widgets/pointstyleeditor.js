@@ -40,7 +40,7 @@ gbi.widgets.PointStyleEditor = function(editor, options) {
         });
         layer.registerEvent('featureunselected', self, function(f) {
             if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
-                var idx = this.selectedFeatures.indexOf(f.feature);
+                var idx = $.inArray(f.feature, this.selectedFeatures);
                 if(idx != -1) {
                     this.selectedFeatures.splice(idx, 1);
                 }

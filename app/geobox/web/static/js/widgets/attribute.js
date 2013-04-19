@@ -20,7 +20,7 @@ gbi.widgets.AttributeEditor = function(editor, options) {
             $('#attributeTab').tab('show');
         });
         layer.registerEvent('featureunselected', self, function(f) {
-            var idx = this.selectedFeatures.indexOf(f.feature);
+            var idx = $.inArray(f.feature, this.selectedFeatures);
             if(idx != -1) {
                 this.selectedFeatures.splice(idx, 1);
                 this._attributes();

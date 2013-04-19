@@ -25,7 +25,7 @@ $(document).ready(function() {
    $('#remove_all_features').click(function() {
         var activeLayer = editor.layerManager.active();
         if(activeLayer instanceof gbi.Layers.SaveableVector) {
-            editor.map.toolbars[1].delete.olControl.deleteFeatures(activeLayer.features)
+            editor.map.toolbars[1].delete_.olControl.deleteFeatures(activeLayer.features)
             activeLayer.changesMade();
         }
         $('#deleteAllGeometries').modal('hide');
@@ -65,15 +65,15 @@ function initEditor() {
     var toolbar = new gbi.Toolbar(editor, {
         element: 'edit-toolbar',
         tools: {
-            drawPoint: true,
-            drawLine: true,
-            drawPolygon: true,
-            select: true,
-            edit: true,
-            split: true,
-            merge: true,
-            copy: true,
-            delete: true
+            'drawPoint': true,
+            'drawLine': true,
+            'drawPolygon': true,
+            'select': true,
+            'edit': true,
+            'split': true,
+            'merge': true,
+            'copy': true,
+            'delete': true
         }
     });
     toolbar.select.deactivate();
