@@ -33,6 +33,8 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
 
     // point styling - widget
     'point': "{{ _('point') }}",
+    'color': "{{ _('color') }}",
+    'pointinfotext': "{{ _('infotext - point styling') }}",
     'radius': "{{ _('radius') }}",
-    'save': "{{ _('save') }}"
+    'setStyling': "{{ _('set styling') }}"
 });

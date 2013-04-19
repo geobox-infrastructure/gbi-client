@@ -47,72 +47,85 @@
 
     <div class="span8 map" id='map'></div>
     <div class="span4">
-       <div class="bs-docs-example">
-          <ul id="tabs" class="nav nav-tabs">
+      <div class="bs-docs-example">
+        <ul id="tabs" class="nav nav-tabs">
+          <li class="active">
+            <a href="#layermanager" data-toggle="tab">{{ _('manager') }}</a>
+          </li>
+          <li>
+            <a href="#layer" data-toggle="tab">{{ _('layer') }}</a>
+          </li>
+          <li>
+            <a href="#edit" data-toggle="tab">{{ _('edit') }}</a>
+          </li>
+          <li>
+            <a href="#filter" data-toggle="tab">{{ _('filter') }}</a>
+          </li>
+          <li>
+            <a href="#measure" data-toggle="tab">{{ _('measure') }}</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="layermanager">
+          <!-- load layermanager widget -->
+          </div>
+
+          <div class="tab-pane fade" id="layer">
+            <h4>{{ _('Styling') }}</h4>
+            <p>{{ _('infotext - edit styling') }}</p>
+            <div id="style-editor"></div>
+          </div>
+
+          <div class="tab-pane fade" id="edit">
+            <h4>{{ _('Edit') }}</h4>
+            <p>{{ _('infotext - edit controls') }}</p>
+            <div id="edit-toolbar" class="span11"></div>
+
+            <div class="span11">
+              <button data-toggle="modal" data-target="#deleteAllGeometries" class="btn btn-small">{{ _('remove all features') }}</button>
+            </div>
+            <hr>
+            <button id="save_changes" class="btn btn-small"  disabled="disabled">{{ _('save') }}</button>
+            <hr>
+
+           <div>
+            <ul id="editor-tabs" class="nav nav-tabs">
               <li class="active">
-                <a href="#layermanager" data-toggle="tab">{{ _('manager') }}</a>
-              </li>
-              <li>
-                <a href="#layer" data-toggle="tab">{{ _('layer') }}</a>
-              </li>
-              <li>
-                <a href="#edit" data-toggle="tab">{{ _('edit') }}</a>
-              </li>
-              <li>
-                <a href="#filter" data-toggle="tab">{{ _('filter') }}</a>
-              </li>
-              <li>
-                <a href="#measure" data-toggle="tab">{{ _('measure') }}</a>
-              </li>
+                  <a id="attributeTab" href="#attributes" data-toggle="tab">{{ _('Attribute') }}</a>
+                </li>
+                <li>
+                  <a href="#point_stling" data-toggle="tab">{{ _('point styling') }}</a>
+                </li>
             </ul>
-            <div class="tab-content">
-              <div class="tab-pane fade in active" id="layermanager">
-                <!-- load layermanager widget -->
-              </div>
-              <div class="tab-pane fade" id="layer">
-                <div>
-                  <h4>{{ _('Styling') }}</h4>
-                  <p>{{ _('infotext - edit styling') }}</p>
-                  <div id="style-editor"></div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="attributes">
+                  <h4>{{ _('Attributes') }}</h4>
+                  <p>{{ _('infotext - attributes') }}</p>
+                  <div id="attributemanager"></div>
                 </div>
-              </div>
-
-              <div class="tab-pane fade" id="edit">
-                <div>
-                 <h4>{{ _('Edit') }}</h4>
-                 <p>{{ _('infotext - edit controls') }}</p>
-                 <div id="edit-toolbar" class="span11"></div>
-                 <div class="span11">
-                    <button data-toggle="modal" data-target="#deleteAllGeometries" class="btn btn-small">{{ _('remove all features') }}</button>
-                 </div>
-               </div>
-
-               <div>
-                 <h4>{{ _('Attributes') }}</h4>
-                 <p>{{ _('infotext - attributes') }}</p>
-                 <div id="attributemanager"></div>
-                 <hr>
-                 <button id="save" class="btn btn-small" disabled="disabled">{{ _('save') }}</button>
+                <div class="tab-pane fade" id="point_stling">
+                  <div id="point-style-editor"></div>
                 </div>
-                <div id="point-style-editor"></div>
-              </div>
-              <div class="tab-pane fade" id="filter">
-                <h4>{{ _('filter') }}</h4>
-                <p>{{ _('infotext - filter controls') }}</p>
-                <div id="filtermanager"></div>
-              </div>
-
-              <div class="tab-pane fade" id="measure">
-                <h4>{{ _('Measure') }}</h4>
-                <p>{{ _('infotext - measure controls') }}</p>
-                <div id="measure-toolbar">
-                  <!--  load measure widget -->
-                </div>
-                <div id="measure-output">
-                </div>
-              </div>
+             </div>
             </div>
           </div>
+          <div class="tab-pane fade" id="filter">
+            <h4>{{ _('filter') }}</h4>
+            <p>{{ _('infotext - filter controls') }}</p>
+            <div id="filtermanager"></div>
+          </div>
+
+          <div class="tab-pane fade" id="measure">
+            <h4>{{ _('Measure') }}</h4>
+            <p>{{ _('infotext - measure controls') }}</p>
+            <div id="measure-toolbar">
+            <!--  load measure widget -->
+            </div>
+            <div id="measure-output">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
 

@@ -17,6 +17,7 @@ gbi.widgets.AttributeEditor = function(editor, options) {
         layer.registerEvent('featureselected', self, function(f) {
             this.selectedFeatures.push(f.feature);
             this._attributes();
+            $('#attributeTab').tab('show');
         });
         layer.registerEvent('featureunselected', self, function(f) {
             var idx = this.selectedFeatures.indexOf(f.feature);

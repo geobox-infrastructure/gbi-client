@@ -162,7 +162,8 @@ gbi.widgets.StyleEditor.template = '\
         </div>\
     </div>\
     </div>\
-    <h3>Polygon</h3>\
+    <hr> \
+    <h3>'+styleLabel.polygon+'</h3>\
     <div class="control-group">\
         <label for="polygon_strokeWidth" class="control-label">'+styleLabel.strokeWidth+':</label>\
         <div class="controls"> \
@@ -188,6 +189,7 @@ gbi.widgets.StyleEditor.template = '\
             <div class="noUiSlider polygon_fillOpacity"></div>\
         </div> \
     </div>\
-    <button id="saveStyle" class="btn btn-small">'+styleLabel.saveStyling+'</button>\
+    <hr> \
+    <button id="saveStyle" class="btn btn-small btn-success">'+styleLabel.saveStyling+'</button>\
 </form>\
 ';
