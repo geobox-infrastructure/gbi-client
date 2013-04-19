@@ -57,7 +57,7 @@ gbi.widgets.LayerManager.prototype = {
         });
 
         if (!accordion) {
-            accordion = 'collapseBackground';
+            accordion = 'collapseVector';
         }
 
         var template = this.options.tiny ? gbi.widgets.LayerManager.templates.tiny : gbi.widgets.LayerManager.templates.normal;
