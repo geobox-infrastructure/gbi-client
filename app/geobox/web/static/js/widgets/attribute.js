@@ -126,7 +126,7 @@ gbi.widgets.AttributeEditor.prototype = {
 };
 
 
-var label = {
+var attributeLabel = {
     'noAttributes': OpenLayers.i18n("noAttributes"),
     'key': OpenLayers.i18n("key"),
     'val': OpenLayers.i18n("value"),
@@ -136,7 +136,7 @@ var label = {
 
 gbi.widgets.AttributeEditor.template = '\
 <% if(Object.keys(attributes).length == 0) { %>\
-    <span>'+label.noAttributes+'</span>\
+    <span>'+attributeLabel.noAttributes+'</span>\
 <% } else { %>\
     <% for(var key in attributes) { %>\
         <form id="view_attributes" class="form-inline">\
@@ -148,20 +148,20 @@ gbi.widgets.AttributeEditor.template = '\
         </form>\
     <% } %>\
 <% } %>\
-<h4>'+label.formTitle+'</h4>\
+<h4>'+attributeLabel.formTitle+'</h4>\
 <form class="form-horizontal"> \
 	 <div class="control-group"> \
-		<label class="control-label" for="newKey">'+label.key+'</label> \
+		<label class="control-label" for="newKey">'+attributeLabel.key+'</label> \
 		<div class="controls">\
 			<input type="text" id="newKey" class="input-medium">\
 		</div>\
 	</div>\
 	 <div class="control-group"> \
-		<label class="control-label" for="newValue">'+label.val+'</label> \
+		<label class="control-label" for="newValue">'+attributeLabel.val+'</label> \
 		<div class="controls">\
 			<input type="text" id="newValue" class="input-medium">\
 		</div>\
 	</div>\
-    <button id="addKeyValue" class="btn btn-small">'+label.add+'</button>\
+    <button id="addKeyValue" class="btn btn-small">'+attributeLabel.add+'</button>\
 </form>\
 ';

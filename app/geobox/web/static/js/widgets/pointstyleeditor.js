@@ -142,7 +142,7 @@ gbi.widgets.PointStyleEditor.prototype = {
 
 };
 
-var label = {
+var pointLabel = {
     'point': OpenLayers.i18n('point'),
     'radius': OpenLayers.i18n('radius'),
     'color': OpenLayers.i18n('color'),
@@ -150,21 +150,21 @@ var label = {
 }
 
 gbi.widgets.PointStyleEditor.template = '\
-<h3>'+label.point+'</h3>\
+<h3>'+pointLabel.point+'</h3>\
 <form class="form-horizontal"> \
      <div class="control-group">\
-        <label for="pointRadius" class="control-label">'+label.radius + ':</label>\
+        <label for="pointRadius" class="control-label">'+pointLabel.radius + ':</label>\
          <div class="controls"> \
             <input type="text" class="pointRadius styleControl input-small" value="<%=pointStyling.pointRadius%>"/>\
         </div>\
     </div>\
     <div class="control-group">\
-        <label for="fillColor" class="control-label">'+label.color+':</label>\
+        <label for="fillColor" class="control-label">'+pointLabel.color+':</label>\
         <div class="controls"> \
             <input class="fillColor color_picker styleControl input-small" value="<%=pointStyling.fillColor%>"/>\
         </div>\
     </div>\
     </div>\
-    <button id="savePointStyle" class="btn btn-small">'+label.saveStyling+'</button>\
+    <button id="savePointStyle" class="btn btn-small">'+pointLabel.saveStyling+'</button>\
 </form>\
 ';

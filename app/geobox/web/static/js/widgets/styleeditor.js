@@ -136,7 +136,7 @@ gbi.widgets.StyleEditor.prototype = {
     }
 };
 
-var label = {
+var styleLabel = {
     'line': OpenLayers.i18n('line'),
     'polygon': OpenLayers.i18n('polygon'),
     'strokeColor': OpenLayers.i18n('strokeColor'),
@@ -147,16 +147,16 @@ var label = {
 }
 
 gbi.widgets.StyleEditor.template = '\
-<h3>'+label.line+'</h3>\
+<h3>'+styleLabel.line+'</h3>\
 <form class="form-horizontal"> \
      <div class="control-group">\
-        <label for="line_strokeWidth" class="control-label">'+label.strokeWidth + ':</label>\
+        <label for="line_strokeWidth" class="control-label">'+styleLabel.strokeWidth + ':</label>\
          <div class="controls"> \
             <input type="text" id="line_strokeWidth" class="line_strokeWidth styleControl input-small" />\
         </div>\
     </div>\
     <div class="control-group">\
-        <label for="line_strokeColor" class="control-label">'+label.strokeColor+':</label>\
+        <label for="line_strokeColor" class="control-label">'+styleLabel.strokeColor+':</label>\
         <div class="controls"> \
             <input class="color_picker line_strokeColor styleControl input-small" value="<%=symbolizers.Line.strokeColor%>"/>\
         </div>\
@@ -164,30 +164,30 @@ gbi.widgets.StyleEditor.template = '\
     </div>\
     <h3>Polygon</h3>\
     <div class="control-group">\
-        <label for="polygon_strokeWidth" class="control-label">'+label.strokeWidth+':</label>\
+        <label for="polygon_strokeWidth" class="control-label">'+styleLabel.strokeWidth+':</label>\
         <div class="controls"> \
             <input id="polygon_strokeWidth" class="polygon_strokeWidth styleControl input-small" />\
         </div>\
     </div>\
     <div class="control-group">\
-        <label for="polygon_strokeColor" class="control-label">'+label.strokeColor+':</label>\
+        <label for="polygon_strokeColor" class="control-label">'+styleLabel.strokeColor+':</label>\
         <div class="controls"> \
             <input id="polygon_strokeColor" class="color_picker polygon_strokeColor styleControl input-small" value="<%=symbolizers.Polygon.strokeColor%>" />\
         </div>\
    </div>\
    <div class="control-group">\
-        <label for="polygon_fillColor" class="control-label">'+label.fillColor+':</label>\
+        <label for="polygon_fillColor" class="control-label">'+styleLabel.fillColor+':</label>\
         <div class="controls"> \
             <input id="polygon_fillColor" class="color_picker polygon_fillColor styleControl input-small" value="<%=symbolizers.Polygon.fillColor %>" />\
         </div>\
     </div>\
     <div class="control-group">\
-        <label for="polygon_fillOpacity" class="control-label">'+label.fillOpacity+':</label>\
+        <label for="polygon_fillOpacity" class="control-label">'+styleLabel.fillOpacity+':</label>\
         <div class="controls"> \
             <input id="polygon_fillOpacity" class="polygon_fillOpacity styleControl input-small" />\
             <div class="noUiSlider polygon_fillOpacity"></div>\
         </div> \
     </div>\
-    <button id="saveStyle" class="btn btn-small">'+label.saveStyling+'</button>\
+    <button id="saveStyle" class="btn btn-small">'+styleLabel.saveStyling+'</button>\
 </form>\
 ';
