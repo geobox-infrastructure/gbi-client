@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-18 13:59+0200\n"
+"POT-Creation-Date: 2013-04-19 10:14+0200\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -273,7 +273,7 @@ msgstr "Auswahl"
 msgid "edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:62 geobox/web/templates/editor.html:105
+#: geobox/web/templates/editor.html:62 geobox/web/templates/editor.html:100
 msgid "filter"
 msgstr "Filter"
 
@@ -321,19 +321,45 @@ msgstr ""
 msgid "save"
 msgstr "Speichern"
 
-#: geobox/web/templates/editor.html:106
+#: geobox/web/templates/editor.html:101
 msgid "infotext - filter controls"
 msgstr "Hier können Sie Geometrien abhängig von Eigenschaft und Wert auswählen."
 
-#: geobox/web/templates/editor.html:111
+#: geobox/web/templates/editor.html:106
 msgid "Measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:112
+#: geobox/web/templates/editor.html:107
 msgid "infotext - measure controls"
 msgstr ""
 "Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen,"
 " oder Strecken und Flächen messen."
+
+#: geobox/web/templates/editor.html:123
+msgid "Sure you want delete layer"
+msgstr "Löschen der Karte "
+
+#: geobox/web/templates/editor.html:126
+msgid "infotext delete layer"
+msgstr ""
+"Achtung: Nach dem Löschen kann die Karte nicht wiederhergestellt werden. "
+"Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
+
+#: geobox/web/templates/editor.html:129 geobox/web/templates/editor.html:143
+msgid "abort"
+msgstr "Abbrechen"
+
+#: geobox/web/templates/editor.html:130 geobox/web/templates/editor.html:144
+msgid "yes delete"
+msgstr "Ja, Löschen"
+
+#: geobox/web/templates/editor.html:137
+msgid "Sure you want delete all geometries?"
+msgstr "Alle Geometrien löschen"
+
+#: geobox/web/templates/editor.html:140
+msgid "infotext delete all geometries"
+msgstr "Hinweis: Alle Geometrien in der aktuell aktiven Karte werden gelöscht."
 
 #: geobox/web/templates/index.html:10
 msgid "Welcome to GeoBox"

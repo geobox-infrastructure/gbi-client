@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-18 13:59+0200\n"
+"POT-Creation-Date: 2013-04-19 10:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -271,7 +271,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:62 geobox/web/templates/editor.html:105
+#: geobox/web/templates/editor.html:62 geobox/web/templates/editor.html:100
 msgid "filter"
 msgstr ""
 
@@ -314,16 +314,40 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:106
+#: geobox/web/templates/editor.html:101
 msgid "infotext - filter controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:111
+#: geobox/web/templates/editor.html:106
 msgid "Measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:112
+#: geobox/web/templates/editor.html:107
 msgid "infotext - measure controls"
+msgstr ""
+
+#: geobox/web/templates/editor.html:123
+msgid "Sure you want delete layer"
+msgstr ""
+
+#: geobox/web/templates/editor.html:126
+msgid "infotext delete layer"
+msgstr ""
+
+#: geobox/web/templates/editor.html:129 geobox/web/templates/editor.html:143
+msgid "abort"
+msgstr ""
+
+#: geobox/web/templates/editor.html:130 geobox/web/templates/editor.html:144
+msgid "yes delete"
+msgstr ""
+
+#: geobox/web/templates/editor.html:137
+msgid "Sure you want delete all geometries?"
+msgstr ""
+
+#: geobox/web/templates/editor.html:140
+msgid "infotext delete all geometries"
 msgstr ""
 
 #: geobox/web/templates/index.html:10
