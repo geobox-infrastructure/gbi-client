@@ -154,9 +154,9 @@ gbi.widgets.LayerManager.prototype = {
                     callbacks: {
                         changes: function(unsavedChanges) {
                             if(unsavedChanges)
-                                $('#save').removeAttr('disabled');
+                                $('#save_changes').removeAttr('disabled').addClass('btn-success');
                              else
-                                $('#save').attr('disabled', 'disabled');
+                                $('#save_changes').attr('disabled', 'disabled').removeClass('btn-success');;
                         }
                     }
                 });

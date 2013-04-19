@@ -220,7 +220,8 @@ li.layerElement input {
     margin-top: -2px;
 }
 
-.controls {
+/* editor */
+.controls, #save_changes {
     margin-top: 10px;
 }
 

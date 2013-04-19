@@ -86,9 +86,10 @@ function initEditor() {
         element: 'filtermanager'
     });
 
-    $('#save').click(function() {
+    $('#save_changes').click(function() {
         var layer = editor.layerManager.active();
         layer.save();
+        $(this).removeClass('btn-success');
     });
 
 	return editor;
