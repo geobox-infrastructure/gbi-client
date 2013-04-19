@@ -3,7 +3,13 @@ gbi.widgets = gbi.widgets || {};
 gbi.widgets.PointStyleEditor = function(editor, options) {
     var self = this;
     var defaults = {
-        element: 'point-style-editor'
+        element: 'point-style-editor',
+        selectDefaults : {
+            strokeWidth: 2,
+            strokeColor: 'blue',
+            strokeOpacity: 1,
+            cursor: "pointer"
+        }
     };
 
     this.layerManager = editor.layerManager;
@@ -13,6 +19,7 @@ gbi.widgets.PointStyleEditor = function(editor, options) {
     this.editor = editor;
     this.stylingLayer = this.layerManager.active();
     this.changed = false;
+    this.activeLayer = this.layerManager.active();
 
     $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
         if(layer !== undefined) {
@@ -24,19 +31,31 @@ gbi.widgets.PointStyleEditor = function(editor, options) {
 
     $.each(this.layerManager.vectorLayers, function(idx, layer) {
         layer.registerEvent('featureselected', self, function(f) {
-            this.selectedFeatures.push(f.feature);
-            this._checkFeatureType()
+            if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
+                var styleBackup = {};
+                jQuery.extend(styleBackup, f.feature.style);
+                f.feature.styleBackup = styleBackup;
+                this.selectedFeatures.push(f.feature);
+                this._checkFeatureType()
+                $('#pointTab').show();
+            }
         });
         layer.registerEvent('featureunselected', self, function(f) {
-            var idx = this.selectedFeatures.indexOf(f.feature);
-            if(idx != -1) {
-                this.selectedFeatures.splice(idx, 1);
+            if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
+                var idx = this.selectedFeatures.indexOf(f.feature);
+                if(idx != -1) {
+                    this.selectedFeatures.splice(idx, 1);
+                }
+                if (f.feature.styleBackup && !jQuery.isEmptyObject(f.feature.styleBackup)) {
+                    f.feature.style = f.feature.styleBackup;
+                }
+                this._checkFeatureType()
+                this.activeLayer.olLayer.redraw();
+                $('#attributeTab').tab('show');
+                $('#pointTab').hide();
             }
-            this._checkFeatureType()
         });
     });
-
-
 };
 gbi.widgets.PointStyleEditor.prototype = {
 
@@ -52,9 +71,13 @@ gbi.widgets.PointStyleEditor.prototype = {
         $.each(this.selectedFeatures, function(id, feature) {
             if (feature.style) {
                 pointStyling = feature.style;
+                feature.style = $.extend({}, pointStyling, self.options.selectDefaults);
                 return false;
             }
         });
+        // redraw to show select
+        this.activeLayer.olLayer.redraw();
+
         // load pointstyling from layer if not selcted point has styling
         if (!pointStyling) {
             pointStyling = this.stylingLayer.symbolizers.Point;
@@ -64,18 +87,18 @@ gbi.widgets.PointStyleEditor.prototype = {
 
         $('.color_picker').each(function() {
             $(this).minicolors({
-                'value': $(this).val()
-                // change: function() {
-                //     self.setStyle();
-                // }
+                'value': $(this).val(),
+                change: function() {
+                    self.setStyle();
+                }
             });
         });
 
-        // $(".styleControl").keyup(function() {
-        //     self.setStyle();
-        // }).change(function() {
-        //     self.setStyle();
-        // });
+        $(".styleControl").keyup(function() {
+            self.setStyle();
+        }).change(function() {
+            self.setStyle();
+        });
 
         $('#savePointStyle').click(function() {
             self.saveStyle();
@@ -92,26 +115,33 @@ gbi.widgets.PointStyleEditor.prototype = {
         $.each(['.pointRadius', '.fillColor'], function(idx, id) {
             self._setStyleProperty(id, point);
         });
-        if(Object.keys(point).length > 0) {
-            symbolizers["Point"] = point;
-        }
+        $.each(this.selectedFeatures, function(id, feature) {
+            feature.styleBackup = point;
+            if (!feature.style) {
+                feature.style = self.options.selectDefaults;
+            }
+            feature.style.pointRadius = point.pointRadius;
+            feature.style.fillColor = point.fillColor;
+        });
+        this.activeLayer.olLayer.redraw();
 
-        if(Object.keys(symbolizers).length > 0) {
-            $.each(this.selectedFeatures, function(id, feature) {
-                 feature.style = point;
-           });
-       }
-        return this.stylingLayer;
+        return point;
     },
 
     saveStyle: function() {
-        this.setStyle();
+        var self = this;
+        var pointStyling = this.setStyle();
         var selectCtrl = this.editor.map.toolbars[1].select.olControl;
         $.each(this.selectedFeatures, function(id, feature) {
-            if (feature && feature.layer) {
-                selectCtrl.unselect(feature)
+            if (feature) {
+                feature.state = OpenLayers.State.UPDATE;
             }
         });
+        selectCtrl.unselectAll();
+        var activeLayer = self.layerManager.active();
+        activeLayer.changesMade();
+        self.selectedFeatures = [];
+        self.render();
     },
 
     _setStyleProperty: function(id, obj) {
