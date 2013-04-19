@@ -1,9 +1,18 @@
+var layerManagerLabel = {
+    'activeLayer': OpenLayers.i18n("activeLayer"),
+    'background': OpenLayers.i18n("backgroundTitle"),
+    'raster': OpenLayers.i18n("rasterLayerTitle"),
+    'vector': OpenLayers.i18n("vectorLayerTitle"),
+    'addLayer': OpenLayers.i18n("addvectorLayerButton")
+}
+
 gbi.widgets = gbi.widgets || {};
 
 gbi.widgets.LayerManager = function(editor, options) {
     var self = this;
     var defaults = {
         element: 'layermanager',
+        showActiveLayer: true,
         tiny: false
     };
 
@@ -16,6 +25,12 @@ gbi.widgets.LayerManager = function(editor, options) {
         this.element.addClass('gbi_widgets_LayerManager');
     } else {
         this.element = $('#' + this.options.element);
+    }
+
+    // add active layer
+    if(this.options.showActiveLayer) {
+        this.activeLayerDIV = $('<div id="layermanager_active_layer" class="label label-success">'+layerManagerLabel.activeLayer+': <span></span></div>');
+        $('.olMapViewport').append(this.activeLayerDIV);
     }
 
     this.render();
@@ -40,10 +55,14 @@ gbi.widgets.LayerManager.prototype = {
         var rasterLayers = [];
         var backgroundLayers = [];
         var vectorLayers = [];
+
         $.each(this.layerManager.layers(), function(idx, gbiLayer) {
             if(gbiLayer.options.displayInLayerSwitcher) {
                 if (gbiLayer.isVector) {
                     vectorLayers.push(gbiLayer);
+                    if (gbiLayer.isActive) {
+                        $('#layermanager_active_layer > span').html(gbiLayer.options.name);
+                    }
                 }
                 if (gbiLayer.isRaster && gbiLayer.isBackground) {
                     backgroundLayers.push(gbiLayer);
@@ -163,20 +182,13 @@ gbi.widgets.LayerManager.prototype = {
     }
 };
 
-var label = {
-    'background': OpenLayers.i18n("backgroundTitle"),
-    'raster': OpenLayers.i18n("rasterLayerTitle"),
-    'vector': OpenLayers.i18n("vectorLayerTitle"),
-    'addLayer': OpenLayers.i18n("addvectorLayerButton")
-}
-
 gbi.widgets.LayerManager.templates = {
  normal: '\
  <div class="accordion" id="accordion2">\
     <div class="accordion-group">\
         <div class="accordion-heading">\
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseBackground">\
-             '+label.background+'\
+             '+layerManagerLabel.background+'\
              </a>\
         </div>\
         <div id="collapseBackground" class="accordion-body collapse <% if(accordion == "collapseBackground") { %> in <% } %>">\
@@ -203,7 +215,7 @@ gbi.widgets.LayerManager.templates = {
     <div class="accordion-group">\
         <div class="accordion-heading">\
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseRaster">\
-             '+label.raster+'\
+             '+layerManagerLabel.raster+'\
             </a>\
         </div>\
         <div id="collapseRaster" class="accordion-body collapse <% if(accordion == "collapseRaster") { %> in <% } %> ">\
@@ -230,7 +242,7 @@ gbi.widgets.LayerManager.templates = {
     <div class="accordion-group">\
         <div class="accordion-heading">\
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseVector">\
-             '+label.vector+'\
+             '+layerManagerLabel.vector+'\
             </a>\
         </div>\
         <div id="collapseVector" class="accordion-body collapse <% if(accordion == "collapseVector") { %> in <% } %>">\
@@ -262,7 +274,7 @@ gbi.widgets.LayerManager.templates = {
             </ul> \
             <div class="input-append"> \
                 <input class="span5" id="new_vector_layer" name="new_vector_layer" type="text"> \
-                <button class="btn" id="add_vector_layer" type="button">'+label.addLayer+'</button> \
+                <button class="btn" id="add_vector_layer" type="button">'+layerManagerLabel.addLayer+'</button> \
             </div> \
             <div id="help_text"></div> \
         </div>\
@@ -270,7 +282,7 @@ gbi.widgets.LayerManager.templates = {
 </div> \
 ',
 tiny: '\
-        <h5>'+label.background+'\</h5>\
+        <h5>'+layerManagerLabel.background+'\</h5>\
         <ul>\
             <% for(var i=0; i<backgroundLayers.length; i++) { %>\
                 <li class="gbi_layer">\
@@ -288,7 +300,7 @@ tiny: '\
             <% } %>\
         </ul>\
         <% if(rasterLayers.length != 0) { %> \
-            <h5>'+label.raster+'\</h5>\
+            <h5>'+layerManagerLabel.raster+'\</h5>\
             <ul>\
                 <% for(var i=0; i<rasterLayers.length; i++) { %>\
                     <li class="gbi_layer">\
@@ -307,7 +319,7 @@ tiny: '\
             </ul>\
             <% } %> \
         <% if(vectorLayers.length != 0) { %> \
-            <h5>'+label.vector+'\</h5>\
+            <h5>'+layerManagerLabel.vector+'\</h5>\
             <ul>\
                 <% for(var i=0; i<vectorLayers.length; i++) { %>\
                     <li class="gbi_layer">\

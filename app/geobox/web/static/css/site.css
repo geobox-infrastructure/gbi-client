@@ -245,6 +245,13 @@ li.layerElement input {
     overflow: visible;
 }
 
+#layermanager_active_layer {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 1005;
+}
+
 .gbi_widgets_LayerManager {
     position: absolute;
     top: 8px;

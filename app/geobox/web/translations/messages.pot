@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-19 10:14+0200\n"
+"POT-Creation-Date: 2013-04-19 10:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -308,7 +308,7 @@ msgid "infotext - attributes"
 msgstr ""
 
 #: geobox/web/templates/editor.html:95
-#: geobox/web/templates/js/translation.js:36
+#: geobox/web/templates/js/translation.js:37
 #: geobox/web/templates/projects/export_edit.html:63
 #: geobox/web/templates/projects/import_edit.html:29
 msgid "save"
@@ -486,71 +486,75 @@ msgstr ""
 msgid "add vector map"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:11
-msgid "coordinates"
+#: geobox/web/templates/js/translation.js:9
+msgid "active layer"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:12
+msgid "coordinates"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:13
 msgid "mesasure result"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:15
+#: geobox/web/templates/js/translation.js:16
 msgid "no attributes"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:16
+#: geobox/web/templates/js/translation.js:17
 msgid "key"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:17
+#: geobox/web/templates/js/translation.js:18
 msgid "value"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:18
+#: geobox/web/templates/js/translation.js:19
 msgid "add "
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:19
+#: geobox/web/templates/js/translation.js:20
 msgid "add new attribute"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:22
+#: geobox/web/templates/js/translation.js:23
 msgid "line"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:23
+#: geobox/web/templates/js/translation.js:24
 msgid "polygon"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:24
+#: geobox/web/templates/js/translation.js:25
 msgid "stroke width"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:25
+#: geobox/web/templates/js/translation.js:26
 msgid "stroke color"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:26
+#: geobox/web/templates/js/translation.js:27
 msgid "fill color"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:27
+#: geobox/web/templates/js/translation.js:28
 msgid "fill opacity"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:28
+#: geobox/web/templates/js/translation.js:29
 msgid "save styling"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:31
+#: geobox/web/templates/js/translation.js:32
 msgid "loadFilter"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:34
+#: geobox/web/templates/js/translation.js:35
 msgid "point"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:35
+#: geobox/web/templates/js/translation.js:36
 msgid "radius"
 msgstr ""
 
