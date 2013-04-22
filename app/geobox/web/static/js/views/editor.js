@@ -12,11 +12,13 @@ $(document).ready(function() {
 
             $.each(editor.map.toolbars, function(id, toolbar) {
                 toolbar.deactivateAllControls();
-                if (toolbar.select && toolbar.select.olControl) {
+                var activeLayer = editor.layerManager.active();
+                if (activeLayer && toolbar.select && toolbar.select.olControl) {
                     toolbar.select.olControl.unselectAll();
                 }
                 if (toolbar.select && toolbar.select.olControl && tab == '#edit') {
                     toolbar.select.activate();
+                    $(gbi).off('gbi.layer.couch.loadFeaturesEnd');
                     orderToolbar();
                 }
             });
@@ -25,8 +27,13 @@ $(document).ready(function() {
 
    $('#remove_all_features').click(function() {
         var activeLayer = editor.layerManager.active();
+        if (!activeLayer) {
+          $('#deleteAllGeometries').modal('hide');
+          return false;
+        }
         if(activeLayer instanceof gbi.Layers.SaveableVector) {
-            editor.map.toolbars[1].delete_.olControl.deleteFeatures(activeLayer.features)
+            activeLayer.unSelectAllFeatures();
+            editor.map.toolbars[1].delete_.olControl.deleteFeatures(activeLayer.olLayer.features)
             activeLayer.changesMade();
         }
         $('#deleteAllGeometries').modal('hide');
@@ -136,7 +143,9 @@ function initEditor() {
 
     $('#save_changes').click(function() {
         var layer = editor.layerManager.active();
-        layer.save();
+        if (layer) {
+          layer.save();
+        }
         $(this).removeClass('btn-success').attr('disabled', 'disabled');
     });
 	return editor;

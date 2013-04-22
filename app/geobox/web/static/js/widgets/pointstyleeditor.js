@@ -43,6 +43,7 @@ gbi.widgets.PointStyleEditor.prototype = {
             layer.registerEvent('featureselected', self, function(f) {
                 var activeLayer = self.layerManager.active();
                 if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
+                    self.activeLayer = self.layerManager.active();
                     self.addSelectFeatureStyle(f.feature);
                     self.selectedFeatures.push(f.feature);
                     if(self.selectedFeatures.length == 1) {
@@ -56,6 +57,7 @@ gbi.widgets.PointStyleEditor.prototype = {
             });
             layer.registerEvent('featureunselected', self, function(f) {
                 if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
+                    self.activeLayer = self.layerManager.active();
                     var idx = $.inArray(f.feature, self.selectedFeatures);
                     if(idx != -1) {
                         self.selectedFeatures.splice(idx, 1);
