@@ -1,5 +1,5 @@
 /* Draw Control */
-.customEditingToolbar div {
+#toolbar-work div, #toolbar-draw div {
     float: left;
     margin: 5px;
     width: 24px;

@@ -79,19 +79,24 @@
           <div class="tab-pane fade" id="edit">
             <h4>{{ _('Edit') }}</h4>
             <p>{{ _('infotext - edit controls') }}</p>
-            <div id="edit-toolbar" class="span11"></div>
+            <div id="edit-toolbar">
+              <div id="toolbar-work" class="span11"></div>
+              <div id="toolbar-draw" class="span11"></div>
+            </div>
 
             <div class="span11">
               <button data-toggle="modal" data-target="#deleteAllGeometries" class="btn btn-small">{{ _('remove all features') }}</button>
             </div>
             <hr>
-            <button id="save_changes" class="btn btn-small"  disabled="disabled">{{ _('save') }}</button>
+            <button id="save_changes" class="btn btn-small"  disabled="disabled">
+              {{ _('save') }}</button>
             <hr>
 
            <div>
             <ul id="editor-tabs" class="nav nav-tabs">
               <li class="active">
-                  <a id="attributeTab" href="#attributes" data-toggle="tab">{{ _('Attribute') }}</a>
+                  <a id="attributeTab" href="#attributes" data-toggle="tab">
+                    {{ _('Attribute') }}</a>
                 </li>
                 <li>
                   <a id="pointTab" href="#point_stling" data-toggle="tab" style="display:none">{{ _('point styling') }}</a>
