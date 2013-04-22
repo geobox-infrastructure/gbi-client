@@ -22,6 +22,7 @@ import shutil
 
 import babel.support
 
+import sqlalchemy.exc
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from geobox.model.meta import Base
@@ -52,6 +53,7 @@ class GeoBoxState(object):
             config.set('web', 'secret_key', uuid.uuid4().get_hex())
             config.write()
         self.engine, self.db_filename = self._user_data_db_engine()
+        self.migrate_db(self.engine)
         Base.metadata.create_all(self.engine)
         self.user_db_session = sessionmaker(self.engine)
         self._should_terminate = threading.Event()
@@ -66,6 +68,19 @@ class GeoBoxState(object):
         # XXX olt: default .ini path
         config = GeoBoxConfig.from_file('./geobox.ini')
         return cls(config)
+
+    def migrate_db(self, engine):
+        """
+        Migrate user db to new version.
+        """
+        con = engine.connect()
+        try:
+            con.execute("ALTER TABLE external_wmts_sources ADD COLUMN max_tiles INTEGER;")
+        except sqlalchemy.exc.OperationalError:
+            # already there
+            pass
+        finally:
+            con.close()
 
     def shutdown_app(self):
         """
