@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-19 14:04+0200\n"
+"POT-Creation-Date: 2013-04-22 10:41+0200\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -273,7 +273,7 @@ msgstr "Auswahl"
 msgid "edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:62 geobox/web/templates/editor.html:113
+#: geobox/web/templates/editor.html:62 geobox/web/templates/editor.html:116
 msgid "filter"
 msgstr "Filter"
 
@@ -300,71 +300,69 @@ msgstr "Editieren"
 msgid "infotext - edit controls"
 msgstr "Wählen Sie ein Bearbeitungswerkzeug aus."
 
-#: geobox/web/templates/editor.html:85
+#: geobox/web/templates/editor.html:86
 msgid "remove all features"
 msgstr "Alle Geometrien löschen"
 
-#: geobox/web/templates/editor.html:88
-#: geobox/web/templates/projects/export_edit.html:63
-#: geobox/web/templates/projects/import_edit.html:29
-msgid "save"
-msgstr "Speichern"
+#: geobox/web/templates/editor.html:90
+msgid "save permanent"
+msgstr "Änderungen dauerhaft speichern"
 
-#: geobox/web/templates/editor.html:94
+#: geobox/web/templates/editor.html:97
 msgid "Attribute"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:97
+#: geobox/web/templates/editor.html:100
 msgid "point styling"
 msgstr "Punktdesign"
 
-#: geobox/web/templates/editor.html:102
+#: geobox/web/templates/editor.html:105
 msgid "Attributes"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:103
+#: geobox/web/templates/editor.html:106
 msgid "infotext - attributes"
 msgstr ""
 "Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie "
 "hierzu eine Geometrie mit dem Auswahlwerkezug aus."
 
-#: geobox/web/templates/editor.html:114
+#: geobox/web/templates/editor.html:117
 msgid "infotext - filter controls"
 msgstr "Hier können Sie Geometrien abhängig von Eigenschaft und Wert auswählen."
 
-#: geobox/web/templates/editor.html:119
+#: geobox/web/templates/editor.html:122
 msgid "Measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:120
+#: geobox/web/templates/editor.html:123
 msgid "infotext - measure controls"
 msgstr ""
 "Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen,"
 " oder Strecken und Flächen messen."
 
-#: geobox/web/templates/editor.html:136
+#: geobox/web/templates/editor.html:139
 msgid "Sure you want delete layer"
 msgstr "Löschen der Karte "
 
-#: geobox/web/templates/editor.html:139
+#: geobox/web/templates/editor.html:142
 msgid "infotext delete layer"
 msgstr ""
 "Achtung: Nach dem Löschen kann die Karte nicht wiederhergestellt werden. "
 "Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
 
-#: geobox/web/templates/editor.html:142 geobox/web/templates/editor.html:156
+#: geobox/web/templates/editor.html:145 geobox/web/templates/editor.html:159
 msgid "abort"
 msgstr "Abbrechen"
 
-#: geobox/web/templates/editor.html:143 geobox/web/templates/editor.html:157
+#: geobox/web/templates/editor.html:146 geobox/web/templates/editor.html:160
 msgid "yes delete"
 msgstr "Ja, Löschen"
 
-#: geobox/web/templates/editor.html:150
+#: geobox/web/templates/editor.html:153
 msgid "Sure you want delete all geometries?"
 msgstr "Alle Geometrien löschen"
 
-#: geobox/web/templates/editor.html:153
+#: geobox/web/templates/editor.html:156
 msgid "infotext delete all geometries"
 msgstr "Hinweis: Alle Geometrien in der aktuell aktiven Karte werden gelöscht."
 
@@ -430,7 +428,7 @@ msgstr "Log Übersicht"
 msgid "logs"
 msgstr "Log Übersicht"
 
-#: geobox/web/templates/macros.html:68
+#: geobox/web/templates/macros.html:69
 msgid "download coverage"
 msgstr "Downloadberecht."
 
@@ -582,8 +580,8 @@ msgstr "Farbe"
 #: geobox/web/templates/js/translation.js:37
 msgid "infotext - point styling"
 msgstr ""
-"Ändern Sie das Aussehen des ausgewählten Punktes. Ohne Speichern gehen die Änderungen"
-" verloren."
+"Ändern Sie das Aussehen des ausgewählten Punktes. Ohne Speichern gehen "
+"die Änderungen verloren."
 
 #: geobox/web/templates/js/translation.js:38
 msgid "radius"
@@ -640,6 +638,11 @@ msgstr ""
 #: geobox/web/templates/projects/export_edit.html:77
 msgid "remove vector"
 msgstr "Vektorlayer entfernen"
+
+#: geobox/web/templates/projects/export_edit.html:63
+#: geobox/web/templates/projects/import_edit.html:29
+msgid "save"
+msgstr "Speichern"
 
 #: geobox/web/templates/projects/export_edit.html:64
 #: geobox/web/templates/projects/import_edit.html:30
