@@ -21,7 +21,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
 
     // styling - widget
     'line': "{{ _('line') }}",
-    'polyon': "{{ _('polygon') }}",
+    'polygon': "{{ _('polygon') }}",
     'strokeWidth': "{{ _('stroke width') }}",
     'strokeColor': "{{ _('stroke color') }}",
     'fillColor': "{{ _('fill color') }}",
