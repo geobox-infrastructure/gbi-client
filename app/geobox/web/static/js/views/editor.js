@@ -12,10 +12,10 @@ $(document).ready(function() {
 
             $.each(editor.map.toolbars, function(id, toolbar) {
                 toolbar.deactivateAllControls();
-                if (toolbar.select) {
+                if (toolbar.select && toolbar.select.olControl) {
                     toolbar.select.olControl.unselectAll();
                 }
-                if (toolbar.select && tab == '#edit') {
+                if (toolbar.select && toolbar.select.olControl && tab == '#edit') {
                     toolbar.select.activate();
                     orderToolbar();
                 }

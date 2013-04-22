@@ -176,7 +176,7 @@ gbi.widgets.LayerManager.prototype = {
                     self.layerManager.addLayer(couchLayer);
                     self.layerManager.active(couchLayer);
                     self.render(self.findAccordion(this));
-                    var addSuccessful = OpenLayers.i18n("addLayerSuccessful")
+                    var addSuccessful = OpenLayers.i18n("addLayerSuccessful");
                     $("#help_text").attr('class','alert alert-success').html(addSuccessful).show().fadeOut(6000);
                 } else {
                     var notPossible = OpenLayers.i18n("notPossible")

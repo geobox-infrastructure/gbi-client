@@ -14,24 +14,33 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     this.changed = false;
     this.editable = false;
 
-    $.each(this.layerManager.vectorLayers, function(idx, layer) {
-        layer.registerEvent('featureselected', self, function(f) {
-            this.selectedFeatures.push(f.feature);
-            this._attributes(f.feature);
-            $('#attributeTab').tab('show');
-        });
-        layer.registerEvent('featureunselected', self, function(f) {
-            var idx = $.inArray(f.feature, this.selectedFeatures);
-            if(idx != -1) {
-                this.selectedFeatures.splice(idx, 1);
-                this._attributes(false);
-            }
-        });
+    this.registerEvents();
+
+    $(gbi).on('gbi.layermanager.layer.add', function(event, layer) {
+       self.registerEvents();
     });
 };
 
 gbi.widgets.AttributeEditor.prototype = {
     CLASS_NAME: 'gbi.widgets.AttributeEditor',
+
+    registerEvents: function() {
+        var self = this;
+        $.each(self.layerManager.vectorLayers, function(idx, layer) {
+            layer.registerEvent('featureselected', self, function(f) {
+                self.selectedFeatures.push(f.feature);
+                self._attributes(f.feature);
+                $('#attributeTab').tab('show');
+            });
+            layer.registerEvent('featureunselected', self, function(f) {
+                var idx = $.inArray(f.feature, self.selectedFeatures);
+                if(idx != -1) {
+                    self.selectedFeatures.splice(idx, 1);
+                    self._attributes(false);
+                }
+            });
+        });
+    },
     render: function() {
         var self = this;
         this.element.empty();

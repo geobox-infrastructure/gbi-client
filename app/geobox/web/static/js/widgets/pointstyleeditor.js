@@ -29,39 +29,48 @@ gbi.widgets.PointStyleEditor = function(editor, options) {
         }
     });
 
-    $.each(this.layerManager.vectorLayers, function(idx, layer) {
-        layer.registerEvent('featureselected', self, function(f) {
-            var activeLayer = self.layerManager.active();
-            if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
-                this.addSelectFeatureStyle(f.feature);
-                this.selectedFeatures.push(f.feature);
-                if(this.selectedFeatures.length == 1) {
-                    this.render();
-                }
-                if (activeLayer.olLayer == f.feature.layer) {
-                    $('#pointTab').show();
-                }
-
-            }
-        });
-        layer.registerEvent('featureunselected', self, function(f) {
-            if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
-                var idx = $.inArray(f.feature, this.selectedFeatures);
-                if(idx != -1) {
-                    this.selectedFeatures.splice(idx, 1);
-                }
-                this.removeSelectFeatureStyle(f.feature)
-                this.activeLayer.olLayer.redraw();
-                if (this.selectedFeatures.length == 0) {
-                    $('#attributeTab').tab('show');
-                    $('#pointTab').hide();
-                    self.element.empty();
-                }
-            }
-        });
+    this.registerEvents();
+    $(gbi).on('gbi.layermanager.layer.add', function(event, layer) {
+       self.registerEvents();
     });
+
 };
 gbi.widgets.PointStyleEditor.prototype = {
+
+    registerEvents: function() {
+        var self = this;
+        $.each(self.layerManager.vectorLayers, function(idx, layer) {
+            layer.registerEvent('featureselected', self, function(f) {
+                var activeLayer = self.layerManager.active();
+                if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
+                    self.addSelectFeatureStyle(f.feature);
+                    self.selectedFeatures.push(f.feature);
+                    if(self.selectedFeatures.length == 1) {
+                        self.render();
+                    }
+                    if (activeLayer.olLayer == f.feature.layer) {
+                        $('#pointTab').show();
+                    }
+
+                }
+            });
+            layer.registerEvent('featureunselected', self, function(f) {
+                if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
+                    var idx = $.inArray(f.feature, self.selectedFeatures);
+                    if(idx != -1) {
+                        self.selectedFeatures.splice(idx, 1);
+                    }
+                    self.removeSelectFeatureStyle(f.feature)
+                    self.activeLayer.olLayer.redraw();
+                    if (self.selectedFeatures.length == 0) {
+                        $('#attributeTab').tab('show');
+                        $('#pointTab').hide();
+                        self.element.empty();
+                    }
+                }
+            });
+        });
+    },
 
     addSelectFeatureStyle: function(feature) {
         var styleBackup = {};
@@ -89,6 +98,7 @@ gbi.widgets.PointStyleEditor.prototype = {
 
     render: function() {
         var self = this;
+        this.activeLayer = this.layerManager.active();
         this.element.empty();
 
         if (this.selectedFeatures.length == 0) {
