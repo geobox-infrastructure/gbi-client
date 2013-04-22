@@ -43,17 +43,20 @@ function initProjectEditor(options) {
                 toggleStartButton(editor);
             },
             featureremoved: function(f) {
-                 if (f.feature) {
+                if (f.feature) {
                     f.feature.destroy();
                 }
+                getDataVolume(editor)
                 toggleStartButton(editor);
             },
             featuresremoved: function() {
-                getDataVolume(editor);
+                // getDataVolume(editor);
                 toggleStartButton(editor);
             },
             afterfeaturemodified: function(feature) {
-                getDataVolume(editor)
+                if (feature.modified) {
+                    getDataVolume(editor)
+                }
             }
         }
 
