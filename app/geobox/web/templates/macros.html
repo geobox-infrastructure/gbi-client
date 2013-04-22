@@ -18,14 +18,15 @@
     });
 {%- endmacro %}
 
-{% macro generate_couch_layers(layers, display_in_layerswitcher='true') -%}
+{% macro generate_couch_layers(layers, show_layer='true') -%}
     var couchLayers = [];
     {% for layer in layers %}
         couchLayers.push(new gbi.Layers.Couch({
             name: "{{layer.title}}",
             url: OpenlayersCouchURL,
-            displayInLayerSwitcher: {{ display_in_layerswitcher }},
+            displayInLayerSwitcher: {{ show_layer }},
             createDB: false,
+            loadStyle: {{ show_layer }},
             callbacks: {
                 changes: function(unsavedChanges) {
                     if(unsavedChanges)
