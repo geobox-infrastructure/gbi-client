@@ -31,13 +31,16 @@ gbi.widgets.PointStyleEditor = function(editor, options) {
 
     $.each(this.layerManager.vectorLayers, function(idx, layer) {
         layer.registerEvent('featureselected', self, function(f) {
+            var activeLayer = self.layerManager.active();
             if (f.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
                 this.addSelectFeatureStyle(f.feature);
                 this.selectedFeatures.push(f.feature);
                 if(this.selectedFeatures.length == 1) {
                     this.render();
                 }
-                $('#pointTab').show();
+                if (activeLayer.olLayer == f.feature.layer) {
+                    $('#pointTab').show();
+                }
 
             }
         });
