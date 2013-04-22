@@ -38,8 +38,10 @@ $(document).ready(function() {
    function orderToolbar() {
        var toolbarButton = $('#edit-toolbar .olButton');
        var toolbarWork = ['DrawFeaturePoint', 'DrawFeatureLine', 'DrawFeaturePolygon'];
-       $('#edit-toolbar').append('<div id="toolbar-draw" class="span12">'+
+       if ($('#toolbar-draw').length == 0) {
+           $('#edit-toolbar').append('<div id="toolbar-draw" class="span12">'+
             '</div><div id="toolbar-work"></div>');
+       }
        // order toolbar as long as gbi editor dont support groups
        $.each(toolbarButton, function(id, button) {
             var class_ = $(button).attr('class');
