@@ -63,7 +63,7 @@ gbi.widgets.PointStyleEditor.prototype = {
                         self.selectedFeatures.splice(idx, 1);
                     }
                     self.removeSelectFeatureStyle(f.feature)
-                    self.activeLayer.olLayer.redraw();
+                    f.feature.layer.redraw();
                     if (self.selectedFeatures.length == 0) {
                         $('#attributeTab').tab('show');
                         $('#pointTab').hide();
@@ -87,7 +87,7 @@ gbi.widgets.PointStyleEditor.prototype = {
         if (feature.style) {
             feature.style = $.extend({}, feature.style, defaults);
         }
-        this.activeLayer.olLayer.redraw();
+        feature.layer.redraw();
     },
 
     removeSelectFeatureStyle: function(feature) {
