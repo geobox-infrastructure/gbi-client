@@ -133,7 +133,12 @@ def import_edit(id=None):
         coverage=coverage, free_disk_space=free_disk_space)
 
 def validate_max_tiles(form):
-    coverage = coverage_from_feature_collection(json.loads(form.coverage.data))
+    feature_collection = json.loads(form.coverage.data)
+    if not feature_collection:
+        flash(_("no coverage"))
+        return False
+
+    coverage = coverage_from_feature_collection(feature_collection)
     levels = range(int(form.start_level.data), int(form.end_level.data) + 1)
     wmts_source = form.raster_source.data
     max_tiles = wmts_source.max_tiles
@@ -372,7 +377,10 @@ def prepare_task_coverage(feature_collection):
     Loads GeoJSON string of a FeatureCollection, validates and fixes
     all geometries and returns a single MultiPolygon GeoJSON string back.
     """
-    task_coverage_geometry = geometry_from_feature_collection(json.loads(feature_collection))
+    feature_collection = json.loads(feature_collection)
+    if not feature_collection:
+        return None
+    task_coverage_geometry = geometry_from_feature_collection(feature_collection)
     if not task_coverage_geometry:
         return None
     return json.dumps(shapely.geometry.mapping(task_coverage_geometry))
