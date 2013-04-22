@@ -34,7 +34,16 @@ function getDataVolume(editor) {
 
     $.post(getDataVolumeURL, data, function(result) {
         var volumenMB = Math.round(parseFloat(result['volume_mb']) * 100 ) / 100
-        $('#data_volume').text(volumenMB)});
+        $('#data_volume').text(volumenMB);
+        $('#data_tiles').text(result['total_tiles']);
+        $('#data_tiles_max').text(result['max_tiles'] || '-');
+        if (result['max_tiles'] > 0 && result['total_tiles'] > result['max_tiles']) {
+            $('#data_tiles').addClass("label").addClass("label-important");
+        } else {
+            $('#data_tiles').removeClass("label").removeClass("label-important");
+        }
+    });
+
 }
 
 function verifyZoomLevel(element, editor) {

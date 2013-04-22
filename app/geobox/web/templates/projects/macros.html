@@ -39,5 +39,6 @@
         {{ generate_tooltip(_('tooltip - information about data volumen') ) }}
     </h3>
     <p>{{ _('Data volume') }}: <span id="data_volume">0</span> {{ _('MB') }}</p>
+    <p>{{ _('Data tiles') }}: <span id="data_tiles">0</span>/<span id="data_tiles_max">0</span> </p>
     <p>{{ _('free disk space') }}: {{ free_disk_space }} {{ _('MB') }}</p>
 {%- endmacro %}

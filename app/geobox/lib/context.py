@@ -68,6 +68,7 @@ class ContextModelUpdater(object):
         source.is_overlay = layer['overlay']
         source.layer = layer['layer']
         source.tile_matrix = layer['tile_matrix']
+        source.max_tiles = layer.get('max_tiles')
 
         ### first element is background layer
         if first:

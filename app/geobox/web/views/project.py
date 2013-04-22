@@ -74,7 +74,7 @@ def import_edit(id=None):
     form.end_level.choices = get_levels(model.ExternalWMTSSource)
     form.update_tiles.checked = proj.update_tiles
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() and validate_max_tiles(form):
         redirect_url = url_for('.import_list', id=id)
         proj.title = form.data['title']
         proj.import_raster_layers = []
@@ -82,6 +82,7 @@ def import_edit(id=None):
             proj.coverage = prepare_feature_collection_coverage(form.coverage.data)
         else:
             proj.coverage = ''
+            coverage = None
 
         proj.download_size = float(form.data.get('download_size', 0.0))
         proj.update_tiles = form.data.get('update_tiles', False)
@@ -130,6 +131,21 @@ def import_edit(id=None):
         proj=proj, form=form, sources=sources,couch_layers=couch_layers,
         base_layer=base_layer,coverage_form=coverage_form,couchlayers_form=couchlayers_form,
         coverage=coverage, free_disk_space=free_disk_space)
+
+def validate_max_tiles(form):
+    coverage = coverage_from_feature_collection(json.loads(form.coverage.data))
+    levels = range(int(form.start_level.data), int(form.end_level.data) + 1)
+    wmts_source = form.raster_source.data
+    max_tiles = wmts_source.max_tiles
+    if not max_tiles:
+        return True
+    tiles = estimate_project_tiles(coverage, wmts_source, levels)
+    if tiles <= max_tiles:
+        return True
+    else:
+        flash(_("to many tiles"))
+        return False
+
 
 @project.route('/export/new', methods=['GET', 'POST'])
 @project.route('/export/<int:id>', methods=['GET', 'POST'])
@@ -289,13 +305,14 @@ def load_coverage():
 
 @project.route('/data_volume', methods=['POST'])
 def data_volume():
-
     project_coverage = coverage_from_feature_collection(json.loads(request.form['coverage']))
 
     total_tiles = 0
     volume = 0
+    max_tiles = None
     if project_coverage:
         for raster_source in json.loads(request.form['raster_data']):
+            levels = range(raster_source['start_level'], raster_source['end_level'] + 1)
             wmts_source = None
             if request.args.get('export', 'false').lower() == 'true':
                 local_source = g.db.query(model.LocalWMTSSource).get(raster_source['source_id'])
@@ -303,28 +320,32 @@ def data_volume():
                     wmts_source = local_source.wmts_source
             else:
                 wmts_source = g.db.query(model.ExternalWMTSSource).get(raster_source['source_id'])
+                max_tiles = wmts_source.max_tiles
 
-            if wmts_source.download_coverage:
-                wmts_source_coverage = coverage_from_geojson(wmts_source.download_coverage)
-            else:
-                wmts_source_coverage = make_coverage(
-                    shapely.geometry.Polygon([
-                        (-20037508.34, -20037508.34),
-                        (-20037508.34, 20037508.34),
-                        (20037508.34, 20037508.34),
-                        (20037508.34, -20037508.34)
-                    ]), SRS(3857))
-            coverage_intersection = wmts_source_coverage.geom.intersection(project_coverage.geom)
-            if not coverage_intersection:
-                continue
-            intersection = make_coverage(coverage_intersection, SRS(3857))
-
-            levels = range(raster_source['start_level'], raster_source['end_level'] + 1)
-            source_tiles = estimate_tiles(tile_grid(3857), levels, intersection)
+            source_tiles = estimate_project_tiles(project_coverage, wmts_source, levels)
             volume += source_tiles * 15
             total_tiles += source_tiles
 
-    return jsonify(total_tiles=total_tiles, volume_mb=volume / 1024.0)
+    return jsonify(total_tiles=total_tiles, volume_mb=volume / 1024.0, max_tiles=max_tiles)
+
+def estimate_project_tiles(coverage, wmts_source, levels):
+    if wmts_source.download_coverage:
+        wmts_source_coverage = coverage_from_geojson(wmts_source.download_coverage)
+    else:
+        wmts_source_coverage = make_coverage(
+            shapely.geometry.Polygon([
+                (-20037508.34, -20037508.34),
+                (-20037508.34, 20037508.34),
+                (20037508.34, 20037508.34),
+                (20037508.34, -20037508.34)
+            ]), SRS(3857))
+    coverage_intersection = wmts_source_coverage.geom.intersection(coverage.geom)
+    if not coverage_intersection:
+        return 0
+    intersection = make_coverage(coverage_intersection, SRS(3857))
+
+    tiles = estimate_tiles(tile_grid(3857), levels, intersection)
+    return tiles
 
 def get_levels(source):
     start_level = g.db.query(func.min(source.download_level_start)).first()[0]

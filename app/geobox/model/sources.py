@@ -34,6 +34,7 @@ class ExternalWMTSSource(Base):
     format = sa.Column(sa.String, nullable=False)
     srs = sa.Column(sa.String(64), default="EPSG:3857")
     matrix_set = sa.Column(sa.String(64), default='GoogleMapsCompatible')
+    max_tiles = sa.Column(sa.Integer)
     download_coverage = sa.Column(sa.String())
     download_level_start = sa.Column(sa.Integer())
     download_level_end = sa.Column(sa.Integer())
