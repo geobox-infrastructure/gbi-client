@@ -77,9 +77,20 @@ function initEditor() {
         editor.addLayer(layer);
     });
 
+
+    $(gbi).on('gbi.layer.couch.loadFeaturesEnd', function(event) {
+      var activeLayer = editor.layerManager.active();
+      var extent = activeLayer.olLayer.getDataExtent();
+      if (extent) {
+         editor.map.olMap.zoomToExtent(extent);
+      }
+      $(gbi).off('gbi.layer.couch.loadFeaturesEnd');
+    });
+
     $.each(couchLayers, function(index, layer) {
         editor.addLayer(layer);
     });
+
 
     var layermanager = new gbi.widgets.LayerManager(editor, {
         element: 'layermanager'
