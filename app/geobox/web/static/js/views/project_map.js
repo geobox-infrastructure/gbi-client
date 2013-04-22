@@ -8,14 +8,6 @@ function initProjectEditor(options) {
         imgPath: OpenlayersImageURL
     });
     editor.addLayer(backgroundLayer)
-
-    $.each(couchLayers, function(index, layer) {
-        editor.addLayer(layer);
-        if (!options.couchVisible) {
-            layer.olLayer.setVisibility(false);
-        }
-    });
-
     var layermanager = new gbi.widgets.LayerManager(editor, {
         tiny: true
     });
@@ -82,12 +74,14 @@ function deleteAllFeatures(editor) {
     return false;
 }
 
-function loadFeatures(editor, data) {
+function loadFeatures(editor, data, complete) {
     var drawLayer = editor.layerManager.active();
     drawLayer.loading = true;
-
     var parser = new OpenLayers.Format.GeoJSON();
-    if (jQuery.isArray(data)) {
+
+    if (jQuery.isArray(data) && complete == true) {
+        drawLayer.addFeatures(data);
+    } else if (jQuery.isArray(data)) {
        $.each(data, function(index, geom) {
             // check if data is geojson or openlayers.features e.g. from couch layer
             if (geom.CLASS_NAME && geom.CLASS_NAME == 'OpenLayers.Feature.Vector') {
@@ -101,7 +95,7 @@ function loadFeatures(editor, data) {
         if (featureCollection)
             drawLayer.addFeatures(featureCollection);
     }
-    if (drawLayer.features.length > 0) {
+    if (drawLayer.olLayer.features.length > 0) {
         editor.map.olMap.zoomToExtent(drawLayer.olLayer.getDataExtent());
     }
     getDataVolume(editor);

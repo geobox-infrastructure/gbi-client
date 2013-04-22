@@ -86,16 +86,29 @@ function loadCouchCoverage(editor) {
     var polygons = [];
     if (couchLayers) {
         var selectedCouchLayer = couchLayers[couchID];
-        $.each(selectedCouchLayer.features, function(key, feature) {
-            if (feature._drawType == 'polygon') {
-                polygons.push(feature);
-            }
-        });
+        if (selectedCouchLayer.features.length == 0) {
+            $(gbi).on('gbi.layer.couch.loadFeaturesEnd', function(event, results) {
+                loadCouchCoverage(editor);
+                $(gbi).off('gbi.layer.couch.loadFeaturesEnd');
+            });
 
+            if (!selectedCouchLayer.olLayer.map) {
+                editor.addLayer(selectedCouchLayer);
+                selectedCouchLayer.olLayer.setVisibility(false);
+            }
+
+        } else {
+            $.each(selectedCouchLayer.features, function(key, feature) {
+                if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Polygon') {
+                       polygons.push(feature);
+                }
+            });
+            if (polygons.length > 0) {
+                loadFeatures(editor, polygons);
+            }
+        }
     }
-    if (polygons.length > 0) {
-        loadFeatures(editor, polygons);
-    }
+
     return false;
 }
 
