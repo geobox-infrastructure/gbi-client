@@ -7,6 +7,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'vectorLayerTitle': "{{ _('vector map') }}",
     'addvectorLayerButton': "{{ _('add vector map') }}",
     'activeLayer' : "{{ _('active layer') }}",
+    'noActiveLayer' : "{{ _('no active layer') }}",
 
     // measure - widget
     'coords': "{{ _('coordinates') }}",

@@ -3,7 +3,8 @@ var layerManagerLabel = {
     'background': OpenLayers.i18n("backgroundTitle"),
     'raster': OpenLayers.i18n("rasterLayerTitle"),
     'vector': OpenLayers.i18n("vectorLayerTitle"),
-    'addLayer': OpenLayers.i18n("addvectorLayerButton")
+    'addLayer': OpenLayers.i18n("addvectorLayerButton"),
+    'noActiveLayer': OpenLayers.i18n("noActiveLayer")
 }
 
 gbi.widgets = gbi.widgets || {};
@@ -46,6 +47,12 @@ gbi.widgets.LayerManager = function(editor, options) {
     $(gbi).on('gbi.layermanager.layer.add', function(event, layer) {
          self.render();
     });
+
+    $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
+        if (layer === undefined) {
+            $('#layermanager_active_layer > span').html(layerManagerLabel.noActiveLayer);
+        }
+    });
 };
 gbi.widgets.LayerManager.prototype = {
     render: function(accordion) {
@@ -61,7 +68,9 @@ gbi.widgets.LayerManager.prototype = {
                 if (gbiLayer.isVector) {
                     vectorLayers.push(gbiLayer);
                     if (gbiLayer.isActive) {
-                        $('#layermanager_active_layer > span').html(gbiLayer.options.name);
+                        if (self.options.showActiveLayer) {
+                            $('#layermanager_active_layer > span').html(gbiLayer.options.name);
+                        }
                     }
                 }
                 if (gbiLayer.isRaster && gbiLayer.isBackground) {
@@ -74,6 +83,9 @@ gbi.widgets.LayerManager.prototype = {
                 layers.push(gbiLayer);
             }
         });
+        if (!this.layerManager.active()) {
+            $('#layermanager_active_layer > span').html(layerManagerLabel.noActiveLayer);
+        }
 
         if (!accordion) {
             accordion = 'collapseVector';
