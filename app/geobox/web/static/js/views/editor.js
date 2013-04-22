@@ -72,11 +72,12 @@ function initEditor() {
         imgPath: OpenlayersImageURL
     });
     editor.addLayer(backgroundLayer)
-
+    if (backgroundLayer.olLayer.restrictedExtent) {
+      editor.map.olMap.zoomToExtent(backgroundLayer.olLayer.restrictedExtent);
+    }
     $.each(raster_sources, function(index, layer) {
         editor.addLayer(layer);
     });
-
 
     $(gbi).on('gbi.layer.couch.loadFeaturesEnd', function(event) {
       var activeLayer = editor.layerManager.active();
@@ -138,7 +139,6 @@ function initEditor() {
         layer.save();
         $(this).removeClass('btn-success').attr('disabled', 'disabled');
     });
-
 	return editor;
 }
 
