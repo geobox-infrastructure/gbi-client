@@ -87,7 +87,15 @@ function initEditor() {
 
     var measure = new gbi.widgets.Measure(editor, {
     	element: 'measure-toolbar',
-        srs: ['EPSG:3857', 'EPSG:4326', 'EPSG:25832', 'EPSG:25833', 'EPSG:31466', 'EPSG:31467', 'EPSG:31468']
+        srs: {
+              'EPSG:4326': 'WGS 84 (EPSG:4326)',
+              'EPSG:25832': 'UTM 32N (EPSG:25832)',
+              'EPSG:25833': 'UTM 33N (EPSG:25833)',
+              'EPSG:31466': 'Gauß-Krüger Zone 3 (EPSG:31466)',
+              'EPSG:31467':'Gauß-Krüger Zone 4 (EPSG:31467)',
+              'EPSG:31468':'Gauß-Krüger Zone 5 (EPSG:31468)',
+              'EPSG:3857':'Webmercator (EPSG:3857)'
+            }
     });
 
     var toolbar = new gbi.Toolbar(editor, {
