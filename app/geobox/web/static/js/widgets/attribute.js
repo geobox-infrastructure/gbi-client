@@ -12,18 +12,19 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     this.element = $('#' + this.options.element);
     this.selectedFeatures = [];
     this.changed = false;
+    this.editable = false;
 
     $.each(this.layerManager.vectorLayers, function(idx, layer) {
         layer.registerEvent('featureselected', self, function(f) {
             this.selectedFeatures.push(f.feature);
-            this._attributes();
+            this._attributes(f.feature);
             $('#attributeTab').tab('show');
         });
         layer.registerEvent('featureunselected', self, function(f) {
             var idx = $.inArray(f.feature, this.selectedFeatures);
             if(idx != -1) {
                 this.selectedFeatures.splice(idx, 1);
-                this._attributes();
+                this._attributes(false);
             }
         });
     });
@@ -37,7 +38,7 @@ gbi.widgets.AttributeEditor.prototype = {
         if(this.selectedFeatures.length > 0) {
             this.element.append(tmpl(
                 gbi.widgets.AttributeEditor.template,
-                {attributes: this.featuresAttributes}
+                {attributes: this.featuresAttributes, editable: this.editable}
             ));
             //bind events
             $.each(this.featuresAttributes, function(key, value) {
@@ -93,11 +94,22 @@ gbi.widgets.AttributeEditor.prototype = {
             }
         });
     },
-    _attributes: function() {
+    _attributes: function(feature) {
         var self = this;
         this.element.empty();
         this.featuresAttributes = {};
         var newFeatureAttributes = false;
+
+        if (feature) {
+            var featureLayer = feature.layer;
+            var activeLayer = this.layerManager.active();
+            if (featureLayer == activeLayer.olLayer) {
+                this.editable = true;
+            } else {
+                this.editable = false;
+            }
+        }
+
         if(this.selectedFeatures.length == 0) {
             this.attributeLayers = null;
             this.newAttributes = {};
@@ -133,6 +145,7 @@ var attributeLabel = {
     'val': OpenLayers.i18n("value"),
     'add': OpenLayers.i18n("add"),
     'formTitle': OpenLayers.i18n("addNewAttributesTitle"),
+    'addAttributesNotPossible': OpenLayers.i18n("addAttributesNotPossible"),
 }
 
 gbi.widgets.AttributeEditor.template = '\
@@ -142,27 +155,37 @@ gbi.widgets.AttributeEditor.template = '\
     <% for(var key in attributes) { %>\
         <form id="view_attributes" class="form-inline">\
             <label class="key-label" for="<%=key%>"><%=key%></label>\
-            <input class="input-medium" type="text" id="<%=key%>" value="<%=attributes[key]%>" />\
+            <input class="input-medium" type="text" id="<%=key%>" value="<%=attributes[key]%>" \
+            <% if(!editable) { %>\
+                disabled=disabled \
+            <% } %>\
+            />\
+            <% if(editable) { %>\
             <button id="<%=key%>_remove" title="remove" class="btn btn-small"> \
                 <i class="icon-remove"></i>\
             </button> \
+            <% } %>\
         </form>\
     <% } %>\
 <% } %>\
-<h4>'+attributeLabel.formTitle+'</h4>\
-<form class="form-horizontal"> \
-	 <div class="control-group"> \
-		<label class="control-label" for="newKey">'+attributeLabel.key+'</label> \
-		<div class="controls">\
-			<input type="text" id="newKey" class="input-medium">\
-		</div>\
-	</div>\
-	 <div class="control-group"> \
-		<label class="control-label" for="newValue">'+attributeLabel.val+'</label> \
-		<div class="controls">\
-			<input type="text" id="newValue" class="input-medium">\
-		</div>\
-	</div>\
-    <button id="addKeyValue" class="btn btn-small">'+attributeLabel.add+'</button>\
-</form>\
+<% if(editable) { %>\
+    <h4>'+attributeLabel.formTitle+'</h4>\
+    <form class="form-horizontal"> \
+    	 <div class="control-group"> \
+    		<label class="control-label" for="newKey">'+attributeLabel.key+'</label> \
+    		<div class="controls">\
+    			<input type="text" id="newKey" class="input-medium">\
+    		</div>\
+    	</div>\
+    	 <div class="control-group"> \
+    		<label class="control-label" for="newValue">'+attributeLabel.val+'</label> \
+    		<div class="controls">\
+    			<input type="text" id="newValue" class="input-medium">\
+    		</div>\
+    	</div>\
+        <button id="addKeyValue" class="btn btn-small">'+attributeLabel.add+'</button>\
+    </form>\
+<% } else { %>\
+    <span>'+attributeLabel.addAttributesNotPossible+'</span>\
+<% } %>\
 ';

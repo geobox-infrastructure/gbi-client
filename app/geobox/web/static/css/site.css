@@ -225,6 +225,10 @@ li.layerElement input {
     margin-top: 10px;
 }
 
+hr#save_dividing_line {
+    min-height: 0;
+}
+
 #measure_toolbar div {
     cursor: pointer;
 }

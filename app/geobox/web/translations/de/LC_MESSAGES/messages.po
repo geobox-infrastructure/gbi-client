@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-22 11:49+0200\n"
+"POT-Creation-Date: 2013-04-22 11:57+0200\n"
 "PO-Revision-Date: 2012-10-29 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -305,10 +305,8 @@ msgid "remove all features"
 msgstr "Alle Geometrien löschen"
 
 #: geobox/web/templates/editor.html:90
-#: geobox/web/templates/projects/export_edit.html:63
-#: geobox/web/templates/projects/import_edit.html:29
-msgid "save"
-msgstr "Speichern"
+msgid "save permanent"
+msgstr "Änderungen dauerhaft speichern"
 
 #: geobox/web/templates/editor.html:97
 msgid "Attribute"
@@ -593,6 +591,10 @@ msgstr "Radius"
 msgid "set styling"
 msgstr "Aussehen speichern"
 
+#: geobox/web/templates/js/translation.js:40
+msgid "add attributes is not possible"
+msgstr "Hinzufügen von Eigenschaften nicht möglich"
+
 #: geobox/web/templates/projects/export_edit.html:3
 msgid "export project edit"
 msgstr "Exportprojekt editieren"
@@ -640,6 +642,11 @@ msgstr ""
 #: geobox/web/templates/projects/export_edit.html:77
 msgid "remove vector"
 msgstr "Vektorlayer entfernen"
+
+#: geobox/web/templates/projects/export_edit.html:63
+#: geobox/web/templates/projects/import_edit.html:29
+msgid "save"
+msgstr "Speichern"
 
 #: geobox/web/templates/projects/export_edit.html:64
 #: geobox/web/templates/projects/import_edit.html:30

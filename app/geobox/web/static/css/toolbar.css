@@ -1,5 +1,5 @@
 /* Draw Control */
-#toolbar-work div, #toolbar-draw div, #toolbar div {
+#toolbar-work div, #toolbar-draw div, #toolbar div, #measure_toolbar div {
     float: left;
     margin: 5px;
     width: 24px;

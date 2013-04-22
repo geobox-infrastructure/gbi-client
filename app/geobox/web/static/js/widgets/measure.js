@@ -18,7 +18,7 @@ gbi.widgets.Measure = function(editor, options) {
     this.pointMeasure = new gbi.Controls.Measure({
             measureType: gbi.Controls.Measure.TYPE_POINT,
             mapSRS: editor.map.olMap.projection.projCode,
-            displaySRS: this.options.srs[0]
+            displaySRS: this.options.srs['EPSG:4326']
         }, function(event) { self.measureHandler(event); });
     this.pointMeasure.registerEvent('activate', this, function() {
         $('#position_srs').show();
@@ -43,7 +43,6 @@ gbi.widgets.Measure = function(editor, options) {
     $('#position_srs').change(function() {
         self.pointMeasure.updateSRS($(this).val());
     });
-
 };
 gbi.widgets.Measure.prototype = {
     render: function() {
@@ -52,10 +51,11 @@ gbi.widgets.Measure.prototype = {
     measureHandler: function(measure) {
         var element = $('#measure-output');
         var output = OpenLayers.i18n('measureResult')+': ';
+        var decimalPlace = 100000; // five decimal place
         switch(measure.type) {
             case gbi.Controls.Measure.TYPE_POINT:
                 var output = OpenLayers.i18n('coords')+': ';
-                output += measure.measure[0] + ', ' + measure.measure[1];
+                output += Math.round(measure.measure[0]*decimalPlace)/decimalPlace + ', ' + Math.round(measure.measure[1]*decimalPlace)/decimalPlace;
                 break;
             case gbi.Controls.Measure.TYPE_LINE:
                 output += measure.measure + " " + measure.units;
@@ -71,8 +71,8 @@ gbi.widgets.Measure.template = '\
     <div class="span11"> \
         <hr> \
         <select id="position_srs" style="display:none;">\
-        <% for(var i=0; i < srs.length; i++) { %>\
-            <option value="<%=srs[i]%>"><%=srs[i]%></option>\
+        <% for(var key in srs) { %>\
+            <option value="<%=key%>"><%=srs[key]%></option>\
         <% } %>\
         </select>\
     </div>\
