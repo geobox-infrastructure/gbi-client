@@ -37,11 +37,10 @@ function getDataVolume(editor) {
         $('#data_volume').text(volumenMB)});
 }
 
-function verifyZoomLevel(editor) {
-    var rasterLayer = $(this).parent();
+function verifyZoomLevel(element, editor) {
+    var rasterLayer = $(element).parent();
     var startLevel = parseInt(rasterLayer.find('#start_level').val());
     var endLevel = parseInt(rasterLayer.find('#end_level').val());
-
     if(rasterLayer.find('#end_level:visible').length && startLevel > endLevel) {
         rasterLayer.find('.error_zoomlevel').show();
         toggleStartButton(editor);

@@ -31,7 +31,7 @@ function addRasterLayer(editor) {
     });
     newLayer.find('select').change(function() {
         getDataVolume(editor);
-        verifyZoomLevel(editor);
+        verifyZoomLevel(this, editor);
     });
     newLayer.find('#remove_layer').click(function() {
         removeRasterLayer(this, editor);
@@ -145,7 +145,9 @@ $(document).ready(function() {
 
     rasterLayerTemplate = $('#rl_0').clone();
     $('#rl_0').remove()
-    $('#format').change(setLayerOptionForFormat).change(verifyZoomLevel);
+    $('#format').change(setLayerOptionForFormat).change(function() {
+        verifyZoomLevel(this, editor)
+    });
 
     if($.isEmptyObject(raster_sources)) {
         $('#add_layer').attr('disabled', 'disabled');
@@ -180,7 +182,7 @@ $(document).ready(function() {
 
     $('.raster_layer select, #format, #srs').change(function() {
         getDataVolume(editor);
-        verifyZoomLevel(editor);
+        verifyZoomLevel(this, editor);
     });
 
     setLayerOptionForFormat();

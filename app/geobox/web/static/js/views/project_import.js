@@ -18,7 +18,6 @@ function downloadLevel(id) {
 }
 
 function showSelectedLayer(editor, id, selectedLayer) {
-// function showSelectedSource(element, editor) {
     var source = $(selectedLayer);
 
     if(typeof source.data('ol_layer') !== "undefined") {
@@ -56,8 +55,8 @@ $(document).ready(function() {
     });
     $('#raster_source').change();
 
-    $('#start_level #end_level').change(function() {
-        verifyZoomLevel(editor)
+    $('#start_level, #end_level').change(function() {
+        verifyZoomLevel(this, editor)
         getDataVolume(editor)
     });
 
