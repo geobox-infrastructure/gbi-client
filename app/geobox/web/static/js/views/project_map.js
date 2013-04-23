@@ -19,10 +19,10 @@ function initProjectEditor(options) {
         new gbi.Toolbar(editor, {
             element: 'toolbar',
             tools: {
-                drawPolygon: true,
-                drawRect: true,
-                edit: true,
-                delete: true
+                'drawPolygon': true,
+                'drawRect': true,
+                'edit': true,
+                'delete': true
             }
         });
     }
@@ -50,7 +50,6 @@ function initProjectEditor(options) {
                 toggleStartButton(editor);
             },
             featuresremoved: function() {
-                // getDataVolume(editor);
                 toggleStartButton(editor);
             },
             afterfeaturemodified: function(feature) {
