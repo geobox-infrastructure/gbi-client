@@ -38,5 +38,28 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'pointinfotext': "{{ _('infotext - point styling') }}",
     'radius': "{{ _('radius') }}",
     'setStyling': "{{ _('set styling') }}",
-    'addAttributesNotPossible': "{{ _('add attributes is not possible') }}"
+    'addAttributesNotPossible': "{{ _('add attributes is not possible') }}",
+
+    //toolbar items
+    'Draw polygon': "{{ _('Draw polygon') }}",
+    'Draw line': "{{ _('Draw line') }}",
+    'Draw rect': "{{ _('Draw rect') }}",
+    'Draw point': "{{ _('Draw point') }}",
+    'Edit feature': "{{ _('Edit feature') }}",
+    'Delete feature': "{{ _('Delete feature') }}",
+    'Split feature': "{{ _('Split feature') }}",
+    'Merge features': "{{ _('Merge features') }}",
+    'Select feature(s)': "{{ _('Select feature(s)') }}",
+    'Snap on features': "{{ _('Snap on features') }}",
+    'Copy feature(s)': "{{ _('Copy feature(s)') }}",
+
+    //measure toolbar
+    'Measure point': "{{ _('Measure point') }}",
+    'Measure path': "{{ _('Measure path') }}",
+    'Measure area': "{{ _('Measure area') }}",
+
+    //openlayers.extensions.couch
+    'Bad JSON: ': "{{ _('Bad JSON: ') }}",
+    'Only OpenLayers.Feature.Vector is supported.': "{{ _('Only OpenLayers.Feature.Vector is supported.') }}",
+    'Feature was': "{{ _('Feature was') }}"
 });

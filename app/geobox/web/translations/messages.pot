@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-23 11:46+0200\n"
+"POT-Creation-Date: 2013-04-23 15:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -583,6 +583,74 @@ msgstr ""
 msgid "add attributes is not possible"
 msgstr ""
 
+#: geobox/web/templates/js/translation.js:44
+msgid "Draw polygon"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:45
+msgid "Draw line"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:46
+msgid "Draw rect"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:47
+msgid "Draw point"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:48
+msgid "Edit feature"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:49
+msgid "Delete feature"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:50
+msgid "Split feature"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:51
+msgid "Merge features"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:52
+msgid "Select feature(s)"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:53
+msgid "Snap on features"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:54
+msgid "Copy feature(s)"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:57
+msgid "Measure point"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:58
+msgid "Measure path"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:59
+msgid "Measure area"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:62
+msgid "Bad JSON: "
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:63
+msgid "Only OpenLayers.Feature.Vector is supported."
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:64
+msgid "Feature was"
+msgstr ""
+
 #: geobox/web/templates/projects/export_edit.html:3
 msgid "export project edit"
 msgstr ""
@@ -974,160 +1042,160 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:55
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:55
 #, python-format
 msgid "Invalid field name '%s'."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:62
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:62
 #, python-format
 msgid "Field must be equal to %(other_name)s."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:94
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:94
 #, python-format
 msgid "Field must be at least %(min)d character long."
 msgid_plural "Field must be at least %(min)d characters long."
 msgstr[0] ""
 msgstr[1] ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:97
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:97
 #, python-format
 msgid "Field cannot be longer than %(max)d character."
 msgid_plural "Field cannot be longer than %(max)d characters."
 msgstr[0] ""
 msgstr[1] ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:100
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:100
 #, python-format
 msgid "Field must be between %(min)d and %(max)d characters long."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:135
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:135
 #, python-format
 msgid "Number must be greater than %(min)s."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:137
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:137
 #, python-format
 msgid "Number must be less than %(max)s."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:139
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:139
 #, python-format
 msgid "Number must be between %(min)s and %(max)s."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:188
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:221
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:188
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:221
 msgid "This field is required."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:249
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:249
 msgid "Invalid input."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:268
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:268
 msgid "Invalid email address."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:297
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:297
 msgid "Invalid IP address."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:345
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:345
 msgid "Invalid Mac address."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:370
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:370
 msgid "Invalid URL."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:388
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:388
 msgid "Invalid UUID."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:415
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:415
 #, python-format
 msgid "Invalid value, must be one of: %(values)s."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:442
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/validators.py:442
 #, python-format
 msgid "Invalid value, can't be any of: %(values)s."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:419
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/appengine/fields.py:90
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/django/fields.py:89
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/sqlalchemy/fields.py:125
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/sqlalchemy/fields.py:175
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/sqlalchemy/fields.py:180
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/fields/core.py:419
 msgid "Not a valid choice"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:109
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/appengine/fields.py:109
 msgid "Not a valid list"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/form.py:47
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/csrf/form.py:47
 msgid "Invalid CSRF Token"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:57
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/csrf/session.py:57
 msgid "CSRF token missing"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:65
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/csrf/session.py:65
 msgid "CSRF failed"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:70
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/csrf/session.py:70
 msgid "CSRF token expired"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:50
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/dateutil/fields.py:50
 msgid "Please input a date/time value"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:62
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/dateutil/fields.py:62
 msgid "Invalid date/time input"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/validators.py:33
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/ext/sqlalchemy/validators.py:33
 msgid "Already exists."
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:412
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/fields/core.py:412
 msgid "Invalid Choice: could not coerce"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:445
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/fields/core.py:445
 msgid "Invalid choice(s): one or more data inputs could not be coerced"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:452
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/fields/core.py:452
 #, python-format
 msgid "'%(value)s' is not a valid choice for this field"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:507
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/fields/core.py:507
 msgid "Not a valid integer value"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:554
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/fields/core.py:554
 msgid "Not a valid decimal value"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:581
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/fields/core.py:581
 msgid "Not a valid float value"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:632
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/fields/core.py:632
 msgid "Not a valid datetime value"
 msgstr ""
 
-#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:649
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/WTForms-1.0.2-py2.7.egg/wtforms/fields/core.py:649
 msgid "Not a valid date value"
 msgstr ""
 
