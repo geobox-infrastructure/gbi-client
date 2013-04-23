@@ -1,7 +1,7 @@
-Export von Raster- und Vektordaten
-==================================
+Export von Rasterdaten
+======================
 
-Sie haben die Möglichkeit Raster- und Vektordaten aus Ihrer GeoBox-Infrastruktur zu exportieren. Der Export unterteilt sich in eine Exportübersicht und einen Exporteditor.
+Sie haben die Möglichkeit Rasterdaten aus Ihrer GeoBox-Infrastruktur zu exportieren. Der Export unterteilt sich in eine Exportübersicht und einen Exporteditor.
 
 
 Exportübersicht
@@ -15,8 +15,6 @@ Um einen neuen Export zu erstellen wählen Sie "Neuer Export" - dieser öffnet d
 
 Exporteditor
 ------------
-
-Der Exporteditor unterteilt sich in die Bereiche Raster und Vektor.
 
 Titel
 #####
