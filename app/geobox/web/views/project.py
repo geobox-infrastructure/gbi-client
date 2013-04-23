@@ -141,10 +141,15 @@ def validate_max_tiles(form):
     coverage = coverage_from_feature_collection(feature_collection)
     levels = range(int(form.start_level.data), int(form.end_level.data) + 1)
     wmts_source = form.raster_source.data
+    tiles = estimate_project_tiles(coverage, wmts_source, levels)
+    if not tiles:
+        flash(_("no tiles"))
+        return False
+
     max_tiles = wmts_source.max_tiles
     if not max_tiles:
         return True
-    tiles = estimate_project_tiles(coverage, wmts_source, levels)
+
     if tiles <= max_tiles:
         return True
     else:

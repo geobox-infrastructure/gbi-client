@@ -97,6 +97,10 @@ class RasterProcess(ProcessBase):
         try:
             with self.task() as task:
                 seed_task = self.create_seed_task(task)
+                # seed_task is None when there is no coverage intersection
+                if not seed_task:
+                    self.task_done()
+                    return
                 progress_logger = self.create_progress_logger(task)
                 start_progress = parse_progress_identifier(task.seed_progress)
                 self.terminate_event = threading.Event()
@@ -179,9 +183,10 @@ class RasterExportImageProcess(RasterProcess):
                 export_filename = self.app_state.user_data_path('export', task.project.title, wmts_source.name + file_extension, make_dirs=True)
                 couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), wmts_source.name)
                 coverage = coverage_from_geojson(task.coverage).bbox
-                merge_tiles(couch, export_filename,
-                    task.zoom_level_start, coverage, wmts_source.matrix_set,
-                    overlay=wmts_source.is_overlay, format=task.export_format, srs=task.export_srs)
+                if coverage:
+                    merge_tiles(couch, export_filename,
+                        task.zoom_level_start, coverage, wmts_source.matrix_set,
+                        overlay=wmts_source.is_overlay, format=task.export_format, srs=task.export_srs)
 
             self.task_done()
         except Exception, e:

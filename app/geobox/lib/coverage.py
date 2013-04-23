@@ -79,4 +79,6 @@ def coverage_intersection(a, b):
     if b and not a:
         return b
     geom = a.geom.intersection(b.geom)
+    if not geom:
+        return None
     return coverage(geom, SRS(3857))

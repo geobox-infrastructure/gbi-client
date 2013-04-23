@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-22 16:41+0200\n"
+"POT-Creation-Date: 2013-04-23 11:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -877,12 +877,20 @@ msgstr ""
 msgid "settings changed. restart required"
 msgstr ""
 
-#: geobox/web/views/project.py:102 geobox/web/views/project.py:216
+#: geobox/web/views/project.py:102 geobox/web/views/project.py:226
 #: geobox/web/views/vector.py:93
 msgid "form error"
 msgstr ""
 
+#: geobox/web/views/project.py:138
+msgid "no coverage"
+msgstr ""
+
 #: geobox/web/views/project.py:146
+msgid "no tiles"
+msgstr ""
+
+#: geobox/web/views/project.py:156
 msgid "to many tiles"
 msgstr ""
 
@@ -966,160 +974,160 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:55
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:55
 #, python-format
 msgid "Invalid field name '%s'."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:62
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:62
 #, python-format
 msgid "Field must be equal to %(other_name)s."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:94
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:94
 #, python-format
 msgid "Field must be at least %(min)d character long."
 msgid_plural "Field must be at least %(min)d characters long."
 msgstr[0] ""
 msgstr[1] ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:97
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:97
 #, python-format
 msgid "Field cannot be longer than %(max)d character."
 msgid_plural "Field cannot be longer than %(max)d characters."
 msgstr[0] ""
 msgstr[1] ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:100
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:100
 #, python-format
 msgid "Field must be between %(min)d and %(max)d characters long."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:135
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:135
 #, python-format
 msgid "Number must be greater than %(min)s."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:137
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:137
 #, python-format
 msgid "Number must be less than %(max)s."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:139
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:139
 #, python-format
 msgid "Number must be between %(min)s and %(max)s."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:188
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:221
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:188
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:221
 msgid "This field is required."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:249
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:249
 msgid "Invalid input."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:268
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:268
 msgid "Invalid email address."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:297
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:297
 msgid "Invalid IP address."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:345
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:345
 msgid "Invalid Mac address."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:370
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:370
 msgid "Invalid URL."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:388
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:388
 msgid "Invalid UUID."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:415
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:415
 #, python-format
 msgid "Invalid value, must be one of: %(values)s."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:442
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/validators.py:442
 #, python-format
 msgid "Invalid value, can't be any of: %(values)s."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:419
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:419
 msgid "Not a valid choice"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:109
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:109
 msgid "Not a valid list"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/form.py:47
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/form.py:47
 msgid "Invalid CSRF Token"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:57
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:57
 msgid "CSRF token missing"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:65
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:65
 msgid "CSRF failed"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:70
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:70
 msgid "CSRF token expired"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:50
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:50
 msgid "Please input a date/time value"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:62
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:62
 msgid "Invalid date/time input"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/validators.py:33
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/validators.py:33
 msgid "Already exists."
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:412
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:412
 msgid "Invalid Choice: could not coerce"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:445
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:445
 msgid "Invalid choice(s): one or more data inputs could not be coerced"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:452
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:452
 #, python-format
 msgid "'%(value)s' is not a valid choice for this field"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:507
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:507
 msgid "Not a valid integer value"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:554
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:554
 msgid "Not a valid decimal value"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:581
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:581
 msgid "Not a valid float value"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:632
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:632
 msgid "Not a valid datetime value"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:649
+#: /Users/olt/dev/venv/gbi/lib/python2.7/site-packages/wtforms/fields/core.py:649
 msgid "Not a valid date value"
 msgstr ""
 

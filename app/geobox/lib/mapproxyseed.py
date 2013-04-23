@@ -234,6 +234,8 @@ def create_import_seed_task(import_task, app_state):
     coverage = coverage_from_geojson(import_task.coverage)
 
     coverage = coverage_intersection(coverage, source.coverage)
+    if not coverage:
+        return None
 
     levels = range(import_task.zoom_level_start,
         import_task.zoom_level_end + 1)
@@ -255,6 +257,8 @@ def create_mbtiles_export_seed_task(export_task, app_state):
     source_coverage = coverage_from_geojson(export_task.layer.wmts_source.download_coverage)
     export_coverage = coverage_from_geojson(export_task.coverage)
     coverage = coverage_intersection(source_coverage, export_coverage)
+    if not coverage:
+        return None
 
     levels = range(export_task.zoom_level_start,
         export_task.zoom_level_end + 1)
@@ -276,6 +280,9 @@ def create_couchdb_export_seed_task(export_task, app_state, couchdb_port):
     source_coverage = coverage_from_geojson(export_task.layer.wmts_source.download_coverage)
     export_coverage = coverage_from_geojson(export_task.coverage)
     coverage = coverage_intersection(source_coverage, export_coverage)
+
+    if not coverage:
+        return None
 
     levels = range(export_task.zoom_level_start,
         export_task.zoom_level_end + 1)
