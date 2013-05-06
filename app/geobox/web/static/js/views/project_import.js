@@ -44,6 +44,7 @@ function showSelectedLayer(editor, id, selectedLayer) {
 
 $(document).ready(function() {
     var editor = initProjectEditor({toolbar: true});
+    editor.map.toolbars[0].edit.draggable(true);
     if(coverage) {
         loadFeatures(editor, coverage);
     }
