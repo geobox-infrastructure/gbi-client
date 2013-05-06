@@ -49,6 +49,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'Delete feature': "{{ _('Delete feature') }}",
     'Split feature': "{{ _('Split feature') }}",
     'Merge features': "{{ _('Merge features') }}",
+    'Unmerge features': "{{ _('Unmerge features') }}",
     'Select feature(s)': "{{ _('Select feature(s)') }}",
     'Snap on features': "{{ _('Snap on features') }}",
     'Copy feature(s)': "{{ _('Copy feature(s)') }}",
