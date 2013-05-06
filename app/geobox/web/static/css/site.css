@@ -261,10 +261,16 @@ hr#save_dividing_line {
     position: absolute;
     top: 8px;
     right: 0px;
-    background-color: darkblue;
     z-index: 1005;
+}
+
+.gbi_widgets_LayerManager_LayerSwitcher {
     color: white;
+    background-color: darkblue;
     padding-left: 15px;
+    padding-right: 5px;
+    padding-top: 8px;
+    padding-bottom: 3px;
 }
 
 .gbi_widgets_LayerManager ul {
@@ -274,5 +280,28 @@ hr#save_dividing_line {
 
 .gbi_widgets_LayerManager li {
     list-style-type: none;
-    margin-left: -20px;
+    /*margin-left: -20px;*/
+}
+
+/*.gbi_widgets_LayerManager_LayerSwitcher div {
+    min-width: 80px;
+    display: inline-block;
+}*/
+
+.gbi_widgets_LayerManager_Maximize {
+    background-image: url(../img/layer-switcher-maximize.png);
+    height: 18px;
+    width: 18px;
+    background-repeat: no-repeat;
+    margin-top: 5px;
+    float: right;
+}
+
+.gbi_widgets_LayerManager_Minimize {
+    background-image: url(../img/layer-switcher-minimize.png);
+    height: 18px;
+    width: 18px;
+    background-repeat: no-repeat;
+    margin-top: 5px;
+    float: right;
 }

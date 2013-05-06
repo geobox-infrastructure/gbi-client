@@ -187,6 +187,21 @@ gbi.widgets.LayerManager.prototype = {
 
         });
 
+        if(this.options.tiny) {
+            this.element.find('.gbi_widgets_LayerManager_Minimize').click(function(event) {
+                event.stopPropagation();
+                self.element.find('.gbi_widgets_LayerManager_LayerSwitcher').hide();
+                self.element.find('.gbi_widgets_LayerManager_Minimize').hide();
+                self.element.find('.gbi_widgets_LayerManager_Maximize').show();
+            }).show();
+            this.element.find('.gbi_widgets_LayerManager_Maximize').click(function(event) {
+                event.stopPropagation();
+                self.element.find('.gbi_widgets_LayerManager_LayerSwitcher').show();
+                self.element.find('.gbi_widgets_LayerManager_Minimize').show();
+                self.element.find('.gbi_widgets_LayerManager_Maximize').hide();
+            }).hide();
+        }
+
     },
     findAccordion: function(element) {
        var accordion = $(element).closest('.accordion-body ');
@@ -294,60 +309,64 @@ gbi.widgets.LayerManager.templates = {
 </div> \
 ',
 tiny: '\
-        <h5>'+layerManagerLabel.background+'\</h5>\
-        <ul>\
-            <% for(var i=0; i<backgroundLayers.length; i++) { %>\
-                <li class="gbi_layer">\
-                    <input type="checkbox" id="visible_<%=backgroundLayers[i].id%>" />\
-                    <span><%=backgroundLayers[i].olLayer.name%></span>\
-                        <div class="btn-group"> \
-                            <button id="up_<%=backgroundLayers[i].id%>" title="up" class="btn btn-mini">\
-                                <i class="icon-chevron-up"></i>\
-                            </button> \
-                            <button id="down_<%=backgroundLayers[i].id%>" title="down" class="btn btn-mini"> \
-                                <i class="icon-chevron-down"></i>\
-                            </button> \
-                        </div> \
-                </li>\
-            <% } %>\
-        </ul>\
-        <% if(rasterLayers.length != 0) { %> \
-            <h5>'+layerManagerLabel.raster+'\</h5>\
+        <div class="gbi_widgets_LayerManager_Maximize"></div>\
+        <div class="gbi_widgets_LayerManager_Minimize"></div>\
+        <div class="gbi_widgets_LayerManager_LayerSwitcher">\
+            <h5>'+layerManagerLabel.background+'\</h5>\
             <ul>\
-                <% for(var i=0; i<rasterLayers.length; i++) { %>\
+                <% for(var i=0; i<backgroundLayers.length; i++) { %>\
                     <li class="gbi_layer">\
-                        <input type="checkbox" id="visible_<%=rasterLayers[i].id%>" />\
-                        <span><%=rasterLayers[i].olLayer.name%></span>\
-                        <div class="btn-group"> \
-                            <button id="up_<%=rasterLayers[i].id%>" title="up" class="btn btn-mini">\
-                                <i class="icon-chevron-up"></i>\
-                            </button> \
-                            <button id="down_<%=rasterLayers[i].id%>" title="down" class="btn btn-mini"> \
-                                <i class="icon-chevron-down"></i>\
-                            </button> \
-                        </div> \
+                        <input type="checkbox" id="visible_<%=backgroundLayers[i].id%>" />\
+                        <span><%=backgroundLayers[i].olLayer.name%></span>\
+                            <div class="btn-group"> \
+                                <button id="up_<%=backgroundLayers[i].id%>" title="up" class="btn btn-mini">\
+                                    <i class="icon-chevron-up"></i>\
+                                </button> \
+                                <button id="down_<%=backgroundLayers[i].id%>" title="down" class="btn btn-mini"> \
+                                    <i class="icon-chevron-down"></i>\
+                                </button> \
+                            </div> \
                     </li>\
                 <% } %>\
             </ul>\
+            <% if(rasterLayers.length != 0) { %> \
+                <h5>'+layerManagerLabel.raster+'\</h5>\
+                <ul>\
+                    <% for(var i=0; i<rasterLayers.length; i++) { %>\
+                        <li class="gbi_layer">\
+                            <input type="checkbox" id="visible_<%=rasterLayers[i].id%>" />\
+                            <span><%=rasterLayers[i].olLayer.name%></span>\
+                            <div class="btn-group"> \
+                                <button id="up_<%=rasterLayers[i].id%>" title="up" class="btn btn-mini">\
+                                    <i class="icon-chevron-up"></i>\
+                                </button> \
+                                <button id="down_<%=rasterLayers[i].id%>" title="down" class="btn btn-mini"> \
+                                    <i class="icon-chevron-down"></i>\
+                                </button> \
+                            </div> \
+                        </li>\
+                    <% } %>\
+                </ul>\
+                <% } %> \
+            <% if(vectorLayers.length != 0) { %> \
+                <h5>'+layerManagerLabel.vector+'\</h5>\
+                <ul>\
+                    <% for(var i=0; i<vectorLayers.length; i++) { %>\
+                        <li class="gbi_layer">\
+                            <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" />\
+                            <span><%=vectorLayers[i].olLayer.name%></span>\
+                            <div class="btn-group"> \
+                                <button id="up_<%=vectorLayers[i].id%>" title="up" class="btn btn-mini">\
+                                    <i class="icon-chevron-up"></i>\
+                                </button> \
+                                <button id="down_<%=vectorLayers[i].id%>" title="down" class="btn btn-mini"> \
+                                    <i class="icon-chevron-down"></i>\
+                                </button> \
+                            </div> \
+                        </li>\
+                    <% } %>\
+                </ul>\
             <% } %> \
-        <% if(vectorLayers.length != 0) { %> \
-            <h5>'+layerManagerLabel.vector+'\</h5>\
-            <ul>\
-                <% for(var i=0; i<vectorLayers.length; i++) { %>\
-                    <li class="gbi_layer">\
-                        <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" />\
-                        <span><%=vectorLayers[i].olLayer.name%></span>\
-                        <div class="btn-group"> \
-                            <button id="up_<%=vectorLayers[i].id%>" title="up" class="btn btn-mini">\
-                                <i class="icon-chevron-up"></i>\
-                            </button> \
-                            <button id="down_<%=vectorLayers[i].id%>" title="down" class="btn btn-mini"> \
-                                <i class="icon-chevron-down"></i>\
-                            </button> \
-                        </div> \
-                    </li>\
-                <% } %>\
-            </ul>\
-        <% } %> \
+        </div>\
     '
 };
