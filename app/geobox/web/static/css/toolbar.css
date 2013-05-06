@@ -86,7 +86,10 @@
     background-image: url(../img/union_disabled.png);
     background-repeat: no-repeat;
 }
-
+.olControlMergeFeatureItemInactive.unmergeActive {
+    background-image: url(../img/union_split.png);
+    background-repeat: no-repeat;
+}
 .olControlMergeFeatureItemInactive {
     background-image: url(../img/union_off.png);
     background-repeat: no-repeat;
