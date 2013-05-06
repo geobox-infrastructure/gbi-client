@@ -9,7 +9,8 @@ function initProjectEditor(options) {
     });
     editor.addLayer(backgroundLayer)
     var layermanager = new gbi.widgets.LayerManager(editor, {
-        tiny: true
+        tiny: true,
+        showActiveLayer: false
     });
     editor.widgets = {
         'layermanager': layermanager
