@@ -1,4 +1,5 @@
 import string
+import sys
 import tarfile
 import scriptine
 import stat
@@ -152,6 +153,12 @@ def build_app_command():
     geobox_conf = config.get('appconfig')
     if geobox_conf:
         path(geobox_conf).copy(path('../app/geobox/appconfig.py'))
+    gbi_editor = path('../app/geobox/web/static/js/gbi-editor')
+    if gbi_editor.exists() and not gbi_editor.isdir():
+        print "remove gbi-editor link!"
+        sys.exit(2)
+    print "copying gbi-editor"
+    path('../gbi-editor/src').copytree(gbi_editor)
     pyinstaller_spec_tpl = open(path('geobox.spec.tpl')).read()
     template = string.Template(pyinstaller_spec_tpl)
     pyinstaller_spec = path('geobox.spec')
