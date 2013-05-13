@@ -33,14 +33,14 @@ class ConvertError(Exception):
 
 def is_valid_shapefile(shape_file, mapping):
     with collection(shape_file, 'r') as source:
-        if not source.schema['geometry'] == mapping.geom_type:
+        if not source.schema['geometry'] == mapping.geom_type and mapping.geom_type != '*':
             raise ConvertError()
     return True
 
 def load_json_from_shape(shape_file, mapping):
     try:
         with collection(shape_file, 'r') as source:
-            if not source.schema['geometry'] == mapping.geom_type:
+            if not source.schema['geometry'] == mapping.geom_type and mapping.geom_type != '*':
                 raise ConvertError()
             for record in source:
                 record = mapping.as_json_record(record)
