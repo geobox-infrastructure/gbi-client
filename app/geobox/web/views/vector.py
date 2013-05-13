@@ -76,8 +76,8 @@ def import_vector():
         if form.validate_on_submit():
             try:
                 is_valid_shapefile(current_app.config.geobox_state.user_data_path('import', form.file_name.data), Mapping(None, None, '*'))
-            except ConvertError:
-                flash(_('invalid mapping'), 'error')
+            except ConvertError as e:
+                flash(e, 'error')
                 return render_template('vector/import.html', form=form)
             except OSError:
                 flash(_('invalid shapefile'), 'error')

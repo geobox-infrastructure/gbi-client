@@ -24,6 +24,8 @@ try:
 except ImportError:
     from StringIO import StringIO
 
+from flaskext.babel import _
+
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -33,8 +35,10 @@ class ConvertError(Exception):
 
 def is_valid_shapefile(shape_file, mapping):
     with collection(shape_file, 'r') as source:
-        if not source.schema['geometry'] == mapping.geom_type and mapping.geom_type != '*':
-            raise ConvertError()
+        if source.schema['geometry'] not in ('Polygon', 'MultiPolygon'):
+            raise ConvertError(_('invalid geometry type'))
+        elif source.schema['geometry'] != mapping.geom_type and mapping.geom_type != '*':
+            raise ConvertError(_('invalid mapping'))
     return True
 
 def load_json_from_shape(shape_file, mapping):
