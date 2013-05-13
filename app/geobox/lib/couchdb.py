@@ -278,6 +278,7 @@ def vector_layers_metadata(couchdb_url):
         metadata = sess.get(couchdb_url + '/' + dbname + '/metadata')
         if metadata.status_code == 200:
             doc = metadata.json()
+            doc['dbname'] = dbname
             if doc.get('type') == 'GeoJSON':
                 yield doc
 
