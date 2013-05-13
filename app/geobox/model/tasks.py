@@ -82,6 +82,7 @@ class VectorImportTask(Task):
     db_name = sa.Column(sa.String())
     file_name = sa.Column(sa.String())
     mapping_name = sa.Column(sa.String())
+    srs = sa.Column(sa.String(64), default="EPSG:3857")
 
 class VectorExportTask(Task):
     task_type = lazy_gettext('vector export')
