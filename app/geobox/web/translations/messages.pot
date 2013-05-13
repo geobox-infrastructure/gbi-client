@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-06 12:45+0200\n"
+"POT-Creation-Date: 2013-05-13 15:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,11 +92,11 @@ msgstr ""
 msgid "format"
 msgstr ""
 
-#: geobox/web/forms.py:202
+#: geobox/web/forms.py:202 geobox/web/forms.py:213
 msgid "srs"
 msgstr ""
 
-#: geobox/web/forms.py:206 geobox/web/forms.py:213
+#: geobox/web/forms.py:206
 msgid "mapping name"
 msgstr ""
 
@@ -104,11 +104,16 @@ msgstr ""
 msgid "file name"
 msgstr ""
 
-#: geobox/web/forms.py:217
+#: geobox/web/forms.py:214 geobox/web/templates/admin.html:11
+#: geobox/web/templates/editor.html:56
+msgid "layer"
+msgstr ""
+
+#: geobox/web/forms.py:218
 msgid "path"
 msgstr ""
 
-#: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:57
+#: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:33
 #: geobox/web/templates/index.html:53
 msgid "settings"
 msgstr ""
@@ -117,13 +122,8 @@ msgstr ""
 msgid "local raster sources"
 msgstr ""
 
-#: geobox/web/templates/admin.html:10 geobox/web/templates/admin.html:37
+#: geobox/web/templates/admin.html:10
 msgid "name"
-msgstr ""
-
-#: geobox/web/templates/admin.html:11 geobox/web/templates/admin.html:38
-#: geobox/web/templates/editor.html:56
-msgid "layer"
 msgstr ""
 
 #: geobox/web/templates/admin.html:13
@@ -131,7 +131,7 @@ msgstr ""
 msgid "zoom level"
 msgstr ""
 
-#: geobox/web/templates/admin.html:25 geobox/web/templates/admin.html:104
+#: geobox/web/templates/admin.html:25 geobox/web/templates/admin.html:80
 #: geobox/web/templates/projects/exports.html:35
 #: geobox/web/templates/projects/imports.html:46
 #: geobox/web/templates/tasks/task_list.html:52
@@ -139,72 +139,64 @@ msgid "remove"
 msgstr ""
 
 #: geobox/web/templates/admin.html:34
-msgid "local vector sources"
-msgstr ""
-
-#: geobox/web/templates/admin.html:48
-msgid "clear database"
-msgstr ""
-
-#: geobox/web/templates/admin.html:58
 msgid "local net access"
 msgstr ""
 
-#: geobox/web/templates/admin.html:59
+#: geobox/web/templates/admin.html:35
 msgid "tooltip local net access"
 msgstr ""
 
-#: geobox/web/templates/admin.html:63
+#: geobox/web/templates/admin.html:39
 #: geobox/web/templates/tasks/task_list.html:28
 #: geobox/web/templates/tasks/task_list.html:88
 msgid "status"
 msgstr ""
 
-#: geobox/web/templates/admin.html:65
+#: geobox/web/templates/admin.html:41
 msgid "activated"
 msgstr ""
 
-#: geobox/web/templates/admin.html:67
+#: geobox/web/templates/admin.html:43
 msgid "deactivated"
 msgstr ""
 
-#: geobox/web/templates/admin.html:73
+#: geobox/web/templates/admin.html:49
 msgid "deactivate"
 msgstr ""
 
-#: geobox/web/templates/admin.html:75
+#: geobox/web/templates/admin.html:51
 msgid "activate"
 msgstr ""
 
-#: geobox/web/templates/admin.html:79
+#: geobox/web/templates/admin.html:55
 msgid "Context documents"
 msgstr ""
 
-#: geobox/web/templates/admin.html:85
+#: geobox/web/templates/admin.html:61
 msgid "load context"
 msgstr ""
 
-#: geobox/web/templates/admin.html:90
+#: geobox/web/templates/admin.html:66
 msgid "Logging"
 msgstr ""
 
-#: geobox/web/templates/admin.html:91
+#: geobox/web/templates/admin.html:67
 msgid "open logview"
 msgstr ""
 
-#: geobox/web/templates/admin.html:93
+#: geobox/web/templates/admin.html:69
 msgid "Files"
 msgstr ""
 
-#: geobox/web/templates/admin.html:94
+#: geobox/web/templates/admin.html:70
 msgid "open external file explorer"
 msgstr ""
 
-#: geobox/web/templates/admin.html:97
+#: geobox/web/templates/admin.html:73
 msgid "External tile box"
 msgstr ""
 
-#: geobox/web/templates/admin.html:103
+#: geobox/web/templates/admin.html:79
 msgid "add and start tilebox"
 msgstr ""
 
@@ -368,7 +360,7 @@ msgid "download usermanual"
 msgstr ""
 
 #: geobox/web/templates/index.html:16
-#: geobox/web/templates/vector/import.html:36
+#: geobox/web/templates/vector/import.html:37
 msgid "import"
 msgstr ""
 
@@ -925,32 +917,28 @@ msgstr ""
 msgid "tooltip import vectordata"
 msgstr ""
 
-#: geobox/web/views/admin.py:62
+#: geobox/web/views/admin.py:58
 msgid "load context document successful"
 msgstr ""
 
-#: geobox/web/views/admin.py:64
+#: geobox/web/views/admin.py:60
 msgid "password not correct"
 msgstr ""
 
-#: geobox/web/views/admin.py:94
-msgid "cleared database"
-msgstr ""
-
-#: geobox/web/views/admin.py:115
+#: geobox/web/views/admin.py:96
 msgid "delete sucessful"
 msgstr ""
 
-#: geobox/web/views/admin.py:117
+#: geobox/web/views/admin.py:98
 msgid "delete not sucessful"
 msgstr ""
 
-#: geobox/web/views/admin.py:129
+#: geobox/web/views/admin.py:110
 msgid "settings changed. restart required"
 msgstr ""
 
 #: geobox/web/views/project.py:102 geobox/web/views/project.py:226
-#: geobox/web/views/vector.py:93
+#: geobox/web/views/vector.py:96
 msgid "form error"
 msgstr ""
 
@@ -982,43 +970,39 @@ msgstr ""
 msgid "username or password not correct"
 msgstr ""
 
-#: geobox/web/views/vector.py:78
-msgid "invalid mapping"
-msgstr ""
-
-#: geobox/web/views/vector.py:81
+#: geobox/web/views/vector.py:83
 msgid "invalid shapefile"
 msgstr ""
 
-#: geobox/web/views/vector.py:96
+#: geobox/web/views/vector.py:99
 #, python-format
 msgid "file %(name)s missing"
 msgstr ""
 
-#: geobox/web/views/vector.py:98
+#: geobox/web/views/vector.py:101
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr ""
 
-#: geobox/web/views/vector.py:100
+#: geobox/web/views/vector.py:103
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr ""
 
-#: geobox/web/views/vector.py:102
+#: geobox/web/views/vector.py:105
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr ""
 
-#: geobox/model/layer.py:24 geobox/model/tasks.py:109
+#: geobox/model/layer.py:24 geobox/model/tasks.py:110
 msgid "raster import"
 msgstr ""
 
-#: geobox/model/layer.py:35 geobox/model/tasks.py:128
+#: geobox/model/layer.py:35 geobox/model/tasks.py:129
 msgid "raster export"
 msgstr ""
 
-#: geobox/model/layer.py:47 geobox/model/tasks.py:87
+#: geobox/model/layer.py:47 geobox/model/tasks.py:88
 msgid "vector export"
 msgstr ""
 
@@ -1030,7 +1014,7 @@ msgstr ""
 msgid "project import"
 msgstr ""
 
-#: geobox/model/tasks.py:96
+#: geobox/model/tasks.py:97
 msgid "replication"
 msgstr ""
 
@@ -1044,6 +1028,14 @@ msgstr ""
 
 #: geobox/lib/trayicon.py:128
 msgid "Open"
+msgstr ""
+
+#: geobox/lib/vectorconvert.py:39
+msgid "invalid geometry type"
+msgstr ""
+
+#: geobox/lib/vectorconvert.py:41
+msgid "invalid mapping"
 msgstr ""
 
 #: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:55
