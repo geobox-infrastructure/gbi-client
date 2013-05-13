@@ -31,7 +31,8 @@
             <form id="import_form" method="POST">
                 {{ form.csrf_token }}
                 {{ select(form.file_name) }}
-                {{ select(form.mapping_name) }}
+                {{ select(form.srs) }}
+                {{ select(form.couchdb) }}
                 <br>
                 <button type="submit" class="btn btn-small" id="save_btn">{{ _('import') }}</button>
             </form>

@@ -17,7 +17,7 @@ from datetime import datetime
 
 from geobox.process.base import ProcessBase
 from geobox.lib.couchdb import CouchDB
-from geobox.lib.vectormapping import default_mappings as mappings
+from geobox.lib.vectormapping import default_mappings as mappings, Mapping
 from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, ConvertError
 
 
@@ -55,10 +55,13 @@ class VectorImportProcess(ProcessBase):
         log.debug('Start vector import process. Task %d' % self.task_id)
         try:
             with self.task() as task:
-                mapping = mappings[task.mapping_name].copy()
-                mapping.json_defaults = mapping.json_defaults.copy()
-                mapping.json_defaults['import_timestamp'] = datetime.now().isoformat();
-                mapping.json_defaults['import_file'] = task.file_name;
+                if task.mapping_name:
+                    mapping = mappings[task.mapping_name].copy()
+                    mapping.json_defaults = mapping.json_defaults.copy()
+                    mapping.json_defaults['import_timestamp'] = datetime.now().isoformat();
+                    mapping.json_defaults['import_file'] = task.file_name;
+                else:
+                    mapping = Mapping(None, None, '*', other_srs=task.srs)
 
                 input_file = self.app_state.user_data_path('import', task.file_name)
                 couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)

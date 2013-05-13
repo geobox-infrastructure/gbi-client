@@ -23,6 +23,7 @@ from flaskext.babel import _
 from geobox.lib.server_logging import send_task_logging
 from geobox.lib.vectorconvert import is_valid_shapefile, ConvertError
 from geobox.lib.fs import open_file_explorer
+from geobox.lib.couchdb import vector_layers_metadata
 from geobox.model import VectorImportTask
 from geobox.web import forms
 
@@ -33,12 +34,12 @@ vector = Blueprint('vector', __name__)
 
 @vector.before_request
 def only_if_enabled():
-    if not current_app.config.geobox_state.config.get('app', 'vector_im_export'):
+    if not current_app.config.geobox_state.config.get('app', 'vector_import'):
         abort(404)
 
 @vector.route('/vector/import', methods=['GET', 'POST'])
 def import_vector():
-    from ...lib.vectormapping import default_mappings as mappings
+    from ...lib.vectormapping import Mapping
 
     uploaded_shapes=[]
     upload_failures=[]
@@ -63,17 +64,18 @@ def import_vector():
             not_allowed_files.append(upload_file.filename)
 
     form = forms.ImportVectorEdit(request.form)
+    form.srs.choices = [(srs, srs) for srs in current_app.config.geobox_state.config.get('web', 'available_srs')]
+
+    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
+    form.couchdb.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
+
     shape_files, missing_files = get_shapefile_list()
     form.file_name.choices = [(name, name) for name in shape_files]
-    form.mapping_name.choices = [
-        (name, '%s (%s, %s)' % (mapping.name, mapping.geom_type, mapping.other_srs.srs_code))
-        for name, mapping in mappings.items()
-    ]
 
     if not len(request.files):
         if form.validate_on_submit():
             try:
-                is_valid_shapefile(current_app.config.geobox_state.user_data_path('import', form.file_name.data), mappings[form.mapping_name.data])
+                is_valid_shapefile(current_app.config.geobox_state.user_data_path('import', form.file_name.data), Mapping(None, None, '*'))
             except ConvertError:
                 flash(_('invalid mapping'), 'error')
                 return render_template('vector/import.html', form=form)
@@ -81,9 +83,9 @@ def import_vector():
                 flash(_('invalid shapefile'), 'error')
                 return render_template('vector/import.html', form=form)
             task = VectorImportTask(
-                mapping_name=form.mapping_name.data,
-                db_name=mappings[form.mapping_name.data].couchdb,
-                file_name=form.file_name.data
+                db_name=form.couchdb.data,
+                file_name=form.file_name.data,
+                srs=form.srs.data
             )
             send_task_logging(current_app.config.geobox_state, task)
             g.db.add(task)
