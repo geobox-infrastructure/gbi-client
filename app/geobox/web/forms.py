@@ -211,7 +211,7 @@ class ExportProjectEdit(ProjectEdit):
 class ImportVectorEdit(Form):
     file_name = SelectField(lazy_gettext('file name'), validators=[Required()])
     srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
-    couchdb = SelectField(lazy_gettext('database'), validators=[Optional()])
+    couchdb = SelectField(lazy_gettext('layer'), validators=[Optional()])
 
 
 class TileBoxPathForm(Form):
