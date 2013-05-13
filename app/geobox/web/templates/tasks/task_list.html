@@ -68,13 +68,13 @@
       <td>{{ project.time_created.strftime('%H:%M, %d.%m.%Y') }}</td>
     </tr>
     {% if project.tasks %}
-    <tr>
-      <td colspan="5">
-        {% for task in project.tasks %}
-          {{ task_item(task) }}
-         {% endfor %}
-       </td>
-    </tr>
+      {% for task in project.tasks %}
+        <tr>
+          <td colspan="5">
+            {{ task_item(task) }}
+           </td>
+        </tr>
+      {% endfor %}
     {% endif %}
 {%- endmacro %}
 
@@ -95,16 +95,16 @@
         {% endfor %}
 
         {% if tasks %}
-        <tr>
-          <td colspan="4">{{_('tasks without project')}}</td>
-        </tr>
-        <tr>
-            <td colspan="5">
-            {% for task in tasks %}
-              {{ task_item(task) }}
-            {% endfor %}
-            </td>
-        </tr>
+          <tr>
+            <td colspan="4">{{_('tasks without project')}}</td>
+          </tr>
+          {% for task in tasks %}
+            <tr>
+              <td colspan="5">
+                {{ task_item(task) }}
+              </td>
+            </tr>
+          {% endfor %}
         {% endif %}
     </tbody>
 </table>
