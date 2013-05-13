@@ -21,7 +21,7 @@
             {{ couch_form.select_couch }}
             <button id="load_couchlayers_coverage" class="btn btn-small">
              {{ _('load coverage') }}</button>
-          {% if app_state.config.get('app', 'vector_im_export') %}
+          {% if app_state.config.get('app', 'vector_import') or app_state.config.get('app', 'vector_export') %}
              <hr>
             <button id="load_couchdb_coverage" class="btn btn-small">
              {{ _('load vectorimports as coverage') }}</button>
