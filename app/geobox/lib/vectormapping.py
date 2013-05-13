@@ -47,12 +47,16 @@ class Mapping(object):
 
     def as_json_record(self, record):
         data = self.json_defaults.copy()
-        for json, shp, _type in self.fields:
-            if record.get('properties', False).get(shp, False):
-                val = record['properties'].get(shp, None)
-                if isinstance(val, str):
-                    val = val.decode(self.shp_encoding)
-                data[json] = val
+        if not self.fields:
+            data['properties'] = record.get('properties', None)
+            data['type'] = 'Feature'
+        else:
+            for json, shp, _type in self.fields:
+                if record.get('properties', False).get(shp, False):
+                    val = record['properties'].get(shp, None)
+                    if isinstance(val, str):
+                        val = val.decode(self.shp_encoding)
+                    data[json] = val
         if self.other_srs != self.srs:
             data['geometry'] = mapping(transform_geometry(self.other_srs, self.srs, asShape(record.get('geometry', None))))
         else:
