@@ -81,6 +81,7 @@ class GeoBoxState(object):
             pass
         finally:
             con.close()
+        con = engine.connect()
         try:
             con.execute("ALTER TABLE tasks_vector_import ADD COLUMN srs VARCHAR(64);")
         except sqlalchemy.exc.OperationalError:
