@@ -1073,7 +1073,7 @@ msgstr "Öffnen"
 
 #: geobox/lib/vectorconvert.py:39
 msgid "invalid geometry type"
-msgstr "Ungeültiger Geometrietyp"
+msgstr "Ungültiger Geometrietyp"
 
 #: geobox/lib/vectorconvert.py:41
 msgid "invalid mapping"
