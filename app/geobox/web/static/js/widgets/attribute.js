@@ -15,6 +15,7 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     this.selectedFeatures = [];
     this.changed = false;
     this.editable = false;
+    this.removedKeys = [];
 
     this.registerEvents();
 
@@ -79,15 +80,14 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     add: function(key, value) {
         if(!this.newAttributes[key] && !this.featuresAttributes[key]) {
-            this.newAttributes[key] = value;
+            this.newAttributes[key] = {'value': value, 'equal': true};
             this.keyIDs[key] = this.keyCounter++;
             this.changed = true;
             this.render();
         }
     },
     edit: function(key, value) {
-        this.featuresAttributes[key] = value;
-        this.newAttributes[key] = value;
+        this.featuresAttributes[key]['value'] = value;
         this.changed = true;
         this._applyAttributes();
         this.render();
@@ -96,6 +96,7 @@ gbi.widgets.AttributeEditor.prototype = {
         delete this.featuresAttributes[key];
         delete this.newAttributes[key];
         delete this.keyIDs[key];
+        this.removedKeys.push(key);
         this.changed = true;
         this._applyAttributes();
         this.render();
@@ -104,7 +105,22 @@ gbi.widgets.AttributeEditor.prototype = {
         var self = this;
         $.each(this.selectedFeatures, function(idx, feature) {
             if (feature) {
-                feature.attributes = $.extend({}, self.featuresAttributes, self.newAttributes);
+                // remove
+                $.each(self.removedKeys, function(idx, key) {
+                    if(key in feature.attributes) {
+                        delete feature.attributes[key]
+                    }
+                });
+                // edit
+                $.each(self.featuresAttributes, function(key, value) {
+                    if(key in feature.attributes) {
+                        feature.attributes[key] = value.value;
+                    }
+                });
+                // add
+                $.each(self.newAttributes, function(key, value) {
+                    feature.attributes[key] = value.value;
+                });
                 var gbiLayer = self.layerManager.layerById(feature.layer.gbiId);
                 if(gbiLayer instanceof gbi.Layers.SaveableVector) {
                     if(feature.state != OpenLayers.State.INSERT) {
@@ -140,10 +156,14 @@ gbi.widgets.AttributeEditor.prototype = {
             $.each(this.selectedFeatures, function(idx, feature) {
                 $.each(feature.attributes, function(key, value) {
                     if(!(key in self.featuresAttributes)) {
-                        self.featuresAttributes[key] = value;
+                        self.featuresAttributes[key] = {'value': value, 'equal': true};
                         self.keyIDs[key] = self.keyCounter++;
                         if(idx>0) {
                             newFeatureAttributes = true;
+                        }
+                    } else {
+                        if(self.featuresAttributes[key]['equal']) {
+                            self.featuresAttributes[key]['equal'] = self.featuresAttributes[key]['value'] == value;
                         }
                     }
                 });
@@ -169,6 +189,7 @@ var attributeLabel = {
     'add': OpenLayers.i18n("add"),
     'formTitle': OpenLayers.i18n("addNewAttributesTitle"),
     'addAttributesNotPossible': OpenLayers.i18n("addAttributesNotPossible"),
+    'sameKeyDifferentValue': OpenLayers.i18n("sameKeyDifferentValue")
 }
 
 gbi.widgets.AttributeEditor.template = '\
@@ -178,7 +199,11 @@ gbi.widgets.AttributeEditor.template = '\
     <% for(var key in attributes) { %>\
         <form id="view_attributes" class="form-inline">\
             <label class="key-label" for="_<%=keyIDs[key]%>"><%=key%></label>\
-            <input class="input-medium" type="text" id="_<%=keyIDs[key]%>" value="<%=attributes[key]%>" \
+            <% if(attributes[key]["equal"]) {%>\
+                <input class="input-medium" type="text" id="_<%=keyIDs[key]%>" value="<%=attributes[key]["value"]%>" \
+            <% } else {%>\
+                <input class="input-medium" type="text" id="_<%=keyIDs[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
+            <% } %>\
             <% if(!editable) { %>\
                 disabled=disabled \
             <% } %>\
