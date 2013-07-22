@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-13 15:50+0200\n"
+"POT-Creation-Date: 2013-07-22 15:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -288,7 +288,7 @@ msgid "infotext - edit controls"
 msgstr ""
 
 #: geobox/web/templates/editor.html:86
-msgid "remove all features"
+msgid "select all features"
 msgstr ""
 
 #: geobox/web/templates/editor.html:90
@@ -331,20 +331,12 @@ msgstr ""
 msgid "infotext delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:145 geobox/web/templates/editor.html:159
+#: geobox/web/templates/editor.html:145
 msgid "abort"
 msgstr ""
 
-#: geobox/web/templates/editor.html:146 geobox/web/templates/editor.html:160
+#: geobox/web/templates/editor.html:146
 msgid "yes delete"
-msgstr ""
-
-#: geobox/web/templates/editor.html:153
-msgid "Sure you want delete all geometries?"
-msgstr ""
-
-#: geobox/web/templates/editor.html:156
-msgid "infotext delete all geometries"
 msgstr ""
 
 #: geobox/web/templates/index.html:10
@@ -519,131 +511,135 @@ msgstr ""
 msgid "add new attribute"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:24
-msgid "line"
+#: geobox/web/templates/js/translation.js:22
+msgid "Same attribute with different values"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:25
-msgid "polygon"
+msgid "line"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:26
-msgid "stroke width"
+msgid "polygon"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:27
-msgid "stroke color"
+msgid "stroke width"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:28
-msgid "fill color"
+msgid "stroke color"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:29
-msgid "fill opacity"
+msgid "fill color"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:30
+msgid "fill opacity"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:31
 msgid "save styling"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:33
+#: geobox/web/templates/js/translation.js:34
 msgid "loadFilter"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:36
+#: geobox/web/templates/js/translation.js:37
 msgid "point"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:37
+#: geobox/web/templates/js/translation.js:38
 msgid "color"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:38
+#: geobox/web/templates/js/translation.js:39
 msgid "infotext - point styling"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:39
+#: geobox/web/templates/js/translation.js:40
 msgid "radius"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:40
+#: geobox/web/templates/js/translation.js:41
 msgid "set styling"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:41
+#: geobox/web/templates/js/translation.js:42
 msgid "add attributes is not possible"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:44
+#: geobox/web/templates/js/translation.js:45
 msgid "Draw polygon"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:45
+#: geobox/web/templates/js/translation.js:46
 msgid "Draw line"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:46
+#: geobox/web/templates/js/translation.js:47
 msgid "Draw rect"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:47
+#: geobox/web/templates/js/translation.js:48
 msgid "Draw point"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:48
+#: geobox/web/templates/js/translation.js:49
 msgid "Edit feature"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:49
+#: geobox/web/templates/js/translation.js:50
 msgid "Delete feature"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:50
+#: geobox/web/templates/js/translation.js:51
 msgid "Split feature"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:51
+#: geobox/web/templates/js/translation.js:52
 msgid "Merge features"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:52
+#: geobox/web/templates/js/translation.js:53
 msgid "Unmerge features"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:53
+#: geobox/web/templates/js/translation.js:54
 msgid "Select feature(s)"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:54
+#: geobox/web/templates/js/translation.js:55
 msgid "Snap on features"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:55
+#: geobox/web/templates/js/translation.js:56
 msgid "Copy feature(s)"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:58
+#: geobox/web/templates/js/translation.js:59
 msgid "Measure point"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:59
+#: geobox/web/templates/js/translation.js:60
 msgid "Measure path"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:60
+#: geobox/web/templates/js/translation.js:61
 msgid "Measure area"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:63
+#: geobox/web/templates/js/translation.js:64
 msgid "Bad JSON: "
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:64
+#: geobox/web/templates/js/translation.js:65
 msgid "Only OpenLayers.Feature.Vector is supported."
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:65
+#: geobox/web/templates/js/translation.js:66
 msgid "Feature was"
 msgstr ""
 
@@ -938,7 +934,7 @@ msgid "settings changed. restart required"
 msgstr ""
 
 #: geobox/web/views/project.py:102 geobox/web/views/project.py:226
-#: geobox/web/views/vector.py:96
+#: geobox/web/views/vector.py:95
 msgid "form error"
 msgstr ""
 
@@ -974,22 +970,22 @@ msgstr ""
 msgid "invalid shapefile"
 msgstr ""
 
-#: geobox/web/views/vector.py:99
+#: geobox/web/views/vector.py:98
 #, python-format
 msgid "file %(name)s missing"
 msgstr ""
 
-#: geobox/web/views/vector.py:101
+#: geobox/web/views/vector.py:100
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr ""
 
-#: geobox/web/views/vector.py:103
+#: geobox/web/views/vector.py:102
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr ""
 
-#: geobox/web/views/vector.py:105
+#: geobox/web/views/vector.py:104
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr ""
@@ -1034,7 +1030,7 @@ msgstr ""
 msgid "invalid geometry type"
 msgstr ""
 
-#: geobox/lib/vectorconvert.py:41
+#: geobox/lib/vectorconvert.py:41 geobox/lib/vectorconvert.py:48
 msgid "invalid mapping"
 msgstr ""
 

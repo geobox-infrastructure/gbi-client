@@ -19,6 +19,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "value": "{{ _('value') }}",
     "add": "{{ _('add ') }}",
     "addNewAttributesTitle": "{{ _('add new attribute') }}",
+    "sameKeyDifferentValue": "{{ _('Same attribute with different values') }}",
 
     // styling - widget
     'line': "{{ _('line') }}",
