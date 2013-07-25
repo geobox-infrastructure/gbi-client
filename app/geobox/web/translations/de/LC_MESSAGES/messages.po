@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-07-22 15:10+0200\n"
-"PO-Revision-Date: 2013-07-22 15:11+0100\n"
+"POT-Creation-Date: 2013-07-25 17:08+0200\n"
+"PO-Revision-Date: 2013-07-25 17:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -112,7 +112,7 @@ msgstr "Shapefile"
 
 #: geobox/web/forms.py:214
 #: geobox/web/templates/admin.html:11
-#: geobox/web/templates/editor.html:56
+#: geobox/web/templates/editor.html:57
 msgid "layer"
 msgstr "Layer"
 
@@ -258,100 +258,121 @@ msgid "open export on external explorer"
 msgstr "Export-Verzeichnis öffnen"
 
 #: geobox/web/templates/editor.html:2
-#: geobox/web/templates/editor.html:44
+#: geobox/web/templates/editor.html:45
 #: geobox/web/templates/index.html:45
 #: geobox/web/templates/index.html:47
 msgid "editor"
 msgstr "Editor"
 
-#: geobox/web/templates/editor.html:45
+#: geobox/web/templates/editor.html:46
 msgid "tooltip - editor"
 msgstr "In dieser Ansicht können Sie Geometrien bearbeiten"
 
-#: geobox/web/templates/editor.html:53
+#: geobox/web/templates/editor.html:54
 msgid "manager"
 msgstr "Auswahl"
 
-#: geobox/web/templates/editor.html:59
+#: geobox/web/templates/editor.html:60
 #: geobox/web/templates/projects/exports.html:29
 #: geobox/web/templates/projects/imports.html:40
 msgid "edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:62
-#: geobox/web/templates/editor.html:116
+#: geobox/web/templates/editor.html:63
+#: geobox/web/templates/editor.html:123
 msgid "filter"
 msgstr "Filter"
 
-#: geobox/web/templates/editor.html:65
+#: geobox/web/templates/editor.html:66
 msgid "measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:74
+#: geobox/web/templates/editor.html:69
+#: geobox/web/templates/editor.html:139
+msgid "thematical map"
+msgstr "Thematische Karte"
+
+#: geobox/web/templates/editor.html:72
+#: geobox/web/templates/editor.html:145
+msgid "thematical legend"
+msgstr "Legende der thematischen Karte"
+
+#: geobox/web/templates/editor.html:81
 msgid "Styling"
 msgstr "Aussehen der Geometrien"
 
-#: geobox/web/templates/editor.html:75
+#: geobox/web/templates/editor.html:82
 msgid "infotext - edit styling"
 msgstr "Hier ändern Sie das Aussehen der Geometrien. In jeder Ebene kann ein bestimmtes Aussehen verwendet werden. Ohne Speichern gehen die Änderungen verloren."
 
-#: geobox/web/templates/editor.html:80
+#: geobox/web/templates/editor.html:87
 msgid "Edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:81
+#: geobox/web/templates/editor.html:88
 msgid "infotext - edit controls"
 msgstr "Wählen Sie ein Bearbeitungswerkzeug aus."
 
-#: geobox/web/templates/editor.html:86
+#: geobox/web/templates/editor.html:93
 msgid "select all features"
 msgstr "Alle Geometrien auswählen"
 
-#: geobox/web/templates/editor.html:90
+#: geobox/web/templates/editor.html:97
 msgid "save permanent"
 msgstr "Änderungen dauerhaft speichern"
 
-#: geobox/web/templates/editor.html:97
+#: geobox/web/templates/editor.html:104
+#: geobox/web/templates/js/translation.js:70
 msgid "Attribute"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:100
+#: geobox/web/templates/editor.html:107
 msgid "point styling"
 msgstr "Punktdesign"
 
-#: geobox/web/templates/editor.html:105
+#: geobox/web/templates/editor.html:112
 msgid "Attributes"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:106
+#: geobox/web/templates/editor.html:113
 msgid "infotext - attributes"
 msgstr "Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie hierzu eine Geometrie mit dem Auswahlwerkezug aus."
 
-#: geobox/web/templates/editor.html:117
+#: geobox/web/templates/editor.html:124
 msgid "infotext - filter controls"
 msgstr "Hier können Sie Geometrien abhängig von Eigenschaft und Wert auswählen."
 
-#: geobox/web/templates/editor.html:122
+#: geobox/web/templates/editor.html:129
 msgid "Measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:123
+#: geobox/web/templates/editor.html:130
 msgid "infotext - measure controls"
 msgstr "Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen, oder Strecken und Flächen messen."
 
-#: geobox/web/templates/editor.html:139
+#: geobox/web/templates/editor.html:140
+#, fuzzy
+msgid "infotext - thematical map"
+msgstr "Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie hierzu eine Geometrie mit dem Auswahlwerkezug aus."
+
+#: geobox/web/templates/editor.html:146
+#, fuzzy
+msgid "infotext - thematical legend"
+msgstr "Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie hierzu eine Geometrie mit dem Auswahlwerkezug aus."
+
+#: geobox/web/templates/editor.html:158
 msgid "Sure you want delete layer"
 msgstr "Löschen der Karte "
 
-#: geobox/web/templates/editor.html:142
+#: geobox/web/templates/editor.html:161
 msgid "infotext delete layer"
 msgstr "Achtung: Nach dem Löschen kann die Karte nicht wiederhergestellt werden. Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
 
-#: geobox/web/templates/editor.html:145
+#: geobox/web/templates/editor.html:164
 msgid "abort"
 msgstr "Abbrechen"
 
-#: geobox/web/templates/editor.html:146
+#: geobox/web/templates/editor.html:165
 msgid "yes delete"
 msgstr "Ja, Löschen"
 
@@ -661,6 +682,58 @@ msgstr "Es werden nur Objekte des Typs OpenLayers.Feature.Vector unterstützt."
 #: geobox/web/templates/js/translation.js:66
 msgid "Feature was"
 msgstr "Objekt war"
+
+#: geobox/web/templates/js/translation.js:69
+msgid "Select a value"
+msgstr "Wert auswählen"
+
+#: geobox/web/templates/js/translation.js:71
+msgid "Exact"
+msgstr "Exakte Werte"
+
+#: geobox/web/templates/js/translation.js:72
+msgid "Range"
+msgstr "Wertebereich"
+
+#: geobox/web/templates/js/translation.js:73
+msgid "Value"
+msgstr "Wert"
+
+#: geobox/web/templates/js/translation.js:74
+msgid "Color"
+msgstr "Farbe"
+
+#: geobox/web/templates/js/translation.js:75
+msgid "Min"
+msgstr "Minimum"
+
+#: geobox/web/templates/js/translation.js:76
+msgid "Max"
+msgstr "Maximum"
+
+#: geobox/web/templates/js/translation.js:77
+msgid "Execute"
+msgstr "Ausführen"
+
+#: geobox/web/templates/js/translation.js:78
+msgid "Legend for"
+msgstr "Legende für"
+
+#: geobox/web/templates/js/translation.js:79
+msgid "Area in"
+msgstr "Fläche in"
+
+#: geobox/web/templates/js/translation.js:80
+msgid "No thematical map present for this layer"
+msgstr "Für diesen Layer existiert keine thematische Karte"
+
+#: geobox/web/templates/js/translation.js:81
+msgid "Add input"
+msgstr "Eingabemöglichkeit hinzufügen"
+
+#: geobox/web/templates/js/translation.js:82
+msgid "Remove input"
+msgstr "Eintrag entfernen"
 
 #: geobox/web/templates/projects/export_edit.html:3
 msgid "export project edit"
@@ -1214,11 +1287,3 @@ msgstr "Kein gültigen Zeitpunkt angegeben."
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
-#~ msgid "remove all features"
-#~ msgstr "Alle Geometrien löschen"
-
-#~ msgid "Sure you want delete all geometries?"
-#~ msgstr "Alle Geometrien löschen"
-
-#~ msgid "infotext delete all geometries"
-#~ msgstr "Hinweis: Alle Geometrien in der aktuell aktiven Karte werden gelöscht."

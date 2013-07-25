@@ -22,6 +22,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/pointstyleeditor.js') }}"></script>
 
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/filter.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvector.js') }}"></script>
 
 {% endblock %}
 
@@ -63,6 +64,12 @@
           </li>
           <li>
             <a href="#measure" data-toggle="tab">{{ _('measure') }}</a>
+          </li>
+          <li>
+            <a href="#thematical" data-toggle="tab">{{ _('thematical map') }}</a>
+          </li>
+          <li>
+            <a href="#legend" data-toggle="tab">{{ _('thematical legend') }}</a>
           </li>
         </ul>
         <div class="tab-content">
@@ -126,6 +133,18 @@
             </div>
             <div id="measure-output">
             </div>
+          </div>
+
+          <div class="tab-pane fade" id="thematical">
+            <h4>{{ _('thematical map') }}</h4>
+            <p>{{ _('infotext - thematical map') }}</p>
+            <div id="thematical-vector"></div>
+          </div>
+
+          <div class="tab-pane fade" id="legend">
+            <h4>{{ _('thematical legend') }}</h4>
+            <p>{{ _('infotext - thematical legend') }}</p>
+            <div id="thematical-legend"></div>
           </div>
         </div>
       </div>

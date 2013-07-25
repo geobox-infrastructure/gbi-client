@@ -137,6 +137,11 @@ function initEditor() {
         element: 'filtermanager'
     });
 
+    var thematicalVector = new gbi.widgets.ThematicalVector(editor, {
+      'element': 'thematical-vector',
+      'legendElement': 'thematical-legend'
+    });
+
     $('#save_changes').click(function() {
         var layer = editor.layerManager.active();
         if (layer) {
