@@ -105,29 +105,20 @@ gbi.widgets.AttributeEditor.prototype = {
         var self = this;
         $.each(this.selectedFeatures, function(idx, feature) {
             if (feature) {
+                var gbiLayer = feature.layer.gbiLayer;
                 // remove
                 $.each(self.removedKeys, function(idx, key) {
-                    if(key in feature.attributes) {
-                        delete feature.attributes[key]
-                    }
+                    gbiLayer.removeFeatureAttribute(feature, key);
                 });
                 // edit
                 $.each(self.featuresAttributes, function(key, value) {
-                    if(key in feature.attributes) {
-                        feature.attributes[key] = value.value;
-                    }
+                    gbiLayer.changeFeatureAttribute(feature, key, value.value);
                 });
                 // add
                 $.each(self.newAttributes, function(key, value) {
-                    feature.attributes[key] = value.value;
+                    gbiLayer.changeFeatureAttribute(feature, key, value.value)
+                    // feature.attributes[key] = value.value;
                 });
-                var gbiLayer = self.layerManager.layerById(feature.layer.gbiId);
-                if(gbiLayer instanceof gbi.Layers.SaveableVector) {
-                    if(feature.state != OpenLayers.State.INSERT) {
-                        feature.state = OpenLayers.State.UPDATE;
-                    }
-                    gbiLayer.changesMade();
-                }
             }
         });
     },
