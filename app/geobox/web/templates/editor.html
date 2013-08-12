@@ -3,26 +3,32 @@
 
 {% block project_js %}
   <!-- JSTS for split and union -->
-   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/javascript.util.js') }}"></script>
-   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jsts.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/javascript.util.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jsts.js') }}"></script>
 
   <!-- Proj4 for transformation -->
-   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js-compressed.js') }}"></script>
-   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js.defs.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js-compressed.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/proj4js.defs.js') }}"></script>
 
   <!-- slider and colorpicker for styleeditor -->
-   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jquery.nouislider.js') }}"></script>
-   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jquery.minicolor.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jquery.nouislider.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jquery.minicolor.js') }}"></script>
 
+  <!-- jquery ui custom for sortable in featureattributelistconfigurator -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jquery-ui-1.10.3.custom.min.js') }}"></script>
   <!-- widgets -->
-   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
-   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
-   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/attribute.js') }}"></script>
-   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/styleeditor.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/attribute.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/styleeditor.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/pointstyleeditor.js') }}"></script>
 
-   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/filter.js') }}"></script>
-   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvector.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/filter.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvector.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorlegend.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorlegendchangeattributes.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/featureattributelist.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/featureattributelistconfigurator.js') }}"></script>
 
 {% endblock %}
 
@@ -34,7 +40,7 @@
       {{ generate_base_layer(base_layer) }}
       {{ generate_sources(sources, cache_url, False)}}
 
-      {{ generate_couch_layers(couch_layers)}}
+      {{ generate_couch_layers(couch_layers, 'true', True)}}
 
   </script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/views/editor.js') }}"></script>
@@ -51,10 +57,10 @@
       <div class="bs-docs-example">
         <ul id="tabs" class="nav nav-tabs">
           <li class="active">
-            <a href="#layermanager" data-toggle="tab">{{ _('manager') }}</a>
+            <a href="#layermanager" data-toggle="tab">{{ _('map layer') }}</a>
           </li>
           <li>
-            <a href="#layer" data-toggle="tab">{{ _('layer') }}</a>
+            <a href="#layer" data-toggle="tab">{{ _('look') }}</a>
           </li>
           <li>
             <a href="#edit" data-toggle="tab">{{ _('edit') }}</a>
@@ -67,9 +73,6 @@
           </li>
           <li>
             <a href="#thematical" data-toggle="tab">{{ _('thematical map') }}</a>
-          </li>
-          <li>
-            <a href="#legend" data-toggle="tab">{{ _('thematical legend') }}</a>
           </li>
         </ul>
         <div class="tab-content">
@@ -138,13 +141,42 @@
           <div class="tab-pane fade" id="thematical">
             <h4>{{ _('thematical map') }}</h4>
             <p>{{ _('infotext - thematical map') }}</p>
-            <div id="thematical-vector"></div>
-          </div>
-
-          <div class="tab-pane fade" id="legend">
-            <h4>{{ _('thematical legend') }}</h4>
-            <p>{{ _('infotext - thematical legend') }}</p>
-            <div id="thematical-legend"></div>
+            <ul id="tabs" class="nav nav-tabs">
+              <li class="active">
+                <a href="#thematical-settings" data-toggle="tab">{{ _('settings') }}</a>
+              </li>
+              <li>
+                <a href="#thematical-list" data-toggle="tab">{{ _('list') }}</a>
+              </li>
+              <li>
+                <a href="#thematical-legend" data-toggle="tab">{{ _('legend') }}</a>
+              </li>
+              <li>
+                <a href="#thematical-list-settings" data-toggle="tab">{{ _('list settings') }}</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="thematical-settings">
+                <h4>{{ _('settings') }}</h4>
+                <p>{{ _('infotext - thematical settings') }}</p>
+                <div id="thematical-settings-element"></div>
+              </div>
+              <div class="tab-pane fade" id="thematical-list">
+                <h4>{{ _('list') }}</h4>
+                <p>{{ _('infotext - thematical list') }}</p>
+                <div id="thematical-feature-list"></div>
+              </div>
+              <div class="tab-pane fade" id="thematical-legend">
+                <h4>{{ _('legend') }}</h4>
+                <p>{{ _('infotext - thematical legend') }}</p>
+                <div id="thematical-legend-element"></div>
+              </div>
+              <div class="tab-pane fade" id="thematical-list-settings">
+                <h4>{{ _('options') }}</h4>
+                <p>{{ _('infotext - thematical options') }}</p>
+                <div id="thematical-feature-list-options"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -101,7 +101,7 @@ function initEditor() {
     });
 
     var measure = new gbi.widgets.Measure(editor, {
-    	element: 'measure-toolbar',
+      element: 'measure-toolbar',
         srs: {
               'EPSG:4326': 'WGS 84 (EPSG:4326)',
               'EPSG:25832': 'UTM 32N (EPSG:25832)',
@@ -138,8 +138,19 @@ function initEditor() {
     });
 
     var thematicalVector = new gbi.widgets.ThematicalVector(editor, {
-      'element': 'thematical-vector',
-      'legendElement': 'thematical-legend'
+      'element': 'thematical-settings-element'
+    });
+    var thematicalVectorLegend = new gbi.widgets.ThematicalVectorLegendChangeAttributes(editor, {
+      'element': 'thematical-legend-element'
+    });
+
+    var featureAttributeList = new gbi.widgets.FeatureAttributeList(editor, {
+      'element': 'thematical-feature-list',
+      featurePopup: 'hover'
+    });
+
+    var featureAttributesListConfigurator = new gbi.widgets.FeatureAttributesListConfigurator(editor, {
+      'element': 'thematical-feature-list-options'
     });
 
     $('#save_changes').click(function() {
@@ -149,6 +160,5 @@ function initEditor() {
         }
         $(this).removeClass('btn-success').attr('disabled', 'disabled');
     });
-	return editor;
+  return editor;
 }
-

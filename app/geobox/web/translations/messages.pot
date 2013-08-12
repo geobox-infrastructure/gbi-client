@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-07-25 17:08+0200\n"
+"POT-Creation-Date: 2013-07-26 08:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,7 +105,6 @@ msgid "file name"
 msgstr ""
 
 #: geobox/web/forms.py:214 geobox/web/templates/admin.html:11
-#: geobox/web/templates/editor.html:57
 msgid "layer"
 msgstr ""
 
@@ -114,6 +113,7 @@ msgid "path"
 msgstr ""
 
 #: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:33
+#: geobox/web/templates/editor.html:140 geobox/web/templates/editor.html:151
 #: geobox/web/templates/index.html:53
 msgid "settings"
 msgstr ""
@@ -254,7 +254,11 @@ msgid "tooltip - editor"
 msgstr ""
 
 #: geobox/web/templates/editor.html:54
-msgid "manager"
+msgid "map layer"
+msgstr ""
+
+#: geobox/web/templates/editor.html:57
+msgid "look"
 msgstr ""
 
 #: geobox/web/templates/editor.html:60
@@ -263,7 +267,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:63 geobox/web/templates/editor.html:123
+#: geobox/web/templates/editor.html:63 geobox/web/templates/editor.html:120
 msgid "filter"
 msgstr ""
 
@@ -271,88 +275,100 @@ msgstr ""
 msgid "measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:69 geobox/web/templates/editor.html:139
+#: geobox/web/templates/editor.html:69 geobox/web/templates/editor.html:136
 msgid "thematical map"
 msgstr ""
 
-#: geobox/web/templates/editor.html:72 geobox/web/templates/editor.html:145
-msgid "thematical legend"
-msgstr ""
-
-#: geobox/web/templates/editor.html:81
+#: geobox/web/templates/editor.html:78
 msgid "Styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:82
+#: geobox/web/templates/editor.html:79
 msgid "infotext - edit styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:87
+#: geobox/web/templates/editor.html:84
 msgid "Edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:88
+#: geobox/web/templates/editor.html:85
 msgid "infotext - edit controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:93
+#: geobox/web/templates/editor.html:90
 msgid "select all features"
 msgstr ""
 
-#: geobox/web/templates/editor.html:97
+#: geobox/web/templates/editor.html:94
 msgid "save permanent"
 msgstr ""
 
-#: geobox/web/templates/editor.html:104
+#: geobox/web/templates/editor.html:101
 #: geobox/web/templates/js/translation.js:70
 msgid "Attribute"
 msgstr ""
 
-#: geobox/web/templates/editor.html:107
+#: geobox/web/templates/editor.html:104
 msgid "point styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:112
+#: geobox/web/templates/editor.html:109
 msgid "Attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:113
+#: geobox/web/templates/editor.html:110
 msgid "infotext - attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:124
+#: geobox/web/templates/editor.html:121
 msgid "infotext - filter controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:129
+#: geobox/web/templates/editor.html:126
 msgid "Measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:130
+#: geobox/web/templates/editor.html:127
 msgid "infotext - measure controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:140
+#: geobox/web/templates/editor.html:137
 msgid "infotext - thematical map"
 msgstr ""
 
-#: geobox/web/templates/editor.html:146
-msgid "infotext - thematical legend"
+#: geobox/web/templates/editor.html:143 geobox/web/templates/editor.html:156
+msgid "list"
 msgstr ""
 
-#: geobox/web/templates/editor.html:158
-msgid "Sure you want delete layer"
+#: geobox/web/templates/editor.html:146 geobox/web/templates/editor.html:160
+msgid "legend"
+msgstr ""
+
+#: geobox/web/templates/editor.html:152
+msgid "infotext - thematical settings"
+msgstr ""
+
+#: geobox/web/templates/editor.html:157
+msgid "infotext - thematical list"
 msgstr ""
 
 #: geobox/web/templates/editor.html:161
+msgid "infotext - thematical legend"
+msgstr ""
+
+#: geobox/web/templates/editor.html:175
+msgid "Sure you want delete layer"
+msgstr ""
+
+#: geobox/web/templates/editor.html:178
 msgid "infotext delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:164
+#: geobox/web/templates/editor.html:181
 msgid "abort"
 msgstr ""
 
-#: geobox/web/templates/editor.html:165
+#: geobox/web/templates/editor.html:182
 msgid "yes delete"
 msgstr ""
 

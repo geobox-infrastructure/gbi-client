@@ -315,10 +315,12 @@ hr#save_dividing_line {
 }
 
 .gbi_widget_legend_color {
-    min-width: 20px;
     width: 20px;
-    max-width: 20px;
-    min-height: 20px;
     height: 20px;
-    max-height: 20px;
+    margin: 2px;
+}
+
+.highlight_legend_color {
+    border: 2px solid orange;
+    margin: 0px;
 }
