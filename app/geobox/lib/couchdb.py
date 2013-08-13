@@ -176,7 +176,7 @@ class UnexpectedResponse(Exception):
 
 
 class CouchDBBase(object):
-    def __init__(self, url, db_name):
+    def __init__(self, url, db_name, auth=None):
         if requests is None:
             raise ImportError("CouchDB backend requires 'requests' package.")
 
@@ -186,6 +186,8 @@ class CouchDBBase(object):
         self.db_name = db_name.lower()
         self.couch_db_url = '%s/%s' % (self.couch_url, self.db_name)
         self.req_session = requests.Session()
+        if auth:
+            self.req_session.auth = auth
 
     def _store_bulk(self, records):
         doc = {'docs': list(records)}
@@ -208,6 +210,12 @@ class CouchDBBase(object):
             doc = json.loads(resp.content)
             return self._load_records(doc.get('rows', []))
         return []
+
+    def load_record(self, doc_id):
+        doc_url = self.couch_db_url + '/' + doc_id
+        resp = self.req_session.get(doc_url)
+        if resp.status_code == 200:
+            return resp.json()
 
     def update_or_create_doc(self, doc_id, doc):
         doc_url = self.couch_db_url + '/' + doc_id

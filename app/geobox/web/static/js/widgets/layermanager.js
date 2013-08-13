@@ -174,6 +174,8 @@ gbi.widgets.LayerManager.prototype = {
                 var couchLayer = new gbi.Layers.Couch({
                     name: newLayer,
                     url: OpenlayersCouchURL,
+                    hoverPopup: true,
+                    hoverAutoActive: true,
                     callbacks: {
                         changes: function(unsavedChanges) {
                             if(unsavedChanges)

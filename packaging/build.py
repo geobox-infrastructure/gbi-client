@@ -158,6 +158,8 @@ def build_app_command():
         print "remove gbi-editor link!"
         sys.exit(2)
     print "copying gbi-editor"
+    if gbi_editor.exists():
+        gbi_editor.rmtree()
     path('../gbi-editor/src').copytree(gbi_editor)
     pyinstaller_spec_tpl = open(path('geobox.spec.tpl')).read()
     template = string.Template(pyinstaller_spec_tpl)

@@ -18,7 +18,7 @@
     });
 {%- endmacro %}
 
-{% macro generate_couch_layers(layers, show_layer='true') -%}
+{% macro generate_couch_layers(layers, show_layer='true', hover_popup=False) -%}
     var couchLayers = [];
     {% for layer in layers %}
         couchLayers.push(new gbi.Layers.Couch({
@@ -27,6 +27,10 @@
             displayInLayerSwitcher: {{ show_layer }},
             createDB: false,
             loadStyle: {{ show_layer }},
+            {% if hover_popup %}
+            hoverPopup: true,
+            hoverAutoActive: true,
+            {% endif %}
             callbacks: {
                 changes: function(unsavedChanges) {
                     if(unsavedChanges)
@@ -71,7 +75,7 @@
             displayInLayerSwitcher: true,
             source_id: {{ map_source.id }},
             editable: false,
-            attributePopup: false
+            clickPopup: false
         });
 
         var geojson_format = new OpenLayers.Format.GeoJSON();

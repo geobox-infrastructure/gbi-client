@@ -1,4 +1,7 @@
 OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
+    //core
+    'Not defined': "{{ _('Not defined') }}",
+
     // layermanager widget
     'addLayerSuccessful': "{{ _('add layer successful') }}",
     'notPossible':  "{{ _('not possible to add layer') }}",
@@ -68,6 +71,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     // thematical vector - widget
     'Select a value': "{{ _('Select a value') }}",
     'Attribute': "{{ _('Attribute') }}",
+    'Attributes': "{{ _('Attributes') }}",
     'Exact': "{{ _('Exact') }}",
     'Range': "{{ _('Range') }}",
     'Value': "{{ _('Value') }}",
@@ -79,5 +83,21 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'Area in': "{{ _('Area in') }}",
     'No thematical map present for this layer': "{{ _('No thematical map present for this layer') }}",
     'Add input': "{{ _('Add input') }}",
-    'Remove input': "{{ _('Remove input') }}"
+    'Remove input': "{{ _('Remove input') }}",
+    'No layer selected': "{{ _('No layer selected') }}",
+    'No attributes selected': "{{ _('No attributes selected') }}",
+    'Show all features': "{{ _('Show all features') }}",
+    'Show in list': "{{ _('Show in list') }}",
+    'Apply': "{{ _('Apply') }}",
+    'Map settings': "{{ _('Map settings') }}",
+    'Legend': "{{ _('Legend') }}",
+    'Short list': "{{ _('Short list') }}",
+    'Complete list': "{{ _('Complete list') }}",
+    'List settings': "{{ _('List settings') }}",
+    'Active': "{{ _('Active') }}",
+    'Choose value': "{{ _('Choose value') }}",
+    'No entries': "{{ _('No entries') }}",
+    'Apply changes': "{{ _('Apply changes') }}",
+    'Discard changes': "{{ _('Discard changes') }}",
+    'Show in popup': "{{ _('Show in popup') }}"
 });
