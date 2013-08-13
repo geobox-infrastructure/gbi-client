@@ -105,14 +105,18 @@ class ContextModelUpdater(object):
 
         return json.dumps(restriction['geometry'])
 
-def reload_context_document(app_state, user, password):
+class AuthenticationError(Exception):
+    pass
+
+def reload_context_document(context_document_url, app_state, user, password):
     session = app_state.user_db_session()
-    result = requests.get(app_state.config.get('web', 'context_document_url'), auth=(user, password))
+    result = requests.get(context_document_url, auth=(user, password))
 
-    if result.status_code != 200:
-        return False
+    if result.status_code in (401, 403):
+        raise AuthenticationError()
 
-    context = Context(result.json())
+    context_doc = result.json()
+    context = Context(context_doc)
     all_active_sources = set(session.query(model.ExternalWMTSSource).filter_by(active=True).all())
     updater = ContextModelUpdater(session)
 
@@ -146,8 +150,6 @@ def reload_context_document(app_state, user, password):
             # replicate other couchdb sources
             replicate_database(couchdb, couchdb_source, app_state)
     session.commit()
-
-    return True
 
 def source_couchdb_url(couchdb_source):
     dburl = couchdb_source['url'] + '/' + couchdb_source['dbname']

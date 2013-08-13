@@ -15,6 +15,7 @@
       {{ form.csrf_token }}
       {{ input(form.username, autofocus=True) }}
       {{ input(form.password) }}
+      {{ input(form.server_url, style="width: 30em") }}
       <input type=hidden value="{{ next or '' }}" name=next>
   </div>
   <div class="control-group">

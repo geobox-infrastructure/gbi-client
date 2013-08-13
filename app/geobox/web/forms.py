@@ -171,6 +171,7 @@ class ProjectEdit(Form):
 class LoginForm(Form):
     username = TextField(lazy_gettext('username'), validators=[Required()])
     password = PasswordField(lazy_gettext('Password'), validators=[Required()])
+    server_url = TextField(lazy_gettext('context server url'))
 
 def get_local_wmts_source():
     return g.db.query(LocalWMTSSource).all()

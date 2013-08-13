@@ -54,7 +54,9 @@ def admin():
 
 @admin_view.route('/admin/refresh_context', methods=['POST'])
 def refresh_context():
-    if reload_context_document(current_app.config.geobox_state, session['username'], request.form['password']):
+    app_state = current_app.config.geobox_state
+    context_document_url = app_state.get('web', 'context_document_url')
+    if reload_context_document(context_document_url, app_state, session['username'], request.form['password']):
         flash(_('load context document successful'), 'sucess')
     else:
         flash(_('password not correct'), 'error')
