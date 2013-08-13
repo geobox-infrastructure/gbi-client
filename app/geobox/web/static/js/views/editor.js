@@ -25,18 +25,14 @@ $(document).ready(function() {
         }
    });
 
-   $('#remove_all_features').click(function() {
+   $('#select_all_features').click(function() {
         var activeLayer = editor.layerManager.active();
         if (!activeLayer) {
-          $('#deleteAllGeometries').modal('hide');
           return false;
         }
         if(activeLayer instanceof gbi.Layers.SaveableVector) {
-            activeLayer.unSelectAllFeatures();
-            editor.map.toolbars[1].delete_.olControl.deleteFeatures(activeLayer.olLayer.features)
-            activeLayer.changesMade();
+            activeLayer.selectAllFeatures();
         }
-        $('#deleteAllGeometries').modal('hide');
         return false;
    });
 
@@ -139,6 +135,11 @@ function initEditor() {
 
     var layerfilter = new gbi.widgets.Filter(editor, {
         element: 'filtermanager'
+    });
+
+    var thematicalVector = new gbi.widgets.ThematicalVector(editor, {
+      'element': 'thematical-vector',
+      'legendElement': 'thematical-legend'
     });
 
     $('#save_changes').click(function() {

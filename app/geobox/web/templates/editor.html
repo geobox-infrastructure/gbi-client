@@ -22,6 +22,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/pointstyleeditor.js') }}"></script>
 
    <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/filter.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvector.js') }}"></script>
 
 {% endblock %}
 
@@ -64,6 +65,12 @@
           <li>
             <a href="#measure" data-toggle="tab">{{ _('measure') }}</a>
           </li>
+          <li>
+            <a href="#thematical" data-toggle="tab">{{ _('thematical map') }}</a>
+          </li>
+          <li>
+            <a href="#legend" data-toggle="tab">{{ _('thematical legend') }}</a>
+          </li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane fade in active" id="layermanager">
@@ -83,7 +90,7 @@
             </div>
 
             <div class="span12">
-              <button data-toggle="modal" data-target="#deleteAllGeometries" class="btn btn-small">{{ _('remove all features') }}</button>
+              <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
             </div>
             <hr id="save_dividing_line" class="span12">
             <button id="save_changes" class="btn btn-small"  disabled="disabled">
@@ -127,6 +134,18 @@
             <div id="measure-output">
             </div>
           </div>
+
+          <div class="tab-pane fade" id="thematical">
+            <h4>{{ _('thematical map') }}</h4>
+            <p>{{ _('infotext - thematical map') }}</p>
+            <div id="thematical-vector"></div>
+          </div>
+
+          <div class="tab-pane fade" id="legend">
+            <h4>{{ _('thematical legend') }}</h4>
+            <p>{{ _('infotext - thematical legend') }}</p>
+            <div id="thematical-legend"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -144,20 +163,6 @@
     <div class="modal-footer">
       <a href="#" id="abort_remove_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
       <a href="#" id="remove_layer" class="btn btn-primary">{{_('yes delete')}}</a>
-    </div>
-  </div>
-
-  <div id="deleteAllGeometries" class="modal hide">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h3>{{_('Sure you want delete all geometries?')}}</h3>
-    </div>
-    <div class="modal-body">
-      <p>{{ _('infotext delete all geometries') }}</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">{{_('abort')}}</a>
-      <a href="#" id="remove_all_features" class="btn btn-primary">{{_('yes delete')}}</a>
     </div>
   </div>
 

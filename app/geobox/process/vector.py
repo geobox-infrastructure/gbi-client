@@ -13,10 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
+
+
 from datetime import datetime
 
 from geobox.process.base import ProcessBase
-from geobox.lib.couchdb import CouchDB
+from geobox.lib.couchdb import CouchDB, VectorCouchDB
 from geobox.lib.vectormapping import default_mappings as mappings, Mapping
 from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, ConvertError
 
@@ -64,10 +67,18 @@ class VectorImportProcess(ProcessBase):
                     mapping = Mapping(None, None, '*', other_srs=task.srs)
 
                 input_file = self.app_state.user_data_path('import', task.file_name)
-                couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
-                couch.store_records(
-                    load_json_from_shape(input_file, mapping)
-                )
+                couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
+
+                if (task.geojson):
+                    records = json.loads(open(input_file).read())
+                    couch.store_records(
+                        records['features']
+                    )
+                else:
+                    couch.store_records(
+                        load_json_from_shape(input_file, mapping)
+                    )
+
             self.task_done()
         except ConvertError, e:
             self.task_failed(e)

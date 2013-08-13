@@ -15,6 +15,7 @@
 
 import os
 import glob
+import re
 
 from flask import Blueprint, render_template, g, url_for, redirect, request, flash, current_app, abort
 
@@ -36,6 +37,60 @@ vector = Blueprint('vector', __name__)
 def only_if_enabled():
     if not current_app.config.geobox_state.config.get('app', 'vector_import'):
         abort(404)
+
+@vector.route('/vector/import_geojson', methods=['GET', 'POST'])
+def import_geojson():
+    # upload geojson
+    for upload_file in request.files.getlist('file_upload'):
+        import_dir = current_app.config.geobox_state.user_data_path('import')
+        target = os.path.join(import_dir, upload_file.filename)
+        if os.path.splitext(target)[1].lower() in ('.json'):
+            try:
+                if not os.path.isdir(import_dir):
+                    os.mkdir(import_dir)
+                f = open(target, 'wb')
+                f.write(upload_file.stream.read())
+                f.close()
+            except IOError:
+                flash(_('failed to upload %(name)s', name=upload_file.filename), 'error')
+
+            flash(_('file %(name)s uploaded', name=upload_file.filename), 'info')
+        else:
+            flash(_('filetype of %(name)s not allowed', name=upload_file.filename), 'error')
+
+    form = forms.ImportGeoJSONEdit(request.form)
+
+    geojson_files = get_geojson_list()
+    form.file_name.choices = [(name, name) for name in geojson_files]
+
+    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
+    form.layers.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
+    form.layers.choices.insert(0, ('', _('-- select layer or add new --')))
+
+    if not len(request.files):
+        if form.validate_on_submit():
+            if (form.layers.data and form.name.data) or (not form.layers.data and not form.name.data):
+                flash(_('please select new layer or current layer to import'), 'error')
+                return redirect(url_for('.import_geojson'))
+
+            layer = form.layers.data if form.layers.data else form.name.data
+            layer = re.sub(r'[^a-z0-9]*', '',  layer.lower())
+
+            task = VectorImportTask(
+                db_name=layer,
+                file_name=form.file_name.data,
+                geojson = True
+            )
+            send_task_logging(current_app.config.geobox_state, task)
+            g.db.add(task)
+            g.db.commit()
+            return redirect(url_for('tasks.list'))
+
+        elif request.method == 'POST':
+            flash(_('form error'), 'error')
+
+    file_browser = request_is_local()
+    return render_template('vector/geojson.html', form=form, file_browser=file_browser)
 
 @vector.route('/vector/import', methods=['GET', 'POST'])
 def import_vector():
@@ -67,7 +122,8 @@ def import_vector():
     form.srs.choices = [(srs, srs) for srs in current_app.config.geobox_state.config.get('web', 'available_srs')]
 
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
-    form.couchdb.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
+    form.layers.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
+    form.layers.choices.insert(0, ('', _('-- select layer or add new --')))
 
     shape_files, missing_files = get_shapefile_list()
     form.file_name.choices = [(name, name) for name in shape_files]
@@ -82,8 +138,16 @@ def import_vector():
             except OSError:
                 flash(_('invalid shapefile'), 'error')
                 return render_template('vector/import.html', form=form)
+
+            if (form.layers.data and form.name.data) or (not form.layers.data and not form.name.data):
+                flash(_('please select new layer or current layer to import'), 'error')
+                return redirect(url_for('.import_vector'))
+
+            layer = form.layers.data if form.layers.data else form.name.data
+            layer = re.sub(r'[^a-z0-9]*', '',  layer.lower())
+
             task = VectorImportTask(
-                db_name=form.couchdb.data,
+                db_name=layer,
                 file_name=form.file_name.data,
                 srs=form.srs.data
             )
@@ -105,6 +169,18 @@ def import_vector():
 
     file_browser = request_is_local()
     return render_template('vector/import.html', form=form, file_browser=file_browser)
+
+def get_geojson_list():
+    file_list = []
+
+    import_dir = current_app.config.geobox_state.user_data_path('import')
+    files = set((glob.glob(os.path.join(import_dir, '*.json')) + glob.glob(os.path.join(import_dir, '*.JSON'))))
+    for geojson_file in files:
+        s_path, s_name = os.path.split(geojson_file)
+        name, ext = os.path.splitext(s_name)
+        file_list.append((s_name))
+    return file_list
+
 
 def get_shapefile_list():
     shape_import_dir = current_app.config.geobox_state.user_data_path('import')

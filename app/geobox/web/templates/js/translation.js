@@ -19,6 +19,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "value": "{{ _('value') }}",
     "add": "{{ _('add ') }}",
     "addNewAttributesTitle": "{{ _('add new attribute') }}",
+    "sameKeyDifferentValue": "{{ _('Same attribute with different values') }}",
 
     // styling - widget
     'line': "{{ _('line') }}",
@@ -29,7 +30,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'fillOpacity': "{{ _('fill opacity') }}",
     'saveStyling': "{{ _('save styling') }}",
 
-    //  filter - widget
+    // filter - widget
     'loadFilter': "{{ _('loadFilter') }}",
 
     // point styling - widget
@@ -40,7 +41,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'setStyling': "{{ _('set styling') }}",
     'addAttributesNotPossible': "{{ _('add attributes is not possible') }}",
 
-    //toolbar items
+    // toolbar items
     'Draw polygon': "{{ _('Draw polygon') }}",
     'Draw line': "{{ _('Draw line') }}",
     'Draw rect': "{{ _('Draw rect') }}",
@@ -54,13 +55,29 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'Snap on features': "{{ _('Snap on features') }}",
     'Copy feature(s)': "{{ _('Copy feature(s)') }}",
 
-    //measure toolbar
+    // measure toolbar
     'Measure point': "{{ _('Measure point') }}",
     'Measure path': "{{ _('Measure path') }}",
     'Measure area': "{{ _('Measure area') }}",
 
-    //openlayers.extensions.couch
+    // openlayers.extensions.couch
     'Bad JSON: ': "{{ _('Bad JSON: ') }}",
     'Only OpenLayers.Feature.Vector is supported.': "{{ _('Only OpenLayers.Feature.Vector is supported.') }}",
-    'Feature was': "{{ _('Feature was') }}"
+    'Feature was': "{{ _('Feature was') }}",
+
+    // thematical vector - widget
+    'Select a value': "{{ _('Select a value') }}",
+    'Attribute': "{{ _('Attribute') }}",
+    'Exact': "{{ _('Exact') }}",
+    'Range': "{{ _('Range') }}",
+    'Value': "{{ _('Value') }}",
+    'Color': "{{ _('Color') }}",
+    'Min': "{{ _('Min') }}",
+    'Max': "{{ _('Max') }}",
+    'Execute': "{{ _('Execute') }}",
+    'Legend for': "{{ _('Legend for') }}",
+    'Area in': "{{ _('Area in') }}",
+    'No thematical map present for this layer': "{{ _('No thematical map present for this layer') }}",
+    'Add input': "{{ _('Add input') }}",
+    'Remove input': "{{ _('Remove input') }}"
 });
