@@ -15,6 +15,8 @@
 
 import os
 import glob
+import json
+
 from zipfile import ZipFile
 
 from fiona import collection
@@ -94,7 +96,6 @@ def zip_shapefiles(filename):
 
 
 def write_json_to_file(records, filename='default.json'):
-    import json
     feature_collection = {"type": "FeatureCollection"}
     feature_collection["features"] = list(records)
 
