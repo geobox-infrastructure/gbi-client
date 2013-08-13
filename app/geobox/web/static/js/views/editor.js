@@ -137,21 +137,7 @@ function initEditor() {
         element: 'filtermanager'
     });
 
-    var thematicalVector = new gbi.widgets.ThematicalVector(editor, {
-      'element': 'thematical-settings-element'
-    });
-    var thematicalVectorLegend = new gbi.widgets.ThematicalVectorLegendChangeAttributes(editor, {
-      'element': 'thematical-legend-element'
-    });
-
-    var featureAttributeList = new gbi.widgets.FeatureAttributeList(editor, {
-      'element': 'thematical-feature-list',
-      featurePopup: 'hover'
-    });
-
-    var featureAttributesListConfigurator = new gbi.widgets.FeatureAttributesListConfigurator(editor, {
-      'element': 'thematical-feature-list-options'
-    });
+    var thematicalVector = new gbi.widgets.ThematicalVector(editor);
 
     $('#save_changes').click(function() {
         var layer = editor.layerManager.active();

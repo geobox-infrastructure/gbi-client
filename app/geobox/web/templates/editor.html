@@ -25,6 +25,7 @@
 
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/filter.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvector.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorconfigurator.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorlegend.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorlegendchangeattributes.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/featureattributelist.js') }}"></script>
@@ -141,42 +142,7 @@
           <div class="tab-pane fade" id="thematical">
             <h4>{{ _('thematical map') }}</h4>
             <p>{{ _('infotext - thematical map') }}</p>
-            <ul id="tabs" class="nav nav-tabs">
-              <li class="active">
-                <a href="#thematical-settings" data-toggle="tab">{{ _('settings') }}</a>
-              </li>
-              <li>
-                <a href="#thematical-list" data-toggle="tab">{{ _('list') }}</a>
-              </li>
-              <li>
-                <a href="#thematical-legend" data-toggle="tab">{{ _('legend') }}</a>
-              </li>
-              <li>
-                <a href="#thematical-list-settings" data-toggle="tab">{{ _('list settings') }}</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane fade in active" id="thematical-settings">
-                <h4>{{ _('settings') }}</h4>
-                <p>{{ _('infotext - thematical settings') }}</p>
-                <div id="thematical-settings-element"></div>
-              </div>
-              <div class="tab-pane fade" id="thematical-list">
-                <h4>{{ _('list') }}</h4>
-                <p>{{ _('infotext - thematical list') }}</p>
-                <div id="thematical-feature-list"></div>
-              </div>
-              <div class="tab-pane fade" id="thematical-legend">
-                <h4>{{ _('legend') }}</h4>
-                <p>{{ _('infotext - thematical legend') }}</p>
-                <div id="thematical-legend-element"></div>
-              </div>
-              <div class="tab-pane fade" id="thematical-list-settings">
-                <h4>{{ _('options') }}</h4>
-                <p>{{ _('infotext - thematical options') }}</p>
-                <div id="thematical-feature-list-options"></div>
-              </div>
-            </div>
+            <div id="thematical-vector"></div>
           </div>
         </div>
       </div>
