@@ -16,7 +16,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app
 from flaskext.babel import _
 
-from geobox.lib.context import reload_context_document
+from geobox.lib import context
 from geobox.web.forms import LoginForm
 from ..helper import get_redirect_target, redirect_back
 
@@ -33,19 +33,36 @@ def login():
     if session.get('username', False):
         return redirect(url_for('main.index'))
 
-    if form.validate_on_submit():
-        user = request.form['username']
-        password = request.form['password']
+    context_doc_url = form.server_url.data
+    if context_doc_url:
+        pass
+    elif 'context_document_url' in request.args:
+        context_doc_url = request.args.get['context_document_url']
+    else:
+        context_doc_url = current_app.config.geobox_state.config.get(
+                'web', 'context_document_url')
 
-        if reload_context_document(current_app.config.geobox_state, user, password):
+    form.server_url.data = context_doc_url
+
+    if form.validate_on_submit():
+        user = form.username.data
+        password = form.password.data
+
+        try:
+            context.reload_context_document(context_doc_url,
+                current_app.config.geobox_state,
+                user, password)
             session['username'] = user
             session.permanent = True
+            current_app.config.geobox_state.config.set('web', 'context_document_url', context_doc_url)
             current_app.config.geobox_state.config.set('user', 'name', user)
             current_app.config.geobox_state.config.write()
-        else:
+        except context.AuthenticationError:
             flash(_('username or password not correct'), 'error')
-            return redirect(url_for('user_view.login'))
-        return redirect_back('main.index')
+        except ValueError:
+            flash(_('unable to fetch context document'), 'error')
+        else:
+            redirect_back('main.index')
 
     return render_template('login.html', form=form, next=next)
 

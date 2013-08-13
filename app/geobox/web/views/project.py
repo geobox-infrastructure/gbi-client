@@ -156,7 +156,6 @@ def validate_max_tiles(form):
         flash(_("to many tiles"))
         return False
 
-
 @project.route('/export/new', methods=['GET', 'POST'])
 @project.route('/export/<int:id>', methods=['GET', 'POST'])
 def export_edit(id=None):
@@ -172,10 +171,7 @@ def export_edit(id=None):
     coverage_form = forms.SelectCoverage()
     form = forms.ExportProjectEdit(request.form)
     form.end_level.choices = form.start_level.choices = get_levels(model.LocalWMTSSource)
-    form.mapping_name.choices = [
-        (name, '%s (%s, %s)' % (mapping.name, mapping.geom_type, mapping.other_srs.srs_code))
-        for name, mapping in mappings.items()
-    ]
+
     form.srs.choices = [(srs, srs) for srs in current_app.config.geobox_state.config.get('web', 'available_srs')]
     if form.validate_on_submit():
         proj.title = form.data['title']
@@ -228,8 +224,6 @@ def export_edit(id=None):
     form.title.data = proj.title
     form.format.data = proj.export_format
     form.srs.data = proj.export_srs
-    if proj.export_vector_layers:
-        form.mapping_name.data = proj.export_vector_layers[0].mapping_name
 
     coverage = proj.coverage if proj.coverage else 'null'
     if form.coverage.data:

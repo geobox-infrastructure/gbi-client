@@ -171,6 +171,7 @@ class ProjectEdit(Form):
 class LoginForm(Form):
     username = TextField(lazy_gettext('username'), validators=[Required()])
     password = PasswordField(lazy_gettext('Password'), validators=[Required()])
+    server_url = TextField(lazy_gettext('context server url'))
 
 def get_local_wmts_source():
     return g.db.query(LocalWMTSSource).all()
@@ -202,7 +203,6 @@ class ExportProjectEdit(ProjectEdit):
     start_level = SelectField(lazy_gettext('start level'), coerce=int, validators=[Optional()])
     end_level = SelectField(lazy_gettext('end level'), coerce=int, validators=[Optional()])
     raster_source = QuerySelectField(lazy_gettext('raster_source'),query_factory=get_local_wmts_source, get_label='wmts_source.title', validators=[Optional()])
-    mapping_name = SelectField(lazy_gettext('mapping name'), coerce=str, validators=[Optional()])
     raster_layers = HiddenField(validators=[Optional()])
     coverage = HiddenField(validators=[Optional()])
     download_size = HiddenField()
@@ -220,3 +220,9 @@ class ImportVectorEdit(Form):
 
 class TileBoxPathForm(Form):
     path = TextField(lazy_gettext('path'), validators=[])
+
+class ExportVectorForm(Form):
+    name = HiddenField(lazy_gettext('name'), validators=[Required()])
+    export_type = SelectField(lazy_gettext('export_type'), choices=[('shp', 'SHP'), ('json', 'GeoJSON')], coerce=str, validators=[Required()])
+    srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
+

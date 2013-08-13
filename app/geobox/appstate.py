@@ -19,6 +19,7 @@ import uuid
 import threading
 import tempfile
 import shutil
+from contextlib import contextmanager
 
 import babel.support
 
@@ -73,18 +74,21 @@ class GeoBoxState(object):
         """
         Migrate user db to new version.
         """
-        con = engine.connect()
-        try:
+        with self._migrate_step(engine) as con:
             con.execute("ALTER TABLE external_wmts_sources ADD COLUMN max_tiles INTEGER;")
-        except sqlalchemy.exc.OperationalError:
-            # already there
-            pass
-        finally:
-            con.close()
 
+        with self._migrate_step(engine) as con:
+            con.execute("ALTER TABLE tasks_vector_import ADD COLUMN srs VARCHAR(64);")
+
+        with self._migrate_step(engine) as con:
+            con.execute("ALTER TABLE external_wmts_sources ADD COLUMN prefix VARCHAR(64);")
+
+
+    @contextmanager
+    def _migrate_step(self, engine):
         con = engine.connect()
         try:
-            con.execute("ALTER TABLE tasks_vector_import ADD COLUMN srs VARCHAR(64);")
+            yield con
         except sqlalchemy.exc.OperationalError:
             # already there
             pass

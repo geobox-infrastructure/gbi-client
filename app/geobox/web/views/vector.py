@@ -27,6 +27,7 @@ from geobox.lib.fs import open_file_explorer
 from geobox.lib.couchdb import vector_layers_metadata
 from geobox.model import VectorImportTask
 from geobox.web import forms
+from geobox.model.tasks import VectorExportTask
 
 from ..utils import request_is_local
 from ..helper import redirect_back
@@ -206,3 +207,24 @@ def get_shapefile_list():
 def import_file_browser():
     open_file_explorer(current_app.config.geobox_state.user_data_path('import', make_dirs=True))
     return redirect_back('.import_vector')
+
+@vector.route('/vector/export', methods=['POST'])
+def export_vector():
+    proj = request.form.get('srs', False)
+    layername = request.form.get('name', False)
+    export_type = request.form.get('export_type', False)
+    if (export_type == 'shp'):
+        task = VectorExportTask(
+            db_name=layername,
+            srs=proj,
+        )
+    else:
+        task = VectorExportTask(
+            db_name=layername,
+            geojson=True
+        )
+
+    g.db.add(task)
+    send_task_logging(current_app.config.geobox_state, task)
+    g.db.commit()
+    return redirect(url_for('tasks.list'))

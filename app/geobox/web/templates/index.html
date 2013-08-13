@@ -26,11 +26,7 @@
   <div class="span12">
     <h2>{{_('export')}}</h2>
     <ul class="nav nav-list">
-      {% if app_state.config.get('app', 'vector_export') %}
-        <li><a href="{{ url_for('project.export_list') }}">{{ _('export raster/vector') }}</a></li>
-      {% else %}
-        <li><a href="{{ url_for('project.export_list') }}">{{ _('export raster') }}</a></li>
-      {% endif %}
+      <li><a href="{{ url_for('project.export_list') }}">{{ _('export raster') }}</a></li>
     </ul>
   </div>
 

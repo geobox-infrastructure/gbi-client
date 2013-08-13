@@ -21,7 +21,7 @@ from datetime import datetime
 from geobox.process.base import ProcessBase
 from geobox.lib.couchdb import CouchDB, VectorCouchDB
 from geobox.lib.vectormapping import default_mappings as mappings, Mapping
-from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, ConvertError
+from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, write_json_to_file, ConvertError
 
 
 import logging
@@ -32,11 +32,15 @@ class VectorExportProcess(ProcessBase):
         log.debug('Start vector export process. Task %d' % self.task_id)
         try:
             with self.task() as task:
-                mapping = mappings[task.mapping_name].copy()
-                output_file = self.app_state.user_data_path('export', task.project.title, task.mapping_name + '.shp', make_dirs=True)
-
                 couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
-                write_json_to_shape(couch.load_records(), mapping, output_file)
+                if task.geojson:
+                    output_file = self.app_state.user_data_path('export', task.db_name + '.json', make_dirs=True)
+                    write_json_to_file(couch.load_records(), output_file)
+                else:
+                    output_file = self.app_state.user_data_path('export', task.db_name + '.shp', make_dirs=True)
+                    mapping = Mapping(None, None, 'Polygon', other_srs=task.srs)
+                    write_json_to_shape(couch.load_records(), mapping, output_file)
+
             self.task_done()
         except ConvertError, e:
             self.task_failed(e)

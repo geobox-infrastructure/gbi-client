@@ -106,16 +106,6 @@ function showSelectedSource(element, editor) {
     editor.layerManager.top(editor.layerManager.active());
 }
 
-function toggleVetorLayer(element) {
-    $('.vector_source').toggle();
-    if($('.vector_source').is(":visible")) {
-        $(element).text(buttonRemoveVector);
-        $('.vector_source').children().removeAttr('disabled');
-    } else {
-        $(element).text(buttonAddVector);
-        $('.vector_source').children().attr('disabled', 'disabled');
-    }
-}
 
 function loadSavedLayer(options, editor) {
     var layer = $('#rl_'+options.layerID);
@@ -168,12 +158,6 @@ $(document).ready(function() {
     $('.raster_layer #raster_source').change(function(){
         limitDownloadLevelWrapper(this)
         showSelectedSource(this, editor);
-        return false;
-    });
-
-    $('#vector_add_remove').click(function() {
-        toggleVetorLayer(this);
-        toggleStartButton(editor);
         return false;
     });
 

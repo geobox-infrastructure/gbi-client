@@ -1,4 +1,6 @@
 {% extends "base_map.html" %}
+{% from "form_macros.html" import select,  input %}
+
 {% block title %}{{ _('editor') }}{% endblock %}
 
 {% block project_js %}
@@ -149,7 +151,7 @@
     </div>
 
 
-  <!-- modals for delete -->
+  <!-- modal for delete -->
    <div id="deleteVectorLayer" class="modal hide">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -164,6 +166,27 @@
     </div>
   </div>
 
+  <!-- modal for export -->
+   <div id="exportVectorLayer" class="modal hide">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>{{_('export vector layer')}} </h3>
+    </div>
+
+    <form action="{{ url_for('vector.export_vector')}}" method="POST">
+      <div class="modal-body">
+        <p>{{ _('infotext export layer') }}</p>
+          {{ export_form.name }}
+          {{ select(export_form.export_type) }}
+          {{ select(export_form.srs) }}
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="abort_export_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+        <button class="btn btn-primary" type="submit">{{_('export')}}</button>
+      </div>
+    </form>
+
+  </div>
 </div>
 
 {% endblock %}
