@@ -202,7 +202,6 @@ class ExportProjectEdit(ProjectEdit):
     start_level = SelectField(lazy_gettext('start level'), coerce=int, validators=[Optional()])
     end_level = SelectField(lazy_gettext('end level'), coerce=int, validators=[Optional()])
     raster_source = QuerySelectField(lazy_gettext('raster_source'),query_factory=get_local_wmts_source, get_label='wmts_source.title', validators=[Optional()])
-    mapping_name = SelectField(lazy_gettext('mapping name'), coerce=str, validators=[Optional()])
     raster_layers = HiddenField(validators=[Optional()])
     coverage = HiddenField(validators=[Optional()])
     download_size = HiddenField()
