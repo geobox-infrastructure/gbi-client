@@ -23,9 +23,9 @@ from ...model.sources import LocalWMTSSource
 from ..utils import request_is_local
 from ..helper import redirect_back
 
+from geobox.lib import context
 from geobox.lib.fs import open_file_explorer
 from geobox.lib.couchdb import CouchDB
-from geobox.lib.context import reload_context_document
 from geobox.lib.mapproxy import write_mapproxy_config
 from geobox.web import forms
 
@@ -55,11 +55,15 @@ def admin():
 @admin_view.route('/admin/refresh_context', methods=['POST'])
 def refresh_context():
     app_state = current_app.config.geobox_state
-    context_document_url = app_state.get('web', 'context_document_url')
-    if reload_context_document(context_document_url, app_state, session['username'], request.form['password']):
-        flash(_('load context document successful'), 'sucess')
+    context_document_url = app_state.config.get('web', 'context_document_url')
+    try:
+        context.reload_context_document(context_document_url, app_state, session['username'], request.form['password'])
+    except context.AuthenticationError:
+        flash(_('username or password not correct'), 'error')
+    except ValueError:
+        flash(_('unable to fetch context document'), 'error')
     else:
-        flash(_('password not correct'), 'error')
+        flash(_('load context document successful'), 'sucess')
 
     return redirect(url_for('.admin'))
 
