@@ -54,14 +54,13 @@ def load_json_from_shape(shape_file, mapping):
 
 def write_json_to_shape(records, mapping, filename='default.shp'):
     schema = mapping.create_schema()
-
     # Open a new shapefile for features
     try:
         with collection(
               filename, "w", driver="ESRI Shapefile",
               schema=schema) as shapefile:
             for record in records:
-                if 'geometry' not in record :
+                if 'geometry' not in record:
                     continue
                 if 'type' not in record['geometry']:
                     continue
@@ -93,3 +92,11 @@ def zip_shapefiles(filename):
 
     return zipped_file
 
+
+def write_json_to_file(records, filename='default.json'):
+    import json
+    feature_collection = {"type": "FeatureCollection"}
+    feature_collection["features"] = list(records)
+
+    with open(filename, 'w') as outfile:
+        json.dump(feature_collection, outfile)

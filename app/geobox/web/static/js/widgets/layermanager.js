@@ -148,6 +148,17 @@ gbi.widgets.LayerManager.prototype = {
                 })
                 return false;
             });
+            self.element.find('#export_' + layer.id).click(function() {
+                $("#exportVectorLayer input#name").val(layer.olLayer.name)
+
+                $('#exportVectorLayer').modal('show');
+
+                $('#exportVectorLayer').on('hidden', function () {
+                    $('#remove_layer').off('click');
+                    $('#deleteVectorLayer').off('hidden');
+                })
+                return false;
+            });
         });
 
         this.element.find('.vectorLayer').click(function() {
@@ -293,6 +304,11 @@ gbi.widgets.LayerManager.templates = {
                             </button> \
                             <button id="remove_<%=vectorLayers[i].id%>" title="remove" class="btn btn-small"> \
                                 <i class="icon-remove"></i>\
+                            </button> \
+                        </div> \
+                        <div class="btn-group controls pull-right"> \
+                            <button id="export_<%=vectorLayers[i].id%>" title="export" class="btn btn-small"> \
+                                <i class="icon-edit"></i>\
                             </button> \
                         </div> \
                         </a>\

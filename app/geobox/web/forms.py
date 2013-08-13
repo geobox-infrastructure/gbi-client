@@ -219,3 +219,9 @@ class ImportVectorEdit(Form):
 
 class TileBoxPathForm(Form):
     path = TextField(lazy_gettext('path'), validators=[])
+
+class ExportVectorForm(Form):
+    name = HiddenField(lazy_gettext('name'), validators=[Required()])
+    export_type = SelectField(lazy_gettext('export_type'), choices=[('shp', 'SHP'), ('json', 'GeoJSON')], coerce=str, validators=[Required()])
+    srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
+
