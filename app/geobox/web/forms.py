@@ -196,7 +196,6 @@ class ImportProjectEdit(ProjectEdit):
     coverage = HiddenField()
     download_size = HiddenField()
 
-
 class ExportProjectEdit(ProjectEdit):
     format = SelectField(lazy_gettext('format'), choices=[('MBTiles', 'MBTiles'), ('GTiff', 'TIFF'), ('JPEG', 'JPEG'), ('CouchDB', 'CouchDB')], coerce=str)
     srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
@@ -207,6 +206,11 @@ class ExportProjectEdit(ProjectEdit):
     raster_layers = HiddenField(validators=[Optional()])
     coverage = HiddenField(validators=[Optional()])
     download_size = HiddenField()
+
+class ImportGeoJSONEdit(Form):
+    file_name = SelectField(lazy_gettext('geojson file name'), validators=[Required()])
+    layers = SelectField(lazy_gettext('select existing layer'), validators=[Optional()])
+    name = TextField(lazy_gettext('new layer'), validators=[Optional()])
 
 class ImportVectorEdit(Form):
     file_name = SelectField(lazy_gettext('file name'), validators=[Required()])
