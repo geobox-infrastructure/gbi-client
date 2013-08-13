@@ -119,7 +119,8 @@ def import_vector():
     form.srs.choices = [(srs, srs) for srs in current_app.config.geobox_state.config.get('web', 'available_srs')]
 
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
-    form.couchdb.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
+    form.layers.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
+    form.layers.choices.insert(0, ('', _('-- select layer or add new --')))
 
     shape_files, missing_files = get_shapefile_list()
     form.file_name.choices = [(name, name) for name in shape_files]
@@ -134,8 +135,15 @@ def import_vector():
             except OSError:
                 flash(_('invalid shapefile'), 'error')
                 return render_template('vector/import.html', form=form)
+
+            if (form.layers.data and form.name.data) or (not form.layers.data and not form.name.data):
+                flash(_('please select new layer or current layer to import'), 'error')
+                return redirect(url_for('.import_vector'))
+
+            layer = form.layers.data if form.layers.data else form.name.data
+
             task = VectorImportTask(
-                db_name=form.couchdb.data,
+                db_name=layer,
                 file_name=form.file_name.data,
                 srs=form.srs.data
             )

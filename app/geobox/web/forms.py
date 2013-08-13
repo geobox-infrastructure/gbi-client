@@ -215,8 +215,8 @@ class ImportGeoJSONEdit(Form):
 class ImportVectorEdit(Form):
     file_name = SelectField(lazy_gettext('file name'), validators=[Required()])
     srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
-    couchdb = SelectField(lazy_gettext('layer'), validators=[Optional()])
-
+    layers = SelectField(lazy_gettext('select existing layer'), validators=[Optional()])
+    name = TextField(lazy_gettext('new layer'), validators=[Optional()])
 
 class TileBoxPathForm(Form):
     path = TextField(lazy_gettext('path'), validators=[])

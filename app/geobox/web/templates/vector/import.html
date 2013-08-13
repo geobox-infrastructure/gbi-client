@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}{{ _('vector import') }}{% endblock %}
+{% block title %}{{ _('shapefile import') }}{% endblock %}
 
 {% from "form_macros.html" import input, select %}
 
 {% block content %}
-    <h1>{{_('vector import')}}</h1>
+    <h1>{{_('shapefile import')}}</h1>
     <div class="row-fluid">
         <div class="span4">
             <h3>1. {{_('Upload Shapefile')}}
@@ -32,7 +32,8 @@
                 {{ form.csrf_token }}
                 {{ select(form.file_name) }}
                 {{ select(form.srs) }}
-                {{ select(form.couchdb) }}
+                {{ select(form.layers) }}
+                {{ input(form.name) }}
                 <br>
                 <button type="submit" class="btn btn-small" id="save_btn">{{ _('import') }}</button>
             </form>
