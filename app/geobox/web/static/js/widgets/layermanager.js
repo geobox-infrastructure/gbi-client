@@ -164,6 +164,7 @@ gbi.widgets.LayerManager.prototype = {
                     name: newLayer,
                     url: OpenlayersCouchURL,
                     hoverPopup: true,
+                    hoverAutoActive: true,
                     callbacks: {
                         changes: function(unsavedChanges) {
                             if(unsavedChanges)
