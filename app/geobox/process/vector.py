@@ -33,12 +33,12 @@ class VectorExportProcess(ProcessBase):
         try:
             with self.task() as task:
                 couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
-                output_file = self.app_state.user_data_path('export', task.db_name + '.json', make_dirs=True)
-
                 if task.geojson:
+                    output_file = self.app_state.user_data_path('export', task.db_name + '.json', make_dirs=True)
                     write_json_to_file(couch.load_records(), output_file)
                 else:
-                    mapping = Mapping(None, None, '*', other_srs=task.srs)
+                    output_file = self.app_state.user_data_path('export', task.db_name + '.shp', make_dirs=True)
+                    mapping = Mapping(None, None, 'Polygon', other_srs=task.srs)
                     write_json_to_shape(couch.load_records(), mapping, output_file)
 
             self.task_done()
