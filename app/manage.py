@@ -65,7 +65,7 @@ def webserver_command(config='./geobox.ini'):
     # scriptine removed sub-command from argv,
     # but Flask reloader needs complete sys.argv
     sys.argv[1:1] = ['webserver']
-    app.run(port=config.get('web', 'port'))
+    app.run(port=config.get('web', 'port'), threaded=True)
 
 if __name__ == '__main__':
     scriptine.run()
