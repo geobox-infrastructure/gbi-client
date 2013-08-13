@@ -48,18 +48,24 @@ class ContextModelUpdater(object):
 
     def sources_from_context(self, context):
         first = True
+        prefix = context.doc.get('portal', {}).get('prefix')
         for layer in context.layers():
-            yield self.source_from_layer(layer, first)
+            yield self.source_from_layer(layer, first, prefix)
             first = False
 
-    def source_from_layer(self, layer, first):
-        source = self.session.query(model.ExternalWMTSSource).filter_by(name=layer['name']).all()
+    def source_from_layer(self, layer, first, prefix):
+        query = self.session.query(model.ExternalWMTSSource).filter_by(name=layer['name'])
+        if prefix:
+            query = query.filter_by(prefix=prefix)
+
+        source = query.all()
         if source:
             source = source[0]
         else:
             source = model.ExternalWMTSSource()
 
         source.name = layer['name']
+        source.prefix = prefix
         source.title = layer['title']
         source.url = layer['url']
         source.username = layer.get('username')

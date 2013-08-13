@@ -26,6 +26,7 @@ class ExternalWMTSSource(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     url = sa.Column(sa.String(256), nullable=False)
+    prefix = sa.Column(sa.String(64))
     username = sa.Column(sa.String(64))
     password = sa.Column(sa.String(64))
     name = sa.Column(sa.String, nullable=False)
