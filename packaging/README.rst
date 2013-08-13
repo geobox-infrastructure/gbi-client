@@ -183,18 +183,19 @@ To build the Python packages of GDAL call the following from the *SDK Command Pr
 Fiona
 ~~~~~
 
-Download and extract `Fiona <http://github.com/Toblerity/Fiona/zipball/f4ceb7a702f50b4d26e91e28d699c739e035de36>`_.
+Download and extract `Fiona <http://github.com/Toblerity/Fiona>`_ >=0.14.
 
 Edit `setup.py` to point to the GDAL install location::
 
-    include_dirs = [r'c:\src\build\include']
-    library_dirs = [r'c:\src\build\lib']
+    include_dirs = [r'c:\src\gdal\include']
+    library_dirs = [r'c:\src\gdal\lib']
     libraries = ['gdal_i']
 
+In SDK shell (see GDAL instructions above)
 ::
-
+    SET VS90COMNTOOLS=%VS100COMNTOOLS%
     c:\python27\python setup.py bdist_egg
-    copy dist\Fiona-0.8-py2.7-win32.egg path_to\packaging\pkgs\
+    copy dist\Fiona-0.14-py2.7-win32.egg path_to\packaging\pkgs\
 
 
 Shapely

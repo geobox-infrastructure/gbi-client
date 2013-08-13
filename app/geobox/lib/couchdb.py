@@ -176,7 +176,7 @@ class UnexpectedResponse(Exception):
 
 
 class CouchDBBase(object):
-    def __init__(self, url, db_name):
+    def __init__(self, url, db_name, auth=None):
         if requests is None:
             raise ImportError("CouchDB backend requires 'requests' package.")
 
@@ -186,6 +186,8 @@ class CouchDBBase(object):
         self.db_name = db_name.lower()
         self.couch_db_url = '%s/%s' % (self.couch_url, self.db_name)
         self.req_session = requests.Session()
+        if auth:
+            self.req_session.auth = auth
 
     def _store_bulk(self, records):
         doc = {'docs': list(records)}
@@ -208,6 +210,12 @@ class CouchDBBase(object):
             doc = json.loads(resp.content)
             return self._load_records(doc.get('rows', []))
         return []
+
+    def load_record(self, doc_id):
+        doc_url = self.couch_db_url + '/' + doc_id
+        resp = self.req_session.get(doc_url)
+        if resp.status_code == 200:
+            return resp.json()
 
     def update_or_create_doc(self, doc_id, doc):
         doc_url = self.couch_db_url + '/' + doc_id
@@ -283,15 +291,19 @@ def vector_layers_metadata(couchdb_url):
                 yield doc
 
 class VectorCouchDB(CouchDBBase):
-    def __init__(self, url, layername):
-        self.layername = layername
-        CouchDB.__init__(self, url, dbname=layername)
+    def __init__(self, url, db_name):
+        CouchDBBase.__init__(self, url, db_name)
+        self.db_name = db_name
+        self.init_layer()
+
+    def init_db(self, couch_db_url=None):
+        self.req_session.put(couch_db_url if couch_db_url else self.couch_db_url)
 
     def init_layer(self, metadata=None):
         if metadata is None:
             metadata = {'title': self.db_name}
         metadata['type'] = 'GeoJSON'
-        CouchDB.init_db()
+        self.init_db()
         self.update_or_create_doc('metadata', metadata)
 
     def metadata(self):

@@ -17,7 +17,8 @@
     <ul class="nav nav-list">
       <li><a href="{{ url_for('project.import_list') }}">{{ _('import raster') }}</a></li>
       {% if app_state.config.get('app', 'vector_import') %}
-        <li><a href="{{ url_for('vector.import_vector') }}">{{ _('import vector') }}</a></li>
+        <li><a href="{{ url_for('vector.import_vector') }}">{{ _('import shape') }}</a></li>
+        <li><a href="{{ url_for('vector.import_geojson') }}">{{ _('import geojson') }}</a></li>
       {% endif %}
     </ul>
   </div>
