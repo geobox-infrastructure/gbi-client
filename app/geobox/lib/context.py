@@ -18,7 +18,8 @@ import urllib2, base64
 from shapely.geometry import asShape
 import requests
 from geobox import model
-from geobox.lib.couchdb import CouchDB
+from geobox.lib.box import FeatureInserter, feature_from_document
+from geobox.lib.couchdb import CouchDB, CouchDBBase
 
 class ContextError(Exception):
     pass
@@ -136,37 +137,61 @@ def reload_context_document(app_state, user, password):
 
 
     couchdb = CouchDB('http://127.0.0.1:%d' % app_state.config.get_int('couchdb', 'port'), '_replicator')
+    coverage_box = app_state.config.get('web', 'coverages_from_couchdb')
     for couchdb_source in context.couchdb_sources():
-        dbname_user = couchdb_source['dbname_user']
-
-        dburl = couchdb_source['url'] + '/' + couchdb_source['dbname']
-
-        if 'username' in couchdb_source:
-            schema, dburl = dburl.split('://')
-            dburl = '%s://%s:%s@%s' % (
-                schema,
-                couchdb_source['username'],
-                couchdb_source['password'],
-                dburl,
-            )
-
-        target_couchdb = CouchDB('http://127.0.0.1:%d' % app_state.config.get_int('couchdb', 'port'), dbname_user)
-        target_couchdb.init_db()
-
-        couchdb.replication(
-            repl_id=couchdb_source['dbname'],
-            source=dburl,
-            target=dbname_user,
-            continuous=True,
-        )
-        if couchdb_source['writable']:
-            couchdb.replication(
-                repl_id=couchdb_source['dbname'] + '_push',
-                source=dbname_user,
-                target=dburl,
-                continuous=True,
-            )
-
+        if couchdb_source['dbname_user'] == coverage_box:
+            # insert features from area/coverage box into layers
+            insert_database_features(couchdb.couch_url, couchdb_source)
+        else:
+            # replicate other couchdb sources
+            replicate_database(couchdb, couchdb_source, app_state)
     session.commit()
 
     return True
+
+def source_couchdb_url(couchdb_source):
+    dburl = couchdb_source['url'] + '/' + couchdb_source['dbname']
+
+    if 'username' in couchdb_source:
+        schema, dburl = dburl.split('://')
+        dburl = '%s://%s:%s@%s' % (
+            schema,
+            couchdb_source['username'],
+            couchdb_source['password'],
+            dburl,
+        )
+    return dburl
+
+def insert_database_features(dst_dburl, src_conf):
+    auth = None
+    if 'username' in src_conf:
+        auth = src_conf['username'], src_conf['password']
+    source_couchdb = CouchDBBase(src_conf['url'],
+        src_conf['dbname'],
+        auth=auth,
+    )
+    inserter = FeatureInserter(dst_dburl)
+
+    print src_conf, source_couchdb.db_name
+    inserter.from_source(source_couchdb)
+
+def replicate_database(couchdb, couchdb_source, app_state):
+    dbname_user = couchdb_source['dbname_user']
+    dburl = source_couchdb_url(couchdb_source)
+
+    target_couchdb = CouchDB('http://127.0.0.1:%d' % app_state.config.get_int('couchdb', 'port'), dbname_user)
+    target_couchdb.init_db()
+
+    couchdb.replication(
+        repl_id=couchdb_source['dbname'],
+        source=dburl,
+        target=dbname_user,
+        continuous=True,
+    )
+    if couchdb_source['writable']:
+        couchdb.replication(
+            repl_id=couchdb_source['dbname'] + '_push',
+            source=dbname_user,
+            target=dburl,
+            continuous=True,
+        )
