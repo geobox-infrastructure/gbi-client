@@ -15,6 +15,7 @@
 
 import os
 import glob
+import re
 
 from flask import Blueprint, render_template, g, url_for, redirect, request, flash, current_app, abort
 
@@ -73,6 +74,8 @@ def import_geojson():
                 return redirect(url_for('.import_geojson'))
 
             layer = form.layers.data if form.layers.data else form.name.data
+            layer = re.sub(r'[^a-z0-9]*', '',  layer.lower())
+
             task = VectorImportTask(
                 db_name=layer,
                 file_name=form.file_name.data,
@@ -141,6 +144,7 @@ def import_vector():
                 return redirect(url_for('.import_vector'))
 
             layer = form.layers.data if form.layers.data else form.name.data
+            layer = re.sub(r'[^a-z0-9]*', '',  layer.lower())
 
             task = VectorImportTask(
                 db_name=layer,
