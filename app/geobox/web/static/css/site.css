@@ -324,3 +324,7 @@ hr#save_dividing_line {
     border: 2px solid orange;
     margin: 0px;
 }
+
+.opacity-1 {
+    opacity: 0.1;
+}
