@@ -1,5 +1,5 @@
 var featuresAttributeListConfiguratorLabel = {
-    'attribute': OpenLayers.i18n('Attributes'),
+    'attributes': OpenLayers.i18n('Attributes'),
     'showInList': OpenLayers.i18n('Show in list'),
     'showInPopup': OpenLayers.i18n('Show in popup'),
     'apply': OpenLayers.i18n('Apply'),
@@ -137,7 +137,7 @@ gbi.widgets.FeatureAttributesListConfigurator.template = '\
             <thead>\
                 <tr>\
                     <th>&nbsp;</th>\
-                    <th>' + featuresAttributeListConfiguratorLabel.attribute + '</th>\
+                    <th>' + featuresAttributeListConfiguratorLabel.attributes + '</th>\
                     <th>' + featuresAttributeListConfiguratorLabel.showInList + '</th>\
                     <th>' + featuresAttributeListConfiguratorLabel.showInPopup + '</th>\
                 </tr>\
