@@ -225,6 +225,7 @@ class ExportVectorForm(Form):
     name = HiddenField(lazy_gettext('name'), validators=[Required()])
     export_type = SelectField(lazy_gettext('export_type'), choices=[('shp', 'SHP'), ('geojson', 'GeoJSON')], coerce=str, validators=[Required()])
     srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
+    destination = SelectField(lazy_gettext('destination'), validators=[Required()])
 
 class UploadForm(Form):
     file = FileField(lazy_gettext('file'), validators=[Required()])

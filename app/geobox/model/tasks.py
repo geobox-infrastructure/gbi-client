@@ -95,6 +95,7 @@ class VectorExportTask(Task):
     mapping_name = sa.Column(sa.String())
     srs = sa.Column(sa.String(64), default="EPSG:3857")
     type_ = sa.Column(sa.String(64), default="shp")
+    destination = sa.Column(sa.String(64), default="file")
 
 class ReplicationTask(Task):
     task_type = lazy_gettext('replication')
