@@ -1,3 +1,3 @@
 [submodule "gbi-editor"]
 	path = gbi-editor
-	url = git://bitbucket.org/Omniscale/gbi-editor.git
+	url = ssh://git@bitbucket.org/Omniscale/gbi-editor.git
