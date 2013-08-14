@@ -61,7 +61,9 @@ except ImportError:
                 'env': [
                     env("ERL_FLAGS", "-pa /usr/local/share/geocouch/ebin", platform='darwin'),
                     env("ERL_LIBS", "/usr/local/lib/couchdb/erlang/lib", platform='darwin'),
-                ]
+                ],
+                'download_box': 'beratungs-outbox',
+                'upload_box': 'beratungs-inbox',
             },
             'tilebox': {
                 'path': None,

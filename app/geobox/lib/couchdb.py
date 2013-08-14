@@ -22,6 +22,8 @@ import tempfile
 import time
 import subprocess
 import shlex
+import datetime
+
 from contextlib import contextmanager
 from ConfigParser import ConfigParser
 
@@ -45,6 +47,8 @@ from geobox.utils import wait_for_http_server
 import logging
 log = logging.getLogger(__name__)
 
+class CouchDBError(Exception):
+    pass
 
 class CouchDBProcess(object):
     """
@@ -310,3 +314,119 @@ class VectorCouchDB(CouchDBBase):
         resp = self.req_session.get(self.couch_url + '/metadata')
         if resp.status_code == 200:
             return resp.json()
+
+class CouchFileBox(CouchDBBase):
+    def __init__(self, url, db_name):
+        CouchDBBase.__init__(self, url, db_name)
+        self.couch_url = url + '/' + db_name
+        self.init_db()
+
+
+    def init_db(self, couch_db_url=None):
+        self.req_session.put(couch_db_url if couch_db_url else self.couch_db_url)
+
+    def _file_doc(self, data):
+        file_id = data['filename']
+        file_doc = {}
+        file_doc['_id'] = file_id
+        file_doc['datetime'] = datetime.datetime.now().strftime('%d.%m.%Y %H:%M:%S ')
+        file_doc['_attachments'] = {
+            'file': {
+                'content_type': data['content-type'],
+                'data':  data['file'].encode('base64').replace('\n', ''),
+            }
+        }
+        return file_id, file_doc
+
+    def _store_bulk(self, files, overwrite=False):
+        file_docs = {}
+        for file in files:
+            file_id, file_doc = self._file_doc(file)
+            file_docs[file_id] = file_doc
+
+            existing_doc = self.get(file_id)
+            if existing_doc:
+                file_docs[file_id]['_rev'] = existing_doc['_rev']
+
+            self.put(file_id, file_doc)
+        return True
+
+    def store_file(self, file, overwrite=False):
+        return self._store_bulk([file], overwrite)
+
+    def store_files(self, files, overwrite=False):
+        files = [f for f in files]
+        return self._store_bulk(files, overwrite)
+
+    def all_files(self):
+        resp = self.req_session.get(self.file_url(include_docs=True))
+        data = resp.json()
+        files = []
+        for row in data.get('rows', []):
+            if row['id'] and '_attachments' in row['doc']:
+                files.append({
+                    'id': row['id'],
+                    'rev': row['value']['rev'],
+                    'size':  row['doc']['_attachments']['file']['length'],
+                    'date': row['doc']['datetime'],
+                    'content_type': row['doc']['_attachments']['file']['content_type'],
+                })
+        return files
+
+    def file_url(self, include_docs=False):
+        url = self.couch_url + '/_all_docs?'
+        if include_docs:
+            url += '&include_docs=true'
+        return url
+
+    def delete(self, doc_id, rev):
+        print self, doc_id, rev
+        doc_url = self.couch_url + '/' + doc_id
+        resp = self.req_session.delete(doc_url, params={'rev': rev})
+        if resp.status_code not in (200, 404):
+            raise CouchDBError(
+                'got unexpected resp (%d) from CouchDB for %s: %s'
+                % (resp.status_code, doc_url, resp.content)
+            )
+
+    def get(self, doc_id):
+        doc_url = self.couch_url + '/' + doc_id
+        resp = self.req_session.get(doc_url)
+
+        if resp.ok:
+            return resp.json()
+        elif resp.status_code != 404:
+            raise CouchDBError(
+                'got unexpected resp (%d) from CouchDB for %s: %s'
+                % (resp.status_code, doc_url, resp.content)
+            )
+
+    def put(self, doc_id, doc):
+        doc_url = self.couch_url + '/' + doc_id
+        resp = self.req_session.put(doc_url,
+            headers={'Accept': 'application/json'},
+            data=json.dumps(doc),
+        )
+        if resp.status_code != 201:
+            raise CouchDBError(
+                'got unexpected resp (%d) from CouchDB for %s: %s'
+                % (resp.status_code, doc_url, resp.content)
+            )
+
+    def put_bulk(self, docs):
+        doc = {'docs': docs}
+        data = json.dumps(doc)
+        resp = self.req_session.post(self.couch_url + '/_bulk_docs',
+            data=data, headers={'Content-type': 'application/json'}
+        )
+        if resp.status_code != 201:
+            raise CouchDBError(
+                'got unexpected resp (%d) from CouchDB for %s: %s'
+                % (resp.status_code, self.couch_url + '/_bulk_docs', resp.content)
+            )
+
+        errors = {}
+        for row in resp.json():
+            if 'error' in row:
+                errors[row['id']] = row['error']
+        return errors
