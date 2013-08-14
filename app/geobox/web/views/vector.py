@@ -214,16 +214,12 @@ def export_vector():
     proj = request.form.get('srs', False)
     layername = request.form.get('name', False)
     export_type = request.form.get('export_type', False)
-    if (export_type == 'shp'):
-        task = VectorExportTask(
-            db_name=layername,
-            srs=proj,
-        )
-    else:
-        task = VectorExportTask(
-            db_name=layername,
-            geojson=True
-        )
+
+    task = VectorExportTask(
+       db_name=layername,
+       srs=proj,
+       type_=export_type
+    )
 
     g.db.add(task)
     send_task_logging(current_app.config.geobox_state, task)
