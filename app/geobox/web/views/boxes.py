@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import urllib
 from werkzeug.exceptions import NotFound
 from flask import (render_template, Blueprint, flash,
     redirect, url_for, request, current_app, jsonify)
@@ -45,13 +44,6 @@ def files(box_name, user_id=None):
     files = couch.all_files()
 
     return render_template("boxes/%s.html" % box_name, form=form, files=files, box_name=box_name)
-
-def couchid_to_authproxy_url(filename, couch_box):
-    if isinstance(filename, unicode):
-        filename = filename.encode('utf-8')
-    return url_for('authproxy.couchdb_proxy_file',
-        url=couch_box + '/' + urllib.quote(filename),
-    )
 
 def get_couch_box_db(box_name):
     if box_name == 'download':
