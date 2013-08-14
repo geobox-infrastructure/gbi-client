@@ -80,7 +80,7 @@ def import_geojson():
             task = VectorImportTask(
                 db_name=layer,
                 file_name=form.file_name.data,
-                geojson = True
+                type_ = 'geojson'
             )
             send_task_logging(current_app.config.geobox_state, task)
             g.db.add(task)
@@ -150,7 +150,8 @@ def import_vector():
             task = VectorImportTask(
                 db_name=layer,
                 file_name=form.file_name.data,
-                srs=form.srs.data
+                srs=form.srs.data,
+                type_ = 'shp',
             )
             send_task_logging(current_app.config.geobox_state, task)
             g.db.add(task)
