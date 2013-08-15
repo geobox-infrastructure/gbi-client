@@ -141,10 +141,10 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
         $('#setListAttributes').click(function() {
             var listAttributes = [];
             var popupAttributes = [];
-            $.each(self.element.find('.list-attribute:checked'), function(idx, checkbox) {
+            $.each(element.find('.list-attribute:checked'), function(idx, checkbox) {
                 listAttributes.push(checkbox.value);
             });
-            $.each(self.element.find('.popup-attribute:checked'), function(idx, checkbox) {
+            $.each(element.find('.popup-attribute:checked'), function(idx, checkbox) {
                 popupAttributes.push(checkbox.value);
             });
             self.activeLayer.listAttributes(listAttributes);
