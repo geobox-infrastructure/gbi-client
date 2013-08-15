@@ -48,15 +48,20 @@
                     <td>{{ file.date }}</td>
                     <td>{{ (file.size/1024/1024)|round(precision=2)}} MB</td>
                     <td>
+                        <a class="btn btn-small"
+                            href="{{ url_for('map_view.editor') }}?box_name={{box_name}}&filename={{file.id}}" >{{ _('preview') }}</a>
+                    </td>
+                    <td>
                     {% if (box_name == 'upload') %}
-                        <a href="{{ url_for('boxes.delete_file', box_name=box_name, id=file.id, rev=file.rev) }}">{{ _('delete') }}</a>
+                        <a class="btn btn-small"
+                        href="{{ url_for('boxes.delete_file', box_name=box_name, id=file.id, rev=file.rev) }}">{{ _('delete') }}</a>
                     {% else %}
                         <a class="btn btn-small import_json"
                             href="{{ url_for('boxes.import_json', box_name=box_name, id=file.id) }}"
                             data-download-url="{{ file.id }}">{{ _('import') }}</a>
-                        <a href="{{ url_for('map_view.editor') }}?box_name={{box_name}}&filename={{file.id}}" class="btn btn-small">{{ _('preview') }}</a>
                     {% endif %}
                     </td>
+
                 </tr>
                 {% endfor %}
             </tbody>
