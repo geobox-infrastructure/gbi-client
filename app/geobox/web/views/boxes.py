@@ -14,6 +14,7 @@
 # limitations under the License.
 
 import re
+import urllib
 
 from werkzeug.exceptions import NotFound
 from flask import (render_template, Blueprint, flash,
@@ -50,8 +51,15 @@ def files(box_name, user_id=None):
                 flash(_('file type not allowed'), 'error')
 
     files = couch.all_files()
+    for f in files:
+        f['download_link'] = couchid_to_link(f['id'], couch_url=couch.couch_url)
 
     return render_template("boxes/%s.html" % box_name, form=form, files=files, box_name=box_name, import_form=import_form)
+
+def couchid_to_link(filename, couch_url):
+    if isinstance(filename, unicode):
+        filename = filename.encode('utf-8')
+    return "%s/%s/file" % (couch_url, urllib.quote(filename))
 
 def get_couch_box_db(box_name):
     if box_name == 'download':
