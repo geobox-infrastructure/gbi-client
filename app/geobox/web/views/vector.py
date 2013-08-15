@@ -39,6 +39,15 @@ def only_if_enabled():
     if not current_app.config.geobox_state.config.get('app', 'vector_import'):
         abort(404)
 
+def prepare_geojson_form(form):
+    geojson_files = get_geojson_list()
+    form.file_name.choices = [(name, name) for name in geojson_files]
+
+    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
+    form.layers.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
+    form.layers.choices.insert(0, ('', _('-- select layer or add new --')))
+    return form
+
 @vector.route('/vector/import_geojson', methods=['GET', 'POST'])
 def import_geojson():
     # upload geojson
@@ -60,13 +69,7 @@ def import_geojson():
             flash(_('filetype of %(name)s not allowed', name=upload_file.filename), 'error')
 
     form = forms.ImportGeoJSONEdit(request.form)
-
-    geojson_files = get_geojson_list()
-    form.file_name.choices = [(name, name) for name in geojson_files]
-
-    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
-    form.layers.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
-    form.layers.choices.insert(0, ('', _('-- select layer or add new --')))
+    form = prepare_geojson_form(form)
 
     if not len(request.files):
         if form.validate_on_submit():

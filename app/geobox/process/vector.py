@@ -75,19 +75,27 @@ class VectorImportProcess(ProcessBase):
                 else:
                     mapping = Mapping(None, None, '*', other_srs=task.srs)
 
-                input_file = self.app_state.user_data_path('import', task.file_name)
                 couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
 
-                if task.type_ == 'geojson':
-                    records = json.loads(open(input_file).read())
+                # import from file
+                if task.source == 'file':
+                    input_file = self.app_state.user_data_path('import', task.file_name)
+                    if task.type_ == 'geojson':
+                        records = json.loads(open(input_file).read())
+                        couch.store_records(
+                            records['features']
+                        )
+                    elif task.type_ == 'shp':
+                        couch.store_records(
+                            load_json_from_shape(input_file, mapping)
+                        )
+                # import from couch db - source name is couchdb name
+                else:
+                    couch_src = CouchFileBox('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.source)
+                    records = couch_src.get_attachment(task.file_name)
                     couch.store_records(
                         records['features']
                     )
-                elif task.type_ == 'shp':
-                    couch.store_records(
-                        load_json_from_shape(input_file, mapping)
-                    )
-
             self.task_done()
         except ConvertError, e:
             self.task_failed(e)

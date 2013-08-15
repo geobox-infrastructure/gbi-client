@@ -400,6 +400,18 @@ class CouchFileBox(CouchDBBase):
                 % (resp.status_code, doc_url, resp.content)
             )
 
+    def get_attachment(self, doc_id):
+        doc_url = self.couch_url + '/' + doc_id + '/file'
+        resp = self.req_session.get(doc_url)
+
+        if resp.ok:
+            return resp.json()
+        elif resp.status_code != 404:
+            raise CouchDBError(
+                'got unexpected resp (%d) from CouchDB for %s: %s'
+                % (resp.status_code, doc_url, resp.content)
+            )
+
     def put(self, doc_id, doc):
         doc_url = self.couch_url + '/' + doc_id
         resp = self.req_session.put(doc_url,
