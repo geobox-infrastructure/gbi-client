@@ -149,9 +149,6 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
             });
             self.activeLayer.listAttributes(listAttributes);
             self.activeLayer.popupAttributes(popupAttributes);
-            if(self.activeLayer instanceof gbi.Layers.Couch) {
-                self.activeLayer._saveGBIData();
-            }
         })
 
         if(this.activeLayer && this.activeLayer.featureStylingRule) {
@@ -321,9 +318,6 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
                 break;
         }
         this.activeLayer.addAttributeFilter(this.mode, $('#attribute').val(), filterOptions);
-        if(this.activeLayer instanceof gbi.Layers.Couch) {
-            this.activeLayer._saveGBIData();
-        }
     },
     _registerLayerEvents: function(layer) {
         var self = this;

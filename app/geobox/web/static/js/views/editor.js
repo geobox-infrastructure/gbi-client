@@ -1,5 +1,15 @@
 $(document).ready(function() {
+    var layerEvents = {
+      'gbi.layer.vector.styleChanged': eneableSaveButton,
+      'gbi.layer.saveableVector.unsavedChanges': eneableSaveButton,
+      'gbi.layer.vector.ruleChanged': eneableSaveButton,
+      'gbi.layer.vector.listAttributesChanged': eneableSaveButton,
+      'gbi.layer.vector.popupAttributesChanged': eneableSaveButton,
+      'gbi.layer.vector.featureAttributeChanged': eneableSaveButton
+    }
+
     var editor = initEditor();
+    var activeLayer = editor.layerManager.active();
 
     $('#tabs a').click(function (e) {
         e.preventDefault();
@@ -25,8 +35,16 @@ $(document).ready(function() {
         }
    });
 
+    $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
+        unregisterEvents(activeLayer);
+        activeLayer = layer;
+        registerEvents(activeLayer);
+        $(this).attr('disabled', 'disabled').removeClass('btn-success');
+        $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+        $('#save-tab').removeClass('label-success').removeClass('text-warning');
+    });
+
    $('#select_all_features').click(function() {
-        var activeLayer = editor.layerManager.active();
         if (!activeLayer) {
           return false;
         }
@@ -36,7 +54,33 @@ $(document).ready(function() {
         return false;
    });
 
+
+
+   // save-button enabeling events
+   $('#save-changes').click(function() {
+    if(activeLayer) {
+      activeLayer.save();
+      activeLayer._saveStyle();
+      activeLayer._saveGBIData();
+    }
+    $(this).attr('disabled', 'disabled').removeClass('btn-success');
+    $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+    $('#save-tab').removeClass('label-success').removeClass('text-warning');
+   });
+
+   $('#discard-changes').click(function() {
+    if(activeLayer) {
+      activeLayer.refresh();
+    }
+    $(this).attr('disabled', 'disabled').removeClass('btn-success');
+    $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+    $('#save-tab').removeClass('label-success').removeClass('text-warning');
+   })
+
    orderToolbar();
+   if(activeLayer) {
+    registerEvents(activeLayer);
+  }
 
    function orderToolbar() {
        var toolbarButton = $('#edit-toolbar .olButton');
@@ -61,7 +105,27 @@ $(document).ready(function() {
             }
 
        });
+    };
+
+    function registerEvents(layer) {
+      $.each(layerEvents, function(type, func) {
+        $(layer).on(type, func);
+      });
     }
+
+    function unregisterEvents(layer) {
+      $.each(layerEvents, function(type, func) {
+        $(layer).off(type, func);
+      });
+    };
+
+    function eneableSaveButton() {
+      if(activeLayer instanceof gbi.Layers.Couch) {
+        $('#save-tab').addClass('label-success').addClass('text-warning');
+        $('#save-changes').removeAttr('disabled').addClass('btn-success');
+        $('#discard-changes').removeAttr('disabled').addClass('btn-danger');
+      }
+    };
 
 });
 

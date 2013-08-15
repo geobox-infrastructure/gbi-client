@@ -75,6 +75,9 @@
           <li>
             <a href="#thematical" data-toggle="tab">{{ _('thematical map') }}</a>
           </li>
+          <li>
+            <a href="#save" id="save-tab" data-toggle="tab">{{ _('save') }}</a>
+          </li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane fade in active" id="layermanager">
@@ -96,10 +99,6 @@
             <div class="span12">
               <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
             </div>
-            <hr id="save_dividing_line" class="span12">
-            <button id="save_changes" class="btn btn-small"  disabled="disabled">
-              {{ _('save permanent') }}</button>
-            <hr>
 
            <div>
             <ul id="editor-tabs" class="nav nav-tabs">
@@ -144,6 +143,12 @@
             <p>{{ _('infotext - thematical map') }}</p>
             <div id="thematical-vector"></div>
           </div>
+
+          <div class="tab-pane fade" id="save">
+            <h4>{{ _('save') }}</h4>
+            <p>{{ _('infotext - editor save') }}</p>
+            <button class="btn btn-small" id="save-changes" disabled="disabled">{{ _('save') }}</button>
+            <button class="btn btn-small" id="discard-changes" disabled="disabled">{{ _('discard') }}</button>
         </div>
       </div>
     </div>

@@ -80,11 +80,6 @@ gbi.widgets.StyleEditor.prototype = {
         }).change(function() {
             self.setStyle();
         });
-
-        $('#saveStyle').click(function() {
-            self.saveStyle();
-            return false;
-        });
     },
 
     setStyle: function() {
@@ -116,14 +111,6 @@ gbi.widgets.StyleEditor.prototype = {
             this.stylingLayer.setStyle(symbolizers);
         }
         return this.stylingLayer;
-    },
-
-    saveStyle: function() {
-        var stylingLayer = this.setStyle();
-
-        if(this.stylingLayer instanceof gbi.Layers.Couch) {
-           this.stylingLayer._saveStyle();
-        }
     },
 
     _setStyleProperty: function(id, obj) {
@@ -189,7 +176,5 @@ gbi.widgets.StyleEditor.template = '\
             <div class="noUiSlider polygon_fillOpacity"></div>\
         </div> \
     </div>\
-    <hr> \
-    <button id="saveStyle" class="btn btn-small btn-success">'+styleLabel.saveStyling+'</button>\
 </form>\
 ';
