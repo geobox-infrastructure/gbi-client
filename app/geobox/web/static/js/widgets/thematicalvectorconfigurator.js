@@ -21,7 +21,9 @@ var thematicalVectorConfiguratorLabel = {
     'noLayer': OpenLayers.i18n('No layer selected'),
     'noAttributes': OpenLayers.i18n('Layer have no attributes'),
     'mapSettings': OpenLayers.i18n('Map Settings'),
-    'listSettings': OpenLayers.i18n('List Settings')
+    'listSettings': OpenLayers.i18n('List Settings'),
+    'maxListAttributesArrived': OpenLayers.i18n('Maximum of selectable shortlist attributes arrived'),
+    'maxPopupAttributesArrived': OpenLayers.i18n('Maximum of selectable popup attributes arrived')
 };
 
 gbi.widgets = gbi.widgets || {};
@@ -34,6 +36,7 @@ gbi.widgets.ThematicalVectorConfigurator = function(thematicalVector, options) {
     var defaults = {
         element: 'thematicalvectorconfigurator',
         mode: 'exact',
+        restrictSelectableAttributes: 10,
         initOnly: false
     }
     this.options = $.extend({}, defaults, options);
@@ -115,7 +118,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
             element.find('.list-attribute').each(function(idx, elm) {
                 elm = $(elm);
                 elm.change(function() {
-                    self._restrictAttributes(element, elm, '.list-attribute', 5)
+                    self._restrictAttributes(element, elm, '.list-attribute')
                 })
                 if($.inArray(elm.val(), listAttributes) != -1) {
                     elm.attr('checked', 'checked');
@@ -128,7 +131,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
             element.find('.popup-attribute').each(function(idx, elm) {
                 elm = $(elm);
                 elm.change(function() {
-                    self._restrictAttributes(element, elm, '.popup-attribute', 5)
+                    self._restrictAttributes(element, elm, '.popup-attribute')
                 });
                 if($.inArray(elm.val(), popupAttributes) != -1) {
                     elm.attr('checked', 'checked');
@@ -335,9 +338,9 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
     _restrictAttributes: function(element, elm, selector, max) {
         var self = this;
         var count = element.find(selector + ':checked').length;
-        if(count > max) {
+        if(count > self.options.restrictSelectableAttributes) {
             elm.removeAttr('checked');
-            console.log('Only ' + max + ' or less attributes can be selected')
+            $(selector + '-error').show().fadeOut(3000)
         }
     }
 };
@@ -419,6 +422,8 @@ gbi.widgets.ThematicalVectorConfigurator.template = '\
     <button class="btn btn-small pull-right" id="addInput">' + thematicalVectorConfiguratorLabel.addInputField + '</button>\
     <hr>\
     <h4>' + thematicalVectorConfiguratorLabel.listSettings + '</h4>\
+    <div class="alert alert-error list-attribute-error" style="display: none">' + thematicalVectorConfiguratorLabel.maxListAttributesArrived + '</div>\
+    <div class="alert alert-error popup-attribute-error" style="display: none">' + thematicalVectorConfiguratorLabel.maxPopupAttributesArrived + '</div>\
     <% if(attributes.length == 0) { %>\
         <div>' + thematicalVectorConfiguratorLabel.noAttributes + '</div>\
     <% } else { %>\
