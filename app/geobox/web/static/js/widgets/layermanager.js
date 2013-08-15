@@ -164,7 +164,7 @@ gbi.widgets.LayerManager.prototype = {
         this.element.find('.vectorLayer').click(function() {
             var clickedElement = this;
             var activeLayer = self.layerManager.active();
-            if(activeLayer && activeLayer.unsavedChanges) {
+            if(activeLayer && activeLayer.unsavedChanges()) {
                 $('#changeVectorLayer').modal('show');
                 $('#change_layer_save').click(function() {
                     activeLayer.save();
@@ -199,7 +199,7 @@ gbi.widgets.LayerManager.prototype = {
             var newLayer = $('#new_vector_layer').val();
             if(newLayer) {
                 var activeLayer = self.layerManager.active();
-                if(activeLayer && activeLayer.unsavedChanges) {
+                if(activeLayer && activeLayer.unsavedChanges()) {
                     $('#changeVectorLayer').modal('show');
                     $('#change_layer_save').click(function() {
                         activeLayer.save();
