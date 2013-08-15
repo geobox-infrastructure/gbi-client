@@ -1,6 +1,7 @@
 var featureAttributeListLabels = {
     'noLayer': OpenLayers.i18n('No layer selected'),
-    'noAttribute': OpenLayers.i18n('No attributes selected'),
+    'noAttributeSelected': OpenLayers.i18n('No attributes selected'),
+    'noAttribute': OpenLayers.i18n('Layer have no attributes'),
     'shortList': OpenLayers.i18n('Short list'),
     'fullList': OpenLayers.i18n('Complete list'),
     'filter': OpenLayers.i18n('Filter')
@@ -66,9 +67,9 @@ gbi.widgets.FeatureAttributeList.prototype = {
             element.append($('<div class="text-center">' + featureAttributeListLabels.noLayer + '</div>'));
             return;
         }
-        var attributes = self.activeLayer ? self.activeLayer.listAttributes() || [] : [];
+        // var attributes = self.activeLayer ? self.activeLayer.listAttributes() || [] : [];
 
-        if(attributes.length == 0) {
+        if(fullListAttributes.length == 0) {
             element.append($('<div class="text-center">' + featureAttributeListLabels.noAttribute + '</div>'));
             return;
         }
@@ -151,38 +152,42 @@ gbi.widgets.FeatureAttributeList.template = '\
             ' + featureAttributeListLabels.fullList + '\
         </button>\
     </div>\
-    <table id="shortList" class="table table-hover">\
-        <thead>\
-            <tr>\
-                <% for(var key in shortListAttributes) { %>\
-                    <th><%=shortListAttributes[key]%></th>\
-                <% } %>\
-                <th>&nbsp;</th>\
-            </tr>\
-        </thead>\
-        <tbody>\
-        <% for(var f_key in shortListFeatures) { %>\
-            <% if(shortListFeatures[f_key].hasValues) { %>\
-            <tr>\
-                <% for(var a_key in shortListAttributes) { %>\
-                    <td>\
-                    <% if(features[f_key].attributes[shortListAttributes[a_key]]) { %>\
-                        <%=features[f_key].attributes[shortListAttributes[a_key]]%>\
-                    <% } else {%>\
-                        &nbsp;\
+    <% if(shortListAttributes.length == 0) { %>\
+        <div id="shortList">' + featureAttributeListLabels.noAttributeSelected + '</div>\
+    <% } else { %>\
+        <table id="shortList" class="table table-hover">\
+            <thead>\
+                <tr>\
+                    <% for(var key in shortListAttributes) { %>\
+                        <th><%=shortListAttributes[key]%></th>\
                     <% } %>\
+                    <th>&nbsp;</th>\
+                </tr>\
+            </thead>\
+            <tbody>\
+            <% for(var f_key in shortListFeatures) { %>\
+                <% if(shortListFeatures[f_key].hasValues) { %>\
+                <tr>\
+                    <% for(var a_key in shortListAttributes) { %>\
+                        <td>\
+                        <% if(features[f_key].attributes[shortListAttributes[a_key]]) { %>\
+                            <%=features[f_key].attributes[shortListAttributes[a_key]]%>\
+                        <% } else {%>\
+                            &nbsp;\
+                        <% } %>\
+                        </td>\
+                    <% } %>\
+                    <td>\
+                        <button class="btn btn-small show-feature" id="<%=f_key%>">\
+                            <i class="icon-fullscreen"></i>\
+                        </button>\
                     </td>\
+                </tr>\
                 <% } %>\
-                <td>\
-                    <button class="btn btn-small show-feature" id="<%=f_key%>">\
-                        <i class="icon-fullscreen"></i>\
-                    </button>\
-                </td>\
-            </tr>\
             <% } %>\
-        <% } %>\
-        </tbody>\
-    </table>\
+            </tbody>\
+        </table>\
+    <% } %>\
     <table id="fullList" class="table table-hover hide">\
         <thead>\
             <tr>\

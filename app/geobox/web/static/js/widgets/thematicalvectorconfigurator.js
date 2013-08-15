@@ -340,7 +340,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
         var count = element.find(selector + ':checked').length;
         if(count > self.options.restrictSelectableAttributes) {
             elm.removeAttr('checked');
-            $(selector + '-error').show().fadeOut(3000)
+            $(selector + '-error').show().fadeOut(3000);
         }
     }
 };
