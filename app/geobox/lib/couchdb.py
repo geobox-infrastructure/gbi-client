@@ -380,7 +380,6 @@ class CouchFileBox(CouchDBBase):
         return url
 
     def delete(self, doc_id, rev):
-        print self, doc_id, rev
         doc_url = self.couch_url + '/' + doc_id
         resp = self.req_session.delete(doc_url, params={'rev': rev})
         if resp.status_code not in (200, 404):
