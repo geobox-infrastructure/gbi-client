@@ -48,17 +48,26 @@
                     <td>{{ file.date }}</td>
                     <td>{{ (file.size/1024/1024)|round(precision=2)}} MB</td>
                     <td>
+                        {% if file.content_type == 'application/json' %}
                         <a class="btn btn-small"
                             href="{{ url_for('map_view.editor') }}?box_name={{box_name}}&filename={{file.id}}" >{{ _('preview') }}</a>
+                        {% else %}
+                         <span>{{ _('preview only for json') }}</span>
+                        {% endif %}
                     </td>
                     <td>
                     {% if (box_name == 'upload') %}
                         <a class="btn btn-small"
                         href="{{ url_for('boxes.delete_file', box_name=box_name, id=file.id, rev=file.rev) }}">{{ _('delete') }}</a>
                     {% else %}
+                        {% if file.content_type == 'application/json' %}
                         <a class="btn btn-small import_json"
                             href="{{ url_for('boxes.import_json', box_name=box_name, id=file.id) }}"
                             data-download-url="{{ file.id }}">{{ _('import') }}</a>
+                        {% else %}
+                         <span>{{ _('import only for json') }}</span>
+                        {% endif %}
+
                     {% endif %}
                     </td>
 

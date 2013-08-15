@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-15 11:21+0200\n"
+"POT-Creation-Date: 2013-08-15 11:36+0200\n"
 "PO-Revision-Date: 2013-08-13 15:15+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -383,8 +383,8 @@ msgstr ""
 "Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
 
 #: geobox/web/templates/editor.html:166 geobox/web/templates/editor.html:187
-#: geobox/web/templates/boxes/base.html:75
-#: geobox/web/templates/boxes/base.html:103
+#: geobox/web/templates/boxes/base.html:84
+#: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr "Abbrechen"
 
@@ -420,8 +420,8 @@ msgstr "Ausführliche Informationen zur Anwendung finden sie im "
 msgid "download usermanual"
 msgstr "Benutzerhandbuch"
 
-#: geobox/web/templates/index.html:16 geobox/web/templates/boxes/base.html:61
-#: geobox/web/templates/boxes/base.html:104
+#: geobox/web/templates/index.html:16 geobox/web/templates/boxes/base.html:66
+#: geobox/web/templates/boxes/base.html:113
 #: geobox/web/templates/vector/geojson.html:37
 #: geobox/web/templates/vector/import.html:38
 msgid "import"
@@ -435,7 +435,7 @@ msgstr "Rasterdaten Importieren"
 msgid "import shape"
 msgstr "Shapedatei importieren"
 
-#: geobox/web/templates/index.html:21 geobox/web/templates/boxes/base.html:91
+#: geobox/web/templates/index.html:21 geobox/web/templates/boxes/base.html:100
 msgid "import geojson"
 msgstr "GeoJSON-Datei importieren"
 
@@ -535,31 +535,41 @@ msgstr "Datum"
 msgid "size"
 msgstr "Dateigröße"
 
-#: geobox/web/templates/boxes/base.html:52
+#: geobox/web/templates/boxes/base.html:53
 msgid "preview"
 msgstr "Vorschau"
 
-#: geobox/web/templates/boxes/base.html:57
+#: geobox/web/templates/boxes/base.html:55
+msgid "preview only for json"
+msgstr "Vorschau nur für .json"
+
+#: geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr "Löschen"
 
-#: geobox/web/templates/boxes/base.html:73
+#: geobox/web/templates/boxes/base.html:68
+msgid "import only for json"
+msgstr "Nur JSON import möglich"
+
+#: geobox/web/templates/boxes/base.html:82
 msgid "help text file exists, are you sure you want to overwrite it?"
 msgstr ""
 "Eine Datei mit diesem Dateinamen existiert bereits. Wollen Sie die Datei "
 "überschreiben?"
 
-#: geobox/web/templates/boxes/base.html:76
+#: geobox/web/templates/boxes/base.html:85
 msgid "ok"
 msgstr "Ja, überschreiben"
 
-#: geobox/web/templates/boxes/base.html:82
+#: geobox/web/templates/boxes/base.html:91
 msgid "file is uploading..."
 msgstr "Datei wird hochgeladen..."
 
-#: geobox/web/templates/boxes/base.html:96
+#: geobox/web/templates/boxes/base.html:105
 msgid "infotext geojson layer"
-msgstr "Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer importieren."
+msgstr ""
+"Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer"
+" importieren."
 
 #: geobox/web/templates/boxes/download.html:3
 msgid "download box title"
@@ -571,7 +581,10 @@ msgstr "Download-Box"
 
 #: geobox/web/templates/boxes/download.html:7
 msgid "tooltip - download box "
-msgstr "Die Download-Box zeigt ihnen alle von Ihrem Berater zur Verfügung gestellten Dateien an. Sie können diese über eine Vorschau ansehen oder - wenn diese Dateien Geometrien erhalten – importieren."
+msgstr ""
+"Die Download-Box zeigt ihnen alle von Ihrem Berater zur Verfügung "
+"gestellten Dateien an. Sie können diese über eine Vorschau ansehen oder -"
+" wenn diese Dateien Geometrien erhalten – importieren."
 
 #: geobox/web/templates/boxes/upload.html:3
 msgid "upload box title"
@@ -1288,7 +1301,7 @@ msgstr "Datei erfolgreich hochgeladen"
 msgid "file type not allowed"
 msgstr "Dateityp ist nich erlaubt"
 
-#: geobox/web/views/boxes.py:90 geobox/web/views/vector.py:77
+#: geobox/web/views/boxes.py:89 geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:147
 msgid "please select new layer or current layer to import"
 msgstr ""
@@ -1296,11 +1309,11 @@ msgstr ""
 "einen Layer aus der Liste oder geben Sie einen Namen für einen neuen "
 "Layer ein."
 
-#: geobox/web/views/boxes.py:105
+#: geobox/web/views/boxes.py:104
 msgid "file will be imported"
 msgstr ""
 
-#: geobox/web/views/boxes.py:113
+#: geobox/web/views/boxes.py:112
 msgid "file deleted"
 msgstr "Datei wurde gelöscht"
 

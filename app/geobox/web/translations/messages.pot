@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-15 11:21+0200\n"
+"POT-Creation-Date: 2013-08-15 11:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -369,8 +369,8 @@ msgid "infotext delete layer"
 msgstr ""
 
 #: geobox/web/templates/editor.html:166 geobox/web/templates/editor.html:187
-#: geobox/web/templates/boxes/base.html:75
-#: geobox/web/templates/boxes/base.html:103
+#: geobox/web/templates/boxes/base.html:84
+#: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr ""
 
@@ -402,8 +402,8 @@ msgstr ""
 msgid "download usermanual"
 msgstr ""
 
-#: geobox/web/templates/index.html:16 geobox/web/templates/boxes/base.html:61
-#: geobox/web/templates/boxes/base.html:104
+#: geobox/web/templates/index.html:16 geobox/web/templates/boxes/base.html:66
+#: geobox/web/templates/boxes/base.html:113
 #: geobox/web/templates/vector/geojson.html:37
 #: geobox/web/templates/vector/import.html:38
 msgid "import"
@@ -417,7 +417,7 @@ msgstr ""
 msgid "import shape"
 msgstr ""
 
-#: geobox/web/templates/index.html:21 geobox/web/templates/boxes/base.html:91
+#: geobox/web/templates/index.html:21 geobox/web/templates/boxes/base.html:100
 msgid "import geojson"
 msgstr ""
 
@@ -514,27 +514,35 @@ msgstr ""
 msgid "size"
 msgstr ""
 
-#: geobox/web/templates/boxes/base.html:52
+#: geobox/web/templates/boxes/base.html:53
 msgid "preview"
 msgstr ""
 
-#: geobox/web/templates/boxes/base.html:57
+#: geobox/web/templates/boxes/base.html:55
+msgid "preview only for json"
+msgstr ""
+
+#: geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr ""
 
-#: geobox/web/templates/boxes/base.html:73
-msgid "help text file exists, are you sure you want to overwrite it?"
-msgstr ""
-
-#: geobox/web/templates/boxes/base.html:76
-msgid "ok"
+#: geobox/web/templates/boxes/base.html:68
+msgid "import only for json"
 msgstr ""
 
 #: geobox/web/templates/boxes/base.html:82
+msgid "help text file exists, are you sure you want to overwrite it?"
+msgstr ""
+
+#: geobox/web/templates/boxes/base.html:85
+msgid "ok"
+msgstr ""
+
+#: geobox/web/templates/boxes/base.html:91
 msgid "file is uploading..."
 msgstr ""
 
-#: geobox/web/templates/boxes/base.html:96
+#: geobox/web/templates/boxes/base.html:105
 msgid "infotext geojson layer"
 msgstr ""
 
@@ -1226,16 +1234,16 @@ msgstr ""
 msgid "file type not allowed"
 msgstr ""
 
-#: geobox/web/views/boxes.py:90 geobox/web/views/vector.py:77
+#: geobox/web/views/boxes.py:89 geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:147
 msgid "please select new layer or current layer to import"
 msgstr ""
 
-#: geobox/web/views/boxes.py:105
+#: geobox/web/views/boxes.py:104
 msgid "file will be imported"
 msgstr ""
 
-#: geobox/web/views/boxes.py:113
+#: geobox/web/views/boxes.py:112
 msgid "file deleted"
 msgstr ""
 

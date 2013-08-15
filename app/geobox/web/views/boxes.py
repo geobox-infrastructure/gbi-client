@@ -53,7 +53,6 @@ def files(box_name, user_id=None):
     files = couch.all_files()
     for f in files:
         f['download_link'] = couchid_to_link(f['id'], couch_url=couch.couch_url)
-
     return render_template("boxes/%s.html" % box_name, form=form, files=files, box_name=box_name, import_form=import_form)
 
 def couchid_to_link(filename, couch_url):
