@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-14 15:07+0200\n"
+"POT-Creation-Date: 2013-08-15 11:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,7 +128,11 @@ msgstr ""
 msgid "export_type"
 msgstr ""
 
-#: geobox/web/forms.py:230
+#: geobox/web/forms.py:228
+msgid "destination"
+msgstr ""
+
+#: geobox/web/forms.py:231
 msgid "file"
 msgstr ""
 
@@ -263,125 +267,126 @@ msgstr ""
 msgid "open export on external explorer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:54
+#: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:56
 #: geobox/web/templates/index.html:50 geobox/web/templates/index.html:52
 msgid "editor"
 msgstr ""
 
-#: geobox/web/templates/editor.html:55
+#: geobox/web/templates/editor.html:57
 msgid "tooltip - editor"
 msgstr ""
 
-#: geobox/web/templates/editor.html:63
+#: geobox/web/templates/editor.html:65
 msgid "map layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:66
+#: geobox/web/templates/editor.html:68
 msgid "look"
 msgstr ""
 
-#: geobox/web/templates/editor.html:69
+#: geobox/web/templates/editor.html:71
 #: geobox/web/templates/projects/exports.html:29
 #: geobox/web/templates/projects/imports.html:40
 msgid "edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:72 geobox/web/templates/editor.html:129
+#: geobox/web/templates/editor.html:74 geobox/web/templates/editor.html:131
 msgid "filter"
 msgstr ""
 
-#: geobox/web/templates/editor.html:75
+#: geobox/web/templates/editor.html:77
 msgid "measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:78 geobox/web/templates/editor.html:145
+#: geobox/web/templates/editor.html:80 geobox/web/templates/editor.html:147
 msgid "thematical map"
 msgstr ""
 
-#: geobox/web/templates/editor.html:87
+#: geobox/web/templates/editor.html:89
 msgid "Styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:88
+#: geobox/web/templates/editor.html:90
 msgid "infotext - edit styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:93
+#: geobox/web/templates/editor.html:95
 msgid "Edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:94
+#: geobox/web/templates/editor.html:96
 msgid "infotext - edit controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:99
+#: geobox/web/templates/editor.html:101
 msgid "select all features"
 msgstr ""
 
-#: geobox/web/templates/editor.html:103
+#: geobox/web/templates/editor.html:105
 msgid "save permanent"
 msgstr ""
 
-#: geobox/web/templates/editor.html:110
+#: geobox/web/templates/editor.html:112
 #: geobox/web/templates/js/translation.js:73
 msgid "Attribute"
 msgstr ""
 
-#: geobox/web/templates/editor.html:113
+#: geobox/web/templates/editor.html:115
 msgid "point styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:118
+#: geobox/web/templates/editor.html:120
 #: geobox/web/templates/js/translation.js:74
 msgid "Attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:119
+#: geobox/web/templates/editor.html:121
 msgid "infotext - attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:130
+#: geobox/web/templates/editor.html:132
 msgid "infotext - filter controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:135
+#: geobox/web/templates/editor.html:137
 msgid "Measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:136
+#: geobox/web/templates/editor.html:138
 msgid "infotext - measure controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:146
+#: geobox/web/templates/editor.html:148
 msgid "infotext - thematical map"
 msgstr ""
 
-#: geobox/web/templates/editor.html:158
+#: geobox/web/templates/editor.html:160
 msgid "Sure you want delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:161
+#: geobox/web/templates/editor.html:163
 msgid "infotext delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:164 geobox/web/templates/editor.html:184
-#: geobox/web/templates/boxes/base.html:65
+#: geobox/web/templates/editor.html:166 geobox/web/templates/editor.html:187
+#: geobox/web/templates/boxes/base.html:75
+#: geobox/web/templates/boxes/base.html:103
 msgid "abort"
 msgstr ""
 
-#: geobox/web/templates/editor.html:165
+#: geobox/web/templates/editor.html:167
 msgid "yes delete"
 msgstr ""
 
-#: geobox/web/templates/editor.html:173
+#: geobox/web/templates/editor.html:175
 msgid "export vector layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:178
+#: geobox/web/templates/editor.html:180
 msgid "infotext export layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:185 geobox/web/templates/index.html:35
+#: geobox/web/templates/editor.html:188 geobox/web/templates/index.html:35
 msgid "export"
 msgstr ""
 
@@ -397,7 +402,8 @@ msgstr ""
 msgid "download usermanual"
 msgstr ""
 
-#: geobox/web/templates/index.html:16
+#: geobox/web/templates/index.html:16 geobox/web/templates/boxes/base.html:61
+#: geobox/web/templates/boxes/base.html:104
 #: geobox/web/templates/vector/geojson.html:37
 #: geobox/web/templates/vector/import.html:38
 msgid "import"
@@ -411,7 +417,7 @@ msgstr ""
 msgid "import shape"
 msgstr ""
 
-#: geobox/web/templates/index.html:21
+#: geobox/web/templates/index.html:21 geobox/web/templates/boxes/base.html:91
 msgid "import geojson"
 msgstr ""
 
@@ -456,7 +462,7 @@ msgstr ""
 msgid "logs"
 msgstr ""
 
-#: geobox/web/templates/macros.html:73
+#: geobox/web/templates/macros.html:87
 msgid "download coverage"
 msgstr ""
 
@@ -509,19 +515,27 @@ msgid "size"
 msgstr ""
 
 #: geobox/web/templates/boxes/base.html:52
+msgid "preview"
+msgstr ""
+
+#: geobox/web/templates/boxes/base.html:57
 msgid "delete"
 msgstr ""
 
-#: geobox/web/templates/boxes/base.html:63
+#: geobox/web/templates/boxes/base.html:73
 msgid "help text file exists, are you sure you want to overwrite it?"
 msgstr ""
 
-#: geobox/web/templates/boxes/base.html:66
+#: geobox/web/templates/boxes/base.html:76
 msgid "ok"
 msgstr ""
 
-#: geobox/web/templates/boxes/base.html:72
+#: geobox/web/templates/boxes/base.html:82
 msgid "file is uploading..."
+msgstr ""
+
+#: geobox/web/templates/boxes/base.html:96
+msgid "infotext geojson layer"
 msgstr ""
 
 #: geobox/web/templates/boxes/download.html:3
@@ -1204,20 +1218,29 @@ msgstr ""
 msgid "settings changed. restart required"
 msgstr ""
 
-#: geobox/web/views/boxes.py:41
+#: geobox/web/views/boxes.py:49
 msgid "upload success"
 msgstr ""
 
-#: geobox/web/views/boxes.py:43
+#: geobox/web/views/boxes.py:51
 msgid "file type not allowed"
 msgstr ""
 
-#: geobox/web/views/boxes.py:80
+#: geobox/web/views/boxes.py:90 geobox/web/views/vector.py:77
+#: geobox/web/views/vector.py:147
+msgid "please select new layer or current layer to import"
+msgstr ""
+
+#: geobox/web/views/boxes.py:105
+msgid "file will be imported"
+msgstr ""
+
+#: geobox/web/views/boxes.py:113
 msgid "file deleted"
 msgstr ""
 
 #: geobox/web/views/project.py:101 geobox/web/views/project.py:221
-#: geobox/web/views/vector.py:91 geobox/web/views/vector.py:161
+#: geobox/web/views/vector.py:94 geobox/web/views/vector.py:164
 msgid "form error"
 msgstr ""
 
@@ -1245,47 +1268,43 @@ msgstr ""
 msgid "delete task successful"
 msgstr ""
 
-#: geobox/web/views/vector.py:56 geobox/web/views/vector.py:166
+#: geobox/web/views/vector.py:48 geobox/web/views/vector.py:130
+msgid "-- select layer or add new --"
+msgstr ""
+
+#: geobox/web/views/vector.py:65 geobox/web/views/vector.py:169
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr ""
 
-#: geobox/web/views/vector.py:58 geobox/web/views/vector.py:170
+#: geobox/web/views/vector.py:67 geobox/web/views/vector.py:173
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr ""
 
-#: geobox/web/views/vector.py:60 geobox/web/views/vector.py:168
+#: geobox/web/views/vector.py:69 geobox/web/views/vector.py:171
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr ""
 
-#: geobox/web/views/vector.py:69 geobox/web/views/vector.py:127
-msgid "-- select layer or add new --"
-msgstr ""
-
-#: geobox/web/views/vector.py:74 geobox/web/views/vector.py:144
-msgid "please select new layer or current layer to import"
-msgstr ""
-
-#: geobox/web/views/vector.py:140
+#: geobox/web/views/vector.py:143
 msgid "invalid shapefile"
 msgstr ""
 
-#: geobox/web/views/vector.py:164
+#: geobox/web/views/vector.py:167
 #, python-format
 msgid "file %(name)s missing"
 msgstr ""
 
-#: geobox/model/layer.py:24 geobox/model/tasks.py:113
+#: geobox/model/layer.py:24 geobox/model/tasks.py:115
 msgid "raster import"
 msgstr ""
 
-#: geobox/model/layer.py:35 geobox/model/tasks.py:132
+#: geobox/model/layer.py:35 geobox/model/tasks.py:134
 msgid "raster export"
 msgstr ""
 
-#: geobox/model/layer.py:47 geobox/model/tasks.py:89
+#: geobox/model/layer.py:47 geobox/model/tasks.py:90
 msgid "vector export"
 msgstr ""
 
@@ -1301,7 +1320,7 @@ msgstr ""
 msgid "vector import"
 msgstr ""
 
-#: geobox/model/tasks.py:100
+#: geobox/model/tasks.py:102
 msgid "replication"
 msgstr ""
 
