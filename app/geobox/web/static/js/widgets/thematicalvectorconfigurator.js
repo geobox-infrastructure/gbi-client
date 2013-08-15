@@ -115,7 +115,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
             element.find('.list-attribute').each(function(idx, elm) {
                 elm = $(elm);
                 elm.change(function() {
-                    self._restrictAttributes(elm, '.list-attribute', 5)
+                    self._restrictAttributes(element, elm, '.list-attribute', 5)
                 })
                 if($.inArray(elm.val(), listAttributes) != -1) {
                     elm.attr('checked', 'checked');
@@ -128,7 +128,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
             element.find('.popup-attribute').each(function(idx, elm) {
                 elm = $(elm);
                 elm.change(function() {
-                    self._restrictAttributes(elm, '.popup-attribute', 5)
+                    self._restrictAttributes(element, elm, '.popup-attribute', 5)
                 });
                 if($.inArray(elm.val(), popupAttributes) != -1) {
                     elm.attr('checked', 'checked');
@@ -332,9 +332,9 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
             self.render();
         });
     },
-    _restrictAttributes: function(elm, selector, max) {
+    _restrictAttributes: function(element, elm, selector, max) {
         var self = this;
-        var count = self.element.find(selector + ':checked').length;
+        var count = element.find(selector + ':checked').length;
         if(count > max) {
             elm.removeAttr('checked');
             console.log('Only ' + max + ' or less attributes can be selected')
