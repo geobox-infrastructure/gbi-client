@@ -54,7 +54,7 @@
                         <a class="btn btn-small import_json"
                             href="{{ url_for('boxes.import_json', box_name=box_name, id=file.id) }}"
                             data-download-url="{{ file.id }}">{{ _('import') }}</a>
-                        <a href="#" class="btn btn-small">{{ _('preview') }}</a>
+                        <a href="{{ url_for('map_view.editor') }}?box_name={{box_name}}&filename={{file.id}}" class="btn btn-small">{{ _('preview') }}</a>
                     {% endif %}
                     </td>
                 </tr>
