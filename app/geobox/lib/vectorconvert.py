@@ -94,10 +94,13 @@ def zip_shapefiles(filename):
 
     return zipped_file
 
-
-def write_json_to_file(records, filename='default.json'):
+def create_feature_collection(records):
     feature_collection = {"type": "FeatureCollection"}
     feature_collection["features"] = list(records)
+    return feature_collection
+
+def write_json_to_file(records, filename='default.json'):
+    feature_collection = create_feature_collection(records)
 
     with open(filename, 'w') as outfile:
         json.dump(feature_collection, outfile)

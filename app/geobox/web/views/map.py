@@ -55,6 +55,10 @@ def editor():
     export_form = ExportVectorForm(request.form)
     export_form.srs.choices = [(srs, srs) for srs in current_app.config.geobox_state.config.get('web', 'available_srs')]
 
+    # TODO select all writeable boxes
+    upload_box = current_app.config.geobox_state.config.get('couchdb', 'upload_box')
+    export_form.destination.choices = [('file', 'Filesystem'), (upload_box, upload_box)]
+
     raster_sources = g.db.query(LocalWMTSSource).all()
     base_layer = g.db.query(ExternalWMTSSource).filter_by(background_layer=True).first()
     base_layer.bbox = base_layer.bbox_from_view_coverage()

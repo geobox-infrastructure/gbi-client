@@ -62,7 +62,7 @@ def login():
         except ValueError:
             flash(_('unable to fetch context document'), 'error')
         else:
-            redirect_back('main.index')
+            return redirect_back('main.index')
 
     return render_template('login.html', form=form, next=next)
 

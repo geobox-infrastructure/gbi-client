@@ -83,7 +83,8 @@ class VectorImportTask(Task):
     file_name = sa.Column(sa.String())
     mapping_name = sa.Column(sa.String())
     srs = sa.Column(sa.String(64), default="EPSG:3857")
-    geojson = sa.Column(sa.Boolean(), default=False)
+    type_ = sa.Column(sa.String(64), default="shp")
+    source = sa.Column(sa.String(64), default="file")
 
 class VectorExportTask(Task):
     task_type = lazy_gettext('vector export')
@@ -94,7 +95,8 @@ class VectorExportTask(Task):
     file_name = sa.Column(sa.String())
     mapping_name = sa.Column(sa.String())
     srs = sa.Column(sa.String(64), default="EPSG:3857")
-    geojson = sa.Column(sa.Boolean(), default=False)
+    type_ = sa.Column(sa.String(64), default="shp")
+    destination = sa.Column(sa.String(64), default="file")
 
 class ReplicationTask(Task):
     task_type = lazy_gettext('replication')

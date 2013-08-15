@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% from "form_macros.html" import input, select %}
+
+{% block title %}{{ _('box') }}{% endblock %}
+
+{% block content %}
+    {% block content_head %}
+
+    {% endblock %}
+    {% if (box_name == 'upload') %}
+    <div class="span6">
+        <h2>{{_('upload file')}}</h2>
+        <form method="post" enctype="multipart/form-data" id="upload_data">
+          <fieldset>
+            {{ form.csrf_token }}
+            {{ form.overwrite }}
+            {{ input(form.file) }}
+            <span class="help-block">{{ _('upload help text') }}</span>
+            <button id="upload" type="submit" class="btn">{{ _('Upload') }}</button>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="span12">
+        <hr>
+    </div>
+    {% endif %}
+    <div class="span6">
+        <h2>{{_('file overview')}}</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>{{ _('filename') }}</th>
+                    <th>{{ _('date') }}</th>
+                    <th>{{ _('size') }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in files %}
+                <tr>
+                    <td>
+                        <a href="{{ file.download_link }}" target='_blank'>
+                        {{ file.id }}
+                        </a>
+                    </td>
+                    <td>{{ file.date }}</td>
+                    <td>{{ (file.size/1024/1024)|round(precision=2)}} MB</td>
+                    <td>
+                    {% if (box_name == 'upload') %}
+                        <a href="{{ url_for('boxes.delete_file', box_name=box_name, id=file.id, rev=file.rev) }}">{{ _('delete') }}</a>
+                    {% else %}
+                        <a class="btn btn-small import_json"
+                            href="{{ url_for('boxes.import_json', box_name=box_name, id=file.id) }}"
+                            data-download-url="{{ file.id }}">{{ _('import') }}</a>
+                        <a href="#" class="btn btn-small">{{ _('preview') }}</a>
+                    {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="confirm_dialog" class="modal hide">
+    <div class="modal-body">{{ _('help text file exists, are you sure you want to overwrite it?') }}</div>
+    <div class="modal-footer">
+        <a href="#" class="btn primary" id="abort">{{_('abort')}}</a>
+        <a href="#" class="btn primary" id="ok">{{_('ok')}}</a>
+    </div>
+</div>
+
+<div id="upload_dialog" class="modal hide">
+    <div class="modal-body">
+        {{ _('file is uploading...') }}
+    </div>
+</div>
+
+
+<!-- modal for import -->
+<div id="importGeoJSON" class="modal hide">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{_('import geojson')}} </h3>
+    </div>
+
+    <form id="import_json_form" method="POST">
+      <div class="modal-body">
+        <p>{{ _('infotext geojson layer') }}</p>
+                {{ import_form.csrf_token }}
+                {{ import_form.file_name }}
+                {{ select(import_form.layers) }}
+                {{ input(import_form.name) }}
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="abort_export_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+        <button class="btn btn-primary" type="submit">{{_('import')}}</button>
+     </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#confirm_dialog").on("show", function() {
+        $("#confirm_dialog a.btn#ok").on("click", function(e) {
+            $('#overwrite').val(true);
+            $("#confirm_dialog").modal('hide');
+            $("#upload_data").submit();
+            $("#upload_dialog").modal('show');
+        });
+
+        $("#confirm_dialog a.btn#abort").on("click", function(e) {
+            $("#confirm_dialog").modal('hide');
+        });
+
+    });
+    $("#confirm_dialog", "#upload_dialog").modal({
+        "backdrop" : "static",
+        "keyboard" : true,
+        "show" : false
+    });
+
+    $("#upload").click(function() {
+        var existing = false;
+        var file = $("#file").val();
+        var filename_elements = file.split(/\\/);
+        filename = filename_elements[filename_elements.length-1]
+        if (filename) {
+            $.ajax({
+              type: 'POST',
+              async: false,
+              url: '{{ url_for('boxes.check_file_exists', box_name=box_name) }}',
+              data: { filename: filename },
+              success: function(data) {
+                if (data.existing) {
+                    existing = true;
+                } else {
+                    existing = false;
+                }
+              }
+            });
+        }
+        if (!existing) {
+            $('#overwrite').val(false);
+            $("#upload_dialog").modal('show');
+            return true;
+        } else {
+           $('#confirm_dialog').modal('show');
+        }
+        return false;
+    });
+
+    $("#file_name").hide();
+
+
+    $(".import_json").click(function() {
+        var formAction = $(this).attr('href');
+        $("#import_json_form").attr('action', formAction)
+        $("#importGeoJSON").modal('show');
+        $("#file_name option").remove();
+        var filename = $(this).attr('data-download-url')
+        $('#file_name').append($("<option></option>")
+                    .attr("value", filename)
+                    .text(filename));
+        return false;
+    });
+});
+
+</script>
+{% endblock %}

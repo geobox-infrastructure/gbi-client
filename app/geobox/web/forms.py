@@ -19,7 +19,7 @@ from jinja2 import Markup
 
 from flask import request, session, current_app, g
 
-from wtforms.fields import HiddenField, TextField, SelectField, PasswordField, BooleanField
+from wtforms.fields import HiddenField, TextField, SelectField, PasswordField, BooleanField, FileField
 from wtforms.validators import Required, ValidationError, Optional
 
 from wtforms.ext.csrf.session import SessionSecureForm
@@ -223,6 +223,10 @@ class TileBoxPathForm(Form):
 
 class ExportVectorForm(Form):
     name = HiddenField(lazy_gettext('name'), validators=[Required()])
-    export_type = SelectField(lazy_gettext('export_type'), choices=[('shp', 'SHP'), ('json', 'GeoJSON')], coerce=str, validators=[Required()])
+    export_type = SelectField(lazy_gettext('export_type'), choices=[('shp', 'SHP'), ('geojson', 'GeoJSON')], coerce=str, validators=[Required()])
     srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
+    destination = SelectField(lazy_gettext('destination'), validators=[Required()])
 
+class UploadForm(Form):
+    file = FileField(lazy_gettext('file'), validators=[Required()])
+    overwrite = HiddenField('overwrite', default=False)
