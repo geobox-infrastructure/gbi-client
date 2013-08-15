@@ -153,6 +153,21 @@
       </div>
     </div>
 
+   <!-- modal for change layer -->
+   <div id="changeVectorLayer" class="modal hide">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>{{_('Sure you want change layer')}}?</h3>
+    </div>
+    <div class="modal-body">
+      <p>{{ _('infotext change layer') }}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="abort_change_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+      <a href="#" id="change_layer_discard" class="btn btn-primary">{{_('yes change and discard')}}</a>
+      <a href="#" id="change_layer_save" class="btn btn-primary">{{_('yes change and save')}}</a>
+    </div>
+  </div>
 
   <!-- modal for delete -->
    <div id="deleteVectorLayer" class="modal hide">

@@ -162,42 +162,94 @@ gbi.widgets.LayerManager.prototype = {
         });
 
         this.element.find('.vectorLayer').click(function() {
-            var id = parseInt($(this).attr('id'));
+            var clickedElement = this;
+            var activeLayer = self.layerManager.active();
+            if(activeLayer && activeLayer.unsavedChanges) {
+                $('#changeVectorLayer').modal('show');
+                $('#change_layer_save').click(function() {
+                    activeLayer.save();
+                    activeLayer._saveStyle();
+                    activeLayer._saveGBIData();
+                    $('#changeVectorLayer').modal('hide');
+                    changeLayer(clickedElement);
+                });
+                $('#change_layer_discard').click(function() {
+                    activeLayer.refresh();
+                    $('#changeVectorLayer').modal('hide');
+                    changeLayer(clickedElement);
+                });
+                $('#changeVectorLayer').on('hidden', function () {
+                    $('#change_layer_save').off('click');
+                    $('#change_layer_discard').off('click');
+                    $('#changeVectorLayer').off('hidden');
+                })
+            } else {
+                changeLayer(clickedElement);
+            }
+        });
+
+        function changeLayer(clickedElement) {
+            var id = parseInt($(clickedElement).attr('id'));
             var layer = self.layerManager.layerById(id);
             self.layerManager.active(layer);
-            self.render(self.findAccordion(this));
-        });
+            self.render(self.findAccordion(clickedElement));
+        }
 
         this.element.find('#add_vector_layer').click(function() {
             var newLayer = $('#new_vector_layer').val();
             if(newLayer) {
-                var couchLayer = new gbi.Layers.Couch({
-                    name: newLayer,
-                    url: OpenlayersCouchURL,
-                    hoverPopup: true,
-                    callbacks: {
-                        changes: function(unsavedChanges) {
-                            if(unsavedChanges)
-                                $('#save_changes').removeAttr('disabled').addClass('btn-success');
-                             else
-                                $('#save_changes').attr('disabled', 'disabled').removeClass('btn-success');;
-                        }
-                    }
-                });
-                if (!couchLayer.couchExists) {
-                    self.layerManager.addLayer(couchLayer);
-                    self.layerManager.active(couchLayer);
-                    self.render(self.findAccordion(this));
-                    var addSuccessful = OpenLayers.i18n("addLayerSuccessful");
-                    $("#help_text").attr('class','alert alert-success').html(addSuccessful).show().fadeOut(6000);
+                var activeLayer = self.layerManager.active();
+                if(activeLayer && activeLayer.unsavedChanges) {
+                    $('#changeVectorLayer').modal('show');
+                    $('#change_layer_save').click(function() {
+                        activeLayer.save();
+                        activeLayer._saveStyle();
+                        activeLayer._saveGBIData();
+                        $('#changeVectorLayer').modal('hide');
+                        createLayer(newLayer);
+                    });
+                    $('#change_layer_discard').click(function() {
+                        activeLayer.refresh();
+                        $('#changeVectorLayer').modal('hide');
+                        createLayer(newLayer);
+                    });
+                    $('#changeVectorLayer').on('hidden', function () {
+                        $('#change_layer_save').off('click');
+                        $('#change_layer_discard').off('click');
+                        $('#changeVectorLayer').off('hidden');
+                    })
                 } else {
-                    var notPossible = OpenLayers.i18n("notPossible")
-                    $("#help_text").attr('class','alert alert-error').html(notPossible).show().fadeOut(6000);
-                    delete couchLayer;
+                    createLayer(newLayer);
                 }
             }
-
         });
+
+        function createLayer(newLayer) {
+            var couchLayer = new gbi.Layers.Couch({
+                name: newLayer,
+                url: OpenlayersCouchURL,
+                hoverPopup: true,
+                callbacks: {
+                    changes: function(unsavedChanges) {
+                        if(unsavedChanges)
+                            $('#save_changes').removeAttr('disabled').addClass('btn-success');
+                         else
+                            $('#save_changes').attr('disabled', 'disabled').removeClass('btn-success');;
+                    }
+                }
+            });
+            if (!couchLayer.couchExists) {
+                self.layerManager.addLayer(couchLayer);
+                self.layerManager.active(couchLayer);
+                self.render(self.findAccordion(this));
+                var addSuccessful = OpenLayers.i18n("addLayerSuccessful");
+                $("#help_text").attr('class','alert alert-success').html(addSuccessful).show().fadeOut(6000);
+            } else {
+                var notPossible = OpenLayers.i18n("notPossible")
+                $("#help_text").attr('class','alert alert-error').html(notPossible).show().fadeOut(6000);
+                delete couchLayer;
+            }
+        }
 
         if(this.options.tiny) {
             this.element.find('.gbi_widgets_LayerManager_Minimize').click(function(event) {
