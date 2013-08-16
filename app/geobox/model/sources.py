@@ -40,6 +40,8 @@ class ExternalWMTSSource(Base):
     download_level_start = sa.Column(sa.Integer())
     download_level_end = sa.Column(sa.Integer())
 
+    source_type = sa.Column(sa.String(), default='wmts')
+
     view_coverage = sa.Column(sa.String())
     view_level_start = sa.Column(sa.Integer)
     view_level_end = sa.Column(sa.Integer)
@@ -53,6 +55,7 @@ class ExternalWMTSSource(Base):
         coverage = coverage_from_geojson(self.view_coverage)
         bbox = coverage.bbox
         return bbox
+
 
 class LocalWMTSSource(Base):
     __tablename__ = 'local_wmts_sources'

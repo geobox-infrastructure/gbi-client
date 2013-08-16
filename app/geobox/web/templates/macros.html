@@ -70,15 +70,27 @@
            {% set layer_name = source.layer %}
         {% endif %}
 
-        raster_sources[{{ source.id }}] = new gbi.Layers.WMTS({
-            name: '{{ map_source.title }}',
-            url: {% if source.url %} '{{add_auth_to_url(source.url, source.username, source.password)}}' {% else %} '{{ cache_url }}' {% endif %},
-            layer: '{{ layer_name }}',
-            format: '{{ map_source.format }}',
-            source_id: {{ map_source.id }},
-            download_level_start: {{ source.download_level_start }},
-            download_level_end: {{ source.download_level_end }}
-        });
+        {% if map_source.source_type == 'wmts' %}
+            raster_sources[{{ source.id }}] = new gbi.Layers.WMTS({
+                name: '{{ map_source.title }}',
+                url: {% if source.url %} '{{add_auth_to_url(source.url, source.username, source.password)}}' {% else %} '{{ cache_url }}' {% endif %},
+                layer: '{{ layer_name }}',
+                format: '{{ map_source.format }}',
+                source_id: {{ map_source.id }},
+                download_level_start: {{ source.download_level_start }},
+                download_level_end: {{ source.download_level_end }}
+            });
+        {% else %}
+            raster_sources[{{ source.id }}] = new gbi.Layers.WMS({
+                name: '{{ map_source.title }}',
+                url: '{{ source.url }}',
+                layer: '{{ layer_name }}',
+                format: '{{ map_source.format }}',
+                source_id: {{ map_source.id }},
+                download_level_start: {{ source.download_level_start }},
+                download_level_end: {{ source.download_level_end }}
+            });
+        {% endif %}
 
         {% if coverages %}
 

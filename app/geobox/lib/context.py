@@ -14,11 +14,10 @@
 # limitations under the License.
 
 import json
-import urllib2, base64
 from shapely.geometry import asShape
 import requests
 from geobox import model
-from geobox.lib.box import FeatureInserter, feature_from_document
+from geobox.lib.box import FeatureInserter
 from geobox.lib.couchdb import CouchDB, CouchDBBase
 
 class ContextError(Exception):
@@ -28,8 +27,12 @@ class Context(object):
     def __init__(self, doc):
         self.doc = doc
 
-    def layers(self):
+    def wmts_sources(self):
         for lyr in self.doc.get('wmts_sources', []):
+            yield lyr
+
+    def wms_sources(self):
+        for lyr in self.doc.get('wms_sources', []):
             yield lyr
 
     def logging_server(self):
@@ -49,12 +52,17 @@ class ContextModelUpdater(object):
     def sources_from_context(self, context):
         first = True
         prefix = context.doc.get('portal', {}).get('prefix')
-        for layer in context.layers():
-            yield self.source_from_layer(layer, first, prefix)
+        for source in context.wmts_sources():
+            yield self.source_for_conf(source, first, prefix, source_type='wmts')
             first = False
 
-    def source_from_layer(self, layer, first, prefix):
+        for source in context.wms_sources():
+            yield self.source_for_conf(source, first, prefix, source_type='wms')
+            first = False
+
+    def source_for_conf(self, layer, first, prefix, source_type):
         query = self.session.query(model.ExternalWMTSSource).filter_by(name=layer['name'])
+        query = query.filter_by(source_type=source_type)
         if prefix:
             query = query.filter_by(prefix=prefix)
 
@@ -74,10 +82,14 @@ class ContextModelUpdater(object):
         source.is_baselayer = layer['baselayer']
         source.is_overlay = layer['overlay']
         source.layer = layer['layer']
-        source.tile_matrix = layer['tile_matrix']
         source.max_tiles = layer.get('max_tiles')
+        if source_type == 'wmts':
+            source.tile_matrix = layer['tile_matrix']
 
-        ### first element is background layer
+        assert source_type in ('wmts', 'wms')
+        source.source_type = source_type
+
+        ### first source is background layer
         if first:
             source.background_layer = True
         else:
@@ -180,7 +192,6 @@ def insert_database_features(dst_dburl, src_conf):
     )
     inserter = FeatureInserter(dst_dburl)
 
-    print src_conf, source_couchdb.db_name
     inserter.from_source(source_couchdb)
 
 def replicate_database(couchdb, couchdb_source, app_state):
