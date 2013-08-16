@@ -24,6 +24,14 @@
   </div>
 
   <div class="span12">
+    <h2>{{_('boxes')}}</h2>
+    <ul class="nav nav-list">
+      <li><a href="{{ url_for('boxes.files', box_name='download') }}">{{ _('downloadbox') }}</a></li>
+      <li><a href="{{ url_for('boxes.files', box_name='upload') }}">{{ _('uploadbox') }}</a></li>
+    </ul>
+  </div>
+
+  <div class="span12">
     <h2>{{_('export')}}</h2>
     <ul class="nav nav-list">
       <li><a href="{{ url_for('project.export_list') }}">{{ _('export raster') }}</a></li>

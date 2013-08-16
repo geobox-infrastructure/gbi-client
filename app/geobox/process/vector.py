@@ -15,13 +15,12 @@
 
 import json
 
-
 from datetime import datetime
 
 from geobox.process.base import ProcessBase
-from geobox.lib.couchdb import CouchDB, VectorCouchDB
+from geobox.lib.couchdb import CouchDB, VectorCouchDB, CouchFileBox
 from geobox.lib.vectormapping import default_mappings as mappings, Mapping
-from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, write_json_to_file, ConvertError
+from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, write_json_to_file, create_feature_collection, ConvertError
 
 
 import logging
@@ -33,10 +32,16 @@ class VectorExportProcess(ProcessBase):
         try:
             with self.task() as task:
                 couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
-                if task.geojson:
-                    output_file = self.app_state.user_data_path('export', task.db_name + '.json', make_dirs=True)
-                    write_json_to_file(couch.load_records(), output_file)
-                else:
+                if task.type_ == 'geojson':
+                    if task.destination != 'file':
+                        dest_couch = CouchFileBox('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.destination)
+                        data = json.dumps(create_feature_collection(couch.load_records()))
+                        file_obj = {'content-type': 'application/json' , 'file': data, 'filename': task.db_name + '.json' }
+                        dest_couch.store_file(file_obj, overwrite=True)
+                    else:
+                        output_file = self.app_state.user_data_path('export', task.db_name + '.json', make_dirs=True)
+                        write_json_to_file(couch.load_records(), output_file)
+                elif task.type_ == 'shp':
                     output_file = self.app_state.user_data_path('export', task.db_name + '.shp', make_dirs=True)
                     mapping = Mapping(None, None, 'Polygon', other_srs=task.srs)
                     write_json_to_shape(couch.load_records(), mapping, output_file)
@@ -70,19 +75,27 @@ class VectorImportProcess(ProcessBase):
                 else:
                     mapping = Mapping(None, None, '*', other_srs=task.srs)
 
-                input_file = self.app_state.user_data_path('import', task.file_name)
                 couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
 
-                if (task.geojson):
-                    records = json.loads(open(input_file).read())
+                # import from file
+                if task.source == 'file':
+                    input_file = self.app_state.user_data_path('import', task.file_name)
+                    if task.type_ == 'geojson':
+                        records = json.loads(open(input_file).read())
+                        couch.store_records(
+                            records['features']
+                        )
+                    elif task.type_ == 'shp':
+                        couch.store_records(
+                            load_json_from_shape(input_file, mapping)
+                        )
+                # import from couch db - source name is couchdb name
+                else:
+                    couch_src = CouchFileBox('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.source)
+                    records = couch_src.get_attachment(task.file_name)
                     couch.store_records(
                         records['features']
                     )
-                else:
-                    couch.store_records(
-                        load_json_from_shape(input_file, mapping)
-                    )
-
             self.task_done()
         except ConvertError, e:
             self.task_failed(e)

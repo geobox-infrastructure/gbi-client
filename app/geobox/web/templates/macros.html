@@ -44,6 +44,20 @@
 {%- endmacro %}
 
 
+{% macro generate_temp_vectorlayer(layername, featureCollection) -%}
+    var tmp_vectorLayer = new gbi.Layers.Vector({
+        name: '{{layername}}',
+        url: OpenlayersCouchURL,
+        displayInLayerSwitcher: true,
+        editable: false,
+    });
+
+    var featureCollection = {{ featureCollection|tojson|safe }};
+    var geojson_format = new OpenLayers.Format.GeoJSON();
+    tmp_vectorLayer.addFeatures(geojson_format.read(featureCollection));
+{%- endmacro %}
+
+
 {% macro generate_sources(sources, cache_url, coverages=True) -%}
     var raster_sources = {};
     {% for source in sources %}

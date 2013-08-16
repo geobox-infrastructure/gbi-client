@@ -32,7 +32,6 @@ from geobox.lib.coverage import coverage as make_coverage
 from geobox.lib.couchdb import CouchDB, vector_layers_metadata
 from geobox.lib.fs import diskspace_available_in_mb
 from geobox.lib.mapproxy import write_mapproxy_config
-from geobox.lib.vectormapping import default_mappings as mappings
 
 from geobox import model
 from geobox.web import forms
@@ -405,16 +404,6 @@ def create_export_tasks(proj):
             zoom_level_end=end_level,
             coverage=prepare_task_coverage(raster_coverage),
             project=proj
-        )
-        g.db.add(task)
-        send_task_logging(current_app.config.geobox_state, task)
-
-
-    for vector_layers in proj.export_vector_layers:
-        task = model.VectorExportTask(
-            db_name=mappings[vector_layers.mapping_name].couchdb,
-            mapping_name=vector_layers.mapping_name,
-                project=proj,
         )
         g.db.add(task)
         send_task_logging(current_app.config.geobox_state, task)

@@ -146,6 +146,14 @@ function initEditor() {
         editor.addLayer(layer);
     });
 
+    if ((typeof tmp_vectorLayer !== 'undefined') && tmp_vectorLayer) {
+      editor.addLayer(tmp_vectorLayer);
+      var extent = tmp_vectorLayer.olLayer.getDataExtent();
+      if (extent) {
+        editor.map.olMap.zoomToExtent(extent);
+      }
+    }
+
     $(gbi).on('gbi.layer.couch.loadFeaturesEnd', function(event) {
       var activeLayer = editor.layerManager.active();
       var extent = activeLayer.olLayer.getDataExtent();

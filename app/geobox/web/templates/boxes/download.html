@@ -1,0 +1,9 @@
+{% extends "boxes/base.html" %}
+
+{% block title %}{{ _('download box title') }}{% endblock %}
+
+{% block content_head %}
+    <h1>
+      {{_('download box')}} {{ generate_tooltip(_('tooltip - download box ')) }}
+    </h1>
+{% endblock %}
