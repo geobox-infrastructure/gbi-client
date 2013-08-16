@@ -61,7 +61,10 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
         }
 
         var features = _features || self.activeLayer.features;
-        var shortListFeatures = features.slice();
+        var shortListFeatures = [];
+        if(features && features.length > 0) {
+            shortListFeatures = features.slice();
+        }
 
         $.each(shortListFeatures, function(idx, feature) {
             var hasValues = false;
