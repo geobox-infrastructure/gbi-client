@@ -27,18 +27,12 @@ gbi.widgets.ThematicalVectorAttributeList = function(thematicalVector, options) 
         self.activeLayer = layer;
         if(self.activeLayer) {
             self._registerLayerEvents(self.activeLayer);
-            self.attributes = self.activeLayer.featuresAttributes() || [];
-        } else {
-            self.attributes = [];
         }
         self.render();
 
     });
     if(this.activeLayer) {
         this._registerLayerEvents(this.activeLayer);
-        this.attributes = this.activeLayer.featuresAttributes() || [];
-    } else {
-        this.attributes = [];
     }
     if(!this.options.initOnly) {
         self.render();
@@ -49,8 +43,17 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
         var self = this;
         var element = $('#' + this.options.element);
         element.empty();
-        var shortListAttributes = self.activeLayer ? self.activeLayer.listAttributes() || [] : [];
-        var fullListAttributes = self.activeLayer ? self.activeLayer.featuresAttributes() || [] : [];
+        var shortListAttributes = [];
+        var fullListAttributes = [];
+
+        if(self.activeLayer) {
+            shortListAttributes = self.activeLayer.shortListAttributes() || [];
+            fullListAttributes = self.activeLayer.fullListAttributes() || [];
+            if(fullListAttributes.length == 0) {
+                fullListAttributes = self.activeLayer.featuresAttributes() || [];
+            }
+        }
+
         var features = _features || self.activeLayer.features;
         var shortListFeatures = features.slice();
 
@@ -67,13 +70,10 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
             element.append($('<div class="text-center">' + thematicalVectorAttributeListLabels.noLayer + '</div>'));
             return;
         }
-        // var attributes = self.activeLayer ? self.activeLayer.listAttributes() || [] : [];
-
         if(fullListAttributes.length == 0) {
             element.append($('<div class="text-center">' + thematicalVectorAttributeListLabels.noAttribute + '</div>'));
             return;
         }
-
         element.append(tmpl(
             gbi.widgets.ThematicalVectorAttributeList.template, {
                 shortListAttributes: shortListAttributes,
@@ -117,7 +117,6 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
         var self = this;
         if(layer instanceof gbi.Layers.SaveableVector && !layer.loaded) {
             $(layer).on('gbi.layer.couch.loadFeaturesEnd', function() {
-                self.attributes = layer.featuresAttributes();
                 self.render();
             });
         }

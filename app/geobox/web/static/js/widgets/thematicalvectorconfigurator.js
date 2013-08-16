@@ -50,7 +50,10 @@ gbi.widgets.ThematicalVectorConfigurator = function(thematicalVector, options) {
         self.activeLayer = layer;
         if(self.activeLayer) {
             self._registerLayerEvents(self.activeLayer);
-            self.attributes = self.activeLayer.featuresAttributes() || [];
+            self.attributes = self.activeLayer.fullListAttributes() || [];
+            if(self.attributes.length == 0) {
+                self.attributes = self.activeLayer.featuresAttributes() || [];
+            }
         } else {
             self.attributes = [];
         }
@@ -58,7 +61,10 @@ gbi.widgets.ThematicalVectorConfigurator = function(thematicalVector, options) {
     });
     if(this.activeLayer) {
         this._registerLayerEvents(this.activeLayer);
-        this.attributes = this.activeLayer.featuresAttributes() || [];
+        this.attributes = this.activeLayer.fullListAttributes() || [];
+        if(this.attributes.length == 0) {
+            this.attributes = this.activeLayer.featuresAttributes() || [];
+        }
     } else {
         this.attributes = [];
     }
@@ -108,10 +114,10 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
             self.addInput(self.mode);
         });
 
-        var listAttributes = self.activeLayer ? self.activeLayer.listAttributes() : [];
+        var shortListAttributes = self.activeLayer ? self.activeLayer.shortListAttributes() : [];
         var popupAttributes = self.activeLayer ? self.activeLayer.popupAttributes() : [];
 
-        if(listAttributes) {
+        if(shortListAttributes) {
             element.find('.list-attribute').each(function(idx, elm) {
                 elm = $(elm);
                 elm.change(function() {
@@ -119,7 +125,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
                         self.setListPopupAttributes(element);
                     }
                 });
-                if($.inArray(elm.val(), listAttributes) != -1) {
+                if($.inArray(elm.val(), shortListAttributes) != -1) {
                     elm.attr('checked', 'checked');
                 }
 
@@ -140,7 +146,11 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
             })
         }
 
-        element.find('#sortable').sortable();
+        element.find('#sortable').sortable({
+            stop: function() {
+                self.setListPopupAttributes(element);
+            }
+        });
 
         if(this.activeLayer && this.activeLayer.featureStylingRule) {
             element.find('#attribute').val(this.activeLayer.featureStylingRule.attribute);
@@ -318,27 +328,39 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
     },
     setListPopupAttributes: function(element) {
         var self = this;
-        var listAttributes = [];
+        var fullListAttributes = [];
+        var shortListAttributes = [];
         var popupAttributes = [];
-        $.each(element.find('.list-attribute:checked'), function(idx, checkbox) {
-            listAttributes.push(checkbox.value);
+        $.each(element.find('.list-attribute'), function(idx, checkbox) {
+            console.log(checkbox.value, $(checkbox).attr('checked'))
+            fullListAttributes.push(checkbox.value);
+            if($(checkbox).is(':checked')) {
+                shortListAttributes.push(checkbox.value);
+            }
         });
         $.each(element.find('.popup-attribute:checked'), function(idx, checkbox) {
             popupAttributes.push(checkbox.value);
         });
-        self.activeLayer.listAttributes(listAttributes);
+        self.activeLayer.fullListAttributes(fullListAttributes);
+        self.activeLayer.shortListAttributes(shortListAttributes);
         self.activeLayer.popupAttributes(popupAttributes);
     },
     _registerLayerEvents: function(layer) {
         var self = this;
         if(self.activeLayer instanceof gbi.Layers.SaveableVector && !self.activeLayer.loaded) {
             $(layer).on('gbi.layer.couch.loadFeaturesEnd', function() {
-                self.attributes = layer.featuresAttributes();
+                self.attributes = self.activeLayer.fullListAttributes() || [];
+                if(self.attributes.length == 0) {
+                    self.attributes = self.activeLayer.featuresAttributes() || [];
+                }
                 self.render();
             });
         }
         $(layer).on('gbi.layer.vector.featureAttributeChanged', function() {
-            self.attributes = layer.featuresAttributes();
+            self.attributes = self.activeLayer.fullListAttributes() || [];
+            if(self.attributes.length == 0) {
+                self.attributes = self.activeLayer.featuresAttributes() || [];
+            }
             self.render();
         });
     },
