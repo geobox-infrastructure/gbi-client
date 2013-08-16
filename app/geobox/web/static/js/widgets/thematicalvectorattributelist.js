@@ -5,7 +5,13 @@ var thematicalVectorAttributeListLabels = {
     'shortList': OpenLayers.i18n('Short list'),
     'fullList': OpenLayers.i18n('Complete list'),
     'filter': OpenLayers.i18n('Filter')
-}
+};
+var thematicalVectorAttributeListTitles = {
+    'removeFilter': OpenLayers.i18n('Remove Filter'),
+    'toggleShortList': OpenLayers.i18n('Show feature list with user defined attributes'),
+    'toggleFullList': OpenLayers.i18n('Show feature list with all attributes'),
+    'showFeature': OpenLayers.i18n('Center on feature in map')
+};
 
 gbi.widgets = gbi.widgets || {};
 
@@ -133,7 +139,7 @@ gbi.widgets.ThematicalVectorAttributeList.template = '\
     <% if(filterValue) { %>\
         <div>\
             <h4 class="inline-block">' + thematicalVectorAttributeListLabels.filter + ': <% if(filterValue.type == "range") { %><%=filterValue.value%><% } else { %><%=filterValue.attribute%> = <%=filterValue.value%><% } %></h4>\
-            <button class="btn btn-small" id="removeFilter">\
+            <button class="btn btn-small" id="removeFilter" title="' + thematicalVectorAttributeListTitles.removeFilter + '">\
                 <i class="icon-remove"></i>\
             </button>\
         </div>\
@@ -142,11 +148,13 @@ gbi.widgets.ThematicalVectorAttributeList.template = '\
          data-toggle="buttons-radio">\
         <button id="toggleShortList"\
                 type="button"\
+                title="' + thematicalVectorAttributeListTitles.toggleShortList + '"\
                 class="btn btn-small active">\
             ' + thematicalVectorAttributeListLabels.shortList + '\
         </button>\
         <button id="toggleFullList"\
                 type="button"\
+                title="' + thematicalVectorAttributeListTitles.toggleFullList + '"\
                 class="btn btn-small">\
             ' + thematicalVectorAttributeListLabels.fullList + '\
         </button>\
@@ -177,7 +185,7 @@ gbi.widgets.ThematicalVectorAttributeList.template = '\
                         </td>\
                     <% } %>\
                     <td>\
-                        <button class="btn btn-small show-feature" id="<%=f_key%>">\
+                        <button class="btn btn-small show-feature" id="<%=f_key%>" title="' + thematicalVectorAttributeListTitles.showFeature + '">\
                             <i class="icon-fullscreen"></i>\
                         </button>\
                     </td>\
@@ -209,7 +217,7 @@ gbi.widgets.ThematicalVectorAttributeList.template = '\
                     </td>\
                 <% } %>\
                 <td>\
-                    <button class="btn btn-small show-feature" id="<%=f_key%>">\
+                    <button class="btn btn-small show-feature" id="<%=f_key%>" title="' + thematicalVectorAttributeListTitles.showFeature + '">\
                         <i class="icon-fullscreen"></i>\
                     </button>\
                 </td>\

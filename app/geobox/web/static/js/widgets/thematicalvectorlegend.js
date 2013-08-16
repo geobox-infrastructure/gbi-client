@@ -9,6 +9,9 @@ var thematicalVectorLegendLabel = {
     'noLayer': OpenLayers.i18n('No layer selected'),
     'createThematicalMap': OpenLayers.i18n('Create thematical map')
 };
+var thematicalVectorLegendTitles = {
+    'showFeatureList': OpenLayers.i18n('Show filtered features in list')
+}
 
 gbi.widgets = gbi.widgets || {};
 
@@ -160,7 +163,7 @@ gbi.widgets.ThematicalVectorLegend.template = '\
                     <td class="text-center" id="_<%=entries[key].id%>_area"></td>\
                     <% if(featureList) { %>\
                         <td class="text-center">\
-                            <button id="_<%=entries[key].id%>_list_view" class="btn btn-small">\
+                            <button id="_<%=entries[key].id%>_list_view" class="btn btn-small" title="' + thematicalVectorLegendTitles.showFeatureList + '">\
                                 <i class="icon-list"></i>\
                             </button>\
                         </td>\

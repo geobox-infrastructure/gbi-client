@@ -25,6 +25,11 @@ var thematicalVectorConfiguratorLabel = {
     'maxListAttributesArrived': OpenLayers.i18n('Maximum of selectable shortlist attributes arrived'),
     'maxPopupAttributesArrived': OpenLayers.i18n('Maximum of selectable popup attributes arrived')
 };
+var ThematicalVectorConfiguratorTitles = {
+    'showExact': OpenLayers.i18n('Create thematical map using exact values'),
+    'rangeExact': OpenLayers.i18n('Create thematical map using ranges'),
+    'addInput': OpenLayers.i18n('Add input field')
+};
 
 gbi.widgets = gbi.widgets || {};
 
@@ -407,11 +412,13 @@ gbi.widgets.ThematicalVectorConfigurator.template = '\
          data-toggle="buttons-radio">\
         <button id="toggleExact"\
                 type="button"\
+                title="' + ThematicalVectorConfiguratorTitles.showExact + '"\
                 class="btn btn-small active">\
             ' + thematicalVectorConfiguratorLabel.exact + '\
         </button>\
         <button id="toggleRange"\
                 type="button"\
+                title="' + ThematicalVectorConfiguratorTitles.showRange + '"\
                 class="btn btn-small">\
             ' + thematicalVectorConfiguratorLabel.range + '\
         </button>\
@@ -449,7 +456,7 @@ gbi.widgets.ThematicalVectorConfigurator.template = '\
             </tbody>\
         </table>\
     </div>\
-    <button class="btn btn-small" id="addInput">' + thematicalVectorConfiguratorLabel.addInputField + '</button>\
+    <button class="btn btn-small" id="addInput" title="' + ThematicalVectorConfiguratorTitles.addInput + '">' + thematicalVectorConfiguratorLabel.addInputField + '</button>\
     <hr>\
     <h4>' + thematicalVectorConfiguratorLabel.listSettings + '</h4>\
     <div class="alert alert-error list-attribute-error" style="display: none">' + thematicalVectorConfiguratorLabel.maxListAttributesArrived + '</div>\
