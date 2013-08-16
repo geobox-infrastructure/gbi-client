@@ -85,13 +85,13 @@ gbi.widgets.ThematicalVectorLegend.prototype = {
                     attribute: self.legend.attribute,
                     type: thematicalVectorLegendLabel[self.legend.type],
                     entries: entries,
-                    featureList: self.options.featureList instanceof gbi.widgets.FeatureAttributeList
+                    featureList: self.options.featureList instanceof gbi.widgets.ThematicalVectorAttributeList
                 }
             ));
 
             self.updateAreas(element);
 
-            if(self.options.featureList instanceof gbi.widgets.FeatureAttributeList) {
+            if(self.options.featureList instanceof gbi.widgets.ThematicalVectorAttributeList) {
                 // bind events
                 $.each(entries, function(idx, entry) {
                     $('#_' + entry.id + '_list_view').click(function() {

@@ -37,7 +37,7 @@ gbi.widgets.ThematicalVector = function(editor, options) {
 
     self.components = {};
     if(self.options.components.list) {
-        self.components["list"] = new gbi.widgets.FeatureAttributeList(self, {
+        self.components["list"] = new gbi.widgets.ThematicalVectorAttributeList(self, {
             'element': 'thematical-feature-list',
             featurePopup: 'hover',
             initOnly: true

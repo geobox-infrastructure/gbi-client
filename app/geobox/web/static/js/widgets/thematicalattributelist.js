@@ -1,4 +1,4 @@
-var featureAttributeListLabels = {
+var thematicalVectorAttributeListLabels = {
     'noLayer': OpenLayers.i18n('No layer selected'),
     'noAttributeSelected': OpenLayers.i18n('No attributes selected'),
     'noAttribute': OpenLayers.i18n('Layer have no attributes'),
@@ -9,7 +9,7 @@ var featureAttributeListLabels = {
 
 gbi.widgets = gbi.widgets || {};
 
-gbi.widgets.FeatureAttributeList = function(thematicalVector, options) {
+gbi.widgets.ThematicalVectorAttributeList = function(thematicalVector, options) {
     if(!(thematicalVector instanceof gbi.widgets.ThematicalVector)) {
         return;
     }
@@ -44,7 +44,7 @@ gbi.widgets.FeatureAttributeList = function(thematicalVector, options) {
         self.render();
     }
 };
-gbi.widgets.FeatureAttributeList.prototype = {
+gbi.widgets.ThematicalVectorAttributeList.prototype = {
     render: function(_features, filterValue) {
         var self = this;
         var element = $('#' + this.options.element);
@@ -64,18 +64,18 @@ gbi.widgets.FeatureAttributeList.prototype = {
             feature.hasValues = hasValues;
         });
         if(!self.activeLayer) {
-            element.append($('<div class="text-center">' + featureAttributeListLabels.noLayer + '</div>'));
+            element.append($('<div class="text-center">' + thematicalVectorAttributeListLabels.noLayer + '</div>'));
             return;
         }
         // var attributes = self.activeLayer ? self.activeLayer.listAttributes() || [] : [];
 
         if(fullListAttributes.length == 0) {
-            element.append($('<div class="text-center">' + featureAttributeListLabels.noAttribute + '</div>'));
+            element.append($('<div class="text-center">' + thematicalVectorAttributeListLabels.noAttribute + '</div>'));
             return;
         }
 
         element.append(tmpl(
-            gbi.widgets.FeatureAttributeList.template, {
+            gbi.widgets.ThematicalVectorAttributeList.template, {
                 shortListAttributes: shortListAttributes,
                 fullListAttributes: fullListAttributes,
                 shortListFeatures: shortListFeatures,
@@ -130,10 +130,10 @@ gbi.widgets.FeatureAttributeList.prototype = {
     }
 };
 
-gbi.widgets.FeatureAttributeList.template = '\
+gbi.widgets.ThematicalVectorAttributeList.template = '\
     <% if(filterValue) { %>\
         <div>\
-            <h4 class="inline-block">' + featureAttributeListLabels.filter + ': <% if(filterValue.type == "range") { %><%=filterValue.value%><% } else { %><%=filterValue.attribute%> = <%=filterValue.value%><% } %></h4>\
+            <h4 class="inline-block">' + thematicalVectorAttributeListLabels.filter + ': <% if(filterValue.type == "range") { %><%=filterValue.value%><% } else { %><%=filterValue.attribute%> = <%=filterValue.value%><% } %></h4>\
             <button class="btn btn-small" id="removeFilter">\
                 <i class="icon-remove"></i>\
             </button>\
@@ -144,16 +144,16 @@ gbi.widgets.FeatureAttributeList.template = '\
         <button id="toggleShortList"\
                 type="button"\
                 class="btn btn-small active">\
-            ' + featureAttributeListLabels.shortList + '\
+            ' + thematicalVectorAttributeListLabels.shortList + '\
         </button>\
         <button id="toggleFullList"\
                 type="button"\
                 class="btn btn-small">\
-            ' + featureAttributeListLabels.fullList + '\
+            ' + thematicalVectorAttributeListLabels.fullList + '\
         </button>\
     </div>\
     <% if(shortListAttributes.length == 0) { %>\
-        <div id="shortList">' + featureAttributeListLabels.noAttributeSelected + '</div>\
+        <div id="shortList">' + thematicalVectorAttributeListLabels.noAttributeSelected + '</div>\
     <% } else { %>\
         <table id="shortList" class="table table-hover">\
             <thead>\
