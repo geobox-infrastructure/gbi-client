@@ -25,19 +25,24 @@ from mapproxy.cache.couchdb import CouchDBCache, CouchDBMDTemplate
 from mapproxy.cache.mbtiles import MBTilesCache
 from mapproxy.cache.tile import TileManager
 from mapproxy.client.http import HTTPClient, HTTPClientError, log_request
-from mapproxy.client.tile import TileClient, TileURLTemplate
 from mapproxy.client.wms import WMSClient
+from mapproxy.client.tile import TileClient, TileURLTemplate
 from mapproxy.grid import tile_grid
 from mapproxy.image import ImageSource
 from mapproxy.image.opts import ImageOptions
 from mapproxy.layer import CacheMapLayer
+from mapproxy.request.wms import create_request
 from mapproxy.seed.seeder import SeedTask, SeedProgress as SeedProgress_
 from mapproxy.source import DummySource
 from mapproxy.source.tile import TiledSource
 from mapproxy.source.wms import WMSSource
 from mapproxy.tilefilter import watermark_filter
-from mapproxy.util import reraise_exception
 from mapproxy.util.coverage import BBOXCoverage
+
+try:
+    from mapproxy.util.py import reraise_exception; reraise_exception
+except ImportError:
+    from mapproxy.util import reraise_exception
 
 from .coverage import coverage_from_geojson, coverage_intersection
 
@@ -176,15 +181,18 @@ def create_wms_source(raster_source, app_state):
 
     http_client = HTTPClient(url, username, password)
 
-    image_opts = None
     coverage = coverage_from_geojson(raster_source.download_coverage)
 
-    client = WMSClient(url, http_client=http_client)
-    return WMSSource(client, image_opts=image_opts, coverage=coverage,
-        res_range=res_range,
-        supported_srs=supported_srs,
-     )
+    request = create_request({'url': url, 'layers': raster_source.layer}, {}, version='1.1.1')
 
+    supported_srs = None
+    if raster_source.srs != 'EPSG:3857':
+        supported_srs = [raster_source.srs]
+
+    client = WMSClient(request, http_client=http_client)
+    return WMSSource(client, coverage=coverage,
+        supported_srs=supported_srs,
+    )
 
 def create_tile_manager(cache, sources, grid, format, tile_filter=None, image_opts=None):
     pre_store_filter = [tile_filter] if tile_filter else None
@@ -237,7 +245,13 @@ def image_options(source):
 
 def create_import_seed_task(import_task, app_state):
     cache = create_couchdb_cache(import_task.source, app_state)
-    source = create_wmts_source(import_task.source, app_state)
+    if import_task.source.source_type == 'wmts':
+        source = create_wmts_source(import_task.source, app_state)
+    elif import_task.source.source_type == 'wms':
+        source = create_wms_source(import_task.source, app_state)
+    else:
+        raise ValueError('unsupported source_type %s' % import_task.source.source_type)
+
     grid = DEFAULT_GRID
 
     watermark_text = app_state.config.get('watermark', 'text')
