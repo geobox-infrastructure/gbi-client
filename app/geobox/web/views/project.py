@@ -57,7 +57,6 @@ def import_list():
 @project.route('/import/<int:id>', methods=['GET', 'POST'])
 def import_edit(id=None):
     sources = g.db.query(model.ExternalWMTSSource).all()
-
     if id is None:
         proj = model.ImportProject()
     else:

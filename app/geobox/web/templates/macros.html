@@ -106,7 +106,7 @@
         var geojson_format = new OpenLayers.Format.GeoJSON();
         {%if map_source.download_coverage %}
           var coverage = {{ map_source.download_coverage|tojson|safe }};
-        {% else %}
+        {% elif map_source.wmts_source and map_source.wmts_source.download_coverage %}
           var coverage = {{ map_source.wmts_source.download_coverage|tojson|safe }};
         {% endif %}
         raster_sources['{{ map_source.id }}_coverage'].olLayer.addFeatures(geojson_format.read(coverage));
