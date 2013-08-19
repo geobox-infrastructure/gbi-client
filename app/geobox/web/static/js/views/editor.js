@@ -40,7 +40,6 @@ $(document).ready(function() {
         activeLayer = layer;
         registerEvents(activeLayer);
         $(this).attr('disabled', 'disabled').removeClass('btn-success');
-        $('#save-as').attr('disabled', 'disabled');
         $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
         $('#save-tab').removeClass('label-success').removeClass('text-warning');
     });
@@ -65,7 +64,6 @@ $(document).ready(function() {
       activeLayer._saveGBIData();
     }
     $(this).attr('disabled', 'disabled').removeClass('btn-success');
-    $('#save-as').attr('disabled', 'disabled');
     $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('label-success').removeClass('text-warning');
    });
@@ -74,10 +72,10 @@ $(document).ready(function() {
       var newName = $('#save-as-name').val();
       if(newName && activeLayer) {
         var newLayer = activeLayer.clone(newName, true);
+        newLayer.visible(true);
         editor.layerManager.addLayer(newLayer)
-        activeLayer.refresh();
-        $(this).attr('disabled', 'disabled').removeClass('btn-success');
-        $('#save-as').attr('disabled', 'disabled');
+        editor.layerManager.active(newLayer);
+        editor.widgets.layermanager.render();
         $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
         $('#save-tab').removeClass('label-success').removeClass('text-warning');
       }
@@ -88,7 +86,6 @@ $(document).ready(function() {
       activeLayer.refresh();
     }
     $(this).attr('disabled', 'disabled').removeClass('btn-success');
-    $('#save-as').attr('disabled', 'disabled');
     $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('label-success').removeClass('text-warning');
    })
@@ -139,7 +136,6 @@ $(document).ready(function() {
       if(activeLayer instanceof gbi.Layers.Couch) {
         $('#save-tab').addClass('label-success').addClass('text-warning');
         $('#save-changes').removeAttr('disabled').addClass('btn-success');
-        $('#save-as').removeAttr('disabled');
         $('#discard-changes').removeAttr('disabled').addClass('btn-danger');
       }
     };
@@ -184,10 +180,12 @@ function initEditor() {
         editor.addLayer(layer);
     });
 
-
     var layermanager = new gbi.widgets.LayerManager(editor, {
         element: 'layermanager'
     });
+
+    editor.widgets = {}
+    editor.widgets.layermanager = layermanager;
 
     var measure = new gbi.widgets.Measure(editor, {
       element: 'measure-toolbar',
