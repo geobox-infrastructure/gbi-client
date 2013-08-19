@@ -142,6 +142,37 @@ class RequestsHTTPClient(object):
                 raise HTTPClientError('response is not an image: (%s)' % (resp.content))
         return ImageSource(StringIO(resp.content))
 
+class AlwaysContainsCoverage(object):
+    """
+    AlwaysContainsCoverage wraps a coverage and always returns true for
+    contains(). Use for preventing a WMSSource from making subqueries
+    which would result in partial tiles.
+    """
+    def __init__(self, coverage):
+        self.coverage = coverage
+
+    def contains(self, bbox, srs):
+        return True
+
+    def __getattr__(self, name):
+        return getattr(self.coverage, name)
+
+class AlwaysContainsMapExtent(object):
+    """
+    AlwaysContainsMapExtent wraps an extent and always returns true for
+    contains(). Use for preventing a WMSSource from making subqueries
+    which would result in partial tiles.
+    """
+    def __init__(self, extent):
+        self.extent = extent
+
+    def contains(self, other):
+        return True
+
+    def __getattr__(self, name):
+        return getattr(self.extent, name)
+
+
 
 def create_wmts_source(raster_source, app_state):
     url = raster_source.url
@@ -182,6 +213,9 @@ def create_wms_source(raster_source, app_state):
     http_client = HTTPClient(url, username, password)
 
     coverage = coverage_from_geojson(raster_source.download_coverage)
+    if coverage:
+        # wrap to prevent partial tiles
+        coverage = AlwaysContainsCoverage(coverage)
 
     request = create_request({'url': url, 'layers': raster_source.layer}, {}, version='1.1.1')
 
@@ -190,9 +224,13 @@ def create_wms_source(raster_source, app_state):
         supported_srs = [raster_source.srs]
 
     client = WMSClient(request, http_client=http_client)
-    return WMSSource(client, coverage=coverage,
+    source = WMSSource(client, coverage=coverage,
         supported_srs=supported_srs,
     )
+
+    # wrap to prevent partial tiles
+    source.extent = AlwaysContainsMapExtent(source.extent)
+    return source
 
 def create_tile_manager(cache, sources, grid, format, tile_filter=None, image_opts=None):
     pre_store_filter = [tile_filter] if tile_filter else None
