@@ -83,7 +83,9 @@
             raster_sources[{{ source.id }}] = new gbi.Layers.WMS({
                 name: '{{ map_source.title }}',
                 url: '{{ source.url }}',
-                layer: '{{ layer_name }}',
+                params: {
+                    layers: '{{ map_source.layer }}'
+                },
                 format: '{{ map_source.format }}',
                 source_id: {{ map_source.id }},
                 download_level_start: {{ source.download_level_start }},
