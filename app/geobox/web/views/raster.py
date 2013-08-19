@@ -66,6 +66,9 @@ def wms_edit(id=None):
                 password = form.data['password'],
                 is_user_defined=True,
                 source_type='wms',
+                download_level_start=0,
+                download_level_end=20,
+                active=True,
             )
             g.db.add(wms)
             flash( _('Save local WMS'), 'success')
@@ -102,7 +105,10 @@ def wmts_edit(id=None):
                 username = form.data['username'],
                 password = form.data['password'],
                 is_user_defined= True,
-                source_type='wmts'
+                source_type='wmts',
+                download_level_start=0,
+                download_level_end=20,
+                active=True,
             )
             g.db.add(wmts)
             flash( _('Save local WMTS'), 'success')
