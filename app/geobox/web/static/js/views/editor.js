@@ -68,6 +68,55 @@ $(document).ready(function() {
     $('#save-tab').removeClass('label-success').removeClass('text-warning');
    });
 
+    $('#save-as').click(function() {
+      var newName = $('#save-as-name').val();
+      if(newName && activeLayer) {
+        var newLayer = false;
+        // clone couch if class is couch
+        if (activeLayer.CLASS_NAME == 'gbi.Layers.Couch') {
+          newLayer = activeLayer.clone(newName, true);
+          newLayer.visible(true);
+        } else {
+          //  create couch to save layer and copy features
+          newLayer = new gbi.Layers.Couch({
+              name: newName,
+              url: OpenlayersCouchURL,
+              displayInLayerSwitcher: true,
+              createDB: false,
+              visibility: true,
+              loadStyle: false,
+              callbacks: {
+                changes: function(unsavedChanges) {
+                    if(unsavedChanges)
+                        $('#save_changes').removeAttr('disabled').addClass('btn-success');
+                    else
+                        $('#save_changes').attr('disabled', 'disabled').removeClass('btn-success');
+                    }
+              }
+          });
+          newLayer.olLayer.setMap(activeLayer.olLayer.map);
+
+          var features = [];
+          $.each(activeLayer.features, function(idx, feature) {
+            newFeature = feature.clone()
+            newFeature.state = OpenLayers.State.INSERT;
+            features.push(newFeature);
+          });
+
+          newLayer.addFeatures(features);
+           $(newLayer).on('gbi.layers.couch.created', function() {
+                newLayer.save();
+            });
+          newLayer._createCouchDB(true)
+        }
+        editor.layerManager.addLayer(newLayer)
+        editor.layerManager.active(newLayer);
+        editor.widgets.layermanager.render();
+        $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+        $('#save-tab').removeClass('label-success').removeClass('text-warning');
+      }
+    });
+
    $('#discard-changes').click(function() {
     if(activeLayer) {
       activeLayer.refresh();
@@ -167,10 +216,12 @@ function initEditor() {
         editor.addLayer(layer);
     });
 
-
     var layermanager = new gbi.widgets.LayerManager(editor, {
         element: 'layermanager'
     });
+
+    editor.widgets = {}
+    editor.widgets.layermanager = layermanager;
 
     var measure = new gbi.widgets.Measure(editor, {
       element: 'measure-toolbar',
@@ -218,5 +269,6 @@ function initEditor() {
         }
         $(this).removeClass('btn-success').attr('disabled', 'disabled');
     });
+
   return editor;
 }

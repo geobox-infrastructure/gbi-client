@@ -27,8 +27,10 @@ gbi.widgets.ThematicalVector = function(editor, options) {
 
     $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
         if(layer != self.activeLayer) {
-            self.activeLayer.deactivateHover();
-            self.activeLayer.deactivateFeatureStylingRule();
+            if(self.activeLayer) {
+                self.activeLayer.deactivateHover();
+                self.activeLayer.deactivateFeatureStylingRule();
+            }
             self.activeLayer = layer;
             self.active = false;
             self.render();
