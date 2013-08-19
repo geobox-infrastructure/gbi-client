@@ -67,5 +67,7 @@ def webserver_command(config='./geobox.ini'):
     sys.argv[1:1] = ['webserver']
     app.run(port=config.get('web', 'port'), threaded=True)
 
+runserver_command = webserver_command
+
 if __name__ == '__main__':
     scriptine.run()
