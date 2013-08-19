@@ -48,7 +48,6 @@
 {% macro generate_temp_vectorlayer(layername, featureCollection) -%}
     var tmp_vectorLayer = new gbi.Layers.Vector({
         name: '{{layername}}',
-        url: OpenlayersCouchURL,
         displayInLayerSwitcher: true,
         editable: false,
     });
