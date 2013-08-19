@@ -31,8 +31,8 @@ class ExternalWMTSSource(Base):
     password = sa.Column(sa.String(64))
     name = sa.Column(sa.String, nullable=False)
     title = sa.Column(sa.String)
-    layer = sa.Column(sa.String(256), nullable=False)
-    format = sa.Column(sa.String, nullable=False)
+    layer = sa.Column(sa.String(256))
+    format = sa.Column(sa.String)
     srs = sa.Column(sa.String(64), default="EPSG:3857")
     matrix_set = sa.Column(sa.String(64), default='GoogleMapsCompatible')
     max_tiles = sa.Column(sa.Integer)
@@ -50,6 +50,8 @@ class ExternalWMTSSource(Base):
     is_overlay = sa.Column(sa.Boolean(), default=True)
     background_layer = sa.Column(sa.Boolean(), default=False)
     active = sa.Column(sa.Boolean(), default=True)
+
+    is_user_defined = sa.Column(sa.Boolean(), default=False)
 
     def bbox_from_view_coverage(self):
         coverage = coverage_from_geojson(self.view_coverage)

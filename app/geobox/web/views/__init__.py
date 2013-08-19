@@ -16,7 +16,7 @@
 __all__ = [
     'main', 'map', 'tasks', 'project', 'user',
     'admin', 'vector', 'downloads',
-    'proxy', 'boxes',
+    'proxy', 'boxes', 'raster',
 ]
 
 
@@ -30,3 +30,4 @@ from .vector import vector
 from .downloads import download_view as downloads
 from .proxy import proxy
 from .boxes import boxes
+from .raster import raster

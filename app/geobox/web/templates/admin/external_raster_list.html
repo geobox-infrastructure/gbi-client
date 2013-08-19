@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('import project overview') }}{% endblock %}
+
+{% block content %}
+    <h2>{{ _('local raster sources') }}
+        {{ generate_tooltip(_('tooltip - local raster source overview') ) }}
+    </h2>
+    <table class="table table-striped">
+        <thead>
+            <th>{{ _('name') }}</th>
+            <th>{{ _('layer') }}</th>
+            <th>{{ _('format') }}</th>
+            <th>{{ _('zoom level') }}</th>
+            <th></th>
+        </thead>
+        <tbody>
+        {% for source in local_raster_sources %}
+            <tr>
+                <td>{{ source.wmts_source.title }}</td>
+                <td>{{ source.wmts_source.name }}</td>
+                <td>{{ source.wmts_source.format }}</td>
+                <td>{{ source.zoom_level }}</td>
+                <td>
+                    <button data-remove-url="{{ url_for('.remove_source', id=source.id) }}" class="btn btn-small remove">
+                        {{ _('remove') }}
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  <hr>
+  <h2>{{_('external raster source overview')}}
+        {{ generate_tooltip(_('tooltip - external raster source overview') ) }}
+  </h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{{ _('title') }}</th>
+        <th>{{ _('layer name') }}</th>
+        <th>{{ _('protected') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for source in external_sources %}
+      <tr>
+        <td>{{ source.title }}</td>
+        <td>{{ source.layer }}</td>
+        <td></td>
+        <td>
+        	<!--  todo select if protected -->
+          <a href="{{ url_for('.raster_unlock', id=source.id) }}" class="btn btn-small" >{{ _('unlock') }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <hr>
+   <h2>{{_('internal raster source overview')}}
+        {{ generate_tooltip(_('tooltip - internal raster source overview') ) }}
+  </h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{{ _('title') }}</th>
+        <th>{{ _('url') }}</th>
+        <th>{{ _('layer name') }}</th>
+        <th>{{ _('srs') }}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for source in user_sources %}
+      <tr>
+        <td>{{ source.title }}</td>
+        <td>{{ source.url }}</td>
+        <td>{{ source.layer }}</td>
+        <td>{{ source.srs }}</td>
+        <td>
+        	{% if source.source_type == 'wmts' %}
+    	      	<a href="{{ url_for('.wmts_edit', id=source.id) }}" class="btn btn-small" >{{ _('edit') }}</a>
+          	{% elif source.source_type == 'wms' %}
+	          	<a href="{{ url_for('.wms_edit', id=source.id) }}" class="btn btn-small" >{{ _('edit') }}</a>
+          	{% endif %}
+          <button class="btn btn-small remove_layer" data-layer_remove_url="{{ url_for('.raster_remove', id=source.id) }}">{{ _('remove') }}</button>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+    <form action="{{ url_for('.wmts_edit') }}" method="GET">
+      <button type="submit" class="btn btn-small">{{ _('new wmts source') }}</button>
+    </form>
+
+    <form action="{{ url_for('.wms_edit') }}" method="GET">
+      <button type="submit" class="btn btn-small">{{ _('new wms project') }}</button>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/projects.js') }}"></script>
+{% endblock %}

@@ -48,6 +48,7 @@ def create_app(app_state):
     app.register_blueprint(views.downloads)
     app.register_blueprint(views.proxy)
     app.register_blueprint(views.boxes)
+    app.register_blueprint(views.raster)
 
     @app.before_request
     def before_request():

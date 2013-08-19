@@ -20,7 +20,7 @@ from jinja2 import Markup
 from flask import request, session, current_app, g
 
 from wtforms.fields import HiddenField, TextField, SelectField, PasswordField, BooleanField, FileField
-from wtforms.validators import Required, ValidationError, Optional
+from wtforms.validators import Required, ValidationError, Optional, Regexp
 
 from wtforms.ext.csrf.session import SessionSecureForm
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
@@ -230,3 +230,22 @@ class ExportVectorForm(Form):
 class UploadForm(Form):
     file = FileField(lazy_gettext('file'), validators=[Required()])
     overwrite = HiddenField('overwrite', default=False)
+
+class UnlockRasterSourceForm(Form):
+    username = TextField(lazy_gettext('rastersource_username'))
+    password = PasswordField(lazy_gettext('rastersource_password'))
+
+class RasterSourceForm(Form):
+    url = TextField(lazy_gettext('rastersource_url'), validators=[Required()])
+    username = TextField(lazy_gettext('rastersource_username'))
+    password = PasswordField(lazy_gettext('rastersource_password'))
+    name = TextField(lazy_gettext('rastersource_name'), validators=[Required(), Regexp('[a-zA-Z0-9_-]+$')])
+    title = TextField(lazy_gettext('rastersource_title'), validators=[Required()])
+
+class WMSForm(RasterSourceForm):
+    layer = TextField(lazy_gettext('rastersource_layer'), validators=[Required()])
+    format = SelectField(lazy_gettext('rastersource_format'), validators=[Required()], choices=[('png', 'png'), ('jpeg', 'jpeg')])
+    srs = TextField(lazy_gettext('rastersource_srs'), validators=[Required()])
+    version = SelectField(lazy_gettext('wms_version'), choices=[('1.1.1', '1.1.1'), ('1.3.0', '1.3.0')],
+        validators=[Required()])
+

@@ -24,3 +24,11 @@
 {% macro checkbox(field) -%}
 	{{ field() }} {{ field.label(class='checkbox checkbox_label') }} {{ render_errors(field) }}
 {%- endmacro %}
+
+{% macro button(text, submit=False, id=False, btn_class=None) -%}
+<div class="control-group">
+    <div class="controls">
+        <button {% if id %} id="{{id}}"{% endif %} {% if submit %}type="submit"{% endif %} class="btn btn-small{% if btn_class %} btn-{{btn_class}}{% endif %}">{{ text }}</button>
+    </div>
+</div>
+{%- endmacro %}
