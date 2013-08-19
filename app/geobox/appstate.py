@@ -83,6 +83,12 @@ class GeoBoxState(object):
         with self._migrate_step(engine) as con:
             con.execute("ALTER TABLE external_wmts_sources ADD COLUMN prefix VARCHAR(64);")
 
+        with self._migrate_step(engine) as con:
+            con.execute("ALTER TABLE tasks_vector_import ADD COLUMN source VARCHAR(64);")
+            con.execute("ALTER TABLE tasks_vector_import ADD COLUMN type_ VARCHAR(64);")
+            con.execute("ALTER TABLE tasks_vector_export ADD COLUMN srs VARCHAR(64);")
+            con.execute("ALTER TABLE tasks_vector_export ADD COLUMN type_ VARCHAR(64);")
+            con.execute("ALTER TABLE tasks_vector_export ADD COLUMN destination VARCHAR(64);")
 
     @contextmanager
     def _migrate_step(self, engine):
