@@ -1,5 +1,15 @@
 $(document).ready(function() {
+    var layerEvents = {
+      'gbi.layer.vector.styleChanged': eneableSaveButton,
+      'gbi.layer.saveableVector.unsavedChanges': eneableSaveButton,
+      'gbi.layer.vector.ruleChanged': eneableSaveButton,
+      'gbi.layer.vector.listAttributesChanged': eneableSaveButton,
+      'gbi.layer.vector.popupAttributesChanged': eneableSaveButton,
+      'gbi.layer.vector.featureAttributeChanged': eneableSaveButton
+    }
+
     var editor = initEditor();
+    var activeLayer = editor.layerManager.active();
 
     $('#tabs a').click(function (e) {
         e.preventDefault();
@@ -25,8 +35,16 @@ $(document).ready(function() {
         }
    });
 
+    $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
+        unregisterEvents(activeLayer);
+        activeLayer = layer;
+        registerEvents(activeLayer);
+        $(this).attr('disabled', 'disabled').removeClass('btn-success');
+        $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+        $('#save-tab').removeClass('label-success').removeClass('text-warning');
+    });
+
    $('#select_all_features').click(function() {
-        var activeLayer = editor.layerManager.active();
         if (!activeLayer) {
           return false;
         }
@@ -36,7 +54,82 @@ $(document).ready(function() {
         return false;
    });
 
+
+
+   // save-button enabeling events
+   $('#save-changes').click(function() {
+    if(activeLayer) {
+      activeLayer.save();
+      activeLayer._saveStyle();
+      activeLayer._saveGBIData();
+    }
+    $(this).attr('disabled', 'disabled').removeClass('btn-success');
+    $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+    $('#save-tab').removeClass('label-success').removeClass('text-warning');
+   });
+
+    $('#save-as').click(function() {
+      var newName = $('#save-as-name').val();
+      if(newName && activeLayer) {
+        var newLayer = false;
+        // clone couch if class is couch
+        if (activeLayer.CLASS_NAME == 'gbi.Layers.Couch') {
+          newLayer = activeLayer.clone(newName, true);
+          newLayer.visible(true);
+        } else {
+          //  create couch to save layer and copy features
+          newLayer = new gbi.Layers.Couch({
+              name: newName,
+              url: OpenlayersCouchURL,
+              displayInLayerSwitcher: true,
+              createDB: false,
+              visibility: true,
+              loadStyle: false,
+              callbacks: {
+                changes: function(unsavedChanges) {
+                    if(unsavedChanges)
+                        $('#save_changes').removeAttr('disabled').addClass('btn-success');
+                    else
+                        $('#save_changes').attr('disabled', 'disabled').removeClass('btn-success');
+                    }
+              }
+          });
+          newLayer.olLayer.setMap(activeLayer.olLayer.map);
+
+          var features = [];
+          $.each(activeLayer.features, function(idx, feature) {
+            newFeature = feature.clone()
+            newFeature.state = OpenLayers.State.INSERT;
+            features.push(newFeature);
+          });
+
+          newLayer.addFeatures(features);
+           $(newLayer).on('gbi.layers.couch.created', function() {
+                newLayer.save();
+            });
+          newLayer._createCouchDB(true)
+        }
+        editor.layerManager.addLayer(newLayer)
+        editor.layerManager.active(newLayer);
+        editor.widgets.layermanager.render();
+        $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+        $('#save-tab').removeClass('label-success').removeClass('text-warning');
+      }
+    });
+
+   $('#discard-changes').click(function() {
+    if(activeLayer) {
+      activeLayer.refresh();
+    }
+    $(this).attr('disabled', 'disabled').removeClass('btn-success');
+    $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+    $('#save-tab').removeClass('label-success').removeClass('text-warning');
+   })
+
    orderToolbar();
+   if(activeLayer) {
+    registerEvents(activeLayer);
+  }
 
    function orderToolbar() {
        var toolbarButton = $('#edit-toolbar .olButton');
@@ -61,7 +154,27 @@ $(document).ready(function() {
             }
 
        });
+    };
+
+    function registerEvents(layer) {
+      $.each(layerEvents, function(type, func) {
+        $(layer).on(type, func);
+      });
     }
+
+    function unregisterEvents(layer) {
+      $.each(layerEvents, function(type, func) {
+        $(layer).off(type, func);
+      });
+    };
+
+    function eneableSaveButton() {
+      if(activeLayer instanceof gbi.Layers.Couch) {
+        $('#save-tab').addClass('label-success').addClass('text-warning');
+        $('#save-changes').removeAttr('disabled').addClass('btn-success');
+        $('#discard-changes').removeAttr('disabled').addClass('btn-danger');
+      }
+    };
 
 });
 
@@ -103,10 +216,12 @@ function initEditor() {
         editor.addLayer(layer);
     });
 
-
     var layermanager = new gbi.widgets.LayerManager(editor, {
         element: 'layermanager'
     });
+
+    editor.widgets = {}
+    editor.widgets.layermanager = layermanager;
 
     var measure = new gbi.widgets.Measure(editor, {
       element: 'measure-toolbar',
@@ -154,5 +269,6 @@ function initEditor() {
         }
         $(this).removeClass('btn-success').attr('disabled', 'disabled');
     });
+
   return editor;
 }

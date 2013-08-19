@@ -29,9 +29,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvector.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorconfigurator.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorlegend.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorlegendchangeattributes.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/featureattributelist.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/featureattributelistconfigurator.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorattributelist.js') }}"></script>
 
 {% endblock %}
 
@@ -79,6 +77,9 @@
           <li>
             <a href="#thematical" data-toggle="tab">{{ _('thematical map') }}</a>
           </li>
+          <li>
+            <a href="#save" id="save-tab" data-toggle="tab">{{ _('save') }}</a>
+          </li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane fade in active" id="layermanager">
@@ -100,10 +101,6 @@
             <div class="span12">
               <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
             </div>
-            <hr id="save_dividing_line" class="span12">
-            <button id="save_changes" class="btn btn-small"  disabled="disabled">
-              {{ _('save permanent') }}</button>
-            <hr>
 
            <div>
             <ul id="editor-tabs" class="nav nav-tabs">
@@ -148,47 +145,75 @@
             <p>{{ _('infotext - thematical map') }}</p>
             <div id="thematical-vector"></div>
           </div>
+
+          <div class="tab-pane fade" id="save">
+            <h4>{{ _('save changes') }}</h4>
+            <p>{{ _('infotext - editor save') }}</p>
+            <hr>
+            <h5>{{ _('save') }}</h5>
+            <button class="btn btn-small" id="save-changes" disabled="disabled">{{ _('save') }}</button>
+            <button class="btn btn-small" id="discard-changes" disabled="disabled">{{ _('discard') }}</button>
+            <hr>
+            <h5>{{ _('save as') }}</h5>
+            <div class="input-append">
+                <input class="span5" id="save-as-name" name="save-as-name" type="text">
+                <button class="btn" id="save-as" type="button">{{ _('save as') }}</button>
+            </div>
         </div>
       </div>
     </div>
 
-
-  <!-- modal for delete -->
-   <div id="deleteVectorLayer" class="modal hide">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h3>{{_('Sure you want delete layer')}} <span id="layer_title"></span>?</h3>
-    </div>
-    <div class="modal-body">
-      <p>{{ _('infotext delete layer') }}</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#" id="abort_remove_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
-      <a href="#" id="remove_layer" class="btn btn-primary">{{_('yes delete')}}</a>
-    </div>
-  </div>
-
-  <!-- modal for export -->
-   <div id="exportVectorLayer" class="modal hide">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h3>{{_('export vector layer')}} </h3>
-    </div>
-
-    <form action="{{ url_for('vector.export_vector')}}" method="POST">
+    <!-- modal for change layer -->
+    <div id="changeVectorLayer" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{_('Sure you want change layer')}}?</h3>
+      </div>
       <div class="modal-body">
-        <p>{{ _('infotext export layer') }}</p>
+        <p>{{ _('infotext change layer') }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="abort_change_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+        <a href="#" id="change_layer_discard" class="btn btn-primary">{{_('yes change and discard')}}</a>
+        <a href="#" id="change_layer_save" class="btn btn-primary">{{_('yes change and save')}}</a>
+      </div>
+    </div>
+
+    <!-- modal for delete -->
+    <div id="deleteVectorLayer" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{_('Sure you want delete layer')}} <span id="layer_title"></span>?</h3>
+      </div>
+      <div class="modal-body">
+        <p>{{ _('infotext delete layer') }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="abort_remove_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+        <a href="#" id="remove_layer" class="btn btn-primary">{{_('yes delete')}}</a>
+      </div>
+    </div>
+
+    <!-- modal for export -->
+    <div id="exportVectorLayer" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{_('export vector layer')}} </h3>
+      </div>
+      <form action="{{ url_for('vector.export_vector')}}" method="POST">
+        <div class="modal-body">
+          <p>{{ _('infotext export layer') }}</p>
           {{ export_form.name }}
           {{ select(export_form.export_type) }}
           {{ select(export_form.srs) }}
           {{ select(export_form.destination) }}
-      </div>
-      <div class="modal-footer">
-        <a href="#" id="abort_export_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
-        <button class="btn btn-primary" type="submit">{{_('export')}}</button>
-      </div>
-    </form>
-
+        </div>
+        <div class="modal-footer">
+          <a href="#" id="abort_export_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+          <button class="btn btn-primary" type="submit">{{_('export')}}</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
