@@ -15,14 +15,14 @@
             <th></th>
         </thead>
         <tbody>
-        {% for source in local_raster_sources %}
+        {% for source in local_sources %}
             <tr>
                 <td>{{ source.wmts_source.title }}</td>
                 <td>{{ source.wmts_source.name }}</td>
                 <td>{{ source.wmts_source.format }}</td>
                 <td>{{ source.zoom_level }}</td>
                 <td>
-                    <button data-remove-url="{{ url_for('.remove_source', id=source.id) }}" class="btn btn-small remove">
+                    <button data-remove-url="{{ url_for('.raster_remove', id=source.id) }}" class="btn btn-small remove">
                         {{ _('remove') }}
                     </button>
                 </td>
