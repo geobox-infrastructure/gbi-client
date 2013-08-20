@@ -39,7 +39,7 @@
       OpenLayers.ProxyHost = "{{ url_for('proxy.proxy_request') }}";
 
       {{ generate_base_layer(base_layer) }}
-      {{ generate_sources(sources, cache_url, False)}}
+      {{ generate_sources(sources, cache_url, coverages=False)}}
       {{ generate_couch_layers(couch_layers, 'true', True)}}
 
       {% if preview_layername and preview_features %}
