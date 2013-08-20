@@ -160,7 +160,8 @@
                 <button class="btn btn-small" id="save-as" type="button">{{ _('save as') }}</button>
             </div>
             <hr>
-            <h4>{{ _('load and save results') }}</h4>
+            <h4>{{ _('savepoints') }}</h4>
+            <h5>{{ _('create savepoint') }}</h5>
             <button class="btn btn-small" id="create-savepoint" type="button">{{ _('create new savepoint') }}</button>
             <span id="save-msg-success" class="span11 alert alert-success hide">{{_('save point created')}}</span>
             <span id="save-msg-error" class="span11 alert alert-error hide">{{_('error - could not create savepoint')}}</span>
@@ -168,8 +169,8 @@
               <h5>{{ _('load savepoint') }}</h5>
                 <select id="select-savepoints" class="span6"></select>
                 <div class="input-append">
-                  <button id="load-savepoint-modal" class="btn btn-small">Load Savepoint</button>
-                  <button id="delete-savepoint-modal" class="btn btn-small">Delete Savepoint</button>
+                  <button id="load-savepoint-modal" class="btn btn-small">{{ _('load') }}</button>
+                  <button id="delete-savepoint-modal" class="btn btn-small">{{ _('delete') }}</button>
                 </div>
             </div>
         </div>
@@ -183,7 +184,7 @@
         <h3>{{_('Sure you want load savepoint')}}?</h3>
       </div>
       <div class="modal-body">
-        <p>{{ _('infotext change layer') }}</p>
+        <p>{{ _('infotext load savepoint') }}</p>
       </div>
       <div class="modal-footer">
         <a href="#" id="abort_load_savepoint" class="btn" data-dismiss="modal">{{_('abort')}}</a>
@@ -197,7 +198,7 @@
         <h3>{{_('Sure you want remove savepoint')}}?</h3>
       </div>
       <div class="modal-body">
-        <p>{{ _('infotext remvove savepoint') }}</p>
+        <p>{{ _('infotext remove savepoint') }}</p>
       </div>
       <div class="modal-footer">
         <a href="#" id="abort_remove_savepoint" class="btn" data-dismiss="modal">{{_('abort')}}</a>
