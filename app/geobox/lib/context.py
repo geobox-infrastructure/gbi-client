@@ -86,6 +86,9 @@ class ContextModelUpdater(object):
         if source_type == 'wmts':
             source.tile_matrix = layer['tile_matrix']
 
+        if source_type == 'wms':
+            source.srs = layer['srs']
+
         assert source_type in ('wmts', 'wms')
         source.source_type = source_type
 

@@ -27,6 +27,7 @@ from mapproxy.cache.tile import TileManager
 from mapproxy.client.http import HTTPClient, HTTPClientError, log_request
 from mapproxy.client.wms import WMSClient
 from mapproxy.client.tile import TileClient, TileURLTemplate
+from mapproxy.srs import SRS
 from mapproxy.grid import tile_grid
 from mapproxy.image import ImageSource
 from mapproxy.image.opts import ImageOptions
@@ -217,13 +218,16 @@ def create_wms_source(raster_source, app_state):
 
     request = create_request({'url': url, 'layers': raster_source.layer}, {}, version='1.1.1')
 
+    image_opts = ImageOptions(resampling='bicubic',
+        transparent=True)
+
     supported_srs = None
     if raster_source.srs != 'EPSG:3857':
-        supported_srs = [raster_source.srs]
+        supported_srs = [SRS(raster_source.srs)]
 
     client = WMSClient(request, http_client=http_client)
     source = WMSSource(client, coverage=coverage,
-        supported_srs=supported_srs,
+        supported_srs=supported_srs, image_opts=image_opts,
     )
 
     # wrap to prevent partial tiles
