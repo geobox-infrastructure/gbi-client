@@ -31,7 +31,7 @@ from mapproxy.srs import SRS
 from mapproxy.grid import tile_grid
 from mapproxy.image import ImageSource
 from mapproxy.image.opts import ImageOptions
-from mapproxy.layer import CacheMapLayer
+from mapproxy.layer import CacheMapLayer, BlankImage
 from mapproxy.request.wms import create_request
 from mapproxy.seed.seeder import SeedTask, SeedProgress as SeedProgress_
 from mapproxy.source import DummySource
@@ -143,6 +143,67 @@ class RequestsHTTPClient(object):
                 raise HTTPClientError('response is not an image: (%s)' % (resp.content))
         return ImageSource(StringIO(resp.content))
 
+def is_valid_transformation(bbox, source_srs, dest_srs):
+    """
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(25833)
+    >>> bbox = [8,54,10,56]
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    True
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(25833)
+    >>> bbox = [-15,54,-13,56]
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    False
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(3857)
+    >>> bbox = [-180, -90, 180, 90]
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    False
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(3857)
+    >>> bbox = [-180, -90, 180, 90]
+    >>> bbox = source_srs.align_bbox(bbox)
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    False
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(3857)
+    >>> bbox = [-180, -90, 180, 90]
+    >>> bbox = source_srs.align_bbox(bbox)
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    False
+    """
+    # max delta in m
+    max_delta = 10
+    if source_srs.is_latlong:
+        max_delta = max_delta * (360.0/40000000)
+
+    x0, y0, x1, y1 = bbox
+    p1 = (x0, y0)
+    p2 = (x1, y1)
+
+    pd1, pd2 = list(source_srs.transform_to(dest_srs, [p1, p2]))
+    bbox_d = list(pd1 + pd2)
+
+    print p1, p2, '->', pd1, pd2
+
+    if float('inf') in bbox_d:
+        return False
+
+    ps1, ps2 = list(dest_srs.transform_to(source_srs, [pd1, pd2]))
+    bbox_t = list(ps1 + ps2)
+
+    print p1, p2, '->', ps1, ps2
+
+    if float('inf') in bbox_t:
+        return False
+
+    for i in range(4):
+        if abs(bbox[i] - bbox_t[i]) > max_delta:
+            return False
+
+    return True
+
 class AlwaysContainsCoverage(object):
     """
     AlwaysContainsCoverage wraps a coverage and always returns true for
@@ -153,6 +214,9 @@ class AlwaysContainsCoverage(object):
         self.coverage = coverage
 
     def contains(self, bbox, srs):
+        if srs != SRS(3857):
+            if not is_valid_transformation(bbox, srs, SRS(3857)):
+                raise BlankImage()
         return True
 
     def __getattr__(self, name):
