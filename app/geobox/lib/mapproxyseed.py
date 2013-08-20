@@ -111,7 +111,7 @@ class RequestsHTTPClient(object):
     """
     def __init__(self, url=None, username=None, password=None, insecure=False,
                  ssl_ca_certs=None, timeout=None, headers=None):
-        self.req_session = requests.Session(timeout=timeout)
+        self.req_session = requests.Session()
 
     def open(self, url, data=None):
 
@@ -172,17 +172,15 @@ class AlwaysContainsMapExtent(object):
     def __getattr__(self, name):
         return getattr(self.extent, name)
 
-
+def create_http_client(username=None, password=None):
+    return HTTPClient(username=username, password=password, headers={'User-Agent': 'GBI-Client'})
 
 def create_wmts_source(raster_source, app_state):
     url = raster_source.url
     username = raster_source.username
     password = raster_source.password
 
-    http_client = HTTPClient(url, username, password)
-                            # , insecure=insecure,
-                             # ssl_ca_certs=ssl_ca_certs, timeout=timeout,
-                             # headers=headers)
+    http_client = create_http_client(username, password)
 
     grid = DEFAULT_GRID
     image_opts = None
@@ -210,7 +208,7 @@ def create_wms_source(raster_source, app_state):
     username = raster_source.username
     password = raster_source.password
 
-    http_client = HTTPClient(url, username, password)
+    http_client = create_http_client(username, password)
 
     coverage = coverage_from_geojson(raster_source.download_coverage)
     if coverage:
