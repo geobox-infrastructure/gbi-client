@@ -232,9 +232,11 @@ def create_wms_source(raster_source, app_state):
     source.extent = AlwaysContainsMapExtent(source.extent)
     return source
 
-def create_tile_manager(cache, sources, grid, format, tile_filter=None, image_opts=None):
+def create_tile_manager(cache, sources, grid, format, tile_filter=None,
+    image_opts=None, meta_size=None, meta_buffer=None):
     pre_store_filter = [tile_filter] if tile_filter else None
     mgr = TileManager(grid, cache, sources, format,
+        meta_size=meta_size, meta_buffer=meta_buffer,
         pre_store_filter=pre_store_filter, image_opts=image_opts)
     return mgr
 
@@ -283,10 +285,13 @@ def image_options(source):
 
 def create_import_seed_task(import_task, app_state):
     cache = create_couchdb_cache(import_task.source, app_state)
+    meta_size = meta_buffer = None
     if import_task.source.source_type == 'wmts':
         source = create_wmts_source(import_task.source, app_state)
     elif import_task.source.source_type == 'wms':
         source = create_wms_source(import_task.source, app_state)
+        meta_size = [4, 4]
+        meta_buffer = 50
     else:
         raise ValueError('unsupported source_type %s' % import_task.source.source_type)
 
@@ -301,6 +306,7 @@ def create_import_seed_task(import_task, app_state):
     image_opts = image_options(import_task.source)
     tile_mgr = create_tile_manager(format=import_task.source.format,
         image_opts=image_opts, cache=cache, sources=[source],
+        meta_size=meta_size, meta_buffer=meta_buffer,
         grid=grid, tile_filter=tile_filter)
     coverage = coverage_from_geojson(import_task.coverage)
 
