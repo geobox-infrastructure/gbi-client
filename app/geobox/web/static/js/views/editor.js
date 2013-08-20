@@ -42,6 +42,8 @@ $(document).ready(function() {
         $(this).attr('disabled', 'disabled').removeClass('btn-success');
         $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
         $('#save-tab').removeClass('label-success').removeClass('text-warning');
+
+        refreshSavePointList();
     });
 
    $('#select_all_features').click(function() {
@@ -54,8 +56,6 @@ $(document).ready(function() {
         return false;
    });
 
-
-
    // save-button enabeling events
    $('#save-changes').click(function() {
     if(activeLayer) {
@@ -67,6 +67,65 @@ $(document).ready(function() {
     $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('label-success').removeClass('text-warning');
    });
+
+    // savepoint settings
+
+    $('#create-savepoint').click(function() {
+      $("#save-msg-success").hide();
+      $("#save-msg-error").hide();
+
+      var saved = activeLayer.setSavepoint();
+      if (saved.ok) {
+        $("#save-msg-success").show().fadeOut(3000);
+        refreshSavePointList();
+      } else if (saved.error) {
+        $("#save-msg-error").show().fadeOut(3000);
+      }
+    });
+
+    $("#load-savepoint-modal").click(function() {
+        $("#loadSavepointModal").modal('show');
+    });
+
+    $("#delete-savepoint-modal").click(function() {
+       $("#deleteSavepointModal").modal('show');
+    });
+
+    $('#load-savepoint').click(function() {
+      var savepoint = $("select#select-savepoints option:selected");
+      var id = savepoint.attr('id')
+      activeLayer.loadSavepoint(id);
+
+      var extent = activeLayer.olLayer.getDataExtent();
+      if (extent) {
+        editor.map.olMap.zoomToExtent(extent);
+      }
+      $("#loadSavepointModal").modal('hide');
+    });
+
+    $('#delete-savepoint').click(function() {
+      var savepoint = $("select#select-savepoints option:selected");
+      var id = savepoint.attr('id')
+      var rev = savepoint.attr('data-rev-url')
+      var deleteSavePoint = activeLayer.deleteSavepoint(id, rev);
+
+      // refresh savepoint list
+      if (deleteSavePoint.ok) {
+          refreshSavePointList();
+      }
+
+      $("#deleteSavepointModal").modal('hide');
+    });
+
+    function refreshSavePointList(savepoints) {
+      var savepoints = activeLayer.getSavepoints();
+      $("#show-savepoints").show();
+      $("#select-savepoints").empty();
+      $.each(savepoints.rows, function(index, savepoint) {
+        $("#select-savepoints").append('<option id="'+savepoint.id+'" data-rev-url="'+savepoint.value+'">'+savepoint.key+'</option>')
+      });
+    };
+    //  savepoint settings end
 
     $('#save-as').click(function() {
       var newName = $('#save-as-name').val();
