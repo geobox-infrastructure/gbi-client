@@ -126,9 +126,11 @@ $(document).ready(function() {
       $("#select-savepoints").empty();
 
       if (savepoints) {
-        $.each(savepoints.rows, function(index, savepoint) {
-          $("#select-savepoints").append('<option id="'+savepoint.id+'" data-rev-url="'+savepoint.value+'">'+savepoint.key+'</option>')
-        });
+        if (savepoints.rows) {
+          $.each(savepoints.rows, function(index, savepoint) {
+            $("#select-savepoints").append('<option id="'+savepoint.id+'" data-rev-url="'+savepoint.value+'">'+savepoint.key+'</option>')
+          });
+        }
       }
     };
     //  savepoint settings end
