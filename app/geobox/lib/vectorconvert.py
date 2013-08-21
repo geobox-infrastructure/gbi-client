@@ -29,6 +29,7 @@ except ImportError:
 from flaskext.babel import _
 
 import logging
+import re
 
 logging.basicConfig(level=logging.INFO)
 
@@ -53,6 +54,23 @@ def load_json_from_shape(shape_file, mapping):
                 yield record
     except OSError, e:
         logging.error(e)
+
+def fields_from_properties(records):
+    headers = []
+    shp_headers = []
+    type_= []
+
+    for record in records:
+        for header in record['properties']:
+            # property = record['properties'][header]
+            # if isinstance(col, basestring):
+            if header not in headers:
+                headers.append(header)
+                layer = re.sub(r'[^a-z0-9]*', '', header.lower())
+                shp_headers.append(layer[:10].upper())
+                type_.append('str')
+
+    return zip(headers,shp_headers, type_)
 
 def write_json_to_shape(records, mapping, filename='default.shp'):
     schema = mapping.create_schema()

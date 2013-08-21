@@ -78,8 +78,8 @@ class Mapping(object):
                 data['geometry']['coordinates'] = (data['geometry']['coordinates'], )
             data['properties'] = {}
             for json, shp, _type in self.fields:
-                if record.get(json, False):
-                    val = record.get(json)
+                if record['properties'].get(json, False):
+                    val = record['properties'].get(json)
                     if isinstance(val, basestring):
                         val = val.encode(self.shp_encoding)
                     data['properties'][shp] = val

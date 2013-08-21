@@ -41,9 +41,12 @@ class VectorExportProcess(ProcessBase):
                         write_json_to_file(couch.load_records(), output_file)
                 elif task.type_ == 'shp':
                     output_file = self.app_state.user_data_path('export', task.db_name + '.shp', make_dirs=True)
-                    mapping = Mapping(None, None, 'Polygon', other_srs=task.srs)
-                    write_json_to_shape(couch.load_records(), mapping, output_file)
 
+                    records = couch.load_features()
+                    fields = fields_from_properties(records)
+
+                    mapping = Mapping(None, None, 'Polygon', other_srs=task.srs, fields=tuple(fields))
+                    write_json_to_shape(couch.load_features(), mapping, output_file)
             self.task_done()
         except ConvertError, e:
             self.task_failed(e)
