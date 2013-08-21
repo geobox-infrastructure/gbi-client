@@ -118,12 +118,18 @@ $(document).ready(function() {
     });
 
     function refreshSavePointList(savepoints) {
-      var savepoints = activeLayer.getSavepoints();
+      var savepoints = false;
+      if (activeLayer) {
+        savepoints = activeLayer.getSavepoints();
+      }
       $("#show-savepoints").show();
       $("#select-savepoints").empty();
-      $.each(savepoints.rows, function(index, savepoint) {
-        $("#select-savepoints").append('<option id="'+savepoint.id+'" data-rev-url="'+savepoint.value+'">'+savepoint.key+'</option>')
-      });
+
+      if (savepoints) {
+        $.each(savepoints.rows, function(index, savepoint) {
+          $("#select-savepoints").append('<option id="'+savepoint.id+'" data-rev-url="'+savepoint.value+'">'+savepoint.key+'</option>')
+        });
+      }
     };
     //  savepoint settings end
 

@@ -37,7 +37,8 @@
 
    <script type="text/javascript">
       OpenLayers.ProxyHost = "{{ url_for('proxy.proxy_request') }}";
-
+      var exportODSURL = "{{ url_for('.export_list', export_type='ods') }}";
+      var exportCSVURL = "{{ url_for('.export_list', export_type='csv') }}";
       {{ generate_base_layer(base_layer) }}
       {{ generate_sources(sources, cache_url, False)}}
       {{ generate_couch_layers(couch_layers, 'true', True)}}
