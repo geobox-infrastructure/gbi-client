@@ -176,4 +176,4 @@ if __name__ == '__main__':
         f.write(ods_export(rows, with_headers=True))
 
     with open('/tmp/foo.csv', 'wb') as f:
-        f.write(csv_export(rows, with_headers=True))
+        f.write(csv_export(rows))
