@@ -15,12 +15,10 @@
 
 import json
 
-from datetime import datetime
-
 from geobox.process.base import ProcessBase
 from geobox.lib.couchdb import CouchDB, VectorCouchDB, CouchFileBox
-from geobox.lib.vectormapping import default_mappings as mappings, Mapping
-from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, write_json_to_file, create_feature_collection, ConvertError
+from geobox.lib.vectormapping import Mapping
+from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, fields_from_properties, write_json_to_file, create_feature_collection, ConvertError
 
 
 import logging
@@ -67,14 +65,14 @@ class VectorImportProcess(ProcessBase):
         log.debug('Start vector import process. Task %d' % self.task_id)
         try:
             with self.task() as task:
-                if task.mapping_name:
-                    mapping = mappings[task.mapping_name].copy()
-                    mapping.json_defaults = mapping.json_defaults.copy()
-                    mapping.json_defaults['import_timestamp'] = datetime.now().isoformat();
-                    mapping.json_defaults['import_file'] = task.file_name;
-                else:
-                    mapping = Mapping(None, None, '*', other_srs=task.srs)
-
+                # if task.mapping_name:
+                #     # mapping = mappings[task.mapping_name].copy()
+                #     mapping = {}
+                #     mapping.json_defaults = mapping.json_defaults.copy()
+                #     mapping.json_defaults['import_timestamp'] = datetime.now().isoformat();
+                #     mapping.json_defaults['import_file'] = task.file_name;
+                # else:
+                mapping = Mapping(None, None, '*', other_srs=task.srs)
                 couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
 
                 # import from file
