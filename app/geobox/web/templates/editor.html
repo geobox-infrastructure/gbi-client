@@ -37,7 +37,8 @@
 
    <script type="text/javascript">
       OpenLayers.ProxyHost = "{{ url_for('proxy.proxy_request') }}";
-
+      var exportODSURL = "{{ url_for('.export_list', export_type='ods') }}";
+      var exportCSVURL = "{{ url_for('.export_list', export_type='csv') }}";
       {{ generate_base_layer(base_layer) }}
       {{ generate_sources(sources, cache_url, coverages=False)}}
       {{ generate_couch_layers(couch_layers, 'true', True)}}
@@ -78,7 +79,7 @@
             <a href="#thematical" data-toggle="tab">{{ _('thematical map') }}</a>
           </li>
           <li>
-            <a href="#save" id="save-tab" data-toggle="tab">{{ _('save') }}</a>
+            <a href="#save" id="save-tab" data-toggle="tab">{{ _('save & load') }}</a>
           </li>
         </ul>
         <div class="tab-content">
@@ -157,11 +158,55 @@
             <h5>{{ _('save as') }}</h5>
             <div class="input-append">
                 <input class="span5" id="save-as-name" name="save-as-name" type="text">
-                <button class="btn" id="save-as" type="button">{{ _('save as') }}</button>
+                <button class="btn btn-small" id="save-as" type="button">{{ _('save as') }}</button>
+            </div>
+            <hr>
+            <h4>{{ _('savepoints') }}</h4>
+            <h5>{{ _('create savepoint') }}</h5>
+            <button class="btn btn-small" id="create-savepoint" type="button">{{ _('create new savepoint') }}</button>
+            <span id="save-msg-success" class="span11 alert alert-success hide">{{_('save point created')}}</span>
+            <span id="save-msg-error" class="span11 alert alert-error hide">{{_('error - could not create savepoint')}}</span>
+            <div id="show-savepoints" class="hide">
+              <h5>{{ _('load savepoint') }}</h5>
+                <select id="select-savepoints" class="span6"></select>
+                <div class="input-append">
+                  <button id="load-savepoint-modal" class="btn btn-small">{{ _('load') }}</button>
+                  <button id="delete-savepoint-modal" class="btn btn-small">{{ _('delete') }}</button>
+                </div>
             </div>
         </div>
       </div>
     </div>
+
+    <!-- modal for load savepoint -->
+    <div id="loadSavepointModal" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{_('Sure you want load savepoint')}}?</h3>
+      </div>
+      <div class="modal-body">
+        <p>{{ _('infotext load savepoint') }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="abort_load_savepoint" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+        <a href="#" id="load-savepoint" class="btn btn-primary">{{_('yes load')}}</a>      </div>
+    </div>
+
+    <!-- modal for delete savepoint -->
+    <div id="deleteSavepointModal" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{_('Sure you want remove savepoint')}}?</h3>
+      </div>
+      <div class="modal-body">
+        <p>{{ _('infotext remove savepoint') }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="abort_remove_savepoint" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+        <a href="#" id="delete-savepoint" class="btn btn-primary">{{_('yes delete')}}</a>
+      </div>
+    </div>
+
 
     <!-- modal for change layer -->
     <div id="changeVectorLayer" class="modal hide">

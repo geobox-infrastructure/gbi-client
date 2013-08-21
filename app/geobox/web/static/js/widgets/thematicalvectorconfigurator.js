@@ -337,7 +337,6 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
         var shortListAttributes = [];
         var popupAttributes = [];
         $.each(element.find('.list-attribute'), function(idx, checkbox) {
-            console.log(checkbox.value, $(checkbox).attr('checked'))
             fullListAttributes.push(checkbox.value);
             if($(checkbox).is(':checked')) {
                 shortListAttributes.push(checkbox.value);

@@ -99,5 +99,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'No entries': "{{ _('No entries') }}",
     'Apply changes': "{{ _('Apply changes') }}",
     'Discard changes': "{{ _('Discard changes') }}",
-    'Show in popup': "{{ _('Show in popup') }}"
+    'Show in popup': "{{ _('Show in popup') }}",
+    'csv': "{{ _('csv') }}",
+    'odt': "{{ _('odt') }}"
 });

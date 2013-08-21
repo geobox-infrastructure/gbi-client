@@ -10,7 +10,9 @@ var thematicalVectorAttributeListTitles = {
     'removeFilter': OpenLayers.i18n('Remove Filter'),
     'toggleShortList': OpenLayers.i18n('Show feature list with user defined attributes'),
     'toggleFullList': OpenLayers.i18n('Show feature list with all attributes'),
-    'showFeature': OpenLayers.i18n('Center on feature in map')
+    'showFeature': OpenLayers.i18n('Center on feature in map'),
+    'odt': OpenLayers.i18n('odt'),
+    'csv': OpenLayers.i18n('csv'),
 };
 
 gbi.widgets = gbi.widgets || {};
@@ -105,6 +107,30 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
             self.render();
         });
 
+        element.find('#csvExport').click(function() {
+            var geoJSON = new OpenLayers.Format.GeoJSON();
+            var features;
+            if (filterValue) {
+                features = self.activeLayer.features_filterd;
+            } else {
+                features = self.activeLayer.features
+            }
+            var geoJSONText = geoJSON.write(features);
+            $.postURL(exportCSVURL, {'data': geoJSONText, 'headers': self.activeLayer.fullListAttributes()})
+        });
+
+        element.find('#odtExport').click(function() {
+            var geoJSON = new OpenLayers.Format.GeoJSON();
+            var features;
+            if (filterValue) {
+                features = self.activeLayer.features_filterd;
+            } else {
+                features = self.activeLayer.features
+            }
+            var geoJSONText = geoJSON.write(features);
+            $.postURL(exportODSURL, {'data': geoJSONText, 'headers': self.activeLayer.fullListAttributes()})
+        });
+
         element.find('.show-feature').click(function() {
             var element = $(this);
             var feature = self.activeLayer.features[element.attr('id')];
@@ -120,6 +146,7 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
                 return true;
             }
         });
+        this.activeLayer.features_filterd = features;
         this.render(features, {'attribute': entry.attribute, 'value': entry.value, 'type': entry.type});
     },
     _registerLayerEvents: function(layer) {
@@ -161,6 +188,16 @@ gbi.widgets.ThematicalVectorAttributeList.template = '\
                 class="btn btn-small">\
             ' + thematicalVectorAttributeListLabels.fullList + '\
         </button>\
+    </div>\
+        <div class="btn-group pull-right">\
+        <button id="odtExport"\
+                type="button"\
+                title="' + thematicalVectorAttributeListTitles.odt + '"\
+                class="btn btn-small">'+ thematicalVectorAttributeListTitles.odt + '</button>\
+        <button id="csvExport"\
+                type="button"\
+                title="' + thematicalVectorAttributeListTitles.csv + '"\
+                class="btn btn-small">'+ thematicalVectorAttributeListTitles.csv + '</button>\
     </div>\
     <% if(shortListAttributes.length == 0) { %>\
         <div id="shortList">' + thematicalVectorAttributeListLabels.noAttributeSelected + '</div>\
