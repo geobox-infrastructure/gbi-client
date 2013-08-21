@@ -119,7 +119,7 @@ $(document).ready(function() {
 
     function refreshSavePointList(savepoints) {
       var savepoints = false;
-      if (activeLayer) {
+      if (activeLayer && activeLayer.CLASS_NAME == "gbi.Layers.Couch") {
         savepoints = activeLayer.getSavepoints();
       }
       $("#show-savepoints").show();
