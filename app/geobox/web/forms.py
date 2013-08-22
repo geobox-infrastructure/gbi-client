@@ -223,6 +223,7 @@ class TileBoxPathForm(Form):
 
 class ExportVectorForm(Form):
     name = HiddenField(lazy_gettext('name'), validators=[Required()])
+    filename = TextField(lazy_gettext('filename'), validators=[Required()])
     export_type = SelectField(lazy_gettext('export_type'), choices=[('shp', 'SHP'), ('geojson', 'GeoJSON')], coerce=str, validators=[Required()])
     srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
     destination = SelectField(lazy_gettext('destination'), validators=[Required()])

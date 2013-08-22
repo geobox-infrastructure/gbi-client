@@ -249,6 +249,7 @@
         <div class="modal-body">
           <p>{{ _('infotext export layer') }}</p>
           {{ export_form.name }}
+          {{ input(export_form.filename) }}
           {{ select(export_form.export_type) }}
           {{ select(export_form.srs) }}
           {{ select(export_form.destination) }}

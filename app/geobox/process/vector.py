@@ -34,13 +34,13 @@ class VectorExportProcess(ProcessBase):
                     if task.destination != 'file':
                         dest_couch = CouchFileBox('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.destination)
                         data = json.dumps(create_feature_collection(couch.load_records()))
-                        file_obj = {'content-type': 'application/json' , 'file': data, 'filename': task.db_name + '.json' }
+                        file_obj = {'content-type': 'application/json' , 'file': data, 'filename': task.file_name + '.json' }
                         dest_couch.store_file(file_obj, overwrite=True)
                     else:
-                        output_file = self.app_state.user_data_path('export', 'vector', task.db_name + '.json', make_dirs=True)
+                        output_file = self.app_state.user_data_path('export', 'vector', task.file_name + '.json', make_dirs=True)
                         write_json_to_file(couch.load_records(), output_file)
                 elif task.type_ == 'shp':
-                    output_file = self.app_state.user_data_path('export',  'vector', task.db_name+"_"+task.srs + '.shp', make_dirs=True)
+                    output_file = self.app_state.user_data_path('export',  'vector', task.file_name+ '.shp', make_dirs=True)
                     # create fields for shp - use for mapping
                     fields = fields_from_properties(couch.load_features())
                     mapping = Mapping(None, None, 'Polygon', other_srs=task.srs, fields=tuple(fields))

@@ -218,12 +218,14 @@ def export_vector():
     layername = request.form.get('name', False)
     export_type = request.form.get('export_type', False)
     destination = request.form.get('destination', False)
+    filename = request.form.get('filename', False)
 
     task = VectorExportTask(
        db_name=layername,
        srs=proj,
        type_=export_type,
        destination=destination,
+       file_name=filename,
     )
 
     g.db.add(task)
