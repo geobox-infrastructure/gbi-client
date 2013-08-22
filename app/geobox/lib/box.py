@@ -21,7 +21,7 @@ from collections import namedtuple
 import json
 import requests
 
-from geobox.lib.couchdb import UnexpectedResponse
+from geobox.lib.couchdb import UnexpectedResponse, VectorCouchDB
 
 feature = namedtuple('feature', ['id', 'rev', 'layer', 'properties', 'geometry'])
 
@@ -69,44 +69,17 @@ class FeatureInserter(object):
             self._check_metadata_doc(layer, source)
 
     def insert(self, feature):
-        doc_url = self.url + '/' + feature.layer + '/' + feature.id
-
+        couch = VectorCouchDB(self.url, feature.layer )
         feature_dict = {
             'geometry': feature.geometry,
             'properties': feature.properties,
             'type': 'Feature',
         }
-        resp = self.session.put(doc_url,
-            data=json.dumps(feature_dict),
-            headers=[('Content-type', 'application/json')],
-        )
+        existing_feature = couch.get(feature.id)
+        if existing_feature:
+            feature_dict['_rev'] = existing_feature['_rev']
 
-        if resp.status_code == 409:
-            # conflict, get rev and overwrite existing
-            resp = self.session.get(doc_url)
-            existing_doc = resp.json()
-            feature_dict['_rev'] = existing_doc['_rev']
-            reinsert = True
-        elif resp.status_code == 404:
-            # db not found, create it first
-            db_url = self.url + '/' + feature.layer
-            resp = self.session.put(db_url)
-            if resp.status_code != 201:
-                raise UnexpectedResponse('unable to create db %s: %s %s' % (
-                    db_url, resp, resp.content))
-            reinsert = True
-        else:
-            reinsert = False
-
-        if reinsert:
-            resp = self.session.put(doc_url,
-                data=json.dumps(feature_dict),
-                headers=[('Content-type', 'application/json')],
-            )
-
-        if resp.status_code != 201:
-            raise UnexpectedResponse('unable to insert feature at %s: %s %s' % (
-                doc_url, resp, resp.content))
+        couch.put(feature.id, feature_dict)
 
         self.inserted_layers.add(feature.layer)
 
