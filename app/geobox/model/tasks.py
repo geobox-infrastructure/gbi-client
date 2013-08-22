@@ -95,6 +95,7 @@ class VectorExportTask(Task):
     srs = sa.Column(sa.String(64), default="EPSG:3857")
     type_ = sa.Column(sa.String(64), default="shp")
     destination = sa.Column(sa.String(64), default="file")
+    geojson = sa.Column(sa.String(64))
 
 class ReplicationTask(Task):
     task_type = lazy_gettext('replication')

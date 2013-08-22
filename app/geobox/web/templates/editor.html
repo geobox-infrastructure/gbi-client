@@ -98,10 +98,16 @@
             <p>{{ _('infotext - edit controls') }}</p>
             <div id="edit-toolbar" class="span12">
             </div>
-
             <div class="span12">
               <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
             </div>
+            <div class="span12">
+              <hr>
+              <button id="export_vectorlayer" title="export" class="btn btn-small">
+               <i class="icon-edit"></i> Export
+               </button>
+                <hr>
+             </div>
 
            <div>
             <ul id="editor-tabs" class="nav nav-tabs">
@@ -249,6 +255,7 @@
         <div class="modal-body">
           <p>{{ _('infotext export layer') }}</p>
           {{ export_form.name }}
+          {{ export_form.geojson }}
           {{ input(export_form.filename) }}
           {{ select(export_form.export_type) }}
           {{ select(export_form.srs) }}

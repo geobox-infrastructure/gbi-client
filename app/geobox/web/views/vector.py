@@ -219,6 +219,7 @@ def export_vector():
     export_type = request.form.get('export_type', False)
     destination = request.form.get('destination', False)
     filename = request.form.get('filename', False)
+    geojson = request.form.get('geojson', '')
 
     task = VectorExportTask(
        db_name=layername,
@@ -226,6 +227,7 @@ def export_vector():
        type_=export_type,
        destination=destination,
        file_name=filename,
+       geojson=geojson,
     )
 
     g.db.add(task)

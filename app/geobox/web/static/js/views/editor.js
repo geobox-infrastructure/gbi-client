@@ -243,6 +243,29 @@ $(document).ready(function() {
       }
     };
 
+
+    $("#export_vectorlayer").click(function() {
+        var layer = activeLayer;
+        var features = editor.widgets.attributeEditor.selectedFeatures;
+        // add value to hiddenfoelds
+        $("#exportVectorLayer input#name").val(layer.olLayer.name)
+        if (features && features.length != 0) {
+          var geoJSON = new OpenLayers.Format.GeoJSON();
+          var geoJSONText = geoJSON.write(features);
+          $("#exportVectorLayer input#geojson").val(geoJSONText)
+        }
+
+        // add filename
+        $("#exportVectorLayer input#filename").val(layer.olLayer.name)
+        // show modal
+        $('#exportVectorLayer').modal('show');
+        $('#exportVectorLayer').on('hidden', function () {
+          $('#remove_layer').off('click');
+          $('#deleteVectorLayer').off('hidden');
+         })
+        return false;
+    });
+
 });
 
 function initEditor() {
@@ -320,6 +343,7 @@ function initEditor() {
     toolbar.select.deactivate();
 
     var attributeEditor = new gbi.widgets.AttributeEditor(editor);
+    editor.widgets.attributeEditor = attributeEditor;
     var styleEditor = new gbi.widgets.StyleEditor(editor);
     var pointStyleEditor = new gbi.widgets.PointStyleEditor(editor);
 
