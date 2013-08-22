@@ -13,6 +13,23 @@ Each layer contains a ``metadata`` document.
     {
         "title": "Title of layer",
         "type": "GeoJSON",
+        "appOptions": {
+            "jsonSchema": {
+                "url": {},
+                "schema": {}
+            },
+            "olDefaultStyle": {
+                [...]
+            },
+            "gbiThematicalMap": {
+                [...]
+            },
+            "gbiAttributeLists": {
+                "popup": [],
+                "shortList": [],
+                "fullList": [],
+            }
+        }
     }
 
 
@@ -57,9 +74,9 @@ Each layer may also contain a ``gbi_editor`` document.
 
     {
         "thematical": {
-            "type": "exact",
-            "attribute": "foo",
-            "filterOptions": [
+            "filterType": "exact",
+            "filterAttribute": "foo",
+            "filters": [
                 {
                     "value": "bar",
                     "symbolizer": {
@@ -110,8 +127,8 @@ Raster layers
             "srs": "EPSG:3857",
             "layers": "osm"
         },
-        "min_level": 0,
-        "max_level": 10,
+        "levelMin": 0,
+        "levelMax": 10,
         "coverage": {
             // GeoJSON
             type: "Polygon",
@@ -130,8 +147,8 @@ Raster layers
             "format": "png",
             "layer": "osm",
         },
-        "min_level": 0,
-        "max_level": 10,
+        "levelMin": 0,
+        "levelMax": 10,
         "coverage": {
             // GeoJSON
             type: "Polygon",
