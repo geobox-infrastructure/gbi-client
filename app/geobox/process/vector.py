@@ -68,16 +68,8 @@ class VectorImportProcess(ProcessBase):
         log.debug('Start vector import process. Task %d' % self.task_id)
         try:
             with self.task() as task:
-                # if task.mapping_name:
-                #     # mapping = mappings[task.mapping_name].copy()
-                #     mapping = {}
-                #     mapping.json_defaults = mapping.json_defaults.copy()
-                #     mapping.json_defaults['import_timestamp'] = datetime.now().isoformat();
-                #     mapping.json_defaults['import_file'] = task.file_name;
-                # else:
                 mapping = Mapping(None, None, '*', other_srs=task.srs)
                 couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
-
                 # import from file
                 if task.source == 'file':
                     input_file = self.app_state.user_data_path('import', task.file_name)

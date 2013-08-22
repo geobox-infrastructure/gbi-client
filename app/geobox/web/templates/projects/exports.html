@@ -43,8 +43,6 @@
               <div>{{ layer.layer_type}} -
                   {% if layer.source %}
                    {{ layer.source.wmts_source.title }} (Level: {{ layer.start_level }}-{{ layer.end_level}})
-                  {% else %}
-                   {{ layer.mapping_name }}
                   {% endif %}
               </div>
             </li>

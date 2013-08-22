@@ -202,12 +202,6 @@ def export_edit(id=None):
                 end_level=end_level,
                 project=proj
             ))
-
-        if form.data['mapping_name'] != 'None':
-            g.db.add(model.ExportVectorLayer(
-                mapping_name=form.data['mapping_name'],
-                project=proj
-            ))
         g.db.commit()
 
         if form.start.data == 'start':

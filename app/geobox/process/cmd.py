@@ -52,11 +52,11 @@ def main():
 
     # create test tasks
     tasks = []
-    # tasks.append(VectorImportTask(db_name='foobar', file_name=path('../example_data/points.shp'), mapping_name='Points'))
-    # tasks.append(VectorImportTask(db_name='foobar', file_name=path('../example_data/lines.shp'), mapping_name='Lines'))
+    tasks.append(VectorImportTask(db_name='foobar', file_name=path('../example_data/points.shp') ))
+    tasks.append(VectorImportTask(db_name='foobar', file_name=path('../example_data/lines.shp') ))
 
-    # tasks.append(ReplicationTask(db_name='foobar', remote_db_url='http://127.0.0.1:5984', remote_db_name='foobar2', push=True))
-    # tasks.append(ReplicationTask(db_name='foobar', remote_db_url='http://127.0.0.1:5984', remote_db_name='foobar2', pull=True))
+    tasks.append(ReplicationTask(db_name='foobar', remote_db_url='http://127.0.0.1:5984', remote_db_name='foobar2', push=True))
+    tasks.append(ReplicationTask(db_name='foobar', remote_db_url='http://127.0.0.1:5984', remote_db_name='foobar2', pull=True))
 
     source = model.ExternalWMTSSource(name='test', url="http://a.tile.openstreetmap.org/%(z)s/%(x)s/%(y)s.png", format='png')
     layer = session.query(model.RasterLayer).filter_by(name='osm').all()
