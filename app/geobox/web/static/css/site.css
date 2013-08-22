@@ -14,9 +14,10 @@ body {
     width: auto;
 }
 
-/* Overwrite max-width from bootstrap */
+/* Overwrite max-width and width from bootstrap */
 .map img {
-    max-width: 512px;
+    max-width: 5000px;
+    width: auto;
 }
 
 #show_zoomlevel {

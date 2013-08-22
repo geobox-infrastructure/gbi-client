@@ -40,6 +40,7 @@ def create_app(app_state):
     from . import views
     app.register_blueprint(views.main)
     app.register_blueprint(views.map)
+    app.register_blueprint(views.editor)
     app.register_blueprint(views.tasks)
     app.register_blueprint(views.project)
     app.register_blueprint(views.user)
@@ -48,6 +49,7 @@ def create_app(app_state):
     app.register_blueprint(views.downloads)
     app.register_blueprint(views.proxy)
     app.register_blueprint(views.boxes)
+    app.register_blueprint(views.raster)
 
     @app.before_request
     def before_request():

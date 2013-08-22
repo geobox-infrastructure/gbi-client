@@ -4,32 +4,6 @@
 {% block title %} {{_('settings')}} {% endblock %}
 
 {% block content %}
-    <h3>{{ _('local raster sources') }}</h3>
-    <table class="table table-striped">
-        <thead>
-            <th>{{ _('name') }}</th>
-            <th>{{ _('layer') }}</th>
-            <th>{{ _('format') }}</th>
-            <th>{{ _('zoom level') }}</th>
-            <th></th>
-        </thead>
-        <tbody>
-        {% for source in raster_sources %}
-            <tr>
-                <td>{{ source.wmts_source.title }}</td>
-                <td>{{ source.wmts_source.name }}</td>
-                <td>{{ source.wmts_source.format }}</td>
-                <td>{{ source.zoom_level }}</td>
-                <td>
-                    <button data-remove-url="{{ url_for('.remove_source', id=source.id) }}" class="btn btn-small remove">
-                        {{ _('remove') }}
-                    </button>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
     <h3>{{ _('settings') }}</h3>
     <h4>{{ _('local net access') }}
         {{ generate_tooltip(_('tooltip local net access') ) }}

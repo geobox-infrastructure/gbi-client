@@ -50,7 +50,7 @@
                     <td>
                         {% if file.content_type == 'application/json' %}
                         <a class="btn btn-small"
-                            href="{{ url_for('map_view.editor') }}?box_name={{box_name}}&filename={{file.id}}" >{{ _('preview') }}</a>
+                            href="{{ url_for('editor_view.editor') }}?box_name={{box_name}}&filename={{file.id}}" >{{ _('preview') }}</a>
                         {% else %}
                          <span>{{ _('preview only for json') }}</span>
                         {% endif %}

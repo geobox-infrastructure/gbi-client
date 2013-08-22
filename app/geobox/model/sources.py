@@ -31,14 +31,16 @@ class ExternalWMTSSource(Base):
     password = sa.Column(sa.String(64))
     name = sa.Column(sa.String, nullable=False)
     title = sa.Column(sa.String)
-    layer = sa.Column(sa.String(256), nullable=False)
-    format = sa.Column(sa.String, nullable=False)
+    layer = sa.Column(sa.String(256))
+    format = sa.Column(sa.String)
     srs = sa.Column(sa.String(64), default="EPSG:3857")
     matrix_set = sa.Column(sa.String(64), default='GoogleMapsCompatible')
     max_tiles = sa.Column(sa.Integer)
     download_coverage = sa.Column(sa.String())
     download_level_start = sa.Column(sa.Integer())
     download_level_end = sa.Column(sa.Integer())
+
+    source_type = sa.Column(sa.String(), default='wmts')
 
     view_coverage = sa.Column(sa.String())
     view_level_start = sa.Column(sa.Integer)
@@ -49,10 +51,13 @@ class ExternalWMTSSource(Base):
     background_layer = sa.Column(sa.Boolean(), default=False)
     active = sa.Column(sa.Boolean(), default=True)
 
+    is_user_defined = sa.Column(sa.Boolean(), default=False)
+
     def bbox_from_view_coverage(self):
         coverage = coverage_from_geojson(self.view_coverage)
         bbox = coverage.bbox
         return bbox
+
 
 class LocalWMTSSource(Base):
     __tablename__ = 'local_wmts_sources'

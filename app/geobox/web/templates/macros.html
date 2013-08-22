@@ -58,10 +58,11 @@
 {%- endmacro %}
 
 
-{% macro generate_sources(sources, cache_url, coverages=True) -%}
+{% macro generate_sources(sources, cache_url=None, coverages=True) -%}
     var raster_sources = {};
     {% for source in sources %}
         {% if source.wmts_source %}
+          {# source is local, set map_source to the external #}
           {% set map_source = source.wmts_source %}
           {% set layer_name = source.wmts_source.name %}
         {% else %}
@@ -69,15 +70,30 @@
            {% set layer_name = source.layer %}
         {% endif %}
 
-        raster_sources[{{ source.id }}] = new gbi.Layers.WMTS({
-            name: '{{ map_source.title }}',
-            url: {% if source.url %} '{{add_auth_to_url(source.url, source.username, source.password)}}' {% else %} '{{ cache_url }}' {% endif %},
-            layer: '{{ layer_name }}',
-            format: '{{ map_source.format }}',
-            source_id: {{ map_source.id }},
-            download_level_start: {{ source.download_level_start }},
-            download_level_end: {{ source.download_level_end }}
-        });
+        {% if map_source.source_type == 'wms' and not cache_url %}
+           {# use WMS for direct access only (eg. when cache_url is not set) #}
+            raster_sources[{{ source.id }}] = new gbi.Layers.WMS({
+                name: '{{ map_source.title }}',
+                url: '{{ source.url }}',
+                params: {
+                    layers: '{{ map_source.layer }}'
+                },
+                format: '{{ map_source.format }}',
+                source_id: {{ map_source.id }},
+                download_level_start: {{ source.download_level_start }},
+                download_level_end: {{ source.download_level_end }}
+            });
+        {% else %}
+            raster_sources[{{ source.id }}] = new gbi.Layers.WMTS({
+                name: '{{ map_source.title }}',
+                url: {% if source.url %} '{{add_auth_to_url(source.url, source.username, source.password)}}' {% else %} '{{ cache_url }}' {% endif %},
+                layer: '{{ layer_name }}',
+                format: '{{ map_source.format }}',
+                source_id: {{ map_source.id }},
+                download_level_start: {{ source.download_level_start }},
+                download_level_end: {{ source.download_level_end }}
+            });
+        {% endif %}
 
         {% if coverages %}
 
@@ -94,7 +110,7 @@
         var geojson_format = new OpenLayers.Format.GeoJSON();
         {%if map_source.download_coverage %}
           var coverage = {{ map_source.download_coverage|tojson|safe }};
-        {% else %}
+        {% elif map_source.wmts_source and map_source.wmts_source.download_coverage %}
           var coverage = {{ map_source.wmts_source.download_coverage|tojson|safe }};
         {% endif %}
         raster_sources['{{ map_source.id }}_coverage'].olLayer.addFeatures(geojson_format.read(coverage));

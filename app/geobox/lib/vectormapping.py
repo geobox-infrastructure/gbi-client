@@ -78,8 +78,8 @@ class Mapping(object):
                 data['geometry']['coordinates'] = (data['geometry']['coordinates'], )
             data['properties'] = {}
             for json, shp, _type in self.fields:
-                if record.get(json, False):
-                    val = record.get(json)
+                if record['properties'].get(json, False):
+                    val = record['properties'].get(json)
                     if isinstance(val, basestring):
                         val = val.encode(self.shp_encoding)
                     data['properties'][shp] = val
@@ -112,59 +112,3 @@ class Mapping(object):
                         return True
             return False
         return True
-
-
-default_mappings = {
-    'schlaege he': Mapping(
-        name = u'Schläge Hessen',
-        couchdb = 'flaechen-box',
-        geom_type = 'Polygon',
-        fields = (
-            ('number', 'SCHLAGNR', 'str'),
-            ('year', 'ANSAATJAHR', 'str'),
-            ('use_code', 'NCODE', 'str'),
-            ('size', 'B_BEANTR_G', 'str'),
-            ('use', 'NUTZUNG', 'str'),
-            ('name', 'LAGE_BEZ', 'str'),
-        ),
-        field_filter = ('import_mapping', 'schlaege he'),
-        json_defaults = {
-            'import_mapping': 'schlaege he',
-        },
-        other_srs = 'EPSG:31467',
-    ),
-    'schlaege nds': Mapping(
-        name = u'Schläge Niedersachsen',
-        couchdb = 'flaechen-box',
-        geom_type = 'Polygon',
-        fields = (
-            ('number', 'SCHLAG_NR', 'str'),
-            ('year', 'JAHR', 'str'),
-        ),
-        field_filter = ('import_mapping', 'schlaege nds'),
-        json_defaults = {
-            'import_mapping': 'schlaege nds',
-        },
-        other_srs = 'EPSG:31467',
-    ),
-    'schlaege rlp': Mapping(
-        name = u'Schläge Rheinland-Pfalz',
-        couchdb = 'flaechen-box',
-        geom_type = 'Polygon',
-        fields = (
-            ('user', 'BTNR', 'str'),
-            ('number', 'SLNR', 'str'),
-            ('year', 'JAHR', 'str'),
-            ('use_code', 'NUAR', 'str'),
-            ('size', 'SLFL', 'str'),
-        ),
-        field_filter = [
-            ('import_mapping', 'schlaege rlp'),
-            ('layer', 'baselayer'),
-        ],
-        json_defaults = {
-            'import_mapping': 'schlaege rlp',
-        },
-        other_srs = 'EPSG:25832',
-    ),
-}

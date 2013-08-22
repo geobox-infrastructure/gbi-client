@@ -25,17 +25,25 @@ from mapproxy.cache.couchdb import CouchDBCache, CouchDBMDTemplate
 from mapproxy.cache.mbtiles import MBTilesCache
 from mapproxy.cache.tile import TileManager
 from mapproxy.client.http import HTTPClient, HTTPClientError, log_request
+from mapproxy.client.wms import WMSClient
 from mapproxy.client.tile import TileClient, TileURLTemplate
+from mapproxy.srs import SRS
 from mapproxy.grid import tile_grid
 from mapproxy.image import ImageSource
 from mapproxy.image.opts import ImageOptions
-from mapproxy.layer import CacheMapLayer
+from mapproxy.layer import CacheMapLayer, BlankImage
+from mapproxy.request.wms import create_request
 from mapproxy.seed.seeder import SeedTask, SeedProgress as SeedProgress_
 from mapproxy.source import DummySource
 from mapproxy.source.tile import TiledSource
+from mapproxy.source.wms import WMSSource
 from mapproxy.tilefilter import watermark_filter
-from mapproxy.util import reraise_exception
 from mapproxy.util.coverage import BBOXCoverage
+
+try:
+    from mapproxy.util.py import reraise_exception; reraise_exception
+except ImportError:
+    from mapproxy.util import reraise_exception
 
 from .coverage import coverage_from_geojson, coverage_intersection
 
@@ -104,7 +112,7 @@ class RequestsHTTPClient(object):
     """
     def __init__(self, url=None, username=None, password=None, insecure=False,
                  ssl_ca_certs=None, timeout=None, headers=None):
-        self.req_session = requests.Session(timeout=timeout)
+        self.req_session = requests.Session()
 
     def open(self, url, data=None):
 
@@ -135,16 +143,109 @@ class RequestsHTTPClient(object):
                 raise HTTPClientError('response is not an image: (%s)' % (resp.content))
         return ImageSource(StringIO(resp.content))
 
+def is_valid_transformation(bbox, source_srs, dest_srs):
+    """
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(25833)
+    >>> bbox = [8,54,10,56]
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    True
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(25833)
+    >>> bbox = [-15,54,-13,56]
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    False
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(3857)
+    >>> bbox = [-180, -90, 180, 90]
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    False
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(3857)
+    >>> bbox = [-180, -90, 180, 90]
+    >>> bbox = source_srs.align_bbox(bbox)
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    False
+    >>> source_srs = SRS(4326)
+    >>> dest_srs = SRS(3857)
+    >>> bbox = [-180, -90, 180, 90]
+    >>> bbox = source_srs.align_bbox(bbox)
+    >>> is_valid_transformation(bbox, source_srs, dest_srs)
+    False
+    """
+    # max delta in m
+    max_delta = 10
+    if source_srs.is_latlong:
+        max_delta = max_delta * (360.0/40000000)
 
-def create_source(raster_source, app_state):
+    x0, y0, x1, y1 = bbox
+    p1 = (x0, y0)
+    p2 = (x1, y1)
+
+    pd1, pd2 = list(source_srs.transform_to(dest_srs, [p1, p2]))
+    bbox_d = list(pd1 + pd2)
+
+    print p1, p2, '->', pd1, pd2
+
+    if float('inf') in bbox_d:
+        return False
+
+    ps1, ps2 = list(dest_srs.transform_to(source_srs, [pd1, pd2]))
+    bbox_t = list(ps1 + ps2)
+
+    print p1, p2, '->', ps1, ps2
+
+    if float('inf') in bbox_t:
+        return False
+
+    for i in range(4):
+        if abs(bbox[i] - bbox_t[i]) > max_delta:
+            return False
+
+    return True
+
+class AlwaysContainsCoverage(object):
+    """
+    AlwaysContainsCoverage wraps a coverage and always returns true for
+    contains(). Use for preventing a WMSSource from making subqueries
+    which would result in partial tiles.
+    """
+    def __init__(self, coverage):
+        self.coverage = coverage
+
+    def contains(self, bbox, srs):
+        if srs != SRS(3857):
+            if not is_valid_transformation(bbox, srs, SRS(3857)):
+                raise BlankImage()
+        return True
+
+    def __getattr__(self, name):
+        return getattr(self.coverage, name)
+
+class AlwaysContainsMapExtent(object):
+    """
+    AlwaysContainsMapExtent wraps an extent and always returns true for
+    contains(). Use for preventing a WMSSource from making subqueries
+    which would result in partial tiles.
+    """
+    def __init__(self, extent):
+        self.extent = extent
+
+    def contains(self, other):
+        return True
+
+    def __getattr__(self, name):
+        return getattr(self.extent, name)
+
+def create_http_client(username=None, password=None):
+    return HTTPClient(username=username, password=password, headers={'User-Agent': 'GBI-Client'})
+
+def create_wmts_source(raster_source, app_state):
     url = raster_source.url
     username = raster_source.username
     password = raster_source.password
 
-    http_client = HTTPClient(url, username, password)
-                            # , insecure=insecure,
-                             # ssl_ca_certs=ssl_ca_certs, timeout=timeout,
-                             # headers=headers)
+    http_client = create_http_client(username, password)
 
     grid = DEFAULT_GRID
     image_opts = None
@@ -167,9 +268,41 @@ def create_source(raster_source, app_state):
     return TiledSource(grid, client, coverage=coverage, image_opts=image_opts)
 
 
-def create_tile_manager(cache, sources, grid, format, tile_filter=None, image_opts=None):
+def create_wms_source(raster_source, app_state):
+    url = raster_source.url
+    username = raster_source.username
+    password = raster_source.password
+
+    http_client = create_http_client(username, password)
+
+    coverage = coverage_from_geojson(raster_source.download_coverage)
+    if coverage:
+        # wrap to prevent partial tiles
+        coverage = AlwaysContainsCoverage(coverage)
+
+    request = create_request({'url': url, 'layers': raster_source.layer}, {}, version='1.1.1')
+
+    image_opts = ImageOptions(resampling='bicubic',
+        transparent=True)
+
+    supported_srs = None
+    if raster_source.srs != 'EPSG:3857':
+        supported_srs = [SRS(raster_source.srs)]
+
+    client = WMSClient(request, http_client=http_client)
+    source = WMSSource(client, coverage=coverage,
+        supported_srs=supported_srs, image_opts=image_opts,
+    )
+
+    # wrap to prevent partial tiles
+    source.extent = AlwaysContainsMapExtent(source.extent)
+    return source
+
+def create_tile_manager(cache, sources, grid, format, tile_filter=None,
+    image_opts=None, meta_size=None, meta_buffer=None):
     pre_store_filter = [tile_filter] if tile_filter else None
     mgr = TileManager(grid, cache, sources, format,
+        meta_size=meta_size, meta_buffer=meta_buffer,
         pre_store_filter=pre_store_filter, image_opts=image_opts)
     return mgr
 
@@ -218,7 +351,16 @@ def image_options(source):
 
 def create_import_seed_task(import_task, app_state):
     cache = create_couchdb_cache(import_task.source, app_state)
-    source = create_source(import_task.source, app_state)
+    meta_size = meta_buffer = None
+    if import_task.source.source_type == 'wmts':
+        source = create_wmts_source(import_task.source, app_state)
+    elif import_task.source.source_type == 'wms':
+        source = create_wms_source(import_task.source, app_state)
+        meta_size = [4, 4]
+        meta_buffer = 50
+    else:
+        raise ValueError('unsupported source_type %s' % import_task.source.source_type)
+
     grid = DEFAULT_GRID
 
     watermark_text = app_state.config.get('watermark', 'text')
@@ -230,6 +372,7 @@ def create_import_seed_task(import_task, app_state):
     image_opts = image_options(import_task.source)
     tile_mgr = create_tile_manager(format=import_task.source.format,
         image_opts=image_opts, cache=cache, sources=[source],
+        meta_size=meta_size, meta_buffer=meta_buffer,
         grid=grid, tile_filter=tile_filter)
     coverage = coverage_from_geojson(import_task.coverage)
 

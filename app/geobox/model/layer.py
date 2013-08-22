@@ -49,4 +49,3 @@ class ExportVectorLayer(Base):
     id = sa.Column(sa.Integer, primary_key=True)
     project_id = sa.Column(sa.Integer, sa.ForeignKey('projects.id'))
     file_name = sa.Column(sa.String())
-    mapping_name = sa.Column(sa.String())

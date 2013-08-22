@@ -20,12 +20,10 @@ def send_task_logging(app_state, task):
 
     if isinstance(task, VectorImportTask):
         json_log['action'] = 'vector_import'
-        json_log['mapping'] = task.mapping_name
         json_log['source'] = task.file_name
         json_log['format'] = 'SHP'
     elif isinstance(task, VectorExportTask):
         json_log['action'] = 'vector_export'
-        json_log['mapping'] = task.mapping_name
         json_log['source'] = app_state.config.get('web', 'coverages_from_couchdb')
         json_log['format'] = 'SHP'
     elif isinstance(task, RasterImportTask):

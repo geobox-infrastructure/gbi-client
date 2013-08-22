@@ -57,7 +57,6 @@ def import_list():
 @project.route('/import/<int:id>', methods=['GET', 'POST'])
 def import_edit(id=None):
     sources = g.db.query(model.ExternalWMTSSource).all()
-
     if id is None:
         proj = model.ImportProject()
     else:
@@ -201,12 +200,6 @@ def export_edit(id=None):
                 source=raster_source,
                 start_level=start_level,
                 end_level=end_level,
-                project=proj
-            ))
-
-        if form.data['mapping_name'] != 'None':
-            g.db.add(model.ExportVectorLayer(
-                mapping_name=form.data['mapping_name'],
                 project=proj
             ))
         g.db.commit()

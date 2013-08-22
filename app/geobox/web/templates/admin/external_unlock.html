@@ -1,0 +1,24 @@
+{% extends "base_map.html" %}
+
+{% block title %}{{ _('import raster edit') }}{% endblock %}
+
+{% from "form_macros.html" import input, button %}
+
+{% block content %}
+<h2>{{_('wms sources')}}</h2>
+
+<div class="row-fluid">
+    {{ source.title }} ({{ source.name }})
+    <form method="POST" class="form-horizontal">
+     {{ form.csrf_token }}
+        <fieldset class="span5 offset1">
+            {{ input(form.username) }}
+            {{ input(form.password) }}
+        </fieldset>
+
+        <fieldset class="span9 pagination-centered">
+            {{ button(_('save'), True) }}
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

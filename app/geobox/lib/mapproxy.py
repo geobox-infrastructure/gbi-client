@@ -41,20 +41,23 @@ class MapProxyConfiguration(object):
 
     def _load_sources(self):
         local_sources = self.db_session.query(LocalWMTSSource).all()
+
         for local_source in local_sources:
             wmts_source = local_source.wmts_source
+
             self.sources[wmts_source.name + '_source'] = {
                 'type': 'wms',
                 'req': {
                     'url': 'http://dummy.example.org/service?'
                 },
-                'seed_only': True,
-                'coverage': {
+                'seed_only': True
+            }
+            if wmts_source.download_coverage:
+                self.sources[wmts_source.name + '_source']['coverage'] = {
                     'srs': 'EPSG:3857',
                     'bbox': list(coverage_from_geojson(wmts_source.download_coverage).bbox)
                 }
 
-            }
             self.caches[wmts_source.name + '_cache'] = {
                 'sources': [wmts_source.name + '_source'],
                 'grids': [wmts_source.matrix_set],

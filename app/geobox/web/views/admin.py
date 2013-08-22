@@ -45,10 +45,7 @@ def admin():
     tilebox_form = forms.TileBoxPathForm()
     tilebox_form.path.data = current_app.config.geobox_state.config.get('tilebox', 'path')
 
-    query = g.db.query(LocalWMTSSource)
-    raster_sources = query.all()
-
-    return render_template('admin.html', raster_sources=raster_sources, localnet=get_localnet_status(),
+    return render_template('admin.html', localnet=get_localnet_status(),
         form=form, tilebox_form=tilebox_form)
 
 
