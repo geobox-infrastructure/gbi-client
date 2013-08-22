@@ -16,7 +16,7 @@
 import json
 
 from geobox.process.base import ProcessBase
-from geobox.lib.couchdb import CouchDB, VectorCouchDB, CouchFileBox
+from geobox.lib.couchdb import VectorCouchDB, CouchFileBox
 from geobox.lib.vectormapping import Mapping
 from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, fields_from_properties, write_json_to_file, create_feature_collection, ConvertError
 
@@ -29,7 +29,7 @@ class VectorExportProcess(ProcessBase):
         log.debug('Start vector export process. Task %d' % self.task_id)
         try:
             with self.task() as task:
-                couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
+                couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
                 if task.type_ == 'geojson':
                     if task.destination != 'file':
                         dest_couch = CouchFileBox('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.destination)
@@ -41,11 +41,10 @@ class VectorExportProcess(ProcessBase):
                         write_json_to_file(couch.load_records(), output_file)
                 elif task.type_ == 'shp':
                     output_file = self.app_state.user_data_path('export', task.db_name + '.shp', make_dirs=True)
-
-                    records = couch.load_features()
-                    fields = fields_from_properties(records)
-
+                    # create fields for shp - use for mapping
+                    fields = fields_from_properties(couch.load_features())
                     mapping = Mapping(None, None, 'Polygon', other_srs=task.srs, fields=tuple(fields))
+                    # create shape
                     write_json_to_shape(couch.load_features(), mapping, output_file)
             self.task_done()
         except ConvertError, e:

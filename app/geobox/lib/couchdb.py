@@ -231,13 +231,6 @@ class CouchDBBase(object):
             if 'doc' in record:
                 yield record['doc']
 
-    def load_features(self):
-        resp = self.req_session.get(self.couch_db_url + '/_design/features/_view/all?include_docs=true', headers={'Accept': 'application/json'})
-        if resp.status_code == 200:
-            doc = json.loads(resp.content)
-            return self._load_records(doc.get('rows', []))
-        return []
-
     def load_records(self):
         resp = self.req_session.get(self.couch_db_url + '/_all_docs?include_docs=true', headers={'Accept': 'application/json'})
         if resp.status_code == 200:
