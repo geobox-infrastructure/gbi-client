@@ -34,7 +34,6 @@ def download_list():
 
     export_projects = g.db.query(model.ExportProject).all()
     exports_overview = []
-
     if isdir(export_path):
         # listdir returns unicode when we provide a unicode dir
         for export_dirname in listdir(unicode(export_path)):
@@ -53,6 +52,7 @@ def download_list():
                 '.jgw',
                 '.tfw',
                 '.couchdb',
+                '.json',
             )
 
             export['files'] = [files for files in listdir(export_dir)
