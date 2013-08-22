@@ -193,6 +193,29 @@ class CouchDBBase(object):
         if auth:
             self.req_session.auth = auth
 
+    def get(self, doc_id):
+        doc_url = self.couch_db_url + '/' + doc_id
+        resp = self.req_session.get(doc_url)
+        if resp.ok:
+            return resp.json()
+        elif resp.status_code != 404:
+            raise CouchDBError(
+                'got unexpected resp (%d) from CouchDB for %s: %s'
+                % (resp.status_code, doc_url, resp.content)
+            )
+
+    def put(self, doc_id, doc):
+        doc_url = self.couch_db_url + '/' + doc_id
+        resp = self.req_session.put(doc_url,
+            headers={'Accept': 'application/json'},
+            data=json.dumps(doc),
+        )
+        if resp.status_code != 201:
+            raise CouchDBError(
+                'got unexpected resp (%d) from CouchDB for %s: %s'
+                % (resp.status_code, doc_url, resp.content)
+            )
+
     def _store_bulk(self, records):
         doc = {'docs': list(records)}
         data = json.dumps(doc)
@@ -209,7 +232,7 @@ class CouchDBBase(object):
                 yield record['doc']
 
     def load_features(self):
-        resp = self.req_session.get(self.couch_db_url + '/_design/features/_view/features?include_docs=true', headers={'Accept': 'application/json'})
+        resp = self.req_session.get(self.couch_db_url + '/_design/features/_view/all?include_docs=true', headers={'Accept': 'application/json'})
         if resp.status_code == 200:
             doc = json.loads(resp.content)
             return self._load_records(doc.get('rows', []))
@@ -315,12 +338,61 @@ class VectorCouchDB(CouchDBBase):
             metadata = {'title': self.db_name}
         metadata['type'] = 'GeoJSON'
         self.init_db()
+        self.update_or_create_features_view_doc()
+        self.update_or_create_savepoints_view_doc()
         self.update_or_create_doc('metadata', metadata)
+
+    def update_or_create_features_view_doc(self):
+        feature_view_doc = {
+          "_id":"_design/features",
+          "language": "javascript",
+          "views":
+          {
+            "all": {
+              "map": "function(doc) { if (doc.type == 'Feature') {emit(doc.type, doc.drawType); } }"
+            },
+          }
+        }
+        existing_features_doc = self.get('_design/features')
+        if existing_features_doc:
+            feature_view_doc['_rev'] = existing_features_doc['_rev']
+        self.put('_design/features', feature_view_doc)
+
+    def update_or_create_savepoints_view_doc(self):
+        savepoints_view_doc = {
+          "_id":"_design/savepoints",
+          "language": "javascript",
+          "views":
+          {
+            "all": {
+              "map": "function(doc) { if (doc.type == 'savepoint') {emit(doc.title, doc._rev) } }"
+            },
+          }
+        }
+        existing_savepoints_doc = self.get('_design/savepoints')
+        if existing_savepoints_doc:
+            savepoints_view_doc['_rev'] = existing_savepoints_doc['_rev']
+        self.put('_design/savepoints', savepoints_view_doc)
+
 
     def metadata(self):
         resp = self.req_session.get(self.couch_url + '/metadata')
         if resp.status_code == 200:
             return resp.json()
+
+    def load_features(self):
+        resp = self.req_session.get(self.couch_db_url + '/_design/features/_view/all?include_docs=true', headers={'Accept': 'application/json'})
+        if resp.status_code == 200:
+            doc = json.loads(resp.content)
+            return self._load_records(doc.get('rows', []))
+        return []
+
+    def load_savepoints(self):
+        resp = self.req_session.get(self.couch_db_url + '/_design/savepoints/_view/all?include_docs=true', headers={'Accept': 'application/json'})
+        if resp.status_code == 200:
+            doc = json.loads(resp.content)
+            return self._load_records(doc.get('rows', []))
+        return []
 
 class CouchFileBox(CouchDBBase):
     def __init__(self, url, db_name):
