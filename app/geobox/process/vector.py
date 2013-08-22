@@ -37,10 +37,10 @@ class VectorExportProcess(ProcessBase):
                         file_obj = {'content-type': 'application/json' , 'file': data, 'filename': task.db_name + '.json' }
                         dest_couch.store_file(file_obj, overwrite=True)
                     else:
-                        output_file = self.app_state.user_data_path('export', task.db_name + '.json', make_dirs=True)
+                        output_file = self.app_state.user_data_path('export', 'vector', task.db_name + '.json', make_dirs=True)
                         write_json_to_file(couch.load_records(), output_file)
                 elif task.type_ == 'shp':
-                    output_file = self.app_state.user_data_path('export', task.db_name + '.shp', make_dirs=True)
+                    output_file = self.app_state.user_data_path('export',  'vector', task.db_name+"_"+task.srs + '.shp', make_dirs=True)
                     # create fields for shp - use for mapping
                     fields = fields_from_properties(couch.load_features())
                     mapping = Mapping(None, None, 'Polygon', other_srs=task.srs, fields=tuple(fields))
