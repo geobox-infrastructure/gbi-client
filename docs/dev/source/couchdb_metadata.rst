@@ -48,6 +48,42 @@ Each layer may also contain a ``style`` document.
         }
     }
 
+GBI Editor
+----------
+
+Each layer may also contain a ``gbi_editor`` document.
+
+::
+
+    {
+        "thematical": {
+            "type": "exact",
+            "attribute": "foo",
+            "filterOptions": [
+                {
+                    "value": "bar",
+                    "symbolizer": {
+                        'fillColor': '#aaa',
+                        'strokeColor': '#aaa'
+                    },
+                    "min": 0,
+                    "max": 1
+                }, {
+                    "value": "foobar",
+                    "symbolizer": {
+                        'fillColor': '#bbb',
+                        'strokeColor': '#bbb'
+                    },
+                    "min": 1,
+                    "max": 2
+                }
+            ]
+        },
+        "popupAttributes": ['foo', 'bar'],
+        "shortListAttributes": ['foo', 'foobar'],
+        "fullListAttributes": ['foo', 'bar', 'foobar']
+    }
+
 
 
 Raster layers
