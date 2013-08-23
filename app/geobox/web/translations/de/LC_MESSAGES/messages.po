@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-23 14:10+0200\n"
-"PO-Revision-Date: 2013-08-23 14:10+0100\n"
+"POT-Creation-Date: 2013-08-23 14:19+0200\n"
+"PO-Revision-Date: 2013-08-23 14:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -388,7 +388,7 @@ msgid "select all features"
 msgstr "Alle Geometrien auswählen"
 
 #: geobox/web/templates/editor.html:116
-#: geobox/web/templates/js/translation.js:85
+#: geobox/web/templates/js/translation.js:87
 msgid "Attribute"
 msgstr "Eigenschaften"
 
@@ -397,7 +397,7 @@ msgid "point styling"
 msgstr "Punktdesign"
 
 #: geobox/web/templates/editor.html:124
-#: geobox/web/templates/js/translation.js:86
+#: geobox/web/templates/js/translation.js:88
 msgid "Attributes"
 msgstr "Eigenschaften"
 
@@ -1007,199 +1007,207 @@ msgstr "Aktualisieren"
 msgid "Remove"
 msgstr "Entfernen"
 
-#: geobox/web/templates/js/translation.js:60
+#: geobox/web/templates/js/translation.js:56
+msgid "Loading schema failed"
+msgstr "Laden des JSON-Schema fehlgeschlagen"
+
+#: geobox/web/templates/js/translation.js:57
+msgid "Refreshing schema failed"
+msgstr "Aktualisieren des JSON-Schema fehlgeschlagen"
+
+#: geobox/web/templates/js/translation.js:62
 msgid "Draw polygon"
 msgstr "Polygon zeichnen"
 
-#: geobox/web/templates/js/translation.js:61
+#: geobox/web/templates/js/translation.js:63
 msgid "Draw line"
 msgstr "Linie zeichnen"
 
-#: geobox/web/templates/js/translation.js:62
+#: geobox/web/templates/js/translation.js:64
 msgid "Draw rect"
 msgstr "Rechteck zeichnen"
 
-#: geobox/web/templates/js/translation.js:63
+#: geobox/web/templates/js/translation.js:65
 msgid "Draw point"
 msgstr "Punkt zeichnen"
 
-#: geobox/web/templates/js/translation.js:64
+#: geobox/web/templates/js/translation.js:66
 msgid "Edit feature"
 msgstr "Geometrie bearbeiten"
 
-#: geobox/web/templates/js/translation.js:65
+#: geobox/web/templates/js/translation.js:67
 msgid "Delete feature"
 msgstr "Geometrie(n) löschen"
 
-#: geobox/web/templates/js/translation.js:66
+#: geobox/web/templates/js/translation.js:68
 msgid "Split feature"
 msgstr "Geometrie teilen"
 
-#: geobox/web/templates/js/translation.js:67
+#: geobox/web/templates/js/translation.js:69
 msgid "Merge features"
 msgstr "Geometrien zusammenfügen"
 
-#: geobox/web/templates/js/translation.js:68
+#: geobox/web/templates/js/translation.js:70
 msgid "Unmerge features"
 msgstr "Geometrien trennen"
 
-#: geobox/web/templates/js/translation.js:69
+#: geobox/web/templates/js/translation.js:71
 msgid "Select feature(s)"
 msgstr "Geometrie(n) auswählen"
 
-#: geobox/web/templates/js/translation.js:70
+#: geobox/web/templates/js/translation.js:72
 msgid "Snap on features"
 msgstr "An Geometrien einrasten"
 
-#: geobox/web/templates/js/translation.js:71
+#: geobox/web/templates/js/translation.js:73
 msgid "Copy feature(s)"
 msgstr "Geometrie(n) kopieren"
 
-#: geobox/web/templates/js/translation.js:74
+#: geobox/web/templates/js/translation.js:76
 msgid "Measure point"
 msgstr "Punkt bestimmen"
 
-#: geobox/web/templates/js/translation.js:75
+#: geobox/web/templates/js/translation.js:77
 msgid "Measure path"
 msgstr "Strecke messen"
 
-#: geobox/web/templates/js/translation.js:76
+#: geobox/web/templates/js/translation.js:78
 msgid "Measure area"
 msgstr "Fläche messen"
 
-#: geobox/web/templates/js/translation.js:79
+#: geobox/web/templates/js/translation.js:81
 msgid "Bad JSON: "
 msgstr "Schlechtes JSON: "
 
-#: geobox/web/templates/js/translation.js:80
+#: geobox/web/templates/js/translation.js:82
 msgid "Only OpenLayers.Feature.Vector is supported."
 msgstr "Es werden nur Objekte des Typs OpenLayers.Feature.Vector unterstützt."
 
-#: geobox/web/templates/js/translation.js:81
+#: geobox/web/templates/js/translation.js:83
 msgid "Feature was"
 msgstr "Objekt war"
 
-#: geobox/web/templates/js/translation.js:84
+#: geobox/web/templates/js/translation.js:86
 msgid "Select a value"
 msgstr "Wert auswählen"
 
-#: geobox/web/templates/js/translation.js:87
+#: geobox/web/templates/js/translation.js:89
 msgid "Exact"
 msgstr "Exakte Werte"
 
-#: geobox/web/templates/js/translation.js:88
+#: geobox/web/templates/js/translation.js:90
 msgid "Range"
 msgstr "Wertebereich"
 
-#: geobox/web/templates/js/translation.js:89
+#: geobox/web/templates/js/translation.js:91
 msgid "Value"
 msgstr "Wert"
 
-#: geobox/web/templates/js/translation.js:90
+#: geobox/web/templates/js/translation.js:92
 msgid "Color"
 msgstr "Farbe"
 
-#: geobox/web/templates/js/translation.js:91
+#: geobox/web/templates/js/translation.js:93
 msgid "Min"
 msgstr "Minimum"
 
-#: geobox/web/templates/js/translation.js:92
+#: geobox/web/templates/js/translation.js:94
 msgid "Max"
 msgstr "Maximum"
 
-#: geobox/web/templates/js/translation.js:93
+#: geobox/web/templates/js/translation.js:95
 msgid "Execute"
 msgstr "Ausführen"
 
-#: geobox/web/templates/js/translation.js:94
+#: geobox/web/templates/js/translation.js:96
 msgid "Legend for"
 msgstr "Legende für"
 
-#: geobox/web/templates/js/translation.js:95
+#: geobox/web/templates/js/translation.js:97
 msgid "Area in"
 msgstr "Fläche in"
 
-#: geobox/web/templates/js/translation.js:96
+#: geobox/web/templates/js/translation.js:98
 msgid "No thematical map present for this layer"
 msgstr "Für diesen Layer existiert keine thematische Karte"
 
-#: geobox/web/templates/js/translation.js:97
+#: geobox/web/templates/js/translation.js:99
 msgid "Add input"
 msgstr "Eingabemöglichkeit hinzufügen"
 
-#: geobox/web/templates/js/translation.js:98
+#: geobox/web/templates/js/translation.js:100
 msgid "Remove input"
 msgstr "Eintrag entfernen"
 
-#: geobox/web/templates/js/translation.js:99
+#: geobox/web/templates/js/translation.js:101
 msgid "No layer selected"
 msgstr "Keine Ebene ausgewählt"
 
-#: geobox/web/templates/js/translation.js:100
+#: geobox/web/templates/js/translation.js:102
 msgid "No attributes selected"
 msgstr "Keine Eigenschaften ausgewählt"
 
-#: geobox/web/templates/js/translation.js:101
+#: geobox/web/templates/js/translation.js:103
 msgid "Show all features"
 msgstr "Alle Einträge anzeigen"
 
-#: geobox/web/templates/js/translation.js:102
+#: geobox/web/templates/js/translation.js:104
 msgid "Show in list"
 msgstr "In Liste anzeigen"
 
-#: geobox/web/templates/js/translation.js:103
+#: geobox/web/templates/js/translation.js:105
 msgid "Apply"
 msgstr "Übernehmen"
 
-#: geobox/web/templates/js/translation.js:104
+#: geobox/web/templates/js/translation.js:106
 msgid "Map settings"
 msgstr "Karteneinstellungen"
 
-#: geobox/web/templates/js/translation.js:105
+#: geobox/web/templates/js/translation.js:107
 msgid "Legend"
 msgstr "Legende"
 
-#: geobox/web/templates/js/translation.js:106
+#: geobox/web/templates/js/translation.js:108
 msgid "Short list"
 msgstr "Kurze Liste"
 
-#: geobox/web/templates/js/translation.js:107
+#: geobox/web/templates/js/translation.js:109
 msgid "Complete list"
 msgstr "Komplette Liste"
 
-#: geobox/web/templates/js/translation.js:108
+#: geobox/web/templates/js/translation.js:110
 msgid "List settings"
 msgstr "Liste/Popup Einstellungen"
 
-#: geobox/web/templates/js/translation.js:109
+#: geobox/web/templates/js/translation.js:111
 msgid "Active"
 msgstr "Aktivieren"
 
-#: geobox/web/templates/js/translation.js:110
+#: geobox/web/templates/js/translation.js:112
 msgid "Choose value"
 msgstr "Wert auswählen"
 
-#: geobox/web/templates/js/translation.js:111
+#: geobox/web/templates/js/translation.js:113
 msgid "No entries"
 msgstr "Keine Einträge"
 
-#: geobox/web/templates/js/translation.js:112
+#: geobox/web/templates/js/translation.js:114
 msgid "Apply changes"
 msgstr "Änderungen übernehmen"
 
-#: geobox/web/templates/js/translation.js:113
+#: geobox/web/templates/js/translation.js:115
 msgid "Discard changes"
 msgstr "Änderungen verwerfen"
 
-#: geobox/web/templates/js/translation.js:114
+#: geobox/web/templates/js/translation.js:116
 msgid "Show in popup"
 msgstr "In Popup anzeigen"
 
-#: geobox/web/templates/js/translation.js:115
+#: geobox/web/templates/js/translation.js:117
 msgid "csv"
 msgstr "CSV"
 
-#: geobox/web/templates/js/translation.js:116
+#: geobox/web/templates/js/translation.js:118
 msgid "odt"
 msgstr "ODT"
 

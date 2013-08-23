@@ -53,6 +53,8 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "URL of used JSONSchema": "{{ _('URL of used JSONSchema') }}",
     "refresh": "{{ _('Refresh') }}",
     "remove": "{{ _('Remove') }}",
+    "Loading schema failed": "{{ _('Loading schema failed') }}",
+    "Refreshing schema failed": "{{ _('Refreshing schema failed') }}",
 
 
 
