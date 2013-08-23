@@ -56,21 +56,27 @@ def load_json_from_shape(shape_file, mapping):
         logging.error(e)
 
 def fields_from_properties(records):
-    headers = []
-    shp_headers = []
-    type_= []
+    columns = {}
 
     for record in records:
         for header in record['properties']:
-            # property = record['properties'][header]
-            # if isinstance(col, basestring):
-            if header not in headers:
-                headers.append(header)
-                layer = re.sub(r'[^a-z0-9]*', '', header.lower())
-                shp_headers.append(layer[:10].upper())
-                type_.append('str')
+            if header not in columns:
+                columns[header] = {}
+                columns[header]['name'] = header
+                title = re.sub(r'[^a-z0-9]*', '', header.lower())
+                columns[header]['title'] = title[:10]
+                columns[header]['type'] = 'int'
 
-    return zip(headers,shp_headers, type_)
+            prop = record['properties'][header]
+            if isinstance(prop, float) and columns[header]['type'] != 'str':
+                columns[header]['type'] = 'float'
+            if isinstance(prop, basestring):
+                columns[header]['type'] = 'str'
+
+
+    fields = ([(x[1]['name'], x[1]['title'], x[1]['type']) for x in columns.items()])
+    return tuple(fields)
+
 
 def write_json_to_shape(records, mapping, filename='default.shp'):
     schema = mapping.create_schema()
