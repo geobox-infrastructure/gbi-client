@@ -38,6 +38,11 @@ gbi.widgets.AttributeEditor = function(editor, options) {
        self.registerEvents();
     });
 
+    $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
+        self.jsonSchema = layer.jsonSchema;
+        self.render();
+    })
+
     self.render();
 };
 
