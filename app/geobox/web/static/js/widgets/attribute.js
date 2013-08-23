@@ -3,21 +3,42 @@ gbi.widgets = gbi.widgets || {};
 gbi.widgets.AttributeEditor = function(editor, options) {
     var self = this;
     var defaults = {
-        element: 'attributemanager'
+        element: 'attributemanager',
+        alpacaSchemaElement: 'alpaca_schema',
+        alpacaNonSchemaElement: 'alpaca_non_schema',
+        allowNewAttributes: true
     };
     this.layerManager = editor.layerManager;
     this.options = $.extend({}, defaults, options);
     this.element = $('#' + this.options.element);
     this.selectedFeatures = [];
     this.featureChanges = {};
+    this.invalidFeatures = [];
+    this.selectedInvalidFeature = false;
     this.changed = false;
     this.labelValue = undefined;
+    this.renderAttributes = false;
+    this.jsonSchema = this.options.jsonSchema || false;
+
+    $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.edit)
+    $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.display)
+
+    var activeLayer = this.layerManager.active();
+    var listenOn = activeLayer instanceof gbi.Layers.Couch ? 'gbi.layer.couch.loadFeaturesEnd' : 'gbi.layer.saveableVector.loadFeaturesEnd';
+    if(!activeLayer.loaded) {
+        $(activeLayer).on(listenOn, function() {
+            self.render();
+            $(activeLayer).off(listenOn, this);
+        });
+    }
 
     this.registerEvents();
 
     $(gbi).on('gbi.layermanager.layer.add', function(event, layer) {
        self.registerEvents();
     });
+
+    self.render();
 };
 
 gbi.widgets.AttributeEditor.prototype = {
@@ -46,31 +67,204 @@ gbi.widgets.AttributeEditor.prototype = {
     render: function() {
         var self = this;
         var activeLayer = this.layerManager.active();
-        var attributes = activeLayer.featuresAttributes();
+        self.invalidFeatures = $.isFunction(activeLayer.validateFeaturesAttributes) ? activeLayer.validateFeaturesAttributes() : [];
+        var attributes = self.jsonSchema ? activeLayer.schemaAttributes() : this.renderAttributes || activeLayer.featuresAttributes();
+        this.element.empty();
+
+        if(self.invalidFeatures && self.invalidFeatures.length > 0) {
+            self.renderInvalidFeatures(activeLayer);
+        } else {
+            self.selectedInvalidFeature = false;
+        }
+
+        if(self.selectedFeatures.length > 0) {
+            self.renderInputMask(attributes, activeLayer);
+        }
+
+        //prepare list of all possible rendered attributes
+        var renderedAttributes = [];
+        if(self.jsonSchema) {
+            renderedAttributes = activeLayer.schemaAttributes();
+        }
+        if(this.renderAttributes) {
+            $.each(this.renderAttributes, function(idx, attribute) {
+                if($.inArray(attribute, renderedAttributes) == -1) {
+                    renderedAttributes.push(attribute);
+                }
+            });
+        }
+        $.each(activeLayer.featuresAttributes(), function(idx, attribute) {
+            if($.inArray(attribute, renderedAttributes) == -1) {
+                renderedAttributes.push(attribute);
+            }
+        });
+
+        //bind events
+        $.each(renderedAttributes, function(idx, key) {
+            $('#'+key).change(function() {
+                var newVal = $('#'+key).val();
+                self.edit(key, newVal);
+            });
+            $('#_'+key+'_remove').click(function() {
+                self.remove(key);
+                return false;
+            });
+            $('#_'+key+'_label').click(function() {
+                self.label(key);
+                return false;
+            });
+        });
+        $('#addKeyValue').click(function() {
+            var key = $('#_newKey').val();
+            var val = $('#_newValue').val();
+            if (key && val) {
+                self.add(key, val);
+                self._applyAttributes();
+            }
+            return false;
+        });
+    },
+    renderInvalidFeatures: function(activeLayer) {
+        var self = this;
+        this.element.append(tmpl(
+            gbi.widgets.AttributeEditor.invalidFeaturesTemplate, {
+                features: self.invalidFeatures
+            }
+        ));
+
+        var id = -1;
+        if(self.selectedInvalidFeature) {
+            $.each(self.invalidFeatures, function(idx, obj) {
+                if(obj.feature.id == self.selectedInvalidFeature.feature.id) {
+                    id = idx;
+                    return false;
+                }
+            });
+        }
+        if(!self.selectedInvalidFeature || id == 0 || self.invalidFeatures.length == 1) {
+            $('#prev_invalid_feature').attr('disabled', 'disabled');
+        }  else {
+            $('#prev_invalid_feature').removeAttr('disabled');
+        }
+        console.log(self.selectedInvalidFeature, id >= self.invalidFeatures.length - 1, self.invalidFeatures.length == 1)
+        if(self.selectedInvalidFeature && (id >= self.invalidFeatures.length - 1 || self.invalidFeatures.length == 1)) {
+            $('#next_invalid_feature').attr('disabled', 'disabled');
+        } else {
+            $('#next_invalid_feature').removeAttr('disabled');
+        }
+
+        $('#prev_invalid_feature').click(function() {
+            var idx = id - 1;
+            self.showInvalidFeature(idx, activeLayer);
+        });
+
+        $('#next_invalid_feature').click(function() {
+            var idx = id + 1;
+            self.showInvalidFeature(idx, activeLayer);
+        });
+    },
+    showInvalidFeature: function(idx, activeLayer) {
+        var self = this;
+        console.log(self.invalidFeatures[idx])
+        self.selectedInvalidFeature = self.invalidFeatures[idx];
+        activeLayer.selectFeature(self.selectedInvalidFeature.feature, true);
+        activeLayer.showFeature(self.selectedInvalidFeature.feature);
+    },
+    renderInputMask: function(attributes, activeLayer) {
+        var self = this;
         var selectedFeatureAttributes = {};
         var editable = true;
+
         $.each(self.selectedFeatures, function(idx, feature) {
             if(feature.layer != activeLayer.olLayer) {
                 editable = false;
             }
-        })
-        $.each(this.selectedFeatures, function(idx, feature) {
-            $.each(attributes, function(idx, key) {
-                var equal = true;
-                var value = feature.attributes[key];
-                if(key in selectedFeatureAttributes) {
-                    equal = selectedFeatureAttributes[key].value == value;
-                    if(!equal) {
-                        selectedFeatureAttributes[key] = {'equal': false};
-                    }
-                } else {
-                    selectedFeatureAttributes[key] = {'equal': equal, 'value': value};
-                }
-            });
         });
 
-        this.element.empty();
-        if(this.selectedFeatures.length > 0) {
+        if(self.jsonSchema) {
+            var schemaOptions = {"fields": {}};
+            var nonSchemaOptions = {"fields": {}};
+
+            $.each(self.jsonSchema.properties, function(name, prop) {
+                schemaOptions.fields[name] = {'id': name};
+            });
+
+            var nonSchema = {
+                "title": attributeLabel.additionalProperties,
+                "type": "object",
+                "properties": {}
+            }
+
+            var data = {};
+            $.each(this.selectedFeatures, function(idx, feature) {
+                $.each(feature.attributes, function(key, value) {
+                    //fill options for non schema
+                    if(!(key in schemaOptions.fields) && !(key in nonSchemaOptions.fields)) {
+                        nonSchemaOptions.fields[key] = {
+                            'id': key,
+                            'readonly': self.jsonSchema.additionalProperties === false
+                        };
+                    }
+
+                    //check for different values for same attribute
+                    if(key in data && data[key] != value) {
+                        data[key] = undefined;
+                        if(key in schemaOptions.fields) {
+                            schemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
+                        } else {
+                            nonSchemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                    //add key to nonSchema if not in jsonSchema and not already in nonSchema
+                    if(!(key in self.jsonSchema.properties) && !(key in nonSchema.properties)) {
+                        nonSchema.properties[key] = {
+                            "type": "any",
+                            "title": key
+                        }
+                    }
+                })
+            });
+
+            this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate));
+
+            $.alpaca(self.options.alpacaSchemaElement, {
+                "schema": self.jsonSchema,
+                "data": data,
+                "options": schemaOptions,
+                view: "VIEW_GBI_EDIT"
+            });
+
+            var nonSchemaView = self.jsonSchema.additionalProperties === false ? "VIEW_GBI_DISPLAY" : "VIEW_GBI_EDIT";
+            console.log({'schema': self.jsonSchema, 'nonSchema': nonSchema})
+            $.alpaca(self.options.alpacaNonSchemaElement, {
+                "schema": nonSchema,
+                "data": data,
+                "options": nonSchemaOptions,
+                view: nonSchemaView
+            });
+
+            if(self.jsonSchema.additionalProperties !== false) {
+                this.element.append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
+            } else {
+                this.element.append($('<span>'+attributeLabel.addAttributesNotPossible+'.</span>'))
+            }
+        } else {
+            $.each(this.selectedFeatures, function(idx, feature) {
+                $.each(attributes, function(idx, key) {
+                    var equal = true;
+                    var value = feature.attributes[key];
+                    if(key in selectedFeatureAttributes) {
+                        equal = selectedFeatureAttributes[key].value == value;
+                        if(!equal) {
+                            selectedFeatureAttributes[key] = {'equal': false};
+                        }
+                    } else {
+                        selectedFeatureAttributes[key] = {'equal': equal, 'value': value};
+                    }
+                });
+            });
             this.element.append(tmpl(
                 gbi.widgets.AttributeEditor.template, {
                     attributes: attributes,
@@ -78,31 +272,11 @@ gbi.widgets.AttributeEditor.prototype = {
                     editable: editable
                 }
             ));
-
-            //bind events
-            $.each(attributes, function(idx, key) {
-                $('#_'+key).change(function() {
-                    var newVal = $('#_'+key).val();
-                    self.edit(key, newVal);
-                });
-                $('#_'+key+'_remove').click(function() {
-                    self.remove(key);
-                    return false;
-                });
-                $('#_'+key+'_label').click(function() {
-                    self.label(key);
-                    return false;
-                });
-            });
-            $('#addKeyValue').click(function() {
-                var key = $('#_newKey').val();
-                var val = $('#_newValue').val();
-                if (key && val) {
-                    self.add(key, val);
-                    self._applyAttributes();
-                }
-                return false;
-            });
+            if(editable && this.options.allowNewAttributes) {
+                this.element.append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
+            } else {
+                this.element.append($('<span>'+attributeLabel.addAttributesNotPossible+'.</span>'))
+            }
         }
     },
     add: function(key, value) {
@@ -159,6 +333,14 @@ gbi.widgets.AttributeEditor.prototype = {
         }
         this.layerManager.active().setStyle(symbolizers, true)
     },
+    setAttributes: function(attributes) {
+        this.renderAttributes = attributes;
+        this.render();
+    },
+    setJsonSchema: function(schema) {
+        this.jsonSchema = schema;
+        this.render();
+    },
     _applyAttributes: function() {
         var self = this;
         var activeLayer = this.layerManager.active();
@@ -185,6 +367,10 @@ gbi.widgets.AttributeEditor.prototype = {
                 if($.inArray(feature, self.selectedFeatures) == -1) {
                     delete self.featureChanges[featureId];
                 }
+
+                if(self.selectedInvalidFeature && feature.id == self.selectedInvalidFeature.feature.id && activeLayer.validateFeatureAttributes(feature)) {
+                    self.selectedInvalidFeature = false;
+                }
             }
         });
     },
@@ -198,58 +384,113 @@ var attributeLabel = {
     'add': OpenLayers.i18n("add"),
     'formTitle': OpenLayers.i18n("addNewAttributesTitle"),
     'addAttributesNotPossible': OpenLayers.i18n("addAttributesNotPossible"),
-    'sameKeyDifferentValue': OpenLayers.i18n("sameKeyDifferentValue")
+    'sameKeyDifferentValue': OpenLayers.i18n("sameKeyDifferentValue"),
+    'featuresWithInvalidAttributes': OpenLayers.i18n('Features with non valid attributes present'),
+    'invalidFeaturesLeft': OpenLayers.i18n('features with invalid attributes left'),
+    'next': OpenLayers.i18n('Next'),
+    'prev': OpenLayers.i18n('Previous'),
+    'additionalProperties': OpenLayers.i18n('Additional attributes'),
+    'schemaViolatingAttribute': OpenLayers.i18n('This attribute is not defined in given schema. Remove it!')
 }
 
 gbi.widgets.AttributeEditor.template = '\
-<% if(attributes.length == 0) { %>\
-    <span>'+attributeLabel.noAttributes+'.</span>\
-<% } else { %>\
-    <% for(var key in attributes) { %>\
-        <form id="view_attributes" class="form-inline">\
-            <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
-            <% if(selectedFeatureAttributes[attributes[key]]) { %>\
-                <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
-                    <input class="input-medium" type="text" id="_<%=attributes[key]%>" value="<%=selectedFeatureAttributes[attributes[key]]["value"]%>" \
-                <% } else {%>\
-                    <input class="input-medium" type="text" id="_<%=attributes[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
+    <% if(attributes.length == 0) { %>\
+        <span>'+attributeLabel.noAttributes+'.</span>\
+    <% } else { %>\
+        <% for(var key in attributes) { %>\
+            <form id="view_attributes" class="form-inline">\
+                <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
+                <% if(selectedFeatureAttributes[attributes[key]]) { %>\
+                    <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
+                        <input class="input-medium" type="text" id="_<%=attributes[key]%>" value="<%=selectedFeatureAttributes[attributes[key]]["value"]%>" \
+                    <% } else {%>\
+                        <input class="input-medium" type="text" id="_<%=attributes[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
+                    <% } %>\
+                <% } else { %>\
+                    <input class="input-medium" type="text" id="_<%=attributes[key]%>"\
                 <% } %>\
-            <% } else { %>\
-                <input class="input-medium" type="text" id="_<%=attributes[key]%>"\
-            <% } %>\
-            <% if(!editable) { %>\
-                disabled=disabled \
-            <% } %>\
-            />\
-            <% if(editable) { %>\
-            <button id="_<%=attributes[key]%>_label" title="label" class="btn btn-small add-label-button"> \
-                <i class="icon-eye-open"></i>\
-            </button>\
-            <button id="_<%=attributes[key]%>_remove" title="remove" class="btn btn-small"> \
-                <i class="icon-remove"></i>\
-            </button> \
-            <% } %>\
-        </form>\
+                <% if(!editable) { %>\
+                    disabled=disabled \
+                <% } %>\
+                />\
+                <% if(editable) { %>\
+                <button id="_<%=attributes[key]%>_label" title="label" class="btn btn-small add-label-button"> \
+                    <i class="icon-eye-open"></i>\
+                </button>\
+                <button id="_<%=attributes[key]%>_remove" title="remove" class="btn btn-small"> \
+                    <i class="icon-remove"></i>\
+                </button> \
+                <% } %>\
+            </form>\
+        <% } %>\
     <% } %>\
-<% } %>\
-<% if(editable) { %>\
+';
+
+gbi.widgets.AttributeEditor.newAttributeTemplate = '\
     <h4>'+attributeLabel.formTitle+'</h4>\
     <form class="form-horizontal"> \
-    	 <div class="control-group"> \
-    		<label class="control-label" for="_newKey">'+attributeLabel.key+'</label> \
-    		<div class="controls">\
-    			<input type="text" id="_newKey" class="input-medium">\
-    		</div>\
-    	</div>\
-    	 <div class="control-group"> \
-    		<label class="control-label" for="_newValue">'+attributeLabel.val+'</label> \
-    		<div class="controls">\
-    			<input type="text" id="_newValue" class="input-medium">\
-    		</div>\
-    	</div>\
+         <div class="control-group"> \
+            <label class="control-label" for="_newKey">'+attributeLabel.key+'</label> \
+            <div class="controls">\
+                <input type="text" id="_newKey" class="input-medium">\
+            </div>\
+        </div>\
+         <div class="control-group"> \
+            <label class="control-label" for="_newValue">'+attributeLabel.val+'</label> \
+            <div class="controls">\
+                <input type="text" id="_newValue" class="input-medium">\
+            </div>\
+        </div>\
         <button id="addKeyValue" class="btn btn-small">'+attributeLabel.add+'</button>\
     </form>\
-<% } else { %>\
-    <span>'+attributeLabel.addAttributesNotPossible+'.</span>\
-<% } %>\
 ';
+
+gbi.widgets.AttributeEditor.alpacaTemplate = '\
+    <div id="alpaca_schema"></div>\
+    <div id="alpaca_non_schema"></div>\
+';
+
+gbi.widgets.AttributeEditor.invalidFeaturesTemplate = '\
+    <div>\
+        <h4>' + attributeLabel.featuresWithInvalidAttributes + '</h4>\
+        <p><%=features.length%> ' + attributeLabel.invalidFeaturesLeft + '</p>\
+        <button class="btn btn-small" id="prev_invalid_feature">' + attributeLabel.prev + '</button>\
+        <button class="btn btn-small" id="next_invalid_feature">' + attributeLabel.next + '</button>\
+    </div>\
+';
+
+gbi.widgets.AttributeEditor.alpacaViews = {
+    "edit": {
+        "id": "VIEW_GBI_EDIT",
+        "parent": "VIEW_BOOTSTRAP_EDIT",
+        "templates": {
+            "controlFieldContainer": "\
+            <div>\
+                {{html this.html}}\
+                <button id='_${id}_label' title='label' class='btn btn-small add-label-button'>\
+                    <i class='icon-eye-open'></i>\
+                </button>\
+                <button id='_${id}_remove' title='remove' class='btn btn-small'>\
+                    <i class='icon-trash'></i>\
+                </button>\
+            </div>"
+        }
+    },
+    "display": {
+        "id": "VIEW_GBI_DISPLAY",
+        "parent": "VIEW_GBI_EDIT",
+        "templates": {
+            "fieldSetItemContainer": '<div class="alpaca-inline-item-container control-group error"></div>',
+            "controlField": "\
+                <div>\
+                    {{html Alpaca.fieldTemplate(this,'controlFieldLabel')}}\
+                    {{wrap(null, {}) Alpaca.fieldTemplate(this,'controlFieldContainer',true)}}\
+                        {{html Alpaca.fieldTemplate(this,'controlFieldHelper')}}\
+                    {{/wrap}}\
+                    <span class='icon-exclamation-sign'></span>\
+                    <span class='help-inline'>" + attributeLabel.schemaViolatingAttribute + "</span>\
+                </div>\
+            "
+        }
+    }
+};
