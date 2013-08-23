@@ -50,7 +50,7 @@ class VectorExportProcess(ProcessBase):
                     output_file = self.app_state.user_data_path('export',  'vector', task.file_name+ '.shp', make_dirs=True)
                     # create fields for shp - use for mapping
                     fields = fields_from_properties(couch.load_features())
-                    mapping = Mapping(None, None, 'Polygon', other_srs=task.srs, fields=tuple(fields))
+                    mapping = Mapping(None, None, 'Polygon', other_srs=task.srs, fields=fields)
                     # create shape
                     write_json_to_shape(couch.load_features(), mapping, output_file)
             self.task_done()
