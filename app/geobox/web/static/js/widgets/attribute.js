@@ -87,6 +87,29 @@ gbi.widgets.AttributeEditor.prototype = {
         var attributes = self.jsonSchema ? activeLayer.schemaAttributes() : this.renderAttributes || activeLayer.featuresAttributes();
         this.element.empty();
 
+        if(!self.jsonSchema) {
+            this.element.append(tmpl(gbi.widgets.AttributeEditor.addSchemaTemplate));
+            $('#add_json_schema_url').click(function() {
+                $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
+                    self.setJsonSchema(schema);
+                });
+                var schemaURL = $('#json_schema_url').val();
+                activeLayer.addSchemaFromUrl(schemaURL);
+            })
+        } else {
+            this.element.append(tmpl(gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate, {
+                jsonSchemaURL: activeLayer.options.jsonSchemaUrl
+            }));
+            $('#refresh_json_schema').click(function() {
+                activeLayer.addSchemaFromUrl(activeLayer.options.jsonSchemaUrl);
+            });
+            $('#remove_json_schema').click(function() {
+                activeLayer.removeJsonSchema();
+                self.jsonSchema = false;
+                self.render();
+            });
+        }
+
         if(self.invalidFeatures && self.invalidFeatures.length > 0) {
             self.renderInvalidFeatures(activeLayer);
         } else {
@@ -100,7 +123,7 @@ gbi.widgets.AttributeEditor.prototype = {
         //prepare list of all possible rendered attributes
         var renderedAttributes = [];
         if(self.jsonSchema) {
-            renderedAttributes = activeLayer.schemaAttributes();
+            renderedAttributes = activeLayer.schemaAttributes() || [];
         }
         if(this.renderAttributes) {
             $.each(this.renderAttributes, function(idx, attribute) {
@@ -410,8 +433,15 @@ var attributeLabel = {
     'next': OpenLayers.i18n('Next'),
     'prev': OpenLayers.i18n('Previous'),
     'additionalProperties': OpenLayers.i18n('Additional attributes'),
-    'schemaViolatingAttribute': OpenLayers.i18n('This attribute is not defined in given schema. Remove it!')
-}
+    'schemaViolatingAttribute': OpenLayers.i18n('This attribute is not defined in given schema. Remove it!'),
+    'addJsonSchemaUrl': OpenLayers.i18n('Add JSONSchema URL'),
+    'usedJsonSchema': OpenLayers.i18n('URL of used JSONSchema')
+};
+
+var attributeTitle = {
+    'refresh': OpenLayers.i18n('refresh'),
+    'remove': OpenLayers.i18n('remove')
+};
 
 gbi.widgets.AttributeEditor.template = '\
     <% if(attributes.length == 0) { %>\
@@ -476,6 +506,23 @@ gbi.widgets.AttributeEditor.invalidFeaturesTemplate = '\
         <p><%=features.length%> ' + attributeLabel.invalidFeaturesLeft + '</p>\
         <button class="btn btn-small" id="prev_invalid_feature">' + attributeLabel.prev + '</button>\
         <button class="btn btn-small" id="next_invalid_feature">' + attributeLabel.next + '</button>\
+    </div>\
+';
+
+gbi.widgets.AttributeEditor.addSchemaTemplate = '\
+    <div>\
+        <div class="input-append">\
+            <input id="json_schema_url" name="json_schema_url" type="text" />\
+            <button class="btn" id="add_json_schema_url" type="button">'+attributeLabel.addJsonSchemaUrl+'</button>\
+        </div>\
+    </div>\
+';
+
+gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate = '\
+    <div>\
+        <span>' + attributeLabel.usedJsonSchema + ': <%=jsonSchemaURL%> </span>\
+        <button class="btn btn-small" id="refresh_json_schema" title="' + attributeTitle.refresh + '"><i class="icon-refresh"></i></button>\
+        <button class="btn btn-small" id="remove_json_schema" title="' + attributeTitle.remove + '"><i class="icon-remove"></i></button>\
     </div>\
 ';
 
