@@ -59,7 +59,6 @@ gbi.widgets.AttributeEditor.prototype = {
                 self.jsonSchema = layer.jsonSchema || this.options.jsonSchema || false;
                 if(self.invalidFeatures) {
                     var id = self._isInvalidFeature(f.feature);
-                    console.log(self.invalidFeatures)
                     if(id != -1) {
                         self.selectedInvalidFeature = self.invalidFeatures[id];
                     }
@@ -269,7 +268,6 @@ gbi.widgets.AttributeEditor.prototype = {
             });
 
             var nonSchemaView = self.jsonSchema.additionalProperties === false ? "VIEW_GBI_DISPLAY" : "VIEW_GBI_EDIT";
-            console.log({'schema': self.jsonSchema, 'nonSchema': nonSchema})
             $.alpaca(self.options.alpacaNonSchemaElement, {
                 "schema": nonSchema,
                 "data": data,
