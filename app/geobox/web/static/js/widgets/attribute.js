@@ -81,9 +81,12 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     render: function() {
         var self = this;
+        var attributes = [];
         var activeLayer = this.layerManager.active();
         self.invalidFeatures = $.isFunction(activeLayer.validateFeaturesAttributes) ? activeLayer.validateFeaturesAttributes() : [];
-        var attributes = self.jsonSchema ? activeLayer.schemaAttributes() : this.renderAttributes || activeLayer.featuresAttributes();
+        if(activeLayer) {
+            attributes = self.jsonSchema ? activeLayer.schemaAttributes() : this.renderAttributes || activeLayer.featuresAttributes();
+        }
         this.element.empty();
 
         if(!self.jsonSchema) {

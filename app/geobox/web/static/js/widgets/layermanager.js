@@ -157,8 +157,7 @@ gbi.widgets.LayerManager.prototype = {
                 $('#changeVectorLayer').modal('show');
                 $('#change_layer_save').click(function() {
                     activeLayer.save();
-                    activeLayer._saveStyle();
-                    activeLayer._saveGBIData();
+                    activeLayer._saveMetaDocument();
                     $('#changeVectorLayer').modal('hide');
                     changeLayer(clickedElement);
                 });
@@ -192,8 +191,7 @@ gbi.widgets.LayerManager.prototype = {
                     $('#changeVectorLayer').modal('show');
                     $('#change_layer_save').click(function() {
                         activeLayer.save();
-                        activeLayer._saveStyle();
-                        activeLayer._saveGBIData();
+                        activeLayer._saveMetaDocument();
                         $('#changeVectorLayer').modal('hide');
                         createLayer(newLayer);
                     });

@@ -60,8 +60,7 @@ $(document).ready(function() {
    $('#save-changes').click(function() {
     if(activeLayer) {
       activeLayer.save();
-      activeLayer._saveStyle();
-      activeLayer._saveGBIData();
+      activeLayer._saveMetaDocument();
     }
     $(this).attr('disabled', 'disabled').removeClass('btn-success');
     $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
