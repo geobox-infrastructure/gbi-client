@@ -91,6 +91,7 @@ gbi.widgets.AttributeEditor.prototype = {
             $('#add_json_schema_url').click(function() {
                 $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
                     self.setJsonSchema(schema);
+                    $(activeLayer).off('gbi.layer.vector.schemaLoaded', this);
                 });
                 var schemaURL = $('#json_schema_url').val();
                 activeLayer.addSchemaFromUrl(schemaURL);
@@ -100,6 +101,11 @@ gbi.widgets.AttributeEditor.prototype = {
                 jsonSchemaURL: activeLayer.options.jsonSchemaUrl
             }));
             $('#refresh_json_schema').click(function() {
+                $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
+                    self.setJsonSchema(schema);
+                    $(activeLayer).off('gbi.layer.vector.schemaLoaded', this);
+                    $('#json_schema_refreshed').show().fadeOut(3000);
+                });
                 activeLayer.addSchemaFromUrl(activeLayer.options.jsonSchemaUrl);
             });
             $('#remove_json_schema').click(function() {
@@ -433,7 +439,8 @@ var attributeLabel = {
     'additionalProperties': OpenLayers.i18n('Additional attributes'),
     'schemaViolatingAttribute': OpenLayers.i18n('This attribute is not defined in given schema. Remove it!'),
     'addJsonSchemaUrl': OpenLayers.i18n('Add JSONSchema URL'),
-    'usedJsonSchema': OpenLayers.i18n('URL of used JSONSchema')
+    'usedJsonSchema': OpenLayers.i18n('URL of used JSONSchema'),
+    'successfulRefereshed': OpenLayers.i18n('Successful refreshed')
 };
 
 var attributeTitle = {
@@ -521,6 +528,7 @@ gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate = '\
         <span>' + attributeLabel.usedJsonSchema + ': <%=jsonSchemaURL%> </span>\
         <button class="btn btn-small" id="refresh_json_schema" title="' + attributeTitle.refresh + '"><i class="icon-refresh"></i></button>\
         <button class="btn btn-small" id="remove_json_schema" title="' + attributeTitle.remove + '"><i class="icon-remove"></i></button>\
+        <div class="alert alert-success" style="display: none" id="json_schema_refreshed">' + attributeLabel.successfulRefereshed + '</div>\
     </div>\
 ';
 
