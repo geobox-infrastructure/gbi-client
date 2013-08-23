@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-21 10:12+0200\n"
-"PO-Revision-Date: 2013-08-13 15:15+0100\n"
+"POT-Creation-Date: 2013-08-23 13:54+0200\n"
+"PO-Revision-Date: 2013-08-23 13:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -45,7 +45,8 @@ msgstr "Einloggen erforderlich"
 msgid "Please login to see this page"
 msgstr "Sie müssen sich anmelden um diese Seite aufrufen zu können"
 
-#: geobox/web/forms.py:164 geobox/web/templates/downloads.html:12
+#: geobox/web/forms.py:164
+#: geobox/web/templates/downloads.html:12
 #: geobox/web/templates/admin/external_raster_list.html:40
 #: geobox/web/templates/admin/external_raster_list.html:66
 #: geobox/web/templates/projects/exports.html:12
@@ -78,15 +79,18 @@ msgstr "Geometrie aus Projekt laden"
 msgid "select couch"
 msgstr "Geometrie aus Editor laden"
 
-#: geobox/web/forms.py:193 geobox/web/forms.py:203
+#: geobox/web/forms.py:193
+#: geobox/web/forms.py:203
 msgid "start level"
 msgstr "Startlevel"
 
-#: geobox/web/forms.py:194 geobox/web/forms.py:204
+#: geobox/web/forms.py:194
+#: geobox/web/forms.py:204
 msgid "end level"
 msgstr "Endlevel"
 
-#: geobox/web/forms.py:195 geobox/web/forms.py:205
+#: geobox/web/forms.py:195
+#: geobox/web/forms.py:205
 msgid "raster_source"
 msgstr "Rasterdatenquelle"
 
@@ -99,7 +103,9 @@ msgstr "Kacheln aktualisieren"
 msgid "format"
 msgstr "Format"
 
-#: geobox/web/forms.py:202 geobox/web/forms.py:217 geobox/web/forms.py:227
+#: geobox/web/forms.py:202
+#: geobox/web/forms.py:217
+#: geobox/web/forms.py:229
 #: geobox/web/templates/admin/external_raster_list.html:69
 msgid "srs"
 msgstr "Koordinatensystem"
@@ -108,11 +114,13 @@ msgstr "Koordinatensystem"
 msgid "geojson file name"
 msgstr "geojson Dateiname"
 
-#: geobox/web/forms.py:212 geobox/web/forms.py:218
+#: geobox/web/forms.py:212
+#: geobox/web/forms.py:218
 msgid "select existing layer"
 msgstr "Bestehenden Layer auswählen"
 
-#: geobox/web/forms.py:213 geobox/web/forms.py:219
+#: geobox/web/forms.py:213
+#: geobox/web/forms.py:219
 msgid "new layer"
 msgstr "oder neuen Layer erstellen"
 
@@ -130,54 +138,67 @@ msgid "name"
 msgstr "Name"
 
 #: geobox/web/forms.py:226
+#, fuzzy
+msgid "geojson"
+msgstr "GeoJSON-Datei importieren"
+
+#: geobox/web/forms.py:227
+#: geobox/web/templates/boxes/base.html:34
+msgid "filename"
+msgstr "Dateiname"
+
+#: geobox/web/forms.py:228
 msgid "export_type"
 msgstr "Type"
 
-#: geobox/web/forms.py:228
+#: geobox/web/forms.py:230
 msgid "destination"
 msgstr "Ziel"
 
-#: geobox/web/forms.py:231
+#: geobox/web/forms.py:233
 msgid "file"
 msgstr "Datei"
 
-#: geobox/web/forms.py:235 geobox/web/forms.py:240
+#: geobox/web/forms.py:237
+#: geobox/web/forms.py:242
 msgid "rastersource_username"
 msgstr "Benutzername"
 
-#: geobox/web/forms.py:236 geobox/web/forms.py:241
+#: geobox/web/forms.py:238
+#: geobox/web/forms.py:243
 msgid "rastersource_password"
 msgstr "Passwort"
 
-#: geobox/web/forms.py:239
+#: geobox/web/forms.py:241
 msgid "rastersource_url"
 msgstr "URL"
 
-#: geobox/web/forms.py:242
+#: geobox/web/forms.py:244
 msgid "rastersource_name"
 msgstr "Name"
 
-#: geobox/web/forms.py:243
+#: geobox/web/forms.py:245
 msgid "rastersource_title"
 msgstr "Title"
 
-#: geobox/web/forms.py:246
+#: geobox/web/forms.py:248
 msgid "rastersource_layer"
 msgstr "Layer"
 
-#: geobox/web/forms.py:247
+#: geobox/web/forms.py:249
 msgid "rastersource_format"
 msgstr "Format"
 
-#: geobox/web/forms.py:248
+#: geobox/web/forms.py:250
 msgid "rastersource_srs"
 msgstr "SRS"
 
-#: geobox/web/forms.py:249
+#: geobox/web/forms.py:251
 msgid "wms_version"
 msgstr "Version"
 
-#: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:7
+#: geobox/web/templates/admin.html:4
+#: geobox/web/templates/admin.html:7
 #: geobox/web/templates/index.html:58
 msgid "settings"
 msgstr "Einstellungen"
@@ -188,9 +209,7 @@ msgstr "Zugriff für lokales Netzwerk"
 
 #: geobox/web/templates/admin.html:9
 msgid "tooltip local net access"
-msgstr ""
-"Erlauben Sie den Zugriff von anderen Computern auf die Anwendung und die "
-"erstellten Daten."
+msgstr "Erlauben Sie den Zugriff von anderen Computern auf die Anwendung und die erstellten Daten."
 
 #: geobox/web/templates/admin.html:13
 #: geobox/web/templates/tasks/task_list.html:28
@@ -255,20 +274,24 @@ msgstr "Hinzufügen/Neustarten"
 msgid "remove"
 msgstr "Entfernen"
 
-#: geobox/web/templates/base.html:28 geobox/web/templates/index.html:3
+#: geobox/web/templates/base.html:30
+#: geobox/web/templates/index.html:3
 msgid "home"
 msgstr "Startseite"
 
-#: geobox/web/templates/base.html:32 geobox/web/templates/login.html:3
-#: geobox/web/templates/login.html:10 geobox/web/templates/login.html:23
+#: geobox/web/templates/base.html:34
+#: geobox/web/templates/login.html:3
+#: geobox/web/templates/login.html:10
+#: geobox/web/templates/login.html:23
 msgid "login"
 msgstr "Anmelden"
 
-#: geobox/web/templates/base.html:34
+#: geobox/web/templates/base.html:36
 msgid "logout"
 msgstr "Abmelden"
 
-#: geobox/web/templates/downloads.html:4 geobox/web/templates/downloads.html:7
+#: geobox/web/templates/downloads.html:4
+#: geobox/web/templates/downloads.html:7
 msgid "Downloads"
 msgstr "Downloads"
 
@@ -299,24 +322,26 @@ msgstr "als ZIP-Datei"
 msgid "open export on external explorer"
 msgstr "Export-Verzeichnis öffnen"
 
-#: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:55
-#: geobox/web/templates/index.html:50 geobox/web/templates/index.html:52
+#: geobox/web/templates/editor.html:4
+#: geobox/web/templates/editor.html:59
+#: geobox/web/templates/index.html:50
+#: geobox/web/templates/index.html:52
 msgid "editor"
 msgstr "Editor"
 
-#: geobox/web/templates/editor.html:56
+#: geobox/web/templates/editor.html:60
 msgid "tooltip - editor"
 msgstr "In dieser Ansicht können Sie Geometrien bearbeiten"
 
-#: geobox/web/templates/editor.html:64
+#: geobox/web/templates/editor.html:68
 msgid "map layer"
 msgstr "Kartenebenen"
 
-#: geobox/web/templates/editor.html:67
+#: geobox/web/templates/editor.html:71
 msgid "look"
 msgstr "Aussehen"
 
-#: geobox/web/templates/editor.html:70
+#: geobox/web/templates/editor.html:74
 #: geobox/web/templates/admin/external_raster_list.html:82
 #: geobox/web/templates/admin/external_raster_list.html:84
 #: geobox/web/templates/projects/exports.html:29
@@ -324,92 +349,88 @@ msgstr "Aussehen"
 msgid "edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:73 geobox/web/templates/editor.html:129
+#: geobox/web/templates/editor.html:77
+#: geobox/web/templates/editor.html:136
 msgid "filter"
 msgstr "Filter"
 
-#: geobox/web/templates/editor.html:76
+#: geobox/web/templates/editor.html:80
 msgid "measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:79 geobox/web/templates/editor.html:145
+#: geobox/web/templates/editor.html:83
+#: geobox/web/templates/editor.html:150
 msgid "thematical map"
 msgstr "Thematische Karte"
 
-#: geobox/web/templates/editor.html:82
+#: geobox/web/templates/editor.html:86
 msgid "save & load"
 msgstr "Speichern & Laden"
 
-#: geobox/web/templates/editor.html:91
+#: geobox/web/templates/editor.html:94
 msgid "Styling"
 msgstr "Aussehen der Geometrien"
 
-#: geobox/web/templates/editor.html:92
+#: geobox/web/templates/editor.html:95
 msgid "infotext - edit styling"
-msgstr ""
-"Hier ändern Sie das Aussehen der Geometrien. In jeder Ebene kann ein "
-"bestimmtes Aussehen verwendet werden. Ohne Speichern gehen die Änderungen"
-" verloren."
+msgstr "Hier ändern Sie das Aussehen der Geometrien. In jeder Ebene kann ein bestimmtes Aussehen verwendet werden. Ohne Speichern gehen die Änderungen verloren."
 
-#: geobox/web/templates/editor.html:97
+#: geobox/web/templates/editor.html:100
 msgid "Edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:98
+#: geobox/web/templates/editor.html:101
 msgid "infotext - edit controls"
 msgstr "Wählen Sie ein Bearbeitungswerkzeug aus."
 
-#: geobox/web/templates/editor.html:103
+#: geobox/web/templates/editor.html:104
 msgid "select all features"
 msgstr "Alle Geometrien auswählen"
 
-#: geobox/web/templates/editor.html:110
-#: geobox/web/templates/js/translation.js:73
+#: geobox/web/templates/editor.html:116
+#: geobox/web/templates/js/translation.js:84
 msgid "Attribute"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:113
+#: geobox/web/templates/editor.html:119
 msgid "point styling"
 msgstr "Punktdesign"
 
-#: geobox/web/templates/editor.html:118
-#: geobox/web/templates/js/translation.js:74
+#: geobox/web/templates/editor.html:124
+#: geobox/web/templates/js/translation.js:85
 msgid "Attributes"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:119
+#: geobox/web/templates/editor.html:125
 msgid "infotext - attributes"
-msgstr ""
-"Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie "
-"hierzu eine Geometrie mit dem Auswahlwerkezug aus."
+msgstr "Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie hierzu eine Geometrie mit dem Auswahlwerkezug aus."
 
-#: geobox/web/templates/editor.html:130
+#: geobox/web/templates/editor.html:137
 msgid "infotext - filter controls"
 msgstr "Hier können Sie Geometrien abhängig von Eigenschaft und Wert auswählen."
 
-#: geobox/web/templates/editor.html:135
+#: geobox/web/templates/editor.html:142
 msgid "Measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:136
+#: geobox/web/templates/editor.html:143
 msgid "infotext - measure controls"
-msgstr ""
-"Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen,"
-" oder Strecken und Flächen messen."
+msgstr "Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen, oder Strecken und Flächen messen."
 
-#: geobox/web/templates/editor.html:146
+#: geobox/web/templates/editor.html:151
 msgid "infotext - thematical map"
 msgstr ""
 
-#: geobox/web/templates/editor.html:151
+#: geobox/web/templates/editor.html:156
 msgid "save changes"
 msgstr "Änderungen speichern"
 
-#: geobox/web/templates/editor.html:152
+#: geobox/web/templates/editor.html:157
 msgid "infotext - editor save"
 msgstr "Speichern Sie hier Änderungen dauerhaft oder laden Sie Daten aus Speicherpunkten."
 
-#: geobox/web/templates/editor.html:154 geobox/web/templates/editor.html:155
+#: geobox/web/templates/editor.html:159
+#: geobox/web/templates/editor.html:160
 #: geobox/web/templates/admin/external_unlock.html:20
 #: geobox/web/templates/admin/external_wms.html:28
 #: geobox/web/templates/admin/external_wmts.html:24
@@ -418,118 +439,117 @@ msgstr "Speichern Sie hier Änderungen dauerhaft oder laden Sie Daten aus Speich
 msgid "save"
 msgstr "Speichern"
 
-#: geobox/web/templates/editor.html:156
+#: geobox/web/templates/editor.html:161
 msgid "discard"
 msgstr "Abbruch"
 
-#: geobox/web/templates/editor.html:158 geobox/web/templates/editor.html:161
+#: geobox/web/templates/editor.html:163
+#: geobox/web/templates/editor.html:166
 msgid "save as"
 msgstr "Speichern untern"
 
-#: geobox/web/templates/editor.html:164
+#: geobox/web/templates/editor.html:169
 msgid "savepoints"
 msgstr "Speicherpunkte"
 
-#: geobox/web/templates/editor.html:165
+#: geobox/web/templates/editor.html:170
 msgid "create savepoint"
 msgstr "Speicherpunkt erstellen"
 
-#: geobox/web/templates/editor.html:166
+#: geobox/web/templates/editor.html:171
 msgid "create new savepoint"
 msgstr "Erstellen"
 
-#: geobox/web/templates/editor.html:167
+#: geobox/web/templates/editor.html:172
 msgid "save point created"
 msgstr "Speicherpunkt wurde erstellt"
 
-#: geobox/web/templates/editor.html:168
+#: geobox/web/templates/editor.html:173
 msgid "error - could not create savepoint"
 msgstr "Fehler - Speicherpunkt konnte nicht wurde erstellt"
 
-#: geobox/web/templates/editor.html:170
+#: geobox/web/templates/editor.html:175
 msgid "load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:173
+#: geobox/web/templates/editor.html:178
 msgid "load"
 msgstr "Laden"
 
-#: geobox/web/templates/editor.html:174 geobox/web/templates/boxes/base.html:61
+#: geobox/web/templates/editor.html:179
+#: geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr "Löschen"
 
-#: geobox/web/templates/editor.html:185
+#: geobox/web/templates/editor.html:190
 msgid "Sure you want load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:188
+#: geobox/web/templates/editor.html:193
 msgid "infotext load savepoint"
-msgstr ""
-"Nach dem Laden des Speicherpunkts gehen alle nicht gespeicherte "
-"Änderungen verloren."
+msgstr "Nach dem Laden des Speicherpunkts gehen alle nicht gespeicherte Änderungen verloren."
 
-#: geobox/web/templates/editor.html:191 geobox/web/templates/editor.html:205
-#: geobox/web/templates/editor.html:221 geobox/web/templates/editor.html:237
-#: geobox/web/templates/editor.html:257 geobox/web/templates/boxes/base.html:84
+#: geobox/web/templates/editor.html:196
+#: geobox/web/templates/editor.html:211
+#: geobox/web/templates/editor.html:226
+#: geobox/web/templates/editor.html:242
+#: geobox/web/templates/editor.html:264
+#: geobox/web/templates/boxes/base.html:84
 #: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr "Abbrechen"
 
-#: geobox/web/templates/editor.html:192
+#: geobox/web/templates/editor.html:197
 msgid "yes load"
 msgstr "Ja, laden!"
 
-#: geobox/web/templates/editor.html:199
+#: geobox/web/templates/editor.html:205
 msgid "Sure you want remove savepoint"
 msgstr "Speicherpunkt löschen"
 
-#: geobox/web/templates/editor.html:202
+#: geobox/web/templates/editor.html:208
 msgid "infotext remove savepoint"
-msgstr ""
-"Nach dem Löschen können Sie dne Speicherpunkt nicht wiederherstellen. "
-"Alle Änderungen gehen dabei verloren."
+msgstr "Nach dem Löschen können Sie dne Speicherpunkt nicht wiederherstellen. Alle Änderungen gehen dabei verloren."
 
-#: geobox/web/templates/editor.html:206 geobox/web/templates/editor.html:238
+#: geobox/web/templates/editor.html:212
+#: geobox/web/templates/editor.html:243
 msgid "yes delete"
 msgstr "Ja, Löschen"
 
-#: geobox/web/templates/editor.html:215
+#: geobox/web/templates/editor.html:220
 msgid "Sure you want change layer"
 msgstr "Sind Sie sicher, dass Sie die Karte wechseln möchten?"
 
-#: geobox/web/templates/editor.html:218
+#: geobox/web/templates/editor.html:223
 msgid "infotext change layer"
-msgstr ""
-"Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer"
-" importieren."
+msgstr "Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer importieren."
 
-#: geobox/web/templates/editor.html:222
+#: geobox/web/templates/editor.html:227
 msgid "yes change and discard"
 msgstr "Änderungen verwefern"
 
-#: geobox/web/templates/editor.html:223
+#: geobox/web/templates/editor.html:228
 msgid "yes change and save"
 msgstr "Speichern und wechseln"
 
-#: geobox/web/templates/editor.html:231
+#: geobox/web/templates/editor.html:236
 msgid "Sure you want delete layer"
 msgstr "Löschen der Karte"
 
-#: geobox/web/templates/editor.html:234
+#: geobox/web/templates/editor.html:239
 msgid "infotext delete layer"
-msgstr ""
-"Achtung: Nach dem Löschen kann die Karte nicht wiederhergestellt werden. "
-"Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
+msgstr "Achtung: Nach dem Löschen kann die Karte nicht wiederhergestellt werden. Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
 
-#: geobox/web/templates/editor.html:246
+#: geobox/web/templates/editor.html:251
 msgid "export vector layer"
 msgstr "Vektorlayer exportieren"
 
-#: geobox/web/templates/editor.html:250
+#: geobox/web/templates/editor.html:255
 msgid "infotext export layer"
 msgstr "Exportieren Sie hier die aktuelle Karte in verschiedene Formate."
 
-#: geobox/web/templates/editor.html:258 geobox/web/templates/index.html:35
+#: geobox/web/templates/editor.html:265
+#: geobox/web/templates/index.html:35
 msgid "export"
 msgstr "Exportieren"
 
@@ -545,7 +565,8 @@ msgstr "Ausführliche Informationen zur Anwendung finden sie im "
 msgid "download usermanual"
 msgstr "Benutzerhandbuch"
 
-#: geobox/web/templates/index.html:16 geobox/web/templates/boxes/base.html:66
+#: geobox/web/templates/index.html:16
+#: geobox/web/templates/boxes/base.html:66
 #: geobox/web/templates/boxes/base.html:113
 #: geobox/web/templates/vector/geojson.html:37
 #: geobox/web/templates/vector/import.html:38
@@ -560,7 +581,8 @@ msgstr "Rasterdaten Importieren"
 msgid "import shape"
 msgstr "Shapedatei importieren"
 
-#: geobox/web/templates/index.html:21 geobox/web/templates/boxes/base.html:100
+#: geobox/web/templates/index.html:21
+#: geobox/web/templates/boxes/base.html:100
 msgid "import geojson"
 msgstr "GeoJSON-Datei importieren"
 
@@ -580,7 +602,8 @@ msgstr "Upload-Box"
 msgid "export raster"
 msgstr "Rasterdaten Exportieren"
 
-#: geobox/web/templates/index.html:42 geobox/web/templates/index.html:44
+#: geobox/web/templates/index.html:42
+#: geobox/web/templates/index.html:44
 #: geobox/web/templates/tasks/task_list.html:83
 msgid "tasks"
 msgstr "Aufgaben"
@@ -640,9 +663,7 @@ msgstr "Lokale Rasterquelle"
 
 #: geobox/web/templates/admin/external_raster_list.html:7
 msgid "tooltip - local raster source overview"
-msgstr ""
-"Hier sind alle Rasterquellen aufgelistet die auf Ihrem System zur "
-"Verfügung stehen."
+msgstr "Hier sind alle Rasterquellen aufgelistet die auf Ihrem System zur Verfügung stehen."
 
 #: geobox/web/templates/admin/external_raster_list.html:12
 msgid "layer"
@@ -659,9 +680,7 @@ msgstr "Externe Rasterquellen"
 
 #: geobox/web/templates/admin/external_raster_list.html:35
 msgid "tooltip - external raster source overview"
-msgstr ""
-"Alle Rasterquellen die vom Server zur Verfügung gestellt wurden. "
-"Definieren Sie hier Benutzername und Passwort falls diese geschützt sind"
+msgstr "Alle Rasterquellen die vom Server zur Verfügung gestellt wurden. Definieren Sie hier Benutzername und Passwort falls diese geschützt sind"
 
 #: geobox/web/templates/admin/external_raster_list.html:41
 #: geobox/web/templates/admin/external_raster_list.html:68
@@ -722,10 +741,7 @@ msgstr "Datei hochladen"
 
 #: geobox/web/templates/boxes/base.html:19
 msgid "upload help text"
-msgstr ""
-"Bitte wählen Sie eine Datei aus die Sie in Ihre Box hochladen können. Es "
-"werden Bilddateien (jpeg, png, tif) sowie Textdateien (csv, xml, json) "
-"und PDF vom System unterstützt."
+msgstr "Bitte wählen Sie eine Datei aus die Sie in Ihre Box hochladen können. Es werden Bilddateien (jpeg, png, tif) sowie Textdateien (csv, xml, json) und PDF vom System unterstützt."
 
 #: geobox/web/templates/boxes/base.html:20
 msgid "Upload"
@@ -734,10 +750,6 @@ msgstr "Hochladen"
 #: geobox/web/templates/boxes/base.html:30
 msgid "file overview"
 msgstr "Dateiübersicht"
-
-#: geobox/web/templates/boxes/base.html:34
-msgid "filename"
-msgstr "Dateiname"
 
 #: geobox/web/templates/boxes/base.html:35
 msgid "date"
@@ -761,9 +773,7 @@ msgstr "Nur JSON import möglich"
 
 #: geobox/web/templates/boxes/base.html:82
 msgid "help text file exists, are you sure you want to overwrite it?"
-msgstr ""
-"Eine Datei mit diesem Dateinamen existiert bereits. Wollen Sie die Datei "
-"überschreiben?"
+msgstr "Eine Datei mit diesem Dateinamen existiert bereits. Wollen Sie die Datei überschreiben?"
 
 #: geobox/web/templates/boxes/base.html:85
 msgid "ok"
@@ -775,9 +785,7 @@ msgstr "Datei wird hochgeladen..."
 
 #: geobox/web/templates/boxes/base.html:105
 msgid "infotext geojson layer"
-msgstr ""
-"Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer"
-" importieren."
+msgstr "Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer importieren."
 
 #: geobox/web/templates/boxes/download.html:3
 msgid "download box title"
@@ -789,10 +797,7 @@ msgstr "Download-Box"
 
 #: geobox/web/templates/boxes/download.html:7
 msgid "tooltip - download box "
-msgstr ""
-"Die Download-Box zeigt ihnen alle von Ihrem Berater zur Verfügung "
-"gestellten Dateien an. Sie können diese über eine Vorschau ansehen oder -"
-" wenn diese Dateien Geometrien erhalten – importieren."
+msgstr "Die Download-Box zeigt ihnen alle von Ihrem Berater zur Verfügung gestellten Dateien an. Sie können diese über eine Vorschau ansehen oder - wenn diese Dateien Geometrien erhalten – importieren."
 
 #: geobox/web/templates/boxes/upload.html:3
 msgid "upload box title"
@@ -817,8 +822,7 @@ msgid ""
 "\tIf this does not happen, please click on the following link"
 msgstr ""
 "Sie werden automatisch zur Login Seite weitergeleitet. \n"
-"\tFalls die Weiterleitung nicht funktioniert klicken Sie bitte auf den "
-"Link."
+"\tFalls die Weiterleitung nicht funktioniert klicken Sie bitte auf den Link."
 
 #: geobox/web/templates/errors/403.html:12
 msgid "Login page"
@@ -949,9 +953,7 @@ msgstr "Farbe"
 
 #: geobox/web/templates/js/translation.js:42
 msgid "infotext - point styling"
-msgstr ""
-"Ändern Sie das Aussehen des ausgewählten Punktes. Ohne Speichern gehen "
-"die Änderungen verloren."
+msgstr "Ändern Sie das Aussehen des ausgewählten Punktes. Ohne Speichern gehen die Änderungen verloren."
 
 #: geobox/web/templates/js/translation.js:43
 msgid "radius"
@@ -962,202 +964,238 @@ msgid "set styling"
 msgstr "Aussehen speichern"
 
 #: geobox/web/templates/js/translation.js:45
-msgid "add attributes is not possible"
-msgstr "Hinzufügen von Eigenschaften nicht möglich"
+msgid "Add attributes is not possible"
+msgstr "Das Hinzufügen von Attributen ist nicht möglich"
+
+#: geobox/web/templates/js/translation.js:46
+msgid "Features with invalid attributes left"
+msgstr "Geometrien mit invaliden Attributen übrig"
+
+#: geobox/web/templates/js/translation.js:47
+msgid "Next"
+msgstr "Nachstes"
 
 #: geobox/web/templates/js/translation.js:48
+msgid "Previos"
+msgstr "Vorheriges"
+
+#: geobox/web/templates/js/translation.js:49
+msgid "Additional attributes"
+msgstr "Zusätzliche Attribute"
+
+#: geobox/web/templates/js/translation.js:50
+msgid "This attribute is not defined in given schema. Remove it!"
+msgstr "Attribut nicht im Schema definiert. Bitte entfernen!"
+
+#: geobox/web/templates/js/translation.js:51
+msgid "Add JSONSchema URL"
+msgstr "JSON-Schema URL hinzufügen"
+
+#: geobox/web/templates/js/translation.js:52
+msgid "URL of used JSONSchema"
+msgstr "URL des benutzten JSON-Schema"
+
+#: geobox/web/templates/js/translation.js:53
+msgid "Refresh"
+msgstr "Aktualisieren"
+
+#: geobox/web/templates/js/translation.js:54
+msgid "Remove"
+msgstr "Entfernen"
+
+#: geobox/web/templates/js/translation.js:59
 msgid "Draw polygon"
 msgstr "Polygon zeichnen"
 
-#: geobox/web/templates/js/translation.js:49
+#: geobox/web/templates/js/translation.js:60
 msgid "Draw line"
 msgstr "Linie zeichnen"
 
-#: geobox/web/templates/js/translation.js:50
+#: geobox/web/templates/js/translation.js:61
 msgid "Draw rect"
 msgstr "Rechteck zeichnen"
 
-#: geobox/web/templates/js/translation.js:51
+#: geobox/web/templates/js/translation.js:62
 msgid "Draw point"
 msgstr "Punkt zeichnen"
 
-#: geobox/web/templates/js/translation.js:52
+#: geobox/web/templates/js/translation.js:63
 msgid "Edit feature"
 msgstr "Geometrie bearbeiten"
 
-#: geobox/web/templates/js/translation.js:53
+#: geobox/web/templates/js/translation.js:64
 msgid "Delete feature"
 msgstr "Geometrie(n) löschen"
 
-#: geobox/web/templates/js/translation.js:54
+#: geobox/web/templates/js/translation.js:65
 msgid "Split feature"
 msgstr "Geometrie teilen"
 
-#: geobox/web/templates/js/translation.js:55
+#: geobox/web/templates/js/translation.js:66
 msgid "Merge features"
 msgstr "Geometrien zusammenfügen"
 
-#: geobox/web/templates/js/translation.js:56
+#: geobox/web/templates/js/translation.js:67
 msgid "Unmerge features"
 msgstr "Geometrien trennen"
 
-#: geobox/web/templates/js/translation.js:57
+#: geobox/web/templates/js/translation.js:68
 msgid "Select feature(s)"
 msgstr "Geometrie(n) auswählen"
 
-#: geobox/web/templates/js/translation.js:58
+#: geobox/web/templates/js/translation.js:69
 msgid "Snap on features"
 msgstr "An Geometrien einrasten"
 
-#: geobox/web/templates/js/translation.js:59
+#: geobox/web/templates/js/translation.js:70
 msgid "Copy feature(s)"
 msgstr "Geometrie(n) kopieren"
 
-#: geobox/web/templates/js/translation.js:62
+#: geobox/web/templates/js/translation.js:73
 msgid "Measure point"
 msgstr "Punkt bestimmen"
 
-#: geobox/web/templates/js/translation.js:63
+#: geobox/web/templates/js/translation.js:74
 msgid "Measure path"
 msgstr "Strecke messen"
 
-#: geobox/web/templates/js/translation.js:64
+#: geobox/web/templates/js/translation.js:75
 msgid "Measure area"
 msgstr "Fläche messen"
 
-#: geobox/web/templates/js/translation.js:67
+#: geobox/web/templates/js/translation.js:78
 msgid "Bad JSON: "
 msgstr "Schlechtes JSON: "
 
-#: geobox/web/templates/js/translation.js:68
+#: geobox/web/templates/js/translation.js:79
 msgid "Only OpenLayers.Feature.Vector is supported."
 msgstr "Es werden nur Objekte des Typs OpenLayers.Feature.Vector unterstützt."
 
-#: geobox/web/templates/js/translation.js:69
+#: geobox/web/templates/js/translation.js:80
 msgid "Feature was"
 msgstr "Objekt war"
 
-#: geobox/web/templates/js/translation.js:72
+#: geobox/web/templates/js/translation.js:83
 msgid "Select a value"
 msgstr "Wert auswählen"
 
-#: geobox/web/templates/js/translation.js:75
+#: geobox/web/templates/js/translation.js:86
 msgid "Exact"
 msgstr "Exakte Werte"
 
-#: geobox/web/templates/js/translation.js:76
+#: geobox/web/templates/js/translation.js:87
 msgid "Range"
 msgstr "Wertebereich"
 
-#: geobox/web/templates/js/translation.js:77
+#: geobox/web/templates/js/translation.js:88
 msgid "Value"
 msgstr "Wert"
 
-#: geobox/web/templates/js/translation.js:78
+#: geobox/web/templates/js/translation.js:89
 msgid "Color"
 msgstr "Farbe"
 
-#: geobox/web/templates/js/translation.js:79
+#: geobox/web/templates/js/translation.js:90
 msgid "Min"
 msgstr "Minimum"
 
-#: geobox/web/templates/js/translation.js:80
+#: geobox/web/templates/js/translation.js:91
 msgid "Max"
 msgstr "Maximum"
 
-#: geobox/web/templates/js/translation.js:81
+#: geobox/web/templates/js/translation.js:92
 msgid "Execute"
 msgstr "Ausführen"
 
-#: geobox/web/templates/js/translation.js:82
+#: geobox/web/templates/js/translation.js:93
 msgid "Legend for"
 msgstr "Legende für"
 
-#: geobox/web/templates/js/translation.js:83
+#: geobox/web/templates/js/translation.js:94
 msgid "Area in"
 msgstr "Fläche in"
 
-#: geobox/web/templates/js/translation.js:84
+#: geobox/web/templates/js/translation.js:95
 msgid "No thematical map present for this layer"
 msgstr "Für diesen Layer existiert keine thematische Karte"
 
-#: geobox/web/templates/js/translation.js:85
+#: geobox/web/templates/js/translation.js:96
 msgid "Add input"
 msgstr "Eingabemöglichkeit hinzufügen"
 
-#: geobox/web/templates/js/translation.js:86
+#: geobox/web/templates/js/translation.js:97
 msgid "Remove input"
 msgstr "Eintrag entfernen"
 
-#: geobox/web/templates/js/translation.js:87
+#: geobox/web/templates/js/translation.js:98
 msgid "No layer selected"
 msgstr "Keine Ebene ausgewählt"
 
-#: geobox/web/templates/js/translation.js:88
+#: geobox/web/templates/js/translation.js:99
 msgid "No attributes selected"
 msgstr "Keine Eigenschaften ausgewählt"
 
-#: geobox/web/templates/js/translation.js:89
+#: geobox/web/templates/js/translation.js:100
 msgid "Show all features"
 msgstr "Alle Einträge anzeigen"
 
-#: geobox/web/templates/js/translation.js:90
+#: geobox/web/templates/js/translation.js:101
 msgid "Show in list"
 msgstr "In Liste anzeigen"
 
-#: geobox/web/templates/js/translation.js:91
+#: geobox/web/templates/js/translation.js:102
 msgid "Apply"
 msgstr "Übernehmen"
 
-#: geobox/web/templates/js/translation.js:92
+#: geobox/web/templates/js/translation.js:103
 msgid "Map settings"
 msgstr "Karteneinstellungen"
 
-#: geobox/web/templates/js/translation.js:93
+#: geobox/web/templates/js/translation.js:104
 msgid "Legend"
 msgstr "Legende"
 
-#: geobox/web/templates/js/translation.js:94
+#: geobox/web/templates/js/translation.js:105
 msgid "Short list"
 msgstr "Kurze Liste"
 
-#: geobox/web/templates/js/translation.js:95
+#: geobox/web/templates/js/translation.js:106
 msgid "Complete list"
 msgstr "Komplette Liste"
 
-#: geobox/web/templates/js/translation.js:96
+#: geobox/web/templates/js/translation.js:107
 msgid "List settings"
 msgstr "Liste/Popup Einstellungen"
 
-#: geobox/web/templates/js/translation.js:97
+#: geobox/web/templates/js/translation.js:108
 msgid "Active"
 msgstr "Aktivieren"
 
-#: geobox/web/templates/js/translation.js:98
+#: geobox/web/templates/js/translation.js:109
 msgid "Choose value"
 msgstr "Wert auswählen"
 
-#: geobox/web/templates/js/translation.js:99
+#: geobox/web/templates/js/translation.js:110
 msgid "No entries"
 msgstr "Keine Einträge"
 
-#: geobox/web/templates/js/translation.js:100
+#: geobox/web/templates/js/translation.js:111
 msgid "Apply changes"
 msgstr "Änderungen übernehmen"
 
-#: geobox/web/templates/js/translation.js:101
+#: geobox/web/templates/js/translation.js:112
 msgid "Discard changes"
 msgstr "Änderungen verwerfen"
 
-#: geobox/web/templates/js/translation.js:102
+#: geobox/web/templates/js/translation.js:113
 msgid "Show in popup"
 msgstr "In Popup anzeigen"
 
-#: geobox/web/templates/js/translation.js:103
+#: geobox/web/templates/js/translation.js:114
 msgid "csv"
 msgstr "CSV"
 
-#: geobox/web/templates/js/translation.js:104
+#: geobox/web/templates/js/translation.js:115
 msgid "odt"
 msgstr "ODT"
 
@@ -1175,9 +1213,7 @@ msgstr "Rasterlayer"
 
 #: geobox/web/templates/projects/export_edit.html:19
 msgid "tooltip - export rasterlayer"
-msgstr ""
-"Wählen Sie ein Dateiformat für den Export aus und fügen Sie anschließend "
-"die gewünschten Rasterlayer hinzu."
+msgstr "Wählen Sie ein Dateiformat für den Export aus und fügen Sie anschließend die gewünschten Rasterlayer hinzu."
 
 #: geobox/web/templates/projects/export_edit.html:27
 #: geobox/web/templates/projects/export_edit.html:36
@@ -1221,10 +1257,7 @@ msgstr "Export"
 
 #: geobox/web/templates/projects/exports.html:7
 msgid "tooltip - overview over all raster export projects"
-msgstr ""
-"Hier finden Sie eine Übersicht über alle Exportprojekte. Um einen Export "
-"zu erstellen klicken Sie auf 'Neuer Export'. Über den Button 'Editieren' "
-"können Sie Exporte nachträglich bearbeiten."
+msgstr "Hier finden Sie eine Übersicht über alle Exportprojekte. Um einen Export zu erstellen klicken Sie auf 'Neuer Export'. Über den Button 'Editieren' können Sie Exporte nachträglich bearbeiten."
 
 #: geobox/web/templates/projects/exports.html:13
 #: geobox/web/templates/projects/imports.html:16
@@ -1242,11 +1275,11 @@ msgstr "MB"
 msgid "start export"
 msgstr "Export Starten"
 
-#: geobox/web/templates/projects/exports.html:53
+#: geobox/web/templates/projects/exports.html:51
 msgid "export project has no layer"
 msgstr "Export beinhaltet keine Daten"
 
-#: geobox/web/templates/projects/exports.html:62
+#: geobox/web/templates/projects/exports.html:60
 msgid "new export project"
 msgstr "Neuer Export"
 
@@ -1264,10 +1297,7 @@ msgstr "Rasterimporte"
 
 #: geobox/web/templates/projects/imports.html:7
 msgid "tooltip - overview over all raster import projects"
-msgstr ""
-"Übersicht über alle Rasterimporte. Um einen Import zu erstellen wählen "
-"Sie 'Neuer Import' aus. Über die Funktion 'Editieren' können Sie den "
-"Import nachträglich bearbeiten."
+msgstr "Übersicht über alle Rasterimporte. Um einen Import zu erstellen wählen Sie 'Neuer Import' aus. Über die Funktion 'Editieren' können Sie den Import nachträglich bearbeiten."
 
 #: geobox/web/templates/projects/imports.html:43
 msgid "start import"
@@ -1283,10 +1313,7 @@ msgstr "Zeichenfunktionen"
 
 #: geobox/web/templates/projects/macros.html:7
 msgid "tooltip - drawing options"
-msgstr ""
-"Sie haben die Möglichkeit ein Rechteck oder ein Polygon zu zeichnen. Um "
-"eine Geometrie zu bearbeiten aktivieren Sie das Editiermodul und wählen "
-"Sie die gewünschte Geometrie aus. "
+msgstr "Sie haben die Möglichkeit ein Rechteck oder ein Polygon zu zeichnen. Um eine Geometrie zu bearbeiten aktivieren Sie das Editiermodul und wählen Sie die gewünschte Geometrie aus. "
 
 #: geobox/web/templates/projects/macros.html:12
 msgid "delete all features"
@@ -1307,9 +1334,7 @@ msgstr "Informationen"
 
 #: geobox/web/templates/projects/macros.html:39
 msgid "tooltip - information about data volumen"
-msgstr ""
-"Der Speicherplatz wird beim Im- oder Export mindestens auf Ihrem PC "
-"benötigt."
+msgstr "Der Speicherplatz wird beim Im- oder Export mindestens auf Ihrem PC benötigt."
 
 #: geobox/web/templates/projects/macros.html:41
 msgid "Data volume"
@@ -1398,10 +1423,7 @@ msgstr "GeoJSON Datei hochladen"
 
 #: geobox/web/templates/vector/geojson.html:12
 msgid "tooltip upload geojson"
-msgstr ""
-"Laden Sie hier Ihre GeoJSON-Dateien in das System. Dies ist erforderlich "
-"um im nächsten Schritt die Daten importieren zu können. Es können Dateien"
-" mit der Datei Endung .json hochgeladen werden."
+msgstr "Laden Sie hier Ihre GeoJSON-Dateien in das System. Dies ist erforderlich um im nächsten Schritt die Daten importieren zu können. Es können Dateien mit der Datei Endung .json hochgeladen werden."
 
 #: geobox/web/templates/vector/geojson.html:18
 #: geobox/web/templates/vector/import.html:18
@@ -1409,13 +1431,8 @@ msgid "upload"
 msgstr "Datei hochladen"
 
 #: geobox/web/templates/vector/geojson.html:21
-msgid ""
-"you can also save your geojson directly to the geobox import folder. "
-"Reload this site after this."
-msgstr ""
-"Sie können die GeoJSON-Datei auch direkt im Import-Verzeichnis ablegen. "
-"Nach dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt "
-"zur Auswahl bereit."
+msgid "you can also save your geojson directly to the geobox import folder. Reload this site after this."
+msgstr "Sie können die GeoJSON-Datei auch direkt im Import-Verzeichnis ablegen. Nach dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur Auswahl bereit."
 
 #: geobox/web/templates/vector/geojson.html:24
 #: geobox/web/templates/vector/import.html:24
@@ -1428,12 +1445,7 @@ msgstr "GeoJSON-Daten importieren"
 
 #: geobox/web/templates/vector/geojson.html:29
 msgid "tooltip import geojson vectordata"
-msgstr ""
-"Damit die Vektordaten im System genutzt werden kann, müssen diese in "
-"einen Layer importiert werden. Bitte wählen Sie die gewünschte Datei und "
-"wählen Sie aus in welche Layer die Datei importiert werden soll. Zudem "
-"besteht die Möglichkeit einen neuen Layer anzulegen. Geben Sie hier zu "
-"einfach einen Namen ein"
+msgstr "Damit die Vektordaten im System genutzt werden kann, müssen diese in einen Layer importiert werden. Bitte wählen Sie die gewünschte Datei und wählen Sie aus in welche Layer die Datei importiert werden soll. Zudem besteht die Möglichkeit einen neuen Layer anzulegen. Geben Sie hier zu einfach einen Namen ein"
 
 #: geobox/web/templates/vector/import.html:3
 #: geobox/web/templates/vector/import.html:8
@@ -1446,20 +1458,11 @@ msgstr "Shapefile hochladen"
 
 #: geobox/web/templates/vector/import.html:12
 msgid "tooltip upload shapefile"
-msgstr ""
-"Laden Sie hier Ihr Shapefile in das System. Dies ist erforderlich um im "
-"nächsten Schritt die Daten importieren zu können. Neben dem Shapefile "
-"(.shp) müssen auch die Dateien mit der Endung .shx und .dbf hochgeladen "
-"werden."
+msgstr "Laden Sie hier Ihr Shapefile in das System. Dies ist erforderlich um im nächsten Schritt die Daten importieren zu können. Neben dem Shapefile (.shp) müssen auch die Dateien mit der Endung .shx und .dbf hochgeladen werden."
 
 #: geobox/web/templates/vector/import.html:21
-msgid ""
-"you can also save your shapefile directly to the geobox import folder. "
-"Reload this site after this."
-msgstr ""
-"Sie können das Shapefile auch direkt im Import-Verzeichnis ablegen. Nach "
-"dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur "
-"Auswahl bereit."
+msgid "you can also save your shapefile directly to the geobox import folder. Reload this site after this."
+msgstr "Sie können das Shapefile auch direkt im Import-Verzeichnis ablegen. Nach dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur Auswahl bereit."
 
 #: geobox/web/templates/vector/import.html:28
 msgid "import vectordata"
@@ -1467,16 +1470,15 @@ msgstr "Daten importieren"
 
 #: geobox/web/templates/vector/import.html:29
 msgid "tooltip import vectordata"
-msgstr ""
-"Damit die Vektordaten im System genutzt werden kann, müssen diese "
-"importiert werden. Bitte wählen Sie das entsprechende Shapefile, das "
-"Koordiantensystem und den dazu passenden Layer aus. "
+msgstr "Damit die Vektordaten im System genutzt werden kann, müssen diese importiert werden. Bitte wählen Sie das entsprechende Shapefile, das Koordiantensystem und den dazu passenden Layer aus. "
 
-#: geobox/web/views/admin.py:59 geobox/web/views/user.py:61
+#: geobox/web/views/admin.py:59
+#: geobox/web/views/user.py:61
 msgid "username or password not correct"
 msgstr "Benutzername oder Passwort sind nicht korrekt."
 
-#: geobox/web/views/admin.py:61 geobox/web/views/user.py:63
+#: geobox/web/views/admin.py:61
+#: geobox/web/views/user.py:63
 msgid "unable to fetch context document"
 msgstr "Kontextdokument konnte nicht aktualisiert werden"
 
@@ -1504,24 +1506,24 @@ msgstr "Datei erfolgreich hochgeladen"
 msgid "file type not allowed"
 msgstr "Dateityp ist nich erlaubt"
 
-#: geobox/web/views/boxes.py:89 geobox/web/views/vector.py:77
+#: geobox/web/views/boxes.py:89
+#: geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:147
 msgid "please select new layer or current layer to import"
-msgstr ""
-"Der Layer konnte nicht eindeutig zugeordnet werden. Bitte wählen Sie "
-"einen Layer aus der Liste oder geben Sie einen Namen für einen neuen "
-"Layer ein."
+msgstr "Der Layer konnte nicht eindeutig zugeordnet werden. Bitte wählen Sie einen Layer aus der Liste oder geben Sie einen Namen für einen neuen Layer ein."
 
 #: geobox/web/views/boxes.py:104
 msgid "file will be imported"
-msgstr ""
+msgstr "Datei wird importiert"
 
 #: geobox/web/views/boxes.py:112
 msgid "file deleted"
 msgstr "Datei wurde gelöscht"
 
-#: geobox/web/views/project.py:100 geobox/web/views/project.py:220
-#: geobox/web/views/vector.py:94 geobox/web/views/vector.py:164
+#: geobox/web/views/project.py:100
+#: geobox/web/views/project.py:214
+#: geobox/web/views/vector.py:94
+#: geobox/web/views/vector.py:164
 msgid "form error"
 msgstr "Fehler bei Eingaben"
 
@@ -1537,7 +1539,8 @@ msgstr "Keine Kacheln"
 msgid "to many tiles"
 msgstr "Zu viele Kacheln"
 
-#: geobox/web/views/raster.py:42 geobox/web/views/raster.py:121
+#: geobox/web/views/raster.py:42
+#: geobox/web/views/raster.py:121
 msgid "update WMTS"
 msgstr "WMTS aktualisiert"
 
@@ -1569,21 +1572,25 @@ msgstr "Aufgabe wurde gestartet"
 msgid "delete task successful"
 msgstr "Aufgabe gelöscht"
 
-#: geobox/web/views/vector.py:48 geobox/web/views/vector.py:130
+#: geobox/web/views/vector.py:48
+#: geobox/web/views/vector.py:130
 msgid "-- select layer or add new --"
 msgstr "-- Layer auswhälen -- "
 
-#: geobox/web/views/vector.py:65 geobox/web/views/vector.py:169
+#: geobox/web/views/vector.py:65
+#: geobox/web/views/vector.py:169
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr "Fehler beim Hochladen der Datei %(name)s"
 
-#: geobox/web/views/vector.py:67 geobox/web/views/vector.py:173
+#: geobox/web/views/vector.py:67
+#: geobox/web/views/vector.py:173
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr "Datei %(name)s hochgeladen"
 
-#: geobox/web/views/vector.py:69 geobox/web/views/vector.py:171
+#: geobox/web/views/vector.py:69
+#: geobox/web/views/vector.py:171
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr "Dateityp der Datei %(name)s ist nicht erlaubt"
@@ -1597,15 +1604,18 @@ msgstr "Ungültiges Shapefile/fehlende Dateien"
 msgid "file %(name)s missing"
 msgstr "Datei %(name)s fehlt"
 
-#: geobox/model/layer.py:24 geobox/model/tasks.py:115
+#: geobox/model/layer.py:24
+#: geobox/model/tasks.py:114
 msgid "raster import"
 msgstr "Rasterimport"
 
-#: geobox/model/layer.py:35 geobox/model/tasks.py:134
+#: geobox/model/layer.py:35
+#: geobox/model/tasks.py:133
 msgid "raster export"
 msgstr "Rasterexport"
 
-#: geobox/model/layer.py:47 geobox/model/tasks.py:90
+#: geobox/model/layer.py:47
+#: geobox/model/tasks.py:89
 msgid "vector export"
 msgstr "Vektorexport"
 
@@ -1621,7 +1631,7 @@ msgstr "Importprojekt"
 msgid "vector import"
 msgstr "Vektorimport"
 
-#: geobox/model/tasks.py:102
+#: geobox/model/tasks.py:101
 msgid "replication"
 msgstr "Replikation"
 
@@ -1637,170 +1647,169 @@ msgstr "Beenden"
 msgid "Open"
 msgstr "Öffnen"
 
-#: geobox/lib/vectorconvert.py:41
+#: geobox/lib/vectorconvert.py:42
 msgid "invalid geometry type"
 msgstr "Ungültiger Geometrietyp"
 
-#: geobox/lib/vectorconvert.py:43 geobox/lib/vectorconvert.py:50
+#: geobox/lib/vectorconvert.py:44
+#: geobox/lib/vectorconvert.py:51
 msgid "invalid mapping"
 msgstr "Ungültiges Mapping"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:55
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:55
 #, python-format
 msgid "Invalid field name '%s'."
 msgstr "Ungültiger Feldname  '%s'."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:62
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:62
 #, python-format
 msgid "Field must be equal to %(other_name)s."
 msgstr "Das Feld muss mit dem %(other_name)s übereinstimmen."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:94
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:94
 #, python-format
 msgid "Field must be at least %(min)d character long."
 msgid_plural "Field must be at least %(min)d characters long."
 msgstr[0] "Feld muss mindestens %(min)d Zeichen lang sein"
 msgstr[1] "Feld muss mindestens %(min)d Zeichen lang sein"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:97
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:97
 #, python-format
 msgid "Field cannot be longer than %(max)d character."
 msgid_plural "Field cannot be longer than %(max)d characters."
 msgstr[0] "Der Inhalt kann nicht länger als %(max)d Buchstabe sein."
 msgstr[1] "Der Inhalt kann nicht länger als %(max)d Buchstaben sein."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:100
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:100
 #, python-format
 msgid "Field must be between %(min)d and %(max)d characters long."
 msgstr "Eingabe muss zwischen %(min)d und %(max)d Zeichen lang sein."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:135
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:135
 #, python-format
 msgid "Number must be greater than %(min)s."
 msgstr "Die Zahl muss größer als %(min)s sein "
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:137
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:137
 #, python-format
 msgid "Number must be less than %(max)s."
 msgstr "Zahl muss kleiner sein als %(max)s"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:139
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:139
 #, python-format
 msgid "Number must be between %(min)s and %(max)s."
 msgstr "Die Zahl muss zwischen %(min)s und %(max)s liegen"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:188
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:221
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:188
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:221
 msgid "This field is required."
 msgstr "Dieses Feld muss ausgefüllt werden."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:249
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:249
 msgid "Invalid input."
 msgstr "Ungültige Eingabe."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:268
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:268
 msgid "Invalid email address."
 msgstr "Ungültige E-Mail Adresse"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:297
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:297
 msgid "Invalid IP address."
 msgstr "Ungültige IP Adresse."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:345
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:345
 msgid "Invalid Mac address."
 msgstr "Ungültige MAC-Adresse"
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:370
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:370
 msgid "Invalid URL."
 msgstr "Ungültige URL."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:388
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:388
 msgid "Invalid UUID."
 msgstr "Ungültige UUID."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:415
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:415
 #, python-format
 msgid "Invalid value, must be one of: %(values)s."
 msgstr "Ungültiger Wert. Der Wert muss eines der folgenen sein: %(values)s."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/validators.py:442
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:442
 #, python-format
 msgid "Invalid value, can't be any of: %(values)s."
 msgstr "Ungültiger Wert: %(values)s sind nicht möglich."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:419
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:419
 msgid "Not a valid choice"
 msgstr "Keine gültige Auswahl."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:109
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:109
 msgid "Not a valid list"
 msgstr "Keine gültige Liste."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/form.py:47
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/csrf/form.py:47
 msgid "Invalid CSRF Token"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:57
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:57
 msgid "CSRF token missing"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:65
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:65
 msgid "CSRF failed"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:70
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/csrf/session.py:70
 msgid "CSRF token expired"
 msgstr ""
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:50
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:50
 msgid "Please input a date/time value"
 msgstr "Bitte geben Sie Datun/Zeit ein."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:62
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/dateutil/fields.py:62
 msgid "Invalid date/time input"
 msgstr "Ungültiger Datumswert."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/validators.py:33
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/validators.py:33
 msgid "Already exists."
 msgstr "Bereits vorhanden."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:412
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:412
 msgid "Invalid Choice: could not coerce"
 msgstr "Keine gültige Auswahl."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:445
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:445
 msgid "Invalid choice(s): one or more data inputs could not be coerced"
-msgstr ""
-"Ungültige Auswahl: Einer oder mehrere Eingaben konnten nicht verarbeitet "
-"werden."
+msgstr "Ungültige Auswahl: Einer oder mehrere Eingaben konnten nicht verarbeitet werden."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:452
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:452
 #, python-format
 msgid "'%(value)s' is not a valid choice for this field"
 msgstr "'%(value)s' ist keine gültige Wahl für dieses Feld."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:507
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:507
 msgid "Not a valid integer value"
 msgstr "Kein gültiger Integer-Zahlenwert angegeben."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:554
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:554
 msgid "Not a valid decimal value"
 msgstr "Kein gültiger Dezimal-Zahlenwert angegeben."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:581
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:581
 msgid "Not a valid float value"
 msgstr "Kein gültiger Float-Zahlenwert angegeben."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:632
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:632
 msgid "Not a valid datetime value"
 msgstr "Kein gültigen Zeitpunkt angegeben."
 
-#: /Users/dominikhelle/Documents/venv/igreen/lib/python2.7/site-packages/wtforms/fields/core.py:649
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:649
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
