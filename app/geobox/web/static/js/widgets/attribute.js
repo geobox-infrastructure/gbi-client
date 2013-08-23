@@ -56,11 +56,22 @@ gbi.widgets.AttributeEditor.prototype = {
                 if(!(f.feature.id in self.featureChanges)) {
                     self.featureChanges[f.feature.id] = {'added': {}, 'edited': {}, 'removed': []};
                 }
+                self.jsonSchema = layer.jsonSchema || this.options.jsonSchema || false;
+                if(self.invalidFeatures) {
+                    var id = self._isInvalidFeature(f.feature);
+                    console.log(self.invalidFeatures)
+                    if(id != -1) {
+                        self.selectedInvalidFeature = self.invalidFeatures[id];
+                    }
+                }
                 self.selectedFeatures.push(f.feature);
                 self.render();
                 $('#attributeTab').tab('show');
             });
             layer.registerEvent('featureunselected', self, function(f) {
+                if(self.selectedInvalidFeature && self.selectedInvalidFeature.feature.id == f.feature.id) {
+                    self.selectedInvalidFeature = false;
+                }
                 var idx = $.inArray(f.feature, self.selectedFeatures);
                 if(idx != -1) {
                     self.selectedFeatures.splice(idx, 1);
