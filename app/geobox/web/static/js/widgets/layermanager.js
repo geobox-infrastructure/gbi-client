@@ -124,10 +124,12 @@ gbi.widgets.LayerManager.prototype = {
                 return false;
             });
             self.element.find('#data_extent_' + layer.id).click(function(e) {
+                layer.visible(true)
                 var extent = layer.olLayer.getDataExtent();
                 if (extent) {
                     self.editor.map.olMap.zoomToExtent(extent);
                 }
+                self.render(self.findAccordion(this));
                 return false;
             });
             self.element.find('#remove_' + layer.id).click(function() {
