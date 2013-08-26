@@ -82,6 +82,7 @@ def wms_edit(id=None):
             wms.srs = form.data['srs']
             wms.username = form.data['username']
             wms.password = form.data['password']
+            wms.active = True
             flash( _('update WMS'), 'success')
         g.db.commit()
         return redirect(url_for('.raster_list'))

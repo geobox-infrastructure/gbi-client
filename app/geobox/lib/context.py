@@ -138,7 +138,7 @@ def reload_context_document(context_document_url, app_state, user, password):
 
     context_doc = result.json()
     context = Context(context_doc)
-    all_active_sources = set(session.query(model.ExternalWMTSSource).filter_by(active=True).all())
+    all_active_sources = set(session.query(model.ExternalWMTSSource).filter_by(active=True).filter_by(is_user_defined=False).all())
     updater = ContextModelUpdater(session)
 
     first_source = None
