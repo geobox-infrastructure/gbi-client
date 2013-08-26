@@ -20,7 +20,7 @@ import json
 
 from mapproxy.srs import SRS
 from mapproxy.util.coverage import GeomCoverage as GeomCoverage_, BBOXCoverage
-from shapely.geometry import asShape, MultiPolygon
+from shapely.geometry import asShape, MultiPolygon, box
 
 if platform.release() == 'XP':
     # disable prepared geometries to work around
@@ -82,3 +82,16 @@ def coverage_intersection(a, b):
     if not geom:
         return None
     return coverage(geom, SRS(3857))
+
+
+def llbbox_to_geojson(llbbox):
+    llbbox = [float(x) for x in llbbox.split(",")]
+    bbox_coverage = coverage(llbbox, SRS(4326))
+
+    bbox = bbox_coverage.transform_to(SRS(3857)).bbox
+    shapebox = box(bbox[0], bbox[1], bbox[2], bbox[3])
+    bbox_coverage = {
+        "type": "Polygon",
+        "coordinates": [list(shapebox.exterior.coords)]
+    }
+    return json.dumps(bbox_coverage)

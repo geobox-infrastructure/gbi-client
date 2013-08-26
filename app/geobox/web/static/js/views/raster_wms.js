@@ -67,6 +67,8 @@
                         $('#srs_select').append(option);
                     });
                     $("#srs").val( $('#srs_select').val());
+
+                    $("#llbbox").val(response.data.layer.llbbox )
                     capa = response.data
 
                   }

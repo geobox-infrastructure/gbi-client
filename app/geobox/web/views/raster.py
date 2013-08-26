@@ -21,9 +21,9 @@ from ...model.sources import LocalWMTSSource
 from geobox.model import ExternalWMTSSource
 from geobox.web.forms import RasterSourceForm, WMSForm, UnlockRasterSourceForm
 from geobox.lib.capabilities import parse_capabilities_url
+from geobox.lib.coverage import llbbox_to_geojson
 
 raster = Blueprint('raster', __name__)
-
 
 @raster.route('/admin/raster/list', methods=["GET"])
 def raster_list():
@@ -54,6 +54,11 @@ def wms_edit(id=None):
 
     form = WMSForm(request.form, wms)
     if form.validate_on_submit():
+
+        llbbox = form.data['llbbox']
+        bbox_coverage = llbbox_to_geojson(llbbox)
+
+
         if not wms:
             wms = ExternalWMTSSource(
                 name=form.data['name'],
@@ -69,6 +74,7 @@ def wms_edit(id=None):
                 download_level_start=0,
                 download_level_end=20,
                 active=True,
+                download_coverage=bbox_coverage,
             )
             g.db.add(wms)
             flash( _('Save local WMS'), 'success')
@@ -83,6 +89,7 @@ def wms_edit(id=None):
             wms.username = form.data['username']
             wms.password = form.data['password']
             wms.active = True
+            wms.download_coverage = bbox_coverage
             flash( _('update WMS'), 'success')
         g.db.commit()
         return redirect(url_for('.raster_list'))
