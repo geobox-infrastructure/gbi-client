@@ -60,5 +60,8 @@
 {% endblock %}
 
 {% block map_js %}
+    <script type="text/javascript">
+        var loadCapabilitiesURL = '{{ url_for('raster.wms_capabilities') }}';
+    </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/views/raster_wms.js') }}"></script>
 {% endblock %}

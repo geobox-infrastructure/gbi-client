@@ -31,7 +31,7 @@
                 $.ajax({
                   type: 'GET',
                   async: true,
-                  url: '{{ url_for('raster.wms_capabilities') }}',
+                  url: loadCapabilitiesURL,
                   data: { url: url },
                   success: function(response) {
                      $("#wms-capabilities-info").empty();
