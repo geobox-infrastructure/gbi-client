@@ -8,6 +8,7 @@ function initProjectEditor(options) {
         imgPath: OpenlayersImageURL
     });
     editor.addLayer(backgroundLayer)
+
     var layermanager = new gbi.widgets.LayerManager(editor, {
         tiny: true,
         showActiveLayer: false

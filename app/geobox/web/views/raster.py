@@ -14,13 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from flask import render_template, abort, flash, g, request, redirect, url_for, Blueprint
+from flask import render_template, abort, flash, g, request, redirect, url_for, Blueprint, jsonify
 from flaskext.babel import _
 from ...model.sources import LocalWMTSSource
 
 from geobox.model import ExternalWMTSSource
-
 from geobox.web.forms import RasterSourceForm, WMSForm, UnlockRasterSourceForm
+from geobox.lib.capabilities import parse_capabilities_url
 
 raster = Blueprint('raster', __name__)
 
@@ -85,7 +85,21 @@ def wms_edit(id=None):
             flash( _('update WMS'), 'success')
         g.db.commit()
         return redirect(url_for('.raster_list'))
-    return render_template('admin/external_wms.html', form=form)
+
+    base_layer = g.db.query(ExternalWMTSSource).filter_by(background_layer=True).first()
+    return render_template('admin/external_wms.html', form=form, base_layer=base_layer)
+
+@raster.route('/admin/wms/capabilities', methods=["GET"])
+def wms_capabilities():
+    url = request.args.get('url', False)
+    if not url:
+        return jsonify(error=_('Need url for capabilities'))
+
+    try:
+        data = parse_capabilities_url(url)
+    except:
+        data = {'error': 'load capabilities not possible'}
+    return jsonify(data=data)
 
 @raster.route('/admin/wmts/edit', methods=["GET", "POST"])
 @raster.route('/admin/wmts/edit/<int:id>', methods=["GET", "POST"])

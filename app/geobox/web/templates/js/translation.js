@@ -101,5 +101,10 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'Discard changes': "{{ _('Discard changes') }}",
     'Show in popup': "{{ _('Show in popup') }}",
     'csv': "{{ _('csv') }}",
-    'odt': "{{ _('odt') }}"
+    'odt': "{{ _('odt') }}",
+
+    // add wms
+    'load wms capabilities': "{{ _('load wms capabilities') }}",
+    'preview not possible': "{{ _('preview not possible') }}"
+
 });

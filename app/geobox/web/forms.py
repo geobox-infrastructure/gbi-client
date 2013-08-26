@@ -19,7 +19,7 @@ from jinja2 import Markup
 
 from flask import request, session, current_app, g
 
-from wtforms.fields import HiddenField, TextField, SelectField, PasswordField, BooleanField, FileField
+from wtforms.fields import HiddenField, TextField, SelectField, SelectMultipleField, PasswordField, BooleanField, FileField
 from wtforms.validators import Required, ValidationError, Optional, Regexp
 
 from wtforms.ext.csrf.session import SessionSecureForm
@@ -245,9 +245,9 @@ class RasterSourceForm(Form):
     title = TextField(lazy_gettext('rastersource_title'), validators=[Required()])
 
 class WMSForm(RasterSourceForm):
-    layer = TextField(lazy_gettext('rastersource_layer'), validators=[Required()])
+    layer = TextField(lazy_gettext('rastersource_layer_input'))
     format = SelectField(lazy_gettext('rastersource_format'), validators=[Required()], choices=[('png', 'png'), ('jpeg', 'jpeg')])
-    srs = TextField(lazy_gettext('rastersource_srs'), validators=[Required()])
+    srs = TextField(lazy_gettext('rastersource_srs_input'))
     version = SelectField(lazy_gettext('wms_version'), choices=[('1.1.1', '1.1.1'), ('1.3.0', '1.3.0')],
         validators=[Required()])
 
