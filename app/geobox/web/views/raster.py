@@ -94,8 +94,7 @@ def wms_edit(id=None):
         g.db.commit()
         return redirect(url_for('.raster_list'))
 
-    base_layer = g.db.query(ExternalWMTSSource).filter_by(background_layer=True).first()
-    return render_template('admin/external_wms.html', form=form, base_layer=base_layer)
+    return render_template('admin/external_wms.html', form=form)
 
 @raster.route('/admin/wms/capabilities', methods=["GET"])
 def wms_capabilities():
