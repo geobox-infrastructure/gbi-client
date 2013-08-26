@@ -5,7 +5,8 @@ $(document).ready(function() {
       'gbi.layer.vector.ruleChanged': eneableSaveButton,
       'gbi.layer.vector.listAttributesChanged': eneableSaveButton,
       'gbi.layer.vector.popupAttributesChanged': eneableSaveButton,
-      'gbi.layer.vector.featureAttributeChanged': eneableSaveButton
+      'gbi.layer.vector.featureAttributeChanged': eneableSaveButton,
+      'gbi.layer.vector.schemaLoaded': eneableSaveButton
     }
 
     var editor = initEditor();
@@ -60,8 +61,7 @@ $(document).ready(function() {
    $('#save-changes').click(function() {
     if(activeLayer) {
       activeLayer.save();
-      activeLayer._saveStyle();
-      activeLayer._saveGBIData();
+      activeLayer._saveMetaDocument();
     }
     $(this).attr('disabled', 'disabled').removeClass('btn-success');
     $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');

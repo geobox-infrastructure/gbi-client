@@ -23,6 +23,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "add": "{{ _('add ') }}",
     "addNewAttributesTitle": "{{ _('add new attribute') }}",
     "sameKeyDifferentValue": "{{ _('Same attribute with different values') }}",
+    "Successful refreshed": "{{ _('Successful refreshed') }}",
 
     // styling - widget
     'line': "{{ _('line') }}",
@@ -42,7 +43,20 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'pointinfotext': "{{ _('infotext - point styling') }}",
     'radius': "{{ _('radius') }}",
     'setStyling': "{{ _('set styling') }}",
-    'addAttributesNotPossible': "{{ _('add attributes is not possible') }}",
+    'addAttributesNotPossible': "{{ _('Add attributes is not possible') }}",
+    'features with invalid attributes left': "{{ _('Features with invalid attributes left') }}",
+    'Next': "{{ _('Next') }}",
+    'Previos': "{{ _('Previos') }}",
+    'Additional attributes': "{{ _('Additional attributes') }}",
+    "This attribute is not defined in given schema. Remove it!": "{{ _('This attribute is not defined in given schema. Remove it!') }}",
+    "Add JSONSchema URL": "{{ _('Add JSONSchema URL') }}",
+    "URL of used JSONSchema": "{{ _('URL of used JSONSchema') }}",
+    "refresh": "{{ _('Refresh') }}",
+    "remove": "{{ _('Remove') }}",
+    "Loading schema failed": "{{ _('Loading schema failed') }}",
+    "Refreshing schema failed": "{{ _('Refreshing schema failed') }}",
+
+
 
     // toolbar items
     'Draw polygon': "{{ _('Draw polygon') }}",

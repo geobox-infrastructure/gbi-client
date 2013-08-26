@@ -18,6 +18,10 @@
 
   <!-- jquery ui custom for sortable in featureattributelistconfigurator -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/jquery-ui-1.10.3.custom.min.js') }}"></script>
+
+  <!-- alpaca -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/alpaca-full.min.js') }}"></script>
+
   <!-- widgets -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
@@ -52,134 +56,129 @@
 
 {% block content %}
 <div class="row-fluid">
-    <h1>{{_('editor')}}
-      {{ generate_tooltip(_('tooltip - editor') ) }}
-    </h1>
+  <h1>{{_('editor')}}
+    {{ generate_tooltip(_('tooltip - editor') ) }}
+  </h1>
 
-    <div class="span8 map" id='map'></div>
-    <div class="span4">
-      <div class="bs-docs-example">
-        <ul id="tabs" class="nav nav-tabs">
-          <li class="active">
-            <a href="#layermanager" data-toggle="tab">{{ _('map layer') }}</a>
-          </li>
-          <li>
-            <a href="#layer" data-toggle="tab">{{ _('look') }}</a>
-          </li>
-          <li>
-            <a href="#edit" data-toggle="tab">{{ _('edit') }}</a>
-          </li>
-          <li>
-            <a href="#filter" data-toggle="tab">{{ _('filter') }}</a>
-          </li>
-          <li>
-            <a href="#measure" data-toggle="tab">{{ _('measure') }}</a>
-          </li>
-          <li>
-            <a href="#thematical" data-toggle="tab">{{ _('thematical map') }}</a>
-          </li>
-          <li>
-            <a href="#save" id="save-tab" data-toggle="tab">{{ _('save & load') }}</a>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane fade in active" id="layermanager">
-          <!-- load layermanager widget -->
+  <div class="span8 map" id='map'></div>
+  <div class="span4">
+    <div class="bs-docs-example">
+      <ul id="tabs" class="nav nav-tabs">
+        <li class="active">
+          <a href="#layermanager" data-toggle="tab">{{ _('map layer') }}</a>
+        </li>
+        <li>
+          <a href="#layer" data-toggle="tab">{{ _('look') }}</a>
+        </li>
+        <li>
+          <a href="#edit" data-toggle="tab">{{ _('edit') }}</a>
+        </li>
+        <li>
+          <a href="#filter" data-toggle="tab">{{ _('filter') }}</a>
+        </li>
+        <li>
+          <a href="#measure" data-toggle="tab">{{ _('measure') }}</a>
+        </li>
+        <li>
+          <a href="#thematical" data-toggle="tab">{{ _('thematical map') }}</a>
+        </li>
+        <li>
+          <a href="#save" id="save-tab" data-toggle="tab">{{ _('save & load') }}</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <!-- load layermanager widget -->
+        <div class="tab-pane fade in active" id="layermanager"></div>
+
+        <div class="tab-pane fade" id="layer">
+          <h4>{{ _('Styling') }}</h4>
+          <p>{{ _('infotext - edit styling') }}</p>
+          <div id="style-editor"></div>
+        </div>
+
+        <div class="tab-pane fade" id="edit">
+          <h4>{{ _('Edit') }}</h4>
+          <p>{{ _('infotext - edit controls') }}</p>
+          <div id="edit-toolbar" class="span12"></div>
+          <div class="span12">
+            <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
           </div>
-
-          <div class="tab-pane fade" id="layer">
-            <h4>{{ _('Styling') }}</h4>
-            <p>{{ _('infotext - edit styling') }}</p>
-            <div id="style-editor"></div>
+          <div class="span12">
+            <hr>
+            <button id="export_vectorlayer" title="export" class="btn btn-small">
+              <i class="icon-edit"></i> Export
+            </button>
+            <hr>
           </div>
-
-          <div class="tab-pane fade" id="edit">
-            <h4>{{ _('Edit') }}</h4>
-            <p>{{ _('infotext - edit controls') }}</p>
-            <div id="edit-toolbar" class="span12">
-            </div>
-            <div class="span12">
-              <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
-            </div>
-            <div class="span12">
-              <hr>
-              <button id="export_vectorlayer" title="export" class="btn btn-small">
-               <i class="icon-edit"></i> Export
-               </button>
-                <hr>
-             </div>
-
-           <div>
+          <div>
             <ul id="editor-tabs" class="nav nav-tabs">
               <li class="active">
-                  <a id="attributeTab" href="#attributes" data-toggle="tab">
-                    {{ _('Attribute') }}</a>
-                </li>
-                <li>
-                  <a id="pointTab" href="#point_stling" data-toggle="tab" style="display:none">{{ _('point styling') }}</a>
-                </li>
+                <a id="attributeTab" href="#attributes" data-toggle="tab">{{ _('Attribute') }}</a>
+              </li>
+              <li>
+                <a id="pointTab" href="#point_stling" data-toggle="tab" style="display:none">{{ _('point styling') }}</a>
+              </li>
             </ul>
-              <div class="tab-content">
-                <div class="tab-pane fade in active" id="attributes">
-                  <h4>{{ _('Attributes') }}</h4>
-                  <p>{{ _('infotext - attributes') }}</p>
-                  <div id="attributemanager"></div>
-                </div>
-                <div class="tab-pane fade" id="point_stling">
-                  <div id="point-style-editor"></div>
-                </div>
-             </div>
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="attributes">
+                <h4>{{ _('Attributes') }}</h4>
+                <p>{{ _('infotext - attributes') }}</p>
+                <div id="attributemanager"></div>
+              </div>
+              <div class="tab-pane fade" id="point_stling">
+                <div id="point-style-editor"></div>
+              </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="filter">
-            <h4>{{ _('filter') }}</h4>
-            <p>{{ _('infotext - filter controls') }}</p>
-            <div id="filtermanager"></div>
-          </div>
+        </div>
 
-          <div class="tab-pane fade" id="measure">
-            <h4>{{ _('Measure') }}</h4>
-            <p>{{ _('infotext - measure controls') }}</p>
-            <div id="measure-toolbar">
-            <!--  load measure widget -->
-            </div>
-            <div id="measure-output">
-            </div>
-          </div>
+        <div class="tab-pane fade" id="filter">
+          <h4>{{ _('filter') }}</h4>
+          <p>{{ _('infotext - filter controls') }}</p>
+          <div id="filtermanager"></div>
+        </div>
 
-          <div class="tab-pane fade" id="thematical">
-            <h4>{{ _('thematical map') }}</h4>
-            <p>{{ _('infotext - thematical map') }}</p>
-            <div id="thematical-vector"></div>
-          </div>
+        <div class="tab-pane fade" id="measure">
+          <h4>{{ _('Measure') }}</h4>
+          <p>{{ _('infotext - measure controls') }}</p>
+          <!--  load measure widget -->
+          <div id="measure-toolbar"></div>
+          <div id="measure-output"></div>
+        </div>
 
-          <div class="tab-pane fade" id="save">
-            <h4>{{ _('save changes') }}</h4>
-            <p>{{ _('infotext - editor save') }}</p>
-            <hr>
-            <h5>{{ _('save') }}</h5>
-            <button class="btn btn-small" id="save-changes" disabled="disabled">{{ _('save') }}</button>
-            <button class="btn btn-small" id="discard-changes" disabled="disabled">{{ _('discard') }}</button>
-            <hr>
-            <h5>{{ _('save as') }}</h5>
+        <div class="tab-pane fade" id="thematical">
+          <h4>{{ _('thematical map') }}</h4>
+          <p>{{ _('infotext - thematical map') }}</p>
+          <div id="thematical-vector"></div>
+        </div>
+
+        <div class="tab-pane fade" id="save">
+          <h4>{{ _('save changes') }}</h4>
+          <p>{{ _('infotext - editor save') }}</p>
+          <hr>
+          <h5>{{ _('save') }}</h5>
+          <button class="btn btn-small" id="save-changes" disabled="disabled">{{ _('save') }}</button>
+          <button class="btn btn-small" id="discard-changes" disabled="disabled">{{ _('discard') }}</button>
+          <hr>
+          <h5>{{ _('save as') }}</h5>
+          <div class="input-append">
+            <input class="span5" id="save-as-name" name="save-as-name" type="text">
+            <button class="btn btn-small" id="save-as" type="button">{{ _('save as') }}</button>
+          </div>
+          <hr>
+          <h4>{{ _('savepoints') }}</h4>
+          <h5>{{ _('create savepoint') }}</h5>
+          <button class="btn btn-small" id="create-savepoint" type="button">{{ _('create new savepoint') }}</button>
+          <span id="save-msg-success" class="span11 alert alert-success hide">{{_('save point created')}}</span>
+          <span id="save-msg-error" class="span11 alert alert-error hide">{{_('error - could not create savepoint')}}</span>
+          <div id="show-savepoints" class="hide">
+            <h5>{{ _('load savepoint') }}</h5>
+            <select id="select-savepoints" class="span6"></select>
             <div class="input-append">
-                <input class="span5" id="save-as-name" name="save-as-name" type="text">
-                <button class="btn btn-small" id="save-as" type="button">{{ _('save as') }}</button>
+              <button id="load-savepoint-modal" class="btn btn-small">{{ _('load') }}</button>
+              <button id="delete-savepoint-modal" class="btn btn-small">{{ _('delete') }}</button>
             </div>
-            <hr>
-            <h4>{{ _('savepoints') }}</h4>
-            <h5>{{ _('create savepoint') }}</h5>
-            <button class="btn btn-small" id="create-savepoint" type="button">{{ _('create new savepoint') }}</button>
-            <span id="save-msg-success" class="span11 alert alert-success hide">{{_('save point created')}}</span>
-            <span id="save-msg-error" class="span11 alert alert-error hide">{{_('error - could not create savepoint')}}</span>
-            <div id="show-savepoints" class="hide">
-              <h5>{{ _('load savepoint') }}</h5>
-                <select id="select-savepoints" class="span6"></select>
-                <div class="input-append">
-                  <button id="load-savepoint-modal" class="btn btn-small">{{ _('load') }}</button>
-                  <button id="delete-savepoint-modal" class="btn btn-small">{{ _('delete') }}</button>
-                </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -195,7 +194,8 @@
       </div>
       <div class="modal-footer">
         <a href="#" id="abort_load_savepoint" class="btn" data-dismiss="modal">{{_('abort')}}</a>
-        <a href="#" id="load-savepoint" class="btn btn-primary">{{_('yes load')}}</a>      </div>
+        <a href="#" id="load-savepoint" class="btn btn-primary">{{_('yes load')}}</a>
+      </div>
     </div>
 
     <!-- modal for delete savepoint -->
@@ -212,7 +212,6 @@
         <a href="#" id="delete-savepoint" class="btn btn-primary">{{_('yes delete')}}</a>
       </div>
     </div>
-
 
     <!-- modal for change layer -->
     <div id="changeVectorLayer" class="modal hide">
