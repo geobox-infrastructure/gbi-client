@@ -3,6 +3,12 @@
 
 {% block title %}{{ _('editor') }}{% endblock %}
 
+{% block head %}
+  <!-- alpaca css -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/alpaca.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/alpaca-bootstrap.min.css') }}">
+{% endblock %}
+
 {% block project_js %}
   <!-- JSTS for split and union -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/javascript.util.js') }}"></script>
