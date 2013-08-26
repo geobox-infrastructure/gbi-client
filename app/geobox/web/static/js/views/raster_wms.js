@@ -25,6 +25,10 @@
             $("#srs").val($(this).val());
         });
 
+        $("#srs_select").prop('disabled', 'disabled')
+        $("#layers_select").prop('disabled', 'disabled')
+        $("#previewMap").prop('disabled', 'disabled')
+
         $("#getCapabilites").click(function() {
             var url = $("#url").val();
             if (url) {
@@ -71,6 +75,10 @@
                     $("#llbbox").val(response.data.layer.llbbox )
                     capa = response.data
 
+                    $("#srs_select").prop('disabled', '')
+                    $("#layers_select").prop('disabled', '')
+                    $("#mapPreview").prop('disabled', '')
+
                   }
                 });
             }
@@ -115,6 +123,7 @@
             editor.addLayer(activeLayer)
 
             editor.zoomToMaxExtent();
+            $("#map").show();
             return false;
         });
 

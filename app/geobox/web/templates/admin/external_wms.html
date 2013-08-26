@@ -17,7 +17,7 @@
             <fieldset class="span5 offset1">
                 {{ input(form.url) }}
                 <button class="btn btn-small" id="getCapabilites">{{ _('load Capabilites') }}</button>
-                <span class="alert alert-error hide" id="wms-capabilities-info"></span>
+                <span class="alert hide" id="wms-capabilities-info"></span>
                 <hr>
                 {{ input(form.name) }}
                 {{ input(form.title) }}
@@ -27,7 +27,7 @@
                 <div class="control-group">
                     <label class="control-label" for="layers_select"><span>{{ _('layers_select') }}:</span></label>
                     <div class="controls">
-                        <select id="layers_select" name="layers_select" multiple='true'></select>
+                        <select id="layers_select" name="layers_select" multiple='true' disabled=disabled></select>
                     </div>
                 </div>
                 {{ input(form.layer) }}
@@ -35,7 +35,7 @@
                 <div class="control-group">
                     <label class="control-label" for="srs_select"><span>{{ _('select srs') }}:</span></label>
                     <div class="controls">
-                        <select id="srs_select" name="srs_select"></select>
+                        <select id="srs_select" name="srs_select" disabled=disabled></select>
                     </div>
                 </div>
 
@@ -47,7 +47,7 @@
             </fieldset>
 
             <fieldset class="span5 offset4">
-                <button class="btn btn-small" id="mapPreview">{{ _('preview') }}</button>
+                <button class="btn btn-small" id="mapPreview" disabled=disabled>{{ _('preview') }}</button>
                 <button class="btn btn-small pull-right" type="submit">{{ _('save') }}</button>
             </fieldset>
             <div class="alert alert-error hide span10" id="wms-preview-info"></div>
@@ -55,7 +55,8 @@
     </div>
     <div class="span7">
         <h3> {{ _('preview map') }} </h3>
-        <div class="map" id='map' style="width: 500px; height: 500px;"></div>
+        <p> {{ _('infotext preview map') }} </p>
+        <div class="map hide" id='map' style="width: 500px; height: 500px;"></div>
     </div>
 </div>
 {% endblock %}
