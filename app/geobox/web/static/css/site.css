@@ -281,13 +281,7 @@ hr#save_dividing_line {
 
 .gbi_widgets_LayerManager li {
     list-style-type: none;
-    /*margin-left: -20px;*/
 }
-
-/*.gbi_widgets_LayerManager_LayerSwitcher div {
-    min-width: 80px;
-    display: inline-block;
-}*/
 
 .gbi_widgets_LayerManager_Maximize {
     background-image: url(../img/layer-switcher-maximize.png);
