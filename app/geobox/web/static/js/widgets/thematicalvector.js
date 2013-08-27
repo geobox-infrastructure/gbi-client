@@ -83,7 +83,7 @@ gbi.widgets.ThematicalVector.prototype = {
             $(self).tab('show');
         });
         self.element.find('#thematical-map-active').change(function() {
-            self.active = $(this).is(':checked');
+            self.active = $(this).prop('checked');
             if(self.activeLayer) {
                 if(self.active) {
                     self.activeLayer.activateFeatureStylingRule();
