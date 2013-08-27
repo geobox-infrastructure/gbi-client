@@ -162,8 +162,8 @@ gbi.widgets.AttributeEditor.prototype = {
 
         //bind events
         $.each(renderedAttributes, function(idx, key) {
-            $('#'+key).change(function() {
-                var newVal = $('#'+key).val();
+            $('#_'+key).change(function() {
+                var newVal = $(this).val();
                 self.edit(key, newVal);
             });
             $('#_'+key+'_remove').click(function() {
