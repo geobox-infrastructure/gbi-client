@@ -21,6 +21,12 @@ gbi.widgets.StyleEditor = function(editor, options) {
         self.render();
     });
 
+    // render stylingeditor after reloading metadata savepoint
+    $(self.stylingLayer).on('gbi.layer.vector.loadMetaData', function(event) {
+        self.render();
+    });
+
+
     this.render();
 };
 gbi.widgets.StyleEditor.prototype = {
