@@ -151,11 +151,14 @@ gbi.widgets.AttributeEditor.prototype = {
                 }
             });
         }
-        $.each(activeLayer.featuresAttributes(), function(idx, attribute) {
-            if($.inArray(attribute, renderedAttributes) == -1) {
-                renderedAttributes.push(attribute);
-            }
-        });
+
+        if (activeLayer) {
+            $.each(activeLayer.featuresAttributes(), function(idx, attribute) {
+                if($.inArray(attribute, renderedAttributes) == -1) {
+                    renderedAttributes.push(attribute);
+                }
+            });
+        }
 
         //bind events
         $.each(renderedAttributes, function(idx, key) {
