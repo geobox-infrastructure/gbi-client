@@ -42,7 +42,7 @@ $(document).ready(function() {
         registerEvents(activeLayer);
         $(this).attr('disabled', 'disabled').removeClass('btn-success');
         $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
-        $('#save-tab').removeClass('label-success').removeClass('text-warning');
+        $('#save-tab').removeClass('save-enabled');
 
         refreshSavePointList();
     });
@@ -65,7 +65,7 @@ $(document).ready(function() {
     }
     $(this).attr('disabled', 'disabled').removeClass('btn-success');
     $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
-    $('#save-tab').removeClass('label-success').removeClass('text-warning');
+    $('#save-tab').removeClass('save-enabled');
    });
 
     // savepoint settings
@@ -180,7 +180,7 @@ $(document).ready(function() {
         editor.layerManager.active(newLayer);
         editor.widgets.layermanager.render();
         $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
-        $('#save-tab').removeClass('label-success').removeClass('text-warning');
+        $('#save-tab').removeClass('save-enabled');
       }
     });
 
@@ -190,7 +190,7 @@ $(document).ready(function() {
     }
     $(this).attr('disabled', 'disabled').removeClass('btn-success');
     $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
-    $('#save-tab').removeClass('label-success').removeClass('text-warning');
+    $('#save-tab').removeClass('save-enabled');
    })
 
    orderToolbar();
@@ -237,7 +237,7 @@ $(document).ready(function() {
 
     function eneableSaveButton() {
       if(activeLayer instanceof gbi.Layers.Couch) {
-        $('#save-tab').addClass('label-success').addClass('text-warning');
+        $('#save-tab').addClass('save-enabled');
         $('#save-changes').removeAttr('disabled').addClass('btn-success');
         $('#discard-changes').removeAttr('disabled').addClass('btn-danger');
       }

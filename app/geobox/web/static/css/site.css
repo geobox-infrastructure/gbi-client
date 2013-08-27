@@ -329,3 +329,12 @@ hr#save_dividing_line {
 .opacity-1 {
     opacity: 0.1;
 }
+
+.save-enabled {
+    background-color: #468847;
+    color: white;
+}
+
+.save-enabled:hover {
+    color: #468847;
+}
