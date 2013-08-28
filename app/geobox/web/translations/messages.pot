@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-26 11:18+0200\n"
+"POT-Creation-Date: 2013-08-28 08:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -190,7 +190,7 @@ msgid "wms_version"
 msgstr ""
 
 #: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:7
-#: geobox/web/templates/index.html:58
+#: geobox/web/templates/index.html:59
 msgid "settings"
 msgstr ""
 
@@ -310,7 +310,7 @@ msgid "open export on external explorer"
 msgstr ""
 
 #: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:65
-#: geobox/web/templates/index.html:50 geobox/web/templates/index.html:52
+#: geobox/web/templates/index.html:51 geobox/web/templates/index.html:53
 msgid "editor"
 msgstr ""
 
@@ -524,7 +524,7 @@ msgstr ""
 msgid "infotext export layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:271 geobox/web/templates/index.html:35
+#: geobox/web/templates/editor.html:271 geobox/web/templates/index.html:36
 msgid "export"
 msgstr ""
 
@@ -564,35 +564,39 @@ msgid "boxes"
 msgstr ""
 
 #: geobox/web/templates/index.html:29
-msgid "downloadbox"
+msgid "filebox"
 msgstr ""
 
 #: geobox/web/templates/index.html:30
+msgid "downloadbox"
+msgstr ""
+
+#: geobox/web/templates/index.html:31
 msgid "uploadbox"
 msgstr ""
 
-#: geobox/web/templates/index.html:37
+#: geobox/web/templates/index.html:38
 msgid "export raster"
 msgstr ""
 
-#: geobox/web/templates/index.html:42 geobox/web/templates/index.html:44
+#: geobox/web/templates/index.html:43 geobox/web/templates/index.html:45
 #: geobox/web/templates/tasks/task_list.html:83
 msgid "tasks"
 msgstr ""
 
-#: geobox/web/templates/index.html:45
+#: geobox/web/templates/index.html:46
 msgid "downloads"
 msgstr ""
 
-#: geobox/web/templates/index.html:53
+#: geobox/web/templates/index.html:54
 msgid "map"
 msgstr ""
 
-#: geobox/web/templates/index.html:60
+#: geobox/web/templates/index.html:61
 msgid "raster sources"
 msgstr ""
 
-#: geobox/web/templates/index.html:61
+#: geobox/web/templates/index.html:62
 msgid "administation"
 msgstr ""
 
@@ -728,6 +732,10 @@ msgstr ""
 msgid "preview map"
 msgstr ""
 
+#: geobox/web/templates/admin/external_wms.html:58
+msgid "infotext preview map"
+msgstr ""
+
 #: geobox/web/templates/admin/external_wmts.html:8
 msgid "wmts sources"
 msgstr ""
@@ -794,6 +802,18 @@ msgstr ""
 
 #: geobox/web/templates/boxes/download.html:7
 msgid "tooltip - download box "
+msgstr ""
+
+#: geobox/web/templates/boxes/file.html:3
+msgid "file box title"
+msgstr ""
+
+#: geobox/web/templates/boxes/file.html:7
+msgid "file box"
+msgstr ""
+
+#: geobox/web/templates/boxes/file.html:7
+msgid "tooltip - file box "
 msgstr ""
 
 #: geobox/web/templates/boxes/upload.html:3
@@ -1523,16 +1543,16 @@ msgstr ""
 msgid "file type not allowed"
 msgstr ""
 
-#: geobox/web/views/boxes.py:89 geobox/web/views/vector.py:77
+#: geobox/web/views/boxes.py:91 geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:147
 msgid "please select new layer or current layer to import"
 msgstr ""
 
-#: geobox/web/views/boxes.py:104
+#: geobox/web/views/boxes.py:106
 msgid "file will be imported"
 msgstr ""
 
-#: geobox/web/views/boxes.py:112
+#: geobox/web/views/boxes.py:114
 msgid "file deleted"
 msgstr ""
 

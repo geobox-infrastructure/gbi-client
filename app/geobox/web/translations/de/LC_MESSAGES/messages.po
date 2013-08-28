@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-26 11:18+0200\n"
+"POT-Creation-Date: 2013-08-28 08:30+0200\n"
 "PO-Revision-Date: 2013-08-23 14:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -190,7 +190,7 @@ msgid "wms_version"
 msgstr "Version"
 
 #: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:7
-#: geobox/web/templates/index.html:58
+#: geobox/web/templates/index.html:59
 msgid "settings"
 msgstr "Einstellungen"
 
@@ -312,7 +312,7 @@ msgid "open export on external explorer"
 msgstr "Export-Verzeichnis öffnen"
 
 #: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:65
-#: geobox/web/templates/index.html:50 geobox/web/templates/index.html:52
+#: geobox/web/templates/index.html:51 geobox/web/templates/index.html:53
 msgid "editor"
 msgstr "Editor"
 
@@ -543,7 +543,7 @@ msgstr "Vektorlayer exportieren"
 msgid "infotext export layer"
 msgstr "Exportieren Sie hier die aktuelle Karte in verschiedene Formate."
 
-#: geobox/web/templates/editor.html:271 geobox/web/templates/index.html:35
+#: geobox/web/templates/editor.html:271 geobox/web/templates/index.html:36
 msgid "export"
 msgstr "Exportieren"
 
@@ -583,35 +583,39 @@ msgid "boxes"
 msgstr "Boxen"
 
 #: geobox/web/templates/index.html:29
+msgid "filebox"
+msgstr "Beraterbox"
+
+#: geobox/web/templates/index.html:30
 msgid "downloadbox"
 msgstr "Download-Box"
 
-#: geobox/web/templates/index.html:30
+#: geobox/web/templates/index.html:31
 msgid "uploadbox"
 msgstr "Upload-Box"
 
-#: geobox/web/templates/index.html:37
+#: geobox/web/templates/index.html:38
 msgid "export raster"
 msgstr "Rasterdaten Exportieren"
 
-#: geobox/web/templates/index.html:42 geobox/web/templates/index.html:44
+#: geobox/web/templates/index.html:43 geobox/web/templates/index.html:45
 #: geobox/web/templates/tasks/task_list.html:83
 msgid "tasks"
 msgstr "Aufgaben"
 
-#: geobox/web/templates/index.html:45
+#: geobox/web/templates/index.html:46
 msgid "downloads"
 msgstr "Downloads"
 
-#: geobox/web/templates/index.html:53
+#: geobox/web/templates/index.html:54
 msgid "map"
 msgstr "Karte"
 
-#: geobox/web/templates/index.html:60
+#: geobox/web/templates/index.html:61
 msgid "raster sources"
 msgstr "Rasterdatenquelle"
 
-#: geobox/web/templates/index.html:61
+#: geobox/web/templates/index.html:62
 msgid "administation"
 msgstr "Administration"
 
@@ -728,7 +732,10 @@ msgstr "WMS Einstellungen"
 
 #: geobox/web/templates/admin/external_wms.html:13
 msgid "infotext add wms"
-msgstr "Fügen Sie hier eigene Rasterlayer hinzu die als Web Map Service (WMS) zur Verfügung stehen. In der Importansicht können Sie diese anschließend auswählen und den gewünchsten Bereich importieren."
+msgstr ""
+"Fügen Sie hier eigene Rasterlayer hinzu die als Web Map Service (WMS) zur"
+" Verfügung stehen. In der Importansicht können Sie diese anschließend "
+"auswählen und den gewünchsten Bereich importieren."
 
 #: geobox/web/templates/admin/external_wms.html:19
 msgid "load Capabilites"
@@ -749,6 +756,11 @@ msgstr "Vorschau"
 
 #: geobox/web/templates/admin/external_wms.html:57
 msgid "preview map"
+msgstr "Vorschau"
+
+#: geobox/web/templates/admin/external_wms.html:58
+#, fuzzy
+msgid "infotext preview map"
 msgstr "Vorschau"
 
 #: geobox/web/templates/admin/external_wmts.html:8
@@ -828,6 +840,18 @@ msgstr ""
 "Die Download-Box zeigt ihnen alle von Ihrem Berater zur Verfügung "
 "gestellten Dateien an. Sie können diese über eine Vorschau ansehen oder -"
 " wenn diese Dateien Geometrien erhalten – importieren."
+
+#: geobox/web/templates/boxes/file.html:3
+msgid "file box title"
+msgstr "Beraterbox"
+
+#: geobox/web/templates/boxes/file.html:7
+msgid "file box"
+msgstr "Beraterbox"
+
+#: geobox/web/templates/boxes/file.html:7
+msgid "tooltip - file box "
+msgstr "Hier können Sie Dateien aus Ihrer Beraterbox vom Server herunterladen oder dort zur Verfügung stellen"
 
 #: geobox/web/templates/boxes/upload.html:3
 msgid "upload box title"
@@ -1250,7 +1274,9 @@ msgstr "Capabilities wurden geladen"
 
 #: geobox/web/templates/js/translation.js:122
 msgid "preview not possible"
-msgstr "Vorschau nicht möglich. Kein Layer gewählt oder Koordiantensystem wird nicht unterstützt."
+msgstr ""
+"Vorschau nicht möglich. Kein Layer gewählt oder Koordiantensystem wird "
+"nicht unterstützt."
 
 #: geobox/web/templates/projects/export_edit.html:3
 msgid "export project edit"
@@ -1595,7 +1621,7 @@ msgstr "Datei erfolgreich hochgeladen"
 msgid "file type not allowed"
 msgstr "Dateityp ist nich erlaubt"
 
-#: geobox/web/views/boxes.py:89 geobox/web/views/vector.py:77
+#: geobox/web/views/boxes.py:91 geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:147
 msgid "please select new layer or current layer to import"
 msgstr ""
@@ -1603,11 +1629,11 @@ msgstr ""
 "einen Layer aus der Liste oder geben Sie einen Namen für einen neuen "
 "Layer ein."
 
-#: geobox/web/views/boxes.py:104
+#: geobox/web/views/boxes.py:106
 msgid "file will be imported"
 msgstr "Datei wird importiert"
 
-#: geobox/web/views/boxes.py:112
+#: geobox/web/views/boxes.py:114
 msgid "file deleted"
 msgstr "Datei wurde gelöscht"
 
