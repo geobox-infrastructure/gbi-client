@@ -29,6 +29,7 @@
     <h4>{{ _('Context documents') }}</h4>
     <form method="POST" action="{{ url_for('.refresh_context') }} " class="form-horizontal">
         {{ form.csrf_token }}
+        {{ input(form.server_url) }}
         {{ input(form.password) }}
         <div class="control-group">
           <div class="controls">

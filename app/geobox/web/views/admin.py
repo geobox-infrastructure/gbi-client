@@ -39,8 +39,8 @@ def restrict_to_local():
 @admin_view.route('/admin')
 def admin():
     form = forms.LoginForm(request.form)
+    form.server_url.data = current_app.config.geobox_state.config.get('web', 'context_document_url')
     del(form.username)
-
 
     tilebox_form = forms.TileBoxPathForm()
     tilebox_form.path.data = current_app.config.geobox_state.config.get('tilebox', 'path')
@@ -52,7 +52,9 @@ def admin():
 @admin_view.route('/admin/refresh_context', methods=['POST'])
 def refresh_context():
     app_state = current_app.config.geobox_state
-    context_document_url = app_state.config.get('web', 'context_document_url')
+    context_document_url = request.form.get('server_url', False)
+    if not context_document_url:
+        context_document_url = app_state.config.get('web', 'context_document_url')
     try:
         context.reload_context_document(context_document_url, app_state, session['username'], request.form['password'])
     except context.AuthenticationError:
