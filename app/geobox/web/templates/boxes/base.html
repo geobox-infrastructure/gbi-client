@@ -8,7 +8,7 @@
     {% block content_head %}
 
     {% endblock %}
-    {% if (box_name == 'upload') %}
+    {% if (box_name == 'upload' or box_name == 'file') %}
     <div class="span6">
         <h2>{{_('upload file')}}</h2>
         <form method="post" enctype="multipart/form-data" id="upload_data">
@@ -56,7 +56,7 @@
                         {% endif %}
                     </td>
                     <td>
-                    {% if (box_name == 'upload') %}
+                    {% if (box_name == 'upload' or box_name == 'file' ) %}
                         <a class="btn btn-small"
                         href="{{ url_for('boxes.delete_file', box_name=box_name, id=file.id, rev=file.rev) }}">{{ _('delete') }}</a>
                     {% else %}

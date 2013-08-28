@@ -16,9 +16,9 @@
 import re
 import urllib
 
-from werkzeug.exceptions import NotFound
+from werkzeug.exceptions import NotFound, Forbidden
 from flask import (render_template, Blueprint, flash,
-    redirect, url_for, request, current_app, jsonify, g)
+    redirect, url_for, request, current_app, jsonify, g, session)
 
 from flask.ext.babel import gettext as _
 
@@ -33,6 +33,13 @@ boxes = Blueprint('boxes', __name__)
 
 @boxes.route("/box/<box_name>", methods=["GET", "POST"])
 def files(box_name, user_id=None):
+
+    if (box_name == 'file' and not session['user_is_consultant']):
+        raise NotFound()
+
+    if ((box_name == 'download' or box_name == 'upload') and session['user_is_consultant']):
+        raise NotFound()
+
     form = UploadForm()
     import_form = ImportGeoJSONEdit()
     import_form = prepare_geojson_form(import_form)
@@ -65,6 +72,8 @@ def get_couch_box_db(box_name):
         return current_app.config.geobox_state.config.get('couchdb', 'download_box')
     elif box_name == 'upload':
         return current_app.config.geobox_state.config.get('couchdb', 'upload_box')
+    elif box_name == 'file':
+        return current_app.config.geobox_state.config.get('couchdb', 'file_box')
     else:
         raise NotFound()
 

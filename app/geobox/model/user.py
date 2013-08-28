@@ -13,11 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# import all model packages here so that they are imported
-# before anyone calls Base.metadata.create_all()
 
-from .tasks import *
-from .sources import *
-from .project import *
-from .layer import *
-from .user import *
+CUSTOMER = 0 #landwirte
+SERVICE_PROVIDER = 1 #dienstleister
+CONSULTANT = 50 #berater
+ADMIN = 99
+
+class User():
+
+    def __init__(self, email, type):
+        self.email = email
+        self.type = type
+
+    @property
+    def is_consultant(self):
+        return True if self.type == CONSULTANT else False

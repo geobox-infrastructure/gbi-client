@@ -19,6 +19,7 @@ import requests
 from geobox import model
 from geobox.lib.box import FeatureInserter
 from geobox.lib.couchdb import CouchDB, CouchDBBase
+from flask import session as user_session
 
 class ContextError(Exception):
     pass
@@ -41,6 +42,8 @@ class Context(object):
     def couchdb_sources(self):
         return self.doc.get('couchdb_sources', [])
 
+    def user(self):
+        return self.doc.get('user', {})
 
 class ContextModelUpdater(object):
     """
@@ -160,7 +163,6 @@ def reload_context_document(context_document_url, app_state, user, password):
     app_state.config.set('app', 'logging_server', context.logging_server())
     app_state.config.write()
 
-
     couchdb = CouchDB('http://127.0.0.1:%d' % app_state.config.get_int('couchdb', 'port'), '_replicator')
     coverage_box = app_state.config.get('web', 'coverages_from_couchdb')
     for couchdb_source in context.couchdb_sources():
@@ -170,6 +172,12 @@ def reload_context_document(context_document_url, app_state, user, password):
         else:
             # replicate other couchdb sources
             replicate_database(couchdb, couchdb_source, app_state)
+
+
+    context_user = context.user()
+    user = model.User(context_user['email'], context_user['type'])
+    user_session['type'] = user.type
+    user_session['user_is_consultant'] = user.is_consultant
     session.commit()
 
 def source_couchdb_url(couchdb_source):
