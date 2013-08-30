@@ -266,6 +266,47 @@ $(document).ready(function() {
         return false;
     });
 
+
+    var activeSearchLayer;
+    $('#start_search').click(function() {
+      if (activeSearchLayer) {
+        activeSearchLayer.visible(false)
+        activeSearchLayer.olLayer.filter = null
+        activeSearchLayer.olLayer.removeAllFeatures();
+       }
+
+       var value = $('#search_value').val();
+
+       var layername = $("#wfs_layers").val()
+       activeSearchLayer = editor.layerManager.layerByName(layername);
+       activeSearchLayer.visible(true)
+       if (value) {
+          value = value.split("\n")
+          activeSearchLayer.filter(
+            activeSearchLayer.olLayer.searchProperty, value
+          );
+          $('#remove_search').removeAttr('disabled');
+          $('#hide_searchlayer').removeAttr('disabled');
+       } else {
+        activeSearchLayer.olLayer.removeAllFeatures();
+       }
+      return false;
+   });
+
+    $('#remove_search').click(function() {
+      $("#search_value").val('');
+      activeSearchLayer.removeFilter();
+      $(this).prop('disabled', 'disabled');
+      return false;
+    });
+
+    $('#hide_searchlayer').click(function() {
+      activeSearchLayer.visible(false)
+      $(this).prop('disabled', 'disabled');
+      return false;
+    });
+
+
 });
 
 function initEditor() {
@@ -360,6 +401,12 @@ function initEditor() {
         }
         $(this).removeClass('btn-success').attr('disabled', 'disabled');
     });
+
+    // add WFS Layer on top
+    $.each(wfsLayers, function(index, layer) {
+        editor.addLayer(layer);
+    });
+
 
   return editor;
 }

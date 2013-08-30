@@ -118,6 +118,30 @@
     {% endfor %}
 {%- endmacro %}
 
+{% macro generate_wfs_searchlayers(layers) -%}
+    var wfsLayers = [];
+    {% for layer in layers %}
+        wfsLayers.push(new gbi.Layers.WFST({
+            "name": "{{ layer.name }}",
+            "url": "{{ layer.url }}",
+            "featureNS":  "{{ layer.feature_ns }}",
+            "featureType": "{{ layer.layer }}",
+            "geometryName": "{{ layer.geometry_field }}",
+            {% if layer.max_features %}
+            "maxFeatures": {{ layer.max_features }},
+            {% endif %}
+            "typename": '{{ layer.typename }}',
+            "styleMap": ro_style_map,
+            "writable": false,
+            displayInLayerSwitcher: false,
+            visibility: false,
+            {% if layer.search_property %}
+            "searchProperty": '{{ layer.search_property }}',
+            {% endif %}
+        }));
+    {% endfor %}
+{%- endmacro %}
+
 
 {% macro generate_tooltip(content) -%}
     <span class="tooltip_element icon-info-sign" title="{{ content }}"></span>

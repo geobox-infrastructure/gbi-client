@@ -22,4 +22,5 @@ proxy = Blueprint('proxy', __name__)
 @proxy.route('/proxy/<path:url>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 @proxy.route('/proxy/', build_only=True)
 def proxy_request(url):
-    return proxy_couchdb_request(request, url)
+    response = proxy_couchdb_request(request, url)
+    return response.data

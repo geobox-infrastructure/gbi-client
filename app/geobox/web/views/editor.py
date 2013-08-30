@@ -18,10 +18,10 @@ from flask import Blueprint, render_template, request, g, current_app, Response,
 import json
 
 from ..helper import get_local_cache_url
-from geobox.model import LocalWMTSSource, ExternalWMTSSource
+from geobox.model import LocalWMTSSource, ExternalWMTSSource, ExternalWFSSource
 from geobox.lib.couchdb import CouchFileBox, vector_layers_metadata
 from geobox.lib.tabular import geojson_to_rows, csv_export, ods_export
-from geobox.web.forms import ExportVectorForm
+from geobox.web.forms import ExportVectorForm, WFSSearchForm
 from .boxes import get_couch_box_db
 
 editor_view = Blueprint('editor_view', __name__)
@@ -31,7 +31,6 @@ def editor():
     export_form = ExportVectorForm(request.form)
     export_form.srs.choices = [(srs, srs) for srs in current_app.config.geobox_state.config.get('web', 'available_srs')]
 
-    # TODO select all writeable boxes
     upload_box = current_app.config.geobox_state.config.get('couchdb', 'upload_box')
     export_form.destination.choices = [('file', 'Filesystem'), (upload_box, upload_box)]
 
@@ -55,6 +54,10 @@ def editor():
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
     couch_layers = list(vector_layers_metadata(couch_url))
 
+    wfs_search_sources = g.db.query(ExternalWFSSource).all()
+    wfs_search_form = WFSSearchForm(request.form)
+
+
     return render_template('editor.html',
         cache_url=cache_url,
         base_layer=base_layer,
@@ -63,6 +66,8 @@ def editor():
         export_form=export_form,
         preview_layername=preview_layername,
         preview_features=preview_features,
+        wfs_search_sources=wfs_search_sources,
+        wfs_search_form=wfs_search_form,
     )
 
 @editor_view.route('/editor/export/<export_type>', methods=['POST'])

@@ -137,7 +137,7 @@ class AuthenticationError(Exception):
     pass
 
 def wfs_source_for_conf(session, layer, prefix):
-    query = session.query(model.ExternalWFSource).filter_by(name=layer['name'])
+    query = session.query(model.ExternalWFSSource).filter_by(name=layer['name'])
 
     if prefix:
         query = query.filter_by(prefix=prefix)
@@ -146,7 +146,7 @@ def wfs_source_for_conf(session, layer, prefix):
     if source:
         source = source[0]
     else:
-        source = model.ExternalWFSource()
+        source = model.ExternalWFSSource()
 
     source.prefix = prefix
     source.id = layer['id']

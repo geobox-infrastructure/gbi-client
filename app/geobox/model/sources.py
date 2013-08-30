@@ -19,7 +19,7 @@ from sqlalchemy import orm
 from geobox.lib.coverage import coverage_from_geojson
 from . meta import Base
 
-__all__ = ['ExternalWMTSSource', 'LocalWMTSSource', 'ExternalWFSource']
+__all__ = ['ExternalWMTSSource', 'LocalWMTSSource', 'ExternalWFSSource']
 
 class ExternalWMTSSource(Base):
     __tablename__ = 'external_wmts_sources'
@@ -75,7 +75,7 @@ class LocalWMTSSource(Base):
         return range(self.download_level_start, self.download_level_end+1)
 
 
-class ExternalWFSource(Base):
+class ExternalWFSSource(Base):
     __tablename__ = 'external_wfs_sources'
     id = sa.Column(sa.Integer, primary_key=True)
     name = sa.Column(sa.String, nullable=False, unique=True)

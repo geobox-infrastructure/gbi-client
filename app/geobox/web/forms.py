@@ -19,7 +19,8 @@ from jinja2 import Markup
 
 from flask import request, session, current_app, g
 
-from wtforms.fields import HiddenField, TextField, SelectField, SelectMultipleField, PasswordField, BooleanField, FileField
+from wtforms.fields import HiddenField, TextField, SelectField, \
+    PasswordField, BooleanField, FileField, TextAreaField
 from wtforms.validators import Required, ValidationError, Optional, Regexp
 
 from wtforms.ext.csrf.session import SessionSecureForm
@@ -27,7 +28,7 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 
 from flaskext.babel import lazy_gettext, gettext, ngettext
-from geobox.model import LocalWMTSSource, ExternalWMTSSource, Project
+from geobox.model import LocalWMTSSource, ExternalWMTSSource, ExternalWFSSource, Project
 
 class BabelTranslations(object):
     def gettext(self, string):
@@ -183,6 +184,9 @@ def get_all_projects_withs_coverages():
     query = g.db.query(Project).with_polymorphic('*').filter(Project.coverage!=None)
     return query.filter(Project.coverage!='').all()
 
+def get_wfs_source():
+    return g.db.query(ExternalWFSSource).filter_by(active=True).all()
+
 class SelectCoverage(Form):
     select_coverage = QuerySelectField(lazy_gettext('select coverage'), query_factory=get_all_projects_withs_coverages, get_label='title')
 
@@ -251,4 +255,9 @@ class WMSForm(RasterSourceForm):
     srs = TextField(lazy_gettext('rastersource_srs_input'))
     version = SelectField(lazy_gettext('wms_version'), choices=[('1.1.1', '1.1.1'), ('1.3.0', '1.3.0')],
         validators=[Required()])
+
+class WFSSearchForm(Form):
+    wfs_layers = QuerySelectField(lazy_gettext('layers'), query_factory=get_wfs_source, get_label='name', get_pk=lambda a: a.name)
+    search_value = TextAreaField(lazy_gettext('search_string'))
+
 
