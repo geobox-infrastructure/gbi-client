@@ -15,9 +15,10 @@
 
 import requests
 
-from flask import current_app
+from flask import current_app, g
 from werkzeug import exceptions
 from werkzeug.wrappers import Response
+from geobox.model import ExternalWFSSource
 
 # headers to remove as of HTTP 1.1 RFC2616
 # http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html
@@ -95,10 +96,20 @@ class LimitedStream(object):
         return self.limited_stream.limit
 
 def proxy_couchdb_request(request, url):
-    if not url.startswith('http://localhost:%s'
-        % current_app.config.geobox_state.config.get('couchdb', 'port')):
-        raise exceptions.Forbidden()
 
+    localhost = 'localhost:%s' % current_app.config.geobox_state.config.get('couchdb', 'port')
+    allowed_hosts = [localhost]
+    wfs_search_layer = g.db.query(ExternalWFSSource).filter_by(active=True).all()
+    for layer in wfs_search_layer:
+        allowed_hosts.append(layer.host)
+
+    found = False
+    for allowed_host in allowed_hosts:
+        if url.startswith('http://%s' % allowed_host) or url.startswith('https://%s' % allowed_host):
+            found = True
+
+    if not found:
+        raise exceptions.Forbidden()
     headers = end_to_end_headers(request.headers)
 
     content_length = request.headers.get('content-length')
