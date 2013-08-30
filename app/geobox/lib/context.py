@@ -36,6 +36,11 @@ class Context(object):
         for lyr in self.doc.get('wms_sources', []):
             yield lyr
 
+    def wfs_sources(self):
+        for lyr in self.doc.get('wfs_sources', []):
+            yield lyr
+
+
     def logging_server(self):
         return self.doc.get('logging', {}).get('url')
 
@@ -121,7 +126,6 @@ class ContextModelUpdater(object):
         source.active = True
         return source
 
-
     def coverage_from_restriction(self, restriction):
         geom = asShape(restriction['geometry'])
         if geom.type not in ('Polygon', 'MultiPolygon'):
@@ -131,6 +135,36 @@ class ContextModelUpdater(object):
 
 class AuthenticationError(Exception):
     pass
+
+def wfs_source_for_conf(session, layer, prefix):
+    query = session.query(model.ExternalWFSource).filter_by(name=layer['name'])
+
+    if prefix:
+        query = query.filter_by(prefix=prefix)
+
+    source = query.all()
+    if source:
+        source = source[0]
+    else:
+        source = model.ExternalWFSource()
+
+    source.prefix = prefix
+    source.id = layer['id']
+    source.name = layer['name']
+    source.layer = layer['layer']
+    source.host = layer['host']
+    source.url = layer['url']
+    source.srs = layer['srs']
+    source.geometry_field = layer['geometry_field']
+    source.feature_ns = layer['feature_ns']
+    source.typename = layer['typename']
+    source.search_property = layer.get('search_property')
+
+    source.username = layer.get('username')
+    source.password = layer.get('password')
+
+    source.active = True
+    return source
 
 def reload_context_document(context_document_url, app_state, user, password):
     session = app_state.user_db_session()
@@ -151,6 +185,11 @@ def reload_context_document(context_document_url, app_state, user, password):
         if source in all_active_sources:
             all_active_sources.remove(source)
         session.add(source)
+
+    prefix = context.doc.get('portal', {}).get('prefix')
+    for source in context.wfs_sources():
+        wfs_source = wfs_source_for_conf(session, source, prefix)
+        session.add(wfs_source)
 
     # set all sources that are not in the context as inactive
     for active_source in all_active_sources:

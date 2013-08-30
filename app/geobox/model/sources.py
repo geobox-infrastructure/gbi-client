@@ -19,7 +19,7 @@ from sqlalchemy import orm
 from geobox.lib.coverage import coverage_from_geojson
 from . meta import Base
 
-__all__ = ['ExternalWMTSSource', 'LocalWMTSSource']
+__all__ = ['ExternalWMTSSource', 'LocalWMTSSource', 'ExternalWFSource']
 
 class ExternalWMTSSource(Base):
     __tablename__ = 'external_wmts_sources'
@@ -73,3 +73,38 @@ class LocalWMTSSource(Base):
     @property
     def zoom_level(self):
         return range(self.download_level_start, self.download_level_end+1)
+
+
+class ExternalWFSource(Base):
+    __tablename__ = 'external_wfs_sources'
+    id = sa.Column(sa.Integer, primary_key=True)
+    name = sa.Column(sa.String, nullable=False, unique=True)
+    url = sa.Column(sa.String(256), nullable=False)
+    host = sa.Column(sa.String(256), nullable=False)
+    geometry_field = sa.Column(sa.String(256), nullable=False)
+    layer = sa.Column(sa.String(256), nullable=False)
+
+    prefix = sa.Column(sa.String(64))
+    active = sa.Column(sa.Boolean(), default=True)
+
+    srs = sa.Column(sa.String(64))
+    ns_prefix = sa.Column(sa.String(64))
+    ns_uri = sa.Column(sa.String(64))
+    search_property = sa.Column(sa.String)
+
+    max_features = sa.Column(sa.Integer)
+
+    username = sa.Column(sa.String(64))
+    password = sa.Column(sa.String(64))
+
+
+    @classmethod
+    def by_id(cls, id):
+        q = cls.query.filter(cls.id == id)
+        return q.first_or_404()
+
+    @classmethod
+    def by_name(cls, name):
+        q = cls.query.filter(cls.name == name)
+        return q.first_or_404()
+
