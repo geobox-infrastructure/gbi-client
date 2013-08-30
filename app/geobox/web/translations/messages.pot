@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-28 08:30+0200\n"
+"POT-Creation-Date: 2013-08-30 11:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Please login to see this page"
 msgstr ""
 
-#: geobox/web/forms.py:164 geobox/web/templates/downloads.html:12
+#: geobox/web/forms.py:165 geobox/web/templates/downloads.html:12
 #: geobox/web/templates/admin/external_raster_list.html:40
 #: geobox/web/templates/admin/external_raster_list.html:66
 #: geobox/web/templates/projects/exports.html:12
@@ -54,143 +54,151 @@ msgstr ""
 msgid "title"
 msgstr ""
 
-#: geobox/web/forms.py:169
+#: geobox/web/forms.py:170
 msgid "level needs to be bigger or equal to start level"
 msgstr ""
 
-#: geobox/web/forms.py:172
+#: geobox/web/forms.py:173
 msgid "username"
 msgstr ""
 
-#: geobox/web/forms.py:173
+#: geobox/web/forms.py:174
 msgid "Password"
 msgstr ""
 
-#: geobox/web/forms.py:174
+#: geobox/web/forms.py:175
 msgid "context server url"
 msgstr ""
 
-#: geobox/web/forms.py:187
+#: geobox/web/forms.py:191
 msgid "select coverage"
 msgstr ""
 
-#: geobox/web/forms.py:190
+#: geobox/web/forms.py:194
 msgid "select couch"
 msgstr ""
 
-#: geobox/web/forms.py:193 geobox/web/forms.py:203
+#: geobox/web/forms.py:197 geobox/web/forms.py:207
 msgid "start level"
 msgstr ""
 
-#: geobox/web/forms.py:194 geobox/web/forms.py:204
+#: geobox/web/forms.py:198 geobox/web/forms.py:208
 msgid "end level"
 msgstr ""
 
-#: geobox/web/forms.py:195 geobox/web/forms.py:205
+#: geobox/web/forms.py:199 geobox/web/forms.py:209
 msgid "raster_source"
 msgstr ""
 
-#: geobox/web/forms.py:196
+#: geobox/web/forms.py:200
 msgid "update_tiles"
 msgstr ""
 
-#: geobox/web/forms.py:201
+#: geobox/web/forms.py:205
 #: geobox/web/templates/admin/external_raster_list.html:13
 msgid "format"
 msgstr ""
 
-#: geobox/web/forms.py:202 geobox/web/forms.py:217 geobox/web/forms.py:229
+#: geobox/web/forms.py:206 geobox/web/forms.py:221 geobox/web/forms.py:233
 #: geobox/web/templates/admin/external_raster_list.html:69
 msgid "srs"
 msgstr ""
 
-#: geobox/web/forms.py:211
+#: geobox/web/forms.py:215
 msgid "geojson file name"
 msgstr ""
 
-#: geobox/web/forms.py:212 geobox/web/forms.py:218
+#: geobox/web/forms.py:216 geobox/web/forms.py:222
 msgid "select existing layer"
 msgstr ""
 
-#: geobox/web/forms.py:213 geobox/web/forms.py:219
+#: geobox/web/forms.py:217 geobox/web/forms.py:223
 msgid "new layer"
 msgstr ""
 
-#: geobox/web/forms.py:216
+#: geobox/web/forms.py:220
 msgid "file name"
 msgstr ""
 
-#: geobox/web/forms.py:222
+#: geobox/web/forms.py:226
 msgid "path"
 msgstr ""
 
-#: geobox/web/forms.py:225
+#: geobox/web/forms.py:229
 #: geobox/web/templates/admin/external_raster_list.html:11
 msgid "name"
 msgstr ""
 
-#: geobox/web/forms.py:226
+#: geobox/web/forms.py:230
 msgid "geojson"
 msgstr ""
 
-#: geobox/web/forms.py:227 geobox/web/templates/boxes/base.html:34
+#: geobox/web/forms.py:231 geobox/web/templates/boxes/base.html:34
 msgid "filename"
 msgstr ""
 
-#: geobox/web/forms.py:228
+#: geobox/web/forms.py:232
 msgid "export_type"
 msgstr ""
 
-#: geobox/web/forms.py:230
+#: geobox/web/forms.py:234
 msgid "destination"
 msgstr ""
 
-#: geobox/web/forms.py:233
+#: geobox/web/forms.py:237
 msgid "file"
 msgstr ""
 
-#: geobox/web/forms.py:237 geobox/web/forms.py:242
+#: geobox/web/forms.py:241 geobox/web/forms.py:246
 msgid "rastersource_username"
 msgstr ""
 
-#: geobox/web/forms.py:238 geobox/web/forms.py:243
+#: geobox/web/forms.py:242 geobox/web/forms.py:247
 msgid "rastersource_password"
 msgstr ""
 
-#: geobox/web/forms.py:241
+#: geobox/web/forms.py:245
 msgid "rastersource_url"
 msgstr ""
 
-#: geobox/web/forms.py:244
+#: geobox/web/forms.py:248
 msgid "rastersource_name"
 msgstr ""
 
-#: geobox/web/forms.py:245
+#: geobox/web/forms.py:249
 msgid "rastersource_title"
 msgstr ""
 
-#: geobox/web/forms.py:246
+#: geobox/web/forms.py:250
 msgid "rastersource_llbox"
 msgstr ""
 
-#: geobox/web/forms.py:249
+#: geobox/web/forms.py:253
 msgid "rastersource_layer_input"
 msgstr ""
 
-#: geobox/web/forms.py:250
+#: geobox/web/forms.py:254
 msgid "rastersource_format"
 msgstr ""
 
-#: geobox/web/forms.py:251
+#: geobox/web/forms.py:255
 msgid "rastersource_srs_input"
 msgstr ""
 
-#: geobox/web/forms.py:252
+#: geobox/web/forms.py:256
 msgid "wms_version"
 msgstr ""
 
+#: geobox/web/forms.py:260
+msgid "layers"
+msgstr ""
+
+#: geobox/web/forms.py:261
+msgid "search_string"
+msgstr ""
+
 #: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:7
-#: geobox/web/templates/index.html:59
+#: geobox/web/templates/index.html:62
 msgid "settings"
 msgstr ""
 
@@ -228,35 +236,35 @@ msgstr ""
 msgid "Context documents"
 msgstr ""
 
-#: geobox/web/templates/admin.html:35
+#: geobox/web/templates/admin.html:36
 msgid "load context"
 msgstr ""
 
-#: geobox/web/templates/admin.html:40
+#: geobox/web/templates/admin.html:41
 msgid "Logging"
 msgstr ""
 
-#: geobox/web/templates/admin.html:41
+#: geobox/web/templates/admin.html:42
 msgid "open logview"
 msgstr ""
 
-#: geobox/web/templates/admin.html:43
+#: geobox/web/templates/admin.html:44
 msgid "Files"
 msgstr ""
 
-#: geobox/web/templates/admin.html:44
+#: geobox/web/templates/admin.html:45
 msgid "open external file explorer"
 msgstr ""
 
-#: geobox/web/templates/admin.html:47
+#: geobox/web/templates/admin.html:48
 msgid "External tile box"
 msgstr ""
 
-#: geobox/web/templates/admin.html:53
+#: geobox/web/templates/admin.html:54
 msgid "add and start tilebox"
 msgstr ""
 
-#: geobox/web/templates/admin.html:54
+#: geobox/web/templates/admin.html:55
 #: geobox/web/templates/admin/external_raster_list.html:26
 #: geobox/web/templates/admin/external_raster_list.html:86
 #: geobox/web/templates/projects/exports.html:35
@@ -309,24 +317,24 @@ msgstr ""
 msgid "open export on external explorer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:65
-#: geobox/web/templates/index.html:51 geobox/web/templates/index.html:53
+#: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:66
+#: geobox/web/templates/index.html:54 geobox/web/templates/index.html:56
 msgid "editor"
 msgstr ""
 
-#: geobox/web/templates/editor.html:66
+#: geobox/web/templates/editor.html:67
 msgid "tooltip - editor"
 msgstr ""
 
-#: geobox/web/templates/editor.html:74
+#: geobox/web/templates/editor.html:75
 msgid "map layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:77
+#: geobox/web/templates/editor.html:78
 msgid "look"
 msgstr ""
 
-#: geobox/web/templates/editor.html:80
+#: geobox/web/templates/editor.html:81
 #: geobox/web/templates/admin/external_raster_list.html:82
 #: geobox/web/templates/admin/external_raster_list.html:84
 #: geobox/web/templates/projects/exports.html:29
@@ -334,85 +342,102 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:83 geobox/web/templates/editor.html:142
+#: geobox/web/templates/editor.html:84 geobox/web/templates/editor.html:146
 msgid "filter"
 msgstr ""
 
-#: geobox/web/templates/editor.html:86
+#: geobox/web/templates/editor.html:87
 msgid "measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:89 geobox/web/templates/editor.html:156
+#: geobox/web/templates/editor.html:90 geobox/web/templates/editor.html:160
+#: geobox/web/templates/editor.html:164
+msgid "search"
+msgstr ""
+
+#: geobox/web/templates/editor.html:93 geobox/web/templates/editor.html:170
 msgid "thematical map"
 msgstr ""
 
-#: geobox/web/templates/editor.html:92
+#: geobox/web/templates/editor.html:96
 msgid "save & load"
 msgstr ""
 
-#: geobox/web/templates/editor.html:100
+#: geobox/web/templates/editor.html:104
 msgid "Styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:101
+#: geobox/web/templates/editor.html:105
 msgid "infotext - edit styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:106
+#: geobox/web/templates/editor.html:110
 msgid "Edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:107
+#: geobox/web/templates/editor.html:111
 msgid "infotext - edit controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:110
+#: geobox/web/templates/editor.html:114
 msgid "select all features"
 msgstr ""
 
-#: geobox/web/templates/editor.html:122
+#: geobox/web/templates/editor.html:126
 #: geobox/web/templates/js/translation.js:87
 msgid "Attribute"
 msgstr ""
 
-#: geobox/web/templates/editor.html:125
+#: geobox/web/templates/editor.html:129
 msgid "point styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:130
+#: geobox/web/templates/editor.html:134
 #: geobox/web/templates/js/translation.js:88
 msgid "Attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:131
+#: geobox/web/templates/editor.html:135
 msgid "infotext - attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:143
+#: geobox/web/templates/editor.html:147
 msgid "infotext - filter controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:148
+#: geobox/web/templates/editor.html:152
 msgid "Measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:149
+#: geobox/web/templates/editor.html:153
 msgid "infotext - measure controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:157
+#: geobox/web/templates/editor.html:161
+msgid "infotext - search controls"
+msgstr ""
+
+#: geobox/web/templates/editor.html:165
+msgid "remove search"
+msgstr ""
+
+#: geobox/web/templates/editor.html:166
+msgid "hide searchlayer"
+msgstr ""
+
+#: geobox/web/templates/editor.html:171
 msgid "infotext - thematical map"
 msgstr ""
 
-#: geobox/web/templates/editor.html:162
+#: geobox/web/templates/editor.html:176
 msgid "save changes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:163
+#: geobox/web/templates/editor.html:177
 msgid "infotext - editor save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:165 geobox/web/templates/editor.html:166
+#: geobox/web/templates/editor.html:179 geobox/web/templates/editor.html:180
 #: geobox/web/templates/admin/external_unlock.html:20
 #: geobox/web/templates/admin/external_wms.html:51
 #: geobox/web/templates/admin/external_wmts.html:25
@@ -421,110 +446,110 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:167
+#: geobox/web/templates/editor.html:181
 msgid "discard"
 msgstr ""
 
-#: geobox/web/templates/editor.html:169 geobox/web/templates/editor.html:172
+#: geobox/web/templates/editor.html:183 geobox/web/templates/editor.html:186
 msgid "save as"
 msgstr ""
 
-#: geobox/web/templates/editor.html:175
+#: geobox/web/templates/editor.html:189
 msgid "savepoints"
 msgstr ""
 
-#: geobox/web/templates/editor.html:176
+#: geobox/web/templates/editor.html:190
 msgid "create savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:177
+#: geobox/web/templates/editor.html:191
 msgid "create new savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:178
+#: geobox/web/templates/editor.html:192
 msgid "save point created"
 msgstr ""
 
-#: geobox/web/templates/editor.html:179
+#: geobox/web/templates/editor.html:193
 msgid "error - could not create savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:181
+#: geobox/web/templates/editor.html:195
 msgid "load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:184
+#: geobox/web/templates/editor.html:198
 msgid "load"
 msgstr ""
 
-#: geobox/web/templates/editor.html:185 geobox/web/templates/boxes/base.html:61
+#: geobox/web/templates/editor.html:199 geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr ""
 
-#: geobox/web/templates/editor.html:196
+#: geobox/web/templates/editor.html:210
 msgid "Sure you want load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:199
+#: geobox/web/templates/editor.html:213
 msgid "infotext load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:202 geobox/web/templates/editor.html:217
-#: geobox/web/templates/editor.html:232 geobox/web/templates/editor.html:248
-#: geobox/web/templates/editor.html:270 geobox/web/templates/boxes/base.html:84
+#: geobox/web/templates/editor.html:216 geobox/web/templates/editor.html:231
+#: geobox/web/templates/editor.html:246 geobox/web/templates/editor.html:262
+#: geobox/web/templates/editor.html:284 geobox/web/templates/boxes/base.html:84
 #: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr ""
 
-#: geobox/web/templates/editor.html:203
+#: geobox/web/templates/editor.html:217
 msgid "yes load"
 msgstr ""
 
-#: geobox/web/templates/editor.html:211
+#: geobox/web/templates/editor.html:225
 msgid "Sure you want remove savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:214
+#: geobox/web/templates/editor.html:228
 msgid "infotext remove savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:218 geobox/web/templates/editor.html:249
+#: geobox/web/templates/editor.html:232 geobox/web/templates/editor.html:263
 msgid "yes delete"
 msgstr ""
 
-#: geobox/web/templates/editor.html:226
+#: geobox/web/templates/editor.html:240
 msgid "Sure you want change layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:229
+#: geobox/web/templates/editor.html:243
 msgid "infotext change layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:233
+#: geobox/web/templates/editor.html:247
 msgid "yes change and discard"
 msgstr ""
 
-#: geobox/web/templates/editor.html:234
+#: geobox/web/templates/editor.html:248
 msgid "yes change and save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:242
+#: geobox/web/templates/editor.html:256
 msgid "Sure you want delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:245
+#: geobox/web/templates/editor.html:259
 msgid "infotext delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:257
+#: geobox/web/templates/editor.html:271
 msgid "export vector layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:261
+#: geobox/web/templates/editor.html:275
 msgid "infotext export layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:271 geobox/web/templates/index.html:36
+#: geobox/web/templates/editor.html:285 geobox/web/templates/index.html:39
 msgid "export"
 msgstr ""
 
@@ -563,40 +588,40 @@ msgstr ""
 msgid "boxes"
 msgstr ""
 
-#: geobox/web/templates/index.html:29
+#: geobox/web/templates/index.html:30
 msgid "filebox"
 msgstr ""
 
-#: geobox/web/templates/index.html:30
+#: geobox/web/templates/index.html:32
 msgid "downloadbox"
 msgstr ""
 
-#: geobox/web/templates/index.html:31
+#: geobox/web/templates/index.html:33
 msgid "uploadbox"
 msgstr ""
 
-#: geobox/web/templates/index.html:38
+#: geobox/web/templates/index.html:41
 msgid "export raster"
 msgstr ""
 
-#: geobox/web/templates/index.html:43 geobox/web/templates/index.html:45
+#: geobox/web/templates/index.html:46 geobox/web/templates/index.html:48
 #: geobox/web/templates/tasks/task_list.html:83
 msgid "tasks"
 msgstr ""
 
-#: geobox/web/templates/index.html:46
+#: geobox/web/templates/index.html:49
 msgid "downloads"
 msgstr ""
 
-#: geobox/web/templates/index.html:54
+#: geobox/web/templates/index.html:57
 msgid "map"
 msgstr ""
 
-#: geobox/web/templates/index.html:61
+#: geobox/web/templates/index.html:64
 msgid "raster sources"
 msgstr ""
 
-#: geobox/web/templates/index.html:62
+#: geobox/web/templates/index.html:65
 msgid "administation"
 msgstr ""
 
@@ -1511,48 +1536,48 @@ msgstr ""
 msgid "tooltip import vectordata"
 msgstr ""
 
-#: geobox/web/views/admin.py:59 geobox/web/views/user.py:61
+#: geobox/web/views/admin.py:61 geobox/web/views/user.py:61
 msgid "username or password not correct"
 msgstr ""
 
-#: geobox/web/views/admin.py:61 geobox/web/views/user.py:63
+#: geobox/web/views/admin.py:63 geobox/web/views/user.py:63
 msgid "unable to fetch context document"
 msgstr ""
 
-#: geobox/web/views/admin.py:63
+#: geobox/web/views/admin.py:65
 msgid "load context document successful"
 msgstr ""
 
-#: geobox/web/views/admin.py:99
+#: geobox/web/views/admin.py:101
 msgid "delete sucessful"
 msgstr ""
 
-#: geobox/web/views/admin.py:101
+#: geobox/web/views/admin.py:103
 msgid "delete not sucessful"
 msgstr ""
 
-#: geobox/web/views/admin.py:113
+#: geobox/web/views/admin.py:115
 msgid "settings changed. restart required"
 msgstr ""
 
-#: geobox/web/views/boxes.py:49
+#: geobox/web/views/boxes.py:56
 msgid "upload success"
 msgstr ""
 
-#: geobox/web/views/boxes.py:51
+#: geobox/web/views/boxes.py:58
 msgid "file type not allowed"
 msgstr ""
 
-#: geobox/web/views/boxes.py:91 geobox/web/views/vector.py:77
+#: geobox/web/views/boxes.py:98 geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:147
 msgid "please select new layer or current layer to import"
 msgstr ""
 
-#: geobox/web/views/boxes.py:106
+#: geobox/web/views/boxes.py:113
 msgid "file will be imported"
 msgstr ""
 
-#: geobox/web/views/boxes.py:114
+#: geobox/web/views/boxes.py:121
 msgid "file deleted"
 msgstr ""
 
