@@ -1,14 +1,4 @@
 (function($) {
-    // $.extend({
-    //     postURL: function(url) {
-    //         var form = $("<form>")
-    //             .attr("method", "post")
-    //             .attr("action", url);
-    //         form.appendTo("body");
-    //         form.submit();
-    //     }
-    // });
-
     $.extend({
         postURL: function(path, params, method) {
             method = method || "post"; // Set method to post by default, if not specified.
