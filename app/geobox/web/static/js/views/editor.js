@@ -295,7 +295,6 @@ $(document).ready(function() {
 
     $('#remove_search').click(function() {
       $("#search_value").val('');
-      activeSearchLayer.removeFilter();
       $(this).prop('disabled', 'disabled');
       return false;
     });
