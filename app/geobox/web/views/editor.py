@@ -59,7 +59,6 @@ def editor():
         wfs_search_sources = False
     wfs_search_form = WFSSearchForm(request.form)
 
-
     return render_template('editor.html',
         cache_url=cache_url,
         base_layer=base_layer,

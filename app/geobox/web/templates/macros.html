@@ -64,7 +64,7 @@
         {% if source.wmts_source %}
           {# source is local, set map_source to the external #}
           {% set map_source = source.wmts_source %}
-          {% set layer_name = source.wmts_source.name %}
+          {% set layer_name = source.name %}
         {% else %}
            {% set map_source = source %}
            {% set layer_name = source.layer %}

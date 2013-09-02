@@ -416,10 +416,12 @@ def create_raster_import_task(proj):
         local_raster_source.download_level_start = min(local_raster_source.download_level_start, start_level)
         local_raster_source.download_level_end = max(local_raster_source.download_level_end, end_level)
     else:
+        name = "%s_%s_%s" % (raster_source.prefix, current_app.config.geobox_state.config.get('app', 'raster_prefix'), raster_source.name)
         local_raster_source = model.LocalWMTSSource(
             download_level_start=start_level,
             download_level_end=end_level,
             wmts_source_id=raster_source.id,
+            name=name,
         )
 
     task = model.RasterImportTask(

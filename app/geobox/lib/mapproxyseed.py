@@ -306,11 +306,17 @@ def create_tile_manager(cache, sources, grid, format, tile_filter=None,
         pre_store_filter=pre_store_filter, image_opts=image_opts)
     return mgr
 
-def create_couchdb_cache(wmts_source, app_state):
+def create_couchdb_cache(app_state, task=False, layer=False):
     cache_dir = app_state.user_temp_dir()
 
-    db_name = wmts_source.name
-    file_ext = wmts_source.format
+    if task:
+        db_name = task.layer.name
+        file_ext = task.source.format
+    if layer:
+        db_name = layer.name
+        file_ext = layer.format
+
+
     port = app_state.config.get('couchdb', 'port')
     url = 'http://127.0.0.1:%s' % (port, )
 
@@ -320,7 +326,7 @@ def create_couchdb_cache(wmts_source, app_state):
         lock_dir=cache_dir, file_ext=file_ext, tile_grid=DEFAULT_GRID)
 
 def create_couchdb_source(layer, app_state, grid):
-    cache = create_couchdb_cache(layer.wmts_source, app_state)
+    cache = create_couchdb_cache(app_state, layer=layer.wmts_source)
     source = DummySource()
     image_opts = image_options(layer.wmts_source)
     tile_mgr = create_tile_manager(format=layer.wmts_source.format, cache=cache, sources=[source],
@@ -350,7 +356,7 @@ def image_options(source):
     return ImageOptions(transparent=source.is_overlay, format=source.format)
 
 def create_import_seed_task(import_task, app_state):
-    cache = create_couchdb_cache(import_task.source, app_state)
+    cache = create_couchdb_cache(app_state, task=import_task)
     meta_size = meta_buffer = None
     if import_task.source.source_type == 'wmts':
         source = create_wmts_source(import_task.source, app_state)

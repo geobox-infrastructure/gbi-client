@@ -63,6 +63,7 @@ class LocalWMTSSource(Base):
     __tablename__ = 'local_wmts_sources'
 
     id = sa.Column(sa.Integer, primary_key=True)
+    name = sa.Column(sa.String())
     wmts_source_id = sa.Column(sa.Integer, sa.ForeignKey('external_wmts_sources.id'), nullable=False)
     wmts_source = orm.relationship('ExternalWMTSSource', backref='local_wmts_sources')
     download_level_start = sa.Column(sa.Integer())

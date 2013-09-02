@@ -52,8 +52,9 @@ class FeatureInserter(object):
     with the same `feature.id` are overwritten. Missing databases
     are created.
     """
-    def __init__(self, url, auth=None):
+    def __init__(self, url, prefix=None, auth=None):
         self.url = url
+        self.prefix = prefix
         self.session = requests.Session()
         self.inserted_layers = set()
         if auth:
@@ -69,7 +70,8 @@ class FeatureInserter(object):
             self._check_metadata_doc(layer, source)
 
     def insert(self, feature):
-        couch = VectorCouchDB(self.url, feature.layer )
+        couchdb_layer = '%s%s' % (self.prefix, feature.layer)
+        couch = VectorCouchDB(self.url, couchdb_layer )
         feature_dict = {
             'geometry': feature.geometry,
             'properties': feature.properties,
@@ -84,6 +86,7 @@ class FeatureInserter(object):
         self.inserted_layers.add(feature.layer)
 
     def _check_metadata_doc(self, layer, source):
+        layer = '%s%s' % (self.prefix, layer)
         metadata_url = self.url + '/' + layer + '/metadata'
         resp = self.session.get(metadata_url)
         if resp.status_code == 404:

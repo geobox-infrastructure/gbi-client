@@ -32,6 +32,8 @@ except ImportError:
                 'logging_server': '',
                 'vector_import': True,
                 'vector_export': False,
+                'raster_prefix': 'tiles',
+                'vector_prefix': 'vector',
             },
             'web': {
                 'port': 8090,

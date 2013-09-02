@@ -40,7 +40,6 @@ class Context(object):
         for lyr in self.doc.get('wfs_sources', []):
             yield lyr
 
-
     def logging_server(self):
         return self.doc.get('logging', {}).get('url')
 
@@ -176,6 +175,8 @@ def reload_context_document(context_document_url, app_state, user, password):
     context_doc = result.json()
     context = Context(context_doc)
     prefix = context.doc.get('portal', {}).get('prefix')
+    vector_prefix = "%s_%s_" % (prefix, app_state.config.get('app', 'vector_prefix'))
+
     all_active_sources = set(session.query(model.ExternalWMTSSource).filter_by(active=True).filter_by(is_user_defined=False).all())
     updater = ContextModelUpdater(session)
 
@@ -215,7 +216,7 @@ def reload_context_document(context_document_url, app_state, user, password):
     for couchdb_source in context.couchdb_sources():
         if couchdb_source['dbname_user'] == coverage_box:
             # insert features from area/coverage box into layers
-            insert_database_features(couchdb.couch_url, couchdb_source)
+            insert_database_features(couchdb.couch_url, couchdb_source, vector_prefix)
         else:
             # replicate other couchdb sources
             replicate_database(couchdb, couchdb_source, app_state)
@@ -242,7 +243,7 @@ def source_couchdb_url(couchdb_source):
         )
     return dburl
 
-def insert_database_features(dst_dburl, src_conf):
+def insert_database_features(dst_dburl, src_conf, prefix=None):
     auth = None
     if 'username' in src_conf:
         auth = src_conf['username'], src_conf['password']
@@ -250,14 +251,14 @@ def insert_database_features(dst_dburl, src_conf):
         src_conf['dbname'],
         auth=auth,
     )
-    inserter = FeatureInserter(dst_dburl)
+    inserter = FeatureInserter(dst_dburl, prefix=prefix)
 
     inserter.from_source(source_couchdb)
 
 def replicate_database(couchdb, couchdb_source, app_state):
+
     dbname_user = couchdb_source['dbname_user']
     dburl = source_couchdb_url(couchdb_source)
-
     target_couchdb = CouchDB('http://127.0.0.1:%d' % app_state.config.get_int('couchdb', 'port'), dbname_user)
     target_couchdb.init_db()
 
