@@ -15,14 +15,16 @@
 
 import os
 from flask import Blueprint, render_template, current_app, abort, send_from_directory, make_response
-
+from geobox.model import User
 from ..utils import request_is_local
 
 main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html', is_local=request_is_local())
+    user = User(current_app.config.geobox_state.config.get('user', 'type'))
+    is_consultant = user.is_consultant
+    return render_template('index.html', is_local=request_is_local(), is_consultant=is_consultant)
 
 @main.route('/js/map.js')
 def javascript_translation():

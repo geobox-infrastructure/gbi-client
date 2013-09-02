@@ -26,7 +26,7 @@
   <div class="span12">
     <h2>{{_('boxes')}}</h2>
     <ul class="nav nav-list">
-      {% if session['user_is_consultant'] %}
+      {% if is_consultant %}
       <li><a href="{{ url_for('boxes.files', box_name='file') }}">{{ _('filebox') }}</a></li>
       {% else %}
       <li><a href="{{ url_for('boxes.files', box_name='download') }}">{{ _('downloadbox') }}</a></li>

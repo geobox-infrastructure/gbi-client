@@ -16,16 +16,16 @@
 import re
 import urllib
 
-from werkzeug.exceptions import NotFound, Forbidden
+from werkzeug.exceptions import NotFound
 from flask import (render_template, Blueprint, flash,
-    redirect, url_for, request, current_app, jsonify, g, session)
+    redirect, url_for, request, current_app, jsonify, g)
 
 from flask.ext.babel import gettext as _
 
 from geobox.lib.couchdb import CouchFileBox
 from geobox.lib.file_validation import get_file_information
 from geobox.web.forms import UploadForm, ImportGeoJSONEdit
-from geobox.model import VectorImportTask
+from geobox.model import VectorImportTask, User
 from geobox.lib.server_logging import send_task_logging
 from .vector import prepare_geojson_form
 
@@ -34,10 +34,13 @@ boxes = Blueprint('boxes', __name__)
 @boxes.route("/box/<box_name>", methods=["GET", "POST"])
 def files(box_name, user_id=None):
 
-    if (box_name == 'file' and not session['user_is_consultant']):
+    user = User(current_app.config.geobox_state.config.get('user', 'type'))
+    is_consultant = user.is_consultant
+
+    if (box_name == 'file' and not is_consultant):
         raise NotFound()
 
-    if ((box_name == 'download' or box_name == 'upload') and session['user_is_consultant']):
+    if ((box_name == 'download' or box_name == 'upload') and is_consultant):
         raise NotFound()
 
     form = UploadForm()
@@ -60,7 +63,10 @@ def files(box_name, user_id=None):
     files = couch.all_files()
     for f in files:
         f['download_link'] = couchid_to_link(f['id'], couch_url=couch.couch_url)
-    return render_template("boxes/%s.html" % box_name, form=form, files=files, box_name=box_name, import_form=import_form)
+
+
+    return render_template("boxes/%s.html" % box_name, form=form, files=files,
+        box_name=box_name, import_form=import_form)
 
 def couchid_to_link(filename, couch_url):
     if isinstance(filename, unicode):

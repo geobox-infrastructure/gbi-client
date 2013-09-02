@@ -21,10 +21,9 @@ ADMIN = 99
 
 class User():
 
-    def __init__(self, email, type):
-        self.email = email
+    def __init__(self, type):
         self.type = type
 
     @property
     def is_consultant(self):
-        return True if self.type == CONSULTANT else False
+        return True if int(self.type) == CONSULTANT else False

@@ -214,9 +214,11 @@ def reload_context_document(context_document_url, app_state, user, password):
 
 
     context_user = context.user()
-    user = model.User(context_user['email'], context_user['type'])
-    user_session['type'] = user.type
-    user_session['user_is_consultant'] = user.is_consultant
+    if context_user:
+        app_state.config.set('user', 'type', user.type)
+    else:
+        app_state.config.set('user', 'type', 0) # set default to 0
+
     session.commit()
 
 def source_couchdb_url(couchdb_source):
