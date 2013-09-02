@@ -5,4 +5,9 @@ $(document).ready(function() {
    $('.start_task').click(function() {
      $.postURL($(this).data('start_task_url'));
    });
+
+    $('.remove').click(function() {
+       	$.postURL($(this).data('remove-url'));
+    });
+
 });

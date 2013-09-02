@@ -22,7 +22,7 @@
                 <td>{{ source.wmts_source.format }}</td>
                 <td>{{ source.zoom_level }}</td>
                 <td>
-                    <button data-remove-url="{{ url_for('.raster_remove', id=source.id) }}" class="btn btn-small remove">
+                    <button data-remove-url="{{ url_for('.local_raster_remove', id=source.id) }}" class="btn btn-small remove">
                         {{ _('remove') }}
                     </button>
                 </td>

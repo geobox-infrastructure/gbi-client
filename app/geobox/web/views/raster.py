@@ -144,6 +144,18 @@ def wmts_edit(id=None):
         return redirect(url_for('.raster_list'))
     return render_template('admin/external_wmts.html', form=form)
 
+@raster.route('/admin/localraster/remove/<int:id>', methods=["GET", "POST"])
+def local_raster_remove(id):
+    raster_source = g.db.query(LocalWMTSSource).with_polymorphic('*').filter_by(id=id).first()
+
+    if not raster_source:
+        abort(404)
+
+    g.db.delete(raster_source)
+    g.db.commit()
+    flash( _('delete local source successful'), 'success')
+    return redirect(url_for('.raster_list'))
+
 @raster.route('/admin/raster/remove/<int:id>', methods=["GET", "POST"])
 def raster_remove(id):
     raster_source = g.db.query(ExternalWMTSSource).with_polymorphic('*').filter_by(id=id).filter_by(is_user_defined=True).first()
