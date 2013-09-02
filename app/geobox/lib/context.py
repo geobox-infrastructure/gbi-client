@@ -215,7 +215,7 @@ def reload_context_document(context_document_url, app_state, user, password):
 
     context_user = context.user()
     if context_user:
-        app_state.config.set('user', 'type', user.type)
+        app_state.config.set('user', 'type', context_user['type'])
     else:
         app_state.config.set('user', 'type', 0) # set default to 0
 
