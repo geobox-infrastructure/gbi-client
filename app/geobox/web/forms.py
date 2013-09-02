@@ -257,7 +257,8 @@ class WMSForm(RasterSourceForm):
         validators=[Required()])
 
 class WFSSearchForm(Form):
-    wfs_layers = QuerySelectField(lazy_gettext('layers'), query_factory=get_wfs_source, get_label='name', get_pk=lambda a: a.name)
+    wfs_layers = QuerySelectField(lazy_gettext('layers'), query_factory=get_wfs_source,
+        get_label=lambda a: ('%s (%s)' % (a.name, a.search_property)), get_pk=lambda a: a.name)
     search_value = TextAreaField(lazy_gettext('search_string'))
 
 
