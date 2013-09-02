@@ -86,8 +86,8 @@ class FeatureInserter(object):
         self.inserted_layers.add(feature.layer)
 
     def _check_metadata_doc(self, layer, source):
-        layer = '%s%s' % (self.prefix, layer)
-        metadata_url = self.url + '/' + layer + '/metadata'
+        couch_layer = '%s%s' % (self.prefix, layer)
+        metadata_url = self.url + '/' + couch_layer + '/metadata'
         resp = self.session.get(metadata_url)
         if resp.status_code == 404:
             source_md = source.load_record('schema_' + layer)
