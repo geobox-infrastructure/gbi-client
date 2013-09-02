@@ -175,6 +175,7 @@ def reload_context_document(context_document_url, app_state, user, password):
 
     context_doc = result.json()
     context = Context(context_doc)
+    prefix = context.doc.get('portal', {}).get('prefix')
     all_active_sources = set(session.query(model.ExternalWMTSSource).filter_by(active=True).filter_by(is_user_defined=False).all())
     updater = ContextModelUpdater(session)
 
@@ -186,11 +187,6 @@ def reload_context_document(context_document_url, app_state, user, password):
             all_active_sources.remove(source)
         session.add(source)
 
-    prefix = context.doc.get('portal', {}).get('prefix')
-    for source in context.wfs_sources():
-        wfs_source = wfs_source_for_conf(session, source, prefix)
-        session.add(wfs_source)
-
     # set all sources that are not in the context as inactive
     for active_source in all_active_sources:
         active_source.active = False
@@ -198,6 +194,18 @@ def reload_context_document(context_document_url, app_state, user, password):
     for source in session.query(model.ExternalWMTSSource):
         if source != first_source:
             source.background_layer = False
+
+    # load WFS layer for search
+    all_active_wfs_sources = set(session.query(model.ExternalWFSSource).filter_by(active=True).all())
+    for source in context.wfs_sources():
+        wfs_source = wfs_source_for_conf(session, source, prefix)
+        if wfs_source in all_active_wfs_sources:
+            all_active_wfs_sources.remove(wfs_source)
+        session.add(wfs_source)
+
+    # set all wfs sources that are not in the context as inactive
+    for active_wfs_source in all_active_wfs_sources:
+        active_wfs_source.active = False
 
     app_state.config.set('app', 'logging_server', context.logging_server())
     app_state.config.write()
