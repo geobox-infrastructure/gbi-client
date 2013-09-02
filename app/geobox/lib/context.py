@@ -174,7 +174,7 @@ def reload_context_document(context_document_url, app_state, user, password):
 
     context_doc = result.json()
     context = Context(context_doc)
-    prefix = context.doc.get('portal', {}).get('prefix')
+    prefix = context.doc.get('portal', {}).get('prefix').lower()
     vector_prefix = "%s_%s_" % (prefix, app_state.config.get('app', 'vector_prefix'))
 
     all_active_sources = set(session.query(model.ExternalWMTSSource).filter_by(active=True).filter_by(is_user_defined=False).all())
