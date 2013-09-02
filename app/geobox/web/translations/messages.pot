@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-30 11:59+0200\n"
+"POT-Creation-Date: 2013-09-02 08:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -278,7 +278,7 @@ msgid "home"
 msgstr ""
 
 #: geobox/web/templates/base.html:32 geobox/web/templates/login.html:3
-#: geobox/web/templates/login.html:10 geobox/web/templates/login.html:23
+#: geobox/web/templates/login.html:15 geobox/web/templates/login.html:28
 msgid "login"
 msgstr ""
 
@@ -631,6 +631,10 @@ msgstr ""
 
 #: geobox/web/templates/log_view.html:7
 msgid "logs"
+msgstr ""
+
+#: geobox/web/templates/login.html:12
+msgid "context document will be loaded and boxes are copied"
 msgstr ""
 
 #: geobox/web/templates/macros.html:102
@@ -1560,24 +1564,24 @@ msgstr ""
 msgid "settings changed. restart required"
 msgstr ""
 
-#: geobox/web/views/boxes.py:56
+#: geobox/web/views/boxes.py:59
 msgid "upload success"
 msgstr ""
 
-#: geobox/web/views/boxes.py:58
+#: geobox/web/views/boxes.py:61
 msgid "file type not allowed"
 msgstr ""
 
-#: geobox/web/views/boxes.py:98 geobox/web/views/vector.py:77
+#: geobox/web/views/boxes.py:104 geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:147
 msgid "please select new layer or current layer to import"
 msgstr ""
 
-#: geobox/web/views/boxes.py:113
+#: geobox/web/views/boxes.py:119
 msgid "file will be imported"
 msgstr ""
 
-#: geobox/web/views/boxes.py:121
+#: geobox/web/views/boxes.py:127
 msgid "file deleted"
 msgstr ""
 
