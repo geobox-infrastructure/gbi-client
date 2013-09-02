@@ -7,4 +7,11 @@ $(document).ready(function() {
        	$.postURL($(this).data('remove-url'));
     });
 
+    $('#reloadContextDocument').submit(function() {
+    	if ($("#server_url").val() && $("#password").val())
+    		$("#reloadContextDocumentMsg").show();
+    	return true;
+    });
+
+
 });

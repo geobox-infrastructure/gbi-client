@@ -4,6 +4,12 @@
 {% block title %} {{_('settings')}} {% endblock %}
 
 {% block content %}
+
+    <div id="reloadContextDocumentMsg" class="alert hide">
+      <img src="{{ url_for('static', filename='img/loader.gif')}}">
+      <span>{{_('context document will be loaded and boxes are copied')}}</span>
+    </div>
+
     <h3>{{ _('settings') }}</h3>
     <h4>{{ _('local net access') }}
         {{ generate_tooltip(_('tooltip local net access') ) }}
@@ -27,7 +33,7 @@
     </button>
 
     <h4>{{ _('Context documents') }}</h4>
-    <form method="POST" action="{{ url_for('.refresh_context') }} " class="form-horizontal">
+    <form id="reloadContextDocument" method="POST" action="{{ url_for('.refresh_context') }} " class="form-horizontal">
         {{ form.csrf_token }}
         {{ input(form.server_url) }}
         {{ input(form.password) }}
