@@ -54,7 +54,9 @@ def editor():
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
     couch_layers = list(vector_layers_metadata(couch_url))
 
-    wfs_search_sources = g.db.query(ExternalWFSSource).all()
+    wfs_search_sources = g.db.query(ExternalWFSSource).filter_by(active=True).all()
+    if not wfs_search_sources:
+        wfs_search_sources = False
     wfs_search_form = WFSSearchForm(request.form)
 
 

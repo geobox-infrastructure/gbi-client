@@ -402,9 +402,12 @@ function initEditor() {
     });
 
     // add WFS Layer on top
-    $.each(wfsLayers, function(index, layer) {
-        editor.addLayer(layer);
-    });
+
+    if ((typeof wfsLayers !== 'undefined') && wfsLayers) {
+      $.each(wfsLayers, function(index, layer) {
+          editor.addLayer(layer);
+      });
+    }
 
 
   return editor;

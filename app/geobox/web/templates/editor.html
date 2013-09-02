@@ -50,7 +50,9 @@
       var exportODSURL = "{{ url_for('.export_list', export_type='ods') }}";
       var exportCSVURL = "{{ url_for('.export_list', export_type='csv') }}";
       {{ generate_base_layer(base_layer) }}
-      {{ generate_wfs_searchlayers(wfs_search_sources) }}
+      {% if wfs_search_sources %}
+        {{ generate_wfs_searchlayers(wfs_search_sources) }}
+      {% endif %}
       {{ generate_sources(sources, cache_url, coverages=False)}}
       {{ generate_couch_layers(couch_layers, 'true', True)}}
 
@@ -158,12 +160,16 @@
 
         <div class="tab-pane fade" id="search">
           <h4>{{ _('search') }}</h4>
-          <p>{{ _('infotext - search controls') }}</p>
-          {{ input(wfs_search_form.wfs_layers) }}
-          {{ input(wfs_search_form.search_value) }}
-          <button class="btn btn-small" id="start_search">{{_('search')}}</button>
-          <button class="btn btn-small" id="remove_search" disabled=disabled>{{_('remove search')}}</button>
-          <button class="btn btn-small" id="hide_searchlayer" disabled=disabled>{{_('hide searchlayer')}}</button>
+          {% if wfs_search_sources %}
+            <p>{{ _('infotext - search controls') }}</p>
+            {{ input(wfs_search_form.wfs_layers) }}
+            {{ input(wfs_search_form.search_value) }}
+            <button class="btn btn-small" id="start_search">{{_('search')}}</button>
+            <button class="btn btn-small" id="remove_search" disabled=disabled>{{_('remove search')}}</button>
+            <button class="btn btn-small" id="hide_searchlayer" disabled=disabled>{{_('hide searchlayer')}}</button>
+          {% else %}
+            <p>{{ _('infotext - no wfs search') }}</p>
+          {% endif %}
         </div>
 
         <div class="tab-pane fade" id="thematical">
