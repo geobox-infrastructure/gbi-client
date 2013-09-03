@@ -58,7 +58,7 @@ class ContextModelUpdater(object):
 
     def sources_from_context(self, context):
         first = True
-        prefix = context.doc.get('portal', {}).get('prefix')
+        prefix = context.doc.get('portal', {}).get('prefix').lower()
         for source in context.wmts_sources():
             yield self.source_for_conf(source, first, prefix, source_type='wmts')
             first = False
