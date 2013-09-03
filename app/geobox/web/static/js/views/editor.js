@@ -286,10 +286,11 @@ $(document).ready(function() {
             activeSearchLayer.olLayer.searchProperty, value
           );
           $('#remove_search').removeAttr('disabled');
-          $('#hide_searchlayer').removeAttr('disabled');
-       } else {
+      } else {
         activeSearchLayer.olLayer.removeAllFeatures();
-       }
+        activeSearchLayer.removeFilter();
+      }
+      $('#hide_searchlayer').removeAttr('disabled');
       return false;
    });
 
