@@ -17,6 +17,7 @@ from __future__ import absolute_import
 
 import time
 import sys
+import json
 
 import requests
 from cStringIO import StringIO
@@ -325,6 +326,25 @@ def create_couchdb_cache(app_state, task=False, layer=False):
     return CouchDBCache(url=url, db_name=db_name, md_template=md_template,
         lock_dir=cache_dir, file_ext=file_ext, tile_grid=DEFAULT_GRID)
 
+
+def create_metadata_doc(couchdb, layer):
+    metadata_url = couchdb.couch_url + '/metadata'
+    resp = couchdb.req_session.get(metadata_url)
+    if resp.status_code == 404:
+        md_doc = {
+            'title': layer.wmts_source.title,
+            'format': layer.wmts_source.format,
+            'layer': layer.name,
+            'wmts_layer': layer.wmts_source.layer,
+            'wmts_url': layer.wmts_source.url,
+            'type': 'tiles',
+        }
+        resp = couchdb.req_session.put(metadata_url,
+            headers=[('Content-type', 'application/json')],
+            data=json.dumps(md_doc),
+        )
+
+
 def create_couchdb_source(layer, app_state, grid):
     cache = create_couchdb_cache(app_state, layer=layer.wmts_source)
     source = DummySource()
@@ -357,6 +377,7 @@ def image_options(source):
 
 def create_import_seed_task(import_task, app_state):
     cache = create_couchdb_cache(app_state, task=import_task)
+    create_metadata_doc(cache, import_task.layer)
     meta_size = meta_buffer = None
     if import_task.source.source_type == 'wmts':
         source = create_wmts_source(import_task.source, app_state)
