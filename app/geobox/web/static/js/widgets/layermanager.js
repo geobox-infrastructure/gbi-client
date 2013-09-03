@@ -182,6 +182,7 @@ gbi.widgets.LayerManager.prototype = {
             var id = parseInt($(clickedElement).attr('id'));
             var layer = self.layerManager.layerById(id);
             self.layerManager.active(layer);
+            layer.visible(true);
             self.render(self.findAccordion(clickedElement));
         }
 
