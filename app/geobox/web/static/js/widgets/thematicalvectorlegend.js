@@ -7,7 +7,7 @@ var thematicalVectorLegendLabel = {
     'exact': OpenLayers.i18n('Exact'),
     'range': OpenLayers.i18n('Range'),
     'noLayer': OpenLayers.i18n('No layer selected'),
-    'createThematicalMap': OpenLayers.i18n('Create thematical map')
+    'createThematicalMap': OpenLayers.i18n('create settings')
 };
 var thematicalVectorLegendTitles = {
     'showFeatureList': OpenLayers.i18n('Show filtered features in list')
@@ -174,7 +174,7 @@ gbi.widgets.ThematicalVectorLegend.template = '\
     </table>\
 ';
 gbi.widgets.ThematicalVectorLegend.noLayerTemplate = '\
-<div class="text-center">' + thematicalVectorLegendLabel.noLayer + '.<br>\
+<div class="text-left">' + thematicalVectorLegendLabel.noLayer + '.<br>\
 <button id="createThematicalMap" class="btn btn-small">' + thematicalVectorLegendLabel.createThematicalMap + '</button>\
 </div>\
 ';

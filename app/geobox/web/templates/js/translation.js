@@ -116,7 +116,14 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'Show in popup': "{{ _('Show in popup') }}",
     'csv': "{{ _('csv') }}",
     'odt': "{{ _('odt') }}",
-
+    "create settings": "{{ _('create settings') }}",
+    "legend": "{{ _('legend') }}",
+    "settings": "{{ _('settings') }}",
+    "list": "{{ _('list') }}",
+    "active": "{{ _('active') }}",
+    "Map Settings":  "{{ _('map settings') }}",
+    "List Settings":  "{{ _('list settings') }}",
+    "Layer have no attributes": "{{ _('layer has not attributes') }}",
     // add wms
     'load wms capabilities': "{{ _('load wms capabilities') }}",
     'preview not possible': "{{ _('preview not possible') }}"

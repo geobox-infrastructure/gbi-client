@@ -1,8 +1,8 @@
 var thematicalVectorLabels = {
-    'legend': OpenLayers.i18n('Legend'),
-    'settings': OpenLayers.i18n('Settings'),
-    'active': OpenLayers.i18n('Active'),
-    'list': OpenLayers.i18n('List')
+    'legend': OpenLayers.i18n('legend'),
+    'settings': OpenLayers.i18n('settings'),
+    'active': OpenLayers.i18n('active'),
+    'list': OpenLayers.i18n('list')
 }
 
 gbi.widgets = gbi.widgets || {};

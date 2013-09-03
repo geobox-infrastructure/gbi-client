@@ -78,11 +78,11 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
             feature.hasValues = hasValues;
         });
         if(!self.activeLayer) {
-            element.append($('<div class="text-center">' + thematicalVectorAttributeListLabels.noLayer + '</div>'));
+            element.append($('<div>' + thematicalVectorAttributeListLabels.noLayer + '</div>'));
             return;
         }
         if(fullListAttributes.length == 0) {
-            element.append($('<div class="text-center">' + thematicalVectorAttributeListLabels.noAttribute + '</div>'));
+            element.append($('<div>' + thematicalVectorAttributeListLabels.noAttribute + '</div>'));
             return;
         }
         element.append(tmpl(
