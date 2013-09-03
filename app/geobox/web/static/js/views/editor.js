@@ -361,7 +361,6 @@ function loadCouchDBs() {
         }
     }
   });
-  console.log(couchLayers)
   return [couchLayers, raster_sources];
 }
 
