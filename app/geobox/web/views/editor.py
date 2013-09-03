@@ -17,9 +17,8 @@ from flask import Blueprint, render_template, request, g, current_app, Response,
 
 import json
 
-from ..helper import get_local_cache_url
-from geobox.model import LocalWMTSSource, ExternalWMTSSource, ExternalWFSSource
-from geobox.lib.couchdb import CouchFileBox, vector_layers_metadata
+from geobox.model import ExternalWMTSSource, ExternalWFSSource
+from geobox.lib.couchdb import CouchFileBox
 from geobox.lib.tabular import geojson_to_rows, csv_export, ods_export
 from geobox.web.forms import ExportVectorForm, WFSSearchForm
 from .boxes import get_couch_box_db
@@ -46,13 +45,8 @@ def editor():
         preview_features = couch_src.get_attachment(filename)
         preview_layername = "%s (temp)" % (filename)
 
-    raster_sources = g.db.query(LocalWMTSSource).all()
     base_layer = g.db.query(ExternalWMTSSource).filter_by(background_layer=True).first()
     base_layer.bbox = base_layer.bbox_from_view_coverage()
-    cache_url = get_local_cache_url(request)
-
-    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
-    couch_layers = list(vector_layers_metadata(couch_url))
 
     wfs_search_sources = g.db.query(ExternalWFSSource).filter_by(active=True).all()
     if not wfs_search_sources:
@@ -60,15 +54,13 @@ def editor():
     wfs_search_form = WFSSearchForm(request.form)
 
     return render_template('editor.html',
-        cache_url=cache_url,
         base_layer=base_layer,
-        couch_layers=couch_layers,
-        sources=raster_sources,
         export_form=export_form,
         preview_layername=preview_layername,
         preview_features=preview_features,
         wfs_search_sources=wfs_search_sources,
         wfs_search_form=wfs_search_form,
+        with_server=True,
     )
 
 @editor_view.route('/editor/export/<export_type>', methods=['POST'])
@@ -98,3 +90,7 @@ def export_list(export_type='csv'):
         }
     )
 
+
+@editor_view.route('/editor-offline')
+def editor_offline():
+    return render_template('editor.html', with_server=False)

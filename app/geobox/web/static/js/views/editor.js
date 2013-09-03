@@ -304,23 +304,95 @@ $(document).ready(function() {
       $(this).prop('disabled', 'disabled');
       return false;
     });
-
-
 });
 
+function loadCouchDBs() {
+  var url = OpenlayersCouchURL;
+  var jsonFormat = new OpenLayers.Format.JSON();
+  var couchLayers = [];
+  var raster_sources = [];
+
+  OpenLayers.Request.GET({
+    url: url + "_all_dbs",
+    async: false,
+    success: function(response) {
+        var doc = jsonFormat.read(response.responseText);
+        for (var i=0; i<doc.length; i++) {
+            // load metadata from couchdb
+            var metadataURL = url +"/"+doc[i]+"/metadata";
+            OpenLayers.Request.GET({
+              url: metadataURL,
+              async: false,
+              success: function(meta_response) {
+                var metadata = jsonFormat.read(meta_response.responseText);
+                if (metadata._id) {
+                  if (metadata.type == 'GeoJSON') {
+                    couchLayers.push(new gbi.Layers.Couch({
+                        name: metadata.title,
+                        url: OpenlayersCouchURL,
+                        displayInLayerSwitcher: true,
+                        createDB: false,
+                        visibility: false,
+                        loadStyle: true,
+                        hoverPopup: true,
+                        callbacks: {
+                        changes: function(unsavedChanges) {
+                          if(unsavedChanges)
+                            $('#save_changes').removeAttr('disabled').addClass('btn-success');
+                          else
+                            $('#save_changes').attr('disabled', 'disabled').removeClass('btn-success');
+                        }
+                      }
+                    }));
+                  }
+
+                  if (metadata.type == 'tiles') {
+                        raster_sources.push(new gbi.Layers.WMTS({
+                            name: metadata.title,
+                            url: OpenlayersCouchURL,
+                            layer:  metadata.layer,
+                            format: metadata.format
+                        })
+                      )
+                  }
+                }
+              }
+            });
+        }
+    }
+  });
+  console.log(couchLayers)
+  return [couchLayers, raster_sources];
+}
+
+
 function initEditor() {
-     var editor = new gbi.Editor({
+    var layers = loadCouchDBs();
+    var couchLayers = layers[0];
+    var raster_sources = layers[1];
+
+
+    if (typeof numZoomLevels == 'undefined') {
+      numZoomLevels = 18;
+    }
+
+    var editor = new gbi.Editor({
        map: {
             element: 'map',
             numZoomLevels : numZoomLevels,
             theme: OpenlayersThemeURL
         },
-        imgPath: OpenlayersImageURL
+        imgPath: OpenlayersImageURL,
+        imageBaseLayer: true
     });
-    editor.addLayer(backgroundLayer)
-    if (backgroundLayer.olLayer.restrictedExtent) {
-      editor.map.olMap.zoomToExtent(backgroundLayer.olLayer.restrictedExtent);
+
+    if ((typeof backgroundLayer !== 'undefined') && backgroundLayer) {
+      editor.addLayer(backgroundLayer)
+      if (backgroundLayer.olLayer.restrictedExtent) {
+        editor.map.olMap.zoomToExtent(backgroundLayer.olLayer.restrictedExtent);
+      }
     }
+
     $.each(raster_sources, function(index, layer) {
         editor.addLayer(layer);
     });
