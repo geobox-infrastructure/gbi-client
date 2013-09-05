@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}{{ _('import raster edit') }}{% endblock %}
+{% block title %}{{ _('unlock source') }}{% endblock %}
 
 {% from "form_macros.html" import input, button %}
 
 {% block content %}
-<h2>{{_('wms sources')}}</h2>
+<h2>{{_('unlock sources')}}</h2>
 
 <div class="row-fluid">
-    {{ source.title }} ({{ source.name }})
+    <h3>{{ source.title }} – {{ source.name }}</h3>
     <form method="POST" class="form-horizontal">
      {{ form.csrf_token }}
         <fieldset class="span5 offset1">

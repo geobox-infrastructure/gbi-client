@@ -18,7 +18,7 @@ from flask import render_template, abort, flash, g, request, redirect, url_for, 
 from flaskext.babel import _
 from ...model.sources import LocalWMTSSource
 
-from geobox.model import ExternalWMTSSource
+from geobox.model import ExternalWMTSSource, ExternalWFSSource
 from geobox.web.forms import RasterSourceForm, WMSForm, UnlockRasterSourceForm
 from geobox.lib.capabilities import parse_capabilities_url
 from geobox.lib.coverage import llbbox_to_geojson
@@ -27,14 +27,21 @@ raster = Blueprint('raster', __name__)
 
 @raster.route('/admin/raster/list', methods=["GET"])
 def raster_list():
-    external_sources = g.db.query(ExternalWMTSSource).filter_by(is_user_defined=False).all()
+    external_sources = g.db.query(ExternalWMTSSource).filter_by(is_user_defined=False).filter_by(active=True).all()
+    external_wfs_sources = g.db.query(ExternalWFSSource).filter_by(active=True).all()
+
     user_sources = g.db.query(ExternalWMTSSource).filter_by(is_user_defined=True).all()
     local_sources = g.db.query(LocalWMTSSource).all()
-    return render_template('admin/external_raster_list.html', external_sources=external_sources, user_sources=user_sources, local_sources=local_sources)
+    return render_template('admin/external_raster_list.html', external_sources=external_sources,
+        user_sources=user_sources, external_wfs_sources=external_wfs_sources, local_sources=local_sources)
 
-@raster.route('/admin/wmts/unlock/<int:id>', methods=["GET", "POST"])
-def raster_unlock(id):
-    source = g.db.query(ExternalWMTSSource).filter_by(id=id).first()
+@raster.route('/admin/<_type>/unlock/<int:id>', methods=["GET", "POST"])
+def unlock_source(_type, id):
+    if _type == 'wmts':
+        source = g.db.query(ExternalWMTSSource).filter_by(id=id).first()
+    elif _type == 'wfs':
+        source = g.db.query(ExternalWFSSource).filter_by(id=id).first()
+
     form = UnlockRasterSourceForm(request.form, source)
     if form.validate_on_submit():
         source.username = form.data['username']
@@ -44,6 +51,7 @@ def raster_unlock(id):
         return redirect(url_for('.raster_list'))
 
     return render_template('admin/external_unlock.html', source=source, form=form)
+
 
 @raster.route('/admin/wms/edit', methods=["GET", "POST"])
 @raster.route('/admin/wms/edit/<int:id>', methods=["GET", "POST"])
@@ -88,6 +96,7 @@ def wms_edit(id=None):
             wms.srs = form.data['srs']
             wms.username = form.data['username']
             wms.password = form.data['password']
+
             wms.active = True
             wms.download_coverage = bbox_coverage
             flash( _('update WMS'), 'success')

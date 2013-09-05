@@ -52,6 +52,7 @@ class ExternalWMTSSource(Base):
     active = sa.Column(sa.Boolean(), default=True)
 
     is_user_defined = sa.Column(sa.Boolean(), default=False)
+    is_protected = sa.Column(sa.Boolean(), default=False)
 
     def bbox_from_view_coverage(self):
         coverage = coverage_from_geojson(self.view_coverage)
@@ -97,6 +98,7 @@ class ExternalWFSSource(Base):
 
     username = sa.Column(sa.String(64))
     password = sa.Column(sa.String(64))
+    is_protected = sa.Column(sa.Boolean(), default=False)
 
 
     @classmethod
