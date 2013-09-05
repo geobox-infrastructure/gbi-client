@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-03 15:25+0200\n"
+"POT-Creation-Date: 2013-09-05 17:03+0200\n"
 "PO-Revision-Date: 2013-08-23 14:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Sie müssen sich anmelden um diese Seite aufrufen zu können"
 
 #: geobox/web/forms.py:165 geobox/web/templates/downloads.html:12
 #: geobox/web/templates/admin/external_raster_list.html:40
-#: geobox/web/templates/admin/external_raster_list.html:66
+#: geobox/web/templates/admin/external_raster_list.html:121
 #: geobox/web/templates/projects/exports.html:12
 #: geobox/web/templates/projects/imports.html:12
 #: geobox/web/templates/tasks/task_list.html:87
@@ -59,6 +59,8 @@ msgid "level needs to be bigger or equal to start level"
 msgstr "Das Endlevel muss größer oder gleich dem Startlevel sein"
 
 #: geobox/web/forms.py:173
+#: geobox/web/templates/admin/external_raster_list.html:43
+#: geobox/web/templates/admin/external_raster_list.html:83
 msgid "username"
 msgstr "Benutzername"
 
@@ -100,7 +102,7 @@ msgid "format"
 msgstr "Format"
 
 #: geobox/web/forms.py:206 geobox/web/forms.py:221 geobox/web/forms.py:233
-#: geobox/web/templates/admin/external_raster_list.html:69
+#: geobox/web/templates/admin/external_raster_list.html:124
 msgid "srs"
 msgstr "Koordinatensystem"
 
@@ -126,6 +128,7 @@ msgstr "Verzeichnis"
 
 #: geobox/web/forms.py:229
 #: geobox/web/templates/admin/external_raster_list.html:11
+#: geobox/web/templates/admin/external_raster_list.html:80
 msgid "name"
 msgstr "Name"
 
@@ -273,7 +276,7 @@ msgstr "Hinzufügen/Neustarten"
 
 #: geobox/web/templates/admin.html:61
 #: geobox/web/templates/admin/external_raster_list.html:26
-#: geobox/web/templates/admin/external_raster_list.html:86
+#: geobox/web/templates/admin/external_raster_list.html:141
 #: geobox/web/templates/projects/exports.html:35
 #: geobox/web/templates/projects/imports.html:46
 #: geobox/web/templates/tasks/task_list.html:52
@@ -342,8 +345,8 @@ msgid "look"
 msgstr "Aussehen"
 
 #: geobox/web/templates/editor.html:85
-#: geobox/web/templates/admin/external_raster_list.html:82
-#: geobox/web/templates/admin/external_raster_list.html:84
+#: geobox/web/templates/admin/external_raster_list.html:137
+#: geobox/web/templates/admin/external_raster_list.html:139
 #: geobox/web/templates/projects/exports.html:29
 #: geobox/web/templates/projects/imports.html:40
 msgid "edit"
@@ -721,46 +724,81 @@ msgstr ""
 "Definieren Sie hier Benutzername und Passwort falls diese geschützt sind"
 
 #: geobox/web/templates/admin/external_raster_list.html:41
-#: geobox/web/templates/admin/external_raster_list.html:68
+#: geobox/web/templates/admin/external_raster_list.html:123
 #: geobox/web/templates/projects/imports.html:14
 msgid "layer name"
 msgstr "Layer Name"
 
 #: geobox/web/templates/admin/external_raster_list.html:42
+#: geobox/web/templates/admin/external_raster_list.html:82
 msgid "protected"
-msgstr "Gesichert"
+msgstr "Abgesichert"
 
 #: geobox/web/templates/admin/external_raster_list.html:53
+#: geobox/web/templates/admin/external_raster_list.html:93
+msgid "yes"
+msgstr "Ja"
+
+#: geobox/web/templates/admin/external_raster_list.html:55
+#: geobox/web/templates/admin/external_raster_list.html:95
+msgid "no"
+msgstr "Nein"
+
+#: geobox/web/templates/admin/external_raster_list.html:62
+#: geobox/web/templates/admin/external_raster_list.html:102
+msgid "no username defined"
+msgstr "Noch kein Benutzername vorhanden"
+
+#: geobox/web/templates/admin/external_raster_list.html:67
+#: geobox/web/templates/admin/external_raster_list.html:107
 msgid "unlock"
 msgstr "Entsperren"
 
-#: geobox/web/templates/admin/external_raster_list.html:60
+#: geobox/web/templates/admin/external_raster_list.html:74
+msgid "external vector source overview"
+msgstr "Externe Suchdienste"
+
+#: geobox/web/templates/admin/external_raster_list.html:75
+msgid "tooltip - external vector source overview"
+msgstr "Hier werden alle aktiven externen Suchedienste in einer Übersicht angezeigt. Hier haben Sie die Möglichkeit ggf. Benutzername und Passwort einzugeben."
+
+#: geobox/web/templates/admin/external_raster_list.html:81
+msgid "serach property"
+msgstr "Such-Attribut"
+
+#: geobox/web/templates/admin/external_raster_list.html:115
 msgid "internal raster source overview"
 msgstr "Eigene Rasterquellen"
 
-#: geobox/web/templates/admin/external_raster_list.html:61
+#: geobox/web/templates/admin/external_raster_list.html:116
 msgid "tooltip - internal raster source overview"
 msgstr "Definieren Sie hier eigene Rasterquellen zum Beispiel WMS oder WMTS"
 
-#: geobox/web/templates/admin/external_raster_list.html:67
+#: geobox/web/templates/admin/external_raster_list.html:122
 msgid "url"
 msgstr "URL"
 
-#: geobox/web/templates/admin/external_raster_list.html:94
+#: geobox/web/templates/admin/external_raster_list.html:149
 msgid "new wmts source"
 msgstr "Neuen WMTS hinzufügen"
 
-#: geobox/web/templates/admin/external_raster_list.html:98
+#: geobox/web/templates/admin/external_raster_list.html:153
 msgid "new wms project"
 msgstr "Neuen WMS hinzufügen"
 
 #: geobox/web/templates/admin/external_unlock.html:3
+msgid "unlock source"
+msgstr "Quelle Entsperren"
+
+#: geobox/web/templates/admin/external_unlock.html:8
+msgid "unlock sources"
+msgstr "Quelle Entsperren"
+
 #: geobox/web/templates/admin/external_wms.html:3
 #: geobox/web/templates/admin/external_wmts.html:3
 msgid "import raster edit"
 msgstr "Rasterquellen"
 
-#: geobox/web/templates/admin/external_unlock.html:8
 #: geobox/web/templates/admin/external_wms.html:8
 msgid "wms sources"
 msgstr "WMS Quellen"
@@ -1722,31 +1760,31 @@ msgstr "Keine Kacheln"
 msgid "to many tiles"
 msgstr "Zu viele Kacheln"
 
-#: geobox/web/views/raster.py:42 geobox/web/views/raster.py:142
+#: geobox/web/views/raster.py:49 geobox/web/views/raster.py:151
 msgid "update WMTS"
 msgstr "WMTS aktualisiert"
 
-#: geobox/web/views/raster.py:80
+#: geobox/web/views/raster.py:88
 msgid "Save local WMS"
 msgstr "Lokaler WMS gespeichert"
 
-#: geobox/web/views/raster.py:93
+#: geobox/web/views/raster.py:102
 msgid "update WMS"
 msgstr "WMS aktualisiert"
 
-#: geobox/web/views/raster.py:103
+#: geobox/web/views/raster.py:112
 msgid "Need url for capabilities"
 msgstr "URL für Capabilites wird benötigt"
 
-#: geobox/web/views/raster.py:135
+#: geobox/web/views/raster.py:144
 msgid "Save local WMTS"
 msgstr "Lokaler WMTS gespeichert"
 
-#: geobox/web/views/raster.py:156
+#: geobox/web/views/raster.py:165
 msgid "delete local source successful"
 msgstr "Quelle erfolgreich gelöscht"
 
-#: geobox/web/views/raster.py:168
+#: geobox/web/views/raster.py:177
 msgid "delete source successful"
 msgstr "Quelle erfolgreich gelöscht"
 
