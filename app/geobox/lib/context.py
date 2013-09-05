@@ -83,8 +83,12 @@ class ContextModelUpdater(object):
         source.prefix = prefix
         source.title = layer['title']
         source.url = layer['url']
-        source.username = layer.get('username')
-        source.password = layer.get('password')
+        source.is_protected = layer.get('is_protected')
+
+        if not source.is_protected:
+            source.username = layer.get('username')
+            source.password = layer.get('password')
+
         source.format = layer['format']
         source.is_baselayer = layer['baselayer']
         source.is_overlay = layer['overlay']
@@ -159,8 +163,10 @@ def wfs_source_for_conf(session, layer, prefix):
     source.typename = layer['typename']
     source.search_property = layer.get('search_property')
 
-    source.username = layer.get('username')
-    source.password = layer.get('password')
+    source.is_protected = layer.get('is_protected')
+    if not source.is_protected:
+        source.username = layer.get('username')
+        source.password = layer.get('password')
 
     source.active = True
     return source
