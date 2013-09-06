@@ -189,6 +189,7 @@ gbi.widgets.LayerManager.prototype = {
         this.element.find('#add_vector_layer').click(function() {
             var newLayer = $('#new_vector_layer').val();
             if(newLayer) {
+                newLayer = 'local_vector_'+newLayer;
                 var activeLayer = self.layerManager.active();
                 if(activeLayer && activeLayer.unsavedChanges()) {
                     $('#changeVectorLayer').modal('show');
