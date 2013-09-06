@@ -19,7 +19,7 @@ import requests
 from geobox import model
 from geobox.lib.box import FeatureInserter
 from geobox.lib.couchdb import CouchDB, CouchDBBase
-from flask import session as user_session
+from werkzeug.exceptions import NotFound
 
 class ContextError(Exception):
     pass
@@ -83,8 +83,12 @@ class ContextModelUpdater(object):
         source.prefix = prefix
         source.title = layer['title']
         source.url = layer['url']
-        source.username = layer.get('username')
-        source.password = layer.get('password')
+        source.is_protected = layer.get('is_protected')
+
+        if not source.is_protected:
+            source.username = layer.get('username')
+            source.password = layer.get('password')
+
         source.format = layer['format']
         source.is_baselayer = layer['baselayer']
         source.is_overlay = layer['overlay']
@@ -159,15 +163,20 @@ def wfs_source_for_conf(session, layer, prefix):
     source.typename = layer['typename']
     source.search_property = layer.get('search_property')
 
-    source.username = layer.get('username')
-    source.password = layer.get('password')
+    source.is_protected = layer.get('is_protected')
+    if not source.is_protected:
+        source.username = layer.get('username')
+        source.password = layer.get('password')
 
     source.active = True
     return source
 
 def reload_context_document(context_document_url, app_state, user, password):
     session = app_state.user_db_session()
-    result = requests.get(context_document_url, auth=(user, password))
+    try:
+        result = requests.get(context_document_url, auth=(user, password))
+    except requests.exceptions.ConnectionError:
+        raise NotFound()
 
     if result.status_code in (401, 403):
         raise AuthenticationError()

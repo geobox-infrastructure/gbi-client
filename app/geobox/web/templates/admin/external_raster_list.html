@@ -40,6 +40,7 @@
         <th>{{ _('title') }}</th>
         <th>{{ _('layer name') }}</th>
         <th>{{ _('protected') }}</th>
+        <th>{{ _('username') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -47,10 +48,64 @@
       <tr>
         <td>{{ source.title }}</td>
         <td>{{ source.layer }}</td>
-        <td></td>
         <td>
-        	<!--  todo select if protected -->
-          <a href="{{ url_for('.raster_unlock', id=source.id) }}" class="btn btn-small" >{{ _('unlock') }}</a>
+          {% if source.is_protected %}
+              {{ _('yes') }}
+          {% else %}
+              {{ _('no') }}
+          {% endif %}
+        </td>
+        <td>
+          {% if source.is_protected and source.username %}
+            {{ source.username }}
+          {% elif source.is_protected %}
+            {{ _('no username defined')}}
+          {% endif %}
+        </td>
+        <td>
+          {% if source.is_protected %}
+          <a href="{{ url_for('.unlock_source', _type='wmts', id=source.id) }}" class="btn btn-small" >{{ _('unlock') }}</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+    <h2>{{_('external vector source overview')}}
+        {{ generate_tooltip(_('tooltip - external vector source overview') ) }}
+  </h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{{ _('name') }}</th>
+        <th>{{ _('serach property') }}</th>
+        <th>{{ _('protected') }}</th>
+        <th>{{ _('username') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for source in external_wfs_sources %}
+      <tr>
+        <td>{{ source.name }}</td>
+        <td>{{ source.search_property }}</td>
+        <td>
+          {% if source.is_protected %}
+              {{ _('yes') }}
+          {% else %}
+              {{ _('no') }}
+          {% endif %}
+        </td>
+        <td>
+          {% if source.is_protected and source.username %}
+            {{ source.username }}
+          {% elif source.is_protected %}
+            {{ _('no username defined')}}
+          {% endif %}
+        </td>
+        <td>
+          {% if source.is_protected %}
+          <a href="{{ url_for('.unlock_source',  _type='wfs', id=source.id) }}" class="btn btn-small" >{{ _('unlock') }}</a>
+          {% endif %}
         </td>
       </tr>
     {% endfor %}

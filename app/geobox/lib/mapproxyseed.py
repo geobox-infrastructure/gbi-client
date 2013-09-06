@@ -333,11 +333,18 @@ def create_metadata_doc(couchdb, layer):
     if resp.status_code == 404:
         md_doc = {
             'title': layer.wmts_source.title,
-            'format': layer.wmts_source.format,
-            'layer': layer.name,
-            'wmts_layer': layer.wmts_source.layer,
-            'wmts_url': layer.wmts_source.url,
+            'name': layer.name,
             'type': 'tiles',
+            'source': {
+                'type': layer.wmts_source.source_type,
+                'url': layer.wmts_source.url,
+                'format': layer.wmts_source.format,
+                'srs': layer.wmts_source.srs,
+                'layers': layer.wmts_source.layer,
+
+             },
+            "levelMin": layer.wmts_source.view_level_start,
+            "levelMax": layer.wmts_source.view_level_end,
         }
         resp = couchdb.req_session.put(metadata_url,
             headers=[('Content-type', 'application/json')],

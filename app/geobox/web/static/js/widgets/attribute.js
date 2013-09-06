@@ -43,6 +43,12 @@ gbi.widgets.AttributeEditor = function(editor, options) {
         self.render();
     })
 
+    $(gbi).on('gbi.widgets.attributeEditor.deactivate', function(event) {
+        self.layerManager.active().setStyle({}, true);
+        self.labelValue = undefined;
+    });
+
+
     self.render();
 };
 
