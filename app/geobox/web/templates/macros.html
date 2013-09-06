@@ -22,7 +22,8 @@
     var couchLayers = [];
     {% for layer in layers %}
         couchLayers.push(new gbi.Layers.Couch({
-            name: "{{layer.title}}",
+            name: "{{layer.name}}",
+            title: "{{layer.title}}",
             url: OpenlayersCouchURL,
             displayInLayerSwitcher: {{ show_layer }},
             createDB: false,

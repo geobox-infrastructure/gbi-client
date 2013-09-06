@@ -342,7 +342,8 @@ function loadCouchDBs() {
                 if (metadata._id) {
                   if (metadata.type == 'GeoJSON') {
                     couchLayers.push(new gbi.Layers.Couch({
-                        name: metadata.title,
+                        title: metadata.title,
+                        name: metadata.name,
                         url: OpenlayersCouchURL,
                         displayInLayerSwitcher: true,
                         createDB: false,
