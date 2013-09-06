@@ -1128,7 +1128,7 @@ msgstr "Attribut nicht im Schema definiert. Bitte entfernen!"
 
 #: geobox/web/templates/js/translation.js:52
 msgid "Add JSONSchema URL"
-msgstr "JSON-Schema URL hinzufügen"
+msgstr "Schema laden"
 
 #: geobox/web/templates/js/translation.js:53
 msgid "URL of used JSONSchema"
@@ -1268,7 +1268,7 @@ msgstr "Für diesen Layer existiert keine thematische Karte"
 
 #: geobox/web/templates/js/translation.js:99
 msgid "Add input"
-msgstr "Eingabemöglichkeit hinzufügen"
+msgstr "Auswahl hinzufügen"
 
 #: geobox/web/templates/js/translation.js:100
 msgid "Remove input"
