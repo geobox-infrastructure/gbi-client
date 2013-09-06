@@ -351,8 +351,8 @@ function loadCouchDBs() {
                         raster_sources.push(new gbi.Layers.WMTS({
                             name: metadata.title,
                             url: OpenlayersCouchURL,
-                            layer:  metadata.layer,
-                            format: metadata.format
+                            layer:  metadata.name,
+                            format: metadata.source.format
                         })
                       )
                   }
@@ -370,7 +370,6 @@ function initEditor() {
     var layers = loadCouchDBs();
     var couchLayers = layers[0];
     var raster_sources = layers[1];
-
 
     if (typeof numZoomLevels == 'undefined') {
       numZoomLevels = 18;
