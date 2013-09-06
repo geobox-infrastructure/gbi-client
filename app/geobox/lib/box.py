@@ -86,19 +86,14 @@ class FeatureInserter(object):
         self.inserted_layers.add(feature.layer)
 
     def _check_metadata_doc(self, layer, source):
-        couch_layer = '%s%s' % (self.prefix, layer)
-        metadata_url = self.url + '/' + couch_layer + '/metadata'
-        resp = self.session.get(metadata_url)
-        if resp.status_code == 404:
-            source_md = source.load_record('schema_' + layer)
-            md_doc = {
-                'title': source_md.get('title', layer) if source_md else layer,
-                'type': 'GeoJSON',
-            }
-            resp = self.session.put(metadata_url,
-                headers=[('Content-type', 'application/json')],
-                data=json.dumps(md_doc),
-            )
-            if resp.status_code != 201:
-                raise UnexpectedResponse('unable to insert metadata at %s: %s %s' % (
-                    metadata_url, resp, resp.content))
+        couchdb_layer = '%s%s' % (self.prefix, layer)
+        couch = VectorCouchDB(self.url, couchdb_layer )
+
+        source_md = source.load_record('schema_' + layer)
+        md_doc = {
+            'title': source_md.get('title', layer) if source_md else layer,
+            'name': couchdb_layer,
+            'layer': source_md.get('layer'),
+            'type': 'GeoJSON',
+        }
+        couch.update_or_create_doc('metadata', md_doc)
