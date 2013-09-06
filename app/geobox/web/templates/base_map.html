@@ -10,7 +10,9 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/gbi-editor/gbi.js') }}">
     </script>
     <script type="text/javascript">
+      {% if with_server %}
           OpenLayers.ProxyHost = "{{ url_for('proxy.proxy_request') }}";
+      {% endif %}
     </script>
     {% block project_js %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>

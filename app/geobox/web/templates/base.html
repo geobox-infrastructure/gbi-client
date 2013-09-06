@@ -69,7 +69,11 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/micro.templating.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
   <script type="text/javascript">
-      var OpenlayersCouchURL = "http://localhost:{{ app_state.config.get('couchdb', 'port') }}/";
+      {% if with_server %}
+          var OpenlayersCouchURL = "http://localhost:{{ app_state.config.get('couchdb', 'port') }}/";
+      {% else %}
+          var OpenlayersCouchURL = "/";
+      {% endif %}
       var OpenlayersThemeURL = "{{ url_for('static', filename='css/openlayers.css') }}";
       var OpenlayersImageURL = "{{ url_for('static', filename='img/') }}";
   </script>

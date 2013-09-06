@@ -333,7 +333,7 @@ function loadCouchDBs() {
         var doc = jsonFormat.read(response.responseText);
         for (var i=0; i<doc.length; i++) {
             // load metadata from couchdb
-            var metadataURL = url +"/"+doc[i]+"/metadata";
+            var metadataURL = url.replace(/\/$/,'') + "/" + doc[i] + "/metadata";
             OpenLayers.Request.GET({
               url: metadataURL,
               async: false,
