@@ -14,7 +14,10 @@
 # limitations under the License.
 
 import os
-from flask import Blueprint, render_template, current_app, abort, send_from_directory, make_response
+from flask import (
+    Blueprint, render_template, current_app, abort, send_from_directory,
+    make_response, request,
+)
 from geobox.model import User
 from ..utils import request_is_local
 
@@ -26,11 +29,13 @@ def index():
     is_consultant = user.is_consultant
     return render_template('index.html', is_local=request_is_local(), is_consultant=is_consultant)
 
-@main.route('/js/map.js')
+@main.route('/translations.js')
 def javascript_translation():
-    response = make_response(render_template('js/translation.js'))
+    content = render_template('js/translation.js')
+    response = make_response(content)
     response.headers['Content-type'] = 'application/javascript'
-    return response
+    response.add_etag()
+    return response.make_conditional(request)
 
 @main.route('/__terminate')
 def terminate():
