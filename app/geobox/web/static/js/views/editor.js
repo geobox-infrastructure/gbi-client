@@ -36,6 +36,19 @@ $(document).ready(function() {
         }
    });
 
+
+    $('a[data-toggle="tab"]').on('shown', function (e) {
+        if ($(e.relatedTarget).prop('id') == 'thematical-tab') {
+           $(gbi).trigger('gbi.widgets.thematicalVector.deactivate');
+        }
+
+        if ($(e.relatedTarget).prop('id') == 'edit-tab') {
+           $(gbi).trigger('gbi.widgets.attributeEditor.deactivate');
+        }
+    })
+
+
+
     $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
         unregisterEvents(activeLayer);
         activeLayer = layer;
@@ -463,6 +476,7 @@ function initEditor() {
     });
 
     var thematicalVector = new gbi.widgets.ThematicalVector(editor);
+    editor.widgets.thematicalVector = thematicalVector;
 
     $('#save_changes').click(function() {
         var layer = editor.layerManager.active();

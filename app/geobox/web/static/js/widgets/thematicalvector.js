@@ -37,6 +37,15 @@ gbi.widgets.ThematicalVector = function(editor, options) {
         }
     });
 
+    $(gbi).on('gbi.widgets.thematicalVector.deactivate', function(event) {
+        if(self.activeLayer) {
+            self.activeLayer.deactivateHover();
+            self.activeLayer.deactivateFeatureStylingRule();
+        }
+        self.active = false;
+        self.render();
+    });
+
     self.components = {};
     if(self.options.components.list) {
         self.components["list"] = new gbi.widgets.ThematicalVectorAttributeList(self, {
