@@ -18,7 +18,7 @@ gbi.widgets.Measure = function(editor, options) {
     this.pointMeasure = new gbi.Controls.Measure({
             measureType: gbi.Controls.Measure.TYPE_POINT,
             mapSRS: editor.map.olMap.projection.projCode,
-            displaySRS: this.options.srs['EPSG:4326']
+            displaySRS: 'EPSG:4326'
         }, function(event) { self.measureHandler(event); });
     this.pointMeasure.registerEvent('activate', this, function() {
         $('#position_srs').show();
