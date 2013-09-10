@@ -48,6 +48,7 @@ except ImportError:
                 'text': 'GeoBox',
             },
             'user': {
+                'type': '0',
             },
             'couchdb': {
                 # temp ports count backwards from this port -> leave room to other ports
