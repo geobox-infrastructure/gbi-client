@@ -132,6 +132,7 @@ def wmts_edit(id=None):
                 name=form.data['name'],
                 title=form.data['title'],
                 url=form.data['url'],
+                layer=form.data['layer'],
                 username = form.data['username'],
                 password = form.data['password'],
                 is_user_defined= True,
@@ -146,6 +147,7 @@ def wmts_edit(id=None):
             wmts.name  = form.data['name']
             wmts.title = form.data['title']
             wmts.url = form.data['url']
+            wmts.layer = form.data['layer']
             wmts.username = form.data['username']
             wmts.password = form.data['password']
             flash( _('update WMTS'), 'success')

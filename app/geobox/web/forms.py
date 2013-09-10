@@ -247,10 +247,10 @@ class RasterSourceForm(Form):
     password = PasswordField(lazy_gettext('rastersource_password'))
     name = TextField(lazy_gettext('rastersource_name'), validators=[Required(), Regexp('[a-zA-Z0-9_-]+$')])
     title = TextField(lazy_gettext('rastersource_title'), validators=[Required()])
+    layer = TextField(lazy_gettext('rastersource_layer_input'))
     llbbox = TextField(lazy_gettext('rastersource_llbox'))
 
 class WMSForm(RasterSourceForm):
-    layer = TextField(lazy_gettext('rastersource_layer_input'))
     format = SelectField(lazy_gettext('rastersource_format'), validators=[Required()], choices=[('png', 'png'), ('jpeg', 'jpeg')])
     srs = TextField(lazy_gettext('rastersource_srs_input'))
     version = SelectField(lazy_gettext('wms_version'), choices=[('1.1.1', '1.1.1'), ('1.3.0', '1.3.0')],
