@@ -63,8 +63,15 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
         }
 
         var features = _features || self.activeLayer.features;
+        features = features.slice();
+
         var shortListFeatures = [];
         if(features && features.length > 0) {
+            for(var i = features.length; i--; i >= 0) {
+                if(features[i].state == OpenLayers.State.DELETE) {
+                    features.splice(i, 1);
+                }
+            }
             shortListFeatures = features.slice();
         }
 
