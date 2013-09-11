@@ -245,7 +245,7 @@ class RasterSourceForm(Form):
     url = TextField(lazy_gettext('rastersource_url'), validators=[Required()])
     username = TextField(lazy_gettext('rastersource_username'))
     password = PasswordField(lazy_gettext('rastersource_password'))
-    name = TextField(lazy_gettext('rastersource_name'), validators=[Required(), Regexp('[a-zA-Z0-9_-]+$')])
+    name = TextField(lazy_gettext('rastersource_name'), validators=[Required(), Regexp('[a-z0-9_-]+$')])
     title = TextField(lazy_gettext('rastersource_title'), validators=[Required()])
     layer = TextField(lazy_gettext('rastersource_layer_input'))
     llbbox = TextField(lazy_gettext('rastersource_llbox'))
