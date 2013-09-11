@@ -149,17 +149,19 @@ $(document).ready(function() {
     //  savepoint settings end
 
     $('#save-as').click(function() {
-      var newName = $('#save-as-name').val();
+      var newTitle = $('#save-as-name').val();
+      var newName = 'local_vector_' + newTitle;
       if(newName && activeLayer) {
         var newLayer = false;
         // clone couch if class is couch
         if (activeLayer.CLASS_NAME == 'gbi.Layers.Couch') {
-          newLayer = activeLayer.clone(newName, true);
+          newLayer = activeLayer.clone(newName, true, newTitle);
           newLayer.visible(true);
         } else {
           //  create couch to save layer and copy features
           newLayer = new gbi.Layers.Couch({
               name: newName,
+              title: newTitle,
               url: OpenlayersCouchURL,
               displayInLayerSwitcher: true,
               createDB: false,
