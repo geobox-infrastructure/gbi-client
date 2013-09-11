@@ -77,6 +77,7 @@ def wms_edit(id=None):
                 srs = form.data['srs'],
                 username = form.data['username'],
                 password = form.data['password'],
+                prefix = 'local',
                 is_user_defined=True,
                 source_type='wms',
                 download_level_start=0,
@@ -96,7 +97,7 @@ def wms_edit(id=None):
             wms.srs = form.data['srs']
             wms.username = form.data['username']
             wms.password = form.data['password']
-
+            wms.prefix = 'local'
             wms.active = True
             wms.download_coverage = bbox_coverage
             flash( _('update WMS'), 'success')
@@ -136,6 +137,7 @@ def wmts_edit(id=None):
                 username = form.data['username'],
                 password = form.data['password'],
                 is_user_defined= True,
+                prefix = 'local',
                 source_type='wmts',
                 download_level_start=0,
                 download_level_end=20,
@@ -150,6 +152,7 @@ def wmts_edit(id=None):
             wmts.layer = form.data['layer']
             wmts.username = form.data['username']
             wmts.password = form.data['password']
+            wmts.prefix = 'local'
             flash( _('update WMTS'), 'success')
         g.db.commit()
         return redirect(url_for('.raster_list'))
