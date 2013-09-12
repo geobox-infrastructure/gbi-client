@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from flask import render_template, abort, flash, g, request, redirect, url_for, Blueprint, jsonify
+from flask import render_template, abort, flash, g, request, redirect, url_for, Blueprint, jsonify, current_app
 from flaskext.babel import _
 from ...model.sources import LocalWMTSSource
 
@@ -22,6 +22,7 @@ from geobox.model import ExternalWMTSSource, ExternalWFSSource
 from geobox.web.forms import RasterSourceForm, WMSForm, UnlockRasterSourceForm
 from geobox.lib.capabilities import parse_capabilities_url
 from geobox.lib.coverage import llbbox_to_geojson
+from geobox.lib.couchdb import VectorCouchDB
 
 raster = Blueprint('raster', __name__)
 
@@ -166,6 +167,10 @@ def local_raster_remove(id):
 
     if not raster_source:
         abort(404)
+
+    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
+    couch = VectorCouchDB(couch_url, raster_source.name, raster_source.name)
+    couch.delete_db()
 
     g.db.delete(raster_source)
     g.db.commit()
