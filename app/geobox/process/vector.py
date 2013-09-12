@@ -44,7 +44,7 @@ class VectorExportProcess(ProcessBase):
                         dest_couch.store_file(file_obj, overwrite=True)
                     else:
                         output_file = self.app_state.user_data_path('export', 'vector', task.file_name + '.json', make_dirs=True)
-                        write_json_to_file(data, output_file)
+                        write_json_to_file(json.loads(data), output_file)
 
                 elif task.type_ == 'shp':
                     output_file = self.app_state.user_data_path('export',  'vector', task.file_name+ '.shp', make_dirs=True)
