@@ -80,6 +80,7 @@ class VectorImportTask(Task):
     __mapper_args__ = {'polymorphic_identity': 'vector_import'}
     id = sa.Column(sa.Integer, sa.ForeignKey('tasks.id'), primary_key=True)
     db_name = sa.Column(sa.String())
+    title = sa.Column(sa.String())
     file_name = sa.Column(sa.String())
     srs = sa.Column(sa.String(64), default="EPSG:3857")
     type_ = sa.Column(sa.String(64), default="shp")

@@ -71,7 +71,7 @@ class FeatureInserter(object):
 
     def insert(self, feature):
         couchdb_layer = '%s%s' % (self.prefix, feature.layer)
-        couch = VectorCouchDB(self.url, couchdb_layer )
+        couch = VectorCouchDB(self.url, couchdb_layer, couchdb_layer)
         feature_dict = {
             'geometry': feature.geometry,
             'properties': feature.properties,
@@ -87,7 +87,7 @@ class FeatureInserter(object):
 
     def _check_metadata_doc(self, layer, source):
         couchdb_layer = '%s%s' % (self.prefix, layer)
-        couch = VectorCouchDB(self.url, couchdb_layer )
+        couch = VectorCouchDB(self.url, couchdb_layer, couchdb_layer )
 
         source_md = source.load_record('schema_' + layer)
         md_doc = {

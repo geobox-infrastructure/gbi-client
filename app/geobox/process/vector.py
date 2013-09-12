@@ -29,7 +29,7 @@ class VectorExportProcess(ProcessBase):
         log.debug('Start vector export process. Task %d' % self.task_id)
         try:
             with self.task() as task:
-                couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
+                couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name, task.title)
                 if task.type_ == 'geojson':
                     # use geojson if is in task - otherwise load from database
                     if not task.geojson:
@@ -75,7 +75,7 @@ class VectorImportProcess(ProcessBase):
         try:
             with self.task() as task:
                 mapping = Mapping(None, None, '*', other_srs=task.srs)
-                couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name)
+                couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name, task.title)
                 # import from file
                 if task.source == 'file':
                     input_file = self.app_state.user_data_path('import', task.file_name)

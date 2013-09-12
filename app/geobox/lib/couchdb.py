@@ -318,9 +318,10 @@ def vector_layers_metadata(couchdb_url):
                 yield doc
 
 class VectorCouchDB(CouchDBBase):
-    def __init__(self, url, db_name):
+    def __init__(self, url, db_name, title):
         CouchDBBase.__init__(self, url, db_name)
         self.db_name = db_name
+        self.title = title
         self.init_layer()
 
     def init_db(self, couch_db_url=None):
@@ -328,7 +329,10 @@ class VectorCouchDB(CouchDBBase):
 
     def init_layer(self, metadata=None):
         if metadata is None:
-            metadata = {'title': self.db_name}
+            metadata = {
+                'name': self.db_name,
+                'title': self.title
+            }
         metadata['type'] = 'GeoJSON'
         self.init_db()
         self.update_or_create_features_view_doc()
