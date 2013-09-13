@@ -110,8 +110,8 @@ def main(config_filename, port_check=True, open_webbrowser=False):
     if port_used(app_state.config.get('mapproxy', 'port')):
         log.fatal('Mapproxy port %d in use', app_state.config.get('mapproxy', 'port'))
         sys.exit(1)
-    if port_used(app_state.config.get('couchdb', 'port')):
-        log.fatal('CouchDB port %d in use', app_state.config.get('couchdb', 'port'))
+    if port_used(app_state.config.get_int('couchdb', 'port')):
+        log.fatal('CouchDB port %s in use', app_state.config.get('couchdb', 'port'))
         sys.exit(1)
 
     factories = [

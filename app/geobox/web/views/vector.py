@@ -77,11 +77,12 @@ def import_geojson():
                 flash(_('please select new layer or current layer to import'), 'error')
                 return redirect(url_for('.import_geojson'))
 
-            layer = form.layers.data if form.layers.data else form.name.data
-            layer = re.sub(r'[^a-z0-9]*', '',  layer.lower())
+            title = form.layers.data if form.layers.data else form.name.data
+            layer = 'local_vector_' + re.sub(r'[^a-z0-9_]*', '',  title.lower())
 
             task = VectorImportTask(
                 db_name=layer,
+                title=title,
                 file_name=form.file_name.data,
                 type_ = 'geojson'
             )

@@ -329,28 +329,33 @@ def create_couchdb_cache(app_state, task=False, layer=False):
 
 def create_metadata_doc(couchdb, layer):
     metadata_url = couchdb.couch_url + '/metadata'
+
+    md_doc = {
+        'title': layer.wmts_source.title,
+        'name': layer.name,
+        'type': 'tiles',
+        'source': {
+            'type': layer.wmts_source.source_type,
+            'url': layer.wmts_source.url,
+            'format': layer.wmts_source.format,
+            'srs': layer.wmts_source.srs,
+            'layers': layer.wmts_source.layer,
+        },
+        'levelMin': layer.wmts_source.view_level_start,
+        'levelMax': layer.wmts_source.view_level_end,
+    }
+
     resp = couchdb.req_session.get(metadata_url)
-    if resp.status_code == 404:
-        md_doc = {
-            'title': layer.wmts_source.title,
-            'name': layer.name,
-            'type': 'tiles',
-            'source': {
-                'type': layer.wmts_source.source_type,
-                'url': layer.wmts_source.url,
-                'format': layer.wmts_source.format,
-                'srs': layer.wmts_source.srs,
-                'layers': layer.wmts_source.layer,
+    if resp.status_code == 200:
+        rev = resp.json()['_rev']
+        md_doc['_rev'] = rev
+    elif resp.status_code != 404:
+        raise CouchDBCache.UnexpectedResponse('got unexpected resp (%d) from CouchDB: %s' % (resp.status_code, resp.content))
 
-             },
-            "levelMin": layer.wmts_source.view_level_start,
-            "levelMax": layer.wmts_source.view_level_end,
-        }
-        resp = couchdb.req_session.put(metadata_url,
-            headers=[('Content-type', 'application/json')],
-            data=json.dumps(md_doc),
-        )
-
+    resp = couchdb.req_session.put(metadata_url,
+        headers=[('Content-type', 'application/json')],
+        data=json.dumps(md_doc),
+    )
 
 def create_couchdb_source(layer, app_state, grid):
     cache = create_couchdb_cache(app_state, layer=layer.wmts_source)

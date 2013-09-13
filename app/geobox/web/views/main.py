@@ -25,7 +25,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    user = User(current_app.config.geobox_state.config.get('user', 'type'))
+    user = User(int(current_app.config.geobox_state.config.get('user', 'type')))
     is_consultant = user.is_consultant
     return render_template('index.html', is_local=request_is_local(), is_consultant=is_consultant)
 

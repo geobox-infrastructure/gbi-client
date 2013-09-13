@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from flask import render_template, abort, flash, g, request, redirect, url_for, Blueprint, jsonify
+from flask import render_template, abort, flash, g, request, redirect, url_for, Blueprint, jsonify, current_app
 from flaskext.babel import _
 from ...model.sources import LocalWMTSSource
 
@@ -22,6 +22,7 @@ from geobox.model import ExternalWMTSSource, ExternalWFSSource
 from geobox.web.forms import RasterSourceForm, WMSForm, UnlockRasterSourceForm
 from geobox.lib.capabilities import parse_capabilities_url
 from geobox.lib.coverage import llbbox_to_geojson
+from geobox.lib.couchdb import VectorCouchDB
 
 raster = Blueprint('raster', __name__)
 
@@ -77,6 +78,7 @@ def wms_edit(id=None):
                 srs = form.data['srs'],
                 username = form.data['username'],
                 password = form.data['password'],
+                prefix = 'local',
                 is_user_defined=True,
                 source_type='wms',
                 download_level_start=0,
@@ -96,7 +98,7 @@ def wms_edit(id=None):
             wms.srs = form.data['srs']
             wms.username = form.data['username']
             wms.password = form.data['password']
-
+            wms.prefix = 'local'
             wms.active = True
             wms.download_coverage = bbox_coverage
             flash( _('update WMS'), 'success')
@@ -132,9 +134,12 @@ def wmts_edit(id=None):
                 name=form.data['name'],
                 title=form.data['title'],
                 url=form.data['url'],
+                layer=form.data['layer'],
+                format=form.data['format'],
                 username = form.data['username'],
                 password = form.data['password'],
                 is_user_defined= True,
+                prefix = 'local',
                 source_type='wmts',
                 download_level_start=0,
                 download_level_end=20,
@@ -146,8 +151,11 @@ def wmts_edit(id=None):
             wmts.name  = form.data['name']
             wmts.title = form.data['title']
             wmts.url = form.data['url']
+            wmts.layer = form.data['layer']
+            wmts.format = form.data['format']
             wmts.username = form.data['username']
             wmts.password = form.data['password']
+            wmts.prefix = 'local'
             flash( _('update WMTS'), 'success')
         g.db.commit()
         return redirect(url_for('.raster_list'))
@@ -159,6 +167,10 @@ def local_raster_remove(id):
 
     if not raster_source:
         abort(404)
+
+    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
+    couch = VectorCouchDB(couch_url, raster_source.name, raster_source.name)
+    couch.delete_db()
 
     g.db.delete(raster_source)
     g.db.commit()

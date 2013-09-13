@@ -69,7 +69,7 @@ gbi.widgets.LayerManager.prototype = {
                     vectorLayers.push(gbiLayer);
                     if (gbiLayer.isActive) {
                         if (self.options.showActiveLayer) {
-                            $('#layermanager_active_layer > span').html(gbiLayer.options.name);
+                            $('#layermanager_active_layer > span').html(gbiLayer.options.title);
                         }
                     }
                 }
@@ -189,7 +189,6 @@ gbi.widgets.LayerManager.prototype = {
         this.element.find('#add_vector_layer').click(function() {
             var newLayer = $('#new_vector_layer').val();
             if(newLayer) {
-                newLayer = 'local_vector_'+newLayer;
                 var activeLayer = self.layerManager.active();
                 if(activeLayer && activeLayer.unsavedChanges()) {
                     $('#changeVectorLayer').modal('show');
@@ -216,8 +215,10 @@ gbi.widgets.LayerManager.prototype = {
         });
 
         function createLayer(newLayer) {
+            var newLayer_name = 'local_vector_'+newLayer;
             var couchLayer = new gbi.Layers.Couch({
-                name: newLayer,
+                name: newLayer_name,
+                title: newLayer,
                 url: OpenlayersCouchURL,
                 hoverPopup: true,
                 callbacks: {
@@ -334,7 +335,7 @@ gbi.widgets.LayerManager.templates = {
                     <a href="#" class="vectorLayer" id="<%=vectorLayers[i].id%> "> \
                         <span class="inline">\
                             <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" />\
-                            <%=vectorLayers[i].olLayer.name%> \
+                            <%=vectorLayers[i].olLayer.title%> \
                         </span><br>\
                         <div class="btn-group controls"> \
                             <button id="up_<%=vectorLayers[i].id%>" title="up" class="btn btn-small">\
