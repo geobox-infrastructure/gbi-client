@@ -96,7 +96,9 @@ gbi.widgets.ThematicalVector.prototype = {
             if(self.activeLayer) {
                 if(self.active) {
                     self.activeLayer.activateFeatureStylingRule();
-                    self.activeLayer.activateHover();
+                    if(self.activeLayer.popupAttributes().length > 0) {
+                        self.activeLayer.activateHover();
+                    }
                 } else {
                     self.activeLayer.deactivateFeatureStylingRule();
                     self.activeLayer.deactivateHover();

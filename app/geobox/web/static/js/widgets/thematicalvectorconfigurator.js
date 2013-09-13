@@ -348,6 +348,11 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
         self.activeLayer.fullListAttributes(fullListAttributes);
         self.activeLayer.shortListAttributes(shortListAttributes);
         self.activeLayer.popupAttributes(popupAttributes);
+        if(popupAttributes.length > 0) {
+            self.activeLayer.activateHover();
+        } else {
+            self.activeLayer.deactivateHover();
+        }
     },
     _registerLayerEvents: function(layer) {
         var self = this;
