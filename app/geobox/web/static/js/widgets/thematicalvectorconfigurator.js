@@ -381,18 +381,17 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
 };
 
 gbi.widgets.ThematicalVectorConfigurator.defaultColors = gbi.widgets.ThematicalVectorConfigurator.defaultColors || [
-    '#ff0000',
-    '#00ff00',
-    '#0000ff',
-    '#ffff00',
-    '#ff00ff',
-    '#00ffff',
-    '#770000',
-    '#007700',
-    '#000077',
-    '#777700',
-    '#770077',
-    '#007777'
+    '#1f77b4',
+    '#33a02c',
+    '#e31a1c',
+    '#ff7f00',
+    '#6a3d9a',
+    // light colors
+    '#a6cee3',
+    '#b2df8a',
+    '#fb9a99',
+    '#fdbf6f',
+    '#cab2d6',
 ];
 
 gbi.widgets.ThematicalVectorConfigurator.template = '\
