@@ -332,10 +332,10 @@ def vector_layers_metadata(couchdb_url):
                 yield doc
 
 class VectorCouchDB(CouchDBBase):
-    def __init__(self, url, db_name, title):
+    def __init__(self, url, db_name, title=None):
         CouchDBBase.__init__(self, url, db_name)
         self.db_name = db_name
-        self.title = title
+        self.title = title or db_name
         self.init_layer()
 
     def init_db(self, couch_db_url=None):
