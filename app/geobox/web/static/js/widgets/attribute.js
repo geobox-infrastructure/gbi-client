@@ -141,6 +141,11 @@ gbi.widgets.AttributeEditor.prototype = {
             });
         }
 
+        this.element.append(tmpl(gbi.widgets.AttributeEditor.dummySaveButtonTemplate));
+        this.element.find('#dummy_save_btn').click(function() {
+            $(this).removeClass('btn-success').attr('disabled', 'disabled');
+        })
+
         if(self.invalidFeatures && self.invalidFeatures.length > 0) {
             self.renderInvalidFeatures(activeLayer);
         } else {
@@ -174,12 +179,16 @@ gbi.widgets.AttributeEditor.prototype = {
 
         //bind events
         $.each(renderedAttributes, function(idx, key) {
-            $('#_'+key).change(function() {
+            $('#'+key).change(function() {
                 var newVal = $(this).val();
                 self.edit(key, newVal);
             });
+            $('#'+key).keyup(function() {
+                $('#dummy_save_btn').removeAttr('disabled').addClass('btn-success');
+            });
             $('#_'+key+'_remove').click(function() {
                 self.remove(key);
+                $('#dummy_save_btn').removeAttr('disabled').addClass('btn-success');
                 return false;
             });
             $('#_'+key+'_label').click(function() {
@@ -294,7 +303,6 @@ gbi.widgets.AttributeEditor.prototype = {
             });
 
             this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate));
-
             $.alpaca(self.options.alpacaSchemaElement, {
                 "schema": self.jsonSchema,
                 "data": data,
@@ -471,7 +479,8 @@ var attributeLabel = {
     'usedJsonSchema': OpenLayers.i18n('URL of used JSONSchema'),
     'successfulRefereshed': OpenLayers.i18n('Successful refreshed'),
     'schemaLoadFail': OpenLayers.i18n('Loading schema failed'),
-    'schemaRefreshFail': OpenLayers.i18n('Refreshing schema failed')
+    'schemaRefreshFail': OpenLayers.i18n('Refreshing schema failed'),
+    'saveAttributeChanges': OpenLayers.i18n('Save attribute changes')
 };
 
 var attributeTitle = {
@@ -488,12 +497,12 @@ gbi.widgets.AttributeEditor.template = '\
                 <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
                 <% if(selectedFeatureAttributes[attributes[key]]) { %>\
                     <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
-                        <input class="input-medium" type="text" id="_<%=attributes[key]%>" value="<%=selectedFeatureAttributes[attributes[key]]["value"]%>" \
+                        <input class="input-medium" type="text" id="<%=attributes[key]%>" value="<%=selectedFeatureAttributes[attributes[key]]["value"]%>" \
                     <% } else {%>\
-                        <input class="input-medium" type="text" id="_<%=attributes[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
+                        <input class="input-medium" type="text" id="<%=attributes[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
                     <% } %>\
                 <% } else { %>\
-                    <input class="input-medium" type="text" id="_<%=attributes[key]%>"\
+                    <input class="input-medium" type="text" id="<%=attributes[key]%>"\
                 <% } %>\
                 <% if(!editable) { %>\
                     disabled=disabled \
@@ -563,6 +572,12 @@ gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate = '\
     </div>\
     <div class="alert alert-success" style="display: none" id="json_schema_refreshed">' + attributeLabel.successfulRefereshed + '</div>\
     <div class="alert alert-error" style="display: none" id="json_schema_refresh_fail">' + attributeLabel.schemaRefreshFail + '</div>\
+';
+
+gbi.widgets.AttributeEditor.dummySaveButtonTemplate = '\
+    <div>\
+        <button class="btn btn-small" disabled="disabled" id="dummy_save_btn">'+attributeLabel.saveAttributeChanges+'</button>\
+    </div>\
 ';
 
 gbi.widgets.AttributeEditor.alpacaViews = {
