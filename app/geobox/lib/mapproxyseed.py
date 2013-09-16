@@ -345,14 +345,14 @@ def create_metadata_doc(couchdb, layer):
         'levelMax': layer.wmts_source.view_level_end,
     }
 
-    resp = couchdb.req_session.get(metadata_url)
+    resp = requests.get(metadata_url)
     if resp.status_code == 200:
         rev = resp.json()['_rev']
         md_doc['_rev'] = rev
     elif resp.status_code != 404:
         raise CouchDBCache.UnexpectedResponse('got unexpected resp (%d) from CouchDB: %s' % (resp.status_code, resp.content))
 
-    resp = couchdb.req_session.put(metadata_url,
+    resp = requests.put(metadata_url,
         headers=[('Content-type', 'application/json')],
         data=json.dumps(md_doc),
     )
