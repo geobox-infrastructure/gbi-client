@@ -17,6 +17,7 @@ from __future__ import absolute_import
 import time
 import threading
 import Queue
+import simplejson
 from functools import partial
 from mapproxy.seed.seeder import TileWorker, SourceError, LockTimeout, TileWorkerPool, TileWalker
 
@@ -60,8 +61,12 @@ class TileSeedWorker(TileWorker):
                     except LockTimeout:
                         log.warn("Lock timeout")
                         time.sleep(0.01)
-                    except requests.exceptions.RequestException, ex:
+                    except (requests.exceptions.RequestException), ex:
                         log.warn("An error occured. Retry in 5 seconds: %r" %
+                            (ex))
+                        time.sleep(5)
+                    except (simplejson.JSONDecodeError), ex:
+                        log.warn("An JSON error occured. Retry in 5 seconds: %r" %
                             (ex))
                         time.sleep(5)
                     except (SourceError, IOError), ex:
