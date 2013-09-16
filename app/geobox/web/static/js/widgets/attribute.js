@@ -34,7 +34,7 @@ gbi.widgets.AttributeEditor = function(editor, options) {
 
     this.registerEvents();
 
-    $(gbi).on('gbi.layermanager.layer.add', function(event, layer) {
+    $(gbi).on('gbi.layermanager.vectorlayer.add', function(event, layer) {
        self.registerEvents();
     });
 
