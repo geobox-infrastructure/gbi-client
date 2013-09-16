@@ -24,6 +24,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "addNewAttributesTitle": "{{ _('add new attribute') }}",
     "sameKeyDifferentValue": "{{ _('Same attribute with different values') }}",
     "Successful refreshed": "{{ _('Successful refreshed') }}",
+    "Save attribute changes": "{{ _('Save attribute changes') }}",
 
     // styling - widget
     'line': "{{ _('line') }}",
