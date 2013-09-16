@@ -35,7 +35,7 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     this.registerEvents();
 
     $(gbi).on('gbi.layermanager.vectorlayer.add', function(event, layer) {
-       self.registerEvents();
+        self.registerEvents(layer);
     });
 
     $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
@@ -55,9 +55,15 @@ gbi.widgets.AttributeEditor = function(editor, options) {
 gbi.widgets.AttributeEditor.prototype = {
     CLASS_NAME: 'gbi.widgets.AttributeEditor',
 
-    registerEvents: function() {
+    registerEvents: function(layer) {
         var self = this;
-        $.each(self.layerManager.vectorLayers, function(idx, layer) {
+        var layers = [];
+        if(layer) {
+            layers = [layer];
+        } else {
+            layers = self.layerManager.vectorLayers;
+        }
+        $.each(layers, function(idx, layer) {
             layer.registerEvent('featureselected', self, function(f) {
                 if(!(f.feature.id in self.featureChanges)) {
                     self.featureChanges[f.feature.id] = {'added': {}, 'edited': {}, 'removed': []};
