@@ -55,12 +55,13 @@ class CouchDBProcess(object):
     Starts and manages a CouchDB process running at `port` and with
     all data stored at `data_dir`.
     """
-    def __init__(self, host, port, data_dir, erl_cmd, bin_dir):
+    def __init__(self, host, port, data_dir, erl_cmd, bin_dir, log_file):
         self.host = host
         self.port = port
         self.data_dir = data_dir
         self.erl_cmd = erl_cmd
         self.bin_dir = bin_dir
+        self.log_file = log_file
         self._local_ini = None
         self._process = None
         self.log = logging.getLogger(__name__ + '_%d' % port)
@@ -74,6 +75,9 @@ class CouchDBProcess(object):
         erl_cmd = shlex.split(self.erl_cmd)
         erl_cmd[0] = os.path.join(self.bin_dir, erl_cmd[0])
         couch_db_configs = [
+            "/etc/couchdb/default.ini",
+            "/etc/couchdb/local.ini",
+            "/etc/couchdb/default.d/geocouch.ini",
             "../etc/couchdb/default.ini",
             "../etc/couchdb/local.ini",
             "../etc/couchdb/default.d/geocouch.ini",
@@ -94,7 +98,8 @@ class CouchDBProcess(object):
             startupinfo.wShowWindow = subprocess.SW_HIDE
 
         self._process = subprocess.Popen(erl_cmd, cwd=self.bin_dir, startupinfo=startupinfo,
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=close_fds)
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=close_fds,
+            env=os.environ)
 
         # log process output, handle blocking stdout|stderr.readline() calls in thread
         LineLoggerThread(self.log, logging.INFO, self._process.stdout).start()
@@ -122,12 +127,14 @@ class CouchDBProcess(object):
         parser.add_section('couchdb')
         parser.set('couchdb', 'database_dir', self.data_dir)
         parser.set('couchdb', 'view_index_dir', self.data_dir)
+        parser.set('couchdb', 'uri_file', os.path.join(self.data_dir, '.couch_uri'))
         parser.add_section('httpd')
         parser.set('httpd', 'bind_address', self.host)
         parser.set('httpd', 'port', self.port)
 
         parser.add_section('log')
         parser.set('log', 'level', 'error')
+        parser.set('log', 'file', self.log_file)
 
         with open(self._local_ini, 'w') as fp:
             parser.write(fp)
@@ -140,8 +147,11 @@ class CouchDBServerThread(threading.Thread):
         self.port = port
         self.data_dir = data_dir
         self.bin_dir = bin_dir
+        log_file = os.path.join(
+            app_state.user_data_path('log', make_dirs=True),
+            'couchdb.log')
         self.terminate_event = terminate_event or threading.Event()
-        self.db = CouchDBProcess(host, port, data_dir, erl_cmd, bin_dir)
+        self.db = CouchDBProcess(host, port, data_dir, erl_cmd, bin_dir, log_file)
 
     def run(self):
         with self.db:
@@ -168,7 +178,11 @@ class TempCouchDB(object):
     def run(self):
         erl_cmd = self.app_state.config.get('couchdb', 'erl_cmd')
         bin_dir = self.app_state.config.get('couchdb', 'bin_dir')
-        self.db = CouchDBProcess('127.0.0.1', self.port, self.db_path, erl_cmd, bin_dir)
+        log_file = os.path.join(
+            self.app_state.user_data_path('log', make_dirs=True),
+            'couchdb_tmp.log'
+        )
+        self.db = CouchDBProcess('127.0.0.1', self.port, self.db_path, erl_cmd, bin_dir, log_file)
         with self.db:
             wait_for_http_server('127.0.0.1', self.port)
             time.sleep(3)
