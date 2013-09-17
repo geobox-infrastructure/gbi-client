@@ -405,7 +405,8 @@ class VectorCouchDB(CouchDBBase):
                                     "Content-Type": "application/atom+xml;type=feed;charset=utf-8"
                                 }
                             });
-                            send('<?xml version="1.0" encoding="utf-8"?><feed xml:base="'+baseUrl+'" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">');
+                            send('<?xml version="1.0" encoding="utf-8"?>');
+                            send('<feed xml:base="'+baseUrl+'" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">');
                             send('<title type="text">'+path[path.length-1]+'</title>');
                             send('<id>'+baseUrl+'</id>');
                             send('<link rel="self" title="odata" href="odata" />');
@@ -453,7 +454,8 @@ class VectorCouchDB(CouchDBBase):
                                 }
                             }
                             var baseUrl = "http://"+host+pathurl+"/_list/odata_convert/";
-                            var returnBody = '<service xmlns:atom="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns="http://www.w3.org/2007/app" xml:base="'+baseUrl+'"><workspace><atom:title>'+path[path.length-1]+'</atom:title>';
+                            var returnBody = '<service xmlns:atom="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns="http://www.w3.org/2007/app" xml:base="'+baseUrl+'">';
+                            returnBody += '<workspace><atom:title>'+path[path.length-1]+'</atom:title>';
                             if(doc){
                                 if (doc.views){
                                     for(var prop in doc.views) {
