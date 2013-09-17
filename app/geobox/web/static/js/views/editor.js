@@ -12,6 +12,13 @@ $(document).ready(function() {
     var editor = initEditor();
     var activeLayer = editor.layerManager.active();
 
+    if(activeLayer.odataUrl) {
+      $('.odata_url_elements').show();
+      $('#odata_url').text(activeLayer.odataUrl);
+    } else {
+      $('.odata_url_elements').hide();
+    }
+
     $('#tabs a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
@@ -56,7 +63,12 @@ $(document).ready(function() {
         $(this).attr('disabled', 'disabled').removeClass('btn-success');
         $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
         $('#save-tab').removeClass('save-enabled');
-
+        if(activeLayer.odataUrl) {
+          $('.odata_url_elements').show();
+          $('#odata_url').text(activeLayer.odataUrl);
+        } else {
+          $('.odata_url_elements').hide();
+        }
         refreshSavePointList();
     });
 
