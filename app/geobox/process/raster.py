@@ -17,7 +17,6 @@ from __future__ import absolute_import
 import time
 import threading
 import Queue
-import simplejson
 from functools import partial
 from mapproxy.seed.seeder import TileWorker, SourceError, LockTimeout, TileWorkerPool, TileWalker
 
@@ -35,6 +34,12 @@ from geobox.model.tasks import (
 from geobox.lib.coverage import coverage_from_geojson
 
 import requests
+
+try:
+    import simplejson
+    JSONDecodeError = simplejson.JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
 
 import logging
 log = logging.getLogger(__name__)
@@ -65,7 +70,7 @@ class TileSeedWorker(TileWorker):
                         log.warn("An error occured. Retry in 5 seconds: %r" %
                             (ex))
                         time.sleep(5)
-                    except (simplejson.JSONDecodeError), ex:
+                    except JSONDecodeError, ex:
                         log.warn("An JSON error occured. Retry in 5 seconds: %r" %
                             (ex))
                         time.sleep(5)

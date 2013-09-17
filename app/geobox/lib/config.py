@@ -76,7 +76,7 @@ class ConfigParser(object):
     def write(self):
         self.parser.write(open(self.fname, 'w'))
 
-def path(default=(), dev=(), test=(), frozen=()):
+def path(default=(), dev=(), test=(), frozen=(), cmd=None):
     """
     Get path depending on the runtime.
 
@@ -102,11 +102,19 @@ def path(default=(), dev=(), test=(), frozen=()):
                 return p
     else:
         for p in dev:
-            if os.path.exists(p):
-                return p
+            if cmd:
+                if os.path.exists(os.path.join(p, cmd)):
+                    return p
+            else:
+                if os.path.exists(p):
+                    return p
         for p in default:
-            if os.path.exists(p):
-                return p
+            if cmd:
+                if os.path.exists(os.path.join(p, cmd)):
+                    return p
+            else:
+                if os.path.exists(p):
+                    return p
 
 def env(key, value, platform=None):
     if platform and not sys.platform.startswith(platform):
