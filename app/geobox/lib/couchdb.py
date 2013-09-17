@@ -337,18 +337,19 @@ class VectorCouchDB(CouchDBBase):
         self.init_db()
         self.update_or_create_features_view_doc()
         self.update_or_create_savepoints_view_doc()
+        self.update_or_create_odata_doc()
         self.update_or_create_doc('metadata', metadata)
 
     def update_or_create_features_view_doc(self):
         feature_view_doc = {
-          "_id":"_design/features",
-          "language": "javascript",
-          "views":
-          {
-            "all": {
-              "map": "function(doc) { if (doc.type == 'Feature') {emit(doc.type, doc.drawType); } }"
-            },
-          }
+            "_id":"_design/features",
+            "language": "javascript",
+            "views":
+            {
+                "all": {
+                    "map": "function(doc) { if (doc.type == 'Feature') {emit(doc.type, doc.drawType); } }"
+                },
+            }
         }
         existing_features_doc = self.get('_design/features')
         if existing_features_doc:
@@ -357,20 +358,126 @@ class VectorCouchDB(CouchDBBase):
 
     def update_or_create_savepoints_view_doc(self):
         savepoints_view_doc = {
-          "_id":"_design/savepoints",
-          "language": "javascript",
-          "views":
-          {
-            "all": {
-              "map": "function(doc) { if (doc.type == 'savepoint') {emit(doc.title, doc._rev) } }"
-            },
-          }
+            "_id":"_design/savepoints",
+            "language": "javascript",
+            "views":
+            {
+                "all": {
+                    "map": "function(doc) { if (doc.type == 'savepoint') {emit(doc.title, doc._rev) } }"
+                },
+            }
         }
         existing_savepoints_doc = self.get('_design/savepoints')
         if existing_savepoints_doc:
             savepoints_view_doc['_rev'] = existing_savepoints_doc['_rev']
         self.put('_design/savepoints', savepoints_view_doc)
 
+    def update_or_create_odata_doc(self):
+        odata_doc = {
+            "_id": "_design/odata",
+            "language": "javascript",
+            'views': {
+                    'odata_view': {
+                        'map': 'function(doc) {emit(doc._id, doc.properties)}'
+                    }
+                },
+                'lists': {
+                    'odata_convert': """
+                        function(head, req) {
+                            var dt = new Date(Date.now());
+                            var month = ("0" + (dt.getUTCMonth() + 1)).slice(-2);
+                            var day = ("0" + dt.getUTCDate()).slice(-2);
+                            var hour = ("0" + dt.getUTCHours()).slice(-2);
+                            var minute = ("0" + dt.getUTCMinutes()).slice(-2);
+                            var second = ("0" + dt.getUTCSeconds()).slice(-2);
+                            var now = dt.getUTCFullYear() + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "Z";
+                            var host = req.headers.Host;
+                            var path = req.path;
+                            var pathurl = "";
+                            for(var b in path) {
+                                if (b < path.length-1) {
+                                    pathurl = pathurl+"/"+path[b];
+                                }
+                            }
+                            var baseUrl = "http://"+host+pathurl;
+                            start({
+                                "headers": {
+                                    "Content-Type": "application/atom+xml;type=feed;charset=utf-8"
+                                }
+                            });
+                            send('<?xml version="1.0" encoding="utf-8"?><feed xml:base="'+baseUrl+'" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">');
+                            send('<title type="text">'+path[path.length-1]+'</title>');
+                            send('<id>'+baseUrl+'</id>');
+                            send('<link rel="self" title="odata" href="odata" />');
+                            send('<updated>'+now+'</updated>');
+                            var row;
+                            while(row = getRow()) {
+                                if(row.key != "metadata") {
+                                    send('<entry>');
+                                    send('<id>'+baseUrl+'</id>');
+                                    send('<title type="text">'+row.key+'</title>');
+                                    send('<author><name /></author>');
+                                    send('<updated>'+now+'</updated>');
+                                    send('<content type="application/xml">');
+                                    send('<m:properties>');
+                                    for(var prop in row.value) {
+                                        if(row.value.hasOwnProperty(prop)){
+                                            if(typeof(row.value[prop]) === "number") {
+                                                send('<d:'+prop+' m:type="Edm.Double">'+row.value[prop]+'</d:'+prop+'>');
+                                            } else if (!isNaN(Date.parse(row.value[prop]))) {
+                                                var d = Date.parse(row.value[prop]);
+                                                var date = new Date(d).toUTCString();
+                                                send('<d:'+prop+' m:type="Edm.DateTime">'+date+'</d:'+prop+'>');
+                                            } else {
+                                                send('<d:'+prop+' m:type="Edm.String">'+row.value[prop]+'</d:'+prop+'>');
+                                            }
+                                        }
+                                    }
+                                    send('</m:properties>');
+                                    send('</content>');
+                                    send('</entry>');
+                                }
+                            }
+                            send('</feed>');
+                        }"""
+                },
+                'shows': {
+                    'odata_service': """
+                        function(doc, req) {
+                            var host = req.headers.Host;
+                            var path = req.path;
+                            var pathurl = "";
+                            for(var b in path) {
+                                if (b < 3) {
+                                    pathurl = pathurl+'/'+path[b];
+                                }
+                            }
+                            var baseUrl = "http://"+host+pathurl+"/_list/odata_convert/";
+                            var returnBody = '<service xmlns:atom="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns="http://www.w3.org/2007/app" xml:base="'+baseUrl+'"><workspace><atom:title>'+path[path.length-1]+'</atom:title>';
+                            if(doc){
+                                if (doc.views){
+                                    for(var prop in doc.views) {
+                                        if(doc.views.hasOwnProperty(prop)){
+                                            returnBody = returnBody+'<collection href="'+prop+'">';
+                                            returnBody = returnBody+'<atom:title>'+prop+'</atom:title></collection>';
+                                        }
+                                    }
+                                }
+                            }
+                            returnBody = returnBody+'</workspace></service>';
+                            return {
+                                headers : {
+                                    "Content-Type" : "application/xml"
+                                },
+                                body : returnBody
+                            };
+                        }"""
+                }
+        }
+        existing_odata_doc = self.get('_design/odata')
+        if existing_odata_doc:
+            odata_doc['_rev'] = existing_odata_doc['_rev']
+        self.put('_design/odata', odata_doc)
 
     def metadata(self):
         resp = self.req_session.get(self.couch_url + '/metadata')
