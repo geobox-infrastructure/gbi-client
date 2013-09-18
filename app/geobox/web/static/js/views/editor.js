@@ -13,10 +13,7 @@ $(document).ready(function() {
     var activeLayer = editor.layerManager.active();
 
     if(activeLayer.odataUrl) {
-      $('.odata_url_elements').show();
-      $('#odata_url').text(activeLayer.odataUrl);
-    } else {
-      $('.odata_url_elements').hide();
+      $('#odata_url').val(activeLayer.odataUrl);
     }
 
     $('#tabs a').click(function (e) {
@@ -64,10 +61,7 @@ $(document).ready(function() {
         $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
         $('#save-tab').removeClass('save-enabled');
         if(activeLayer.odataUrl) {
-          $('.odata_url_elements').show();
-          $('#odata_url').text(activeLayer.odataUrl);
-        } else {
-          $('.odata_url_elements').hide();
+          $('#odata_url').val(activeLayer.odataUrl);
         }
         refreshSavePointList();
     });
@@ -81,6 +75,18 @@ $(document).ready(function() {
         }
         return false;
    });
+
+   $('#export_type').change(function() {
+    if($(this).val() == 'odata') {
+      $('#srs').hide().prev().hide();
+      $('#destination').hide().prev().hide();
+      $('#odata_url').parent().parent().show();
+    } else {
+      $('#srs').show().prev().show();
+      $('#destination').show().prev().show();
+      $('#odata_url').parent().parent().hide();
+    }
+   }).change();
 
    // save-button enabeling events
    $('#save-changes').click(function() {

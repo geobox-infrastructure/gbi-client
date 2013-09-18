@@ -125,9 +125,6 @@
             <button id="export_vectorlayer" title="export" class="btn btn-small">
               <i class="icon-edit"></i> Export
             </button>
-            <hr class="odata_url_elements">
-            <p class="odata_url_elements">{{ _('infotext - odata') }}</p>
-            <code class="odata_url_elements" id="odata_url"></code>
             <hr>
           </div>
          {% endif %}
@@ -297,6 +294,7 @@
           {{ select(export_form.export_type) }}
           {{ select(export_form.srs) }}
           {{ select(export_form.destination) }}
+          {{ input(export_form.odata_url) }}
         </div>
         <div class="modal-footer">
           <a href="#" id="abort_export_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
