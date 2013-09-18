@@ -29,8 +29,9 @@ class Tabular(object):
     :param headers: expected headers. columns will be sorted
         in this order.
     """
-    def __init__(self, headers=None):
+    def __init__(self, headers=None, additional_headers=False):
         self.headers = headers or []
+        self.additional_headers = additional_headers
         self._actual_headers = set()
         self._row_dicts = []
 
@@ -50,9 +51,10 @@ class Tabular(object):
         keys that are found in the added row dicts.
         """
         headers = list(self.headers)
-        for h in self._actual_headers:
-            if h not in headers:
-                headers.append(h)
+        if self.additional_headers:
+            for h in self._actual_headers:
+                if h not in headers:
+                    headers.append(h)
 
         rows = []
         if with_headers:
