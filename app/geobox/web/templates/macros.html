@@ -98,23 +98,27 @@
 
         {% if coverages %}
 
-        // add download coverage as vectorlayer
-        raster_sources['{{ map_source.id }}_coverage'] = new gbi.Layers.Vector({
-            name: '{{_('download coverage')}} {{ map_source.title }}',
-            styleMap: downloadAreaStyleMap,
-            displayInLayerSwitcher: true,
-            source_id: {{ map_source.id }},
-            editable: false,
-            clickPopup: false
-        });
+            // add download coverage as vectorlayer
+            raster_sources['{{ map_source.id }}_coverage'] = new gbi.Layers.Vector({
+                name: '{{_('download coverage')}} {{ map_source.title }}',
+                styleMap: downloadAreaStyleMap,
+                displayInLayerSwitcher: true,
+                source_id: {{ map_source.id }},
+                editable: false,
+                clickPopup: false
+            });
 
-        var geojson_format = new OpenLayers.Format.GeoJSON();
-        {%if map_source.download_coverage %}
-          var coverage = {{ map_source.download_coverage|tojson|safe }};
-        {% elif map_source.wmts_source and map_source.wmts_source.download_coverage %}
-          var coverage = {{ map_source.wmts_source.download_coverage|tojson|safe }};
-        {% endif %}
-        raster_sources['{{ map_source.id }}_coverage'].olLayer.addFeatures(geojson_format.read(coverage));
+            var geojson_format = new OpenLayers.Format.GeoJSON();
+            {%if map_source.download_coverage %}
+              var coverage = {{ map_source.download_coverage|tojson|safe }};
+            {% elif map_source.wmts_source and map_source.wmts_source.download_coverage %}
+              var coverage = {{ map_source.wmts_source.download_coverage|tojson|safe }};
+            {% else %}
+              var coverage = false;
+            {% endif %}
+            if(coverage) {
+                raster_sources['{{ map_source.id }}_coverage'].olLayer.addFeatures(geojson_format.read(coverage));
+            }
         {% endif %}
     {% endfor %}
 {%- endmacro %}
