@@ -344,6 +344,9 @@ def create_metadata_doc(couchdb, layer):
         'levelMin': layer.wmts_source.view_level_start,
         'levelMax': layer.wmts_source.view_level_end,
     }
+    resp = requests.get(couchdb.couch_url)
+    if resp.status_code == 404:
+        requests.put(couchdb.couch_url)
 
     resp = requests.get(metadata_url)
     if resp.status_code == 200:
