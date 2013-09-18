@@ -123,7 +123,16 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
                 features = self.activeLayer.features
             }
             var geoJSONText = geoJSON.write(features);
-            $.postURL(exportCSVURL, {'data': geoJSONText, 'headers': self.activeLayer.fullListAttributes()})
+            var headers;
+            if($('#fullList:visible').length) {
+                headers = self.activeLayer.fullListAttributes();
+                if(!headers.length) {
+                    headers = self.activeLayer.featuresAttributes();
+                }
+            } else {
+                headers = self.activeLayer.shortListAttributes();
+            }
+            $.postURL(exportCSVURL, {'data': geoJSONText, 'headers': headers})
         });
 
         element.find('#odtExport').click(function() {
@@ -135,7 +144,16 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
                 features = self.activeLayer.features
             }
             var geoJSONText = geoJSON.write(features);
-            $.postURL(exportODSURL, {'data': geoJSONText, 'headers': self.activeLayer.fullListAttributes()})
+            var headers;
+            if($('#fullList:visible').length) {
+                headers = self.activeLayer.fullListAttributes();
+                if(!headers.length) {
+                    headers = self.activeLayer.featuresAttributes();
+                }
+            } else {
+                headers = self.activeLayer.shortListAttributes();
+            }
+            $.postURL(exportODSURL, {'data': geoJSONText, 'headers': headers})
         });
 
         element.find('.show-feature').click(function() {
