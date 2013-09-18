@@ -128,7 +128,7 @@ def import_edit(id=None):
     return render_template('projects/import_edit.html',
         proj=proj, form=form, sources=sources,couch_layers=couch_layers,
         base_layer=base_layer,coverage_form=coverage_form,couchlayers_form=couchlayers_form,
-        coverage=coverage, free_disk_space=free_disk_space)
+        coverage=coverage, free_disk_space=free_disk_space, with_server=True)
 
 def validate_max_tiles(form):
     feature_collection = json.loads(form.coverage.data)
