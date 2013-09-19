@@ -37,6 +37,20 @@ class VectorExportProcess(ProcessBase):
                     else:
                         data = task.geojson
 
+                    # check metadata for jsonSchema and restrict feature properties to
+                    # schema properties of schema don't allow additional properties
+                    metadata = couch.metadata()
+                    if metadata and 'appOptions' in metadata and 'jsonSchema' in metadata['appOptions'] and 'additionalProperties' in metadata['appOptions']['jsonSchema']['schema'] and metadata['appOptions']['jsonSchema']['schema']['additionalProperties'] == False:
+                        schema_properties = metadata['appOptions']['jsonSchema']['schema']['properties'].keys()
+                        data = json.loads(data)
+                        for feature in data['features']:
+                            export_properties = {}
+                            for key in feature['properties'].keys():
+                                if key in schema_properties:
+                                    export_properties[key] = feature['properties'][key]
+                            feature['properties'] = export_properties
+                        data = json.dumps(data)
+
                     if task.destination != 'file':
                         dest_couch = CouchFileBox('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.destination)
 
