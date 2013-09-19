@@ -502,7 +502,7 @@ class VectorCouchDB(CouchDBBase):
         self.put('_design/odata', odata_doc)
 
     def metadata(self):
-        resp = self.req_session.get(self.couch_url + '/metadata')
+        resp = self.req_session.get(self.couch_db_url + '/metadata')
         if resp.status_code == 200:
             return resp.json()
 
