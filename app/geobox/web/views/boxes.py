@@ -99,16 +99,20 @@ def import_json(box_name, id):
     layer = request.form.get('layers', False)
     new_layer = request.form.get('name', False)
     file_name = request.form.get('file_name', False)
+    title = None
 
     if (layer and new_layer) or (not layer and not new_layer):
         flash(_('please select new layer or current layer to import'), 'error')
         return redirect(url_for('.files', box_name=box_name))
-
-    layer = layer if layer else new_layer
-    layer = re.sub(r'[^a-z0-9]*', '',  layer.lower())
+    if layer:
+        layer = layer
+    else:
+        title = new_layer
+        layer = 'local_vector_' + re.sub(r'[^a-z0-9]*', '',  new_layer.lower())
 
     task = VectorImportTask(
         db_name=layer,
+        title=title,
         file_name=file_name,
         type_ = 'geojson',
         source = get_couch_box_db(box_name)
