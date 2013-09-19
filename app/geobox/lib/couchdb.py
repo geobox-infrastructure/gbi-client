@@ -217,6 +217,7 @@ class CouchDBBase(object):
                 'got unexpected resp (%d) from CouchDB for %s: %s'
                 % (resp.status_code, doc_url, resp.content)
             )
+        return resp
 
     def put(self, doc_id, doc):
         doc_url = self.couch_db_url + '/' + doc_id
