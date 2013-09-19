@@ -341,13 +341,18 @@ class VectorCouchDB(CouchDBBase):
     def init_db(self, couch_db_url=None):
         self.req_session.put(couch_db_url if couch_db_url else self.couch_db_url)
 
-    def init_layer(self, metadata=None):
-        if metadata is None:
+    def init_layer(self):
+        resp = self.get('metadata')
+
+        if 'status_code' in resp and resp.status_code == 404:
             metadata = {
                 'name': self.db_name,
-                'title': self.title
+                'title': self.title,
             }
+        else:
+            metadata = resp
         metadata['type'] = 'GeoJSON'
+
         self.init_db()
         self.update_or_create_features_view_doc()
         self.update_or_create_savepoints_view_doc()
