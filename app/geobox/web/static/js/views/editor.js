@@ -315,6 +315,12 @@ $(document).ready(function() {
        activeSearchLayer.visible(true)
        if (value) {
           value = value.split("\n")
+          $(activeSearchLayer).one('gbi.layer.WFST.filter_applied', function() {
+            var foundFeaturesCount = activeSearchLayer.features.length;
+              if(!foundFeaturesCount) {
+                $('#no_features_found').show().fadeOut(3000);
+              }
+          });
           activeSearchLayer.filter(
             activeSearchLayer.olLayer.searchProperty, value
           );

@@ -171,6 +171,7 @@
             <p>{{ _('infotext - search controls') }}</p>
             {{ input(wfs_search_form.wfs_layers) }}
             {{ input(wfs_search_form.search_value) }}
+            <div id="no_features_found" class="alert alert-error" style="display: none">{{ _('No features found') }}</div>
             <button class="btn btn-small" id="start_search">{{_('search')}}</button>
             <button class="btn btn-small" id="remove_search" disabled=disabled>{{_('remove search')}}</button>
             <button class="btn btn-small" id="hide_searchlayer" disabled=disabled>{{_('hide searchlayer')}}</button>
