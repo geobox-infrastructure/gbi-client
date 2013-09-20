@@ -77,8 +77,12 @@ def import_geojson():
                 flash(_('please select new layer or current layer to import'), 'error')
                 return redirect(url_for('.import_geojson'))
 
-            title = form.layers.data if form.layers.data else form.name.data
-            layer = 'local_vector_' + re.sub(r'[^a-z0-9_]*', '',  title.lower())
+            title = None
+            if form.layers.data:
+                layer = form.layers.data
+            else:
+                title = form.name.data
+                layer = 'local_vector_' + re.sub(r'[^a-z0-9]*', '',  title.lower())
 
             task = VectorImportTask(
                 db_name=layer,
@@ -148,11 +152,16 @@ def import_vector():
                 flash(_('please select new layer or current layer to import'), 'error')
                 return redirect(url_for('.import_vector'))
 
-            layer = form.layers.data if form.layers.data else form.name.data
-            layer = re.sub(r'[^a-z0-9]*', '',  layer.lower())
+            title = None
+            if form.layers.data:
+                layer = form.layers.data
+            else:
+                title = form.name.data
+                layer = 'local_vector_' + re.sub(r'[^a-z0-9]*', '',  title.lower())
 
             task = VectorImportTask(
                 db_name=layer,
+                title=title,
                 file_name=form.file_name.data,
                 srs=form.srs.data,
                 type_ = 'shp',
