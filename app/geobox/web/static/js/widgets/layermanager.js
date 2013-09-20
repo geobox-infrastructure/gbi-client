@@ -4,7 +4,8 @@ var layerManagerLabel = {
     'raster': OpenLayers.i18n("rasterLayerTitle"),
     'vector': OpenLayers.i18n("vectorLayerTitle"),
     'addLayer': OpenLayers.i18n("addvectorLayerButton"),
-    'noActiveLayer': OpenLayers.i18n("noActiveLayer")
+    'noActiveLayer': OpenLayers.i18n("noActiveLayer"),
+    'invalidLayerName': OpenLayers.i18n("Given layer name is invalid")
 }
 
 gbi.widgets = gbi.widgets || {};
@@ -188,6 +189,7 @@ gbi.widgets.LayerManager.prototype = {
 
         this.element.find('#add_vector_layer').click(function() {
             var newLayer = $('#new_vector_layer').val();
+            newLayer = newLayer.replace(/[^a-z0-9_]*/g, '');
             if(newLayer) {
                 var activeLayer = self.layerManager.active();
                 if(activeLayer && activeLayer.unsavedChanges()) {
@@ -211,6 +213,8 @@ gbi.widgets.LayerManager.prototype = {
                 } else {
                     createLayer(newLayer);
                 }
+            } else {
+                $('#invalid_layer_name').show().fadeOut(3000);
             }
         });
 
@@ -355,6 +359,7 @@ gbi.widgets.LayerManager.templates = {
                     </li>\
                 <% } %>\
             </ul> \
+            <div class="alert alert-error" style="display: none" id="invalid_layer_name">'+layerManagerLabel.invalidLayerName+'</div>\
             <div class="input-append"> \
                 <input class="span5" id="new_vector_layer" name="new_vector_layer" type="text"> \
                 <button class="btn" id="add_vector_layer" type="button">'+layerManagerLabel.addLayer+'</button> \

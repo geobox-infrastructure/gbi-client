@@ -83,6 +83,9 @@ def import_geojson():
             else:
                 title = form.name.data
                 layer = 'local_vector_' + re.sub(r'[^a-z0-9]*', '',  title.lower())
+                if layer == 'local_vector_':
+                    flash(_('None of the characters used for the layer is allowed'))
+                    return redirect(url_for('.import_geojson'))
 
             task = VectorImportTask(
                 db_name=layer,
@@ -158,6 +161,9 @@ def import_vector():
             else:
                 title = form.name.data
                 layer = 'local_vector_' + re.sub(r'[^a-z0-9]*', '',  title.lower())
+                if layer == 'local_vector_':
+                    flash(_('None of the characters used for the layer is allowed'))
+                    return redirect(url_for('.import_vector'))
 
             task = VectorImportTask(
                 db_name=layer,

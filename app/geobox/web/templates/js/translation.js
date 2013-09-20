@@ -11,6 +11,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'addvectorLayerButton': "{{ _('add vector map') }}",
     'activeLayer' : "{{ _('active layer') }}",
     'noActiveLayer' : "{{ _('no active layer') }}",
+    'Given layer name is invalid': "{{ _('Given layer name is invalid') }}",
 
     // measure - widget
     'coords': "{{ _('coordinates') }}",

@@ -109,6 +109,9 @@ def import_json(box_name, id):
     else:
         title = new_layer
         layer = 'local_vector_' + re.sub(r'[^a-z0-9]*', '',  new_layer.lower())
+        if layer == 'local_vector_':
+            flash(_('None of the characters used for the layer is allowed'))
+            return redirect(url_for('.files', box_name=box_name))
 
     task = VectorImportTask(
         db_name=layer,
