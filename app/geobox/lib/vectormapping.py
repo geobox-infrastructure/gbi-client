@@ -48,7 +48,11 @@ class Mapping(object):
     def as_json_record(self, record):
         data = self.json_defaults.copy()
         if not self.fields:
-            data['properties'] = record.get('properties', None)
+            properties = record.get('properties', None)
+            for key in properties.keys():
+                if isinstance(properties[key], str):
+                    properties[key] = properties[key].decode(self.shp_encoding)
+            data['properties'] = properties
             data['type'] = 'Feature'
         else:
             for json, shp, _type in self.fields:
