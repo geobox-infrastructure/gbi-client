@@ -119,15 +119,6 @@
           <div class="span12">
             <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
           </div>
-          {% if with_server %}
-          <div class="span12">
-            <hr>
-            <button id="export_vectorlayer" title="export" class="btn btn-small">
-              <i class="icon-edit"></i> Export
-            </button>
-            <hr>
-          </div>
-         {% endif %}
          <div>
             <ul id="editor-tabs" class="nav nav-tabs">
               <li class="active">
@@ -200,6 +191,12 @@
             <input class="span5" id="save-as-name" name="save-as-name" type="text">
             <button class="btn btn-small" id="save-as" type="button">{{ _('save as') }}</button>
           </div>
+          {% if with_server %}
+          <hr>
+          <button id="export_vectorlayer" title="export" class="btn btn-small">
+            <i class="icon-edit"></i> Export
+          </button>
+          {% endif %}
           <hr>
           <h4>{{ _('savepoints') }}</h4>
           <h5>{{ _('create savepoint') }}</h5>
