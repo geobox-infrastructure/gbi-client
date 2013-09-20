@@ -304,7 +304,6 @@ $(document).ready(function() {
     var activeSearchLayer;
     $('#start_search').click(function() {
       if (activeSearchLayer) {
-        activeSearchLayer.visible(false)
         activeSearchLayer.olLayer.filter = null
         activeSearchLayer.olLayer.removeAllFeatures();
        }
@@ -313,17 +312,17 @@ $(document).ready(function() {
 
        var layername = $("#wfs_layers").val()
        activeSearchLayer = editor.layerManager.layerByName(layername);
-       activeSearchLayer.visible(true)
+
        if (value) {
           value = value.split("\n")
-          $(activeSearchLayer).one('gbi.layer.WFST.filter_applied', function() {
+          $(activeSearchLayer).one('gbi.layer.WFST.filter_applied', function(event) {
             var foundFeaturesCount = activeSearchLayer.features.length;
-              if(!foundFeaturesCount) {
-                $('#no_features_found').show().fadeOut(3000);
-              }
+            if(!foundFeaturesCount) {
+              $('#no_features_found').show().fadeOut(3000);
+            }
           });
           activeSearchLayer.filter(
-            activeSearchLayer.olLayer.searchProperty, value
+            activeSearchLayer.olLayer.searchProperty, value, 'like', true
           );
           $('#remove_search').removeAttr('disabled');
       } else {
