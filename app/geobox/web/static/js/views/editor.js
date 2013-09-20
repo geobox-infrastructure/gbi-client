@@ -6,7 +6,8 @@ $(document).ready(function() {
       'gbi.layer.vector.listAttributesChanged': eneableSaveButton,
       'gbi.layer.vector.popupAttributesChanged': eneableSaveButton,
       'gbi.layer.vector.featureAttributeChanged': eneableSaveButton,
-      'gbi.layer.vector.schemaLoaded': eneableSaveButton
+      'gbi.layer.vector.schemaLoaded': eneableSaveButton,
+      'gbi.layer.vector.schemaRemoved': eneableSaveButton
     }
 
     var editor = initEditor();
