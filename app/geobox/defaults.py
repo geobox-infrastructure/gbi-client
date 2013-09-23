@@ -28,6 +28,7 @@ except ImportError:
             'app': {
                 'name': 'GeoBox',
                 'host': '127.0.0.1',
+                'hostname': 'localhost',
                 'locale': 'de_DE', # 'en_UK'
                 'logging_server': '',
                 'vector_import': True,
