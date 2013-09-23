@@ -126,7 +126,7 @@
 {% macro generate_wfs_searchlayers(layers) -%}
     var wfsLayers = [];
     {% for layer in layers %}
-        wfsLayers.push(new gbi.Layers.WFST({
+        wfsLayers.push(new gbi.Layers.WFS({
             "name": "{{ layer.name }}",
             "url": "{{ layer.url }}",
             "featureNS":  "{{ layer.feature_ns }}",
