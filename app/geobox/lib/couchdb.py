@@ -217,7 +217,6 @@ class CouchDBBase(object):
                 'got unexpected resp (%d) from CouchDB for %s: %s'
                 % (resp.status_code, doc_url, resp.content)
             )
-        return resp
 
     def put(self, doc_id, doc):
         doc_url = self.couch_db_url + '/' + doc_id
@@ -343,15 +342,14 @@ class VectorCouchDB(CouchDBBase):
         self.req_session.put(couch_db_url if couch_db_url else self.couch_db_url)
 
     def init_layer(self):
-        resp = self.get('metadata')
+        metadata = self.get('metadata')
 
-        if 'status_code' in resp and resp.status_code == 404:
+        if not metadata:
             metadata = {
                 'name': self.db_name,
                 'title': self.title,
             }
-        else:
-            metadata = resp
+
         metadata['type'] = 'GeoJSON'
 
         self.init_db()
