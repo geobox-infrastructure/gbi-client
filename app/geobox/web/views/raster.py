@@ -61,6 +61,8 @@ def wms_edit(id=None):
     if wms and not wms.is_user_defined:
         abort(404)
 
+    edit_mode = True if wms  else False
+
     form = WMSForm(request.form, wms)
     if form.validate_on_submit():
 
@@ -105,7 +107,7 @@ def wms_edit(id=None):
         g.db.commit()
         return redirect(url_for('.raster_list'))
 
-    return render_template('admin/external_wms.html', form=form)
+    return render_template('admin/external_wms.html', form=form, edit_mode=edit_mode)
 
 @raster.route('/admin/wms/capabilities', methods=["GET"])
 def wms_capabilities():

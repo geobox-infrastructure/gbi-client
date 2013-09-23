@@ -29,7 +29,7 @@
         $("#layers_select").prop('disabled', 'disabled')
         $("#previewMap").prop('disabled', 'disabled')
 
-        $("#getCapabilites").click(function() {
+        var getCapabilites = function() {
             var url = $("#url").val();
             if (url) {
                 $.ajax({
@@ -83,7 +83,23 @@
                 });
             }
             return false;
+        };
+
+        $('#load_capabilities').click(function() {
+            $('#askForOverwrite').modal('hide');
+            return getCapabilites()
         });
+
+        if(editMode == true) {
+            $("#getCapabilites").click(function() {
+                $('#askForOverwrite').modal('show');
+                return false;
+            });
+        } else {
+            $("#getCapabilites").click(function() {
+                return getCapabilites();
+            });
+        }
 
         $("#mapPreview").click(function() {
             var url = $("#url").val()

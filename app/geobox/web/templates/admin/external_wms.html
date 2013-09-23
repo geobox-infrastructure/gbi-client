@@ -58,12 +58,26 @@
         <p> {{ _('infotext preview map') }} </p>
         <div class="map hide" id='map' style="width: 500px; height: 500px;"></div>
     </div>
+    <div id="askForOverwrite" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{_('Get capabilities')}} <span id="layer_title"></span>?</h3>
+      </div>
+      <div class="modal-body">
+        <p>{{ _('infotext wms capabilities reset form') }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="abort_load_capabilities" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+        <a href="#" id="load_capabilities" class="btn btn-primary">{{_('load capabilities')}}</a>
+      </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block map_js %}
     <script type="text/javascript">
         var loadCapabilitiesURL = '{{ url_for('raster.wms_capabilities') }}';
+        var editMode = {{ edit_mode|tojson|safe }};
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/views/raster_wms.js') }}"></script>
 {% endblock %}
