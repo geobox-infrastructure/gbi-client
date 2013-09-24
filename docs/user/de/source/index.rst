@@ -15,6 +15,7 @@ Benutzerhandbuch
   karte
   editor
   einstellungen
+  linux_installation
   glossar
 
 .. Indices and tables
