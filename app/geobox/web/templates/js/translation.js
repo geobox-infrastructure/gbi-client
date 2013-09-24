@@ -12,6 +12,10 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'activeLayer' : "{{ _('active layer') }}",
     'noActiveLayer' : "{{ _('no active layer') }}",
     'Given layer name is invalid': "{{ _('Given layer name is invalid') }}",
+    'Layer up': "{{ _('Layer up') }}",
+    'Layer down': "{{ _('Layer down') }}",
+    'Zoom to layer extent': "{{ _('Zoom to layer extent') }}",
+    'Remove layer': "{{ _('Remove layer') }}",
 
     // measure - widget
     'coords': "{{ _('coordinates') }}",

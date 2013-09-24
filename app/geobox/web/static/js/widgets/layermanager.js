@@ -5,7 +5,11 @@ var layerManagerLabel = {
     'vector': OpenLayers.i18n("vectorLayerTitle"),
     'addLayer': OpenLayers.i18n("addvectorLayerButton"),
     'noActiveLayer': OpenLayers.i18n("noActiveLayer"),
-    'invalidLayerName': OpenLayers.i18n("Given layer name is invalid")
+    'invalidLayerName': OpenLayers.i18n("Given layer name is invalid"),
+    'up': OpenLayers.i18n('Layer up'),
+    'down': OpenLayers.i18n('Layer down'),
+    'dataExtent': OpenLayers.i18n('Zoom to layer extent'),
+    'remove': OpenLayers.i18n('Remove layer')
 }
 
 gbi.widgets = gbi.widgets || {};
@@ -287,10 +291,10 @@ gbi.widgets.LayerManager.templates = {
                             <%=backgroundLayers[i].olLayer.name%> \
                         </label>\
                         <div class="btn-group pull-right"> \
-                            <button id="up_<%=backgroundLayers[i].id%>" class="btn btn-small">\
+                            <button id="up_<%=backgroundLayers[i].id%>" class="btn btn-small" title="' + layerManagerLabel.up + '">\
                                 <i class="icon-chevron-up"></i>\
                             </button> \
-                            <button id="down_<%=backgroundLayers[i].id%>" class="btn btn-small"> \
+                            <button id="down_<%=backgroundLayers[i].id%>" class="btn btn-small" title="' + layerManagerLabel.down + '"> \
                                 <i class="icon-chevron-down"></i>\
                             </button> \
                         </div> \
@@ -314,10 +318,10 @@ gbi.widgets.LayerManager.templates = {
                             <%=rasterLayers[i].olLayer.name%> \
                         </label>\
                         <div class="btn-group pull-right"> \
-                            <button id="up_<%=rasterLayers[i].id%>" class="btn btn-small">\
+                            <button id="up_<%=rasterLayers[i].id%>" class="btn btn-small" title="' + layerManagerLabel.up + '">\
                                 <i class="icon-chevron-up"></i>\
                             </button> \
-                            <button id="down_<%=rasterLayers[i].id%>" class="btn btn-small"> \
+                            <button id="down_<%=rasterLayers[i].id%>" class="btn btn-small" title="' + layerManagerLabel.down + '"> \
                                 <i class="icon-chevron-down"></i>\
                             </button> \
                         </div> \
@@ -342,16 +346,16 @@ gbi.widgets.LayerManager.templates = {
                             <%=vectorLayers[i].olLayer.title%> \
                         </span><br>\
                         <div class="btn-group controls"> \
-                            <button id="up_<%=vectorLayers[i].id%>" title="up" class="btn btn-small">\
+                            <button id="up_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.up + '" class="btn btn-small">\
                                 <i class="icon-chevron-up"></i>\
                             </button> \
-                            <button id="down_<%=vectorLayers[i].id%>" title="down" class="btn btn-small"> \
+                            <button id="down_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.down + '" class="btn btn-small"> \
                                 <i class="icon-chevron-down"></i>\
                             </button> \
-                            <button id="data_extent_<%=vectorLayers[i].id%>" title="data extent" class="btn btn-small"> \
+                            <button id="data_extent_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.dataExtent + '" class="btn btn-small"> \
                                 <i class="icon-search"></i>\
                             </button> \
-                            <button id="remove_<%=vectorLayers[i].id%>" title="remove" class="btn btn-small"> \
+                            <button id="remove_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.remove+ '" class="btn btn-small"> \
                                 <i class="icon-remove"></i>\
                             </button> \
                         </div> \
