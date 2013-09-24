@@ -319,11 +319,13 @@ $(document).ready(function() {
        if (value) {
           value = value.split("\n")
           $(activeSearchLayer).one('gbi.layer.WFS.filter_applied', function(event) {
+            $('#wfsSearchInProgress').hide()
             var foundFeaturesCount = activeSearchLayer.features.length;
             if(!foundFeaturesCount) {
               $('#no_features_found').show().fadeOut(3000);
             }
           });
+          $('#wfsSearchInProgress').show()
           activeSearchLayer.filter(
             activeSearchLayer.olLayer.searchProperty, value, 'like', true
           );
