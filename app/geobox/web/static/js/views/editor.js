@@ -169,8 +169,9 @@ $(document).ready(function() {
 
     $('#save-as').click(function() {
       var newTitle = $('#save-as-name').val();
-      var newName = 'local_vector_' + newTitle;
+      var newName = newTitle.replace(/[^a-z0-9_]*/g, '');
       if(newName && activeLayer) {
+        newName = 'local_vector_' + newName;
         var newLayer = false;
         // clone couch if class is couch
         if (activeLayer.CLASS_NAME == 'gbi.Layers.Couch') {
@@ -215,6 +216,8 @@ $(document).ready(function() {
         editor.widgets.layermanager.render();
         $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
         $('#save-tab').removeClass('save-enabled');
+      } else {
+        $('#save_as_error').show().fadeOut(3000);
       }
     });
 

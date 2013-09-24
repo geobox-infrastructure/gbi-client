@@ -191,6 +191,7 @@
             <input class="span5" id="save-as-name" name="save-as-name" type="text">
             <button class="btn btn-small" id="save-as" type="button">{{ _('save as') }}</button>
           </div>
+          <div class="alert alert-error hide" id="save_as_error">{{ _('No active layer or invalid layer name') }}</div>
           {% if with_server %}
           <hr>
           <button id="export_vectorlayer" title="export" class="btn btn-small">

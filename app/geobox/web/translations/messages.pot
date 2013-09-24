@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-23 16:14+0200\n"
+"POT-Creation-Date: 2013-09-24 08:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -474,104 +474,108 @@ msgstr ""
 msgid "save as"
 msgstr ""
 
-#: geobox/web/templates/editor.html:202
-msgid "savepoints"
+#: geobox/web/templates/editor.html:195
+msgid "No active layer or invalid layer name"
 msgstr ""
 
 #: geobox/web/templates/editor.html:203
-msgid "create savepoint"
+msgid "savepoints"
 msgstr ""
 
 #: geobox/web/templates/editor.html:204
-msgid "create new savepoint"
+msgid "create savepoint"
 msgstr ""
 
 #: geobox/web/templates/editor.html:205
-msgid "save point created"
+msgid "create new savepoint"
 msgstr ""
 
 #: geobox/web/templates/editor.html:206
+msgid "save point created"
+msgstr ""
+
+#: geobox/web/templates/editor.html:207
 msgid "error - could not create savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:208
+#: geobox/web/templates/editor.html:209
 msgid "load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:211
+#: geobox/web/templates/editor.html:212
 msgid "load"
 msgstr ""
 
-#: geobox/web/templates/editor.html:212 geobox/web/templates/boxes/base.html:61
+#: geobox/web/templates/editor.html:213 geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr ""
 
-#: geobox/web/templates/editor.html:223
+#: geobox/web/templates/editor.html:224
 msgid "Sure you want load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:226
+#: geobox/web/templates/editor.html:227
 msgid "infotext load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:229 geobox/web/templates/editor.html:244
-#: geobox/web/templates/editor.html:259 geobox/web/templates/editor.html:275
-#: geobox/web/templates/editor.html:299
+#: geobox/web/templates/editor.html:230 geobox/web/templates/editor.html:245
+#: geobox/web/templates/editor.html:260 geobox/web/templates/editor.html:276
+#: geobox/web/templates/editor.html:300
 #: geobox/web/templates/admin/external_wms.html:70
 #: geobox/web/templates/boxes/base.html:84
 #: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr ""
 
-#: geobox/web/templates/editor.html:230
+#: geobox/web/templates/editor.html:231
 msgid "yes load"
 msgstr ""
 
-#: geobox/web/templates/editor.html:238
+#: geobox/web/templates/editor.html:239
 msgid "Sure you want remove savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:241
+#: geobox/web/templates/editor.html:242
 msgid "infotext remove savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:245 geobox/web/templates/editor.html:276
+#: geobox/web/templates/editor.html:246 geobox/web/templates/editor.html:277
 msgid "yes delete"
 msgstr ""
 
-#: geobox/web/templates/editor.html:253
+#: geobox/web/templates/editor.html:254
 msgid "Sure you want change layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:256
+#: geobox/web/templates/editor.html:257
 msgid "infotext change layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:260
+#: geobox/web/templates/editor.html:261
 msgid "yes change and discard"
 msgstr ""
 
-#: geobox/web/templates/editor.html:261
+#: geobox/web/templates/editor.html:262
 msgid "yes change and save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:269
+#: geobox/web/templates/editor.html:270
 msgid "Sure you want delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:272
+#: geobox/web/templates/editor.html:273
 msgid "infotext delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:285
+#: geobox/web/templates/editor.html:286
 msgid "export vector layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:289
+#: geobox/web/templates/editor.html:290
 msgid "infotext export layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:300 geobox/web/templates/index.html:39
+#: geobox/web/templates/editor.html:301 geobox/web/templates/index.html:39
 msgid "export"
 msgstr ""
 
