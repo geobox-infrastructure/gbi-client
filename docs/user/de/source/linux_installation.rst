@@ -1,6 +1,8 @@
 Installation unter Linux
 ========================
 
+Getestet mit Ubuntu 12.04.3 amd64 Desktop
+
 System vorbereiten
 ------------------
 
