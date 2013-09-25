@@ -26,7 +26,7 @@ Rasterlayer
 
 Beim Exportieren der Rasterdaten können Sie zwischen unterschiedlichen Formaten auswählen wie die Daten gespeichert werden sollen. Für jeden Rasterlayer der ausgewählt wird, wird ein entsprechender Export in dem oben ausgewählten Format erzeugt. Es können über den Button "Rasterlayer hinzufügen" mehrere Datenquellen hinzugefügt werden. Für jede Datenquelle wird ein eigener Download erzeugt.
 
-Welcher Bereich der Karten exportiert werden soll kann mittels der Zeichenfunktionen ausgewählt werden. Diese sind im Bereich Import näher beschrieben.
+Welcher Bereich der Karten exportiert werden soll kann mittels der Zeichenfunktionen ausgewählt werden. Diese sind im Bereich `Rasterimport-Editor`_ näher beschrieben.
 
 Das passende Format ist abhängig vom Einsatzgebiet de Exportes. Sie haben die Auswahl zwischen folgenden Formaten:
 

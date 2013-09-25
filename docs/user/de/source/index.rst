@@ -10,12 +10,13 @@ Benutzerhandbuch
 
   einfuehrung
   import
+  boxen
   export
   aufgaben
-  karte
   editor
+  karte
+  datenquellen
   einstellungen
-  linux_installation
   glossar
 
 .. Indices and tables

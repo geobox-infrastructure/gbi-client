@@ -1,7 +1,7 @@
 Aufgaben
 ========
 
-Alle vom System durchgeführten Im- oder Exporte finden Sie in dieser Übersicht. Zu jeder Aufgabe ist der jeweilige Status und der aktuelle Fortschritt gespeichert. Die Anzeige ist nach dem jeweiligen Projekt gruppiert sollte dieses vorhanden sein.
+Alle vom System durchgeführten Im- und Exporte finden Sie in dieser Übersicht. Zu jeder Aufgabe ist der jeweilige Status und der aktuelle Fortschritt gespeichert. Die Anzeige ist nach dem jeweiligen Projekt gruppiert sollte dieses vorhanden sein.
 
 Die Anzeige des Fortschritts aktualisiert sich alle 5 Sekunden neu. Es werden maximal drei Aufgaben gleichzeitig von der Anwendung ausgeführt. Alle weiteren Aufgaben werden im Anschluss durchgeführt.
 

@@ -1,10 +1,10 @@
 Installation unter Linux
-========================
+------------------------
 
 Getestet mit Ubuntu 12.04.3 amd64 Desktop
 
 System vorbereiten
-------------------
+''''''''''''''''''
 
 Um den GeoBox-Client unter Linux auszuführen, werden die Packete GDAL in der Version 1.9.2 und CouchDB in der Version 1.3 benötigt.
 Sollten diese Packete für Ihr System nicht zur Verfügung stehen, müssen Sie die folgenden Repositories Ihrem System hinzufügen:
@@ -19,14 +19,14 @@ Sollten diese Packete für Ihr System nicht zur Verfügung stehen, müssen Sie d
 
 
 Abhängigkeiten installieren
----------------------------
+'''''''''''''''''''''''''''
 
 ::
 
     sudo apt-get install git virtualenvwrapper libgdal1-dev python-dev g++ python-gdal couchdb zlibc
 
 System einrichten
------------------
+'''''''''''''''''
 
 Lese- und Ausführrechte für die CouchDB-Konfigurationsdateien für alle Systembenutzer einrichten:
 
@@ -43,7 +43,7 @@ Bibliotheken für die Verwendung in PIL verlinken:
 
 
 GeoBox-Client aus Quellcode installieren
-----------------------------------------
+''''''''''''''''''''''''''''''''''''''''
 
 Erstellen einer virtuellen Umgebung:
 
@@ -72,7 +72,7 @@ Abschließend müssen die Python-Abhängigkeiten installiert werden:
 
 
 GeoBox-Client starten
----------------------
+'''''''''''''''''''''
 
 Nach dem Wechsel in das ``app`` Verzeichnis des GeoBox-Client kann diese als Python-Modul ausgeführt werden.
 
