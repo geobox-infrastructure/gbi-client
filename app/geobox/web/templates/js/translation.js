@@ -61,6 +61,8 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "remove": "{{ _('Remove') }}",
     "Loading schema failed": "{{ _('Loading schema failed') }}",
     "Refreshing schema failed": "{{ _('Refreshing schema failed') }}",
+    "Show property in map": "{{ _('Show property in map') }}",
+    "Remove property from feature": "{{ _('Remove property from feature') }}",
 
 
 

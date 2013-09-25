@@ -480,7 +480,9 @@ var attributeLabel = {
     'successfulRefereshed': OpenLayers.i18n('Successful refreshed'),
     'schemaLoadFail': OpenLayers.i18n('Loading schema failed'),
     'schemaRefreshFail': OpenLayers.i18n('Refreshing schema failed'),
-    'saveAttributeChanges': OpenLayers.i18n('Save attribute changes')
+    'saveAttributeChanges': OpenLayers.i18n('Save attribute changes'),
+    'label': OpenLayers.i18n('Show property in map'),
+    'remove': OpenLayers.i18n('Remove property from feature')
 };
 
 var attributeTitle = {
@@ -509,10 +511,10 @@ gbi.widgets.AttributeEditor.template = '\
                 <% } %>\
                 />\
                 <% if(editable) { %>\
-                <button id="_<%=attributes[key]%>_label" title="label" class="btn btn-small add-label-button"> \
+                <button id="_<%=attributes[key]%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button"> \
                     <i class="icon-eye-open"></i>\
                 </button>\
-                <button id="_<%=attributes[key]%>_remove" title="remove" class="btn btn-small"> \
+                <button id="_<%=attributes[key]%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
                     <i class="icon-remove"></i>\
                 </button> \
                 <% } %>\
@@ -588,10 +590,10 @@ gbi.widgets.AttributeEditor.alpacaViews = {
             "controlFieldContainer": "\
             <div>\
                 {{html this.html}}\
-                <button id='_${id}_label' title='label' class='btn btn-small add-label-button'>\
+                <button id='_${id}_label' title='" + attributeLabel.label + "' class='btn btn-small add-label-button'>\
                     <i class='icon-eye-open'></i>\
                 </button>\
-                <button id='_${id}_remove' title='remove' class='btn btn-small'>\
+                <button id='_${id}_remove' title='" + attributeLabel.remove + "' class='btn btn-small'>\
                     <i class='icon-trash'></i>\
                 </button>\
             </div>"
