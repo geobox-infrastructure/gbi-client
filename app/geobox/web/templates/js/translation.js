@@ -52,7 +52,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'addAttributesNotPossible': "{{ _('Add attributes is not possible') }}",
     'features with invalid attributes left': "{{ _('Features with invalid attributes left') }}",
     'Next': "{{ _('Next') }}",
-    'Previos': "{{ _('Previos') }}",
+    'Previous': "{{ _('Previous') }}",
     'Additional attributes': "{{ _('Additional attributes') }}",
     "This attribute is not defined in given schema. Remove it!": "{{ _('This attribute is not defined in given schema. Remove it!') }}",
     "Add JSONSchema URL": "{{ _('Add JSONSchema URL') }}",
@@ -63,6 +63,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "Refreshing schema failed": "{{ _('Refreshing schema failed') }}",
     "Show property in map": "{{ _('Show property in map') }}",
     "Remove property from feature": "{{ _('Remove property from feature') }}",
+    "Features with non valid attributes present": "{{ _('Features with non valid attributes present') }}",
 
 
 
