@@ -44,8 +44,10 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     })
 
     $(gbi).on('gbi.widgets.attributeEditor.deactivate', function(event) {
-        self.layerManager.active().setStyle({}, true);
-        self.labelValue = undefined;
+        if(self.layerManager.active()) {
+            self.layerManager.active().setStyle({}, true);
+            self.labelValue = undefined;
+        }
     });
 
 
@@ -103,20 +105,24 @@ gbi.widgets.AttributeEditor.prototype = {
 
         if(!self.jsonSchema) {
             this.element.append(tmpl(gbi.widgets.AttributeEditor.addSchemaTemplate));
-            $('#add_json_schema_url').click(function() {
-                $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
-                    self.setJsonSchema(schema);
-                    $(activeLayer).off('gbi.layer.vector.schemaLoaded');
-                    $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
+            if(activeLayer) {
+                $('#add_json_schema_url').click(function() {
+                    $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
+                        self.setJsonSchema(schema);
+                        $(activeLayer).off('gbi.layer.vector.schemaLoaded');
+                        $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
+                    });
+                    $(activeLayer).on('gbi.layer.vector.loadSchemaFail', function(event, schema) {
+                        $('#json_schema_load_fail').show().fadeOut(3000);
+                        $(activeLayer).off('gbi.layer.vector.schemaLoaded');
+                        $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
+                    });
+                    var schemaURL = $('#json_schema_url').val();
+                    activeLayer.addSchemaFromUrl(schemaURL);
                 });
-                $(activeLayer).on('gbi.layer.vector.loadSchemaFail', function(event, schema) {
-                    $('#json_schema_load_fail').show().fadeOut(3000);
-                    $(activeLayer).off('gbi.layer.vector.schemaLoaded');
-                    $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
-                });
-                var schemaURL = $('#json_schema_url').val();
-                activeLayer.addSchemaFromUrl(schemaURL);
-            })
+            } else {
+                $('#add_json_schema_url').attr('disabled', 'disabled');
+            }
         } else {
             this.element.append(tmpl(gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate, {
                 jsonSchemaURL: activeLayer.options.jsonSchemaUrl

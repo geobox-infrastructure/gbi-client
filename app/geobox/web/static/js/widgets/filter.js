@@ -7,18 +7,26 @@ gbi.widgets.Filter = function(editor, options) {
     this.editor = editor;
     this.render();
 
-    $('#setFilter').click(function() {
-    	var attr = $('#filterAttr').val();
-        var value = $('#filterValue').val();
-        var layer = self.editor.layerManager.active();
-        layer.selectByPropertyValue(attr, value);
-        return false;
-     });
-
+    $(gbi).on('gbi.layermanager.layer.active', function() {
+        self.render();
+    });
 };
 gbi.widgets.Filter.prototype = {
     render: function() {
-        this.element.append(tmpl(gbi.widgets.Filter.template, {srs: this.options.srs}));
+        self = this
+        self.element.empty().append(tmpl(gbi.widgets.Filter.template, {srs: self.options.srs}));
+
+        if(self.editor.layerManager.active()) {
+            $('#setFilter').click(function() {
+                var attr = $('#filterAttr').val();
+                var value = $('#filterValue').val();
+                var layer = self.editor.layerManager.active();
+                layer.selectByPropertyValue(attr, value);
+                return false;
+             });
+        } else {
+            $('#setFilter').attr('disabled', 'disabled');
+        }
     }
 };
 

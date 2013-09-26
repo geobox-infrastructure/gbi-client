@@ -57,6 +57,7 @@ gbi.widgets.LayerManager = function(editor, options) {
         if (layer === undefined) {
             $('#layermanager_active_layer > span').html(layerManagerLabel.noActiveLayer);
         }
+        self.render();
     });
 };
 gbi.widgets.LayerManager.prototype = {

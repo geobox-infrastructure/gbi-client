@@ -105,13 +105,16 @@ $(document).ready(function() {
     $('#create-savepoint').click(function() {
       $("#save-msg-success").hide();
       $("#save-msg-error").hide();
-
-      var saved = activeLayer.setSavepoint();
-      if (saved.ok) {
-        $("#save-msg-success").show().fadeOut(3000);
-        refreshSavePointList();
-      } else if (saved.error) {
-        $("#save-msg-error").show().fadeOut(3000);
+      if(activeLayer) {
+        var saved = activeLayer.setSavepoint();
+        if (saved.ok) {
+          $("#save-msg-success").show().fadeOut(3000);
+          refreshSavePointList();
+        } else if (saved.error) {
+          $("#save-msg-error").show().fadeOut(3000);
+        }
+      } else {
+        $('#savepoint_error').show().fadeOut(3000);
       }
     });
 
@@ -283,23 +286,27 @@ $(document).ready(function() {
 
     $("#export_vectorlayer").click(function() {
         var layer = activeLayer;
-        var features = editor.widgets.attributeEditor.selectedFeatures;
-        // add value to hiddenfoelds
-        $("#exportVectorLayer input#name").val(layer.olLayer.name)
-        if (features && features.length != 0) {
-          var geoJSON = new OpenLayers.Format.GeoJSON();
-          var geoJSONText = geoJSON.write(features);
-          $("#exportVectorLayer input#geojson").val(geoJSONText)
-        }
+        if(layer) {
+          var features = editor.widgets.attributeEditor.selectedFeatures;
+          // add value to hiddenfoelds
+          $("#exportVectorLayer input#name").val(layer.olLayer.name)
+          if (features && features.length != 0) {
+            var geoJSON = new OpenLayers.Format.GeoJSON();
+            var geoJSONText = geoJSON.write(features);
+            $("#exportVectorLayer input#geojson").val(geoJSONText)
+          }
 
-        // add filename
-        $("#exportVectorLayer input#filename").val(layer.olLayer.name)
-        // show modal
-        $('#exportVectorLayer').modal('show');
-        $('#exportVectorLayer').on('hidden', function () {
-          $('#remove_layer').off('click');
-          $('#deleteVectorLayer').off('hidden');
-         })
+          // add filename
+          $("#exportVectorLayer input#filename").val(layer.olLayer.name)
+          // show modal
+          $('#exportVectorLayer').modal('show');
+          $('#exportVectorLayer').on('hidden', function () {
+            $('#remove_layer').off('click');
+            $('#deleteVectorLayer').off('hidden');
+           })
+        } else {
+          $('#export_error').show().fadeOut(3000);
+        }
         return false;
     });
 

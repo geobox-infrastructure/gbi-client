@@ -183,11 +183,13 @@
           <button id="export_vectorlayer" class="btn btn-small">
             <i class="icon-edit"></i> Export
           </button>
+          <div class="alert alert-error hide" id="export_error">{{ _('No active layer') }}</div>
           {% endif %}
           <hr>
           <h4>{{ _('savepoints') }}</h4>
           <h5>{{ _('create savepoint') }}</h5>
           <button class="btn btn-small" id="create-savepoint" type="button">{{ _('create new savepoint') }}</button>
+          <div class="alert alert-error hide" id="savepoint_error">{{ _('No active layer') }}</div>
           <span id="save-msg-success" class="span11 alert alert-success hide">{{_('save point created')}}</span>
           <span id="save-msg-error" class="span11 alert alert-error hide">{{_('error - could not create savepoint')}}</span>
           <div id="show-savepoints" class="hide">
