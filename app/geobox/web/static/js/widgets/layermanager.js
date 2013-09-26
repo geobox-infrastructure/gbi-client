@@ -223,7 +223,7 @@ gbi.widgets.LayerManager.prototype = {
         });
 
         function createLayer(title) {
-            var newLayer = title.replace(/[^a-z0-9_]*/g, '');
+            var newLayer = title.toLowerCase().replace(/[^a-z0-9_]*/g, '');
             var newLayerName = 'local_vector_'+ newLayer;
             var couchLayer = new gbi.Layers.Couch({
                 name: newLayerName,

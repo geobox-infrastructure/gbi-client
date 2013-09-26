@@ -172,7 +172,7 @@ $(document).ready(function() {
 
     $('#save-as').click(function() {
       var newTitle = $('#save-as-name').val();
-      var newName = newTitle.replace(/[^a-z0-9_]*/g, '');
+      var newName = newTitle.toLowerCase().replace(/[^a-z0-9_]*/g, '');
       if(newName && activeLayer) {
         newName = 'local_vector_' + newName;
         var newLayer = false;
