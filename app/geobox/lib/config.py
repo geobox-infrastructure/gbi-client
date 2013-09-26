@@ -101,20 +101,19 @@ def path(default=(), dev=(), test=(), frozen=(), cmd=None):
             if os.path.exists(p):
                 return p
     else:
+        if cmd:
+            for p in dev:
+                if os.path.exists(os.path.join(p, cmd)):
+                    return p
+            for p in default:
+                if os.path.exists(os.path.join(p, cmd)):
+                    return p
         for p in dev:
-            if cmd:
-                if os.path.exists(os.path.join(p, cmd)):
-                    return p
-            else:
-                if os.path.exists(p):
-                    return p
+            if os.path.exists(p):
+                return p
         for p in default:
-            if cmd:
-                if os.path.exists(os.path.join(p, cmd)):
-                    return p
-            else:
-                if os.path.exists(p):
-                    return p
+            if os.path.exists(p):
+                return p
 
 def env(key, value, platform=None):
     if platform and not sys.platform.startswith(platform):
