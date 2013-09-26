@@ -163,16 +163,20 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
             switch(this.mode) {
                 case 'exact':
                     this.toggleExact();
-                    $.each(this.activeLayer.featureStylingRule.filters, function(idx, filterOption) {
-                        self.addInput('exact', filterOption);
-                    });
+                    if(this.activeLayer.featureStylingRule.filters) {
+                        $.each(this.activeLayer.featureStylingRule.filters, function(idx, filterOption) {
+                            self.addInput('exact', filterOption);
+                        });
+                    }
                     this.addInput('range');
                     break;
                 case 'range':
-                    this.toggleRange()
-                    $.each(this.activeLayer.featureStylingRule.filters, function(idx, filterOption) {
-                        self.addInput('range', filterOption);
-                    });
+                    this.toggleRange();
+                    if(this.activeLayer.featureStylingRule.filters) {
+                        $.each(this.activeLayer.featureStylingRule.filters, function(idx, filterOption) {
+                            self.addInput('range', filterOption);
+                        });
+                    }
                     this.addInput('exact');
                     break;
             }
