@@ -14,6 +14,7 @@
 # limitations under the License.
 
 from flask import Blueprint, render_template, request, g, current_app, Response, abort
+from flaskext.babel import _
 
 import json
 
@@ -31,7 +32,7 @@ def editor():
     export_form.srs.choices = [(srs, srs) for srs in current_app.config.geobox_state.config.get('web', 'available_srs')]
 
     upload_box = current_app.config.geobox_state.config.get('couchdb', 'upload_box')
-    export_form.destination.choices = [('file', 'Filesystem'), (upload_box, upload_box)]
+    export_form.destination.choices = [('file', _('Filesystem')), (upload_box, upload_box)]
 
     # load preview layer
     preview_features = False

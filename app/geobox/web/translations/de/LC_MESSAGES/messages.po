@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-25 13:53+0200\n"
-"PO-Revision-Date: 2013-09-25 13:53+0100\n"
+"POT-Creation-Date: 2013-09-26 09:00+0200\n"
+"PO-Revision-Date: 2013-09-26 09:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1387,11 +1387,11 @@ msgstr "In Popup anzeigen"
 
 #: geobox/web/templates/js/translation.js:126
 msgid "csv"
-msgstr "CSV"
+msgstr "Liste als CSV exportieren"
 
 #: geobox/web/templates/js/translation.js:127
 msgid "odt"
-msgstr "ODT"
+msgstr "Liste als ODT exportieren"
 
 #: geobox/web/templates/js/translation.js:128
 msgid "create settings"
@@ -1755,6 +1755,10 @@ msgstr "Datei wird importiert"
 #: geobox/web/views/boxes.py:134
 msgid "file deleted"
 msgstr "Datei wurde gelöscht"
+
+#: geobox/web/views/editor.py:35
+msgid "Filesystem"
+msgstr "Dateisystem"
 
 #: geobox/web/views/project.py:100
 #: geobox/web/views/project.py:214
