@@ -20,6 +20,8 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     this.renderAttributes = false;
     this.jsonSchema = this.options.jsonSchema || false;
 
+    Alpaca.setDefaultLocale("de_AT");
+
     $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.edit)
     $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.display)
 
