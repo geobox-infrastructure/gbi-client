@@ -194,7 +194,6 @@ gbi.widgets.LayerManager.prototype = {
 
         this.element.find('#add_vector_layer').click(function() {
             var newLayer = $('#new_vector_layer').val();
-            newLayer = newLayer.replace(/[^a-z0-9_]*/g, '');
             if(newLayer) {
                 var activeLayer = self.layerManager.active();
                 if(activeLayer && activeLayer.unsavedChanges()) {
@@ -223,11 +222,12 @@ gbi.widgets.LayerManager.prototype = {
             }
         });
 
-        function createLayer(newLayer) {
-            var newLayer_name = 'local_vector_'+newLayer;
+        function createLayer(title) {
+            var newLayer = title.replace(/[^a-z0-9_]*/g, '');
+            var newLayer_name = 'local_vector_'+ newLayer;
             var couchLayer = new gbi.Layers.Couch({
                 name: newLayer_name,
-                title: newLayer,
+                title: title,
                 url: OpenlayersCouchURL,
                 hoverPopup: true,
                 callbacks: {
