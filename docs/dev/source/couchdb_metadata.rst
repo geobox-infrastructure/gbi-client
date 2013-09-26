@@ -1,16 +1,20 @@
 CouchDB Metadata
 ================
 
+Vector layer
+------------
+
 Each vector layer gets stored in a separate CouchDB database.
 
 Metadata
---------
+''''''''
 
 Each layer contains a ``metadata`` document.
 
 ::
 
     {
+        "name": "layername"
         "title": "Title of layer",
         "type": "GeoJSON",
         "appOptions": {
@@ -34,9 +38,9 @@ Each layer contains a ``metadata`` document.
 
 
 Style
------
+"""""
 
-Each layer may also contain a ``style`` document.
+Metadata document may also contain a style stored in ``appOptions.olDefaultStyle``.
 
 ::
 
@@ -65,42 +69,73 @@ Each layer may also contain a ``style`` document.
         }
     }
 
-GBI Editor
-----------
+Thematical map
+""""""""""""""
 
-Each layer may also contain a ``gbi_editor`` document.
+Metadata document may also contain a thematical map definition stored in ``appOptions.gbiThematicalMap``.
 
 ::
 
     {
-        "thematical": {
-            "filterType": "exact",
-            "filterAttribute": "foo",
-            "filters": [
-                {
-                    "value": "bar",
-                    "symbolizer": {
-                        'fillColor': '#aaa',
-                        'strokeColor': '#aaa'
-                    },
-                    "min": 0,
-                    "max": 1
-                }, {
-                    "value": "foobar",
-                    "symbolizer": {
-                        'fillColor': '#bbb',
-                        'strokeColor': '#bbb'
-                    },
-                    "min": 1,
-                    "max": 2
-                }
-            ]
-        },
+        "filterType": "exact",
+        "filterAttribute": "foo",
+        "filters": [
+            {
+                "value": "bar",
+                "symbolizer": {
+                    'fillColor': '#aaa',
+                    'strokeColor': '#aaa'
+                },
+                "min": 0,
+                "max": 1
+            }, {
+                "value": "foobar",
+                "symbolizer": {
+                    'fillColor': '#bbb',
+                    'strokeColor': '#bbb'
+                },
+                "min": 1,
+                "max": 2
+            }
+        ]
+    }
+
+Attribute lists
+"""""""""""""""
+
+Metadata document may also contain attribute lists stored in ``appOptions.gbiAttributeLists``.
+
+::
+    {
         "popupAttributes": ['foo', 'bar'],
         "shortListAttributes": ['foo', 'foobar'],
         "fullListAttributes": ['foo', 'bar', 'foobar']
     }
 
+JSON Schema
+"""""""""""
+
+Metadata document may also contain a JSON Schema stored in ``appOptions.jsonSchema``.
+
+::
+
+    {
+        "url": "",
+        "schema": {}
+    }
+
+Savepoints
+''''''''''
+
+Each vector layer may contain ``savepoint`` documents.
+
+::
+
+    {
+        "title": "date",
+        "type": "savepoint",
+        "rows": []
+    }
 
 
 Raster layers

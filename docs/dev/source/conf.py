@@ -39,7 +39,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'GBI-Client'
+project = u'GeoBox-Client'
 copyright = u'Omniscale GmbH & Co. KG'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -107,7 +107,7 @@ html_theme = 'default'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = "GBI-Client %s Docs" % (release, )
+html_title = "GeoBox-Client %s Docs" % (release, )
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -173,7 +173,7 @@ latex_paper_size = 'a4'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'gbi-client-dev.tex', u'GBI-Client Dev-Documentation',
+  ('index', 'geobox-client-dev.tex', u'GeoBox-Client Dev-Documentation',
    u'Omniscale GmbH & Co. KG', 'manual'),
 ]
 

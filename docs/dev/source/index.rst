@@ -1,9 +1,9 @@
-GBI Client Developer Documentation
-==================================
+GeoBox-Client Developer Documentation
+=====================================
 
 .. toctree::
    :maxdepth: 2
-   
+
    appdata
    configuration
    translation

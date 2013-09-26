@@ -9,4 +9,4 @@ With the configuration file it is possible to overwrite the default configuratio
     locale = 'en_UK' # changes the default language
 
     [watermark]
-    text = 'GBI-Client'
+    text = 'GeoBox-Client'
