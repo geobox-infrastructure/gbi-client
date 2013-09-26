@@ -98,8 +98,7 @@ class LimitedStream(object):
 def proxy_couchdb_request(request, url):
 
     localhost = 'localhost:%s' % current_app.config.geobox_state.config.get('couchdb', 'port')
-    named_localhost = '%s:%s' % (current_app.config.geobox_state.config.get('app', 'hostname'), current_app.config.geobox_state.config.get('couchdb', 'port'))
-    allowed_hosts = [localhost, named_localhost]
+    allowed_hosts = [localhost]
     wfs_search_layer = g.db.query(ExternalWFSSource).filter_by(active=True).all()
     for layer in wfs_search_layer:
         allowed_hosts.append(layer.host)

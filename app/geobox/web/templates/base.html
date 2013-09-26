@@ -70,7 +70,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
   <script type="text/javascript">
       {% if with_server %}
-          var OpenlayersCouchURL = "http://{{ app_state.config.get('app', 'hostname') }}:{{ app_state.config.get('couchdb', 'port') }}/";
+          var OpenlayersCouchURL = "http://localhost:{{ app_state.config.get('couchdb', 'port') }}/";
       {% else %}
           var OpenlayersCouchURL = "/";
       {% endif %}

@@ -16,8 +16,6 @@
 
 import codecs
 
-from socket import getfqdn
-
 from flask import Blueprint, render_template, current_app, abort, flash, g, request, redirect, url_for, session
 from flaskext.babel import _
 from ...model.sources import LocalWMTSSource
@@ -111,10 +109,8 @@ def localnet_access():
     localnet_status = get_localnet_status()
     if localnet_status:
         current_app.config.geobox_state.config.set('app', 'host', '127.0.0.1')
-        current_app.config.geobox_state.config.set('app', 'hostname', 'localhost')
     else:
         current_app.config.geobox_state.config.set('app', 'host', '0.0.0.0')
-        current_app.config.geobox_state.config.set('app', 'hostname', getfqdn())
     current_app.config.geobox_state.config.write()
     flash(_('settings changed. restart required'), 'error')
     return redirect(url_for('.admin'))
