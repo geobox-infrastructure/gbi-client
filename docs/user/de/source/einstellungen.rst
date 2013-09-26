@@ -24,3 +24,4 @@ Die Anwendung öffnet das Verzeichnis des GeoBox-Client.
 Externe TileBox einbinden
 -------------------------
 
+Wenn Sie Rasterdaten in eine CouchDB exportiert haben und diese einbinden möchten, geben Sie unter `Verzeichnis` den Speicherort der CouchDB an.
