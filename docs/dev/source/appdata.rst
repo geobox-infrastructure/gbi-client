@@ -1,7 +1,7 @@
 Appdata Folder
 ==============
 
-The GBI-Client use the appdata folder from the operating system to save the application data. In this directory the application creates a ``GeoBox`` folder including folders for the logs, the import- and export-data and the CouchDB.
+The GeoBox-Client use the appdata folder from the operating system to save the application data. In this directory the application creates a ``GeoBox`` folder including folders for the logs, the import- and export-data and the CouchDB.
 
 Locations
 ---------
