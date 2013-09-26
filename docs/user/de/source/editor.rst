@@ -127,7 +127,7 @@ Suche
 
 Wenn ein oder mehrere Suchdienste von der GeoBox-Infrastruktur bereitgestellt werden, können Sie hier den Dienst, in dem Sie suchen möchten auswählen. Die Eigenschaft, nachdem Sie im Dienst suchen können, wird in Klammern hinter dem Namen Suchdienst angezeigt.
 
-Im Feld `Suchanfrage` können Sie Werte für die Eigenschaft angeben, nach denen Sie suchen möchten. Wenn Sie nach mehr als einem Wert suchen möchten, sind die einzelnen Werte Zeilenweise anzugeben.
+Im Feld `Suchanfrage` können Sie Werte für die Eigenschaft angeben, nach denen Sie suchen möchten. Wenn Sie nach mehr als einem Wert suchen möchten, sind die einzelnen Werte Zeilenweise anzugeben. Falls Sie nur den Anfang Ihres Suchbegriffes kennen, können Sie ihn durch ein * ergänzen. So finden Sie mit der Suchanfrage `Grün*` sowohl `Grünfläche` als auch `Grünland`.
 
 Geometrien, auf deren Eigenschaften die Suchanfrage zutrifft, werden in der Karte dargestellt und können über den Register `Editieren`_ in den aktiven Layer kopiert werden.
 
