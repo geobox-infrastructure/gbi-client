@@ -189,6 +189,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
         $('#rangeInputDiv').hide();
         $('#exactInputDiv').show();
         self.mode = "exact";
+        self.execute();
     },
     toggleRange: function() {
         var self = this;
@@ -197,6 +198,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
         $('#rangeInputDiv').show();
         $('#exactInputDiv').hide();
         self.mode = "range";
+        self.execute();
     },
     fillExactInputSelect: function(element, value) {
         var self = this;
