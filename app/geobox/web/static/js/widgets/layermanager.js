@@ -142,7 +142,7 @@ gbi.widgets.LayerManager.prototype = {
                 var element = this;
                 var activeLayer = layer;
 
-                $('#deleteVectorLayer #layer_title').html(activeLayer.options.name)
+                $('#deleteVectorLayer #layer_title').html(activeLayer.options.title)
                 $('#deleteVectorLayer').modal('show');
 
                 $('#remove_layer').click(function() {
