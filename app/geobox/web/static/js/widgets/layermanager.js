@@ -224,9 +224,9 @@ gbi.widgets.LayerManager.prototype = {
 
         function createLayer(title) {
             var newLayer = title.replace(/[^a-z0-9_]*/g, '');
-            var newLayer_name = 'local_vector_'+ newLayer;
+            var newLayerName = 'local_vector_'+ newLayer;
             var couchLayer = new gbi.Layers.Couch({
-                name: newLayer_name,
+                name: newLayerName,
                 title: title,
                 url: OpenlayersCouchURL,
                 hoverPopup: true,
