@@ -1,14 +1,14 @@
 Boxen
 =====
 
-Auch im GeoBox-Client haben Sie Zugriff auf Ihre Up- und Download-Boxen des GeoBox-Server. Die Inhalte der Boxen werden zwischen GeoBox-Server und -Client regelmässig abgeglichen, so dass alle Änderungen in den Up- und Download-Boxen sowohl im GeoBox-Server als auch im -Client vorhanden sind.
+Auch im GeoBox-Client haben Sie Zugriff auf Ihre Up- und Download-Boxen des GeoBox-Server. Die Inhalte der Boxen werden zwischen GeoBox-Server und -Client regelmäßig abgeglichen, so dass alle Änderungen in den Up- und Download-Boxen sowohl im GeoBox-Server als auch im -Client vorhanden sind.
 
 Download-Box
 ------------
 
 In Ihrer Download-Box haben Sie eine Übersicht über Dateien, die Ihnen durch Berater zur Verfügung gestellt wurden. Es werden der `Dateiname`, das `Datum` der Bereitstellung und die `Dateigröße` angezeigt. Durch anklicken des Dateinamens können Sie die entsprechende Datei herunterladen.
 
-Ausserdem ist es für GeoJSON-Dateien möglich, die enthaltenen Geometrien in einer Vorschaukarte anzusehen und diese direkt aus der Download-Box in einen bestehenden oder neuen Layer zu importieren.
+Außerdem ist es für GeoJSON-Dateien möglich, die enthaltenen Geometrien in einer Vorschaukarte anzusehen und diese direkt aus der Download-Box in einen bestehenden oder neuen Layer zu importieren.
 
 Upload-Box
 ----------

@@ -30,7 +30,7 @@ Zeichenfunktionen
 
 Mit Hilfe der Zeichenfunktionen können Sie den Bereich definieren welcher auf Ihren PC heruntergeladen werden soll. Bei dem Zeichnen der Bereiche haben Sie die Möglichkeit zwischen dem Aufziehen eines Rechteckes und dem Zeichnen eines Polygons zu wählen. Außerdem können Sie die Geometrien bearbeiten und löschen.
 
-Um die jeweilige Funktionen zu aktivieren oder zu deaktiveren klicken Sie auf den entsprechenden Button. Ein aktiver Button wird mit gelben Hintergrund dargestellt.
+Um die jeweilige Funktionen zu aktivieren oder zu de­ak­ti­vie­ren klicken Sie auf den entsprechenden Button. Ein aktiver Button wird mit gelben Hintergrund dargestellt.
 
 **Rechteck zeichnen:**
 Für das Zeichnen eines Rechteckes klicken Sie auf die Karte und halten Sie die Maustaste dabei gedrückt. Ziehen Sie nun mit weiterhin gedrückter Maustaste ein Kästchen auf. Nach dem Lösen der Maustaste ist das Rechteck fertig.

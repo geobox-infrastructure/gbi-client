@@ -5,7 +5,7 @@ Erste Schritte
 
 Start der Anwendung
 -------------------
-Nach erfolgreicher Installation des GeoBox-Client kann die Anwendung über das Windows Startmenü gestartet werden. Nach dem Start erscheint das GeoBox-Symbol in der Windows-Taskleiste. Über das Menü können sie die Anwendung schließen oder neustarten.
+Nach erfolgreicher Installation des GeoBox-Client kann die Anwendung über das Windows Startmenü gestartet werden. Nach dem Start erscheint das GeoBox-Symbol in der Windows-Taskleiste. Über das Menü können sie die Anwendung schließen oder neu starten.
 
 Die Funktionen der Anwendung werden über einen Webbrowser gesteuert. Nach dem Starten der Anwendung wird automatisch Ihr Standardbrowser mit der dazugehörigen Webseite geöffnet. Sollte die Seite nicht automatisch öffnen erreichen Sie die Anwendung unter der Webaddresse `http://127.0.0.1:8090/`.
 

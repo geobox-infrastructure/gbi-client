@@ -19,7 +19,7 @@ Lokale Rasterkarte:
 
 Vektorkarte:
     Hier können Sie Ihre erstellten Vektorkarten ein- und ausschalten. Wenn Sie unterschiedliche Vektorebenen haben, können Sie über die Pfeil-Symbol die Darstellungsreihenfolge ändern.
-    Durch klicken auf den Ebenennamen können Sie diesen aktivieren. Aktivierte Layer können über die Register `Aussehen`, `Editieren`, `Filtern` und `Thematische Karte` weiter bearbeitet werden. Ausserdem bezieht sich das Register `Speichern & Laden` auf den jeweils aktiven Layer.
+    Durch klicken auf den Ebenennamen können Sie diesen aktivieren. Aktivierte Layer können über die Register `Aussehen`, `Editieren`, `Filtern` und `Thematische Karte` weiter bearbeitet werden. Außerdem bezieht sich das Register `Speichern & Laden` auf den jeweils aktiven Layer.
 
     Durch das Lupen-Symbol können Sie die Karte auf die Geometrien des Layers zoomen.
 
@@ -46,7 +46,7 @@ Wählen Sie das entsprechende Symbol um Punkte, Linien oder Polygone zu zeichnen
 Selektieren
 """""""""""
 
-Mit der Selektieren-Funktion können Sie eine Geometrie auswählen. Durch gedrückthalten der Shift-Taste können Sie mehrere Geometrien auswählen.
+Mit der Selektieren-Funktion können Sie eine Geometrie auswählen. Durch gedrückt halten der Shift-Taste können Sie mehrere Geometrien auswählen.
 
 Bearbeiten
 """"""""""
@@ -150,7 +150,7 @@ Ist die thematische Karte im `Exakte Werte`-Modus, können Sie auf die Farbe und
 Liste
 '''''
 
-In dem Register Liste können Sie die Eigenschaften aller Geometrien des aktiven Layers betrachten. Ihnen stehen zwei Arten von Listen zur verfügung:
+In dem Register Liste können Sie die Eigenschaften aller Geometrien des aktiven Layers betrachten. Ihnen stehen zwei Arten von Listen zur Verfügung:
 
 Kurze Liste
   In dieser Liste werden nur Eigenschaften angezeigt, die Sie vorher in den Einstellungen festgelegt haben.
@@ -160,7 +160,7 @@ Komplette Liste
 
 Am Ende jeder Zeile befindet sich ein Button, mit dem Sie die zum dem Listeneintrag gehörige Geometrie in der Karte zentrieren können.
 
-Die Reihenfolge der Eigenschaften kann unter Einstellungen gefiniert werden.
+Die Reihenfolge der Eigenschaften kann unter Einstellungen definiert werden.
 
 Sie können die Listen als `ODT` oder `CSV` herunterladen.
 
@@ -192,7 +192,7 @@ Liste
 
 In diesem Register können Sie bis zu 10 Eigenschaften des aktiven Layer auswählen, die Sie in der Kurzliste angezeigt haben möchten.
 
-Ausserdem können Sie bis zu 10 Eigenschaften auswählen, die in einem Popup beim Überfahren der Maus über eine Geometrie in der Karte angezeigt werden.
+Außerdem können Sie bis zu 10 Eigenschaften auswählen, die in einem Popup beim Überfahren der Maus über eine Geometrie in der Karte angezeigt werden.
 
 Sie können die Reihenfolge der Eigenschaften verändern, indem Sie über einen Eintrag in der Liste die linke Maustaste gedrückt halten und den Eintrag an die von Ihnen gewünschte Stelle verschieben.
 In der Kurzliste, der kompletten Liste und in den Popups werden die Eigenschaften in der Reihenfolge dargestellt, wie sie in der Liste definiert wurde.
