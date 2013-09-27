@@ -1,19 +1,19 @@
 Export von Rasterdaten
 ======================
 
-Sie haben die Möglichkeit Rasterdaten aus Ihrer GeoBox-Infrastruktur zu exportieren. Der Export unterteilt sich in eine Exportübersicht und einen Exporteditor.
+Sie haben die Möglichkeit Rasterdaten aus Ihrem GeoBox-Client zu exportieren. Der Export unterteilt sich in eine Übersicht und einen Editor.
 
 
-Exportübersicht
----------------
+Übersicht
+---------
 
-In der Übersicht sind alle gespeicherten Exportvorgänge aufgelistet. Sie können hier einzelne Vorgänge editieren oder direkt entfernen. Wenn Exportvorgänge fertig konfiguriert sind, können diese aus der Übersicht oder aus dem Editermodus gestartet werden.
+In der Übersicht sind alle gespeicherten Exportvorgänge aufgelistet. Sie können einzelne Vorgänge editieren oder direkt entfernen. Wenn Exportvorgänge fertig konfiguriert sind, können diese aus der Übersicht oder aus dem Editor gestartet werden.
 
 Um einen neuen Export zu erstellen wählen Sie "Neuer Export" - dieser öffnet den Exporteditor.
 
 .. attention :: Das Löschen eines Exports kann nicht rückgängig gemacht werden.
 
-Exporteditor
+Editor
 ------------
 
 Titel
@@ -24,9 +24,9 @@ Jedes Rasterimport-Projekt wird durch einen Titel identifiziert. Bitte geben Sie
 Rasterlayer
 ###########
 
-Beim Exportieren der Rasterdaten können Sie zwischen unterschiedlichen Formaten auswählen wie die Daten gespeichert werden sollen. Für jeden Rasterlayer der ausgewählt wird, wird ein entsprechender Export in dem oben ausgewählten Format erzeugt. Es können über den Button "Rasterlayer hinzufügen" mehrere Datenquellen hinzugefügt werden. Für jede Datenquelle wird ein eigener Download erzeugt.
+Beim Exportieren der Rasterdaten können Sie zwischen unterschiedlichen Formaten auswählen wie die Daten gespeichert werden sollen. Für jeden Rasterlayer der ausgewählt wird, wird ein entsprechender Export in dem oben ausgewählten Format erzeugt. Es können mehrere Datenquellen hinzugefügt werden. Für jede Datenquelle wird ein eigener Download erzeugt.
 
-Welcher Bereich der Karten exportiert werden soll kann mittels der Zeichenfunktionen ausgewählt werden. Diese sind im Bereich `Rasterimport-Editor`_ näher beschrieben.
+Welcher Bereich der Karten exportiert werden soll kann über die Zeichenfunktionen ausgewählt werden. Diese sind im Bereich `Rasterimport-Editor`_ näher beschrieben.
 
 Das passende Format ist abhängig vom Einsatzgebiet de Exportes. Sie haben die Auswahl zwischen folgenden Formaten:
 
@@ -45,7 +45,7 @@ Die Daten werden in dem Datenbankformat CouchDB abgespeichert. Hierbei kann eine
 Speichern & Starten des Imports
 ###############################
 
-Alle Einstellungen können gespeichert werden und werden anschließend in der Rasterübersicht angezeigt. Neben dem Speichern besteht die Möglichkeit den Vorgang direkt zu Starten. Hierbei werden auch alle Änderungen gespeichert.
+Alle Einstellungen werden gespeichert und werden anschließend in der Rasterübersicht angezeigt. Neben dem Speichern besteht die Möglichkeit den Vorgang direkt zu Starten. Auch hierbei werden alle Änderungen gespeichert.
 
 Informationen
 #############

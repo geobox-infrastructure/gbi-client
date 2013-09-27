@@ -18,10 +18,10 @@ Lokale Rasterkarte:
 
 
 Vektorkarte:
-    Hier können Sie Ihre erstellten Vektorkarten ein- und ausschalten. Wenn Sie unterschiedliche Vektorebenen haben, können Sie über die Pfeil-Symbol die Darstellungsreihenfolge ändern.
-    Durch klicken auf den Ebenennamen können Sie diesen aktivieren. Aktivierte Layer können über die Register `Aussehen`, `Editieren`, `Filtern` und `Thematische Karte` weiter bearbeitet werden. Außerdem bezieht sich das Register `Speichern & Laden` auf den jeweils aktiven Layer.
+    Hier können Sie Ihre erstellten Vektorkarten ein- und ausschalten. Wenn Sie unterschiedliche Ebenen haben, können Sie diese über die Pfeil-Symbol die Darstellungsreihenfolge ändern.
+    Durch Anklicken des Ebenennamens können Sie den gewünschten Layer aktivieren. Aktivierte Layer können über die Register `Aussehen`, `Editieren`, `Filtern` und `Thematische Karte` weiter bearbeitet werden. Das Register `Speichern & Laden` bezieht sich immer auf den jeweils aktiven Layer. Der Titel des aktiven Layers wird Ihnen oben rechts in der Karte angezeigt.
 
-    Durch das Lupen-Symbol können Sie die Karte auf die Geometrien des Layers zoomen.
+    Durch das Lupen-Symbol können Sie die Karte auf die Ausdehnung der Geometrien des Layers zoomen.
 
 Aussehen
 --------
@@ -46,7 +46,7 @@ Wählen Sie das entsprechende Symbol um Punkte, Linien oder Polygone zu zeichnen
 Selektieren
 """""""""""
 
-Mit der Selektieren-Funktion können Sie eine Geometrie auswählen. Durch gedrückt halten der Shift-Taste können Sie mehrere Geometrien auswählen.
+Mit der Selektieren-Funktion können Sie eine Geometrie auswählen. Durch gedrückt halten der Shift-Taste können mehrere Geometrien ausgewählt werden.
 
 Bearbeiten
 """"""""""
@@ -67,12 +67,12 @@ Wenn Sie Geometrien aus anderen Vektorebenen selektiert haben, können Sie mit d
 Zerschneiden
 """"""""""""
 
-Mit der Zerschneiden-Funktion können Sie eine selektierte Geometrie an einer Linie teilen. Nach Auswahl der Zerschneiden-Funktion können Sie in der Karte die Schneidelinie zeichnen. Zum Durchführen müssen Sie ein Doppelklick in der Karte durchführen.
+Mit der Zerschneiden-Funktion können Sie eine selektierte Geometrie an einer Linie teilen. Nach Auswahl der Zerschneiden-Funktion können Sie in der Karte die Schneidelinie zeichnen. Zum Durchführen muss diese Aktion mit einem Doppelklick in der Karte bestätigt werden. 
 
-Vereinen
-""""""""
+Zusammenfügen
+"""""""""""""
 
-Wenn Sie mehrere sich sich berührende oder überlappende Geometrien selektiert haben, können Sie diese über die Vereinen-Funktion zu einer Geometrie zusammenfassen.
+Wenn Sie mehrere sich sich berührende oder überlappende Geometrien selektiert haben, können Sie diese über die Zusammenfügen-Funktion zu einer Geometrie zusammenfassen.
 
 
 Eigenschaften
@@ -80,13 +80,13 @@ Eigenschaften
 
 Zu jeder selektierten Geometrie können Sie Eigenschaften in Form von Schlüssel-Werte-Paaren speichern. Dieses kann z.B. Schlüssel: Jahr und Wert: 2013 sein. Alle im aktiven Layer vorhandenen Schlüssel werden zu jeder Geometrie angezeigt.
 
-Neben den Eigenschaften findet sich ein Button mit Auge-Symbol. Dieser Button dient dazu, alle Geometrien in der Karte mit dem entsprechenden Schlüssel-Wert-Paar zu beschriften. Diese Beschriftung ist nicht dauerhaft und kann auch nicht gespeichert werden.
+Neben den Eigenschaften findet sich ein Button mit Auge-Symbol. Dieser Button dient dazu, alle Geometrien in der Karte mit dem entsprechenden Schlüssel-Wert-Paar zu beschriften. Diese Beschriftung ist nicht dauerhaft und wird nicht gespeichert.
 
-Der Button mit dem X-Symbol löscht das Schlüssel-Wert-Paar von jeder selektierten Geometrie. Das Eingabefeld für dieses Schlüssel-Wert-Paar verschwindet, sobald keine der Geometrien des Layers dieses Schlüssel-Wert-Paar mehr als Eigenschaft besitzt.
+Über das X-Symbol löschen Sie das Schlüssel-Wert-Paar von der selektierten Geometrie. Das Eingabefeld für dieses Schlüssel-Wert-Paar verschwindet, sobald keine der Geometrien des Layers dieses Schlüssel-Wert-Paar mehr als Eigenschaft besitzt.
 
-Weiterhin kann unter diesem Register dem Layer ein JSON Schema zugewiesen werden. Nach laden des JSON Schema wird automatisch eine Überprüfung der Eigenschaften der Geometrien gestartet. Alle Geometrien mit nicht gültigen Eigenschaften lassen sich danach durchgehen und deren Eigenschaften entsprechend ändern.
+Weiterhin kann unter diesem Register dem Layer ein JSON Schema zugewiesen werden. Nach laden des JSON Schema wird automatisch eine Überprüfung der Eigenschaften der Geometrien gestartet. Alle Geometrien mit nicht gültigen Eigenschaften lassen sich bearbeiten und entsprechend ändern.
 
-Sollte im JSON Schema angegeben sein, dass nur im Schema definierte Eigenschaften gültig sind, werden alle Eigenschaften einer Geometrie, die nicht im JSON Schema definiert sind, gesondert aufgeführt und Sie zum löschen dieser aufgefordert.
+Sollte im JSON Schema angegeben sein, dass nur im Schema definierte Eigenschaften gültig sind, werden alle Eigenschaften einer Geometrie, die nicht im JSON Schema definiert sind gesondert aufgeführt und Sie werden zum Löschen dieser aufgefordert.
 
 Ist einem Layer ein JSON Schema zugewiesen, wird die URL, von der Sie das JSON Schema hinzugefügt haben, angezeigt. Daneben befinden sich Button um das JSON Schema von der URL zu aktualisieren oder das JSON Schema aus dem Layer zu löschen.
 
@@ -100,26 +100,26 @@ Hier können Sie Geometrien der aktivierten Vektorebene, abhängig von Eigenscha
 Messen
 ------
 
-Hier können Sie in der Karte messen.
+Messen Sie Linien oder Flächen in der Karte. Zudem besteht die Möglichkeit eine Koordinate zu bestimmen.
 
 
 Koordinate
 ''''''''''
 
-Durch klicken in der Karten können Sie einen Punkt setzen, zu dem die Koordinate dargestellt wird. Über die Auswahlliste können Sie die Projektion in der die Koordinate dargestellt werden soll auswählen.
+Durch Klicken in der Karten können Sie einen Punkt setzen, zu dem die Koordinate bestimmt wird. Über die Auswahlliste können Sie die Projektion der Koordinate auswählen.
 
 
 Linien
 ''''''
 
-Durch klicken in der Karte können Sie einen Linienzug zeichnen. Die Gesamtlänge wird als Messergebnis in Metern oder Kilometern dargestellt.
+Durch Klicken in der Karte können Sie einen Linienzug zeichnen. Die Gesamtlänge wird als Messergebnis in Metern oder Kilometern dargestellt.
 Den Messvorgang können Sie mit Doppelklick in der Karte beenden.
 
 
 Flächen
 '''''''
 
-Durch klicken in der Karte können Sie einen Polygon zeichnen. Die Gesamtfläche wird als Messergebnis in Quadratmetern oder Quadratkilometern dargestellt.
+Durch Klicken in der Karte können Sie ein Polygon zeichnen. Die Gesamtfläche wird als Messergebnis in Quadratmetern oder Quadratkilometern dargestellt.
 Den Messvorgang können Sie mit Doppelklick in der Karte beenden.
 
 Suche
@@ -143,9 +143,9 @@ Die `Thematische Karte` ist beim Aufruf der Seite deaktiviert, unabhängig davon
 Legende
 '''''''
 
-Hier sehen Sie die Legende der thematischen Karte. Es werden `Farbe`, `Wert` und `Fläche` angezeigt, sowie ein Button, durch dessen Betätigung Sie zu einer Liste alle Geometrien gelangen, deren Werte für die thematisierte Eigenschaft denen des Legendeneintrags entsprechen.
+In der Legende der thematischen Karte werden `Farbe`, `Wert` und `Fläche` angezeigt. Zusätzlich besteht die Möglichkeit über den Listenbutton zu einer Übersichtsliste zu gelangen. Hier werden alle Geometrien aufgelistet die dem Wert der Legende entsprechen. 
 
-Ist die thematische Karte im `Exakte Werte`-Modus, können Sie auf die Farbe und anschließend auf eine Geometrie klicken, der Sie den der Farbe entsprechenden Wert für die thematisierte Eigenschaft zuweisen wollen.
+Ist die thematische Karte im Modus `Exakte Werte`, können Sie den Schnell-Editormodus verwenden. Dieser kann aktiviert werden in dem Sie auf die Farbe in der Legende Klicken. Anschließend haben Sie die Möglichkeit eine Geometrie anzuklicken um dieser den Wert – entsprechenden der Farbe – zuzuweisen.
 
 Liste
 '''''
@@ -167,13 +167,13 @@ Sie können die Listen als `ODT` oder `CSV` herunterladen.
 Einstellungen
 '''''''''''''
 
-In diesem Register können Sie Einstellungen für die thematische Karte, für Attributlisten und Popups vornehmen.
+In diesem Register können Sie Einstellungen für die thematische Karte für Attributlisten und Popups vornehmen.
 Die Einstellungen können für jeden Layer gespeichert werden.
 
 Karte
 """""
 
-Hier können Sie eine Eigenschaft des aktiven Layers wählen, für die Sie eine thematische Darstellung erzeugen möchten. Sie können beliebig vielen Werten der gewählten Eigenschaft Farben zuweisen. Bei den ersten 10 Werten werden Ihnen Farben vorgeschlagen, die Sie aber auch ändern können.
+Hier können Sie eine Eigenschaft des aktiven Layers wählen, für die Sie eine thematische Darstellung erzeugen möchten. Sie können beliebig viele Werten eine  Farbe zuweisen. Bei den ersten 10 Werten werden Ihnen Farben vom System vorgeschlagen. Diese können von Ihnen verändert werden. 
 
 Für die Angabe der Werte stehen Ihnen zwei Arten zur Auswahl.
 
@@ -190,7 +190,7 @@ Wertebereich
 Liste
 """""
 
-In diesem Register können Sie bis zu 10 Eigenschaften des aktiven Layer auswählen, die Sie in der Kurzliste angezeigt haben möchten.
+In diesem Register können Sie bis zu 10 Eigenschaften des aktiven Layer auswählen die in der Kurzliste angezeigt werden sollen.
 
 Außerdem können Sie bis zu 10 Eigenschaften auswählen, die in einem Popup beim Überfahren der Maus über eine Geometrie in der Karte angezeigt werden.
 
@@ -200,19 +200,19 @@ In der Kurzliste, der kompletten Liste und in den Popups werden die Eigenschafte
 Speichern & Laden
 -----------------
 
-Dieses Register wird grün hinterlegt, sobald Sie speicherbare Änderungen vorgenommen haben.
+Dieses Register wird grün hinterlegt, sobald speicherbare Änderungen vorliegen.
 
 Speichern / Speichern unter
 '''''''''''''''''''''''''''
 
-Unter der Überschrift `Speichern` befinden sich die Button `Speichern`, mit dem Sie Ihre vorgenommenen Änderungen am aktiven Layer speichern, und `Abbruch`, mit dem Sie Ihre vorgenommenen Änderungen am aktiven Layer verwerfen.
+Mittels `Speichern` können Sie vorgenommenen Änderungen am aktiven Layer speichern. Sollen die Änderungen verworfen werden wählen Sie `Abbruch`.
 
-Unter der Überschrift `Speichern unter` können Sie den aktuellen Stand des aktuellen Layers in einem neuen Layer speichern.
+Mit `Speichern unter` können Sie den aktiven Layer in einem neuen Layer speichern. Geben Sie hier den gewünschten Namen ein.
 
 Export
 ''''''
 
-Über den Button `Export` gelangen Sie zu einem Dialog, in dem Sie den aktuellen Stand des aktuellen Layers als Shapedatei oder GeoJSON exportieren können.
+Über den Button `Export` gelangen Sie zu einem Dialog, in dem Sie den aktuellen Layer als Shapedatei oder GeoJSON exportieren können.
 
 Hierzu geben Sie den `Dateinamen` an, der automatisch beim Exportvorgang mit der richtigen Endung ergänzt wird. Weiterhin können Sie das `Koordinatensystem` für den Export angeben.
 
@@ -224,9 +224,9 @@ Dateisystem
 Upload-Box
   Der Export wird direkt in Ihrer Upload-Box abgelegt.
 
-Als weiter Exporttyp steht Ihnen OData zur Verfügung. Wenn Sie diesen Typ auswählen, wird Ihnen eine URL angezeigt, die Sie kopieren und in einem Programm, dass OData lesen kann (z.B. Microsoft Excel 2013), als Quelle angeben können.
+Als weiter Exporttyp steht Ihnen ein OData-Feed zur Verfügung. Wenn Sie diesen Typ auswählen, wird Ihnen die benötigten URL angezeigt. Diese könne sie dann z.b. in Microsoft Excel 2013 als OData-Feed einbinden.
 
 Speicherpunkte
 ''''''''''''''
 
-Unter der Überschrift `Speicherpunkte` können Sie für den aktuellen Stand des aktuellen Layers einen Speicherpunkt erstellen und erstellte Speicherpunkte wiederherstellen.
+Unter der Überschrift `Speicherpunkte` können Sie für den Stand des aktiven Layers einen Speicherpunkt erstellen und erstellte Speicherpunkte wiederherstellen.

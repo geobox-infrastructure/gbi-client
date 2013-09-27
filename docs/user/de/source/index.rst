@@ -14,7 +14,6 @@ Benutzerhandbuch
   export
   aufgaben
   editor
-  karte
   datenquellen
   einstellungen
   glossar
