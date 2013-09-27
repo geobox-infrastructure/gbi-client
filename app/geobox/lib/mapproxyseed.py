@@ -186,15 +186,11 @@ def is_valid_transformation(bbox, source_srs, dest_srs):
     pd1, pd2 = list(source_srs.transform_to(dest_srs, [p1, p2]))
     bbox_d = list(pd1 + pd2)
 
-    print p1, p2, '->', pd1, pd2
-
     if float('inf') in bbox_d:
         return False
 
     ps1, ps2 = list(dest_srs.transform_to(source_srs, [pd1, pd2]))
     bbox_t = list(ps1 + ps2)
-
-    print p1, p2, '->', ps1, ps2
 
     if float('inf') in bbox_t:
         return False
