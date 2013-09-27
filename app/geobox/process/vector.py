@@ -15,10 +15,14 @@
 
 import json
 
+from tempfile import mkdtemp
+from os import path
+from shutil import rmtree
+
 from geobox.process.base import ProcessBase
 from geobox.lib.couchdb import VectorCouchDB, CouchFileBox
 from geobox.lib.vectormapping import Mapping
-from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, fields_from_properties, write_json_to_file, create_feature_collection, ConvertError
+from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, fields_from_properties, write_json_to_file, create_feature_collection, ConvertError, zip_shapefiles
 
 
 import logging
@@ -30,6 +34,7 @@ class VectorExportProcess(ProcessBase):
         try:
             with self.task() as task:
                 couch = VectorCouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.db_name, task.title)
+
                 if task.type_ == 'geojson':
                     # use geojson if is in task - otherwise load from database
                     if not task.geojson:
@@ -61,12 +66,27 @@ class VectorExportProcess(ProcessBase):
                         write_json_to_file(json.loads(data), output_file)
 
                 elif task.type_ == 'shp':
-                    output_file = self.app_state.user_data_path('export',  'vector', task.file_name+ '.shp', make_dirs=True)
-                    # create fields for shp - use for mapping
-                    fields = fields_from_properties(couch.load_features())
-                    mapping = Mapping(None, None, 'Polygon', other_srs=task.srs, fields=fields)
-                    # create shape
-                    write_json_to_shape(couch.load_features(), mapping, output_file)
+                    if task.destination != 'file':
+                        dest_couch = CouchFileBox('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.destination)
+                        temp_dir = mkdtemp()
+
+                        output_file = path.join(temp_dir, task.file_name + '.shp')
+                        fields = fields_from_properties(couch.load_features())
+                        mapping = Mapping(None, None, 'Polygon', other_srs=task.srs, fields=fields)
+
+                        # create shape
+                        write_json_to_shape(couch.load_features(), mapping, output_file)
+                        zip_file = zip_shapefiles(output_file)
+                        dest_couch.store_file({'content-type': 'application/zip', 'file': zip_file.getvalue(), 'filename': task.file_name + '.zip' }, overwrite=True)
+
+                        rmtree(temp_dir)
+                    else:
+                        output_file = self.app_state.user_data_path('export',  'vector', task.file_name+ '.shp', make_dirs=True)
+                        # create fields for shp - use for mapping
+                        fields = fields_from_properties(couch.load_features())
+                        mapping = Mapping(None, None, 'Polygon', other_srs=task.srs, fields=fields)
+                        # create shape
+                        write_json_to_shape(couch.load_features(), mapping, output_file)
             self.task_done()
         except ConvertError, e:
             self.task_failed(e)
