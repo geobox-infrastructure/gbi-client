@@ -186,15 +186,11 @@ def is_valid_transformation(bbox, source_srs, dest_srs):
     pd1, pd2 = list(source_srs.transform_to(dest_srs, [p1, p2]))
     bbox_d = list(pd1 + pd2)
 
-    print p1, p2, '->', pd1, pd2
-
     if float('inf') in bbox_d:
         return False
 
     ps1, ps2 = list(dest_srs.transform_to(source_srs, [pd1, pd2]))
     bbox_t = list(ps1 + ps2)
-
-    print p1, p2, '->', ps1, ps2
 
     if float('inf') in bbox_t:
         return False
@@ -314,9 +310,8 @@ def create_couchdb_cache(app_state, task=False, layer=False):
         db_name = task.layer.name
         file_ext = task.source.format
     if layer:
-        db_name = layer.name
+        db_name = "%s_%s_%s" % (layer.prefix, app_state.config.get('app', 'raster_prefix'), layer.name)
         file_ext = layer.format
-
 
     port = app_state.config.get('couchdb', 'port')
     url = 'http://127.0.0.1:%s' % (port, )

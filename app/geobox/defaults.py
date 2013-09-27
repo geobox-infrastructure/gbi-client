@@ -56,9 +56,9 @@ except ImportError:
                 # use installed path for couchdb since couchdb in packaging/build
                 # is only usable after installation
                 'bin_dir': path(
-                    dev=['c:/Program Files/GeoBox/couchdb/bin', 'c:/Programme/GeoBox/couchdb/bin', '/usr/local/bin', '/usr/bin'],
+                    dev=['c:/Program Files/GeoBox-Client/couchdb/bin', 'c:/Programme/GeoBox-Client/couchdb/bin', '/usr/local/bin', '/usr/bin'],
                     frozen=['../couchdb/bin'],
-                    test=['c:/Program Files/GeoBox/couchdb/bin', 'c:/Programme/GeoBox/couchdb/bin', '/usr/local/bin', '/usr/bin'],
+                    test=['c:/Program Files/GeoBox-Client/couchdb/bin', 'c:/Programme/GeoBox-Client/couchdb/bin', '/usr/local/bin', '/usr/bin'],
                     cmd='erl',
                 ),
                 'erl_cmd': 'erl -noinput -noshell -sasl errlog_type error -couch_ini',

@@ -20,7 +20,8 @@ from werkzeug.exceptions import NotFound
 from flask import (render_template, Blueprint, flash,
     redirect, url_for, request, current_app, jsonify, g)
 
-from flask.ext.babel import gettext as _
+# XXX olt: do not import from flask.ext, makes trouble with pyinstaller
+from flaskext.babel import gettext as _
 
 from geobox.lib.couchdb import CouchFileBox
 from geobox.lib.file_validation import get_file_information
