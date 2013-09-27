@@ -46,7 +46,7 @@ def couchdb_server_thread(app_state):
 def tray_icon_thread(app_state):
     """TrayIcon background thread"""
     from geobox.lib.trayicon import TrayIconThread
-    return TrayIconThread(app_state, host='localhost', port=app_state.config.get_int('web', 'port'))
+    return TrayIconThread(app_state, host='127.0.0.1', port=app_state.config.get_int('web', 'port'))
 
 def mapproxy_thread(app_state):
     """Mapproxy background thread"""
