@@ -314,9 +314,8 @@ def create_couchdb_cache(app_state, task=False, layer=False):
         db_name = task.layer.name
         file_ext = task.source.format
     if layer:
-        db_name = layer.name
+        db_name = "%s_%s_%s" % (layer.prefix, app_state.config.get('app', 'raster_prefix'), layer.name)
         file_ext = layer.format
-
 
     port = app_state.config.get('couchdb', 'port')
     url = 'http://127.0.0.1:%s' % (port, )
