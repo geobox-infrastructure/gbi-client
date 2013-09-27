@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# GBI-Client documentation build configuration file, created by
+# GeoBox-Client documentation build configuration file, created by
 # sphinx-quickstart on Tue Jul 24 10:35:38 2012.
 #
 # This file is execfile()d with the current directory set to its containing dir.

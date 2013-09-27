@@ -49,7 +49,9 @@ def files(box_name, user_id=None):
     import_form = prepare_geojson_form(import_form)
 
     couch_box = get_couch_box_db(box_name)
-    couch = CouchFileBox('http://127.0.0.1:%s' % current_app.config.geobox_state.config.get('couchdb', 'port'), couch_box)
+
+    host = request.headers.get('Host').split(':')[0]
+    couch = CouchFileBox('http://%s:%s' %(host, current_app.config.geobox_state.config.get('couchdb', 'port'), ), couch_box)
     if form.validate_on_submit():
         file = request.files['file']
         overwrite = True if request.form.get('overwrite') == 'true' else False

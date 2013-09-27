@@ -364,6 +364,9 @@ function loadCouchDBs() {
   var couchLayers = [];
   var raster_sources = [];
 
+  var realHostName = window.location.hostname;
+  var wmtsURL = OpenlayersCouchURL.replace(gbi.Helper.extractHostName(OpenlayersCouchURL), realHostName);
+
   OpenLayers.Request.GET({
     url: url + "_all_dbs",
     async: false,
@@ -402,7 +405,7 @@ function loadCouchDBs() {
                   if (metadata.type == 'tiles') {
                         raster_sources.push(new gbi.Layers.WMTS({
                             name: metadata.title,
-                            url: OpenlayersCouchURL,
+                            url: wmtsURL,
                             layer:  metadata.name,
                             format: metadata.source.format
                         })

@@ -1,5 +1,5 @@
-Building and Packaging GBI Client
-=================================
+Building and Packaging GeoBox Client
+====================================
 
 This documents the build process of the GBI client .exe and installer for Windows.
 
@@ -82,7 +82,7 @@ To remove the `build` files::
 Binary dependencies
 -------------------
 
-The GBI Client depends on a few software packages that needs to be compiled.
+The GeoBox Client depends on a few software packages that needs to be compiled.
 
 You need a developer environment as described in the `CouchDB Glazier instructions <https://github.com/dch/glazier>`_.
 

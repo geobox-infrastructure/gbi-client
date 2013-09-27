@@ -1,13 +1,12 @@
-
 Erste Schritte
 ==============
 
 
 Start der Anwendung
 -------------------
-Nach erfolgreicher Installation des GeoBox-Client kann die Anwendung über das Windows Startmenü gestartet werden. Nach dem Start erscheint das GeoBox-Symbol in der Windows-Taskleiste. Über das Menü können sie die Anwendung schließen oder neustarten.
+Nach erfolgreicher Installation des GeoBox-Client kann die Anwendung über das Windows Startmenü gestartet werden. Nach dem Start erscheint das GeoBox-Symbol in der Windows-Taskleiste. Über das Menü können sie die Anwendung schließen oder neu starten.
 
-Die Funktionen der Anwendung werden über einen Webbrowser gesteuert. Nach dem Starten der Anwendung wird automatisch Ihr Standardbrowser mit der dazugehörigen Webseite geöffnet. Sollte die Seite nicht automatisch öffnen erreichen Sie die Anwendung unter der Webaddresse `http://127.0.0.1:8090/`.
+Die Funktionen der Anwendung werden über einen Webbrowser gesteuert. Nach dem Starten der Anwendung wird automatisch Ihr Standardbrowser mit der dazugehörigen Webseite geöffnet. Sollte die Seite nicht automatisch öffnen erreichen Sie die Anwendung unter der Webadresse `http://127.0.0.1:8090/`.
 
 Aufbau der Webseite
 -------------------
@@ -23,7 +22,7 @@ Die Anmeldung erfolgt über die Angabe des Benutzernamens und des zugehörigen P
 Startseite
 ''''''''''
 
-Über die Startseite können Sie die Funktionen der Anwendung auswählen.  Folgende Funktionen stehen Ihnen hier zur Auswahl:
+Über die Startseite gelangen Sie zu den Funktionen der Anwendung.  Folgende Funktionen stehen Ihnen zur Verfügung:
 
   - Importieren von Rasterdaten
   - Importieren von Shapedateien
@@ -35,7 +34,7 @@ Startseite
   - Downloads
   - Editor
   - Karte
-  - Übersicht über Datenquellen
+  - Datenquellen
   - Administration
 
 Die einzelnen Funktionen werden in der Benutzerdokumentation näher erläutert.
@@ -44,5 +43,3 @@ Abmelden eines Nutzers
 ''''''''''''''''''''''
 
 Um einen Benutzer von der Anwendung abzumelden, wählen Sie `Abmelden` in dem Navigationsmenü aus.
-
-.. include:: linux_installation.rst

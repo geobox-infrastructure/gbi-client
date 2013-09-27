@@ -6,8 +6,8 @@ Getestet mit Ubuntu 12.04.3 amd64 Desktop
 System vorbereiten
 ''''''''''''''''''
 
-Um den GeoBox-Client unter Linux auszuführen, werden die Packete GDAL in der Version 1.9.2 und CouchDB in der Version 1.3 benötigt.
-Sollten diese Packete für Ihr System nicht zur Verfügung stehen, müssen Sie die folgenden Repositories Ihrem System hinzufügen:
+Um den GeoBox-Client unter Linux auszuführen, werden die Pakete GDAL in der Version 1.9.2 und CouchDB in der Version 1.3 benötigt.
+Sollten diese Pakete für Ihr System nicht zur Verfügung stehen, müssen Sie die folgenden Repositories Ihrem System hinzufügen:
 
 ::
 
@@ -51,7 +51,7 @@ Erstellen einer virtuellen Umgebung:
 
     mkvirtualenv geobox
 
-Um Zugriff auf die im System installierten Packete zu erhalten, müssen die globalen Sitepackages aktiviert werden:
+Um Zugriff auf die im System installierten Pakete zu erhalten, müssen die globalen Sitepackages aktiviert werden:
 
 ::
 

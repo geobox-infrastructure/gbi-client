@@ -14,14 +14,13 @@
 # limitations under the License.
 
 __all__ = [
-    'main', 'map', 'tasks', 'project', 'user',
+    'main', 'tasks', 'project', 'user',
     'admin', 'vector', 'downloads',
     'proxy', 'boxes', 'raster', 'editor',
 ]
 
 
 from .main import main
-from .map import map_view as map
 from .tasks import tasks_view as tasks
 from .project import project
 from .user import user_view as user
