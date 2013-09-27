@@ -387,6 +387,9 @@ gbi.widgets.AttributeEditor.prototype = {
         });
         this.changed = true;
         this._applyAttributes();
+        if($.inArray(key, self.layerManager.active().featuresAttributes()) == -1) {
+            self.label(key);
+        }
         this.render();
     },
     label: function(key) {
