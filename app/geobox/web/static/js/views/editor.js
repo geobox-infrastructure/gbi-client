@@ -228,7 +228,7 @@ $(document).ready(function() {
     if(activeLayer) {
       activeLayer.refresh();
     }
-    $(this).attr('disabled', 'disabled').removeClass('btn-success');
+    $('#save-changes').attr('disabled', 'disabled').removeClass('btn-success');
     $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('save-enabled');
    })
