@@ -26,7 +26,7 @@ except ImportError:
         """
         defaults = {
             'app': {
-                'name': 'GeoBox',
+                'name': 'GeoBox-Client',
                 'host': '127.0.0.1',
                 'locale': 'de_DE', # 'en_UK'
                 'logging_server': '',
