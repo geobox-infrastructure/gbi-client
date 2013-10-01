@@ -250,7 +250,7 @@ class RasterSourceForm(Form):
     title = TextField(lazy_gettext('rastersource_title'), validators=[Required()])
     layer = TextField(lazy_gettext('rastersource_layer_input'))
     format = SelectField(lazy_gettext('rastersource_format'), validators=[Required()], choices=[('png', 'png'), ('jpeg', 'jpeg')])
-    llbbox = TextField(lazy_gettext('rastersource_llbox'))
+    llbbox = TextAreaField(lazy_gettext('rastersource_llbox'), validators=[Required()])
 
 class WMSForm(RasterSourceForm):
     srs = TextField(lazy_gettext('rastersource_srs_input'))

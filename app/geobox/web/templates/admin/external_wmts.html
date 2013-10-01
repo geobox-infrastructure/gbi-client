@@ -2,7 +2,7 @@
 
 {% block title %}{{ _('import raster edit') }}{% endblock %}
 
-{% from "form_macros.html" import input, button %}
+{% from "form_macros.html" import input, button, textarea %}
 
 {% block content %}
 <h2>{{_('wmts sources')}}</h2>
@@ -10,17 +10,15 @@
 <div class="row-fluid">
     <form method="POST" class="form-horizontal">
     {{ form.csrf_token }}
-        <fieldset class="span5 offset1">
+        <fieldset class="span8 offset1">
             {{ input(form.name) }}
             {{ input(form.title) }}
             {{ input(form.url) }}
             {{ input(form.layer) }}
             {{ input(form.format) }}
-            {{ input(form.llbbox) }}
+            {{ textarea(form.llbbox, rows=6, cols=6, class='span4') }}
             {{ input(form.username) }}
             {{ input(form.password) }}
-        </fieldset>
-        <fieldset class="span5">
         </fieldset>
         <fieldset class="span9 pagination-centered">
             {{ button(_('save'), True) }}
