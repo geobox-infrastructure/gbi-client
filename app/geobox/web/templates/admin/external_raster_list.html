@@ -119,8 +119,7 @@
     <thead>
       <tr>
         <th>{{ _('title') }}</th>
-        <th>{{ _('url') }}</th>
-        <th>{{ _('layer name') }}</th>
+        <th>{{ _('url (layer name)') }}</th>
         <th>{{ _('srs') }}</th>
         <th></th>
       </tr>
@@ -129,8 +128,7 @@
     {% for source in user_sources %}
       <tr>
         <td>{{ source.title }}</td>
-        <td>{{ source.url }}</td>
-        <td>{% if source.layer %}{{ source.layer }}{% endif %}</td>
+        <td>{{ source.url }} {% if source.layer %}<br>{{ _('layer') }}: {{ source.layer }}{% endif %}</td>
         <td>{{ source.srs }}</td>
         <td>
         	{% if source.source_type == 'wmts' %}

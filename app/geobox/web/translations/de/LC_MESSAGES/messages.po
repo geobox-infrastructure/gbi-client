@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-01 12:19+0200\n"
-"PO-Revision-Date: 2013-10-01 12:24+0100\n"
+"POT-Creation-Date: 2013-10-01 13:22+0200\n"
+"PO-Revision-Date: 2013-10-01 13:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -108,7 +108,7 @@ msgstr "Format"
 #: geobox/web/forms.py:206
 #: geobox/web/forms.py:221
 #: geobox/web/forms.py:233
-#: geobox/web/templates/admin/external_raster_list.html:124
+#: geobox/web/templates/admin/external_raster_list.html:123
 msgid "srs"
 msgstr "Koordinatensystem"
 
@@ -291,7 +291,7 @@ msgstr "Hinzufügen/Neustarten"
 
 #: geobox/web/templates/admin.html:61
 #: geobox/web/templates/admin/external_raster_list.html:26
-#: geobox/web/templates/admin/external_raster_list.html:141
+#: geobox/web/templates/admin/external_raster_list.html:139
 #: geobox/web/templates/projects/exports.html:35
 #: geobox/web/templates/projects/imports.html:46
 #: geobox/web/templates/tasks/task_list.html:52
@@ -366,8 +366,8 @@ msgid "look"
 msgstr "Aussehen"
 
 #: geobox/web/templates/editor.html:85
+#: geobox/web/templates/admin/external_raster_list.html:135
 #: geobox/web/templates/admin/external_raster_list.html:137
-#: geobox/web/templates/admin/external_raster_list.html:139
 #: geobox/web/templates/projects/exports.html:29
 #: geobox/web/templates/projects/imports.html:40
 msgid "edit"
@@ -705,6 +705,7 @@ msgid "tooltip - local raster source overview"
 msgstr "Hier sind alle Rasterquellen aufgelistet die auf Ihrem System zur Verfügung stehen."
 
 #: geobox/web/templates/admin/external_raster_list.html:12
+#: geobox/web/templates/admin/external_raster_list.html:131
 msgid "layer"
 msgstr "Layer"
 
@@ -722,7 +723,6 @@ msgid "tooltip - external raster source overview"
 msgstr "Alle Rasterquellen die vom Server zur Verfügung gestellt wurden. Definieren Sie hier Benutzername und Passwort falls diese geschützt sind"
 
 #: geobox/web/templates/admin/external_raster_list.html:41
-#: geobox/web/templates/admin/external_raster_list.html:123
 #: geobox/web/templates/projects/imports.html:14
 msgid "layer name"
 msgstr "Layer Name"
@@ -773,14 +773,14 @@ msgid "tooltip - internal raster source overview"
 msgstr "Definieren Sie hier eigene Rasterquellen zum Beispiel WMS oder WMTS"
 
 #: geobox/web/templates/admin/external_raster_list.html:122
-msgid "url"
-msgstr "URL"
+msgid "url (layer name)"
+msgstr "URL und Layer Name"
 
-#: geobox/web/templates/admin/external_raster_list.html:149
+#: geobox/web/templates/admin/external_raster_list.html:147
 msgid "new wmts source"
 msgstr "Neuen WMTS hinzufügen"
 
-#: geobox/web/templates/admin/external_raster_list.html:153
+#: geobox/web/templates/admin/external_raster_list.html:151
 msgid "new wms project"
 msgstr "Neuen WMS hinzufügen"
 
@@ -2050,3 +2050,5 @@ msgstr "Kein gültigen Zeitpunkt angegeben."
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
+#~ msgid "url"
+#~ msgstr "URL"
