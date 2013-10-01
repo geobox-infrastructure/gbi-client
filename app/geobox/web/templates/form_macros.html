@@ -1,3 +1,5 @@
+{% from "macros.html" import generate_tooltip %}
+
 {% macro render_errors(field) %}
 {% if field.errors %}
 <ul class="errors">
@@ -8,11 +10,14 @@
 {% endif %}
 {% endmacro %}
 
-{% macro input(field) -%}
+{% macro input(field, tooltip=False) -%}
 <div class="control-group {% if field.errors %}error{% endif %}">
     <label class="control-label" for="{{ field.id }}"><span>{{ field.label.text }}{%- if field.flags.required -%}*{%- endif %} :</span></label>
     <div class="controls">
         {{ field(**kwargs)|safe }} {{ render_errors(field) }}
+        {%- if tooltip -%}
+            {{ generate_tooltip(tooltip) }}
+        {%- endif -%}
     </div>
 </div>
 {%- endmacro %}
