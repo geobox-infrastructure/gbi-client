@@ -26,7 +26,7 @@ def static_files(basedir, attachments=None):
     return attachments
 
 
-def push_couchapp(attachments):
+def push_couchapp(attachments, couchurl, appname):
     doc = {
         '_attachments': attachments,
         'rewrites': [
@@ -35,14 +35,14 @@ def push_couchapp(attachments):
         ],
     }
 
-    resp = requests.head('http://localhost:5984/default/_design/test_app',
+    resp = requests.head(couchurl + '/_design/' + appname,
         headers={'Accept': 'application/json'},
     )
 
     if resp.status_code == 200:
         doc['_rev'] = resp.headers['etag'].strip('"')
 
-    resp = requests.put('http://localhost:5984/default/_design/test_app',
+    resp = requests.put(couchurl + '/_design/' + appname,
         headers={
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -53,6 +53,26 @@ def push_couchapp(attachments):
         print resp, resp.content
 
 def main(config_filename=None):
+    import logging
+    import optparse
+
+    log = logging.getLogger('geobox.offline')
+    requests_log = logging.getLogger("requests")
+    requests_log.setLevel(logging.WARNING)
+    logging.basicConfig(level=logging.DEBUG)
+
+    parser = optparse.OptionParser()
+    parser.description = 'Deploy the GBI-Client CouchApp to a CouchDB.'
+    parser.add_option('--couchurl', help='url of couchdb', default='http://localhost:5984')
+    parser.add_option('--dbname', help='database name')
+    parser.add_option('--appname', help='name of couchapp, as in /dbname/_design/appname')
+    options, args = parser.parse_args()
+
+    if not options.dbname or not options.appname:
+        parser.print_help()
+        print >>sys.stderr, '\nERROR: --dbname and --appname required'
+        sys.exit(1)
+
     if config_filename:
         config = GeoBoxConfig.from_file(config_filename)
         if not config:
@@ -63,6 +83,7 @@ def main(config_filename=None):
 
     app = create_app(app_state)
 
+    log.info('collecting files')
     attachments = {}
     with app.test_request_context('/'):
         editorhtml = render_template('editor.html', with_server=False)
@@ -83,8 +104,10 @@ def main(config_filename=None):
     basedir = os.path.abspath(basedir)
     static_files(basedir, attachments)
 
-    push_couchapp(attachments)
-
+    couchurl = options.couchurl.rstrip('/') + '/' + options.dbname
+    log.info('pushing app to %s/_design/%s', couchurl, options.appname)
+    push_couchapp(attachments, couchurl, options.appname)
+    log.info('done. see %s/_design/%s/_rewrite', couchurl, options.appname)
 
 if __name__ == '__main__':
     main()
