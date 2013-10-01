@@ -4,6 +4,7 @@
 
 {% from "form_macros.html" import input, button, textarea %}
 
+
 {% block content %}
 <h2>{{_('wmts sources')}}</h2>
 
@@ -13,7 +14,7 @@
         <fieldset class="span8 offset1">
             {{ input(form.name) }}
             {{ input(form.title) }}
-            {{ input(form.url) }}
+            {{ input(form.url, tooltip=_('tooltip - userdefined wmts source url')) }}
             {{ input(form.format) }}
             {{ textarea(form.llbbox, rows=6, cols=6, class='span4') }}
             {{ input(form.username) }}
