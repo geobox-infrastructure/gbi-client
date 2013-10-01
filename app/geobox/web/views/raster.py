@@ -106,7 +106,8 @@ def wms_edit(id=None):
             flash( _('update WMS'), 'success')
         g.db.commit()
         return redirect(url_for('.raster_list'))
-
+    if wms:
+        form.llbbox.data = wms.download_coverage
     return render_template('admin/external_wms.html', form=form, edit_mode=edit_mode)
 
 @raster.route('/admin/wms/capabilities', methods=["GET"])
@@ -131,6 +132,9 @@ def wmts_edit(id=None):
     form = RasterSourceForm(request.form, wmts)
 
     if form.validate_on_submit():
+        llbbox = form.data['llbbox']
+        bbox_coverage = llbbox_to_geojson(llbbox)
+
         if not wmts:
             wmts = ExternalWMTSSource(
                 name=form.data['name'],
@@ -145,6 +149,7 @@ def wmts_edit(id=None):
                 source_type='wmts',
                 download_level_start=0,
                 download_level_end=20,
+                download_coverage = bbox_coverage,
                 active=True,
             )
             g.db.add(wmts)
@@ -157,10 +162,13 @@ def wmts_edit(id=None):
             wmts.format = form.data['format']
             wmts.username = form.data['username']
             wmts.password = form.data['password']
+            wmts.download_coverage = bbox_coverage
             wmts.prefix = 'local'
             flash( _('update WMTS'), 'success')
         g.db.commit()
         return redirect(url_for('.raster_list'))
+    if wmts:
+        form.llbbox.data = wmts.download_coverage
     return render_template('admin/external_wmts.html', form=form)
 
 @raster.route('/admin/localraster/remove/<int:id>', methods=["GET", "POST"])
