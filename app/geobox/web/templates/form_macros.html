@@ -1,3 +1,5 @@
+{% from "macros.html" import generate_tooltip %}
+
 {% macro render_errors(field) %}
 {% if field.errors %}
 <ul class="errors">
@@ -8,11 +10,14 @@
 {% endif %}
 {% endmacro %}
 
-{% macro input(field) -%}
+{% macro input(field, tooltip=False) -%}
 <div class="control-group {% if field.errors %}error{% endif %}">
     <label class="control-label" for="{{ field.id }}"><span>{{ field.label.text }}{%- if field.flags.required -%}*{%- endif %} :</span></label>
     <div class="controls">
         {{ field(**kwargs)|safe }} {{ render_errors(field) }}
+        {%- if tooltip -%}
+            {{ generate_tooltip(tooltip) }}
+        {%- endif -%}
     </div>
 </div>
 {%- endmacro %}
@@ -29,6 +34,15 @@
 <div class="control-group">
     <div class="controls">
         <button {% if id %} id="{{id}}"{% endif %} {% if submit %}type="submit"{% endif %} class="btn btn-small{% if btn_class %} btn-{{btn_class}}{% endif %}">{{ text }}</button>
+    </div>
+</div>
+{%- endmacro %}
+
+{%- macro textarea(field, value='', rows=7, cols=40, class='') -%}
+<div class="control-group {% if field.errors %}error{% endif %}">
+    <label class="control-label" for="{{ field.id }}"><span>{{ field.label.text|safe }}{%- if field.flags.required -%}*{%- endif %} :</span></label>
+    <div class="controls">
+        {{ field(value=value, rows=rows, cols=cols, class=class) }} {{ render_errors(field) }}
     </div>
 </div>
 {%- endmacro %}

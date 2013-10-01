@@ -72,7 +72,7 @@
         {% endif %}
 
         {% if map_source.source_type == 'wms' and not cache_url %}
-           {# use WMS for direct access only (eg. when cache_url is not set) #}
+            {# use WMS for direct access only (eg. when cache_url is not set) #}
             raster_sources[{{ source.id }}] = new gbi.Layers.WMS({
                 name: '{{ map_source.title }}',
                 url: '{{ source.url }}',
@@ -83,12 +83,24 @@
                 source_id: {{ map_source.id }},
                 download_level_start: {{ source.download_level_start }},
                 download_level_end: {{ source.download_level_end }}
+                {% if map_source.srs not in ['EPSG:3857', 'EPSG:900913'] %}
+                    ,
+                    visibility: false,
+                    displayInLayerSwitcher: false
+                {% endif %}
             });
+
         {% else %}
             raster_sources[{{ source.id }}] = new gbi.Layers.WMTS({
                 name: '{{ map_source.title }}',
-                url: {% if source.url %} '{{add_auth_to_url(source.url, source.username, source.password)}}' {% else %} '{{ cache_url }}' {% endif %},
-                layer: '{{ layer_name }}',
+                {% if not layer_name %}
+                    url: '{{ add_auth_to_url(source.url, source.username, source.password)}}.{{source.format}}',
+                    layer: false,
+                    requestEncoding: 'REST',
+                {% else %}
+                    url: {% if source.url %} '{{add_auth_to_url(source.url, source.username, source.password)}}' {% else %} '{{ cache_url }}' {% endif %},
+                    layer: '{{ layer_name }}',
+                {% endif %}
                 format: '{{ map_source.format }}',
                 source_id: {{ map_source.id }},
                 download_level_start: {{ source.download_level_start }},
