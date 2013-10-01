@@ -130,7 +130,7 @@
       <tr>
         <td>{{ source.title }}</td>
         <td>{{ source.url }}</td>
-        <td>{{ source.layer }}</td>
+        <td>{% if source.layer %}{{ source.layer }}{% endif %}</td>
         <td>{{ source.srs }}</td>
         <td>
         	{% if source.source_type == 'wmts' %}
