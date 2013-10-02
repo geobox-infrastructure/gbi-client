@@ -94,7 +94,7 @@
             raster_sources[{{ source.id }}] = new gbi.Layers.WMTS({
                 name: '{{ map_source.title }}',
                 {% if not layer_name %}
-                    url: '{{ add_auth_to_url(source.url, source.username, source.password)}}.{{source.format}}',
+                    url: '{{ add_auth_to_url(source.url, source.username, source.password)}}',
                     layer: false,
                     requestEncoding: 'REST',
                 {% else %}
