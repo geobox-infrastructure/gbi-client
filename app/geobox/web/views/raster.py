@@ -13,6 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import json
 
 from flask import render_template, abort, flash, g, request, redirect, url_for, Blueprint, jsonify, current_app
 from flaskext.babel import _
@@ -67,8 +68,14 @@ def wms_edit(id=None):
     if form.validate_on_submit():
 
         llbbox = form.data['llbbox']
-        bbox_coverage = llbbox_to_geojson(llbbox)
-
+        try:
+            bbox_coverage = llbbox_to_geojson(llbbox)
+        except ValueError:
+            try:
+                bbox_coverage = json.dumps(json.loads(llbbox))
+            except ValueError:
+                flash( _('invalid bbox'), 'error')
+                return render_template('admin/external_wms.html', form=form, edit_mode=edit_mode)
 
         if not wms:
             wms = ExternalWMTSSource(
@@ -133,7 +140,14 @@ def wmts_edit(id=None):
 
     if form.validate_on_submit():
         llbbox = form.data['llbbox']
-        bbox_coverage = llbbox_to_geojson(llbbox)
+        try:
+            bbox_coverage = llbbox_to_geojson(llbbox)
+        except ValueError:
+            try:
+                bbox_coverage = json.dumps(json.loads(llbbox))
+            except ValueError:
+                flash( _('invalid bbox'), 'error')
+                return render_template('admin/external_wmts.html', form=form)
 
         if not wmts:
             wmts = ExternalWMTSSource(
