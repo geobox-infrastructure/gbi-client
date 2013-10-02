@@ -7,8 +7,14 @@
 
     var backgroundLayer = new gbi.Layers.WMTS({
         name: '{{ layer.title }}',
-        url: '{{ layer.url }}',
-        layer: '{{ layer.layer }}',
+        {% if not layer_name %}
+            url: '{{ add_auth_to_url(layer.url, layer.username, layer.password)}}',
+            layer: false,
+            requestEncoding: 'REST',
+        {% else %}
+            url: {% if layer.url %} '{{add_auth_to_url(layer.url, layer.username, layer.password)}}' {% else %} '{{ cache_url }}' {% endif %},
+            layer: '{{ layer_name }}',
+        {% endif %}
         format: '{{ layer.format }}',
         background: true,
         // isBaseLayer: true,
