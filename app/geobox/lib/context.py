@@ -92,13 +92,12 @@ class ContextModelUpdater(object):
         source.format = layer['format']
         source.is_baselayer = layer['baselayer']
         source.is_overlay = layer['overlay']
-        source.layer = layer['layer']
+
         source.max_tiles = layer.get('max_tiles')
-        if source_type == 'wmts':
-            source.tile_matrix = layer['tile_matrix']
 
         if source_type == 'wms':
             source.srs = layer['srs']
+            source.layer = layer['layer']
 
         assert source_type in ('wmts', 'wms')
         source.source_type = source_type
