@@ -249,9 +249,11 @@ def create_wmts_source(raster_source, app_state):
     coverage = coverage_from_geojson(raster_source.download_coverage)
     format = raster_source.format
 
-    url_template = TileURLTemplate(
-        '%s/%s/%s-%%(z)s-%%(x)s-%%(y)s/tile' % (url.rstrip('/'), raster_source.layer, raster_source.matrix_set),
-        format=format)
+    tpl_url = url.replace('{TileMatrix}', '%(z)s')
+    tpl_url = tpl_url.replace('{TileCol}', '%(x)s')
+    tpl_url = tpl_url.replace('{TileRow}', '%(y)s')
+
+    url_template = TileURLTemplate(tpl_url, format=format)
     client = TileClient(url_template, http_client=http_client, grid=grid)
 
     if app_state.tilebox.is_running():
