@@ -338,8 +338,8 @@ def create_metadata_doc(couchdb, layer):
             'srs': layer.wmts_source.srs,
             'layers': layer.wmts_source.layer,
         },
-        'levelMin': layer.wmts_source.view_level_start,
-        'levelMax': layer.wmts_source.view_level_end,
+        'levelMin': layer.wmts_source.download_level_start or layer.wmts_source.view_level_start,
+        'levelMax': layer.wmts_source.download_level_end or layer.wmts_source.view_level_end,
     }
     resp = requests.get(couchdb.couch_url)
     if resp.status_code == 404:
