@@ -1,3 +1,6 @@
 [submodule "gbi-editor"]
 	path = gbi-editor
 	url = ssh://git@bitbucket.org/Omniscale/gbi-editor.git
+[submodule "app/geobox/web/static/js/seedjs"]
+	path = app/geobox/web/static/js/seedjs
+	url = git@github.com:omniscale/seedjs.git

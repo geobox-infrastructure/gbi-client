@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-01 13:22+0200\n"
-"PO-Revision-Date: 2013-10-01 13:22+0100\n"
+"POT-Creation-Date: 2013-10-04 16:25+0200\n"
+"PO-Revision-Date: 2013-10-04 16:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -347,25 +347,25 @@ msgid "open export on external explorer"
 msgstr "Export-Verzeichnis öffnen"
 
 #: geobox/web/templates/editor.html:4
-#: geobox/web/templates/editor.html:70
+#: geobox/web/templates/editor.html:83
 #: geobox/web/templates/index.html:54
 #: geobox/web/templates/index.html:56
 msgid "editor"
 msgstr "Editor"
 
-#: geobox/web/templates/editor.html:71
+#: geobox/web/templates/editor.html:84
 msgid "tooltip - editor"
 msgstr "In dieser Ansicht können Sie Geometrien bearbeiten"
 
-#: geobox/web/templates/editor.html:79
+#: geobox/web/templates/editor.html:92
 msgid "map layer"
 msgstr "Kartenebenen"
 
-#: geobox/web/templates/editor.html:82
+#: geobox/web/templates/editor.html:95
 msgid "look"
 msgstr "Aussehen"
 
-#: geobox/web/templates/editor.html:85
+#: geobox/web/templates/editor.html:98
 #: geobox/web/templates/admin/external_raster_list.html:135
 #: geobox/web/templates/admin/external_raster_list.html:137
 #: geobox/web/templates/projects/exports.html:29
@@ -373,109 +373,114 @@ msgstr "Aussehen"
 msgid "edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:88
-#: geobox/web/templates/editor.html:127
+#: geobox/web/templates/editor.html:101
+#: geobox/web/templates/editor.html:144
 msgid "filter"
 msgstr "Filter"
 
-#: geobox/web/templates/editor.html:91
+#: geobox/web/templates/editor.html:104
 msgid "measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:95
-#: geobox/web/templates/editor.html:142
-#: geobox/web/templates/editor.html:152
+#: geobox/web/templates/editor.html:108
+#: geobox/web/templates/editor.html:159
+#: geobox/web/templates/editor.html:169
 msgid "search"
 msgstr "Suche"
 
-#: geobox/web/templates/editor.html:99
-#: geobox/web/templates/editor.html:162
+#: geobox/web/templates/editor.html:112
+#: geobox/web/templates/editor.html:223
+msgid "offline seeding"
+msgstr "Datenimport"
+
+#: geobox/web/templates/editor.html:116
+#: geobox/web/templates/editor.html:179
 msgid "thematical map"
 msgstr "Thematische Karte"
 
-#: geobox/web/templates/editor.html:102
+#: geobox/web/templates/editor.html:119
 msgid "save & load"
 msgstr "Speichern & Laden"
 
-#: geobox/web/templates/editor.html:110
+#: geobox/web/templates/editor.html:127
 msgid "Styling"
 msgstr "Aussehen der Geometrien"
 
-#: geobox/web/templates/editor.html:111
+#: geobox/web/templates/editor.html:128
 msgid "infotext - edit styling"
 msgstr "Hier ändern Sie das Aussehen der Geometrien. In jeder Ebene kann ein bestimmtes Aussehen verwendet werden. Ohne Speichern gehen die Änderungen verloren."
 
-#: geobox/web/templates/editor.html:116
+#: geobox/web/templates/editor.html:133
 msgid "Edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:117
+#: geobox/web/templates/editor.html:134
 msgid "infotext - edit controls"
 msgstr "Wählen Sie ein Bearbeitungswerkzeug aus."
 
-#: geobox/web/templates/editor.html:119
+#: geobox/web/templates/editor.html:136
 msgid "select all features"
 msgstr "Alle Geometrien auswählen"
 
-#: geobox/web/templates/editor.html:121
+#: geobox/web/templates/editor.html:138
 #: geobox/web/templates/js/translation.js:97
 msgid "Attributes"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:122
+#: geobox/web/templates/editor.html:139
 msgid "infotext - attributes"
 msgstr "Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie hierzu eine Geometrie mit dem Auswahlwerkezug aus."
 
-#: geobox/web/templates/editor.html:128
+#: geobox/web/templates/editor.html:145
 msgid "infotext - filter controls"
 msgstr "Hier können Sie Geometrien abhängig von Eigenschaft und Wert auswählen."
 
-#: geobox/web/templates/editor.html:133
+#: geobox/web/templates/editor.html:150
 msgid "Measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:134
+#: geobox/web/templates/editor.html:151
 msgid "infotext - measure controls"
 msgstr "Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen, oder Strecken und Flächen messen."
 
-#: geobox/web/templates/editor.html:144
+#: geobox/web/templates/editor.html:161
 msgid "infotext - search controls"
 msgstr "Sie können hier über die vom Server bereitgestellt Dienste suchen und die Geometrien anschließend über den Reiter 'Editieren' in Ihren Layer übertragen"
 
-#: geobox/web/templates/editor.html:147
+#: geobox/web/templates/editor.html:164
 msgid "No features found"
 msgstr "Die Suche ergab keine Ergebnisse"
 
-#: geobox/web/templates/editor.html:150
+#: geobox/web/templates/editor.html:167
 msgid "search request is being processed"
 msgstr "Suchanfrage wird bearbeitet"
 
-#: geobox/web/templates/editor.html:153
+#: geobox/web/templates/editor.html:170
 msgid "remove search"
 msgstr "Suchstring entfernen"
 
-#: geobox/web/templates/editor.html:154
+#: geobox/web/templates/editor.html:171
 msgid "hide searchlayer"
 msgstr "Suchergebnis ausblenden"
 
-#: geobox/web/templates/editor.html:156
+#: geobox/web/templates/editor.html:173
 msgid "infotext - no wfs search"
 msgstr "Der Server stellt keine Suchdienste zur Verfügung."
 
-#: geobox/web/templates/editor.html:163
+#: geobox/web/templates/editor.html:180
 msgid "infotext - thematical map"
 msgstr "Erstellen Sie hier eine thematische Karte. So können Sie zum Beispiel die Geometrien klassifizieren oder die Daten als Liste exportieren."
 
-#: geobox/web/templates/editor.html:168
+#: geobox/web/templates/editor.html:185
 msgid "save changes"
 msgstr "Änderungen speichern"
 
-#: geobox/web/templates/editor.html:169
+#: geobox/web/templates/editor.html:186
 msgid "infotext - editor save"
 msgstr "Speichern Sie hier Änderungen dauerhaft oder laden Sie Daten aus Speicherpunkten."
 
-#: geobox/web/templates/editor.html:171
-#: geobox/web/templates/editor.html:172
+#: geobox/web/templates/editor.html:188
+#: geobox/web/templates/editor.html:189
 #: geobox/web/templates/admin/external_unlock.html:20
 #: geobox/web/templates/admin/external_wms.html:51
 #: geobox/web/templates/admin/external_wmts.html:24
@@ -484,126 +489,130 @@ msgstr "Speichern Sie hier Änderungen dauerhaft oder laden Sie Daten aus Speich
 msgid "save"
 msgstr "Speichern"
 
-#: geobox/web/templates/editor.html:173
+#: geobox/web/templates/editor.html:190
 msgid "discard"
 msgstr "Abbruch"
 
-#: geobox/web/templates/editor.html:175
-#: geobox/web/templates/editor.html:178
+#: geobox/web/templates/editor.html:192
+#: geobox/web/templates/editor.html:195
 msgid "save as"
 msgstr "Speichern untern"
 
-#: geobox/web/templates/editor.html:180
+#: geobox/web/templates/editor.html:197
 msgid "No active layer or invalid layer name"
 msgstr "Ungültiger Layername oder kein Layer aktiv"
 
-#: geobox/web/templates/editor.html:186
-#: geobox/web/templates/editor.html:192
+#: geobox/web/templates/editor.html:203
+#: geobox/web/templates/editor.html:209
 msgid "No active layer"
 msgstr "Kein Layer aktiv"
 
-#: geobox/web/templates/editor.html:189
+#: geobox/web/templates/editor.html:206
 msgid "savepoints"
 msgstr "Speicherpunkte"
 
-#: geobox/web/templates/editor.html:190
+#: geobox/web/templates/editor.html:207
 msgid "create savepoint"
 msgstr "Speicherpunkt erstellen"
 
-#: geobox/web/templates/editor.html:191
+#: geobox/web/templates/editor.html:208
 msgid "create new savepoint"
 msgstr "Erstellen"
 
-#: geobox/web/templates/editor.html:193
+#: geobox/web/templates/editor.html:210
 msgid "save point created"
 msgstr "Speicherpunkt wurde erstellt"
 
-#: geobox/web/templates/editor.html:194
+#: geobox/web/templates/editor.html:211
 msgid "error - could not create savepoint"
 msgstr "Fehler - Speicherpunkt konnte nicht wurde erstellt"
 
-#: geobox/web/templates/editor.html:196
+#: geobox/web/templates/editor.html:213
 msgid "load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:199
+#: geobox/web/templates/editor.html:216
 msgid "load"
 msgstr "Laden"
 
-#: geobox/web/templates/editor.html:200
+#: geobox/web/templates/editor.html:217
 #: geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr "Löschen"
 
-#: geobox/web/templates/editor.html:211
+#: geobox/web/templates/editor.html:224
+msgid "infotext - offline seeding"
+msgstr "Hier können Sie für Ihre lokalen Rasterlayer zusätzlich Daten importieren. Wählen Sie hierzu einen Layer aus und zeichnen Sie den Bereich, für den Sie Daten importieren möchten, in die Karte ein. Wählen Sie einen Start- und Endlevel für den Datenimport aus und starten Sie den Datenimport per Knopfdruck"
+
+#: geobox/web/templates/editor.html:236
 msgid "Sure you want load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:214
+#: geobox/web/templates/editor.html:239
 msgid "infotext load savepoint"
 msgstr "Nach dem Laden des Speicherpunkts gehen alle nicht gespeicherte Änderungen verloren."
 
-#: geobox/web/templates/editor.html:217
-#: geobox/web/templates/editor.html:232
-#: geobox/web/templates/editor.html:247
-#: geobox/web/templates/editor.html:263
-#: geobox/web/templates/editor.html:287
+#: geobox/web/templates/editor.html:242
+#: geobox/web/templates/editor.html:257
+#: geobox/web/templates/editor.html:272
+#: geobox/web/templates/editor.html:288
+#: geobox/web/templates/editor.html:312
 #: geobox/web/templates/admin/external_wms.html:70
 #: geobox/web/templates/boxes/base.html:84
 #: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr "Abbrechen"
 
-#: geobox/web/templates/editor.html:218
+#: geobox/web/templates/editor.html:243
 msgid "yes load"
 msgstr "Ja, laden!"
 
-#: geobox/web/templates/editor.html:226
+#: geobox/web/templates/editor.html:251
 msgid "Sure you want remove savepoint"
 msgstr "Speicherpunkt löschen"
 
-#: geobox/web/templates/editor.html:229
+#: geobox/web/templates/editor.html:254
 msgid "infotext remove savepoint"
 msgstr "Nach dem Löschen können Sie dne Speicherpunkt nicht wiederherstellen. Alle Änderungen gehen dabei verloren."
 
-#: geobox/web/templates/editor.html:233
-#: geobox/web/templates/editor.html:264
+#: geobox/web/templates/editor.html:258
+#: geobox/web/templates/editor.html:289
 msgid "yes delete"
 msgstr "Ja, Löschen"
 
-#: geobox/web/templates/editor.html:241
+#: geobox/web/templates/editor.html:266
 msgid "Sure you want change layer"
 msgstr "Sind Sie sicher, dass Sie die Karte wechseln möchten"
 
-#: geobox/web/templates/editor.html:244
+#: geobox/web/templates/editor.html:269
 msgid "infotext change layer"
 msgstr "Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer importieren."
 
-#: geobox/web/templates/editor.html:248
+#: geobox/web/templates/editor.html:273
 msgid "yes change and discard"
 msgstr "Änderungen verwefern"
 
-#: geobox/web/templates/editor.html:249
+#: geobox/web/templates/editor.html:274
 msgid "yes change and save"
 msgstr "Speichern und wechseln"
 
-#: geobox/web/templates/editor.html:257
+#: geobox/web/templates/editor.html:282
 msgid "Sure you want delete layer"
 msgstr "Löschen der Karte"
 
-#: geobox/web/templates/editor.html:260
+#: geobox/web/templates/editor.html:285
 msgid "infotext delete layer"
 msgstr "Achtung: Nach dem Löschen kann die Karte nicht wiederhergestellt werden. Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
 
-#: geobox/web/templates/editor.html:273
+#: geobox/web/templates/editor.html:298
 msgid "export vector layer"
 msgstr "Vektorlayer exportieren"
 
-#: geobox/web/templates/editor.html:277
+#: geobox/web/templates/editor.html:302
 msgid "infotext export layer"
 msgstr "Exportieren Sie hier die aktuelle Karte in verschiedene Formate."
 
-#: geobox/web/templates/editor.html:288
+#: geobox/web/templates/editor.html:313
 #: geobox/web/templates/index.html:39
 msgid "export"
 msgstr "Exportieren"
@@ -687,7 +696,7 @@ msgstr "Log Übersicht"
 msgid "logs"
 msgstr "Log Übersicht"
 
-#: geobox/web/templates/macros.html:115
+#: geobox/web/templates/macros.html:121
 msgid "download coverage"
 msgstr "Downloadberecht."
 
@@ -1418,6 +1427,46 @@ msgstr "Capabilities wurden geladen"
 msgid "preview not possible"
 msgstr "Vorschau nicht möglich. Kein Layer gewählt oder Koordiantensystem wird nicht unterstützt."
 
+#: geobox/web/templates/js/translation.js:141
+msgid "Layer to seed"
+msgstr "Datenimport für Layer"
+
+#: geobox/web/templates/js/translation.js:142
+msgid "Start level"
+msgstr "Startlevel"
+
+#: geobox/web/templates/js/translation.js:143
+msgid "End level"
+msgstr "Endlevel"
+
+#: geobox/web/templates/js/translation.js:144
+msgid "Start seeding"
+msgstr "Datenimport gestarten"
+
+#: geobox/web/templates/js/translation.js:145
+msgid "Stop seeding"
+msgstr "Datenimport gestoppen"
+
+#: geobox/web/templates/js/translation.js:146
+msgid "Seeding finished"
+msgstr "Datenimport beendet"
+
+#: geobox/web/templates/js/translation.js:147
+msgid "No BBox given"
+msgstr "Kein Bereich für den Datenimport in der Karte markiert"
+
+#: geobox/web/templates/js/translation.js:148
+msgid "Tiles estimated"
+msgstr "Kacheln werden importiert"
+
+#: geobox/web/templates/js/translation.js:149
+msgid "Seeding stopped"
+msgstr "Datenimport gestoppt"
+
+#: geobox/web/templates/js/translation.js:150
+msgid "No layer to seed"
+msgstr "Kein Layer für Datenimport vorhanden"
+
 #: geobox/web/templates/projects/export_edit.html:3
 msgid "export project edit"
 msgstr "Exportprojekt editieren"
@@ -1768,32 +1817,37 @@ msgstr "Keine Kacheln"
 msgid "to many tiles"
 msgstr "Zu viele Kacheln"
 
-#: geobox/web/views/raster.py:50
-#: geobox/web/views/raster.py:165
+#: geobox/web/views/raster.py:51
+#: geobox/web/views/raster.py:179
 msgid "update WMTS"
 msgstr "WMTS aktualisiert"
 
-#: geobox/web/views/raster.py:92
+#: geobox/web/views/raster.py:77
+#: geobox/web/views/raster.py:149
+msgid "invalid bbox"
+msgstr "Ungültige BoundingBox"
+
+#: geobox/web/views/raster.py:99
 msgid "Save local WMS"
 msgstr "Lokaler WMS gespeichert"
 
-#: geobox/web/views/raster.py:106
+#: geobox/web/views/raster.py:113
 msgid "update WMS"
 msgstr "WMS aktualisiert"
 
-#: geobox/web/views/raster.py:117
+#: geobox/web/views/raster.py:124
 msgid "Need url for capabilities"
 msgstr "URL für Capabilites wird benötigt"
 
-#: geobox/web/views/raster.py:155
+#: geobox/web/views/raster.py:169
 msgid "Save local WMTS"
 msgstr "Lokaler WMTS gespeichert"
 
-#: geobox/web/views/raster.py:185
+#: geobox/web/views/raster.py:199
 msgid "delete local source successful"
 msgstr "Quelle erfolgreich gelöscht"
 
-#: geobox/web/views/raster.py:197
+#: geobox/web/views/raster.py:211
 msgid "delete source successful"
 msgstr "Quelle erfolgreich gelöscht"
 
@@ -2050,5 +2104,3 @@ msgstr "Kein gültigen Zeitpunkt angegeben."
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
-#~ msgid "url"
-#~ msgstr "URL"

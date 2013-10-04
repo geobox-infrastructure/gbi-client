@@ -25,6 +25,13 @@ $(document).ready(function() {
     $("#tabs > li > a ").click(function() {
         if (editor.map.toolbars && editor.map.toolbars.length > 0) {
             var tab = $(this).attr('href');
+            if(offline) {
+              if(tab == '#seeding') {
+                editor.widgets.seeding.activate();
+              } else {
+                editor.widgets.seeding.deactivate();
+              }
+            }
 
             $.each(editor.map.toolbars, function(id, toolbar) {
                 toolbar.deactivateAllControls();
@@ -520,6 +527,10 @@ function initEditor() {
 
     var thematicalVector = new gbi.widgets.ThematicalVector(editor);
     editor.widgets.thematicalVector = thematicalVector;
+    if(offline) {
+      var seeding = new gbi.widgets.Seeding(editor);
+      editor.widgets.seeding = seeding;
+    }
 
     $('#save_changes').click(function() {
         var layer = editor.layerManager.active();

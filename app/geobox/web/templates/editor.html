@@ -28,6 +28,10 @@
   <!-- alpaca -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/lib/widgets/alpaca-full.min.js') }}"></script>
 
+  {% if not with_server %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/seedjs/seed.dev.js') }}"></script>
+  {% endif %}
+
   <!-- widgets -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/layermanager.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/measure.js') }}"></script>
@@ -40,12 +44,16 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorconfigurator.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorlegend.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/thematicalvectorattributelist.js') }}"></script>
+  {% if not with_server %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/widgets/seeding.js') }}"></script>
+  {% endif %}
 
 {% endblock %}
 
 {% block map_js %}
 
    <script type="text/javascript">
+
       OpenLayers.ProxyHost = "{{ url_for('proxy.proxy_request') }}";
 
       {% if with_server %}
@@ -59,6 +67,9 @@
           {% if preview_layername and preview_features %}
             {{ generate_temp_vectorlayer(preview_layername, preview_features)}}
           {% endif %}
+          var offline = false;
+      {% else %}
+          var offline = true;
       {% endif %}
 
    </script>
@@ -93,6 +104,10 @@
         {% if with_server %}
         <li>
           <a id="search-tab" href="#search" data-toggle="tab">{{ _('search') }}</a>
+        </li>
+        {% else %}
+        <li>
+          <a id="seeding-tab" href="#seeding" data-toggle="tab">{{ _('offline seeding') }}</a>
         </li>
         {% endif %}
         <li>
@@ -201,6 +216,14 @@
             </div>
           </div>
         </div>
+        {% if not with_server %}
+        <div class="tab-pane fade" id="seeding">
+          <h4>{{ _('offline seeding')}}</h4>
+          <p>{{ _('infotext - offline seeding') }}</p>
+          <hr>
+          <div id='seeding-widget'></div>
+        </div>
+        {% endif %}
       </div>
     </div>
 

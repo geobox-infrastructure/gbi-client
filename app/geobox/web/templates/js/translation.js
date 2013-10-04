@@ -135,6 +135,18 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "Layer have no attributes": "{{ _('layer has not attributes') }}",
     // add wms
     'load wms capabilities': "{{ _('load wms capabilities') }}",
-    'preview not possible': "{{ _('preview not possible') }}"
+    'preview not possible': "{{ _('preview not possible') }}",
+
+    // seeding widget
+    'Layer to seed': "{{ _('Layer to seed') }}",
+    'Start level': "{{ _('Start level') }}",
+    'End level': "{{ _('End level') }}",
+    'Start seeding': "{{ _('Start seeding') }}",
+    'Stop seeding': "{{ _('Stop seeding') }}",
+    'Seeding finished': "{{ _('Seeding finished') }}",
+    'No BBox given': "{{ _('No BBox given') }}",
+    'Tiles estimated': "{{ _('Tiles estimated') }}",
+    'Seeding stopped': "{{ _('Seeding stopped') }}",
+    'No layer to seed': "{{ _('No layer to seed') }}"
 
 });
