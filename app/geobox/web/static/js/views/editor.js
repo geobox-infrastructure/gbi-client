@@ -403,13 +403,14 @@ function loadCouchDBs() {
                   }
 
                   if (metadata.type == 'tiles') {
-                        raster_sources.push(new gbi.Layers.WMTS({
-                            name: metadata.title,
-                            url: wmtsURL,
-                            layer:  metadata.name,
-                            format: metadata.source.format
-                        })
-                      )
+                    raster_sources.push(new gbi.Layers.WMTS({
+                      name: metadata.title,
+                      url: wmtsURL + metadata.name + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile',
+                      layer:  metadata.name,
+                      format: metadata.source.format,
+                      requestEncoding: 'REST',
+                      data: metadata
+                    }));
                   }
                 }
               }
