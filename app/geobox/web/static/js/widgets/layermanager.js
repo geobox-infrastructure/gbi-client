@@ -9,7 +9,8 @@ var layerManagerLabel = {
     'up': OpenLayers.i18n('Layer up'),
     'down': OpenLayers.i18n('Layer down'),
     'dataExtent': OpenLayers.i18n('Zoom to layer extent'),
-    'remove': OpenLayers.i18n('Remove layer')
+    'remove': OpenLayers.i18n('Remove layer'),
+    'seeding': OpenLayers.i18n('On the fly seeding')
 }
 
 gbi.widgets = gbi.widgets || {};
@@ -19,6 +20,7 @@ gbi.widgets.LayerManager = function(editor, options) {
     var defaults = {
         element: 'layermanager',
         showActiveLayer: true,
+        allowSeeding: false,
         tiny: false
     };
 
@@ -103,6 +105,7 @@ gbi.widgets.LayerManager.prototype = {
             backgroundLayers: backgroundLayers,
             rasterLayers: rasterLayers,
             vectorLayers: vectorLayers,
+            allowSeeding: this.options.allowSeeding,
             accordion: accordion,
             self: this}));
 
@@ -115,6 +118,17 @@ gbi.widgets.LayerManager.prototype = {
                     layer.visible(status);
                     e.stopPropagation()
 
+                });
+
+            self.element.find('#seed_' + layer.id)
+                .click(function(e) {
+                    var seed = $(this).prop("checked");
+                    if(seed) {
+                        layer.olLayer.url = layer.data.source.url;
+                    } else {
+                        layer.olLayer.url = layer.options.url;
+                    }
+                    e.stopPropagation();
                 });
 
             self.element.find('#up_' + layer.id).click(function() {
@@ -314,10 +328,6 @@ gbi.widgets.LayerManager.templates = {
             <div class="accordion-inner"><ul class="nav nav-pills nav-stacked">\
                 <% for(var i=0; i<rasterLayers.length; i++) { %>\
                     <li class="layerElement">\
-                        <label class="inline" for="visible_<%=rasterLayers[i].id%>">\
-                            <input type="checkbox" id="visible_<%=rasterLayers[i].id%>" />\
-                            <%=rasterLayers[i].olLayer.name%> \
-                        </label>\
                         <div class="btn-group pull-right"> \
                             <button id="up_<%=rasterLayers[i].id%>" class="btn btn-small" title="' + layerManagerLabel.up + '">\
                                 <i class="icon-chevron-up"></i>\
@@ -326,6 +336,18 @@ gbi.widgets.LayerManager.templates = {
                                 <i class="icon-chevron-down"></i>\
                             </button> \
                         </div> \
+                        <div class="inline">\
+                            <label for="visible_<%=rasterLayers[i].id%>">\
+                                <input type="checkbox" id="visible_<%=rasterLayers[i].id%>" />\
+                                <%=rasterLayers[i].olLayer.name%> \
+                            </label>\
+                            <% if(allowSeeding && rasterLayers[i].isSeedable()) { %>\
+                                <label for="seed_<%=rasterLayers[i].id%>">\
+                                    <input type="checkbox" id="seed_<%=rasterLayers[i].id%>" />\
+                                    ' + layerManagerLabel.seeding + '\
+                                </label>\
+                            <% } %>\
+                        </div>\
                     </li>\
                 <% } %>\
             </ul></div>\

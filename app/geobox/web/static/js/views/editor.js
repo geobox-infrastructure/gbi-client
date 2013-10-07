@@ -410,9 +410,17 @@ function loadCouchDBs() {
                   }
 
                   if (metadata.type == 'tiles') {
+                    var cacheURL = false;
+                    if(offline) {
+                      cacheURL = Seed.CORSProxyURL + wmtsURL + metadata.name + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile';
+                      cacheURL = cacheURL.replace('{TileMatrix}', '${z}');
+                      cacheURL = cacheURL.replace('{TileCol}', '${x}');
+                      cacheURL = cacheURL.replace('{TileRow}', '${y}');
+                    }
                     raster_sources.push(new gbi.Layers.WMTS({
                       name: metadata.title,
                       url: wmtsURL + metadata.name + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile',
+                      cacheURL: cacheURL,
                       layer:  metadata.name,
                       format: metadata.source.format,
                       requestEncoding: 'REST',
@@ -481,7 +489,8 @@ function initEditor() {
     });
 
     var layermanager = new gbi.widgets.LayerManager(editor, {
-        element: 'layermanager'
+        element: 'layermanager',
+        allowSeeding: offline
     });
 
     editor.widgets = {}
