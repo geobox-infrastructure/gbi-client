@@ -53,8 +53,9 @@ class ContextModelUpdater(object):
     """
     Update the internal source/layer models from a new context.
     """
-    def __init__(self, session):
+    def __init__(self, session, version):
         self.session = session
+        self.version = version
 
     def sources_from_context(self, context):
         first = True
@@ -184,9 +185,10 @@ def reload_context_document(context_document_url, app_state, user, password):
     context = Context(context_doc)
     prefix = context.doc.get('portal', {}).get('prefix').lower()
     vector_prefix = "%s_%s_" % (prefix, app_state.config.get('app', 'vector_prefix'))
+    version = context.doc.get('version')
 
     all_active_sources = set(session.query(model.ExternalWMTSSource).filter_by(active=True).filter_by(is_user_defined=False).all())
-    updater = ContextModelUpdater(session)
+    updater = ContextModelUpdater(session, version)
 
     first_source = None
     for source in updater.sources_from_context(context):
