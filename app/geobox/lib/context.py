@@ -86,6 +86,9 @@ class ContextModelUpdater(object):
         source.url = layer['url']
         source.is_protected = layer.get('is_protected')
 
+        if source_type == 'wmts' and self.version == '0.1':
+            source.url = source.url + layer['layer'] + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile'
+
         if not source.is_protected:
             source.username = layer.get('username')
             source.password = layer.get('password')
