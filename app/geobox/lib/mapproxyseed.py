@@ -38,7 +38,7 @@ from mapproxy.seed.seeder import SeedTask, SeedProgress as SeedProgress_
 from mapproxy.source import DummySource
 from mapproxy.source.tile import TiledSource
 from mapproxy.source.wms import WMSSource
-from mapproxy.tilefilter import watermark_filter
+from mapproxy.image.message import WatermarkImage
 from mapproxy.util.coverage import BBOXCoverage
 
 try:
@@ -387,6 +387,22 @@ def create_couchdb_export_cache(export_path, db_name, file_ext, couchdb_port, ap
 def image_options(source):
     return ImageOptions(transparent=source.is_overlay, format=source.format)
 
+
+def watermark_filter(text):
+    """
+    Returns a tile filter that adds a watermark to the tiles.
+    :param text: watermark text
+    """
+    def _watermark_filter(tile):
+        if tile.coord[0] % 4 != 0 or tile.coord[1] % 4 != 0:
+            return tile
+        wimg = WatermarkImage(text, image_opts=tile.source.image_opts,
+            placement='c', opacity=100, font_size=11,
+            font_color=(200, 200, 200))
+        tile.source = wimg.draw(img=tile.source, in_place=False)
+        return tile
+    return _watermark_filter
+
 def create_import_seed_task(import_task, app_state):
     cache = create_couchdb_cache(app_state, task=import_task)
     create_metadata_doc(cache, import_task.layer)
@@ -406,8 +422,7 @@ def create_import_seed_task(import_task, app_state):
     if app_state.config.has_option('user', 'name'):
         watermark_text += ' ' + app_state.config.get('user', 'name')
 
-    tile_filter = watermark_filter(watermark_text, opacity=100, font_size=11,
-                                spacing=None, font_color=(200, 200, 200))
+    tile_filter = watermark_filter(watermark_text)
     image_opts = image_options(import_task.source)
     tile_mgr = create_tile_manager(format=import_task.source.format,
         image_opts=image_opts, cache=cache, sources=[source],
