@@ -3,6 +3,7 @@ import json
 import requests
 import os
 import mimetypes
+import logging
 from flask import render_template
 from .appstate import GeoBoxState
 from .defaults import GeoBoxConfig
@@ -42,7 +43,8 @@ def push_couchapp(attachments, couchurl, appname):
     if resp.status_code == 200:
         doc['_rev'] = resp.headers['etag'].strip('"')
 
-    resp = requests.put(couchurl + '/_design/' + appname,
+    app_url = couchurl + '/_design/' + appname
+    resp = requests.put(app_url,
         headers={
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -50,10 +52,10 @@ def push_couchapp(attachments, couchurl, appname):
         data=json.dumps(doc),
     )
     if resp.status_code != 201:
-        print resp, resp.content
+        log = logging.getLogger('geobox.offline')
+        log.warn('failed to push app to %s: %s %s', app_url, resp, resp.content)
 
 def main(config_filename=None):
-    import logging
     import optparse
 
     log = logging.getLogger('geobox.offline')
