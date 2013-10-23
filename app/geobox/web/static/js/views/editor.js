@@ -30,8 +30,9 @@ $(document).ready(function() {
     $("#tabs > li > a ").click(function() {
       var tab = $(this).attr('href');
       var activeLayer = editor.layerManager.active();
-
-      activeLayer.unregisterEvent('featureunselected', editor, clearStoredFeaturesWrapper);
+      if(activeLayer) {
+        activeLayer.unregisterEvent('featureunselected', editor, clearStoredFeaturesWrapper);
+      }
       if (editor.map.toolbars && editor.map.toolbars.length > 0) {
 
         if(offline) {
