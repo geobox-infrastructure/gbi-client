@@ -21,7 +21,9 @@ gbi.widgets.Filter.prototype = {
                 var attr = $('#filterAttr').val();
                 var value = $('#filterValue').val();
                 var layer = self.editor.layerManager.active();
-                layer.selectByPropertyValue(attr, value);
+                var features = layer.selectByPropertyValue(attr, value, true);
+                layer.clearStoredFeatures();
+                layer.storeFeatures(features);
                 return false;
              });
         } else {
