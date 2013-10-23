@@ -9,9 +9,14 @@ $(document).ready(function() {
       'gbi.layer.vector.schemaLoaded': eneableSaveButton,
       'gbi.layer.vector.schemaRemoved': eneableSaveButton
     }
-
     var editor = initEditor();
     var activeLayer = editor.layerManager.active();
+
+    var clearStoredFeaturesWrapper = function(f) {
+      var layer = f.feature.layer.gbiLayer;
+      layer.clearStoredFeatures();
+      layer.unregisterEvent('featureunselected', editor, clearStoredFeaturesWrapper);
+    }
 
     if(activeLayer.odataUrl) {
       $('#odata_url').val(activeLayer.odataUrl);
@@ -23,30 +28,42 @@ $(document).ready(function() {
     })
 
     $("#tabs > li > a ").click(function() {
-        if (editor.map.toolbars && editor.map.toolbars.length > 0) {
-            var tab = $(this).attr('href');
-            if(offline) {
-              if(tab == '#seeding') {
-                editor.widgets.seeding.activate();
-              } else {
-                editor.widgets.seeding.deactivate();
-              }
-            }
+      var tab = $(this).attr('href');
+      var activeLayer = editor.layerManager.active();
 
-            $.each(editor.map.toolbars, function(id, toolbar) {
-                toolbar.deactivateAllControls();
-                var activeLayer = editor.layerManager.active();
-                if (activeLayer && toolbar.select && toolbar.select.olControl) {
-                    toolbar.select.olControl.unselectAll();
-                }
-                if (toolbar.select && toolbar.select.olControl && tab == '#edit') {
-                    toolbar.select.activate();
-                    $(gbi).off('gbi.layer.couch.loadFeaturesEnd');
-                    orderToolbar();
-                }
-            });
+      activeLayer.unregisterEvent('featureunselected', editor, clearStoredFeaturesWrapper);
+      if (editor.map.toolbars && editor.map.toolbars.length > 0) {
+
+        if(offline) {
+          if(tab == '#seeding') {
+            editor.widgets.seeding.activate();
+          } else {
+            editor.widgets.seeding.deactivate();
+          }
         }
-   });
+        $.each(editor.map.toolbars, function(id, toolbar) {
+          toolbar.deactivateAllControls();
+
+          if (activeLayer && toolbar.select && toolbar.select.olControl) {
+
+            toolbar.select.olControl.unselectAll();
+            if(tab == '#edit') {
+              $.each(activeLayer.storedFeatures(), function(idx, feature) {
+                toolbar.select.olControl.select(feature)
+              });
+              activeLayer.registerEvent('featureunselected', editor, clearStoredFeaturesWrapper);
+            } else {
+              activeLayer.selectFeatures(activeLayer.storedFeatures());
+            }
+          }
+          if (toolbar.select && toolbar.select.olControl && tab == '#edit') {
+            toolbar.select.activate();
+            $(gbi).off('gbi.layer.couch.loadFeaturesEnd');
+            orderToolbar();
+          }
+        });
+      }
+    });
 
 
     $('a[data-toggle="tab"]').on('shown', function (e) {
