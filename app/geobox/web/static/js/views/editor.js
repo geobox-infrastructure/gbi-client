@@ -430,7 +430,7 @@ function loadCouchDBs() {
                   if (metadata.type == 'tiles') {
                     var cacheURL = false;
                     if(offline) {
-                      cacheURL = Seed.CORSProxyURL + wmtsURL + metadata.name + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile';
+                      cacheURL = OpenlayersCouchURL + metadata.name + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile';
                       cacheURL = cacheURL.replace('{TileMatrix}', '${z}');
                       cacheURL = cacheURL.replace('{TileCol}', '${x}');
                       cacheURL = cacheURL.replace('{TileRow}', '${y}');
