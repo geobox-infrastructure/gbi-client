@@ -203,6 +203,7 @@ gbi.widgets.LayerManager.prototype = {
             var layer = self.layerManager.layerById(id);
             self.layerManager.active(layer);
             layer.visible(true);
+            layer.selectFeatures(layer.storedFeatures())
             self.render(self.findAccordion(clickedElement));
         }
 
