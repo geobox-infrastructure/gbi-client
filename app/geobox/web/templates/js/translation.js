@@ -137,6 +137,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     // add wms
     'load wms capabilities': "{{ _('load wms capabilities') }}",
     'preview not possible': "{{ _('preview not possible') }}",
+    'Show filtered features in list': "{{ _('Show filtered features in list') }}",
 
     // seeding widget
     'Layer to seed': "{{ _('Layer to seed') }}",

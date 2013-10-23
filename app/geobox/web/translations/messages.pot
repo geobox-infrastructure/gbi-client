@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-07 16:48+0200\n"
+"POT-Creation-Date: 2013-10-23 14:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1395,43 +1395,47 @@ msgstr ""
 msgid "preview not possible"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:142
-msgid "Layer to seed"
+#: geobox/web/templates/js/translation.js:140
+msgid "Show filtered features in list"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:143
-msgid "Start level"
+msgid "Layer to seed"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:144
-msgid "End level"
+msgid "Start level"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:145
-msgid "Start seeding"
+msgid "End level"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:146
-msgid "Stop seeding"
+msgid "Start seeding"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:147
-msgid "Seeding finished"
+msgid "Stop seeding"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:148
-msgid "No BBox given"
+msgid "Seeding finished"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:149
-msgid "Tiles estimated"
+msgid "No BBox given"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:150
-msgid "Seeding stopped"
+msgid "Tiles estimated"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:151
+msgid "Seeding stopped"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:152
 msgid "No layer to seed"
 msgstr ""
 
