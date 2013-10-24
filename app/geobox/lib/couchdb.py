@@ -274,12 +274,13 @@ class CouchDBBase(object):
         if resp.status_code != 201:
             raise UnexpectedResponse('got unexpected resp (%d) from CouchDB: %s' % (resp.status_code, resp.content))
 
-    def replication(self, repl_id, source, target, continuous=False):
+    def replication(self, repl_id, source, target, continuous=False, create_target=False):
         repl_doc = {
             "_id": repl_id,
             "source":  source,
             "target":  target,
             "continuous": continuous,
+            "create_target": create_target,
             "worker_processes": 1,
             "user_ctx": {
                 "roles": ["_admin"],
