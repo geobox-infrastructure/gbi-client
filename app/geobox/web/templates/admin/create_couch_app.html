@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% from "form_macros.html" import input%}
+
+{% macro checkbox(id, value) %}
+<tr>
+  <td>
+    <input type="checkbox" id="{{ id }}" name="{{ id }}" value="{{ value }}" />
+  </td>
+  <td>{{ value }}</td>
+</tr>
+{% endmacro %}
+
+{% block title %}{{ _('create couch app') }}{% endblock %}
+
+{% block content %}
+  <h2>{{ _('Create couch app') }}</h2>
+  <form method="POST" class="form-horizontal">
+    {{ form.csrf_token }}
+    {{ input(form.couch_url) }}
+    <h3>{{ _('raster layers') }}</h3>
+    <table class="table table-striped">
+    {% for layer in raster_layers %}
+      {{ checkbox('raster_%d' % loop.index, layer['name']) }}
+    {% endfor %}
+    </table>
+    <h3>{{ _('vector layer') }}</h3>
+    <table class="table table-striped">
+    {% for layer in vector_layers %}
+      {{ checkbox('vector_%d' % loop.index, layer['name']) }}
+    {% endfor %}
+    </table>
+    <button class="btn btn-small pull-right" type="submit">{{ _('create') }}</button>
+  </form>
+{% endblock %}

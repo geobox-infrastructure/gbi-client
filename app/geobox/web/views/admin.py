@@ -23,9 +23,9 @@ from ...model.sources import LocalWMTSSource
 from ..utils import request_is_local
 from ..helper import redirect_back
 
-from geobox.lib import context
+from geobox.lib import context, offline
 from geobox.lib.fs import open_file_explorer
-from geobox.lib.couchdb import CouchDB
+from geobox.lib.couchdb import CouchDB, all_layers
 from geobox.lib.mapproxy import write_mapproxy_config
 from geobox.web import forms
 
@@ -127,3 +127,37 @@ def file_browser():
 
 def get_localnet_status():
     return False if current_app.config.geobox_state.config.get('app', 'host') == '127.0.0.1' else True
+
+@admin_view.route('/admin/create_couch_app', methods=["GET", "POST"])
+def create_couch_app():
+    form = forms.CreateCouchAppForm(request.form)
+
+    if form.validate_on_submit():
+        form_data = dict(request.form)
+        form_data.pop('csrf_token')
+
+        target_couch_url = form_data.pop('couch_url')[0]
+
+        offline.create_offline_editor(current_app, target_couch_url, 'geobox_couchapp', 'GeoBoxCouchApp')
+
+        replication_layers = [layer[0] for layer in form_data.values()]
+        target_couchdb = CouchDB(target_couch_url, '_replicator')
+
+        for layer in replication_layers:
+            target_couchdb.replication(layer,
+                'http://127.0.0.1:%s/%s' % (current_app.config.geobox_state.config.get('couchdb', 'port'), layer),
+                layer, create_target=True)
+
+        flash(_('couch app created') )
+
+
+    raster_layers = []
+    vector_layers = []
+
+    for layer in all_layers('http://127.0.0.1:%s' % (current_app.config.geobox_state.config.get('couchdb', 'port'), )):
+        if layer['type'] == 'GeoJSON':
+            vector_layers.append(layer)
+        elif layer['type'] == 'tiles':
+            raster_layers.append(layer)
+
+    return render_template('admin/create_couch_app.html', form=form, raster_layers=raster_layers, vector_layers=vector_layers)
