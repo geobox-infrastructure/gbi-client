@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-07 16:48+0200\n"
-"PO-Revision-Date: 2013-10-07 16:49+0100\n"
+"POT-Creation-Date: 2013-10-23 14:10+0200\n"
+"PO-Revision-Date: 2013-10-23 14:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1431,43 +1431,47 @@ msgstr "Capabilities wurden geladen"
 msgid "preview not possible"
 msgstr "Vorschau nicht möglich. Kein Layer gewählt oder Koordiantensystem wird nicht unterstützt."
 
-#: geobox/web/templates/js/translation.js:142
+#: geobox/web/templates/js/translation.js:140
+msgid "Show filtered features in list"
+msgstr "Zeige in Liste"
+
+#: geobox/web/templates/js/translation.js:143
 msgid "Layer to seed"
 msgstr "Datenimport für Layer"
 
-#: geobox/web/templates/js/translation.js:143
+#: geobox/web/templates/js/translation.js:144
 msgid "Start level"
 msgstr "Startlevel"
 
-#: geobox/web/templates/js/translation.js:144
+#: geobox/web/templates/js/translation.js:145
 msgid "End level"
 msgstr "Endlevel"
 
-#: geobox/web/templates/js/translation.js:145
+#: geobox/web/templates/js/translation.js:146
 msgid "Start seeding"
 msgstr "Datenimport gestarten"
 
-#: geobox/web/templates/js/translation.js:146
+#: geobox/web/templates/js/translation.js:147
 msgid "Stop seeding"
 msgstr "Datenimport gestoppen"
 
-#: geobox/web/templates/js/translation.js:147
+#: geobox/web/templates/js/translation.js:148
 msgid "Seeding finished"
 msgstr "Datenimport beendet"
 
-#: geobox/web/templates/js/translation.js:148
+#: geobox/web/templates/js/translation.js:149
 msgid "No BBox given"
 msgstr "Kein Bereich für den Datenimport in der Karte markiert"
 
-#: geobox/web/templates/js/translation.js:149
+#: geobox/web/templates/js/translation.js:150
 msgid "Tiles estimated"
 msgstr "Kacheln werden importiert"
 
-#: geobox/web/templates/js/translation.js:150
+#: geobox/web/templates/js/translation.js:151
 msgid "Seeding stopped"
 msgstr "Datenimport gestoppt"
 
-#: geobox/web/templates/js/translation.js:151
+#: geobox/web/templates/js/translation.js:152
 msgid "No layer to seed"
 msgstr "Kein Layer für Datenimport vorhanden"
 

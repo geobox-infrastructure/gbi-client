@@ -53,25 +53,23 @@
 {% block map_js %}
 
    <script type="text/javascript">
-
+    {% if with_server %}
       OpenLayers.ProxyHost = "{{ url_for('proxy.proxy_request') }}";
+      var exportODSURL = "{{ url_for('.export_list', export_type='ods') }}";
+      var exportCSVURL = "{{ url_for('.export_list', export_type='csv') }}";
+      {{ generate_base_layer(base_layer) }}
 
-      {% if with_server %}
-          var exportODSURL = "{{ url_for('.export_list', export_type='ods') }}";
-          var exportCSVURL = "{{ url_for('.export_list', export_type='csv') }}";
-          {{ generate_base_layer(base_layer) }}
-          {% if wfs_search_sources %}
-            {{ generate_wfs_searchlayers(wfs_search_sources) }}
-          {% endif %}
-
-          {% if preview_layername and preview_features %}
-            {{ generate_temp_vectorlayer(preview_layername, preview_features)}}
-          {% endif %}
-          var offline = false;
-      {% else %}
-          var offline = true;
+      {% if wfs_search_sources %}
+        {{ generate_wfs_searchlayers(wfs_search_sources) }}
       {% endif %}
 
+      {% if preview_layername and preview_features %}
+        {{ generate_temp_vectorlayer(preview_layername, preview_features)}}
+      {% endif %}
+      var offline = false;
+    {% else %}
+      var offline = true;
+    {% endif %}
    </script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/views/editor.js') }}"></script>
 {% endblock %}
