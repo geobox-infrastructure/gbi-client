@@ -31,6 +31,11 @@ def static_files(basedir, attachments=None):
 
 
 def push_couchapp(attachments, couchurl, appname):
+    resp = requests.put(couchurl)
+    if not resp.status_code in [201, 412]:
+        log.warn('faild to create database %s', couchurl)
+        return False
+
     doc = {
         '_attachments': attachments,
         'rewrites': [
