@@ -9,6 +9,9 @@ from geobox.appstate import GeoBoxState
 from geobox.defaults import GeoBoxConfig
 from geobox.web import create_app
 
+import logging
+log = logging.getLogger(__name__)
+
 def static_files(basedir, attachments=None):
     if attachments is None:
         attachments = {}
@@ -58,7 +61,6 @@ def push_couchapp(attachments, couchurl, appname):
 def main(config_filename=None):
     import optparse
 
-    log = logging.getLogger('geobox.offline')
     requests_log = logging.getLogger("requests")
     requests_log.setLevel(logging.WARNING)
     logging.basicConfig(level=logging.DEBUG)
