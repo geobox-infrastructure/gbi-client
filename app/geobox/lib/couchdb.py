@@ -337,6 +337,22 @@ def all_layers(couchdb_url):
             if doc.get('type', None):
                 yield doc
 
+def replication_status(couch_url, task_name):
+    couch_url = couch_url.rstrip('/')
+    sess = requests.Session()
+    resp = sess.get(couch_url + '/_replicator/' + task_name)
+    doc = resp.json()
+
+    if not doc.has_key('_replication_state'):
+        return False
+    elif doc['_replication_state'] == 'triggered':
+        resp = sess.get(couch_url + '/_active_tasks')
+        for active_task in resp.json():
+            if active_task['target'] == task_name:
+                return active_task['progress']
+
+    return doc['_replication_state']
+
 class VectorCouchDB(CouchDBBase):
     def __init__(self, url, db_name, title=None):
         CouchDBBase.__init__(self, url, db_name)
