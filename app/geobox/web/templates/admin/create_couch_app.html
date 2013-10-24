@@ -2,12 +2,12 @@
 
 {% from "form_macros.html" import input%}
 
-{% macro checkbox(id, value) %}
+{% macro checkbox(id, value, label) %}
 <tr>
   <td>
     <input type="checkbox" id="{{ id }}" name="{{ id }}" value="{{ value }}" />
   </td>
-  <td>{{ value }}</td>
+  <td>{{ label }}</td>
 </tr>
 {% endmacro %}
 
@@ -21,15 +21,15 @@
     <h3>{{ _('raster layers') }}</h3>
     <table class="table table-striped">
     {% for layer in raster_layers %}
-      {{ checkbox('raster_%d' % loop.index, layer['name']) }}
+      {{ checkbox('raster_%d' % loop.index, layer['name'], layer['title']) }}
     {% endfor %}
     </table>
     <h3>{{ _('vector layer') }}</h3>
     <table class="table table-striped">
     {% for layer in vector_layers %}
-      {{ checkbox('vector_%d' % loop.index, layer['name']) }}
+      {{ checkbox('vector_%d' % loop.index, layer['name'], layer['title']) }}
     {% endfor %}
     </table>
-    <button class="btn btn-small pull-right" type="submit">{{ _('create') }}</button>
+    <button class="btn btn-small" type="submit">{{ _('create') }}</button>
   </form>
 {% endblock %}
