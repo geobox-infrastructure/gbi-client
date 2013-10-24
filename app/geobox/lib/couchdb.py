@@ -320,6 +320,11 @@ class CouchDB(CouchDBBase):
         return resp.content
 
 def vector_layers_metadata(couchdb_url):
+    for doc in all_layers(couchdb_url):
+        if doc.get('type') == 'GeoJSON':
+            yield doc
+
+def all_layers(couchdb_url):
     couchdb_url = couchdb_url.rstrip('/')
     sess = requests.Session()
     resp = sess.get(couchdb_url + '/_all_dbs')
@@ -328,7 +333,7 @@ def vector_layers_metadata(couchdb_url):
         if metadata.status_code == 200:
             doc = metadata.json()
             doc['dbname'] = dbname
-            if doc.get('type') == 'GeoJSON':
+            if doc.get('type', None):
                 yield doc
 
 class VectorCouchDB(CouchDBBase):
