@@ -5,8 +5,8 @@ import os
 import mimetypes
 import logging
 from flask import render_template
-from .appstate import GeoBoxState
-from .defaults import GeoBoxConfig
+from geobox.appstate import GeoBoxState
+from geobox.defaults import GeoBoxConfig
 from geobox.web import create_app
 
 def static_files(basedir, attachments=None):
