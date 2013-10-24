@@ -262,4 +262,5 @@ class WFSSearchForm(Form):
         get_label=lambda a: ('%s (%s)' % (a.name, a.search_property)), get_pk=lambda a: a.name)
     search_value = TextAreaField(lazy_gettext('search_string'))
 
-
+class CreateCouchAppForm(Form):
+    couch_url = TextField(lazy_gettext('couchapp_couch_url'), validators=[Required()])

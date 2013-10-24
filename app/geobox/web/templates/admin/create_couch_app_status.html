@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('create couch app status') }}{% endblock %}
+
+{% block head %}
+<meta http-equiv="refresh" content="5;">
+{% endblock %}
+
+{% block content %}
+  <h2>{{ _('Create couch app status') }}</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{{ _('Layer') }}</th>
+        <th>{{ _('Status') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for layer, status in layers.items() %}
+      <tr>
+        <td>{{ layer }}</td>
+        <td>
+          {% if not status %}
+            {{ _('not processed') }}
+          {% elif status == 'completed' %}
+            {{ _('finished') }}
+          {% elif status == 'error' %}
+            {{ _('an error occured') }}
+          {% else %}
+            {{ status }}% {{ _('completed') }}
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+{% endblock %}

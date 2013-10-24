@@ -25,7 +25,7 @@ from ..helper import redirect_back
 
 from geobox.lib import context, offline
 from geobox.lib.fs import open_file_explorer
-from geobox.lib.couchdb import CouchDB, all_layers
+from geobox.lib.couchdb import CouchDB, all_layers, replication_status, CouchDBBase
 from geobox.lib.mapproxy import write_mapproxy_config
 from geobox.web import forms
 
@@ -136,20 +136,20 @@ def create_couch_app():
         form_data = dict(request.form)
         form_data.pop('csrf_token')
 
-        target_couch_url = form_data.pop('couch_url')[0]
+        target_couch_url = form_data.pop('couch_url')[0].rstrip('/')
 
         offline.create_offline_editor(current_app, target_couch_url, 'geobox_couchapp', 'GeoBoxCouchApp')
 
         replication_layers = [layer[0] for layer in form_data.values()]
-        target_couchdb = CouchDB(target_couch_url, '_replicator')
+        target_couchdb = CouchDBBase(target_couch_url, '_replicator')
 
         for layer in replication_layers:
             target_couchdb.replication(layer,
                 'http://127.0.0.1:%s/%s' % (current_app.config.geobox_state.config.get('couchdb', 'port'), layer),
                 layer, create_target=True)
 
-        flash(_('couch app created') )
-
+        flash(_('creating couch app') )
+        return redirect(url_for('.create_couch_app_status', couch_url=target_couch_url, layers=','.join(replication_layers)))
 
     raster_layers = []
     vector_layers = []
@@ -161,3 +161,22 @@ def create_couch_app():
             raster_layers.append(layer)
 
     return render_template('admin/create_couch_app.html', form=form, raster_layers=raster_layers, vector_layers=vector_layers)
+
+@admin_view.route('/admin/couch_app/status/<path:couch_url>/<layers>')
+def create_couch_app_status(couch_url, layers=None):
+    _layers = layers.split(',')
+    layers = {}
+    couchapp_ready = True
+    for layer in _layers:
+        couchdb = CouchDB('http://127.0.0.1:%s' % (current_app.config.geobox_state.config.get('couchdb', 'port')), layer)
+        metadata = couchdb.get('metadata')
+        status = replication_status(couch_url, layer)
+        if status != 'completed':
+            couchapp_ready = False
+        layers[metadata['title']] = status
+
+    if couchapp_ready:
+        couchapp_url = '%s/_design/GeoBoxCouchApp/_rewrite' % couch_url
+        flash(_('couchapp ready %(couchapp_url)s', couchapp_url=couchapp_url), 'success')
+
+    return render_template('admin/create_couch_app_status.html', layers=layers)
