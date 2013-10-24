@@ -60,8 +60,41 @@ def push_couchapp(attachments, couchurl, appname):
         data=json.dumps(doc),
     )
     if resp.status_code != 201:
-        log = logging.getLogger('geobox.offline')
         log.warn('failed to push app to %s: %s %s', app_url, resp, resp.content)
+        return False
+
+    return True
+
+def create_offline_editor(app, couchurl, dbname, appname):
+    log.info('collecting files for couchapp')
+    attachments = {}
+    with app.test_request_context('/'):
+        editorhtml = render_template('editor.html', with_server=False)
+        editorhtml = editorhtml.replace('"/static/', '"')
+        editorhtml = editorhtml.replace('"/translations.js', '"translations.js')
+        attachments['index.html'] = {
+            'content_type': 'text/html',
+            'data': editorhtml.encode('utf8').encode('base64')
+        }
+
+        translations = render_template('js/translation.js')
+        attachments['translations.js'] = {
+            'content_type': 'application/javascript',
+            'data': translations.encode('utf8').encode('base64')
+        }
+
+    root_dir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
+    basedir = os.path.join(root_dir, 'web', 'static')
+    basedir = os.path.abspath(basedir)
+
+    static_files(basedir, attachments)
+
+    couchurl = couchurl.rstrip('/') + '/' + dbname
+    log.info('pushing app to %s/_design/%s', couchurl, appname)
+    if push_couchapp(attachments, couchurl, appname):
+        log.info('done. see %s/_design/%s/_rewrite', couchurl, appname)
+    else:
+        log.warn('failed to create couchapp on %s in database %s with name %s', couchurl, dbname, appname)
 
 def main(config_filename=None):
     import optparse
@@ -91,32 +124,8 @@ def main(config_filename=None):
         app_state = GeoBoxState()
 
     app = create_app(app_state)
+    create_offline_editor(app, options.couchurl, options.dbname, options.appname)
 
-    log.info('collecting files')
-    attachments = {}
-    with app.test_request_context('/'):
-        editorhtml = render_template('editor.html', with_server=False)
-        editorhtml = editorhtml.replace('"/static/', '"')
-        editorhtml = editorhtml.replace('"/translations.js', '"translations.js')
-        attachments['index.html'] = {
-            'content_type': 'text/html',
-            'data': editorhtml.encode('utf8').encode('base64')
-        }
-
-        translations = render_template('js/translation.js')
-        attachments['translations.js'] = {
-            'content_type': 'application/javascript',
-            'data': translations.encode('utf8').encode('base64')
-        }
-
-    basedir = os.path.join(os.path.dirname(__file__), 'web', 'static')
-    basedir = os.path.abspath(basedir)
-    static_files(basedir, attachments)
-
-    couchurl = options.couchurl.rstrip('/') + '/' + options.dbname
-    log.info('pushing app to %s/_design/%s', couchurl, options.appname)
-    push_couchapp(attachments, couchurl, options.appname)
-    log.info('done. see %s/_design/%s/_rewrite', couchurl, options.appname)
 
 if __name__ == '__main__':
     main()
