@@ -128,7 +128,7 @@ def file_browser():
 def get_localnet_status():
     return False if current_app.config.geobox_state.config.get('app', 'host') == '127.0.0.1' else True
 
-@admin_view.route('/admin/create_couch_app', methods=["GET", "POST"])
+@admin_view.route('/admin/couch_app/create', methods=["GET", "POST"])
 def create_couch_app():
     form = forms.CreateCouchAppForm(request.form)
 
