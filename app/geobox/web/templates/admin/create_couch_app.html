@@ -18,13 +18,13 @@
   <form method="POST" class="form-horizontal">
     {{ form.csrf_token }}
     {{ input(form.couch_url) }}
-    <h3>{{ _('raster layers') }}</h3>
+    <h3>{{ _('raster layers') }} {{ generate_tooltip(_('tooltip couch app raster layers') ) }}</h3>
     <table class="table table-striped">
     {% for layer in raster_layers %}
       {{ checkbox('raster_%d' % loop.index, layer['name'], layer['title']) }}
     {% endfor %}
     </table>
-    <h3>{{ _('vector layer') }}</h3>
+    <h3>{{ _('vector layer') }} {{ generate_tooltip(_('tooltip couch app vector layers') ) }}</h3>
     <table class="table table-striped">
     {% for layer in vector_layers %}
       {{ checkbox('vector_%d' % loop.index, layer['name'], layer['title']) }}
