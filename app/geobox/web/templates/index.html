@@ -56,6 +56,12 @@
       <li><a href="{{ url_for('editor_view.editor') }}">{{ _('editor') }}</a></li>
     </ul>
   </div>
+  <div class="span12">
+    <h2>{{ _('create couch app') }}</h2>
+    <ul class="nav nav-list">
+      <li><a href="{{ url_for('admin.create_couch_app') }}">{{ _('create couch app') }}</a></li>
+    </ul>
+  </div>
   {% if is_local %}
   <div class="span12">
     <h2>{{_('settings')}}</h2>
