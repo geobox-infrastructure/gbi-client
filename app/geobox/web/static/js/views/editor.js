@@ -16,6 +16,7 @@ $(document).ready(function() {
       var layer = f.feature.layer.gbiLayer;
       layer.clearStoredFeatures();
       layer.unregisterEvent('featureunselected', editor, clearStoredFeaturesWrapper);
+      editor.widgets.layerfilter.clearFields();
     }
 
     if(activeLayer.odataUrl) {
@@ -551,7 +552,7 @@ function initEditor() {
     var layerfilter = new gbi.widgets.Filter(editor, {
         element: 'filtermanager'
     });
-
+    editor.widgets.layerfilter = layerfilter;
     var thematicalVector = new gbi.widgets.ThematicalVector(editor);
     editor.widgets.thematicalVector = thematicalVector;
     if(offline) {

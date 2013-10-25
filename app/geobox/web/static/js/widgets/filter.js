@@ -29,6 +29,10 @@ gbi.widgets.Filter.prototype = {
         } else {
             $('#setFilter').attr('disabled', 'disabled');
         }
+    },
+    clearFields: function() {
+        this.element.find('#filterAttr').val('');
+        this.element.find('#filterValue').val('');
     }
 };
 
