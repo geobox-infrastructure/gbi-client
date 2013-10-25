@@ -48,14 +48,18 @@ $(document).ready(function() {
       if (editor.map.toolbars && editor.map.toolbars.length > 0) {
         $.each(editor.map.toolbars, function(id, toolbar) {
           toolbar.deactivateAllControls();
+
+          // unselect all and select stored features
           if (activeLayer && toolbar.select && toolbar.select.olControl) {
             toolbar.select.olControl.unselectAll();
             if(tab == '#edit') {
+              // with select control to enable unselecting
               $.each(activeLayer.storedFeatures(), function(idx, feature) {
                 toolbar.select.olControl.select(feature)
               });
               activeLayer.registerEvent('featureunselected', editor, clearStoredFeaturesWrapper);
             } else {
+              // with layer
               activeLayer.selectFeatures(activeLayer.storedFeatures());
             }
           }
