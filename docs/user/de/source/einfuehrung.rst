@@ -34,6 +34,7 @@ Startseite
   - Downloads
   - Editor
   - Karte
+  - CouchApp erstellen
   - Datenquellen
   - Administration
 

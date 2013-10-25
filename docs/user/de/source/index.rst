@@ -14,6 +14,7 @@ Benutzerhandbuch
   export
   aufgaben
   editor
+  couchapp
   datenquellen
   einstellungen
   glossar
