@@ -445,10 +445,10 @@ function loadCouchDBs() {
                       name: metadata.title,
                       url: wmtsURL + metadata.name + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile',
                       cacheURL: cacheURL,
+                      sourceURL: metadata.source.url,
                       layer:  metadata.name,
                       format: metadata.source.format,
-                      requestEncoding: 'REST',
-                      data: metadata
+                      requestEncoding: 'REST'
                     }));
                   }
                 }
