@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-10-24 17:23+0200\n"
-"PO-Revision-Date: 2013-10-24 17:24+0100\n"
+"PO-Revision-Date: 2013-10-25 08:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -769,7 +769,7 @@ msgstr "Es ist ein Fehler aufgetreten"
 
 #: geobox/web/templates/admin/create_couch_app_status.html:31
 msgid "completed"
-msgstr "Beendet"
+msgstr "abgeschlossen"
 
 #: geobox/web/templates/admin/external_raster_list.html:3
 #: geobox/web/templates/projects/imports.html:3
