@@ -125,9 +125,12 @@ gbi.widgets.LayerManager.prototype = {
                     var seed = $(this).prop("checked");
                     if(seed) {
                         layer.olLayer.url = layer.data.source.url;
+                        layer.enableSeeding();
                     } else {
                         layer.olLayer.url = layer.options.url;
+                        layer.disableSeeding();
                     }
+
                     e.stopPropagation();
                 });
 
