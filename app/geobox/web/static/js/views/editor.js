@@ -30,24 +30,25 @@ $(document).ready(function() {
 
     $("#tabs > li > a ").click(function() {
       var tab = $(this).attr('href');
+
+      // seeding widgets changes active layer back to real active layer when deactivate
+      if(offline) {
+        editor.widgets.seeding.deactivate();
+      }
+
       var activeLayer = editor.layerManager.active();
       if(activeLayer) {
         activeLayer.unregisterEvent('featureunselected', editor, clearStoredFeaturesWrapper);
       }
-      if (editor.map.toolbars && editor.map.toolbars.length > 0) {
+      // sedding widgets changes active layer to its draw layer when activate
+      if(offline && tab == '#seeding') {
+        editor.widgets.seeding.activate();
+      }
 
-        if(offline) {
-          if(tab == '#seeding') {
-            editor.widgets.seeding.activate();
-          } else {
-            editor.widgets.seeding.deactivate();
-          }
-        }
+      if (editor.map.toolbars && editor.map.toolbars.length > 0) {
         $.each(editor.map.toolbars, function(id, toolbar) {
           toolbar.deactivateAllControls();
-
           if (activeLayer && toolbar.select && toolbar.select.olControl) {
-
             toolbar.select.olControl.unselectAll();
             if(tab == '#edit') {
               $.each(activeLayer.storedFeatures(), function(idx, feature) {
