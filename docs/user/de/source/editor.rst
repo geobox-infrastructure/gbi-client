@@ -67,7 +67,7 @@ Wenn Sie Geometrien aus anderen Vektorebenen selektiert haben, können Sie mit d
 Zerschneiden
 """"""""""""
 
-Mit der Zerschneiden-Funktion können Sie eine selektierte Geometrie an einer Linie teilen. Nach Auswahl der Zerschneiden-Funktion können Sie in der Karte die Schneidelinie zeichnen. Zum Durchführen muss diese Aktion mit einem Doppelklick in der Karte bestätigt werden. 
+Mit der Zerschneiden-Funktion können Sie eine selektierte Geometrie an einer Linie teilen. Nach Auswahl der Zerschneiden-Funktion können Sie in der Karte die Schneidelinie zeichnen. Zum Durchführen muss diese Aktion mit einem Doppelklick in der Karte bestätigt werden.
 
 Zusammenfügen
 """""""""""""
@@ -94,7 +94,7 @@ Ist einem Layer ein JSON Schema zugewiesen, wird die URL, von der Sie das JSON S
 Filter
 ------
 
-Hier können Sie Geometrien der aktivierten Vektorebene, abhängig von Eigenschaft und Wert, auswählen.
+Hier können Sie Geometrien der aktivierten Vektorebene, abhängig von Eigenschaft und Wert, auswählen. Die Geometrien, auf die Ihr Filter passt werden ausgewählt. Die Geometrien bleiben solange ausgewählt, bis Sie die Auswahl im `Editieren` Register aufheben.
 
 
 Messen
@@ -143,7 +143,7 @@ Die `Thematische Karte` ist beim Aufruf der Seite deaktiviert, unabhängig davon
 Legende
 '''''''
 
-In der Legende der thematischen Karte werden `Farbe`, `Wert` und `Fläche` angezeigt. Zusätzlich besteht die Möglichkeit über den Listenbutton zu einer Übersichtsliste zu gelangen. Hier werden alle Geometrien aufgelistet die dem Wert der Legende entsprechen. 
+In der Legende der thematischen Karte werden `Farbe`, `Wert` und `Fläche` angezeigt. Zusätzlich besteht die Möglichkeit über den Listenbutton zu einer Übersichtsliste zu gelangen. Hier werden alle Geometrien aufgelistet die dem Wert der Legende entsprechen.
 
 Ist die thematische Karte im Modus `Exakte Werte`, können Sie den Schnell-Editormodus verwenden. Dieser kann aktiviert werden in dem Sie auf die Farbe in der Legende Klicken. Anschließend haben Sie die Möglichkeit eine Geometrie anzuklicken um dieser den Wert – entsprechenden der Farbe – zuzuweisen.
 
@@ -173,7 +173,7 @@ Die Einstellungen können für jeden Layer gespeichert werden.
 Karte
 """""
 
-Hier können Sie eine Eigenschaft des aktiven Layers wählen, für die Sie eine thematische Darstellung erzeugen möchten. Sie können beliebig viele Werten eine  Farbe zuweisen. Bei den ersten 10 Werten werden Ihnen Farben vom System vorgeschlagen. Diese können von Ihnen verändert werden. 
+Hier können Sie eine Eigenschaft des aktiven Layers wählen, für die Sie eine thematische Darstellung erzeugen möchten. Sie können beliebig viele Werten eine  Farbe zuweisen. Bei den ersten 10 Werten werden Ihnen Farben vom System vorgeschlagen. Diese können von Ihnen verändert werden.
 
 Für die Angabe der Werte stehen Ihnen zwei Arten zur Auswahl.
 
