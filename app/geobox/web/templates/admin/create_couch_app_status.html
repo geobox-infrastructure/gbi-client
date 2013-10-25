@@ -3,7 +3,9 @@
 {% block title %}{{ _('create couch app status') }}{% endblock %}
 
 {% block head %}
+{% if not ready %}
 <meta http-equiv="refresh" content="5;">
+{% endif %}
 {% endblock %}
 
 {% block content %}

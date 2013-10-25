@@ -179,4 +179,4 @@ def create_couch_app_status(couch_url, layers=None):
         couchapp_url = '%s/_design/GeoBoxCouchApp/_rewrite' % couch_url
         flash(_('couchapp ready %(couchapp_url)s', couchapp_url=couchapp_url), 'success')
 
-    return render_template('admin/create_couch_app_status.html', layers=layers)
+    return render_template('admin/create_couch_app_status.html', layers=layers, ready=couchapp_ready)
