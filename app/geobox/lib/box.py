@@ -93,7 +93,7 @@ class FeatureInserter(object):
         md_doc = {
             'title': source_md.get('title', layer) if source_md else layer,
             'name': couchdb_layer,
-            'layer': source_md.get('layer'),
+            'layer': source_md.get('layer', layer) if source_md else layer,
             'type': 'GeoJSON',
         }
         couch.update_or_create_doc('metadata', md_doc)
