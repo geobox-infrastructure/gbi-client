@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-24 17:23+0200\n"
+"POT-Creation-Date: 2013-10-25 09:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,7 +209,7 @@ msgid "couchapp_couch_url"
 msgstr ""
 
 #: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:13
-#: geobox/web/templates/index.html:61
+#: geobox/web/templates/index.html:67
 #: geobox/web/templates/js/translation.js:131
 msgid "settings"
 msgstr ""
@@ -256,40 +256,31 @@ msgstr ""
 msgid "load context"
 msgstr ""
 
-#: geobox/web/templates/admin.html:47 geobox/web/templates/admin.html:48
-#: geobox/web/templates/admin/create_couch_app.html:14
-msgid "create couch app"
-msgstr ""
-
 #: geobox/web/templates/admin.html:47
-msgid "tooltip create couch app"
-msgstr ""
-
-#: geobox/web/templates/admin.html:50
 msgid "Logging"
 msgstr ""
 
-#: geobox/web/templates/admin.html:51
+#: geobox/web/templates/admin.html:48
 msgid "open logview"
 msgstr ""
 
-#: geobox/web/templates/admin.html:53
+#: geobox/web/templates/admin.html:50
 msgid "Files"
 msgstr ""
 
-#: geobox/web/templates/admin.html:54
+#: geobox/web/templates/admin.html:51
 msgid "open external file explorer"
 msgstr ""
 
-#: geobox/web/templates/admin.html:57
+#: geobox/web/templates/admin.html:54
 msgid "External tile box"
 msgstr ""
 
-#: geobox/web/templates/admin.html:63
+#: geobox/web/templates/admin.html:60
 msgid "add and start tilebox"
 msgstr ""
 
-#: geobox/web/templates/admin.html:64
+#: geobox/web/templates/admin.html:61
 #: geobox/web/templates/admin/external_raster_list.html:26
 #: geobox/web/templates/admin/external_raster_list.html:139
 #: geobox/web/templates/projects/exports.html:35
@@ -659,11 +650,16 @@ msgstr ""
 msgid "downloads"
 msgstr ""
 
-#: geobox/web/templates/index.html:63
+#: geobox/web/templates/index.html:60 geobox/web/templates/index.html:62
+#: geobox/web/templates/admin/create_couch_app.html:14
+msgid "create couch app"
+msgstr ""
+
+#: geobox/web/templates/index.html:69
 msgid "data sources"
 msgstr ""
 
-#: geobox/web/templates/index.html:64
+#: geobox/web/templates/index.html:70
 msgid "administation"
 msgstr ""
 
@@ -681,6 +677,10 @@ msgstr ""
 
 #: geobox/web/templates/admin/create_couch_app.html:17
 msgid "Create couch app"
+msgstr ""
+
+#: geobox/web/templates/admin/create_couch_app.html:17
+msgid "tooltip create couch app"
 msgstr ""
 
 #: geobox/web/templates/admin/create_couch_app.html:21
@@ -708,31 +708,39 @@ msgstr ""
 msgid "create couch app status"
 msgstr ""
 
-#: geobox/web/templates/admin/create_couch_app_status.html:10
+#: geobox/web/templates/admin/create_couch_app_status.html:12
 msgid "Create couch app status"
 msgstr ""
 
-#: geobox/web/templates/admin/create_couch_app_status.html:14
-msgid "Layer"
+#: geobox/web/templates/admin/create_couch_app_status.html:13
+msgid "Couchapp created"
 msgstr ""
 
 #: geobox/web/templates/admin/create_couch_app_status.html:15
+msgid "Layer copy status"
+msgstr ""
+
+#: geobox/web/templates/admin/create_couch_app_status.html:19
+msgid "Layer"
+msgstr ""
+
+#: geobox/web/templates/admin/create_couch_app_status.html:20
 msgid "Status"
 msgstr ""
 
-#: geobox/web/templates/admin/create_couch_app_status.html:25
+#: geobox/web/templates/admin/create_couch_app_status.html:30
 msgid "not processed"
 msgstr ""
 
-#: geobox/web/templates/admin/create_couch_app_status.html:27
+#: geobox/web/templates/admin/create_couch_app_status.html:32
 msgid "finished"
 msgstr ""
 
-#: geobox/web/templates/admin/create_couch_app_status.html:29
+#: geobox/web/templates/admin/create_couch_app_status.html:34
 msgid "an error occured"
 msgstr ""
 
-#: geobox/web/templates/admin/create_couch_app_status.html:31
+#: geobox/web/templates/admin/create_couch_app_status.html:36
 msgid "completed"
 msgstr ""
 

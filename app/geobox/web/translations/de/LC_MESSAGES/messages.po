@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-24 17:23+0200\n"
-"PO-Revision-Date: 2013-10-25 08:41+0100\n"
+"POT-Creation-Date: 2013-10-25 09:25+0200\n"
+"PO-Revision-Date: 2013-10-25 09:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -221,7 +221,7 @@ msgstr "URL der Ziel CouchDB"
 
 #: geobox/web/templates/admin.html:4
 #: geobox/web/templates/admin.html:13
-#: geobox/web/templates/index.html:61
+#: geobox/web/templates/index.html:67
 #: geobox/web/templates/js/translation.js:131
 msgid "settings"
 msgstr "Einstellungen"
@@ -270,40 +270,30 @@ msgid "load context"
 msgstr "Daten aktualisieren"
 
 #: geobox/web/templates/admin.html:47
-#: geobox/web/templates/admin.html:48
-#: geobox/web/templates/admin/create_couch_app.html:14
-msgid "create couch app"
-msgstr "GeoBox CouchApp erstellen"
-
-#: geobox/web/templates/admin.html:47
-msgid "tooltip create couch app"
-msgstr "Erstellen der GeoBox CouchApp in einer von Ihnen anzugebenen CouchDB. Die GeoBox CouchApp entspricht dem Editor des GeoBox Client."
-
-#: geobox/web/templates/admin.html:50
 msgid "Logging"
 msgstr "Logging"
 
-#: geobox/web/templates/admin.html:51
+#: geobox/web/templates/admin.html:48
 msgid "open logview"
 msgstr "Log öffnen"
 
-#: geobox/web/templates/admin.html:53
+#: geobox/web/templates/admin.html:50
 msgid "Files"
 msgstr "Dateien"
 
-#: geobox/web/templates/admin.html:54
+#: geobox/web/templates/admin.html:51
 msgid "open external file explorer"
 msgstr "GeoBox-Verzeichnis öffnen"
 
-#: geobox/web/templates/admin.html:57
+#: geobox/web/templates/admin.html:54
 msgid "External tile box"
 msgstr "Externe TileBox einbinden"
 
-#: geobox/web/templates/admin.html:63
+#: geobox/web/templates/admin.html:60
 msgid "add and start tilebox"
 msgstr "Hinzufügen/Neustarten"
 
-#: geobox/web/templates/admin.html:64
+#: geobox/web/templates/admin.html:61
 #: geobox/web/templates/admin/external_raster_list.html:26
 #: geobox/web/templates/admin/external_raster_list.html:139
 #: geobox/web/templates/projects/exports.html:35
@@ -694,11 +684,17 @@ msgstr "Aufgaben"
 msgid "downloads"
 msgstr "Downloads"
 
-#: geobox/web/templates/index.html:63
+#: geobox/web/templates/index.html:60
+#: geobox/web/templates/index.html:62
+#: geobox/web/templates/admin/create_couch_app.html:14
+msgid "create couch app"
+msgstr "GeoBox CouchApp erstellen"
+
+#: geobox/web/templates/index.html:69
 msgid "data sources"
 msgstr "Datenquellen"
 
-#: geobox/web/templates/index.html:64
+#: geobox/web/templates/index.html:70
 msgid "administation"
 msgstr "Administration"
 
@@ -717,6 +713,10 @@ msgstr "Downloadberecht."
 #: geobox/web/templates/admin/create_couch_app.html:17
 msgid "Create couch app"
 msgstr "GeoBox CouchApp erstellen"
+
+#: geobox/web/templates/admin/create_couch_app.html:17
+msgid "tooltip create couch app"
+msgstr "Erstellen der GeoBox CouchApp in einer von Ihnen anzugebenen CouchDB. Die GeoBox CouchApp entspricht dem Editor des GeoBox Client."
 
 #: geobox/web/templates/admin/create_couch_app.html:21
 #: geobox/web/templates/projects/export_edit.html:18
@@ -743,31 +743,39 @@ msgstr "Erstellen"
 msgid "create couch app status"
 msgstr "Status des Erstellvorgangs der GeoBox CouchApp"
 
-#: geobox/web/templates/admin/create_couch_app_status.html:10
+#: geobox/web/templates/admin/create_couch_app_status.html:12
 msgid "Create couch app status"
 msgstr "Status des Erstellvorgangs der GeoBox CouchApp"
 
-#: geobox/web/templates/admin/create_couch_app_status.html:14
+#: geobox/web/templates/admin/create_couch_app_status.html:13
+msgid "Couchapp created"
+msgstr "GeoBox CouchApp erstellt"
+
+#: geobox/web/templates/admin/create_couch_app_status.html:15
+msgid "Layer copy status"
+msgstr "Kopierstatus der Layer"
+
+#: geobox/web/templates/admin/create_couch_app_status.html:19
 msgid "Layer"
 msgstr "Layer"
 
-#: geobox/web/templates/admin/create_couch_app_status.html:15
+#: geobox/web/templates/admin/create_couch_app_status.html:20
 msgid "Status"
 msgstr "Status"
 
-#: geobox/web/templates/admin/create_couch_app_status.html:25
+#: geobox/web/templates/admin/create_couch_app_status.html:30
 msgid "not processed"
 msgstr "Noch nicht bearbeitet"
 
-#: geobox/web/templates/admin/create_couch_app_status.html:27
+#: geobox/web/templates/admin/create_couch_app_status.html:32
 msgid "finished"
 msgstr "Beendet"
 
-#: geobox/web/templates/admin/create_couch_app_status.html:29
+#: geobox/web/templates/admin/create_couch_app_status.html:34
 msgid "an error occured"
 msgstr "Es ist ein Fehler aufgetreten"
 
-#: geobox/web/templates/admin/create_couch_app_status.html:31
+#: geobox/web/templates/admin/create_couch_app_status.html:36
 msgid "completed"
 msgstr "abgeschlossen"
 
