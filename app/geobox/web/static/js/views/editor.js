@@ -24,7 +24,6 @@ $(document).ready(function() {
     var activeLayer = editor.layerManager.active();
 
     $('#exportVectorLayer form, #exportSelectedGeometries form').submit(function(event) {
-      console.log('submit')
       var filename_input = $(this).find('#filename');
       if(!filename_input.val()) {
         filename_input.parent().parent().addClass('error');
@@ -607,7 +606,6 @@ function initEditor() {
     });
     toolbar.select.deactivate();
     toolbar.select.olControl.onUnselect = function(feature) {
-      console.log('unselect')
       var layer = feature.layer.gbiLayer;
 
       layer.removeStoredFeature(feature);

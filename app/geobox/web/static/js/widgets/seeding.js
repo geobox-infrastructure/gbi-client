@@ -103,7 +103,6 @@ gbi.widgets.Seeding.prototype = {
     },
     activate: function() {
         var self = this;
-
         self.oldActiveLayer = self.editor.layerManager.active();
         self.layer.visible(true);
         self.editor.layerManager.active(self.layer);
@@ -111,7 +110,6 @@ gbi.widgets.Seeding.prototype = {
     },
     deactivate: function() {
         var self = this;
-
         self.layer.visible(false);
         if(self.oldActiveLayer) {
             self.editor.layerManager.active(self.oldActiveLayer);
