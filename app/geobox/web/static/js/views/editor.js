@@ -295,6 +295,12 @@ $(document).ready(function() {
     registerEvents(activeLayer);
   }
 
+  function storeSelectedFeatures(f) {
+    var layer = f.feature.layer.gbiLayer;
+    var selectedFeatures = f.feature.layer.selectedFeatures;
+    layer.storeFeatures(selectedFeatures);
+  };
+
    function orderToolbar() {
        var toolbarButton = $('#edit-toolbar .olButton');
        var toolbarWork = ['DrawFeaturePoint', 'DrawFeatureLine', 'DrawFeaturePolygon'];
