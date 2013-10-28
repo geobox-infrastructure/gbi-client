@@ -60,9 +60,6 @@ $(document).ready(function() {
         $(gbi).trigger('gbi.widgets.thematicalVector.activate', activeLayer);
       }
 
-      var storedFeatures = activeLayer.storedFeatures().slice();
-
-
       if (editor.map.toolbars && editor.map.toolbars.length > 0) {
         $.each(editor.map.toolbars, function(id, toolbar) {
           toolbar.deactivateAllControls();
