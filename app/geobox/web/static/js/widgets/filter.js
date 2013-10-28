@@ -31,8 +31,8 @@ gbi.widgets.Filter.prototype = {
         }
     },
     clearFields: function() {
-        this.element.find('#filterAttr').val('');
-        this.element.find('#filterValue').val('');
+        self.element.find('#filterAttr').val('');
+        self.element.find('#filterValue').val('');
     }
 };
 
