@@ -187,10 +187,6 @@ gbi.widgets.AttributeEditor.prototype = {
 
         //bind events
         $.each(renderedAttributes, function(idx, key) {
-            $('#'+key).change(function() {
-                var newVal = $(this).val();
-                self.edit(key, newVal);
-            });
             $('#'+key).keyup(function() {
                 $('#dummy_save_btn').removeAttr('disabled').addClass('btn-success');
             });
