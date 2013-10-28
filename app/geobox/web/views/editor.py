@@ -123,7 +123,10 @@ def create_couch_app():
                 layer, create_target=True)
 
         flash(_('creating couch app') )
-        return redirect(url_for('.create_couch_app_status', couch_url=target_couch_url, layers=','.join(replication_layers)))
+        if replication_layers:
+            return redirect(url_for('.create_couch_app_status', couch_url=target_couch_url, layers=','.join(replication_layers) ))
+        else:
+            return redirect(url_for('.create_couch_app_status', couch_url=target_couch_url))
 
     raster_layers = []
     vector_layers = []
@@ -136,18 +139,23 @@ def create_couch_app():
 
     return render_template('create_couch_app.html', form=form, raster_layers=raster_layers, vector_layers=vector_layers)
 
-@editor_view.route('/editor/couch_app/status/<path:couch_url>/<layers>')
+@editor_view.route('/editor/couch_app/status/<path:couch_url>/with_layers/<layers>')
+@editor_view.route('/editor/couch_app/status/<path:couch_url>')
 def create_couch_app_status(couch_url, layers=None):
-    _layers = layers.split(',')
-    layers = {}
     couchapp_ready = True
-    for layer in _layers:
-        couchdb = CouchDB('http://127.0.0.1:%s' % (current_app.config.geobox_state.config.get('couchdb', 'port')), layer)
-        metadata = couchdb.get('metadata')
-        status = replication_status(couch_url, layer)
-        if status != 'completed':
-            couchapp_ready = False
-        layers[metadata['title']] = status
+    if layers:
+        _layers = layers.split(',')
+        layers = {}
+
+        for layer in _layers:
+            couchdb = CouchDB('http://127.0.0.1:%s' % (current_app.config.geobox_state.config.get('couchdb', 'port')), layer)
+            metadata = couchdb.get('metadata')
+            status = replication_status(couch_url, layer)
+            if status != 'completed':
+                couchapp_ready = False
+            layers[metadata['title']] = status
+    else:
+        layers = {}
 
     if couchapp_ready:
         couchapp_url = '%s/geobox_couchapp/_design/GeoBoxCouchApp/_rewrite' % couch_url
