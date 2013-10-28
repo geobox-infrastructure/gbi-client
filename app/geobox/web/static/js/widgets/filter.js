@@ -21,9 +21,10 @@ gbi.widgets.Filter.prototype = {
                 var attr = $('#filterAttr').val();
                 var value = $('#filterValue').val();
                 var layer = self.editor.layerManager.active();
-                var features = layer.selectByPropertyValue(attr, value, true);
                 layer.clearStoredFeatures();
-                layer.storeFeatures(features);
+                self.filteredFeatures = layer.selectByPropertyValue(attr, value, true);
+
+                $(layer).on('gbi.layer.vector.unstoredFeature', self.clearFields)
                 return false;
              });
         } else {
