@@ -54,12 +54,7 @@
     <h2>{{_('editor')}}</h2>
     <ul class="nav nav-list">
       <li><a href="{{ url_for('editor_view.editor') }}">{{ _('editor') }}</a></li>
-    </ul>
-  </div>
-  <div class="span12">
-    <h2>{{ _('create couch app') }}</h2>
-    <ul class="nav nav-list">
-      <li><a href="{{ url_for('admin.create_couch_app') }}">{{ _('create couch app') }}</a></li>
+      <li><a href="{{ url_for('editor_view.create_couch_app') }}">{{ _('export editor and data') }}</a></li>
     </ul>
   </div>
   {% if is_local %}
