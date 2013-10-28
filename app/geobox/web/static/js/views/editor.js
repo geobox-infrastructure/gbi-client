@@ -17,6 +17,10 @@ $(document).ready(function() {
       'gbi.layer.vector.featuresStored': enableExportSelectedGeometriesButton,
       'gbi.layer.vector.featuresStoreCleared': disableExportSelectedGeometriesButton,
     };
+    var olLayerEvents = {
+      'featureselected': storeSelectedFeatures,
+      'featureunselected': removeStoredFeature
+    };
     var editor = initEditor();
     var activeLayer = editor.layerManager.active();
 
@@ -319,12 +323,22 @@ $(document).ready(function() {
       $.each(gbiLayerEvents, function(type, func) {
         $(layer).on(type, func);
       });
+      if(layer) {
+        $.each(olLayerEvents, function(type, func) {
+          layer.registerEvent(type, editor, func);
+        });
+      }
     }
 
     function unregisterEvents(layer) {
       $.each(gbiLayerEvents, function(type, func) {
         $(layer).off(type, func);
       });
+      if(layer) {
+        $.each(olLayerEvents, function(type, func) {
+          layer.unregisterEvent(type, editor, func);
+        });
+      }
     };
 
     function enableSaveButton() {
