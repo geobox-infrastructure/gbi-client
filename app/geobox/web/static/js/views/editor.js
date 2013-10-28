@@ -52,10 +52,6 @@ $(document).ready(function() {
 
       var activeLayer = editor.layerManager.active();
 
-      // sedding widgets changes active layer to its draw layer when activate
-      if(offline && tab == '#seeding') {
-        editor.widgets.seeding.activate();
-      }
       if(tab == '#thematical') {
         $(gbi).trigger('gbi.widgets.thematicalVector.activate', activeLayer);
       }
@@ -83,6 +79,10 @@ $(document).ready(function() {
             orderToolbar();
           }
         });
+      }
+      // sedding widgets changes active layer to its draw layer when activate
+      if(offline && tab == '#seeding') {
+        editor.widgets.seeding.activate();
       }
     });
 
