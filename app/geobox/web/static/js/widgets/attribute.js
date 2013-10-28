@@ -18,6 +18,7 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     this.changed = false;
     this.labelValue = undefined;
     this.renderAttributes = false;
+    this.changedAttributes = {};
     this.jsonSchema = this.options.jsonSchema || false;
 
     Alpaca.setDefaultLocale("de_AT");
@@ -151,8 +152,16 @@ gbi.widgets.AttributeEditor.prototype = {
 
         this.element.append(tmpl(gbi.widgets.AttributeEditor.dummySaveButtonTemplate));
         this.element.find('#dummy_save_btn').click(function() {
+            var changedAttributes = Object.keys(self.changedAttributes);
+            if(changedAttributes.length > 0) {
+                $.each(changedAttributes, function(idx, attribute) {
+                    self.edit(attribute, self.element.find('#' + attribute).val());
+                });
+            }
+            self.changedAttributes = {};
+
             $(this).removeClass('btn-success').attr('disabled', 'disabled');
-        })
+        });
 
         if(self.invalidFeatures && self.invalidFeatures.length > 0) {
             self.renderInvalidFeatures(activeLayer);
@@ -189,10 +198,10 @@ gbi.widgets.AttributeEditor.prototype = {
         $.each(renderedAttributes, function(idx, key) {
             $('#'+key).keyup(function() {
                 $('#dummy_save_btn').removeAttr('disabled').addClass('btn-success');
+                self.changedAttributes[key] = true;
             });
             $('#_'+key+'_remove').click(function() {
                 self.remove(key);
-                $('#dummy_save_btn').removeAttr('disabled').addClass('btn-success');
                 return false;
             });
             $('#_'+key+'_label').click(function() {
