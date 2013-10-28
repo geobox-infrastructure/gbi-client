@@ -328,7 +328,7 @@
       </div>
       <form action="{{ url_for('vector.export_selected_geometries')}}" method="POST">
         <div class="modal-body">
-          <p>{{ _('infotext export layer') }}</p>
+          <p>{{ _('infotext export selected geometries') }}</p>
           {{ export_form.name }}
           {{ export_form.geojson }}
           {{ input(export_form.filename) }}

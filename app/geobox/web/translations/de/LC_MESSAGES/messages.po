@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-28 10:04+0100\n"
-"PO-Revision-Date: 2013-10-28 10:04+0100\n"
+"POT-Creation-Date: 2013-10-28 15:51+0100\n"
+"PO-Revision-Date: 2013-10-28 15:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -221,7 +221,7 @@ msgstr "URL der Ziel CouchDB"
 
 #: geobox/web/templates/admin.html:4
 #: geobox/web/templates/admin.html:13
-#: geobox/web/templates/index.html:67
+#: geobox/web/templates/index.html:62
 #: geobox/web/templates/js/translation.js:132
 msgid "settings"
 msgstr "Einstellungen"
@@ -302,21 +302,94 @@ msgstr "Hinzufügen/Neustarten"
 msgid "remove"
 msgstr "Entfernen"
 
-#: geobox/web/templates/base.html:28
+#: geobox/web/templates/base.html:29
 #: geobox/web/templates/index.html:3
 msgid "home"
 msgstr "Startseite"
 
-#: geobox/web/templates/base.html:32
+#: geobox/web/templates/base.html:33
 #: geobox/web/templates/login.html:3
 #: geobox/web/templates/login.html:15
 #: geobox/web/templates/login.html:28
 msgid "login"
 msgstr "Anmelden"
 
-#: geobox/web/templates/base.html:34
+#: geobox/web/templates/base.html:35
 msgid "logout"
 msgstr "Abmelden"
+
+#: geobox/web/templates/create_couch_app.html:14
+msgid "create couch app"
+msgstr "GeoBox CouchApp erstellen"
+
+#: geobox/web/templates/create_couch_app.html:17
+msgid "Create couch app"
+msgstr "GeoBox CouchApp erstellen"
+
+#: geobox/web/templates/create_couch_app.html:17
+msgid "tooltip create couch app"
+msgstr "Erstellen der GeoBox CouchApp in einer von Ihnen anzugebenen CouchDB. Die GeoBox CouchApp entspricht dem Editor des GeoBox Client."
+
+#: geobox/web/templates/create_couch_app.html:21
+#: geobox/web/templates/projects/export_edit.html:18
+msgid "raster layers"
+msgstr "Rasterlayer"
+
+#: geobox/web/templates/create_couch_app.html:21
+msgid "tooltip couch app raster layers"
+msgstr "Wählen Sie aus den Ihren lokalen Rasterlayern aus, welche zusammen mit der GeoBox CouchApp in die CouchDB übertragen werden sollen"
+
+#: geobox/web/templates/create_couch_app.html:27
+msgid "vector layer"
+msgstr "Vektorlayer"
+
+#: geobox/web/templates/create_couch_app.html:27
+msgid "tooltip couch app vector layers"
+msgstr "Wählen Sie aus Ihren Vektorlayern aus, welche zusammen mit der GeoBox CouchApp in die CouchDB übertragen werden sollen"
+
+#: geobox/web/templates/create_couch_app.html:33
+msgid "create"
+msgstr "Erstellen"
+
+#: geobox/web/templates/create_couch_app_status.html:3
+msgid "create couch app status"
+msgstr "Status des Erstellvorgangs der GeoBox CouchApp"
+
+#: geobox/web/templates/create_couch_app_status.html:12
+msgid "Create couch app status"
+msgstr "Status des Erstellvorgangs der GeoBox CouchApp"
+
+#: geobox/web/templates/create_couch_app_status.html:13
+msgid "Couchapp created"
+msgstr "GeoBox CouchApp erstellt"
+
+#: geobox/web/templates/create_couch_app_status.html:15
+msgid "Layer copy status"
+msgstr "Kopierstatus der Layer"
+
+#: geobox/web/templates/create_couch_app_status.html:19
+msgid "Layer"
+msgstr "Layer"
+
+#: geobox/web/templates/create_couch_app_status.html:20
+msgid "Status"
+msgstr "Status"
+
+#: geobox/web/templates/create_couch_app_status.html:30
+msgid "not processed"
+msgstr "Noch nicht bearbeitet"
+
+#: geobox/web/templates/create_couch_app_status.html:32
+msgid "finished"
+msgstr "Beendet"
+
+#: geobox/web/templates/create_couch_app_status.html:34
+msgid "an error occured"
+msgstr "Es ist ein Fehler aufgetreten"
+
+#: geobox/web/templates/create_couch_app_status.html:36
+msgid "completed"
+msgstr "abgeschlossen"
 
 #: geobox/web/templates/downloads.html:4
 #: geobox/web/templates/downloads.html:7
@@ -351,25 +424,25 @@ msgid "open export on external explorer"
 msgstr "Export-Verzeichnis öffnen"
 
 #: geobox/web/templates/editor.html:4
-#: geobox/web/templates/editor.html:79
+#: geobox/web/templates/editor.html:85
 #: geobox/web/templates/index.html:54
 #: geobox/web/templates/index.html:56
 msgid "editor"
 msgstr "Editor"
 
-#: geobox/web/templates/editor.html:80
+#: geobox/web/templates/editor.html:86
 msgid "tooltip - editor"
 msgstr "In dieser Ansicht können Sie Geometrien bearbeiten"
 
-#: geobox/web/templates/editor.html:88
+#: geobox/web/templates/editor.html:94
 msgid "map layer"
 msgstr "Kartenebenen"
 
-#: geobox/web/templates/editor.html:91
+#: geobox/web/templates/editor.html:97
 msgid "look"
 msgstr "Aussehen"
 
-#: geobox/web/templates/editor.html:94
+#: geobox/web/templates/editor.html:100
 #: geobox/web/templates/admin/external_raster_list.html:135
 #: geobox/web/templates/admin/external_raster_list.html:137
 #: geobox/web/templates/projects/exports.html:29
@@ -377,114 +450,114 @@ msgstr "Aussehen"
 msgid "edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:97
-#: geobox/web/templates/editor.html:140
+#: geobox/web/templates/editor.html:103
+#: geobox/web/templates/editor.html:146
 msgid "filter"
 msgstr "Filter"
 
-#: geobox/web/templates/editor.html:100
+#: geobox/web/templates/editor.html:106
 msgid "measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:104
-#: geobox/web/templates/editor.html:155
-#: geobox/web/templates/editor.html:165
+#: geobox/web/templates/editor.html:110
+#: geobox/web/templates/editor.html:161
+#: geobox/web/templates/editor.html:171
 msgid "search"
 msgstr "Suche"
 
-#: geobox/web/templates/editor.html:108
-#: geobox/web/templates/editor.html:219
+#: geobox/web/templates/editor.html:114
+#: geobox/web/templates/editor.html:228
 msgid "offline seeding"
 msgstr "Datenimport"
 
-#: geobox/web/templates/editor.html:112
-#: geobox/web/templates/editor.html:175
+#: geobox/web/templates/editor.html:118
+#: geobox/web/templates/editor.html:181
 msgid "thematical map"
 msgstr "Thematische Karte"
 
-#: geobox/web/templates/editor.html:115
+#: geobox/web/templates/editor.html:121
 msgid "documents"
 msgstr "Dokumente"
 
-#: geobox/web/templates/editor.html:123
+#: geobox/web/templates/editor.html:129
 msgid "Styling"
 msgstr "Aussehen der Geometrien"
 
-#: geobox/web/templates/editor.html:124
+#: geobox/web/templates/editor.html:130
 msgid "infotext - edit styling"
 msgstr "Hier ändern Sie das Aussehen der Geometrien. In jeder Ebene kann ein bestimmtes Aussehen verwendet werden. Ohne Speichern gehen die Änderungen verloren."
 
-#: geobox/web/templates/editor.html:129
+#: geobox/web/templates/editor.html:135
 msgid "Edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:130
+#: geobox/web/templates/editor.html:136
 msgid "infotext - edit controls"
 msgstr "Wählen Sie ein Bearbeitungswerkzeug aus."
 
-#: geobox/web/templates/editor.html:132
+#: geobox/web/templates/editor.html:138
 msgid "select all features"
 msgstr "Alle Geometrien auswählen"
 
-#: geobox/web/templates/editor.html:134
+#: geobox/web/templates/editor.html:140
 #: geobox/web/templates/js/translation.js:99
 msgid "Attributes"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:135
+#: geobox/web/templates/editor.html:141
 msgid "infotext - attributes"
 msgstr "Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie hierzu eine Geometrie mit dem Auswahlwerkezug aus."
 
-#: geobox/web/templates/editor.html:141
+#: geobox/web/templates/editor.html:147
 msgid "infotext - filter controls"
 msgstr "Hier können Sie Geometrien abhängig von Eigenschaft und Wert auswählen."
 
-#: geobox/web/templates/editor.html:146
+#: geobox/web/templates/editor.html:152
 msgid "Measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:147
+#: geobox/web/templates/editor.html:153
 msgid "infotext - measure controls"
 msgstr "Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen, oder Strecken und Flächen messen."
 
-#: geobox/web/templates/editor.html:157
+#: geobox/web/templates/editor.html:163
 msgid "infotext - search controls"
 msgstr "Sie können hier über die vom Server bereitgestellt Dienste suchen und die Geometrien anschließend über den Reiter 'Editieren' in Ihren Layer übertragen"
 
-#: geobox/web/templates/editor.html:160
+#: geobox/web/templates/editor.html:166
 msgid "No features found"
 msgstr "Die Suche ergab keine Ergebnisse"
 
-#: geobox/web/templates/editor.html:163
+#: geobox/web/templates/editor.html:169
 msgid "search request is being processed"
 msgstr "Suchanfrage wird bearbeitet"
 
-#: geobox/web/templates/editor.html:166
+#: geobox/web/templates/editor.html:172
 msgid "remove search"
 msgstr "Suchstring entfernen"
 
-#: geobox/web/templates/editor.html:167
+#: geobox/web/templates/editor.html:173
 msgid "hide searchlayer"
 msgstr "Suchergebnis ausblenden"
 
-#: geobox/web/templates/editor.html:169
+#: geobox/web/templates/editor.html:175
 msgid "infotext - no wfs search"
 msgstr "Der Server stellt keine Suchdienste zur Verfügung."
 
-#: geobox/web/templates/editor.html:176
+#: geobox/web/templates/editor.html:182
 msgid "infotext - thematical map"
 msgstr "Erstellen Sie hier eine thematische Karte. So können Sie zum Beispiel die Geometrien klassifizieren oder die Daten als Liste exportieren."
 
-#: geobox/web/templates/editor.html:181
+#: geobox/web/templates/editor.html:187
 msgid "save changes"
 msgstr "Änderungen speichern"
 
-#: geobox/web/templates/editor.html:182
+#: geobox/web/templates/editor.html:188
 msgid "infotext - editor save"
 msgstr "Speichern Sie hier Änderungen dauerhaft oder laden Sie Daten aus Speicherpunkten."
 
-#: geobox/web/templates/editor.html:184
-#: geobox/web/templates/editor.html:185
+#: geobox/web/templates/editor.html:190
+#: geobox/web/templates/editor.html:191
 #: geobox/web/templates/admin/external_unlock.html:20
 #: geobox/web/templates/admin/external_wms.html:51
 #: geobox/web/templates/admin/external_wmts.html:24
@@ -493,133 +566,147 @@ msgstr "Speichern Sie hier Änderungen dauerhaft oder laden Sie Daten aus Speich
 msgid "save"
 msgstr "Speichern"
 
-#: geobox/web/templates/editor.html:186
+#: geobox/web/templates/editor.html:192
 msgid "discard"
 msgstr "Abbruch"
 
-#: geobox/web/templates/editor.html:188
-#: geobox/web/templates/editor.html:191
+#: geobox/web/templates/editor.html:194
+#: geobox/web/templates/editor.html:197
 msgid "save as"
 msgstr "Speichern untern"
 
-#: geobox/web/templates/editor.html:193
+#: geobox/web/templates/editor.html:199
 msgid "No active layer or invalid layer name"
 msgstr "Ungültiger Layername oder kein Layer aktiv"
 
-#: geobox/web/templates/editor.html:199
-#: geobox/web/templates/editor.html:205
+#: geobox/web/templates/editor.html:206
+msgid "Export selected geometries"
+msgstr "Ausgewählte Geometrien exportieren"
+
+#: geobox/web/templates/editor.html:208
+#: geobox/web/templates/editor.html:214
 msgid "No active layer"
 msgstr "Kein Layer aktiv"
 
-#: geobox/web/templates/editor.html:202
+#: geobox/web/templates/editor.html:211
 msgid "savepoints"
 msgstr "Speicherpunkte"
 
-#: geobox/web/templates/editor.html:203
+#: geobox/web/templates/editor.html:212
 msgid "create savepoint"
 msgstr "Speicherpunkt erstellen"
 
-#: geobox/web/templates/editor.html:204
+#: geobox/web/templates/editor.html:213
 msgid "create new savepoint"
 msgstr "Erstellen"
 
-#: geobox/web/templates/editor.html:206
+#: geobox/web/templates/editor.html:215
 msgid "save point created"
 msgstr "Speicherpunkt wurde erstellt"
 
-#: geobox/web/templates/editor.html:207
+#: geobox/web/templates/editor.html:216
 msgid "error - could not create savepoint"
 msgstr "Fehler - Speicherpunkt konnte nicht wurde erstellt"
 
-#: geobox/web/templates/editor.html:209
+#: geobox/web/templates/editor.html:218
 msgid "load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:212
+#: geobox/web/templates/editor.html:221
 msgid "load"
 msgstr "Laden"
 
-#: geobox/web/templates/editor.html:213
+#: geobox/web/templates/editor.html:222
 #: geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr "Löschen"
 
-#: geobox/web/templates/editor.html:220
+#: geobox/web/templates/editor.html:229
 msgid "infotext - offline seeding"
 msgstr "Hier können Sie für Ihre lokalen Rasterlayer zusätzlich Daten importieren. Wählen Sie hierzu einen Layer aus und zeichnen Sie den Bereich, für den Sie Daten importieren möchten, in die Karte ein. Wählen Sie einen Start- und Endlevel für den Datenimport aus und starten Sie den Datenimport per Knopfdruck"
 
-#: geobox/web/templates/editor.html:232
+#: geobox/web/templates/editor.html:241
 msgid "Sure you want load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:235
+#: geobox/web/templates/editor.html:244
 msgid "infotext load savepoint"
 msgstr "Nach dem Laden des Speicherpunkts gehen alle nicht gespeicherte Änderungen verloren."
 
-#: geobox/web/templates/editor.html:238
-#: geobox/web/templates/editor.html:253
-#: geobox/web/templates/editor.html:268
-#: geobox/web/templates/editor.html:284
-#: geobox/web/templates/editor.html:308
+#: geobox/web/templates/editor.html:247
+#: geobox/web/templates/editor.html:262
+#: geobox/web/templates/editor.html:277
+#: geobox/web/templates/editor.html:293
+#: geobox/web/templates/editor.html:317
+#: geobox/web/templates/editor.html:337
 #: geobox/web/templates/admin/external_wms.html:70
 #: geobox/web/templates/boxes/base.html:84
 #: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr "Abbrechen"
 
-#: geobox/web/templates/editor.html:239
+#: geobox/web/templates/editor.html:248
 msgid "yes load"
 msgstr "Ja, laden!"
 
-#: geobox/web/templates/editor.html:247
+#: geobox/web/templates/editor.html:256
 msgid "Sure you want remove savepoint"
 msgstr "Speicherpunkt löschen"
 
-#: geobox/web/templates/editor.html:250
+#: geobox/web/templates/editor.html:259
 msgid "infotext remove savepoint"
 msgstr "Nach dem Löschen können Sie dne Speicherpunkt nicht wiederherstellen. Alle Änderungen gehen dabei verloren."
 
-#: geobox/web/templates/editor.html:254
-#: geobox/web/templates/editor.html:285
+#: geobox/web/templates/editor.html:263
+#: geobox/web/templates/editor.html:294
 msgid "yes delete"
 msgstr "Ja, Löschen"
 
-#: geobox/web/templates/editor.html:262
+#: geobox/web/templates/editor.html:271
 msgid "Sure you want change layer"
 msgstr "Sind Sie sicher, dass Sie die Karte wechseln möchten"
 
-#: geobox/web/templates/editor.html:265
+#: geobox/web/templates/editor.html:274
 msgid "infotext change layer"
 msgstr "Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer importieren."
 
-#: geobox/web/templates/editor.html:269
+#: geobox/web/templates/editor.html:278
 msgid "yes change and discard"
 msgstr "Änderungen verwefern"
 
-#: geobox/web/templates/editor.html:270
+#: geobox/web/templates/editor.html:279
 msgid "yes change and save"
 msgstr "Speichern und wechseln"
 
-#: geobox/web/templates/editor.html:278
+#: geobox/web/templates/editor.html:287
 msgid "Sure you want delete layer"
 msgstr "Löschen der Karte"
 
-#: geobox/web/templates/editor.html:281
+#: geobox/web/templates/editor.html:290
 msgid "infotext delete layer"
 msgstr "Achtung: Nach dem Löschen kann die Karte nicht wiederhergestellt werden. Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
 
-#: geobox/web/templates/editor.html:294
+#: geobox/web/templates/editor.html:303
 msgid "export vector layer"
 msgstr "Vektorlayer exportieren"
 
-#: geobox/web/templates/editor.html:298
+#: geobox/web/templates/editor.html:307
 msgid "infotext export layer"
 msgstr "Exportieren Sie hier die aktuelle Karte in verschiedene Formate."
 
-#: geobox/web/templates/editor.html:309
+#: geobox/web/templates/editor.html:318
+#: geobox/web/templates/editor.html:338
 #: geobox/web/templates/index.html:39
 msgid "export"
 msgstr "Exportieren"
+
+#: geobox/web/templates/editor.html:327
+msgid "export selected geometries"
+msgstr "Ausgewählte Geometrien exportieren"
+
+#: geobox/web/templates/editor.html:331
+msgid "infotext export selected geometries"
+msgstr "Exportieren Sie hier Ihre ausgewählten Geometrien als GeoJSON direkt in Ihre Box."
 
 #: geobox/web/templates/index.html:10
 msgid "Welcome to GeoBox"
@@ -659,7 +746,7 @@ msgid "boxes"
 msgstr "Boxen"
 
 #: geobox/web/templates/index.html:30
-#: geobox/web/views/editor.py:37
+#: geobox/web/views/editor.py:38
 msgid "filebox"
 msgstr "Beraterbox"
 
@@ -685,17 +772,15 @@ msgstr "Aufgaben"
 msgid "downloads"
 msgstr "Downloads"
 
-#: geobox/web/templates/index.html:60
-#: geobox/web/templates/index.html:62
-#: geobox/web/templates/admin/create_couch_app.html:14
-msgid "create couch app"
-msgstr "GeoBox CouchApp erstellen"
+#: geobox/web/templates/index.html:57
+msgid "export editor and data"
+msgstr "Editor und Daten exportieren"
 
-#: geobox/web/templates/index.html:69
+#: geobox/web/templates/index.html:64
 msgid "data sources"
 msgstr "Datenquellen"
 
-#: geobox/web/templates/index.html:70
+#: geobox/web/templates/index.html:65
 msgid "administation"
 msgstr "Administration"
 
@@ -710,75 +795,6 @@ msgstr "Log Übersicht"
 #: geobox/web/templates/macros.html:121
 msgid "download coverage"
 msgstr "Downloadberecht."
-
-#: geobox/web/templates/admin/create_couch_app.html:17
-msgid "Create couch app"
-msgstr "GeoBox CouchApp erstellen"
-
-#: geobox/web/templates/admin/create_couch_app.html:17
-msgid "tooltip create couch app"
-msgstr "Erstellen der GeoBox CouchApp in einer von Ihnen anzugebenen CouchDB. Die GeoBox CouchApp entspricht dem Editor des GeoBox Client."
-
-#: geobox/web/templates/admin/create_couch_app.html:21
-#: geobox/web/templates/projects/export_edit.html:18
-msgid "raster layers"
-msgstr "Rasterlayer"
-
-#: geobox/web/templates/admin/create_couch_app.html:21
-msgid "tooltip couch app raster layers"
-msgstr "Wählen Sie aus den Ihren lokalen Rasterlayern aus, welche zusammen mit der GeoBox CouchApp in die CouchDB übertragen werden sollen"
-
-#: geobox/web/templates/admin/create_couch_app.html:27
-msgid "vector layer"
-msgstr "Vektorlayer"
-
-#: geobox/web/templates/admin/create_couch_app.html:27
-msgid "tooltip couch app vector layers"
-msgstr "Wählen Sie aus Ihren Vektorlayern aus, welche zusammen mit der GeoBox CouchApp in die CouchDB übertragen werden sollen"
-
-#: geobox/web/templates/admin/create_couch_app.html:33
-msgid "create"
-msgstr "Erstellen"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:3
-msgid "create couch app status"
-msgstr "Status des Erstellvorgangs der GeoBox CouchApp"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:12
-msgid "Create couch app status"
-msgstr "Status des Erstellvorgangs der GeoBox CouchApp"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:13
-msgid "Couchapp created"
-msgstr "GeoBox CouchApp erstellt"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:15
-msgid "Layer copy status"
-msgstr "Kopierstatus der Layer"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:19
-msgid "Layer"
-msgstr "Layer"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:20
-msgid "Status"
-msgstr "Status"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:30
-msgid "not processed"
-msgstr "Noch nicht bearbeitet"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:32
-msgid "finished"
-msgstr "Beendet"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:34
-msgid "an error occured"
-msgstr "Es ist ein Fehler aufgetreten"
-
-#: geobox/web/templates/admin/create_couch_app_status.html:36
-msgid "completed"
-msgstr "abgeschlossen"
 
 #: geobox/web/templates/admin/external_raster_list.html:3
 #: geobox/web/templates/projects/imports.html:3
@@ -1507,55 +1523,59 @@ msgstr "Liste"
 msgid "layer has not attributes"
 msgstr "Der Layer besitzt keine Attribute"
 
-#: geobox/web/templates/js/translation.js:139
+#: geobox/web/templates/js/translation.js:138
+msgid "Select filtered features"
+msgstr "Geometrien auswählen"
+
+#: geobox/web/templates/js/translation.js:140
 msgid "load wms capabilities"
 msgstr "Capabilities wurden geladen"
 
-#: geobox/web/templates/js/translation.js:140
+#: geobox/web/templates/js/translation.js:141
 msgid "preview not possible"
 msgstr "Vorschau nicht möglich. Kein Layer gewählt oder Koordiantensystem wird nicht unterstützt."
 
-#: geobox/web/templates/js/translation.js:141
+#: geobox/web/templates/js/translation.js:142
 msgid "Show filtered features in list"
 msgstr "Zeige in Liste"
 
-#: geobox/web/templates/js/translation.js:144
+#: geobox/web/templates/js/translation.js:145
 msgid "Layer to seed"
 msgstr "Datenimport für Layer"
 
-#: geobox/web/templates/js/translation.js:145
+#: geobox/web/templates/js/translation.js:146
 msgid "Start level"
 msgstr "Startlevel"
 
-#: geobox/web/templates/js/translation.js:146
+#: geobox/web/templates/js/translation.js:147
 msgid "End level"
 msgstr "Endlevel"
 
-#: geobox/web/templates/js/translation.js:147
+#: geobox/web/templates/js/translation.js:148
 msgid "Start seeding"
 msgstr "Datenimport gestarten"
 
-#: geobox/web/templates/js/translation.js:148
+#: geobox/web/templates/js/translation.js:149
 msgid "Stop seeding"
 msgstr "Datenimport gestoppen"
 
-#: geobox/web/templates/js/translation.js:149
+#: geobox/web/templates/js/translation.js:150
 msgid "Seeding finished"
 msgstr "Datenimport beendet"
 
-#: geobox/web/templates/js/translation.js:150
+#: geobox/web/templates/js/translation.js:151
 msgid "No BBox given"
 msgstr "Kein Bereich für den Datenimport in der Karte markiert"
 
-#: geobox/web/templates/js/translation.js:151
+#: geobox/web/templates/js/translation.js:152
 msgid "Tiles estimated"
 msgstr "Kacheln werden importiert"
 
-#: geobox/web/templates/js/translation.js:152
+#: geobox/web/templates/js/translation.js:153
 msgid "Seeding stopped"
 msgstr "Datenimport gestoppt"
 
-#: geobox/web/templates/js/translation.js:153
+#: geobox/web/templates/js/translation.js:154
 msgid "No layer to seed"
 msgstr "Kein Layer für Datenimport vorhanden"
 
@@ -1854,15 +1874,6 @@ msgstr "Löschen nicht möglich"
 msgid "settings changed. restart required"
 msgstr "Die Einstellungen wurden verändert - bitte starten Sie die Anwendung neu"
 
-#: geobox/web/views/admin.py:151
-msgid "creating couch app"
-msgstr "Erstelle GeoBox CouchApp"
-
-#: geobox/web/views/admin.py:180
-#, python-format
-msgid "couchapp ready %(couchapp_url)s"
-msgstr "Die GeoBox CouchApp wurde erfolgreich in Ihrer CouchDB erstellt und steht nun unter der URL %(couchapp_url)s für Sie bereit"
-
 #: geobox/web/views/boxes.py:62
 msgid "upload success"
 msgstr "Datei erfolgreich hochgeladen"
@@ -1891,13 +1902,22 @@ msgstr "Datei wird importiert"
 msgid "file deleted"
 msgstr "Datei wurde gelöscht"
 
-#: geobox/web/views/editor.py:37
+#: geobox/web/views/editor.py:38
 msgid "upload_box"
 msgstr "Upload-Box"
 
-#: geobox/web/views/editor.py:39
+#: geobox/web/views/editor.py:40
 msgid "Filesystem"
 msgstr "Dateisystem"
+
+#: geobox/web/views/editor.py:125
+msgid "creating couch app"
+msgstr "Erstelle GeoBox CouchApp"
+
+#: geobox/web/views/editor.py:162
+#, python-format
+msgid "couchapp ready %(couchapp_url)s"
+msgstr "Die GeoBox CouchApp wurde erfolgreich in Ihrer CouchDB erstellt und steht nun unter der URL %(couchapp_url)s für Sie bereit"
 
 #: geobox/web/views/project.py:100
 #: geobox/web/views/project.py:214
