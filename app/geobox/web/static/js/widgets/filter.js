@@ -16,7 +16,11 @@ gbi.widgets.Filter.prototype = {
         self = this
         self.element.empty().append(tmpl(gbi.widgets.Filter.template, {srs: self.options.srs}));
 
-        if(self.editor.layerManager.active()) {
+        var layer = self.editor.layerManager.active()
+        if(layer) {
+            if(layer._filterWidget !== undefined) {
+                self.fillFields(layer._filterWidget['attr'], layer._filterWidget['value']);
+            }
             $('#setFilter').click(function() {
                 var attr = $('#filterAttr').val();
                 var value = $('#filterValue').val();
@@ -27,15 +31,22 @@ gbi.widgets.Filter.prototype = {
             $('#setFilter').attr('disabled', 'disabled');
         }
     },
-    clearFields: function() {
+    fillFields: function(attr, value) {
+        var self = this;
+        self.element.find('#filterAttr').val(attr);
+        self.element.find('#filterValue').val(value);
+    },
+    clearFields: function(event, layer) {
         self.element.find('#filterAttr').val('');
         self.element.find('#filterValue').val('');
+        delete layer._filterWidget;
     },
     setFilter: function(attr, value) {
         var self = this;
         var layer = self.editor.layerManager.active();
         layer.clearStoredFeatures();
-        self.filteredFeatures = layer.selectByPropertyValue(attr, value, true);
+        layer.selectByPropertyValue(attr, value);
+        layer._filterWidget = {'attr': attr, 'value': value};
         return false;
     }
 };
