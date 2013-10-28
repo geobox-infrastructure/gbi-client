@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-28 09:06+0100\n"
-"PO-Revision-Date: 2013-10-28 09:08+0100\n"
+"POT-Creation-Date: 2013-10-28 10:04+0100\n"
+"PO-Revision-Date: 2013-10-28 10:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -659,6 +659,7 @@ msgid "boxes"
 msgstr "Boxen"
 
 #: geobox/web/templates/index.html:30
+#: geobox/web/views/editor.py:37
 msgid "filebox"
 msgstr "Beraterbox"
 
@@ -1890,7 +1891,11 @@ msgstr "Datei wird importiert"
 msgid "file deleted"
 msgstr "Datei wurde gelöscht"
 
-#: geobox/web/views/editor.py:35
+#: geobox/web/views/editor.py:37
+msgid "upload_box"
+msgstr "Upload-Box"
+
+#: geobox/web/views/editor.py:39
 msgid "Filesystem"
 msgstr "Dateisystem"
 
@@ -2200,5 +2205,3 @@ msgstr "Kein gültigen Zeitpunkt angegeben."
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
-#~ msgid "save & load"
-#~ msgstr "Speichern & Laden"

@@ -18,7 +18,7 @@ from flaskext.babel import _
 
 import json
 
-from geobox.model import ExternalWMTSSource, ExternalWFSSource
+from geobox.model import ExternalWMTSSource, ExternalWFSSource, User
 from geobox.lib.couchdb import CouchFileBox
 from geobox.lib.tabular import geojson_to_rows, csv_export, ods_export
 from geobox.web.forms import ExportVectorForm, WFSSearchForm
@@ -31,8 +31,12 @@ def editor():
     export_form = ExportVectorForm(request.form)
     export_form.srs.choices = [(srs, srs) for srs in current_app.config.geobox_state.config.get('web', 'available_srs')]
 
-    upload_box = current_app.config.geobox_state.config.get('couchdb', 'upload_box')
-    export_form.destination.choices = [('file', _('Filesystem')), (upload_box, upload_box)]
+    user = User(current_app.config.geobox_state.config.get('user', 'type'))
+
+    target_box_name = 'file_box' if user.is_consultant else 'upload_box'
+    target_box_label = _('filebox') if user.is_consultant else _('upload_box')
+    target_box = current_app.config.geobox_state.config.get('couchdb', target_box_name)
+    export_form.destination.choices = [('file', _('Filesystem')), (target_box, target_box_label)]
 
     # load preview layer
     preview_features = False

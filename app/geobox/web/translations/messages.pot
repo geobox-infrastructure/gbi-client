@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-28 09:06+0100\n"
+"POT-Creation-Date: 2013-10-28 10:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -625,7 +625,7 @@ msgstr ""
 msgid "boxes"
 msgstr ""
 
-#: geobox/web/templates/index.html:30
+#: geobox/web/templates/index.html:30 geobox/web/views/editor.py:37
 msgid "filebox"
 msgstr ""
 
@@ -1853,7 +1853,11 @@ msgstr ""
 msgid "file deleted"
 msgstr ""
 
-#: geobox/web/views/editor.py:35
+#: geobox/web/views/editor.py:37
+msgid "upload_box"
+msgstr ""
+
+#: geobox/web/views/editor.py:39
 msgid "Filesystem"
 msgstr ""
 
