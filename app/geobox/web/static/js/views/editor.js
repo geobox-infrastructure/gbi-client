@@ -18,8 +18,7 @@ $(document).ready(function() {
       'gbi.layer.vector.featuresStoreCleared': disableExportSelectedGeometriesButton,
     };
     var olLayerEvents = {
-      'featureselected': storeSelectedFeatures,
-      'featureunselected': removeStoredFeature
+      'featureselected': storeSelectedFeatures
     };
     var editor = initEditor();
     var activeLayer = editor.layerManager.active();
@@ -613,6 +612,13 @@ function initEditor() {
         }
     });
     toolbar.select.deactivate();
+    toolbar.select.olControl.onUnselect = function(feature) {
+      console.log('unselect')
+      var layer = feature.layer.gbiLayer;
+
+      layer.removeStoredFeature(feature);
+      layer.storeFeatures(layer.olLayer.selectedFeatures);
+    };
 
     var attributeEditor = new gbi.widgets.AttributeEditor(editor);
     editor.widgets.attributeEditor = attributeEditor;
