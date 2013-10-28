@@ -196,6 +196,9 @@
           <button id="export_vectorlayer" class="btn btn-small">
             <i class="icon-edit"></i> Export
           </button>
+          <button id="export_selected_geometries" class="btn btn-small" disabled="disabled">
+            <i class="icon-edit"></i> {{ _('Export selected geometries') }}
+          </button>
           <div class="alert alert-error hide" id="export_error">{{ _('No active layer') }}</div>
           {% endif %}
           <hr>
@@ -303,6 +306,26 @@
           {{ select(export_form.srs) }}
           {{ select(export_form.destination) }}
           {{ input(export_form.odata_url) }}
+        </div>
+        <div class="modal-footer">
+          <a href="#" id="abort_export_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>
+          <button class="btn btn-primary" type="submit">{{_('export')}}</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- modal for selected geometries export -->
+    <div id="exportSelectedGeometries" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{_('export selected geometries')}} </h3>
+      </div>
+      <form action="{{ url_for('vector.export_selected_geometries')}}" method="POST">
+        <div class="modal-body">
+          <p>{{ _('infotext export layer') }}</p>
+          {{ export_form.name }}
+          {{ export_form.geojson }}
+          {{ input(export_form.filename) }}
         </div>
         <div class="modal-footer">
           <a href="#" id="abort_export_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>

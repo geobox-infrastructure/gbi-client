@@ -6,15 +6,15 @@ $(window).on('beforeunload', function() {
 
 $(document).ready(function() {
     var layerEvents = {
-      'gbi.layer.vector.styleChanged': eneableSaveButton,
-      'gbi.layer.saveableVector.unsavedChanges': eneableSaveButton,
-      'gbi.layer.vector.ruleChanged': eneableSaveButton,
-      'gbi.layer.vector.listAttributesChanged': eneableSaveButton,
-      'gbi.layer.vector.popupAttributesChanged': eneableSaveButton,
-      'gbi.layer.vector.featureAttributeChanged': eneableSaveButton,
-      'gbi.layer.vector.schemaLoaded': eneableSaveButton,
-      'gbi.layer.vector.schemaRemoved': eneableSaveButton
     }
+      'gbi.layer.vector.styleChanged': enableSaveButton,
+      'gbi.layer.saveableVector.unsavedChanges': enableSaveButton,
+      'gbi.layer.vector.ruleChanged': enableSaveButton,
+      'gbi.layer.vector.listAttributesChanged': enableSaveButton,
+      'gbi.layer.vector.popupAttributesChanged': enableSaveButton,
+      'gbi.layer.vector.featureAttributeChanged': enableSaveButton,
+      'gbi.layer.vector.schemaLoaded': enableSaveButton,
+      'gbi.layer.vector.schemaRemoved': enableSaveButton,
     var editor = initEditor();
     var activeLayer = editor.layerManager.active();
 
@@ -24,6 +24,16 @@ $(document).ready(function() {
       layer.unregisterEvent('featureunselected', editor, clearStoredFeaturesWrapper);
       editor.widgets.layerfilter.clearFields();
     }
+
+    $('#exportVectorLayer form, #exportSelectedGeometries form').submit(function(event) {
+      console.log('submit')
+      var filename_input = $(this).find('#filename');
+      if(!filename_input.val()) {
+        filename_input.parent().parent().addClass('error');
+        filename_input.after('<span class="help-inline">' + OpenLayers.i18n('Required') + '</span>');
+        event.preventDefault();
+      }
+    });
 
     if(activeLayer.odataUrl) {
       $('#odata_url').val(activeLayer.odataUrl);
@@ -315,13 +325,21 @@ $(document).ready(function() {
       });
     };
 
-    function eneableSaveButton() {
+    function enableSaveButton() {
       if(activeLayer instanceof gbi.Layers.Couch) {
         $('#save-tab').addClass('save-enabled');
         $('#save-changes').removeAttr('disabled').addClass('btn-success');
         $('#discard-changes').removeAttr('disabled').addClass('btn-danger');
       }
     };
+
+    function enableExportSelectedGeometriesButton() {
+      $('#export_selected_geometries').removeAttr('disabled');
+    }
+
+    function disableExportSelectedGeometriesButton() {
+      $('#export_selected_geometries').attr('disabled', 'disabled');
+    }
 
 
     $("#export_vectorlayer").click(function() {
@@ -350,6 +368,28 @@ $(document).ready(function() {
         return false;
     });
 
+    $("#export_selected_geometries").click(function() {
+      var layer = activeLayer;
+      if(layer && layer.storedFeatures().length > 0) {
+        var features = layer.storedFeatures();
+        $("#exportSelectedGeometries input#name").val(layer.olLayer.name)
+        if (features && features.length != 0) {
+          var geoJSON = new OpenLayers.Format.GeoJSON();
+          var geoJSONText = geoJSON.write(features);
+          $("#exportSelectedGeometries input#geojson").val(geoJSONText)
+        }
+        // add filename
+        $("#exportSelectedGeometries input#filename").val(layer.olLayer.name)
+        $('#exportSelectedGeometries').modal('show');
+        $('#exportSelectedGeometries').on('hidden', function () {
+          $('#remove_layer').off('click');
+          $('#deleteVectorLayer').off('hidden');
+         })
+      } else {
+        $('#export_error').show().fadeOut(3000);
+      }
+      return false;
+    });
 
     var activeSearchLayer;
     $('#start_search').click(function() {

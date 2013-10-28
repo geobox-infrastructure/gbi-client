@@ -25,7 +25,7 @@ from geobox.lib.server_logging import send_task_logging
 from geobox.lib.vectorconvert import is_valid_shapefile, ConvertError
 from geobox.lib.fs import open_file_explorer
 from geobox.lib.couchdb import vector_layers_metadata
-from geobox.model import VectorImportTask
+from geobox.model import VectorImportTask, User
 from geobox.web import forms
 from geobox.model.tasks import VectorExportTask
 
@@ -230,13 +230,30 @@ def import_file_browser():
 
 @vector.route('/vector/export', methods=['POST'])
 def export_vector():
-    proj = request.form.get('srs', False)
-    layername = request.form.get('name', False)
-    export_type = request.form.get('export_type', False)
-    destination = request.form.get('destination', False)
-    filename = request.form.get('filename', False)
-    geojson = request.form.get('geojson', '')
+    return create_export_task(
+        proj = request.form.get('srs', False),
+        layername = request.form.get('name', False),
+        export_type = request.form.get('export_type', False),
+        destination = request.form.get('destination', False),
+        filename = request.form.get('filename', False),
+        geojson = request.form.get('geojson', '')
+    )
 
+@vector.route('/vector/export/selected', methods=['POST'])
+def export_selected_geometries():
+    user = User(current_app.config.geobox_state.config.get('user', 'type'))
+    target_box_name = 'file_box' if user.is_consultant else 'upload_box'
+
+    return create_export_task(
+        proj = 'EPSG:3857',
+        layername = request.form.get('name', False),
+        export_type ='geojson',
+        destination = current_app.config.geobox_state.config.get('couchdb', target_box_name),
+        filename = request.form.get('filename', False),
+        geojson = request.form.get('geojson', False)
+    )
+
+def create_export_task(proj, layername, export_type, destination, filename, geojson):
     task = VectorExportTask(
        db_name=layername,
        srs=proj,
