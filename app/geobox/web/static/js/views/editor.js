@@ -5,8 +5,7 @@ $(window).on('beforeunload', function() {
 });
 
 $(document).ready(function() {
-    var layerEvents = {
-    }
+    var gbiLayerEvents = {
       'gbi.layer.vector.styleChanged': enableSaveButton,
       'gbi.layer.saveableVector.unsavedChanges': enableSaveButton,
       'gbi.layer.vector.ruleChanged': enableSaveButton,
@@ -15,6 +14,9 @@ $(document).ready(function() {
       'gbi.layer.vector.featureAttributeChanged': enableSaveButton,
       'gbi.layer.vector.schemaLoaded': enableSaveButton,
       'gbi.layer.vector.schemaRemoved': enableSaveButton,
+      'gbi.layer.vector.featuresStored': enableExportSelectedGeometriesButton,
+      'gbi.layer.vector.featuresStoreCleared': disableExportSelectedGeometriesButton,
+    };
     var editor = initEditor();
     var activeLayer = editor.layerManager.active();
 
@@ -314,13 +316,13 @@ $(document).ready(function() {
     };
 
     function registerEvents(layer) {
-      $.each(layerEvents, function(type, func) {
+      $.each(gbiLayerEvents, function(type, func) {
         $(layer).on(type, func);
       });
     }
 
     function unregisterEvents(layer) {
-      $.each(layerEvents, function(type, func) {
+      $.each(gbiLayerEvents, function(type, func) {
         $(layer).off(type, func);
       });
     };
