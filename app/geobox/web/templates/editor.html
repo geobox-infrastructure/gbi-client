@@ -74,6 +74,12 @@
    <script type="text/javascript" src="{{ url_for('static', filename='js/views/editor.js') }}"></script>
 {% endblock %}
 
+{% if with_server %}
+  {% block navbar %}
+  <span class="brand">GeoBox CouchApp</span>
+  {% endblock %}
+{% endif %}
+
 {% block content %}
 <div class="row-fluid">
   <h1>{{_('editor')}}
