@@ -107,6 +107,7 @@ gbi.widgets.Seeding.prototype = {
         self.oldActiveLayer = self.editor.layerManager.active();
         self.layer.visible(true);
         self.editor.layerManager.active(self.layer);
+        self.oldActiveLayer.selectFeatures(self.oldActiveLayer.storedFeatures())
     },
     deactivate: function() {
         var self = this;
