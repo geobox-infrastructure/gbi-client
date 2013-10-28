@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-28 09:03+0100\n"
+"POT-Creation-Date: 2013-10-28 09:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -380,7 +380,7 @@ msgid "thematical map"
 msgstr ""
 
 #: geobox/web/templates/editor.html:115
-msgid "save & load"
+msgid "documents"
 msgstr ""
 
 #: geobox/web/templates/editor.html:123

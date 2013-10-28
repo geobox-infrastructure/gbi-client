@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-28 09:03+0100\n"
-"PO-Revision-Date: 2013-10-28 09:03+0100\n"
+"POT-Creation-Date: 2013-10-28 09:06+0100\n"
+"PO-Revision-Date: 2013-10-28 09:08+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -403,8 +403,8 @@ msgid "thematical map"
 msgstr "Thematische Karte"
 
 #: geobox/web/templates/editor.html:115
-msgid "save & load"
-msgstr "Speichern & Laden"
+msgid "documents"
+msgstr "Dokumente"
 
 #: geobox/web/templates/editor.html:123
 msgid "Styling"
@@ -2200,3 +2200,5 @@ msgstr "Kein gültigen Zeitpunkt angegeben."
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
+#~ msgid "save & load"
+#~ msgstr "Speichern & Laden"
