@@ -69,22 +69,24 @@ $(document).ready(function() {
         $(gbi).trigger('gbi.widgets.thematicalVector.activate', activeLayer);
       }
 
+      var storedFeatures = activeLayer.storedFeatures().slice();
+
+
       if (editor.map.toolbars && editor.map.toolbars.length > 0) {
         $.each(editor.map.toolbars, function(id, toolbar) {
           toolbar.deactivateAllControls();
 
-          // unselect all and select stored features
           if (activeLayer && toolbar.select && toolbar.select.olControl) {
-            toolbar.select.olControl.unselectAll();
             if(tab == '#edit') {
-              // with select control to enable unselecting
-              $.each(activeLayer.storedFeatures(), function(idx, feature) {
-                toolbar.select.olControl.select(feature)
+              var selectedFeatures = activeLayer.olLayer.selectedFeatures.slice();
+              // select features with toolbar.select for unselecting
+              $.each(selectedFeatures, function(idx, feature) {
+                f_idx = $.inArray(feature, activeLayer.olLayer.selectedFeatures)
+                if(f_idx != -1) {
+                  activeLayer.olLayer.selectedFeatures.splice(f_idx, 1);
+                  toolbar.select.olControl.select(feature);
+                }
               });
-              activeLayer.registerEvent('featureunselected', editor, clearStoredFeaturesWrapper);
-            } else {
-              // with layer
-              activeLayer.selectFeatures(activeLayer.storedFeatures());
             }
           }
           if (toolbar.select && toolbar.select.olControl && tab == '#edit') {
