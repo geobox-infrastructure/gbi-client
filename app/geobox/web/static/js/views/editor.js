@@ -1,3 +1,9 @@
+$(window).on('beforeunload', function() {
+  if($('#save-tab').hasClass('save-enabled')) {
+    return OpenLayers.i18n("Unsaved changes present. Sure, you want to leave the editor?");
+  }
+});
+
 $(document).ready(function() {
     var layerEvents = {
       'gbi.layer.vector.styleChanged': eneableSaveButton,
