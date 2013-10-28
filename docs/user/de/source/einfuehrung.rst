@@ -33,8 +33,7 @@ Startseite
   - Aufgaben
   - Downloads
   - Editor
-  - Karte
-  - CouchApp erstellen
+  - Editor und Daten exportieren
   - Datenquellen
   - Administration
 

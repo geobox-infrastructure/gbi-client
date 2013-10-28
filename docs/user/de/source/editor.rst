@@ -143,7 +143,9 @@ Die `Thematische Karte` ist beim Aufruf der Seite deaktiviert, unabhängig davon
 Legende
 '''''''
 
-In der Legende der thematischen Karte werden `Farbe`, `Wert` und `Fläche` angezeigt. Zusätzlich besteht die Möglichkeit über den Listenbutton zu einer Übersichtsliste zu gelangen. Hier werden alle Geometrien aufgelistet die dem Wert der Legende entsprechen.
+In der Legende der thematischen Karte werden `Farbe`, `Wert` und `Fläche` angezeigt.
+Über den Listenbutton gelangen Sie zu einer Übersichtsliste. Hier werden alle Geometrien aufgelistet, die dem Wert der Legende entsprechen.
+Mit dem Auswählenbutton werden alle Geometrien ausgewählt, die dem Wert der Legende entsprechen.
 
 Ist die thematische Karte im Modus `Exakte Werte`, können Sie den Schnell-Editormodus verwenden. Dieser kann aktiviert werden in dem Sie auf die Farbe in der Legende Klicken. Anschließend haben Sie die Möglichkeit eine Geometrie anzuklicken um dieser den Wert – entsprechenden der Farbe – zuzuweisen.
 
@@ -197,10 +199,10 @@ Außerdem können Sie bis zu 10 Eigenschaften auswählen, die in einem Popup bei
 Sie können die Reihenfolge der Eigenschaften verändern, indem Sie über einen Eintrag in der Liste die linke Maustaste gedrückt halten und den Eintrag an die von Ihnen gewünschte Stelle verschieben.
 In der Kurzliste, der kompletten Liste und in den Popups werden die Eigenschaften in der Reihenfolge dargestellt, wie sie in der Liste definiert wurde.
 
-Speichern & Laden
------------------
+Dokumente
+---------
 
-Dieses Register wird grün hinterlegt, sobald speicherbare Änderungen vorliegen.
+Der Text dieses Register wird kursiv, sobald speicherbare Änderungen vorliegen.
 
 Speichern / Speichern unter
 '''''''''''''''''''''''''''
@@ -209,8 +211,8 @@ Mittels `Speichern` können Sie vorgenommenen Änderungen am aktiven Layer speic
 
 Mit `Speichern unter` können Sie den aktiven Layer in einem neuen Layer speichern. Geben Sie hier den gewünschten Namen ein.
 
-Export
-''''''
+Export / Ausgewählte Geometrien exportieren
+'''''''''''''''''''''''''''''''''''''''''''
 
 Über den Button `Export` gelangen Sie zu einem Dialog, in dem Sie den aktuellen Layer als Shapedatei oder GeoJSON exportieren können.
 
@@ -225,6 +227,8 @@ Upload-Box
   Der Export wird direkt in Ihrer Upload-Box abgelegt.
 
 Als weiter Exporttyp steht Ihnen ein OData-Feed zur Verfügung. Wenn Sie diesen Typ auswählen, wird Ihnen die benötigten URL angezeigt. Diese könne sie dann z.b. in Microsoft Excel 2013 als OData-Feed einbinden.
+
+Über den Button `Ausgewählte Geometrien exportieren` können Sie per Filter oder Selektieren-Funktion ausgewählte Geometrien als GeoJSON in Ihre Box exportieren.
 
 Speicherpunkte
 ''''''''''''''

@@ -1,12 +1,9 @@
-GeoBox CouchApp
-===============
+Editor und Daten Exportieren
+============================
 
-Mit der GeoBox CouchApp können Sie die Funktionen des Editors des GeoBox Client in einer von Ihnen wählbaren Couchdb nutzen.
+Hier können Sie die Funktionen des Editors des GeoBox Client als GeoBox CouchApp und von Ihnen ausgewählte Layer in einer von Ihnen wählbaren Couchdb nutzen.
 
-GeoBox CouchApp erstellen
--------------------------
-
-Unter dem Menüpunkt `GeoBox CouchApp erstellen` können Sie die benötigten Einstellungen vornehmen. Hier geben Sie die URL Ihrer CouchDB an, in der Sie die GeoBox CouchApp integrieren wollen.
+Geben Sie die URL Ihrer CouchDB an, in der Sie die GeoBox CouchApp integrieren wollen.
 Weiterhin werden Ihre lokalen Rasterlayer, sowie Ihre Vektorlayer aufgelistet. Sie können wählen, welche dieser Layer in Ihre CouchDB kopiert werden sollen.
 Nach dem Starten des Vorgangs werden Sie auf die Seite `Status des Erstellvorgangs der GeoBox CouchApp` weitergeleitet.
 
