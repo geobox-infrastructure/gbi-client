@@ -26,15 +26,11 @@ gbi.widgets.ThematicalVector = function(editor, options) {
     self.active = false;
 
     $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
-        if(layer != self.activeLayer) {
-            if(self.activeLayer) {
-                self.activeLayer.deactivateHover();
-                self.activeLayer.deactivateFeatureStylingRule();
-            }
-            self.activeLayer = layer;
-            self.active = false;
-            self.render();
-        }
+        self.activate(event, layer);
+    });
+
+    $(gbi).on('gbi.widgets.thematicalVector.activate', function(event, layer) {
+        self.activate(event, layer);
     });
 
     $(gbi).on('gbi.widgets.thematicalVector.deactivate', function(event) {
@@ -42,7 +38,7 @@ gbi.widgets.ThematicalVector = function(editor, options) {
             self.activeLayer.deactivateHover();
             self.activeLayer.deactivateFeatureStylingRule();
         }
-        self.active = false;
+        self.active = self.element.find('#thematical-map-active').prop('checked');;
         self.render();
     });
 
@@ -112,6 +108,26 @@ gbi.widgets.ThematicalVector.prototype = {
     },
     showSettings: function() {
         $('#thematical-settings-tab').tab('show');
+    },
+    activate: function(event, layer) {
+        var self = this;
+        if(layer != self.activeLayer) {
+            if(self.activeLayer) {
+                self.activeLayer.deactivateHover();
+                self.activeLayer.deactivateFeatureStylingRule();
+            }
+            self.activeLayer = layer;
+        }
+        if(self.activeLayer) {
+            self.active = self.element.find('#thematical-map-active').prop('checked');
+            if(self.activeLayer && self.active) {
+                self.activeLayer.activateFeatureStylingRule();
+                if(self.activeLayer.popupAttributes().length > 0) {
+                    self.activeLayer.activateHover();
+                }
+            }
+            self.render();
+        }
     }
 };
 gbi.widgets.ThematicalVector.template = '\

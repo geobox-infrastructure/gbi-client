@@ -44,6 +44,9 @@ $(document).ready(function() {
       if(offline && tab == '#seeding') {
         editor.widgets.seeding.activate();
       }
+      if(tab == '#thematical') {
+        $(gbi).trigger('gbi.widgets.thematicalVector.activate', activeLayer);
+      }
 
       if (editor.map.toolbars && editor.map.toolbars.length > 0) {
         $.each(editor.map.toolbars, function(id, toolbar) {
