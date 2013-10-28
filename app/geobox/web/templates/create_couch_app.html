@@ -11,10 +11,10 @@
 </tr>
 {% endmacro %}
 
-{% block title %}{{ _('create couch app') }}{% endblock %}
+{% block title %}{{ _('export editor and data') }}{% endblock %}
 
 {% block content %}
-  <h2>{{ _('Create couch app') }} {{ generate_tooltip(_('tooltip create couch app') ) }}</h2>
+  <h2>{{ _('export editor and data') }} {{ generate_tooltip(_('tooltip create couch app') ) }}</h2>
   <form method="POST" class="form-horizontal">
     {{ form.csrf_token }}
     {{ input(form.couch_url) }}
