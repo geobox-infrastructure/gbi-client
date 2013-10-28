@@ -23,13 +23,6 @@ $(document).ready(function() {
     var editor = initEditor();
     var activeLayer = editor.layerManager.active();
 
-    var clearStoredFeaturesWrapper = function(f) {
-      var layer = f.feature.layer.gbiLayer;
-      layer.clearStoredFeatures();
-      layer.unregisterEvent('featureunselected', editor, clearStoredFeaturesWrapper);
-      editor.widgets.layerfilter.clearFields();
-    }
-
     $('#exportVectorLayer form, #exportSelectedGeometries form').submit(function(event) {
       console.log('submit')
       var filename_input = $(this).find('#filename');
@@ -58,9 +51,7 @@ $(document).ready(function() {
       }
 
       var activeLayer = editor.layerManager.active();
-      if(activeLayer) {
-        activeLayer.unregisterEvent('featureunselected', editor, clearStoredFeaturesWrapper);
-      }
+
       // sedding widgets changes active layer to its draw layer when activate
       if(offline && tab == '#seeding') {
         editor.widgets.seeding.activate();
@@ -107,9 +98,7 @@ $(document).ready(function() {
         if ($(e.relatedTarget).prop('id') == 'edit-tab') {
            $(gbi).trigger('gbi.widgets.attributeEditor.deactivate');
         }
-    })
-
-
+    });
 
     $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
         unregisterEvents(activeLayer);
