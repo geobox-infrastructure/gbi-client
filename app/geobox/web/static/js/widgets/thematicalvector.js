@@ -61,13 +61,15 @@ gbi.widgets.ThematicalVector = function(editor, options) {
             self.components["legend"] = new gbi.widgets.ThematicalVectorLegendChangeAttributes(self, {
                 'element': 'thematical-legend-element',
                 'featureList': self.components.list,
-                initOnly: true
+                initOnly: true,
+                filterWidget: self.options.filterWidget
             });
         } else {
             self.components["legend"] = new gbi.widgets.ThematicalVectorLegend(self, {
                 'element': 'thematical-legend-element',
                 'featureList': self.components.list,
-                initOnly: true
+                initOnly: true,
+                filterWidget: self.options.filterWidget
             });
         }
     }

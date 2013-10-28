@@ -10,7 +10,8 @@ var thematicalVectorLegendLabel = {
     'createThematicalMap': OpenLayers.i18n('create settings')
 };
 var thematicalVectorLegendTitles = {
-    'showFeatureList': OpenLayers.i18n('Show filtered features in list')
+    'showFeatureList': OpenLayers.i18n('Show filtered features in list'),
+    'selectFeatures': OpenLayers.i18n('Select filtered features')
 }
 
 gbi.widgets = gbi.widgets || {};
@@ -88,7 +89,8 @@ gbi.widgets.ThematicalVectorLegend.prototype = {
                     attribute: self.legend.attribute,
                     type: thematicalVectorLegendLabel[self.legend.type],
                     entries: entries,
-                    featureList: self.options.featureList instanceof gbi.widgets.ThematicalVectorAttributeList
+                    featureList: self.options.featureList instanceof gbi.widgets.ThematicalVectorAttributeList,
+                    selectable: self.options.filterWidget ? true : false
                 }
             ));
 
@@ -101,6 +103,11 @@ gbi.widgets.ThematicalVectorLegend.prototype = {
                         self.options.featureList.showFilteredFeatures(entry);
                         self.thematicalVector.showListView();
                     });
+                    if(self.options.filterWidget) {
+                        $('#_' + entry.id + '_select_features').click(function() {
+                            self.options.filterWidget.setFilter(entry.attribute, entry.value);
+                        });
+                    }
                 });
             }
 
@@ -163,6 +170,11 @@ gbi.widgets.ThematicalVectorLegend.template = '\
                             <button id="_<%=entries[key].id%>_list_view" class="btn btn-small" title="' + thematicalVectorLegendTitles.showFeatureList + '">\
                                 <i class="icon-list"></i>\
                             </button>\
+                            <% if(selectable) { %>\
+                                <button id="_<%=entries[key].id%>_select_features" class="btn btn-small" title="' + thematicalVectorLegendTitles.selectFeatures + '">\
+                                    <i class="icon-check"></i>\
+                                </button>\
+                            <% } %>\
                         </td>\
                     <% } %>\
                 </tr>\

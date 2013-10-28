@@ -20,13 +20,9 @@ gbi.widgets.Filter.prototype = {
             $('#setFilter').click(function() {
                 var attr = $('#filterAttr').val();
                 var value = $('#filterValue').val();
-                var layer = self.editor.layerManager.active();
-                layer.clearStoredFeatures();
-                self.filteredFeatures = layer.selectByPropertyValue(attr, value, true);
-
+                self.setFilter(attr, value);
                 $(layer).on('gbi.layer.vector.unstoredFeature', self.clearFields)
-                return false;
-             });
+            });
         } else {
             $('#setFilter').attr('disabled', 'disabled');
         }
@@ -34,6 +30,13 @@ gbi.widgets.Filter.prototype = {
     clearFields: function() {
         self.element.find('#filterAttr').val('');
         self.element.find('#filterValue').val('');
+    },
+    setFilter: function(attr, value) {
+        var self = this;
+        var layer = self.editor.layerManager.active();
+        layer.clearStoredFeatures();
+        self.filteredFeatures = layer.selectByPropertyValue(attr, value, true);
+        return false;
     }
 };
 

@@ -626,7 +626,7 @@ function initEditor() {
         element: 'filtermanager'
     });
     editor.widgets.layerfilter = layerfilter;
-    var thematicalVector = new gbi.widgets.ThematicalVector(editor);
+    var thematicalVector = new gbi.widgets.ThematicalVector(editor, {'filterWidget': layerfilter});
     editor.widgets.thematicalVector = thematicalVector;
     if(offline) {
       var seeding = new gbi.widgets.Seeding(editor);
