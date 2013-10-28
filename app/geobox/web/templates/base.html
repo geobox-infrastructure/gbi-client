@@ -22,7 +22,9 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
-      {% block navbar %}
+      {% if with_server == False %}
+        <span class="brand">GeoBox CouchApp</span>
+      {% else %}
       <a class="brand" href="/">GeoBox</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
@@ -36,7 +38,7 @@
           {% endif %}
         </ul>
       </div><!--/.nav-collapse -->
-      {% endblock %}
+      {% endif %}
     </div>
   </div>
 </div>
