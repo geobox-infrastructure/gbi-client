@@ -253,7 +253,7 @@ $(document).ready(function() {
       // clone couch if class is couch
       if (activeLayer.CLASS_NAME == 'gbi.Layers.Couch') {
         newLayer = activeLayer.clone(newName, true, newTitle);
-        newLayer.visible(true);
+        newLayer.visible(false);
       } else {
         //  create couch to save layer and copy features
         newLayer = new gbi.Layers.Couch({
@@ -262,7 +262,7 @@ $(document).ready(function() {
           url: OpenlayersCouchURL,
           displayInLayerSwitcher: true,
           createDB: false,
-          visibility: true,
+          visibility: false,
           loadStyle: false,
           callbacks: {
             changes: function(unsavedChanges) {
@@ -290,10 +290,10 @@ $(document).ready(function() {
         newLayer._createCouchDB(true)
       }
       editor.layerManager.addLayer(newLayer)
-      editor.layerManager.active(newLayer);
       editor.widgets.layermanager.render();
-      $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
-      $('#save-tab').removeClass('save-enabled');
+      $('#save_as_success #new_layer_name').text(newTitle)
+      $('#save-as-name').val('');
+      $('#save_as_success').show().fadeOut(3000);
     } else {
       $('#save_as_error').show().fadeOut(3000);
     }

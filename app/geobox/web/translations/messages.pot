@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-29 11:50+0100\n"
+"POT-Creation-Date: 2013-10-29 17:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -442,7 +442,7 @@ msgstr ""
 msgid "search"
 msgstr ""
 
-#: geobox/web/templates/editor.html:108 geobox/web/templates/editor.html:225
+#: geobox/web/templates/editor.html:108 geobox/web/templates/editor.html:226
 msgid "offline seeding"
 msgstr ""
 
@@ -552,141 +552,145 @@ msgstr ""
 msgid "No active layer or invalid layer name"
 msgstr ""
 
-#: geobox/web/templates/editor.html:196
+#: geobox/web/templates/editor.html:194
+msgid "Layer saved as"
+msgstr ""
+
+#: geobox/web/templates/editor.html:197
 msgid "Export"
 msgstr ""
 
-#: geobox/web/templates/editor.html:198
+#: geobox/web/templates/editor.html:199
 msgid "Export layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:201
+#: geobox/web/templates/editor.html:202
 msgid "Export selected geometries"
 msgstr ""
 
-#: geobox/web/templates/editor.html:203 geobox/web/templates/editor.html:211
+#: geobox/web/templates/editor.html:204 geobox/web/templates/editor.html:212
 msgid "No active layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:204
+#: geobox/web/templates/editor.html:205
 msgid "Failed to export selected geometries"
 msgstr ""
 
-#: geobox/web/templates/editor.html:205
+#: geobox/web/templates/editor.html:206
 msgid "Selected geometries exported"
 msgstr ""
 
-#: geobox/web/templates/editor.html:208
+#: geobox/web/templates/editor.html:209
 msgid "savepoints"
 msgstr ""
 
-#: geobox/web/templates/editor.html:209
+#: geobox/web/templates/editor.html:210
 msgid "create savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:210
+#: geobox/web/templates/editor.html:211
 msgid "create new savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:212
+#: geobox/web/templates/editor.html:213
 msgid "save point created"
 msgstr ""
 
-#: geobox/web/templates/editor.html:213
+#: geobox/web/templates/editor.html:214
 msgid "error - could not create savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:215
+#: geobox/web/templates/editor.html:216
 msgid "load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:218
+#: geobox/web/templates/editor.html:219
 msgid "load"
 msgstr ""
 
-#: geobox/web/templates/editor.html:219 geobox/web/templates/boxes/base.html:61
+#: geobox/web/templates/editor.html:220 geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr ""
 
-#: geobox/web/templates/editor.html:226
+#: geobox/web/templates/editor.html:227
 msgid "infotext - offline seeding"
 msgstr ""
 
-#: geobox/web/templates/editor.html:238
+#: geobox/web/templates/editor.html:239
 msgid "Sure you want load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:241
+#: geobox/web/templates/editor.html:242
 msgid "infotext load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:244 geobox/web/templates/editor.html:259
-#: geobox/web/templates/editor.html:274 geobox/web/templates/editor.html:290
-#: geobox/web/templates/editor.html:314 geobox/web/templates/editor.html:334
+#: geobox/web/templates/editor.html:245 geobox/web/templates/editor.html:260
+#: geobox/web/templates/editor.html:275 geobox/web/templates/editor.html:291
+#: geobox/web/templates/editor.html:315 geobox/web/templates/editor.html:335
 #: geobox/web/templates/admin/external_wms.html:70
 #: geobox/web/templates/boxes/base.html:84
 #: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr ""
 
-#: geobox/web/templates/editor.html:245
+#: geobox/web/templates/editor.html:246
 msgid "yes load"
 msgstr ""
 
-#: geobox/web/templates/editor.html:253
+#: geobox/web/templates/editor.html:254
 msgid "Sure you want remove savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:256
+#: geobox/web/templates/editor.html:257
 msgid "infotext remove savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:260 geobox/web/templates/editor.html:291
+#: geobox/web/templates/editor.html:261 geobox/web/templates/editor.html:292
 msgid "yes delete"
 msgstr ""
 
-#: geobox/web/templates/editor.html:268
+#: geobox/web/templates/editor.html:269
 msgid "Sure you want change layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:271
+#: geobox/web/templates/editor.html:272
 msgid "infotext change layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:275
+#: geobox/web/templates/editor.html:276
 msgid "yes change and discard"
 msgstr ""
 
-#: geobox/web/templates/editor.html:276
+#: geobox/web/templates/editor.html:277
 msgid "yes change and save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:284
+#: geobox/web/templates/editor.html:285
 msgid "Sure you want delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:287
+#: geobox/web/templates/editor.html:288
 msgid "infotext delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:300
+#: geobox/web/templates/editor.html:301
 msgid "export vector layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:304
+#: geobox/web/templates/editor.html:305
 msgid "infotext export layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:315 geobox/web/templates/editor.html:335
+#: geobox/web/templates/editor.html:316 geobox/web/templates/editor.html:336
 #: geobox/web/templates/index.html:39
 msgid "export"
 msgstr ""
 
-#: geobox/web/templates/editor.html:324
+#: geobox/web/templates/editor.html:325
 msgid "export selected geometries"
 msgstr ""
 
-#: geobox/web/templates/editor.html:328
+#: geobox/web/templates/editor.html:329
 msgid "infotext export selected geometries"
 msgstr ""
 
@@ -1882,19 +1886,19 @@ msgstr ""
 msgid "upload_box"
 msgstr ""
 
-#: geobox/web/views/editor.py:42
+#: geobox/web/views/editor.py:41
 msgid "Filesystem"
 msgstr ""
 
-#: geobox/web/views/editor.py:128
+#: geobox/web/views/editor.py:125
 msgid "creating couch app"
 msgstr ""
 
-#: geobox/web/views/editor.py:134
+#: geobox/web/views/editor.py:131
 msgid "Error creating couchapp. Check url and given target couchdb."
 msgstr ""
 
-#: geobox/web/views/editor.py:167
+#: geobox/web/views/editor.py:164
 #, python-format
 msgid "couchapp ready %(couchapp_url)s"
 msgstr ""

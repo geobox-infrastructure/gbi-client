@@ -191,6 +191,7 @@
             <button class="btn" id="save-as" type="button">{{ _('save as') }}</button>
           </div>
           <div class="alert alert-error hide" id="save_as_error">{{ _('No active layer or invalid layer name') }}</div>
+          <div class="alert alert-success hide" id="save_as_success">{{ _('Layer saved as') }} "<span id='new_layer_name'></span>"</div>
           {% if with_server %}
           <hr>
           <h5>{{ _('Export') }}</h5>

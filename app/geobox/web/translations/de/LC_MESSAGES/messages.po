@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-29 11:50+0100\n"
-"PO-Revision-Date: 2013-10-29 11:51+0100\n"
+"POT-Creation-Date: 2013-10-29 17:48+0100\n"
+"PO-Revision-Date: 2013-10-29 17:49+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -464,7 +464,7 @@ msgid "search"
 msgstr "Suche"
 
 #: geobox/web/templates/editor.html:108
-#: geobox/web/templates/editor.html:225
+#: geobox/web/templates/editor.html:226
 msgid "offline seeding"
 msgstr "Datenimport"
 
@@ -577,148 +577,152 @@ msgstr "Speichern untern"
 msgid "No active layer or invalid layer name"
 msgstr "Ungültiger Layername oder kein Layer aktiv"
 
-#: geobox/web/templates/editor.html:196
+#: geobox/web/templates/editor.html:194
+msgid "Layer saved as"
+msgstr "Layer gespeichert als"
+
+#: geobox/web/templates/editor.html:197
 msgid "Export"
 msgstr "Exportieren"
 
-#: geobox/web/templates/editor.html:198
+#: geobox/web/templates/editor.html:199
 msgid "Export layer"
 msgstr "Layer exportieren"
 
-#: geobox/web/templates/editor.html:201
+#: geobox/web/templates/editor.html:202
 msgid "Export selected geometries"
 msgstr "Ausgewählte Geometrien exportieren"
 
-#: geobox/web/templates/editor.html:203
-#: geobox/web/templates/editor.html:211
+#: geobox/web/templates/editor.html:204
+#: geobox/web/templates/editor.html:212
 msgid "No active layer"
 msgstr "Kein Layer aktiv"
 
-#: geobox/web/templates/editor.html:204
+#: geobox/web/templates/editor.html:205
 msgid "Failed to export selected geometries"
 msgstr "Fehler beim exportieren der ausgewählten Geometrien"
 
-#: geobox/web/templates/editor.html:205
+#: geobox/web/templates/editor.html:206
 msgid "Selected geometries exported"
 msgstr "Ausgewählte Geometrien exportiert"
 
-#: geobox/web/templates/editor.html:208
+#: geobox/web/templates/editor.html:209
 msgid "savepoints"
 msgstr "Speicherpunkte"
 
-#: geobox/web/templates/editor.html:209
+#: geobox/web/templates/editor.html:210
 msgid "create savepoint"
 msgstr "Speicherpunkt erstellen"
 
-#: geobox/web/templates/editor.html:210
+#: geobox/web/templates/editor.html:211
 msgid "create new savepoint"
 msgstr "Erstellen"
 
-#: geobox/web/templates/editor.html:212
+#: geobox/web/templates/editor.html:213
 msgid "save point created"
 msgstr "Speicherpunkt wurde erstellt"
 
-#: geobox/web/templates/editor.html:213
+#: geobox/web/templates/editor.html:214
 msgid "error - could not create savepoint"
 msgstr "Fehler - Speicherpunkt konnte nicht wurde erstellt"
 
-#: geobox/web/templates/editor.html:215
+#: geobox/web/templates/editor.html:216
 msgid "load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:218
+#: geobox/web/templates/editor.html:219
 msgid "load"
 msgstr "Laden"
 
-#: geobox/web/templates/editor.html:219
+#: geobox/web/templates/editor.html:220
 #: geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr "Löschen"
 
-#: geobox/web/templates/editor.html:226
+#: geobox/web/templates/editor.html:227
 msgid "infotext - offline seeding"
 msgstr "Hier können Sie für Ihre lokalen Rasterlayer zusätzlich Daten importieren. Wählen Sie hierzu einen Layer aus und zeichnen Sie den Bereich, für den Sie Daten importieren möchten, in die Karte ein. Wählen Sie einen Start- und Endlevel für den Datenimport aus und starten Sie den Datenimport per Knopfdruck"
 
-#: geobox/web/templates/editor.html:238
+#: geobox/web/templates/editor.html:239
 msgid "Sure you want load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:241
+#: geobox/web/templates/editor.html:242
 msgid "infotext load savepoint"
 msgstr "Nach dem Laden des Speicherpunkts gehen alle nicht gespeicherte Änderungen verloren."
 
-#: geobox/web/templates/editor.html:244
-#: geobox/web/templates/editor.html:259
-#: geobox/web/templates/editor.html:274
-#: geobox/web/templates/editor.html:290
-#: geobox/web/templates/editor.html:314
-#: geobox/web/templates/editor.html:334
+#: geobox/web/templates/editor.html:245
+#: geobox/web/templates/editor.html:260
+#: geobox/web/templates/editor.html:275
+#: geobox/web/templates/editor.html:291
+#: geobox/web/templates/editor.html:315
+#: geobox/web/templates/editor.html:335
 #: geobox/web/templates/admin/external_wms.html:70
 #: geobox/web/templates/boxes/base.html:84
 #: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr "Abbrechen"
 
-#: geobox/web/templates/editor.html:245
+#: geobox/web/templates/editor.html:246
 msgid "yes load"
 msgstr "Ja, laden!"
 
-#: geobox/web/templates/editor.html:253
+#: geobox/web/templates/editor.html:254
 msgid "Sure you want remove savepoint"
 msgstr "Speicherpunkt löschen"
 
-#: geobox/web/templates/editor.html:256
+#: geobox/web/templates/editor.html:257
 msgid "infotext remove savepoint"
 msgstr "Nach dem Löschen können Sie dne Speicherpunkt nicht wiederherstellen. Alle Änderungen gehen dabei verloren."
 
-#: geobox/web/templates/editor.html:260
-#: geobox/web/templates/editor.html:291
+#: geobox/web/templates/editor.html:261
+#: geobox/web/templates/editor.html:292
 msgid "yes delete"
 msgstr "Ja, Löschen"
 
-#: geobox/web/templates/editor.html:268
+#: geobox/web/templates/editor.html:269
 msgid "Sure you want change layer"
 msgstr "Sind Sie sicher, dass Sie die Karte wechseln möchten"
 
-#: geobox/web/templates/editor.html:271
+#: geobox/web/templates/editor.html:272
 msgid "infotext change layer"
 msgstr "Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer importieren."
 
-#: geobox/web/templates/editor.html:275
+#: geobox/web/templates/editor.html:276
 msgid "yes change and discard"
 msgstr "Änderungen verwefern"
 
-#: geobox/web/templates/editor.html:276
+#: geobox/web/templates/editor.html:277
 msgid "yes change and save"
 msgstr "Speichern und wechseln"
 
-#: geobox/web/templates/editor.html:284
+#: geobox/web/templates/editor.html:285
 msgid "Sure you want delete layer"
 msgstr "Löschen der Karte"
 
-#: geobox/web/templates/editor.html:287
+#: geobox/web/templates/editor.html:288
 msgid "infotext delete layer"
 msgstr "Achtung: Nach dem Löschen kann die Karte nicht wiederhergestellt werden. Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
 
-#: geobox/web/templates/editor.html:300
+#: geobox/web/templates/editor.html:301
 msgid "export vector layer"
 msgstr "Vektorlayer exportieren"
 
-#: geobox/web/templates/editor.html:304
+#: geobox/web/templates/editor.html:305
 msgid "infotext export layer"
 msgstr "Exportieren Sie hier die aktuelle Karte in verschiedene Formate."
 
-#: geobox/web/templates/editor.html:315
-#: geobox/web/templates/editor.html:335
+#: geobox/web/templates/editor.html:316
+#: geobox/web/templates/editor.html:336
 #: geobox/web/templates/index.html:39
 msgid "export"
 msgstr "Exportieren"
 
-#: geobox/web/templates/editor.html:324
+#: geobox/web/templates/editor.html:325
 msgid "export selected geometries"
 msgstr "Ausgewählte Geometrien exportieren"
 
-#: geobox/web/templates/editor.html:328
+#: geobox/web/templates/editor.html:329
 msgid "infotext export selected geometries"
 msgstr "Exportieren Sie hier Ihre ausgewählten Geometrien als GeoJSON direkt in Ihre Box."
 
@@ -1920,19 +1924,19 @@ msgstr "Datei wurde gelöscht"
 msgid "upload_box"
 msgstr "Upload-Box"
 
-#: geobox/web/views/editor.py:42
+#: geobox/web/views/editor.py:41
 msgid "Filesystem"
 msgstr "Dateisystem"
 
-#: geobox/web/views/editor.py:128
+#: geobox/web/views/editor.py:125
 msgid "creating couch app"
 msgstr "Erstelle GeoBox CouchApp"
 
-#: geobox/web/views/editor.py:134
+#: geobox/web/views/editor.py:131
 msgid "Error creating couchapp. Check url and given target couchdb."
 msgstr "Fehler beim erstellen der GeoBox CouchApp. Bitte überprüfen Sie die angegebene URL und die Ziel-CouchDB."
 
-#: geobox/web/views/editor.py:167
+#: geobox/web/views/editor.py:164
 #, python-format
 msgid "couchapp ready %(couchapp_url)s"
 msgstr "Die GeoBox CouchApp wurde erfolgreich in Ihrer CouchDB erstellt und steht nun unter der URL %(couchapp_url)s für Sie bereit"
