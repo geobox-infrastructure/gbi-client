@@ -98,8 +98,10 @@ def create_offline_editor(app, couchurl, dbname, appname):
     log.info('pushing app to %s/_design/%s', couchurl, appname)
     if push_couchapp(attachments, couchurl, appname):
         log.info('done. see %s/_design/%s/_rewrite', couchurl, appname)
+        return True
     else:
         log.warn('failed to create couchapp on %s in database %s with name %s', couchurl, dbname, appname)
+        return False
 
 def main(config_filename=None):
     import optparse
