@@ -61,7 +61,7 @@ def add_auth_to_url(url, username, password):
             fragment=parse_result.fragment))
     return url
 
-def get_local_cache_url(request):
+def get_external_couch_url(request):
     host = request.host.split(":")
     map_host = host[0]
     return 'http://%s:%s/' % (map_host, current_app.config.geobox_state.config.get('couchdb', 'port'))

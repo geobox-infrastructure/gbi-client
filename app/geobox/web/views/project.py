@@ -35,7 +35,7 @@ from geobox.lib.mapproxy import write_mapproxy_config
 
 from geobox import model
 from geobox.web import forms
-from geobox.web.helper import redirect_back, get_local_cache_url
+from geobox.web.helper import redirect_back, get_external_couch_url
 from geobox.lib.server_logging import send_task_logging
 
 project = Blueprint('project', __name__)
@@ -225,7 +225,7 @@ def export_edit(id=None):
     base_layer.bbox = base_layer.bbox_from_view_coverage()
 
     free_disk_space = diskspace_available_in_mb(current_app.config.geobox_state.user_data_path())
-    cache_url = get_local_cache_url(request)
+    cache_url = get_external_couch_url(request)
 
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
     couch_layers = list(vector_layers_metadata(couch_url))
