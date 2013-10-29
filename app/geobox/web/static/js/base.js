@@ -15,8 +15,11 @@
                     form.appendChild(hiddenField);
                  }
             }
+            var beforeunloadevent = window.onbeforeunload;
+            window.onbeforeunload = null;
             document.body.appendChild(form);
             form.submit();
+            window.onbeforeunload = beforeunloadevent;
         }
     });
 
