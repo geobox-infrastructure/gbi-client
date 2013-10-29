@@ -184,7 +184,7 @@ gbi.widgets.AttributeEditor.prototype = {
         //bind events
         $.each(renderedAttributes, function(idx, key) {
             $('#'+key).keyup(function() {
-                $('#dummy_save_btn').removeAttr('disabled').addClass('btn-success');
+                $('#save_btn').removeAttr('disabled').addClass('btn-success');
                 self.changedAttributes[key] = true;
             });
             $('#_'+key+'_remove').click(function() {
@@ -247,8 +247,8 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     renderSaveButton: function() {
         var self = this;
-        self.element.append(tmpl(gbi.widgets.AttributeEditor.dummySaveButtonTemplate));
-        self.element.find('#dummy_save_btn').click(function() {
+        self.element.append(tmpl(gbi.widgets.AttributeEditor.saveButtonTemplate));
+        self.element.find('#save_btn').click(function() {
             var changedAttributes = Object.keys(self.changedAttributes);
             if(changedAttributes.length > 0) {
                 $.each(changedAttributes, function(idx, attribute) {
@@ -599,9 +599,9 @@ gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate = '\
     <div class="alert alert-error" style="display: none" id="json_schema_refresh_fail">' + attributeLabel.schemaRefreshFail + '</div>\
 ';
 
-gbi.widgets.AttributeEditor.dummySaveButtonTemplate = '\
+gbi.widgets.AttributeEditor.saveButtonTemplate = '\
     <div>\
-        <button class="btn btn-small" disabled="disabled" id="dummy_save_btn">'+attributeLabel.saveAttributeChanges+'</button>\
+        <button class="btn btn-small" disabled="disabled" id="save_btn">'+attributeLabel.saveAttributeChanges+'</button>\
     </div>\
 ';
 
