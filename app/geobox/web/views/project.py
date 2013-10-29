@@ -371,6 +371,15 @@ def prepare_task_coverage(feature_collection):
     feature_collection = json.loads(feature_collection)
     if not feature_collection:
         return None
+    if feature_collection['type'] == 'Polygon':
+        feature_collection = {
+            "type": "FeatureCollection",
+            "features": [{
+                "geometry": feature_collection,
+                "type": "Feature",
+                "properties": {}
+            }]
+        }
     task_coverage_geometry = geometry_from_feature_collection(feature_collection)
     if not task_coverage_geometry:
         return None
