@@ -1,8 +1,8 @@
-$(window).on('beforeunload', function() {
+window.onbeforeunload = function() {
   if($('#save-tab').hasClass('save-enabled')) {
     return OpenLayers.i18n("Unsaved changes present. Sure, you want to leave the editor?");
   }
-});
+};
 
 $(document).ready(function() {
   var gbiLayerEvents = {
