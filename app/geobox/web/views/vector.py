@@ -17,7 +17,7 @@ import os
 import glob
 import re
 
-from flask import Blueprint, render_template, g, url_for, redirect, request, flash, current_app, abort
+from flask import Blueprint, render_template, g, url_for, redirect, request, flash, current_app, abort, jsonify
 
 from flaskext.babel import _
 
@@ -29,8 +29,13 @@ from geobox.model import VectorImportTask, User
 from geobox.web import forms
 from geobox.model.tasks import VectorExportTask
 
+from geobox.lib.couchdb import CouchFileBox
+
 from ..utils import request_is_local
 from ..helper import redirect_back
+
+import logging
+log = logging.getLogger(__name__)
 
 vector = Blueprint('vector', __name__)
 
@@ -243,15 +248,21 @@ def export_vector():
 def export_selected_geometries():
     user = User(current_app.config.geobox_state.config.get('user', 'type'))
     target_box_name = 'file_box' if user.is_consultant else 'upload_box'
+    target_box = current_app.config.geobox_state.config.get('couchdb', target_box_name)
 
-    return create_export_task(
-        proj = 'EPSG:3857',
-        layername = request.form.get('name', False),
-        export_type ='geojson',
-        destination = current_app.config.geobox_state.config.get('couchdb', target_box_name),
-        filename = request.form.get('filename', False),
-        geojson = request.form.get('geojson', False)
-    )
+    filename = request.form.get('filename', False)
+    data = request.form.get('geojson', False)
+
+    file_obj = {'content-type': 'application/json' , 'file': data, 'filename': filename + '.json' }
+
+    couch = CouchFileBox('http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port')), target_box)
+
+    try:
+        couch.store_file(file_obj, overwrite=True)
+    except Exception, e:
+        log.exception(e)
+        abort(500)
+    return jsonify({'status': 'success'})
 
 def create_export_task(proj, layername, export_type, destination, filename, geojson):
     task = VectorExportTask(

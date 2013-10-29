@@ -23,14 +23,46 @@ $(document).ready(function() {
   var editor = initEditor();
   var activeLayer = editor.layerManager.active();
 
-  $('#exportVectorLayer form, #exportSelectedGeometries form').submit(function(event) {
-    var filename_input = $(this).find('#filename');
-    if(!filename_input.val()) {
-      filename_input.parent().parent().addClass('error');
-      filename_input.after('<span class="help-inline">' + OpenLayers.i18n('Required') + '</span>');
+  $('#exportVectorLayer form').submit(function(event) {
+    if(!checkFilenameInput(this)) {
       event.preventDefault();
     }
   });
+
+  $('#exportSelectedGeometries form').submit(function(event) {
+    event.preventDefault();
+    if(!checkFilenameInput(this)) {
+      return
+    }
+    var form = $(this);
+    var filename = form.find('#filename').val();
+    var geojson = form.find('#geojson').val()
+    $.ajax(form.attr('action'), {
+      'type': 'POST',
+      'data': {
+        'filename': filename,
+        'geojson': geojson,
+        'title': filename
+      }
+    }).done(function(resp) {
+      $('#exportSelectedGeometries').modal('hide');
+      if(resp['error']) {
+        $('#export_failed').show().fadeOut(3000);
+      } else {
+        $('#export_success').show().fadeOut(3000);
+      }
+    });
+  });
+
+  function checkFilenameInput(form) {
+    var filename_input = $(form).find('#filename');
+    if(!filename_input.val()) {
+      filename_input.parent().parent().addClass('error');
+      filename_input.after('<span class="help-inline">' + OpenLayers.i18n('Required') + '</span>');
+      return false;
+    }
+    return true;
+  }
 
   if(activeLayer.odataUrl) {
     $('#odata_url').val(activeLayer.odataUrl);

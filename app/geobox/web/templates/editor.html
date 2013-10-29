@@ -193,13 +193,16 @@
           <div class="alert alert-error hide" id="save_as_error">{{ _('No active layer or invalid layer name') }}</div>
           {% if with_server %}
           <hr>
+          <h5>{{ _('Export') }}</h5>
           <button id="export_vectorlayer" class="btn btn-small">
-            <i class="icon-edit"></i> Export
+            <i class="icon-edit"></i> {{ _('Export layer') }}
           </button>
           <button id="export_selected_geometries" class="btn btn-small" disabled="disabled">
             <i class="icon-edit"></i> {{ _('Export selected geometries') }}
-          </button>
+          </button><br>
           <div class="alert alert-error hide" id="export_error">{{ _('No active layer') }}</div>
+          <div class="alert alert-error hide" id="export_failed">{{ _('Failed to export selected geometries') }}</div>
+          <div class="alert alert-success hide" id="export_success">{{ _('Selected geometries exported') }}</div>
           {% endif %}
           <hr>
           <h4>{{ _('savepoints') }}</h4>
