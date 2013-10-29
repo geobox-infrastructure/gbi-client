@@ -112,21 +112,21 @@ def create_couch_app():
 
         target_couch_url = form_data.pop('couch_url')[0].rstrip('/')
 
-        offline.create_offline_editor(current_app, target_couch_url, 'geobox_couchapp', 'GeoBoxCouchApp')
+        if offline.create_offline_editor(current_app, target_couch_url, 'geobox_couchapp', 'GeoBoxCouchApp'):
+            replication_layers = [layer[0] for layer in form_data.values()]
+            target_couchdb = CouchDBBase(target_couch_url, '_replicator')
+            for layer in replication_layers:
+                target_couchdb.replication(layer,
+                    'http://127.0.0.1:%s/%s' % (current_app.config.geobox_state.config.get('couchdb', 'port'), layer),
+                    layer, create_target=True)
 
-        replication_layers = [layer[0] for layer in form_data.values()]
-        target_couchdb = CouchDBBase(target_couch_url, '_replicator')
-
-        for layer in replication_layers:
-            target_couchdb.replication(layer,
-                'http://127.0.0.1:%s/%s' % (current_app.config.geobox_state.config.get('couchdb', 'port'), layer),
-                layer, create_target=True)
-
-        flash(_('creating couch app') )
-        if replication_layers:
-            return redirect(url_for('.create_couch_app_status', couch_url=target_couch_url, layers=','.join(replication_layers) ))
+            flash(_('creating couch app') )
+            if replication_layers:
+                return redirect(url_for('.create_couch_app_status', couch_url=target_couch_url, layers=','.join(replication_layers) ))
+            else:
+                return redirect(url_for('.create_couch_app_status', couch_url=target_couch_url))
         else:
-            return redirect(url_for('.create_couch_app_status', couch_url=target_couch_url))
+            flash(_('Error creating couchapp. Check url and given target couchdb.'), 'error')
 
     raster_layers = []
     vector_layers = []

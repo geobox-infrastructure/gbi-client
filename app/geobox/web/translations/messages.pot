@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-28 17:12+0100\n"
+"POT-Creation-Date: 2013-10-29 09:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1870,11 +1870,15 @@ msgstr ""
 msgid "Filesystem"
 msgstr ""
 
-#: geobox/web/views/editor.py:125
+#: geobox/web/views/editor.py:124
 msgid "creating couch app"
 msgstr ""
 
-#: geobox/web/views/editor.py:162
+#: geobox/web/views/editor.py:130
+msgid "Error creating couchapp. Check url and given target couchdb."
+msgstr ""
+
+#: geobox/web/views/editor.py:163
 #, python-format
 msgid "couchapp ready %(couchapp_url)s"
 msgstr ""

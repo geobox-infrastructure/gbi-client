@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-28 17:12+0100\n"
-"PO-Revision-Date: 2013-10-29 09:06+0100\n"
+"POT-Creation-Date: 2013-10-29 09:44+0100\n"
+"PO-Revision-Date: 2013-10-29 09:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1415,7 +1415,7 @@ msgstr "Für diesen Layer existiert keine thematische Karte"
 
 #: geobox/web/templates/js/translation.js:111
 msgid "Add input"
-msgstr "Auswahl hinzufügen"
+msgstr "Wert hinzufügen"
 
 #: geobox/web/templates/js/translation.js:112
 msgid "Remove input"
@@ -1908,11 +1908,15 @@ msgstr "Upload-Box"
 msgid "Filesystem"
 msgstr "Dateisystem"
 
-#: geobox/web/views/editor.py:125
+#: geobox/web/views/editor.py:124
 msgid "creating couch app"
 msgstr "Erstelle GeoBox CouchApp"
 
-#: geobox/web/views/editor.py:162
+#: geobox/web/views/editor.py:130
+msgid "Error creating couchapp. Check url and given target couchdb."
+msgstr "Fehler beim erstellen der GeoBox CouchApp. Bitte überprüfen Sie die angegebene URL und die Ziel-CouchDB."
+
+#: geobox/web/views/editor.py:163
 #, python-format
 msgid "couchapp ready %(couchapp_url)s"
 msgstr "Die GeoBox CouchApp wurde erfolgreich in Ihrer CouchDB erstellt und steht nun unter der URL %(couchapp_url)s für Sie bereit"
@@ -2223,8 +2227,3 @@ msgstr "Kein gültigen Zeitpunkt angegeben."
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
-#~ msgid "create couch app"
-#~ msgstr "GeoBox CouchApp erstellen"
-
-#~ msgid "Create couch app"
-#~ msgstr "GeoBox CouchApp erstellen"
