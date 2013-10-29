@@ -150,19 +150,6 @@ gbi.widgets.AttributeEditor.prototype = {
             });
         }
 
-        this.element.append(tmpl(gbi.widgets.AttributeEditor.dummySaveButtonTemplate));
-        this.element.find('#dummy_save_btn').click(function() {
-            var changedAttributes = Object.keys(self.changedAttributes);
-            if(changedAttributes.length > 0) {
-                $.each(changedAttributes, function(idx, attribute) {
-                    self.edit(attribute, self.element.find('#' + attribute).val());
-                });
-            }
-            self.changedAttributes = {};
-
-            $(this).removeClass('btn-success').attr('disabled', 'disabled');
-        });
-
         if(self.invalidFeatures && self.invalidFeatures.length > 0) {
             self.renderInvalidFeatures(activeLayer);
         } else {
@@ -258,6 +245,21 @@ gbi.widgets.AttributeEditor.prototype = {
         activeLayer.selectFeature(self.selectedInvalidFeature.feature, true);
         activeLayer.showFeature(self.selectedInvalidFeature.feature);
     },
+    renderSaveButton: function() {
+        var self = this;
+        self.element.append(tmpl(gbi.widgets.AttributeEditor.dummySaveButtonTemplate));
+        self.element.find('#dummy_save_btn').click(function() {
+            var changedAttributes = Object.keys(self.changedAttributes);
+            if(changedAttributes.length > 0) {
+                $.each(changedAttributes, function(idx, attribute) {
+                    self.edit(attribute, self.element.find('#' + attribute).val());
+                });
+            }
+            self.changedAttributes = {};
+
+            $(this).removeClass('btn-success').attr('disabled', 'disabled');
+        });
+    },
     renderInputMask: function(attributes, activeLayer) {
         var self = this;
         var selectedFeatureAttributes = {};
@@ -331,6 +333,8 @@ gbi.widgets.AttributeEditor.prototype = {
                 view: nonSchemaView
             });
 
+            self.renderSaveButton();
+
             if(self.jsonSchema.additionalProperties !== false) {
                 this.element.append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
             } else {
@@ -358,6 +362,9 @@ gbi.widgets.AttributeEditor.prototype = {
                     editable: editable
                 }
             ));
+
+            self.renderSaveButton();
+
             if(editable && this.options.allowNewAttributes) {
                 this.element.append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
             } else {
