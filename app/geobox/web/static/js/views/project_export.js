@@ -70,12 +70,18 @@ function setLayerOptionForFormat() {
         $('#srs').attr('disabled', 'disabled');
         $('.raster_layer').each(function(idx, elem) {
             $(elem).find('#start_level').prev().text(startLevelText);
-            $(elem).find('#end_level').show().prev().show();
+            $(elem).find('#end_level')
+                .removeAttr('disabled')
+                .show()
+                .prev().show();
         });
     } else {
         $('.raster_layer').each(function(idx, elem) {
             $(elem).find('#start_level').prev().text(level);
-            $(elem).find('#end_level').hide().prev().hide();
+            $(elem).find('#end_level')
+                .attr('disabled', 'disabled')
+                .hide()
+                .prev().hide();
         })
         $('#srs').removeAttr('disabled');
     }
