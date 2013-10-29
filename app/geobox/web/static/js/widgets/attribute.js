@@ -80,7 +80,9 @@ gbi.widgets.AttributeEditor.prototype = {
                         self.selectedInvalidFeature = self.invalidFeatures[id];
                     }
                 }
-                self.selectedFeatures.push(f.feature);
+                if($.inArray(f.feature, self.selectedFeatures) == -1) {
+                    self.selectedFeatures.push(f.feature);
+                }
                 self.render();
                 $('#attributeTab').tab('show');
             });
