@@ -75,6 +75,7 @@ function setLayerOptionForFormat() {
                 .show()
                 .prev().show();
         });
+        $('#data_tiles_container').show();
     } else {
         $('.raster_layer').each(function(idx, elem) {
             $(elem).find('#start_level').prev().text(level);
@@ -84,6 +85,7 @@ function setLayerOptionForFormat() {
                 .prev().hide();
         })
         $('#srs').removeAttr('disabled');
+        $('#data_tiles_container').hide();
     }
 }
 
