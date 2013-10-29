@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-10-28 17:12+0100\n"
-"PO-Revision-Date: 2013-10-28 17:13+0100\n"
+"PO-Revision-Date: 2013-10-29 09:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1985,7 +1985,7 @@ msgstr "Aufgabe gelöscht"
 #: geobox/web/views/vector.py:48
 #: geobox/web/views/vector.py:138
 msgid "-- select layer or add new --"
-msgstr "-- Layer auswhälen -- "
+msgstr "-- Layer auswählen -- "
 
 #: geobox/web/views/vector.py:65
 #: geobox/web/views/vector.py:185
