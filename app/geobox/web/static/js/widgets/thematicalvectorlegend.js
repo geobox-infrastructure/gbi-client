@@ -105,6 +105,9 @@ gbi.widgets.ThematicalVectorLegend.prototype = {
                     });
                     if(self.options.filterWidget) {
                         $('#_' + entry.id + '_select_features').click(function() {
+                            if(self instanceof gbi.widgets.ThematicalVectorLegendChangeAttributes && self.selectControl) {
+                                self._removeSelectControl(element);
+                            }
                             self.options.filterWidget.setFilter(entry.attribute, entry.value);
                         });
                     }
