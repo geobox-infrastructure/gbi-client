@@ -27,8 +27,8 @@ var thematicalVectorConfiguratorLabel = {
 };
 var ThematicalVectorConfiguratorTitles = {
     'showExact': OpenLayers.i18n('Create thematical map using exact values'),
-    'rangeExact': OpenLayers.i18n('Create thematical map using ranges'),
-    'addInput': OpenLayers.i18n('Add input field')
+    'showRange': OpenLayers.i18n('Create thematical map using ranges'),
+    'addInput': OpenLayers.i18n('Add value field')
 };
 
 gbi.widgets = gbi.widgets || {};

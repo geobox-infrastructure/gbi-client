@@ -137,6 +137,12 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "List Settings":  "{{ _('list settings') }}",
     "Layer have no attributes": "{{ _('layer has not attributes') }}",
     "Select filtered features": "{{ _('Select filtered features') }}",
+    "Show feature list with user defined attributes": "{{ _('Show feature list with user defined attributes') }}",
+    "Show feature list with all attributes": "{{ _('Show feature list with all attributes') }}",
+    "Create thematical map using exact values": "{{ _('Create thematical map using exact values') }}",
+    "Create thematical map using ranges": "{{ _('Create thematical map using ranges') }}",
+    "Add value field": "{{ _('Add value field') }}",
+
     // add wms
     'load wms capabilities': "{{ _('load wms capabilities') }}",
     'preview not possible': "{{ _('preview not possible') }}",

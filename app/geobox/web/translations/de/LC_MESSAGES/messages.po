@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-29 17:48+0100\n"
-"PO-Revision-Date: 2013-10-29 17:49+0100\n"
+"POT-Creation-Date: 2013-10-29 18:06+0100\n"
+"PO-Revision-Date: 2013-10-29 18:08+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1545,55 +1545,75 @@ msgstr "Der Layer besitzt keine Attribute"
 msgid "Select filtered features"
 msgstr "Geometrien auswählen"
 
+#: geobox/web/templates/js/translation.js:140
+msgid "Show feature list with user defined attributes"
+msgstr "Zeigt Liste mit ausgewählten Attributen"
+
 #: geobox/web/templates/js/translation.js:141
+msgid "Show feature list with all attributes"
+msgstr "Zeigt Liste mit allen Attributen"
+
+#: geobox/web/templates/js/translation.js:142
+msgid "Create thematical map using exact values"
+msgstr "Erstellt eine thematische Karte mit exakten Werten"
+
+#: geobox/web/templates/js/translation.js:143
+msgid "Create thematical map using ranges"
+msgstr "Erstellt eine thematische Karte mit Wertbereichen"
+
+#: geobox/web/templates/js/translation.js:144
+msgid "Add value field"
+msgstr "Fügt ein Legendenfeld hinzu"
+
+#: geobox/web/templates/js/translation.js:147
 msgid "load wms capabilities"
 msgstr "Capabilities wurden geladen"
 
-#: geobox/web/templates/js/translation.js:142
+#: geobox/web/templates/js/translation.js:148
 msgid "preview not possible"
 msgstr "Vorschau nicht möglich. Kein Layer gewählt oder Koordiantensystem wird nicht unterstützt."
 
-#: geobox/web/templates/js/translation.js:143
+#: geobox/web/templates/js/translation.js:149
 msgid "Show filtered features in list"
 msgstr "Zeige in Liste"
 
-#: geobox/web/templates/js/translation.js:146
+#: geobox/web/templates/js/translation.js:152
 msgid "Layer to seed"
 msgstr "Datenimport für Layer"
 
-#: geobox/web/templates/js/translation.js:147
+#: geobox/web/templates/js/translation.js:153
 msgid "Start level"
 msgstr "Startlevel"
 
-#: geobox/web/templates/js/translation.js:148
+#: geobox/web/templates/js/translation.js:154
 msgid "End level"
 msgstr "Endlevel"
 
-#: geobox/web/templates/js/translation.js:149
+#: geobox/web/templates/js/translation.js:155
 msgid "Start seeding"
 msgstr "Datenimport gestarten"
 
-#: geobox/web/templates/js/translation.js:150
+#: geobox/web/templates/js/translation.js:156
 msgid "Stop seeding"
 msgstr "Datenimport gestoppen"
 
-#: geobox/web/templates/js/translation.js:151
+#: geobox/web/templates/js/translation.js:157
 msgid "Seeding finished"
 msgstr "Datenimport beendet"
 
-#: geobox/web/templates/js/translation.js:152
+#: geobox/web/templates/js/translation.js:158
 msgid "No BBox given"
 msgstr "Kein Bereich für den Datenimport in der Karte markiert"
 
-#: geobox/web/templates/js/translation.js:153
+#: geobox/web/templates/js/translation.js:159
 msgid "Tiles estimated"
 msgstr "Kacheln werden importiert"
 
-#: geobox/web/templates/js/translation.js:154
+#: geobox/web/templates/js/translation.js:160
 msgid "Seeding stopped"
 msgstr "Datenimport gestoppt"
 
-#: geobox/web/templates/js/translation.js:155
+#: geobox/web/templates/js/translation.js:161
 msgid "No layer to seed"
 msgstr "Kein Layer für Datenimport vorhanden"
 
