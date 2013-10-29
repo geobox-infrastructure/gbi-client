@@ -191,7 +191,7 @@ class RasterExportImageProcess(RasterProcess):
                 file_extension = '.tiff' if task.export_format == 'GTiff' else '.jpeg'
                 wmts_source = task.layer.wmts_source
                 export_filename = self.app_state.user_data_path('export', task.project.title, wmts_source.name + file_extension, make_dirs=True)
-                couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), wmts_source.name)
+                couch = CouchDB('http://%s:%s' % ('127.0.0.1', self.app_state.config.get('couchdb', 'port')), task.layer.name)
                 coverage = coverage_from_geojson(task.coverage).bbox
                 if coverage:
                     merge_tiles(couch, export_filename,
