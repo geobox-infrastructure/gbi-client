@@ -308,7 +308,11 @@ def data_volume():
     max_tiles = None
     if project_coverage:
         for raster_source in json.loads(request.form['raster_data']):
-            levels = range(raster_source['start_level'], raster_source['end_level'] + 1)
+            end_level = raster_source['end_level']
+            if end_level:
+                levels = range(raster_source['start_level'], end_level + 1)
+            else:
+                levels = [raster_source['start_level']]
             wmts_source = None
             if request.args.get('export', 'false').lower() == 'true':
                 local_source = g.db.query(model.LocalWMTSSource).get(raster_source['source_id'])
