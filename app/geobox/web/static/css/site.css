@@ -327,7 +327,3 @@ hr#save_dividing_line {
 .save-enabled {
     font-style: italic;
 }
-
-.save-enabled:hover {
-    color: #468847;
-}
