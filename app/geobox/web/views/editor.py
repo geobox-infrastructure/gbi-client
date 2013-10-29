@@ -23,6 +23,7 @@ from geobox.lib import offline
 from geobox.lib.couchdb import CouchFileBox, all_layers, replication_status, CouchDBBase, CouchDB
 from geobox.lib.tabular import geojson_to_rows, csv_export, ods_export
 from geobox.web.forms import ExportVectorForm, WFSSearchForm, CreateCouchAppForm
+from geobox.web.helper import get_external_couch_url
 from .boxes import get_couch_box_db
 
 editor_view = Blueprint('editor_view', __name__)
@@ -115,9 +116,10 @@ def create_couch_app():
         if offline.create_offline_editor(current_app, target_couch_url, 'geobox_couchapp', 'GeoBoxCouchApp'):
             replication_layers = [layer[0] for layer in form_data.values()]
             target_couchdb = CouchDBBase(target_couch_url, '_replicator')
+            source_couch_url = get_external_couch_url(request)
             for layer in replication_layers:
                 target_couchdb.replication(layer,
-                    'http://127.0.0.1:%s/%s' % (current_app.config.geobox_state.config.get('couchdb', 'port'), layer),
+                    '%s/%s' % (source_couch_url, layer),
                     layer, create_target=True)
 
             flash(_('creating couch app') )
