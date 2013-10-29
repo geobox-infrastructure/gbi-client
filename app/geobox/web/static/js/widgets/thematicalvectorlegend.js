@@ -216,6 +216,10 @@ $.extend(gbi.widgets.ThematicalVectorLegendChangeAttributes.prototype, {
             });
         }
     },
+    deactivate: function() {
+        var self = this;
+        self._removeSelectControl($('#' + this.options.element));
+    },
     _addSelectControl: function(element, id, attribute, value) {
         var self = this;
         element.find('#_' + id + '_row').addClass('warning')

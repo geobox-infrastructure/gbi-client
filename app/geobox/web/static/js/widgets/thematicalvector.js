@@ -104,6 +104,14 @@ gbi.widgets.ThematicalVector.prototype = {
             }
             self.render();
         });
+        if(self.components["legend"] instanceof gbi.widgets.ThematicalVectorLegendChangeAttributes) {
+            self.element.find('#tabs > li > a ').click(function() {
+                var tab = $(this).attr('href');
+                if(tab != '#thematical-legend') {
+                    self.components["legend"].deactivate();
+                }
+            });
+        }
     },
     showListView: function() {
         $('#thematical-list-tab').tab('show');
