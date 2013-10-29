@@ -3,7 +3,6 @@ import json
 import requests
 import os
 import mimetypes
-import logging
 from flask import render_template
 from geobox.appstate import GeoBoxState
 from geobox.defaults import GeoBoxConfig
