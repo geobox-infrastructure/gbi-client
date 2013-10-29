@@ -11,7 +11,7 @@ var thematicalVectorConfiguratorLabel = {
     'addInputField': OpenLayers.i18n('Add input'),
     'removeInputField': OpenLayers.i18n('Remove input'),
     'active': OpenLayers.i18n('Active'),
-    'choose': OpenLayers.i18n('Choose value'),
+    'choose': OpenLayers.i18n('Value'),
     'noInput': OpenLayers.i18n('No entries'),
     'noLayer': OpenLayers.i18n('No layer selected'),
     'attributes': OpenLayers.i18n('Attributes'),
