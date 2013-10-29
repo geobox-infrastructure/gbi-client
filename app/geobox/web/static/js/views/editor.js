@@ -588,6 +588,7 @@ function initEditor() {
 
   if ((typeof tmp_vectorLayer !== 'undefined') && tmp_vectorLayer) {
     editor.addLayer(tmp_vectorLayer);
+    editor.layerManager.active(tmp_vectorLayer)
     var extent = tmp_vectorLayer.olLayer.getDataExtent();
     if (extent) {
       editor.map.olMap.zoomToExtent(extent);
