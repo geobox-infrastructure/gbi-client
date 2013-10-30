@@ -4,8 +4,6 @@ import requests
 import os
 import mimetypes
 from flask import render_template
-from requests.sessions import InvalidSchema
-from requests.models import MissingSchema
 from geobox.appstate import GeoBoxState
 from geobox.defaults import GeoBoxConfig
 from geobox.web import create_app
@@ -34,7 +32,7 @@ def static_files(basedir, attachments=None):
 def push_couchapp(attachments, couchurl, appname):
     try:
         resp = requests.put(couchurl)
-    except (MissingSchema, InvalidSchema), ex:
+    except Exception, ex:
         log.exception(ex)
         return False
     if not resp.status_code in [201, 412]:
