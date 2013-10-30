@@ -543,6 +543,7 @@ function loadCouchDBs() {
                   sourceURL: metadata.source.url,
                   layer:  metadata.name,
                   format: metadata.source.format,
+                  data: metadata,
                   requestEncoding: 'REST'
                 }));
               }
