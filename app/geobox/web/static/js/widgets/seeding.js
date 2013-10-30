@@ -162,6 +162,12 @@ gbi.widgets.Seeding.prototype = {
         self = e.data.self;
 
         self.seeder.stop();
+
+        self.element.find('#seeding-start')
+            .removeAttr('disabled');
+
+        self.element.find('#seeding-stop')
+            .attr('disabled', 'disabled');
     },
     updateProgressBar: function(status) {
         var self = this;
