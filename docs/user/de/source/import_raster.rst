@@ -12,6 +12,8 @@ Um einen neuen Rasterimport zu erstellen wählen Sie "Neuer Import".
 
 .. attention :: Das Löschen eines Imports kann nicht rückgängig gemacht werden.
 
+.. _import_editor:
+
 Editor
 ''''''
 
