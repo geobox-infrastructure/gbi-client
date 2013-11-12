@@ -1,7 +1,7 @@
 Boxen
 =====
 
-Im GeoBox-Client haben Sie die Möglichkeit auf Ihre Up- und Download-Boxen aus der Webanwendung der GeoBox-Infrastruktur zuzugreifen. Die Inhalte der Boxen werden regelmäßig abgeglichen, so dass alle Änderungen sowohl im GeoBox-Client als auch in der Webanwendung vorhanden sind.
+Im GeoBox-Client haben Sie die Möglichkeit auf Ihre Up- und Download-Boxen der GeoBox-Infrastruktur zuzugreifen. Die Inhalte der Boxen werden regelmäßig abgeglichen, so dass alle Änderungen sowohl im GeoBox-Client als auch im GeoBox-Server vorhanden sind.
 
 Download-Box
 ------------
@@ -13,8 +13,8 @@ Außerdem ist es für GeoJSON-Dateien möglich die enthaltenen Geometrien in ein
 Upload-Box
 ----------
 
-Die Upload-Box ist Ihre Ablage für Dateien. In dem Feld `Datei` geben Sie per Auswahldialog die Datei an, die Sie in Ihrer Upload-Box speichern möchten. Durch betätigen des Button `Hochladen` wird die Datei in Ihre Upload-Box geladen. Ist der Vorgang abgeschlossen, erscheint die hochgeladene Datei in der Dateiübersicht.
+Die Upload-Box ist Ihre Ablage für Dateien, die Sie Ihrem Berater zur Verfügung stellen möchten. In dem Feld `Datei` geben Sie per Auswahldialog die Datei an, die Sie in Ihrer Upload-Box speichern möchten. Durch betätigen des Button `Hochladen` wird die Datei in Ihre Upload-Box geladen. Ist der Vorgang abgeschlossen, erscheint die hochgeladene Datei in der Dateiübersicht.
 
 Mit einem Klick auf den Dateinamen können Sie die entsprechende Datei herunterladen. Zudem können Sie die Datei wieder aus Ihrer Upload-Box löschen.  Dateien des Typs `GeoJSON` lassen sich durch Klicken des Button `Vorschau` in einer Vorschaukarte ansehen.
 
-Berater haben Zugriff auf die Dateien, die Sie in Ihrer Upload-Box ablegen.
+.. note:: Berater haben Zugriff auf die Dateien, die Sie in Ihrer Upload-Box ablegen.

@@ -4,22 +4,22 @@ Datenquellen
 Lokale Rasterquellen
 --------------------
 
-Ist eine Übersicht der von Ihnen importierten Rasterquellen. Es werden der `Name`, der `Layer`, das `Format` sowie die `Level`, in denen die lokale Rasterquelle zur Verfügung steht, angezeigt. Über den Button `Entfernen` können Sie die lokale Rasterquelle unwiderruflich löschen. Bitte beachten Sie das gelöschte Daten neu importiert werden müssen um einen Export erstellen zu können.
+Ist eine Übersicht der von Ihnen importierten Rasterquellen. Es werden der `Name`, der `Layer`, das `Format` sowie die `Level`, in denen die lokale Rasterquelle zur Verfügung steht, angezeigt. Über den Button `Entfernen` können Sie die lokale Rasterquelle unwiderruflich löschen. Bitte beachten Sie das gelöschte Daten neu importiert werden müssen, um einen neuen Export erstellen zu können.
 
 Externe Rasterquellen
 ---------------------
 
-Ist eine Übersicht der von der GeoBox-Infrastruktur für Sie zur Verfügung gestellten Rasterquellen. Es werden der `Titel` und der `Layer Name` angezeigt. Außerdem wird angezeigt, ob die entsprechende Quelle abgesichert ist. Sollte dies der Fall sein, können Sie die Quelle über den Button `Entsperren` freischalten. Nach Betätigung des Button `Entsperren` werden Sie aufgefordert, Benutzername und Passwort für die Quelle anzugeben. Der angegebene Benutzername wird anschließend in der Spalte `Benutzername` angezeigt.
+Ist eine Übersicht der von dem GeoBox-Server für Sie zur Verfügung gestellten Rasterquellen. Es werden der `Titel` und der `Layer Name` angezeigt. Außerdem wird angezeigt, ob die entsprechende Quelle abgesichert ist. Sollte dies der Fall sein, können Sie die Quelle über den Button `Entsperren` freischalten. Nach Betätigung des Button `Entsperren` werden Sie aufgefordert, Benutzername und Passwort für die Quelle anzugeben. Der angegebene Benutzername wird anschließend in der Spalte `Benutzername` angezeigt.
 
 Externe Suchdienste
 -------------------
 
-Ist eine Übersicht über die von der GeoBox-Infrastruktur für Sie zur Verfügung gestellten Suchdienste. Es werden der `Name` und das `Such-Attribut` angezeigt. Außerdem wird angezeigt, ob der entsprechende uUchdienst abgesichert ist. Sollte dies der Fall sein, können Sie den Suchdienst über den Button `Entsperren` freischalten. Nach Betätigung des Button `Entsperren` werden Sie aufgefordert, Benutzername und Passwort für den Suchdienst anzugeben. Der Benutzername wird anschließend in der Spalte `Benutzername` angezeigt.
+Ist eine Übersicht über die von der GeoBox-Infrastruktur für Sie zur Verfügung gestellten WFS-Suchdienste. Es werden der `Name` und das `Such-Attribut` angezeigt. Außerdem wird angezeigt, ob der Suchdienst abgesichert ist. Sollte dies der Fall sein, können Sie den Suchdienst über den Button `Entsperren` freischalten. Nach Betätigung des Button `Entsperren` werden Sie aufgefordert, Benutzername und Passwort für den Suchdienst anzugeben. Der Benutzername wird anschließend in der Spalte `Benutzername` angezeigt.
 
 Eigene Rasterquellen
 --------------------
 
-Ist eine Übersicht der von Ihnen hinzugefügten Rasterquellen. Es werden der `Titel`, die `URL` der `Layer Name` und das `Koordinatensystem` des Layers angezeigt. Weiterhin haben Sie über den Button `Editieren` die Möglichkeit, die Einstellungen für Ihre Rasterquelle zu ändern. Über den Button `Entfernen` können Sie die Quelle unwiderruflich löschen.
+Ist eine Übersicht der von Ihnen hinzugefügten WMS- und WMTS-Rasterquellen. Es werden der `Titel`, die `URL` der `Layer Name` und das `Koordinatensystem` des Layers angezeigt. Weiterhin haben Sie über den Button `Editieren` die Möglichkeit, die Einstellungen für Ihre Rasterquelle zu ändern. Über den Button `Entfernen` können Sie die Quelle unwiderruflich löschen.
 
 Neuen WMTS hinzufügen
 ---------------------

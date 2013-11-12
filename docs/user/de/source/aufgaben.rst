@@ -11,4 +11,4 @@ Aufgaben die durch ein Beenden der Anwendung unterbrochen wurden, werden beim n�
 
 Downloads
 =========
-Alle beim Exportvorgang erzeugten Dateien können Sie hier herunterladen. Sie können diese entweder direkt speichern oder das Export-Verzeichnis öffnen.
+Hier erhalten Sie eine Übersicht über alle exportierten Dateien. Sie haben die Möglichkeit die Dateien direkt herunterzuladen, oder das Export-Verzeichnis zu öffnen.

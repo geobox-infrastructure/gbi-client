@@ -4,9 +4,9 @@ Erste Schritte
 
 Start der Anwendung
 -------------------
-Nach erfolgreicher Installation des GeoBox-Client kann die Anwendung über das Windows Startmenü gestartet werden. Nach dem Start erscheint das GeoBox-Symbol in der Windows-Taskleiste. Über das Menü können sie die Anwendung schließen oder neu starten.
+Nach erfolgreicher Installation des GeoBox-Client kann die Anwendung über das Windows Startmenü gestartet werden. Nach dem Start erscheint das GeoBox-Symbol in der Windows-Taskleiste. Über das Kontext-Menü des GeoBox-Symbols (rechte Maustaste) können Sie die Anwendung schließen.
 
-Die Funktionen der Anwendung werden über einen Webbrowser gesteuert. Nach dem Starten der Anwendung wird automatisch Ihr Standardbrowser mit der dazugehörigen Webseite geöffnet. Sollte die Seite nicht automatisch öffnen erreichen Sie die Anwendung unter der Webadresse `http://127.0.0.1:8090/`.
+Die Anwendung selbst lässt sich über einen Webbrowser steuern. Nach dem Starten der Anwendung wird automatisch Ihr Standardbrowser mit der dazugehörigen Webseite geöffnet. Sollte die Seite nicht automatisch öffnen, erreichen Sie die Anwendung unter der Webadresse `http://127.0.0.1:8090/`.
 
 Aufbau der Webseite
 -------------------
@@ -16,7 +16,8 @@ Die Webseite besteht aus einer Navigationsleiste im oberen Bereich, sowie dem in
 Anmeldung
 '''''''''
 
-Die Anmeldung erfolgt über die Angabe des Benutzernamens und des zugehörigen Passworts. Bitte verwenden Sie hier die Anmeldedaten der GeoBox-Infrastruktur.
+Die Anmeldung erfolgt über die Angabe des Benutzernamens und des zugehörigen Passworts. Bitte verwenden Sie hier die Anmeldedaten Ihres GeoBox-Server Zuganges.
+Nach dem Anmelden werden Ihre Flächenboxen vom GeoBox-Server in den GeoBox-Client übertragen. Je nach Datenmenge kann dieses einige Minuten dauern.
 
 
 Startseite
@@ -37,7 +38,7 @@ Startseite
   - Datenquellen
   - Administration
 
-Die einzelnen Funktionen werden in der Benutzerdokumentation näher erläutert.
+Die einzelnen Funktionen werden im Folgenden näher erläutert.
 
 Abmelden eines Nutzers
 ''''''''''''''''''''''
