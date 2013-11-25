@@ -358,6 +358,7 @@ class VectorCouchDB(CouchDBBase):
         CouchDBBase.__init__(self, url, db_name)
         self.db_name = db_name
         self.title = title or db_name
+        print self.title
         self.init_layer()
 
     def init_db(self, couch_db_url=None):
@@ -501,7 +502,7 @@ class VectorCouchDB(CouchDBBase):
                                     for(var prop in doc.views) {
                                         if(doc.views.hasOwnProperty(prop)){
                                             returnBody = returnBody+'<collection href="'+prop+'">';
-                                            returnBody = returnBody+'<atom:title>'+prop+'</atom:title></collection>';
+                                            returnBody = returnBody+'<atom:title>%(title)s</atom:title></collection>';
                                         }
                                     }
                                 }
@@ -513,7 +514,7 @@ class VectorCouchDB(CouchDBBase):
                                 },
                                 body : returnBody
                             };
-                        }"""
+                        }""" % {'title': self.title}
                 }
         }
         existing_odata_doc = self.get('_design/odata')
