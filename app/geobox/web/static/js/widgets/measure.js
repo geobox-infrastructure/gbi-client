@@ -58,7 +58,11 @@ gbi.widgets.Measure.prototype = {
                 output += Math.round(measure.measure[0]*decimalPlace)/decimalPlace + ', ' + Math.round(measure.measure[1]*decimalPlace)/decimalPlace;
                 break;
             case gbi.Controls.Measure.TYPE_LINE:
-                output += measure.measure + " " + measure.units;
+                var measureResult = measure.measure;
+                if(measure.units == 'km') {
+                    measureResult *= 1000;
+                }
+                output += measureResult + " m";
                 break;
             case gbi.Controls.Measure.TYPE_POLYGON:
                 output += measure.measure + " " + measure.units + "<sup>2</sup>";
