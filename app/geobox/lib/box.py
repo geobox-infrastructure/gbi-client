@@ -87,11 +87,14 @@ class FeatureInserter(object):
 
     def _check_metadata_doc(self, layer, source):
         couchdb_layer = '%s%s' % (self.prefix, layer)
-        couch = VectorCouchDB(self.url, couchdb_layer, couchdb_layer )
 
         source_md = source.load_record('schema_' + layer)
+        title = source_md.get('title', layer) if source_md else layer
+
+        couch = VectorCouchDB(self.url, couchdb_layer, title )
+
         md_doc = {
-            'title': source_md.get('title', layer) if source_md else layer,
+            'title': title,
             'name': couchdb_layer,
             'layer': source_md.get('layer', layer) if source_md else layer,
             'type': 'GeoJSON',
