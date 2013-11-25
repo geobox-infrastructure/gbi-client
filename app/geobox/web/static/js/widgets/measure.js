@@ -65,7 +65,13 @@ gbi.widgets.Measure.prototype = {
                 output += measureResult + " m";
                 break;
             case gbi.Controls.Measure.TYPE_POLYGON:
-                output += measure.measure + " " + measure.units + "<sup>2</sup>";
+                var measureResult = measure.measure;
+                if(measure.units == 'km') {
+                    measureResult *= 1000;
+                }
+                measureResult /= 10000;
+                measureResult = Math.round(measureResult*decimalPlace)/decimalPlace
+                output += measureResult + " ha";
         }
         element.html(output);
     }
