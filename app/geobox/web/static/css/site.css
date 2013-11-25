@@ -327,3 +327,10 @@ hr#save_dividing_line {
 .save-enabled {
     font-style: italic;
 }
+
+#measure-result-container {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 0px 0px 0px 0px;
+}

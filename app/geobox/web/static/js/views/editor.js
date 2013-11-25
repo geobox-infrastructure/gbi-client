@@ -635,7 +635,7 @@ function initEditor() {
     tools: {
       'drawPoint': true,
       'drawLine': true,
-      'drawPolygon': true,
+      'drawPolygon': false,
       'select': true,
       'edit': true,
       'split': true,
@@ -644,6 +644,24 @@ function initEditor() {
       'delete': true
     }
   });
+  // add div to show selected / drawn area
+  var measureResultDiv = $('<div id="measure-result-container" class="label">Area: <span id="measure-result"></span></div>');
+  $('.olMapViewport').append(measureResultDiv);
+  var measuredDraw = new gbi.Controls.MeasuredDraw(toolbar.vectorActive, {
+    measureCallback: function(result) {
+      var target = $('#measure-result');
+      target.empty()
+      var area = result.measure;
+      if(result.units == 'km') {
+        area *= 1000;
+      }
+      area /= 10000;
+      area = Math.round(area * 100000)/100000;
+      target.text(area + ' ha')
+    }
+  });
+
+  toolbar.addControl(measuredDraw)
   toolbar.select.deactivate();
   toolbar.select.olControl.onUnselect = function(feature) {
     var layer = feature.layer.gbiLayer;
@@ -683,5 +701,6 @@ function initEditor() {
       editor.addLayer(layer);
     });
   }
+
   return editor;
 }
