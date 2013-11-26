@@ -505,7 +505,7 @@ var attributeLabel = {
     'successfulRefereshed': OpenLayers.i18n('Successful refreshed'),
     'schemaLoadFail': OpenLayers.i18n('Loading schema failed'),
     'schemaRefreshFail': OpenLayers.i18n('Refreshing schema failed'),
-    'saveAttributeChanges': OpenLayers.i18n('Save attribute changes'),
+    'saveAttributeChanges': OpenLayers.i18n('Apply'),
     'label': OpenLayers.i18n('Show property in map'),
     'remove': OpenLayers.i18n('Remove property from feature')
 };
