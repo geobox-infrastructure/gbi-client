@@ -149,11 +149,13 @@ gbi.widgets.LayerManager.prototype = {
                     var loadEndCallback = function() {
                         layer.unregisterEvent('loadend', gbi, loadEndCallback);
                         self.zoomToExtent(layer);
+                        self.changeLayer(layer, self.activateLayer);
                     }
                     layer.registerEvent('loadend', gbi, loadEndCallback);
                     layer.visible(true)
                 } else {
                     self.zoomToExtent(layer);
+                    self.changeLayer(layer, self.activateLayer);
                 }
                 return false;
             });
@@ -179,98 +181,20 @@ gbi.widgets.LayerManager.prototype = {
 
         this.element.find('.vectorLayer').click(function() {
             var clickedElement = this;
-            var activeLayer = self.layerManager.active();
-            if(activeLayer && jQuery.isFunction(activeLayer.unsavedChanges) && activeLayer.unsavedChanges()) {
-                $('#changeVectorLayer').modal('show');
-                $('#change_layer_save').click(function() {
-                    activeLayer.save();
-                    activeLayer._saveMetaDocument();
-                    $('#changeVectorLayer').modal('hide');
-                    changeLayer(clickedElement);
-                });
-                $('#change_layer_discard').click(function() {
-                    activeLayer.refresh();
-                    $('#changeVectorLayer').modal('hide');
-                    changeLayer(clickedElement);
-                });
-                $('#changeVectorLayer').on('hidden', function () {
-                    $('#change_layer_save').off('click');
-                    $('#change_layer_discard').off('click');
-                    $('#changeVectorLayer').off('hidden');
-                })
-            } else {
-                changeLayer(clickedElement);
-            }
-        });
-
-        function changeLayer(clickedElement) {
             var id = parseInt($(clickedElement).attr('id'));
             var layer = self.layerManager.layerById(id);
-            self.layerManager.active(layer);
-            layer.visible(true);
-            layer.selectFeatures(layer.storedFeatures())
-            self.render(self.findAccordion(clickedElement));
-        }
+            self.activeLayer(layer);
+
+        });
 
         this.element.find('#add_vector_layer').click(function() {
-            var newLayer = $('#new_vector_layer').val();
-            if(newLayer) {
-                var activeLayer = self.layerManager.active();
-                if(activeLayer && activeLayer.unsavedChanges()) {
-                    $('#changeVectorLayer').modal('show');
-                    $('#change_layer_save').click(function() {
-                        activeLayer.save();
-                        activeLayer._saveMetaDocument();
-                        $('#changeVectorLayer').modal('hide');
-                        createLayer(newLayer);
-                    });
-                    $('#change_layer_discard').click(function() {
-                        activeLayer.refresh();
-                        $('#changeVectorLayer').modal('hide');
-                        createLayer(newLayer);
-                    });
-                    $('#changeVectorLayer').on('hidden', function () {
-                        $('#change_layer_save').off('click');
-                        $('#change_layer_discard').off('click');
-                        $('#changeVectorLayer').off('hidden');
-                    })
-                } else {
-                    createLayer(newLayer);
-                }
+            var newLayerTitle = $('#new_vector_layer').val();
+            if(newLayerTitle) {
+                self.changeLayer(newLayerTitle, self.createLayer)
             } else {
                 $('#invalid_layer_name').show().fadeOut(3000);
             }
         });
-
-        function createLayer(title) {
-            var newLayer = title.toLowerCase().replace(/[^a-z0-9_]*/g, '');
-            var newLayerName = 'local_vector_'+ newLayer;
-            var couchLayer = new gbi.Layers.Couch({
-                name: newLayerName,
-                title: title,
-                url: OpenlayersCouchURL,
-                hoverPopup: true,
-                callbacks: {
-                    changes: function(unsavedChanges) {
-                        if(unsavedChanges)
-                            $('#save_changes').removeAttr('disabled').addClass('btn-success');
-                         else
-                            $('#save_changes').attr('disabled', 'disabled').removeClass('btn-success');;
-                    }
-                }
-            });
-            if (!couchLayer.couchExists) {
-                self.layerManager.addLayer(couchLayer);
-                self.layerManager.active(couchLayer);
-                self.render(self.findAccordion(this));
-                var addSuccessful = OpenLayers.i18n("addLayerSuccessful");
-                $("#help_text").attr('class','alert alert-success').html(addSuccessful).show().fadeOut(6000);
-            } else {
-                var notPossible = OpenLayers.i18n("notPossible")
-                $("#help_text").attr('class','alert alert-error').html(notPossible).show().fadeOut(6000);
-                delete couchLayer;
-            }
-        }
 
         if(this.options.tiny) {
             this.element.find('.gbi_widgets_LayerManager_Minimize').click(function(event) {
@@ -299,7 +223,72 @@ gbi.widgets.LayerManager.prototype = {
             self.editor.map.olMap.zoomToExtent(extent);
         }
         self.render(self.findAccordion(this));
+    },
+    // checks for changes in active layer and raise modal if changes present
+    // after accept or discard modal or if no changes found
+    // changeFunction(obj) is called
+    changeLayer: function(obj, changeFunction) {
+        var self = this;
+        var activeLayer = self.layerManager.active();
+        if(activeLayer && jQuery.isFunction(activeLayer.unsavedChanges) && activeLayer.unsavedChanges()) {
+            $('#changeVectorLayer').modal('show');
+            $('#change_layer_save').click(function() {
+                activeLayer.save();
+                activeLayer._saveMetaDocument();
+                $('#changeVectorLayer').modal('hide');
+                changeFunction.call(self, obj);
+            });
+            $('#change_layer_discard').click(function() {
+                activeLayer.refresh();
+                $('#changeVectorLayer').modal('hide');
+                changeFunction.call(self, obj);
+            });
+            $('#changeVectorLayer').on('hidden', function () {
+                $('#change_layer_save').off('click');
+                $('#change_layer_discard').off('click');
+                $('#changeVectorLayer').off('hidden');
+            })
+        } else {
+            changeFunction.call(self, obj);
+        }
+    },
+    activateLayer: function(layer) {
+        var self = this;
+        self.layerManager.active(layer);
+        layer.visible(true);
+        layer.selectFeatures(layer.storedFeatures())
+        self.render(self.findAccordion($('#' + layer.id)));
+    },
+    createLayer: function(title) {
+        var self = this;
+        var newLayer = title.toLowerCase().replace(/[^a-z0-9_]*/g, '');
+        var newLayerName = 'local_vector_'+ newLayer;
+        var couchLayer = new gbi.Layers.Couch({
+            name: newLayerName,
+            title: title,
+            url: OpenlayersCouchURL,
+            hoverPopup: true,
+            callbacks: {
+                changes: function(unsavedChanges) {
+                    if(unsavedChanges)
+                        $('#save_changes').removeAttr('disabled').addClass('btn-success');
+                     else
+                        $('#save_changes').attr('disabled', 'disabled').removeClass('btn-success');;
+                }
+            }
+        });
+        if (!couchLayer.couchExists) {
+            self.layerManager.addLayer(couchLayer);
+            self.activateLayer(couchLayer);
+            var addSuccessful = OpenLayers.i18n("addLayerSuccessful");
+            $("#help_text").attr('class','alert alert-success').html(addSuccessful).show().fadeOut(6000);
+        } else {
+            var notPossible = OpenLayers.i18n("notPossible")
+            $("#help_text").attr('class','alert alert-error').html(notPossible).show().fadeOut(6000);
+            delete couchLayer;
+        }
     }
+
 };
 
 gbi.widgets.LayerManager.templates = {
