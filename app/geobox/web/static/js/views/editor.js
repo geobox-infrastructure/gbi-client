@@ -6,19 +6,21 @@ window.onbeforeunload = function() {
 
 $(document).ready(function() {
   var gbiLayerEvents = {
-    'gbi.layer.vector.styleChanged': enableSaveButton,
-    'gbi.layer.saveableVector.unsavedChanges': enableSaveButton,
-    'gbi.layer.vector.ruleChanged': enableSaveButton,
-    'gbi.layer.vector.listAttributesChanged': enableSaveButton,
-    'gbi.layer.vector.popupAttributesChanged': enableSaveButton,
-    'gbi.layer.vector.featureAttributeChanged': enableSaveButton,
-    'gbi.layer.vector.schemaLoaded': enableSaveButton,
-    'gbi.layer.vector.schemaRemoved': enableSaveButton,
-    'gbi.layer.vector.featuresStored': enableExportSelectedGeometriesButton,
-    'gbi.layer.vector.featuresStoreCleared': disableExportSelectedGeometriesButton,
+    'gbi.layer.vector.styleChanged': [enableSaveButton],
+    'gbi.layer.saveableVector.unsavedChanges': [enableSaveButton],
+    'gbi.layer.vector.ruleChanged': [enableSaveButton],
+    'gbi.layer.vector.listAttributesChanged': [enableSaveButton],
+    'gbi.layer.vector.popupAttributesChanged': [enableSaveButton],
+    'gbi.layer.vector.featureAttributeChanged': [enableSaveButton],
+    'gbi.layer.vector.schemaLoaded': [enableSaveButton],
+    'gbi.layer.vector.schemaRemoved': [enableSaveButton],
+    'gbi.layer.vector.featuresStored': [enableExportSelectedGeometriesButton],
+    'gbi.layer.vector.featuresStoreCleared': [disableExportSelectedGeometriesButton]
   };
   var olLayerEvents = {
-    'featureselected': storeSelectedFeatures
+    'featureselected': [storeSelectedFeatures, updateArea],
+    'featureunselected': [updateArea],
+    'featuremodified': [updateArea]
   };
   var editor = initEditor();
   var activeLayer = editor.layerManager.active();
@@ -347,23 +349,31 @@ $(document).ready(function() {
   };
 
   function registerEvents(layer) {
-    $.each(gbiLayerEvents, function(type, func) {
-      $(layer).on(type, func);
+    $.each(gbiLayerEvents, function(type, funcList) {
+      $.each(funcList, function(idx, func) {
+        $(layer).on(type, func);
+      });
     });
     if(layer) {
-      $.each(olLayerEvents, function(type, func) {
-        layer.registerEvent(type, editor, func);
+      $.each(olLayerEvents, function(type, funcList) {
+        $.each(funcList, function(idx, func) {
+          layer.registerEvent(type, editor, func);
+        });
       });
     }
   }
 
   function unregisterEvents(layer) {
-    $.each(gbiLayerEvents, function(type, func) {
-      $(layer).off(type, func);
+    $.each(gbiLayerEvents, function(type, funcList) {
+      $.each(funcList, function(idx, func) {
+        $(layer).off(type, func);
+      });
     });
     if(layer) {
-      $.each(olLayerEvents, function(type, func) {
-        layer.unregisterEvent(type, editor, func);
+      $.each(olLayerEvents, function(type, funcList) {
+        $.each(funcList, function(idx, func) {
+          layer.unregisterEvent(type, editor, func);
+        })
       });
     }
   };
