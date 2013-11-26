@@ -378,6 +378,17 @@ $(document).ready(function() {
     }
   };
 
+  function updateArea() {
+    var features = activeLayer.selectedFeatures();
+    var area = 0;
+    $.each(features, function(idx, feature) {
+      if($.isFunction(feature.geometry.getGeodesicArea)) {
+        area += feature.geometry.getGeodesicArea(new OpenLayers.Projection('EPSG:3857'));
+      }
+    });
+    displayArea(area);
+  };
+
   function enableSaveButton() {
     if(activeLayer instanceof gbi.Layers.Couch) {
       $('#save-tab').addClass('save-enabled');
@@ -492,6 +503,14 @@ $(document).ready(function() {
     return false;
   });
 });
+
+function displayArea(area) {
+  area /= 10000;
+  area = Math.round(area*100000)/100000;
+  $('#measure-result')
+    .empty()
+    .text(area);
+};
 
 function loadCouchDBs() {
   var url = OpenlayersCouchURL;
@@ -666,9 +685,7 @@ function initEditor() {
       if(result.units == 'km') {
         area *= 1000;
       }
-      area /= 10000;
-      area = Math.round(area * 100000)/100000;
-      target.text(area + ' ha')
+      displayArea(area);
     }
   });
 
