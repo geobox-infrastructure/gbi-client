@@ -675,7 +675,9 @@ function initEditor() {
   });
 
   // move div into viewport
-  $('#measure-result-container').appendTo($('.olMapViewport'))
+  $('#measure-result-container')
+    .appendTo($('.olMapViewport'))
+    .removeClass('hide')
 
   var measuredDraw = new gbi.Controls.MeasuredDraw(toolbar.vectorActive, {
     measureCallback: function(result) {
