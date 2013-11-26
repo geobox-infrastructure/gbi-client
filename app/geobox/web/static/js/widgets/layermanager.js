@@ -183,7 +183,7 @@ gbi.widgets.LayerManager.prototype = {
             var clickedElement = this;
             var id = parseInt($(clickedElement).attr('id'));
             var layer = self.layerManager.layerById(id);
-            self.activeLayer(layer);
+            self.activateLayer(layer);
 
         });
 
