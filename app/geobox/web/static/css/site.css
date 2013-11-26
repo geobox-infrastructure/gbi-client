@@ -333,4 +333,5 @@ hr#save_dividing_line {
     right: 0px;
     bottom: 0px;
     border-radius: 0px 0px 0px 0px;
+    z-index: 100005;
 }
