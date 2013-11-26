@@ -80,7 +80,9 @@
     {{ generate_tooltip(_('tooltip - editor') ) }}
   </h1>
 
-  <div class="span8 map" id='map'></div>
+  <div class="span8 map" id='map'>
+    <div id="measure-result-container" class="label">{{ _('Area') }}: <span id="measure-result">0</span> ha</div>
+  </div>
   <div class="span4">
     <div class="bs-docs-example">
       <ul id="tabs" class="nav nav-tabs">

@@ -654,9 +654,10 @@ function initEditor() {
       'delete': true
     }
   });
-  // add div to show selected / drawn area
-  var measureResultDiv = $('<div id="measure-result-container" class="label">Area: <span id="measure-result"></span></div>');
-  $('.olMapViewport').append(measureResultDiv);
+
+  // move div into viewport
+  $('#measure-result-container').appendTo($('.olMapViewport'))
+
   var measuredDraw = new gbi.Controls.MeasuredDraw(toolbar.vectorActive, {
     measureCallback: function(result) {
       var target = $('#measure-result');
