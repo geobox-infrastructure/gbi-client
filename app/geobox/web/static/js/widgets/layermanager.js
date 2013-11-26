@@ -145,12 +145,16 @@ gbi.widgets.LayerManager.prototype = {
                 return false;
             });
             self.element.find('#data_extent_' + layer.id).click(function(e) {
-                layer.visible(true)
-                var extent = layer.olLayer.getDataExtent();
-                if (extent) {
-                    self.editor.map.olMap.zoomToExtent(extent);
+                if(!layer.visible()) {
+                    var loadEndCallback = function() {
+                        layer.unregisterEvent('loadend', gbi, loadEndCallback);
+                        self.zoomToExtent(layer);
+                    }
+                    layer.registerEvent('loadend', gbi, loadEndCallback);
+                    layer.visible(true)
+                } else {
+                    self.zoomToExtent(layer);
                 }
-                self.render(self.findAccordion(this));
                 return false;
             });
             self.element.find('#remove_' + layer.id).click(function() {
@@ -287,6 +291,14 @@ gbi.widgets.LayerManager.prototype = {
     findAccordion: function(element) {
        var accordion = $(element).closest('.accordion-body ');
        return $(accordion).attr('id');
+    },
+    zoomToExtent: function(layer) {
+        var self = this;
+        var extent = layer.olLayer.getDataExtent();
+        if (extent) {
+            self.editor.map.olMap.zoomToExtent(extent);
+        }
+        self.render(self.findAccordion(this));
     }
 };
 
