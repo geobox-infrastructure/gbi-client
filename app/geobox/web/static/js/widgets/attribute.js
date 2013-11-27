@@ -110,49 +110,6 @@ gbi.widgets.AttributeEditor.prototype = {
         }
         this.element.empty();
 
-        if(!self.jsonSchema) {
-            this.element.append(tmpl(gbi.widgets.AttributeEditor.addSchemaTemplate));
-            if(activeLayer) {
-                $('#add_json_schema_url').click(function() {
-                    $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
-                        self.setJsonSchema(schema);
-                        $(activeLayer).off('gbi.layer.vector.schemaLoaded');
-                        $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
-                    });
-                    $(activeLayer).on('gbi.layer.vector.loadSchemaFail', function(event, schema) {
-                        $('#json_schema_load_fail').show().fadeOut(3000);
-                        $(activeLayer).off('gbi.layer.vector.schemaLoaded');
-                        $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
-                    });
-                    var schemaURL = $('#json_schema_url').val();
-                    activeLayer.addSchemaFromUrl(schemaURL);
-                });
-            } else {
-                $('#add_json_schema_url').attr('disabled', 'disabled');
-            }
-        } else {
-            this.element.append(tmpl(gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate, {
-                jsonSchemaURL: activeLayer.options.jsonSchemaUrl
-            }));
-            $('#refresh_json_schema').click(function() {
-                $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
-                    self.setJsonSchema(schema);
-                    $(activeLayer).off('gbi.layer.vector.schemaLoaded');
-                    $('#json_schema_refreshed').show().fadeOut(3000);
-                });
-                $(activeLayer).on('gbi.layer.vector.loadSchemaFail', function(event, schema) {
-                    $('#json_schema_refresh_fail').show().fadeOut(3000);
-                    $(activeLayer).off('gbi.layer.vector.schemaLoaded');
-                    $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
-                });
-                activeLayer.addSchemaFromUrl(activeLayer.options.jsonSchemaUrl);
-            });
-            $('#remove_json_schema').click(function() {
-                activeLayer.removeJsonSchema();
-                self.jsonSchema = false;
-                self.render();
-            });
-        }
 
         if(self.invalidFeatures && self.invalidFeatures.length > 0) {
             self.renderInvalidFeatures(activeLayer);
@@ -647,15 +604,6 @@ gbi.widgets.AttributeEditor.invalidFeaturesTemplate = '\
     </div>\
 ';
 
-gbi.widgets.AttributeEditor.addSchemaTemplate = '\
-    <div>\
-        <div class="input-append">\
-            <input id="json_schema_url" name="json_schema_url" type="text" />\
-            <button class="btn" id="add_json_schema_url" type="button">'+attributeLabel.addJsonSchemaUrl+'</button>\
-        </div>\
-        <div class="alert alert-error" style="display: none" id="json_schema_load_fail">' + attributeLabel.schemaLoadFail + '</div>\
-    </div>\
-';
 
 gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate = '\
     <div>\
