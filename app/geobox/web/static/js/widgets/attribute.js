@@ -384,6 +384,25 @@ gbi.widgets.AttributeEditor.prototype = {
         $.each(this.selectedFeatures, function(idx, feature) {
             self.featureChanges[feature.id]['added'][key] = value;
         });
+        if(self.element.find('input#' + key).length == 0) {
+            self.element.find('.view_attributes').last().after(
+                tmpl(gbi.widgets.AttributeEditor.addedAttributeTemplate, {
+                    key: key,
+                    value: value
+                }))
+            $('#_'+key+'_remove').click(function() {
+                self.remove(key);
+                return false;
+            });
+            $('#_'+key+'_label').click(function() {
+                self.label(key);
+                return false;
+            });
+        } else {
+            self.element.find('input#' + key).val(value);
+        }
+        self.element.find('#_newKey').val('');
+        self.element.find('#_newValue').val('');
         this.changed = true;
     },
     edit: function(key, value) {
