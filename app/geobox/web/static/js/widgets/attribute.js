@@ -21,7 +21,7 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     this.changedAttributes = {};
     this.jsonSchema = this.options.jsonSchema || false;
 
-    this.editMode = true
+    this.editMode = false;
 
     Alpaca.setDefaultLocale("de_AT");
 
