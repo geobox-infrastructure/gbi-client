@@ -445,7 +445,7 @@ gbi.widgets.AttributeEditor.prototype = {
         this.jsonSchema = schema;
         this.render();
     },
-    _applyAttributes: function() {
+    saveChanges: function() {
         var self = this;
         var activeLayer = this.layerManager.active();
         $.each($.extend(true, {}, this.featureChanges), function(featureId, changeSet) {
