@@ -419,6 +419,9 @@ gbi.widgets.AttributeEditor.prototype = {
                 self.featureChanges[feature.id]['removed'].push(key);
             }
         });
+        var field = self.element.find('input#' + key);
+        field.removeAttr('placeholder');
+        field.val('');
         this.changed = true;
         if($.inArray(key, self.layerManager.active().featuresAttributes()) == -1) {
             self.label(key);
