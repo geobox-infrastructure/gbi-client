@@ -152,6 +152,45 @@ $(document).ready(function() {
     return false;
   });
 
+  $('#activate_attribute_edit_mode').click(function() {
+    var storedActiveControls
+    if(!activeLayer) {
+      return false;
+    }
+    if(activeLayer instanceof gbi.Layers.Vector) {
+      var activeToolbar = false;
+      $.each(self.editor.map.toolbars, function(idx, toolbar) {
+        if ($(toolbar.options.div).is(':visible')) {
+          activeToolbar = toolbar;
+        }
+      });
+      if(activeToolbar) {
+        storedActiveControls = activeToolbar.activeControls();
+        activeToolbar.deactivateAllControls();
+
+        $('#attribute-edit-mode').find('#save_btn').click(function() {
+          editor.widgets.attributeEditor.saveChanges();
+          editor.widgets.attributeEditor.deactivateEditMode();
+          $.each(storedActiveControls, function(idx, control) {
+            control.activate();
+          })
+          $('#edit-toolbar-mode').removeClass('hide');
+          $('#attribute-edit-mode').addClass('hide');
+        });
+        $('#attribute-edit-mode').find('#cancel_btn').click(function() {
+          editor.widgets.attributeEditor.deactivateEditMode();
+          $('#edit-toolbar-mode').removeClass('hide');
+          $('#attribute-edit-mode').addClass('hide');
+        });
+      }
+
+      $('#edit-toolbar-mode').addClass('hide');
+      $('#attribute-edit-mode').removeClass('hide');
+
+      editor.widgets.attributeEditor.activateEditMode();
+    }
+  });
+
   $('#export_type').change(function() {
     if($(this).val() == 'odata') {
       $('#srs').hide().prev().hide();

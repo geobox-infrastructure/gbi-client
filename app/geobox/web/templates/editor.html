@@ -128,10 +128,21 @@
         </div>
 
         <div class="tab-pane fade" id="edit">
-          <h4>{{ _('Edit') }}</h4>
-          <p>{{ _('infotext - edit controls') }}</p>
-          <div id="edit-toolbar" class="span12"></div>
-          <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
+          <div id="edit-toolbar-mode">
+            <h4>{{ _('Edit') }}</h4>
+            <p>{{ _('infotext - edit controls') }}</p>
+            <div id="edit-toolbar" class="span12"></div>
+            <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
+            <button id="activate_attribute_edit_mode" class="btn btn-small">{{ _('edit attributes') }}</button>
+          </div>
+          <div id="attribute-edit-mode" class="hide">
+            <h4>Attribut-Editiermodus</h4>
+            <p>Übernehmen oder Verwerfen Sie Ihre Änderungen um in den normalen Modus zurückzuwechseln.</p>
+            <div>
+              <button id="save_btn" class="btn btn-small btn-success">Speichern</button>
+              <button id="cancel_btn" class="btn btn-small btn-danger">Verwerfen</button>
+            </div>
+          </div>
           <hr>
           <h4>{{ _('Attributes') }}</h4>
           <p>{{ _('infotext - attributes') }}</p>

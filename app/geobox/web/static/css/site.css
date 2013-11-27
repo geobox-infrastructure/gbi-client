@@ -335,3 +335,7 @@ hr#save_dividing_line {
     border-radius: 0px 0px 0px 0px;
     z-index: 100005;
 }
+
+#attribute-edit-mode, #edit-toolbar-mode {
+    height: 180px;
+}
