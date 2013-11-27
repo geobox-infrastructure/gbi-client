@@ -205,21 +205,6 @@ gbi.widgets.AttributeEditor.prototype = {
         activeLayer.selectFeature(self.selectedInvalidFeature.feature, true);
         activeLayer.showFeature(self.selectedInvalidFeature.feature);
     },
-    renderSaveButton: function() {
-        var self = this;
-        self.element.append(tmpl(gbi.widgets.AttributeEditor.saveButtonTemplate));
-        self.element.find('#save_btn').click(function() {
-            var changedAttributes = Object.keys(self.changedAttributes);
-            if(changedAttributes.length > 0) {
-                $.each(changedAttributes, function(idx, attribute) {
-                    self.edit(attribute, self.element.find('#' + attribute).val());
-                });
-            }
-            self.changedAttributes = {};
-
-            $(this).removeClass('btn-success').attr('disabled', 'disabled');
-        });
-    },
     renderInputMask: function(attributes, activeLayer) {
         var self = this;
         var selectedFeatureAttributes = {};
@@ -293,7 +278,6 @@ gbi.widgets.AttributeEditor.prototype = {
                 view: nonSchemaView
             });
 
-            self.renderSaveButton();
 
             if(self.jsonSchema.additionalProperties !== false) {
                 this.element.append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
@@ -323,7 +307,6 @@ gbi.widgets.AttributeEditor.prototype = {
                 }
             ));
 
-            self.renderSaveButton();
 
             if(editable && this.options.allowNewAttributes) {
                 this.element.append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
@@ -595,11 +578,6 @@ gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate = '\
     <div class="alert alert-error" style="display: none" id="json_schema_refresh_fail">' + attributeLabel.schemaRefreshFail + '</div>\
 ';
 
-gbi.widgets.AttributeEditor.saveButtonTemplate = '\
-    <div>\
-        <button class="btn btn-small" disabled="disabled" id="save_btn">'+attributeLabel.saveAttributeChanges+'</button>\
-    </div>\
-';
 
 gbi.widgets.AttributeEditor.alpacaViews = {
     "edit": {
