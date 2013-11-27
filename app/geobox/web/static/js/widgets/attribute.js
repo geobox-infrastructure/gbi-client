@@ -159,7 +159,11 @@ gbi.widgets.AttributeEditor.prototype = {
         }
 
         if(self.selectedFeatures.length > 0) {
-            self.renderInputMask(attributes, activeLayer);
+            if(self.editMode) {
+                self.renderInputMask(attributes, activeLayer);
+            } else {
+                self.renderAttributeTable(attributes, activeLayer);
+            }
         }
 
         //prepare list of all possible rendered attributes
@@ -482,6 +486,30 @@ gbi.widgets.AttributeEditor.prototype = {
             }
         });
         return id;
+    },
+    renderAttributeTable: function(attributes, activeLayer) {
+        var self = this;
+        var selectedFeatureAttributes = {};
+        $.each(this.selectedFeatures, function(idx, feature) {
+            $.each(attributes, function(idx, key) {
+                var equal = true;
+                var value = feature.attributes[key];
+                if(key in selectedFeatureAttributes) {
+                    equal = selectedFeatureAttributes[key].value == value;
+                    if(!equal) {
+                        selectedFeatureAttributes[key] = {'equal': false};
+                    }
+                } else {
+                    selectedFeatureAttributes[key] = {'equal': equal, 'value': value};
+                }
+            });
+        });
+        self.element.append(tmpl(
+            gbi.widgets.AttributeEditor.viewOnlyTemplate, {
+                attributes: attributes,
+                selectedFeaturesAttributes: selectedFeatureAttributes
+            }
+        ))
     }
 };
 
@@ -642,3 +670,35 @@ gbi.widgets.AttributeEditor.alpacaViews = {
         }
     }
 };
+
+gbi.widgets.AttributeEditor.viewOnlyTemplate = '\
+    <div>\
+        <table class="table table-hover">\
+            <thead>\
+                <tr>\
+                    <th>Key</th>\
+                    <th>Value</th>\
+                </tr>\
+            </thead>\
+            <tbody>\
+            <% for(var key in attributes) { %>\
+                <tr>\
+                    <td><%=attributes[key]%></td>\
+                    <td>\
+                        <% if(selectedFeaturesAttributes[attributes[key]]["equal"]) {%>\
+                            <%=selectedFeaturesAttributes[attributes[key]]["value"]%>\
+                        <% } else {%>\
+                            '+attributeLabel.sameKeyDifferentValue+'\
+                        <% } %>\
+                    </td>\
+                    <td>\
+                        <button id="_<%=attributes[key]%>_label" title="Show labels" class="btn btn-small add-label-button">\
+                            <i class="icon-eye-open"></i>\
+                        </button>\
+                    </td>\
+                </tr>\
+            <% } %>\
+            </tbody>\
+        </table>\
+    </div>\
+';
