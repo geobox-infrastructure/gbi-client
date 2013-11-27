@@ -209,7 +209,6 @@ gbi.widgets.AttributeEditor.prototype = {
             var val = $('#_newValue').val();
             if (key && val) {
                 self.add(key, val);
-                self._applyAttributes();
             }
             return false;
         });
@@ -385,9 +384,7 @@ gbi.widgets.AttributeEditor.prototype = {
         $.each(this.selectedFeatures, function(idx, feature) {
             self.featureChanges[feature.id]['added'][key] = value;
         });
-        this._applyAttributes();
         this.changed = true;
-        this.render();
     },
     edit: function(key, value) {
         var self = this;
@@ -395,8 +392,6 @@ gbi.widgets.AttributeEditor.prototype = {
             self.featureChanges[feature.id]['edited'][key] = value;
         });
         this.changed = true;
-        this._applyAttributes();
-        this.render();
     },
     remove: function(key) {
         var self = this;
@@ -406,11 +401,9 @@ gbi.widgets.AttributeEditor.prototype = {
             }
         });
         this.changed = true;
-        this._applyAttributes();
         if($.inArray(key, self.layerManager.active().featuresAttributes()) == -1) {
             self.label(key);
         }
-        this.render();
     },
     label: function(key) {
         var symbolizers;
