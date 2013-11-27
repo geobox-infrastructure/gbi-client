@@ -574,19 +574,9 @@ gbi.widgets.AttributeEditor.addedAttributeTemplate = '\
 gbi.widgets.AttributeEditor.newAttributeTemplate = '\
     <h4>'+attributeLabel.formTitle+'</h4>\
     <form class="form-horizontal"> \
-         <div class="control-group"> \
-            <label class="control-label" for="_newKey">'+attributeLabel.key+'</label> \
-            <div class="controls">\
-                <input type="text" id="_newKey" class="input-medium">\
-            </div>\
-        </div>\
-         <div class="control-group"> \
-            <label class="control-label" for="_newValue">'+attributeLabel.val+'</label> \
-            <div class="controls">\
-                <input type="text" id="_newValue" class="input-medium">\
-            </div>\
-        </div>\
-        <button id="addKeyValue" class="btn btn-small">'+attributeLabel.add+'</button>\
+        <input type="text" id="_newKey" class="input-medium" placeholder="'+attributeLabel.key+'">\
+        <input type="text" id="_newValue" class="input-medium" placeholder="'+attributeLabel.val+'">\
+        <button id="addKeyValue" class="btn btn-small"><i class="icon-plus"></i></button>\
     </form>\
 ';
 
