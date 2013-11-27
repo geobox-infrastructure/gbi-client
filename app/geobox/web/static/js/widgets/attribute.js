@@ -12,7 +12,7 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     this.options = $.extend({}, defaults, options);
     this.element = $('#' + this.options.element);
     this.selectedFeatures = [];
-    this.featureChanges = {};
+    this.featureChanges = {'added': {}, 'edited': {}, 'removed': []};
     this.invalidFeatures = [];
     this.selectedInvalidFeature = false;
     this.changed = false;
@@ -72,9 +72,6 @@ gbi.widgets.AttributeEditor.prototype = {
         }
         $.each(layers, function(idx, layer) {
             layer.registerEvent('featureselected', self, function(f) {
-                if(!(f.feature.id in self.featureChanges)) {
-                    self.featureChanges[f.feature.id] = {'added': {}, 'edited': {}, 'removed': []};
-                }
                 self.jsonSchema = layer.jsonSchema || this.options.jsonSchema || false;
                 if(self.invalidFeatures) {
                     var id = self._isInvalidFeature(f.feature);
@@ -338,9 +335,8 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     add: function(key, value) {
         var self = this;
-        $.each(this.selectedFeatures, function(idx, feature) {
-            self.featureChanges[feature.id]['added'][key] = value;
-        });
+        self.featureChanges['added'][key] = value;
+
         if(self.element.find('input#' + key).length == 0) {
             self.element.find('.view_attributes').last().after(
                 tmpl(gbi.widgets.AttributeEditor.addedAttributeTemplate, {
@@ -364,18 +360,16 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     edit: function(key, value) {
         var self = this;
-        $.each(this.selectedFeatures, function(idx, feature) {
-            self.featureChanges[feature.id]['edited'][key] = value;
-        });
+        self.featureChanges['edited'][key] = value;
         this.changed = true;
     },
     remove: function(key) {
         var self = this;
-        $.each(this.selectedFeatures, function(idx, feature) {
-            if($.inArray(key, self.featureChanges[feature.id]['removed']) == -1) {
-                self.featureChanges[feature.id]['removed'].push(key);
-            }
-        });
+
+        if($.inArray(key, self.featureChanges['removed']) == -1) {
+            self.featureChanges['removed'].push(key);
+        }
+
         var field = self.element.find('input#' + key);
         field.removeAttr('placeholder');
         field.val('');
@@ -420,35 +414,32 @@ gbi.widgets.AttributeEditor.prototype = {
     saveChanges: function() {
         var self = this;
         var activeLayer = this.layerManager.active();
-        $.each($.extend(true, {}, this.featureChanges), function(featureId, changeSet) {
-            var feature = activeLayer.featureById(featureId);
-            if (feature) {
-                // remove
-                $.each(changeSet['removed'], function(idx, key) {
-                    activeLayer.removeFeatureAttribute(feature, key);
-                });
-                self.featureChanges[feature.id]['removed'] = [];
-                // edit
-                $.each(changeSet['edited'], function(key, value) {
+
+        $.each(activeLayer.selectedFeatures(), function(_idx, feature) {
+            console.log(feature)
+            // remove
+            $.each(self.featureChanges['removed'], function(idx, key) {
+                activeLayer.removeFeatureAttribute(feature, key);
+            });
+            // edit
+            $.each(self.featureChanges['edited'], function(key, value) {
+                if(value) {
                     activeLayer.changeFeatureAttribute(feature, key, value);
-                });
-                self.featureChanges[feature.id]['edited'] = {};
-                // add
-                $.each(changeSet['added'], function(key, value) {
-                    activeLayer.changeFeatureAttribute(feature, key, value)
-                });
-                self.featureChanges[feature.id]['added'] = {};
-
-                // remove not selected features
-                if($.inArray(feature, self.selectedFeatures) == -1) {
-                    delete self.featureChanges[featureId];
+                } else {
+                    activeLayer.removeFeatureAttribute(feature, key);
                 }
+            });
+            // add
+            $.each(self.featureChanges['added'], function(key, value) {
+                activeLayer.changeFeatureAttribute(feature, key, value)
+            });
 
-                if(self.selectedInvalidFeature && feature.id == self.selectedInvalidFeature.feature.id && activeLayer.validateFeatureAttributes(feature)) {
-                    self.selectedInvalidFeature = false;
-                }
+            if(self.selectedInvalidFeature && feature.id == self.selectedInvalidFeature.feature.id && activeLayer.validateFeatureAttributes(feature)) {
+                self.selectedInvalidFeature = false;
             }
+
         });
+        self.featureChanges = {'added': {}, 'edited': {}, 'removed': []};
     },
     _isInvalidFeature: function(feature) {
         var self = this;
