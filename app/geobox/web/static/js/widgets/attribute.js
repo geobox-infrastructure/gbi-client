@@ -334,7 +334,9 @@ gbi.widgets.AttributeEditor.prototype = {
                 self.label(key);
                 return false;
             });
+            $('#'+key).keyup(function() {
                 self.featureChanges['added'][key] = $(this).val();
+            });
         } else {
             self.element.find('input#' + key).val(value);
         }
