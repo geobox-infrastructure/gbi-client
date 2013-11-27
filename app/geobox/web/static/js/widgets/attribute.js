@@ -551,7 +551,7 @@ gbi.widgets.AttributeEditor.template = '\
         <span>'+attributeLabel.noAttributes+'.</span>\
     <% } else { %>\
         <% for(var key in attributes) { %>\
-            <form id="view_attributes" class="form-inline">\
+            <form class="form-inline view_attributes">\
                 <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
                 <% if(selectedFeatureAttributes[attributes[key]]) { %>\
                     <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
