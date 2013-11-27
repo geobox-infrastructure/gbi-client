@@ -579,6 +579,19 @@ gbi.widgets.AttributeEditor.template = '\
     <% } %>\
 ';
 
+gbi.widgets.AttributeEditor.addedAttributeTemplate = '\
+<form class="form-inline view_attributes">\
+    <label class="key-label" for="_<%=key%>"><%=key%></label>\
+    <input class="input-medium" type="text" id="<%=key%>" value="<%=value%>">\
+    <button id="_<%=key%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button"> \
+        <i class="icon-eye-open"></i>\
+    </button>\
+    <button id="_<%=key%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
+        <i class="icon-remove"></i>\
+    </button> \
+</form>\
+'
+
 gbi.widgets.AttributeEditor.newAttributeTemplate = '\
     <h4>'+attributeLabel.formTitle+'</h4>\
     <form class="form-horizontal"> \
