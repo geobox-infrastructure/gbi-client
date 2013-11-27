@@ -326,13 +326,15 @@ gbi.widgets.AttributeEditor.prototype = {
                     value: value
                 }))
             $('#_'+key+'_remove').click(function() {
-                self.remove(key);
+                delete self.featureChanges['added'][key];
+                self.element.find('.view_attributes input#'+key).val('')
                 return false;
             });
             $('#_'+key+'_label').click(function() {
                 self.label(key);
                 return false;
             });
+                self.featureChanges['added'][key] = $(this).val();
         } else {
             self.element.find('input#' + key).val(value);
         }
