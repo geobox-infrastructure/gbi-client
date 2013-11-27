@@ -21,6 +21,8 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     this.changedAttributes = {};
     this.jsonSchema = this.options.jsonSchema || false;
 
+    this.editMode = true
+
     Alpaca.setDefaultLocale("de_AT");
 
     $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.edit)
@@ -510,6 +512,14 @@ gbi.widgets.AttributeEditor.prototype = {
                 selectedFeaturesAttributes: selectedFeatureAttributes
             }
         ))
+    },
+    activateEditMode: function() {
+        this.editMode = true;
+        this.render();
+    },
+    deactivateEditMode: function() {
+        this.editMode = false;
+        this.render();
     }
 };
 
