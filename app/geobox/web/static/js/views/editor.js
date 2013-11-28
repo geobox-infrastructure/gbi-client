@@ -183,6 +183,9 @@ $(document).ready(function() {
         });
         $('#attribute-edit-mode').find('#cancel_btn').click(function() {
           editor.widgets.attributeEditor.deactivateEditMode();
+          $.each(storedActiveControls, function(idx, control) {
+            control.activate();
+          });
           $('#edit-toolbar-mode').removeClass('hide');
           $('#attribute-edit-mode').addClass('hide');
           $('#json-schema-container button').removeAttr('disabled');
