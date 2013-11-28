@@ -128,24 +128,25 @@
         </div>
 
         <div class="tab-pane fade" id="edit">
-          <div id="edit-toolbar-mode">
-            <h4>{{ _('Edit') }}</h4>
-            <p>{{ _('infotext - edit controls') }}</p>
+          <h4>{{ _('Edit') }}</h4>
+          <p>{{ _('infotext - edit controls') }}</p>
+          <div id="disable-overlay" class="hide"></div>
+          <div id="edit-toolbar-container">
             <div id="edit-toolbar" class="span12"></div>
             <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
-            <button id="activate_attribute_edit_mode" class="btn btn-small">{{ _('edit attributes') }}</button>
           </div>
-          <div id="attribute-edit-mode" class="hide">
-            <h4>{{ _('Attributs') }}</h4>
-            <p>{{ _('infotext - edit attributes') }}</p>
-            <div>
-              <button id="save_btn" class="btn btn-small btn-success">{{ _('apply') }}</button>
-              <button id="cancel_btn" class="btn btn-small btn-danger">{{ _('discard') }}</button>
-            </div>
-          </div>
+
+
           <hr>
           <h4>{{ _('Attributes') }}</h4>
           <p>{{ _('infotext - attributes') }}</p>
+          <div id="edit-toolbar-mode">
+            <button id="activate_attribute_edit_mode" class="btn btn-small">{{ _('edit attributes') }}</button>
+          </div>
+          <div id="attribute-edit-mode" class="hide">
+            <button id="save_btn" class="btn btn-small btn-success">{{ _('apply') }}</button>
+            <button id="cancel_btn" class="btn btn-small btn-danger">{{ _('discard') }}</button>
+          </div>
           <div id="attributemanager"></div>
           <hr>
           <div id="json-schema-container">

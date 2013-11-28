@@ -178,7 +178,6 @@ $(document).ready(function() {
       if(activeToolbar) {
         storedActiveControls = activeToolbar.activeControls();
         activeToolbar.deactivateAllControls();
-
         $('#attribute-edit-mode').find('#save_btn').click(function() {
           editor.widgets.attributeEditor.saveChanges();
           editor.widgets.attributeEditor.deactivateEditMode();
@@ -188,6 +187,7 @@ $(document).ready(function() {
           $('#edit-toolbar-mode').removeClass('hide');
           $('#attribute-edit-mode').addClass('hide');
           $('#json-schema-container button').removeAttr('disabled');
+          $('#disable-overlay').addClass('hide');
           editor.map.removeControl(clickPopup);
           clickPopup.destroy();
           delete clickPopup
@@ -200,6 +200,7 @@ $(document).ready(function() {
           $('#edit-toolbar-mode').removeClass('hide');
           $('#attribute-edit-mode').addClass('hide');
           $('#json-schema-container button').removeAttr('disabled');
+          $('#disable-overlay').addClass('hide');
           editor.map.removeControl(clickPopup);
           clickPopup.destroy();
           delete clickPopup
@@ -209,7 +210,7 @@ $(document).ready(function() {
       $('#edit-toolbar-mode').addClass('hide');
       $('#attribute-edit-mode').removeClass('hide');
       $('#json-schema-container button').attr('disabled', 'disabled');
-
+      $('#disable-overlay').removeClass('hide')
       editor.widgets.attributeEditor.activateEditMode();
     }
   });
@@ -616,6 +617,12 @@ $(document).ready(function() {
     $(this).prop('disabled', 'disabled');
     return false;
   });
+
+  $('#disable-overlay').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  })
 });
 
 function displayArea(area) {

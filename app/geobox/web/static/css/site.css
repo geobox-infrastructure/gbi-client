@@ -336,8 +336,17 @@ hr#save_dividing_line {
     z-index: 100005;
 }
 
-#attribute-edit-mode, #edit-toolbar-mode {
-    height: 180px;
+#disable-overlay {
+
+    position: absolute;background-color: #bbb;
+    z-index: 1000;
+    opacity: 0.5;
+    width: 30%;
+}
+
+#disable-overlay, #edit-toolbar-container {
+    height: 100px;
+
 }
 
 .table-row {
