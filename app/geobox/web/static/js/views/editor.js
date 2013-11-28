@@ -161,6 +161,14 @@ $(document).ready(function() {
       return false;
     }
     if(activeLayer instanceof gbi.Layers.Vector) {
+      var clickPopup = new gbi.Controls.ClickPopup({
+        'editor': editor,
+        'width': 190,
+        'height': 45,
+        'popupContent': '<div style="text-align: center;"><b>' + OpenLayers.i18n('Finish edit first') + '</b></div>'
+      });
+      editor.map.addControl(clickPopup);
+      clickPopup.olControl.activate();
       var activeToolbar = false;
       $.each(self.editor.map.toolbars, function(idx, toolbar) {
         if ($(toolbar.options.div).is(':visible')) {
@@ -180,6 +188,9 @@ $(document).ready(function() {
           $('#edit-toolbar-mode').removeClass('hide');
           $('#attribute-edit-mode').addClass('hide');
           $('#json-schema-container button').removeAttr('disabled');
+          editor.map.removeControl(clickPopup);
+          clickPopup.destroy();
+          delete clickPopup
         });
         $('#attribute-edit-mode').find('#cancel_btn').click(function() {
           editor.widgets.attributeEditor.deactivateEditMode();
@@ -189,6 +200,9 @@ $(document).ready(function() {
           $('#edit-toolbar-mode').removeClass('hide');
           $('#attribute-edit-mode').addClass('hide');
           $('#json-schema-container button').removeAttr('disabled');
+          editor.map.removeControl(clickPopup);
+          clickPopup.destroy();
+          delete clickPopup
         });
       }
 
