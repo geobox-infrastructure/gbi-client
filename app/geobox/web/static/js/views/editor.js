@@ -176,7 +176,7 @@ $(document).ready(function() {
           editor.widgets.attributeEditor.deactivateEditMode();
           $.each(storedActiveControls, function(idx, control) {
             control.activate();
-          })
+          });
           $('#edit-toolbar-mode').removeClass('hide');
           $('#attribute-edit-mode').addClass('hide');
           $('#json-schema-container button').removeAttr('disabled');
@@ -503,6 +503,7 @@ $(document).ready(function() {
       $('#refresh_json_schema').addClass('hide');
       $('#remove_json_schema').addClass('hide');
     }
+    editor.widgets.attributeEditor.setJsonSchema(activeLayer.jsonSchema || false);
   }
 
   refreshJSONSchemaInput();
