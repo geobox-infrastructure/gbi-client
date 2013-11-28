@@ -463,6 +463,18 @@ $(document).ready(function() {
     displayArea(area);
   };
 
+  function enableAttributeEdit() {
+    if(activeLayer.selectedFeatures().length > 0) {
+      $('#activate_attribute_edit_mode').removeAttr('disabled');
+    }
+  }
+
+  function disableAttributeEdit() {
+    if(activeLayer.selectedFeatures().length < 1) {
+      $('#activate_attribute_edit_mode').attr('disabled', 'disabled');
+    }
+  }
+
   function enableSaveButton() {
     if(activeLayer instanceof gbi.Layers.Couch) {
       $('#save-tab').addClass('save-enabled');
@@ -482,6 +494,7 @@ $(document).ready(function() {
     $('#export_selected_geometries').attr('disabled', 'disabled');
   }
 
+  // json schema block
   $('#add_json_schema_url').click(function() {
     $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
       $('#json_schema_refreshed').show().fadeOut(3000);
@@ -533,6 +546,7 @@ $(document).ready(function() {
   }
 
   refreshJSONSchemaInput();
+  // end json schema block
 
   $("#export_vectorlayer").click(function() {
     var layer = activeLayer;
