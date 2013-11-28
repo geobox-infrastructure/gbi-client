@@ -140,6 +140,9 @@ $(document).ready(function() {
       $('#odata_url').val(activeLayer.odataUrl);
     }
     refreshSavePointList();
+
+    refreshJSONSchemaInput();
+
   });
 
   $('#select_all_features').click(function() {
@@ -446,6 +449,57 @@ $(document).ready(function() {
   function disableExportSelectedGeometriesButton() {
     $('#export_selected_geometries').attr('disabled', 'disabled');
   }
+
+  $('#add_json_schema_url').click(function() {
+    $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
+      $('#json_schema_refreshed').show().fadeOut(3000);
+      $(activeLayer).off('gbi.layer.vector.schemaLoaded');
+      $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
+      refreshJSONSchemaInput()
+    });
+    $(activeLayer).on('gbi.layer.vector.loadSchemaFail', function(event, schema) {
+      $('#json_schema_load_fail').show().fadeOut(3000);
+      $(activeLayer).off('gbi.layer.vector.schemaLoaded');
+      $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
+    });
+    var schemaURL = $('#json_schema_url').val();
+    activeLayer.addSchemaFromUrl(schemaURL);
+  })
+
+  $('#refresh_json_schema').click(function() {
+    $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
+      $(activeLayer).off('gbi.layer.vector.schemaLoaded');
+      $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
+      $('#json_schema_refreshed').show().fadeOut(3000);
+      refreshJSONSchemaInput();
+    });
+    $(activeLayer).on('gbi.layer.vector.loadSchemaFail', function(event, schema) {
+      $('#json_schema_refresh_fail').show().fadeOut(3000);
+      $(activeLayer).off('gbi.layer.vector.schemaLoaded');
+      $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
+    });
+    activeLayer.addSchemaFromUrl(activeLayer.options.jsonSchemaUrl);
+  });
+  $('#remove_json_schema').click(function() {
+      activeLayer.removeJsonSchema();
+      refreshJSONSchemaInput();
+  });
+
+  function refreshJSONSchemaInput() {
+    if(activeLayer && activeLayer.jsonSchema) {
+      $('#json_schema_url').val(activeLayer.options.jsonSchemaUrl);
+      $('#add_json_schema_url').addClass('hide');
+      $('#refresh_json_schema').removeClass('hide');
+      $('#remove_json_schema').removeClass('hide');
+    } else {
+      $('#json_schema_url').val('');
+      $('#add_json_schema_url').removeClass('hide');
+      $('#refresh_json_schema').addClass('hide');
+      $('#remove_json_schema').addClass('hide');
+    }
+  }
+
+  refreshJSONSchemaInput();
 
   $("#export_vectorlayer").click(function() {
     var layer = activeLayer;
