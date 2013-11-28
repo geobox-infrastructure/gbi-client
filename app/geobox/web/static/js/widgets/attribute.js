@@ -172,7 +172,8 @@ gbi.widgets.AttributeEditor.prototype = {
         var self = this;
         this.element.append(tmpl(
             gbi.widgets.AttributeEditor.invalidFeaturesTemplate, {
-                features: self.invalidFeatures
+                features: self.invalidFeatures,
+                editMode: self.editMode
             }
         ));
 
@@ -629,8 +630,10 @@ gbi.widgets.AttributeEditor.invalidFeaturesTemplate = '\
     <div>\
         <h4>' + attributeLabel.featuresWithInvalidAttributes + '</h4>\
         <p><%=features.length%> ' + attributeLabel.invalidFeaturesLeft + '</p>\
-        <button class="btn btn-small" id="prev_invalid_feature">' + attributeLabel.prev + '</button>\
-        <button class="btn btn-small" id="next_invalid_feature">' + attributeLabel.next + '</button>\
+        <% if(!editMode) { %>\
+            <button class="btn btn-small" id="prev_invalid_feature">' + attributeLabel.prev + '</button>\
+            <button class="btn btn-small" id="next_invalid_feature">' + attributeLabel.next + '</button>\
+        <% } %>\
     </div>\
 ';
 
