@@ -179,16 +179,19 @@ $(document).ready(function() {
           })
           $('#edit-toolbar-mode').removeClass('hide');
           $('#attribute-edit-mode').addClass('hide');
+          $('#json-schema-container button').removeAttr('disabled');
         });
         $('#attribute-edit-mode').find('#cancel_btn').click(function() {
           editor.widgets.attributeEditor.deactivateEditMode();
           $('#edit-toolbar-mode').removeClass('hide');
           $('#attribute-edit-mode').addClass('hide');
+          $('#json-schema-container button').removeAttr('disabled');
         });
       }
 
       $('#edit-toolbar-mode').addClass('hide');
       $('#attribute-edit-mode').removeClass('hide');
+      $('#json-schema-container button').attr('disabled', 'disabled');
 
       editor.widgets.attributeEditor.activateEditMode();
     }
