@@ -210,7 +210,6 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     renderInputMask: function(attributes, activeLayer) {
         var self = this;
-        var selectedFeatureAttributes = {};
         var editable = true;
 
         $.each(self.selectedFeatures, function(idx, feature) {
@@ -245,20 +244,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 this.element.append($('<span>'+attributeLabel.addAttributesNotPossible+'.</span>'))
             }
         } else {
-            $.each(this.selectedFeatures, function(idx, feature) {
-                $.each(attributes, function(idx, key) {
-                    var equal = true;
-                    var value = feature.attributes[key];
-                    if(key in selectedFeatureAttributes) {
-                        equal = selectedFeatureAttributes[key].value == value;
-                        if(!equal) {
-                            selectedFeatureAttributes[key] = {'equal': false};
-                        }
-                    } else {
-                        selectedFeatureAttributes[key] = {'equal': equal, 'value': value};
-                    }
-                });
-            });
+            var selectedFeatureAttributes = self.prepareSelectedFeatureAttributes(attributes);
             this.element.append(tmpl(
                 gbi.widgets.AttributeEditor.template, {
                     attributes: attributes,
@@ -398,6 +384,24 @@ gbi.widgets.AttributeEditor.prototype = {
         });
         return id;
     },
+    prepareSelectedFeatureAttributes: function(attributes) {
+        var self = this;
+        var selectedFeatureAttributes = {};
+        $.each(self.selectedFeatures, function(idx, feature) {
+            $.each(attributes, function(idx, key) {
+                var equal = true;
+                var value = feature.attributes[key];
+                if(key in selectedFeatureAttributes) {
+                    equal = selectedFeatureAttributes[key].value == value;
+                    if(!equal) {
+                        selectedFeatureAttributes[key] = {'equal': false};
+                    }
+                } else {
+                    selectedFeatureAttributes[key] = {'equal': equal, 'value': value};
+                }
+            });
+        });
+    },
     prepareAlpacaOptions: function() {
         var self = this;
         var schemaOptions = {"fields": {}};
@@ -453,21 +457,7 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     renderAttributeTable: function(attributes, activeLayer) {
         var self = this;
-        var selectedFeatureAttributes = {};
-        $.each(this.selectedFeatures, function(idx, feature) {
-            $.each(attributes, function(idx, key) {
-                var equal = true;
-                var value = feature.attributes[key];
-                if(key in selectedFeatureAttributes) {
-                    equal = selectedFeatureAttributes[key].value == value;
-                    if(!equal) {
-                        selectedFeatureAttributes[key] = {'equal': false};
-                    }
-                } else {
-                    selectedFeatureAttributes[key] = {'equal': equal, 'value': value};
-                }
-            });
-        });
+        var selectedFeatureAttributes = self.prepareSelectedFeatureAttributes(attributes);
         if(self.jsonSchema) {
             var alpacaOptions = self.prepareAlpacaOptions();
 
@@ -489,7 +479,7 @@ gbi.widgets.AttributeEditor.prototype = {
             self.element.append(tmpl(
                 gbi.widgets.AttributeEditor.viewOnlyTemplate, {
                     attributes: attributes,
-                    selectedFeaturesAttributes: selectedFeatureAttributes
+                    selectedFeatureAttributes: selectedFeatureAttributes
                 }
             ))
         }
@@ -695,8 +685,8 @@ gbi.widgets.AttributeEditor.viewOnlyTemplate = '\
                 <tr>\
                     <td><%=attributes[key]%></td>\
                     <td>\
-                        <% if(selectedFeaturesAttributes[attributes[key]]["equal"]) {%>\
-                            <%=selectedFeaturesAttributes[attributes[key]]["value"]%>\
+                        <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
+                            <%=selectedFeatureAttributes[attributes[key]]["value"]%>\
                         <% } else {%>\
                             '+attributeLabel.sameKeyDifferentValue+'\
                         <% } %>\
