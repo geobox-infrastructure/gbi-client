@@ -635,11 +635,7 @@ gbi.widgets.AttributeEditor.alpacaViews = {
         "id": "VIEW_GBI_TABLE",
         "parent": "VIEW_BOOTSTRAP_DISPLAY",
         "templates": {
-            "fieldSetItemsContainer": '\
-                <table class="table table-hover">\
-                    <tbody></tbody>\
-                </table>\
-            ',
+            "fieldSetItemsContainer": '<table class="table table-hover"><tbody>{{html this.html}}</tbody></table>',
             "controlField": '\
                 <tr class="table-row">\
                     <td style="display: table-cell">${options.label}</td>\
