@@ -401,6 +401,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 }
             });
         });
+        return selectedFeatureAttributes;
     },
     prepareAlpacaOptions: function() {
         var self = this;
@@ -457,7 +458,7 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     renderAttributeTable: function(attributes, activeLayer) {
         var self = this;
-        var selectedFeatureAttributes = self.prepareSelectedFeatureAttributes(attributes);
+
         if(self.jsonSchema) {
             var alpacaOptions = self.prepareAlpacaOptions();
 
@@ -476,6 +477,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 view: "VIEW_GBI_TABLE_INVALID"
             });
         } else {
+            var selectedFeatureAttributes = self.prepareSelectedFeatureAttributes(attributes);
             self.element.append(tmpl(
                 gbi.widgets.AttributeEditor.viewOnlyTemplate, {
                     attributes: attributes,
