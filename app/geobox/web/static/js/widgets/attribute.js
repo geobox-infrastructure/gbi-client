@@ -26,7 +26,9 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     Alpaca.setDefaultLocale("de_AT");
 
     $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.edit)
-    $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.display)
+    $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.edit_invalid)
+    $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.table)
+    $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.table_invalid)
 
     var activeLayer = this.layerManager.active();
     var listenOn = activeLayer instanceof gbi.Layers.Couch ? 'gbi.layer.couch.loadFeaturesEnd' : 'gbi.layer.saveableVector.loadFeaturesEnd';
@@ -270,7 +272,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 view: "VIEW_GBI_EDIT"
             });
 
-            var nonSchemaView = self.jsonSchema.additionalProperties === false ? "VIEW_GBI_DISPLAY" : "VIEW_GBI_EDIT";
+            var nonSchemaView = self.jsonSchema.additionalProperties === false ? "VIEW_GBI_EDIT_INVALID" : "VIEW_GBI_EDIT";
             $.alpaca(self.options.alpacaNonSchemaElement, {
                 "schema": nonSchema,
                 "data": data,
@@ -455,12 +457,73 @@ gbi.widgets.AttributeEditor.prototype = {
                 }
             });
         });
-        self.element.append(tmpl(
-            gbi.widgets.AttributeEditor.viewOnlyTemplate, {
-                attributes: attributes,
-                selectedFeaturesAttributes: selectedFeatureAttributes
+        if(self.jsonSchema) {
+
+            var schemaOptions = {"fields": {}};
+            var nonSchemaOptions = {"fields": {}};
+
+            $.each(self.jsonSchema.properties, function(name, prop) {
+                schemaOptions.fields[name] = {'id': name};
+            });
+
+            var nonSchema = {
+                "title": attributeLabel.additionalProperties,
+                "type": "object",
+                "properties": {}
             }
-        ))
+
+            var data = {};
+            $.each(this.selectedFeatures, function(idx, feature) {
+                $.each(feature.attributes, function(key, value) {
+                    //fill options for non schema
+                    if(!(key in schemaOptions.fields) && !(key in nonSchemaOptions.fields)) {
+                        nonSchemaOptions.fields[key] = {
+                            'id': key,
+                            'readonly': self.jsonSchema.additionalProperties === false
+                        };
+                    }
+
+                    //check for different values for same attribute
+                    if(key in data && data[key] != value) {
+                        data[key] = undefined;
+                        if(key in schemaOptions.fields) {
+                            schemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
+                        } else {
+                            nonSchemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                    //add key to nonSchema if not in jsonSchema and not already in nonSchema
+                    if(!(key in self.jsonSchema.properties) && !(key in nonSchema.properties)) {
+                        nonSchema.properties[key] = {
+                            "type": "any",
+                            "title": key
+                        }
+                    }
+                })
+            });
+            this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate));
+            $.alpaca(self.options.alpacaSchemaElement, {
+                "schema": self.jsonSchema,
+                "data": data,
+                "options": schemaOptions,
+                view: "VIEW_GBI_TABLE"
+            });
+            $.alpaca(self.options.alpacaNonSchemaElement, {
+                "schema": nonSchema,
+                "data": data,
+                "options": nonSchemaOptions,
+                view: "VIEW_GBI_TABLE_INVALID"
+            });
+        } else {
+            self.element.append(tmpl(
+                gbi.widgets.AttributeEditor.viewOnlyTemplate, {
+                    attributes: attributes,
+                    selectedFeaturesAttributes: selectedFeatureAttributes
+                }
+            ))
+        }
     },
     activateEditMode: function() {
         this.editMode = true;
@@ -600,8 +663,8 @@ gbi.widgets.AttributeEditor.alpacaViews = {
             </div>"
         }
     },
-    "display": {
-        "id": "VIEW_GBI_DISPLAY",
+    "edit_invalid": {
+        "id": "VIEW_GBI_EDIT_INVALID",
         "parent": "VIEW_GBI_EDIT",
         "templates": {
             "fieldSetItemContainer": '<div class="alpaca-inline-item-container control-group error"></div>',
@@ -615,6 +678,46 @@ gbi.widgets.AttributeEditor.alpacaViews = {
                     <span class='help-inline'>" + attributeLabel.schemaViolatingAttribute + "</span>\
                 </div>\
             "
+        }
+    },
+    "table": {
+        "id": "VIEW_GBI_TABLE",
+        "parent": "VIEW_BOOTSTRAP_DISPLAY",
+        "templates": {
+            "fieldSetItemsContainer": '\
+                <table class="table table-hover">\
+                    <tbody></tbody>\
+                </table>\
+            ',
+            "controlField": '\
+                <tr class="table-row">\
+                    <td style="display: table-cell">${options.label}</td>\
+                    <td style="display: table-cell">${data}</td>\
+                    <td>\
+                        <button id="_${id}_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button">\
+                            <i class="icon-eye-open"></i>\
+                        </button>\
+                    </td>\
+                </tr>\
+            '
+        }
+    },
+    "table_invalid": {
+        "id": "VIEW_GBI_TABLE_INVALID",
+        "parent": "VIEW_GBI_TABLE",
+        "templates": {
+            "controlField": '\
+                <tr class="table-row error">\
+                    <td>${options.label}</td>\
+                    <td>${data}</td>\
+                    <td><span class="help-inline">' + attributeLabel.schemaViolatingAttribute + '</span></td>\
+                    <td>\
+                        <button id="_${id}_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button">\
+                            <i class="icon-eye-open"></i>\
+                        </button>\
+                    </td>\
+                </tr>\
+            '
         }
     }
 };

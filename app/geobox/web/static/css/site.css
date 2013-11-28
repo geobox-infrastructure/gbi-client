@@ -339,3 +339,7 @@ hr#save_dividing_line {
 #attribute-edit-mode, #edit-toolbar-mode {
     height: 180px;
 }
+
+.table-row {
+    display: table-row;
+}
