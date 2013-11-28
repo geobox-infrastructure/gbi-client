@@ -220,64 +220,21 @@ gbi.widgets.AttributeEditor.prototype = {
         });
 
         if(self.jsonSchema) {
-            var schemaOptions = {"fields": {}};
-            var nonSchemaOptions = {"fields": {}};
-
-            $.each(self.jsonSchema.properties, function(name, prop) {
-                schemaOptions.fields[name] = {'id': name};
-            });
-
-            var nonSchema = {
-                "title": attributeLabel.additionalProperties,
-                "type": "object",
-                "properties": {}
-            }
-
-            var data = {};
-            $.each(this.selectedFeatures, function(idx, feature) {
-                $.each(feature.attributes, function(key, value) {
-                    //fill options for non schema
-                    if(!(key in schemaOptions.fields) && !(key in nonSchemaOptions.fields)) {
-                        nonSchemaOptions.fields[key] = {
-                            'id': key,
-                            'readonly': self.jsonSchema.additionalProperties === false
-                        };
-                    }
-
-                    //check for different values for same attribute
-                    if(key in data && data[key] != value) {
-                        data[key] = undefined;
-                        if(key in schemaOptions.fields) {
-                            schemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
-                        } else {
-                            nonSchemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
-                        }
-                    } else {
-                        data[key] = value;
-                    }
-                    //add key to nonSchema if not in jsonSchema and not already in nonSchema
-                    if(!(key in self.jsonSchema.properties) && !(key in nonSchema.properties)) {
-                        nonSchema.properties[key] = {
-                            "type": "any",
-                            "title": key
-                        }
-                    }
-                })
-            });
+            var alpacaOptions = self.prepareAlpacaOptions();
 
             this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate));
             $.alpaca(self.options.alpacaSchemaElement, {
                 "schema": self.jsonSchema,
-                "data": data,
-                "options": schemaOptions,
+                "data": alpacaOptions['data'],
+                "options": alpacaOptions['schemaOptions'],
                 view: "VIEW_GBI_EDIT"
             });
 
             var nonSchemaView = self.jsonSchema.additionalProperties === false ? "VIEW_GBI_EDIT_INVALID" : "VIEW_GBI_EDIT";
             $.alpaca(self.options.alpacaNonSchemaElement, {
-                "schema": nonSchema,
-                "data": data,
-                "options": nonSchemaOptions,
+                "schema": alpacaOptions['nonSchema'],
+                "data": alpacaOptions['data'],
+                "options": alpacaOptions['nonSchemaOptions'],
                 view: nonSchemaView
             });
 
@@ -441,6 +398,59 @@ gbi.widgets.AttributeEditor.prototype = {
         });
         return id;
     },
+    prepareAlpacaOptions: function() {
+        var self = this;
+        var schemaOptions = {"fields": {}};
+        var nonSchemaOptions = {"fields": {}};
+
+        $.each(self.jsonSchema.properties, function(name, prop) {
+            schemaOptions.fields[name] = {'id': name};
+        });
+
+        var nonSchema = {
+            "title": attributeLabel.additionalProperties,
+            "type": "object",
+            "properties": {}
+        }
+
+        var data = {};
+        $.each(self.selectedFeatures, function(idx, feature) {
+            $.each(feature.attributes, function(key, value) {
+                //fill options for non schema
+                if(!(key in schemaOptions.fields) && !(key in nonSchemaOptions.fields)) {
+                    nonSchemaOptions.fields[key] = {
+                        'id': key,
+                        'readonly': self.jsonSchema.additionalProperties === false
+                    };
+                }
+
+                //check for different values for same attribute
+                if(key in data && data[key] != value) {
+                    data[key] = undefined;
+                    if(key in schemaOptions.fields) {
+                        schemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
+                    } else {
+                        nonSchemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
+                    }
+                } else {
+                    data[key] = value;
+                }
+                //add key to nonSchema if not in jsonSchema and not already in nonSchema
+                if(!(key in self.jsonSchema.properties) && !(key in nonSchema.properties)) {
+                    nonSchema.properties[key] = {
+                        "type": "any",
+                        "title": key
+                    }
+                }
+            })
+        });
+        return {
+            nonSchema: nonSchema,
+            schemaOptions: schemaOptions,
+            nonSchemaOptions: nonSchemaOptions,
+            data: data
+        }
+    },
     renderAttributeTable: function(attributes, activeLayer) {
         var self = this;
         var selectedFeatureAttributes = {};
@@ -459,62 +469,20 @@ gbi.widgets.AttributeEditor.prototype = {
             });
         });
         if(self.jsonSchema) {
+            var alpacaOptions = self.prepareAlpacaOptions();
 
-            var schemaOptions = {"fields": {}};
-            var nonSchemaOptions = {"fields": {}};
-
-            $.each(self.jsonSchema.properties, function(name, prop) {
-                schemaOptions.fields[name] = {'id': name};
-            });
-
-            var nonSchema = {
-                "title": attributeLabel.additionalProperties,
-                "type": "object",
-                "properties": {}
-            }
-
-            var data = {};
-            $.each(this.selectedFeatures, function(idx, feature) {
-                $.each(feature.attributes, function(key, value) {
-                    //fill options for non schema
-                    if(!(key in schemaOptions.fields) && !(key in nonSchemaOptions.fields)) {
-                        nonSchemaOptions.fields[key] = {
-                            'id': key,
-                            'readonly': self.jsonSchema.additionalProperties === false
-                        };
-                    }
-
-                    //check for different values for same attribute
-                    if(key in data && data[key] != value) {
-                        data[key] = undefined;
-                        if(key in schemaOptions.fields) {
-                            schemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
-                        } else {
-                            nonSchemaOptions.fields[key]['placeholder'] = attributeLabel.sameKeyDifferentValue;
-                        }
-                    } else {
-                        data[key] = value;
-                    }
-                    //add key to nonSchema if not in jsonSchema and not already in nonSchema
-                    if(!(key in self.jsonSchema.properties) && !(key in nonSchema.properties)) {
-                        nonSchema.properties[key] = {
-                            "type": "any",
-                            "title": key
-                        }
-                    }
-                })
-            });
             this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate));
+
             $.alpaca(self.options.alpacaSchemaElement, {
                 "schema": self.jsonSchema,
-                "data": data,
-                "options": schemaOptions,
+                "data": alpacaOptions['data'],
+                "options": alpacaOptions['schemaOptions'],
                 view: "VIEW_GBI_TABLE"
             });
             $.alpaca(self.options.alpacaNonSchemaElement, {
-                "schema": nonSchema,
-                "data": data,
-                "options": nonSchemaOptions,
+                "schema": alpacaOptions['nonSchema'],
+                "data": alpacaOptions['data'],
+                "options": alpacaOptions['nonSchemaOptions'],
                 view: "VIEW_GBI_TABLE_INVALID"
             });
         } else {
