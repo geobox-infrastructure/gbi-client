@@ -135,13 +135,11 @@
             <div id="edit-toolbar" class="span12"></div>
             <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
           </div>
-
-
           <hr>
-          <h4>{{ _('Attributes') }}</h4>
-          <p>{{ _('infotext - attributes') }}</p>
+          <h4>{{ _('Attributes') }} {{ generate_tooltip(_('infotext - attributes') ) }}</h4>
+
           <div id="edit-toolbar-mode">
-            <button id="activate_attribute_edit_mode" class="btn btn-small">{{ _('edit attributes') }}</button>
+            <button id="activate_attribute_edit_mode" class="btn btn-small" disabled="disabled" title="{{ _('tooltip - edit attributes') }}">{{ _('edit attributes') }}</button>
           </div>
           <div id="attribute-edit-mode" class="hide">
             <button id="save_btn" class="btn btn-small btn-success">{{ _('apply') }}</button>
@@ -150,8 +148,8 @@
           <div id="attributemanager"></div>
           <hr>
           <div id="json-schema-container">
-            <h4>{{ _('JSON Schema') }}</h4>
-            <p>{{ _('infotext -json schema') }}</p>
+            <h4>{{ _('JSON Schema') }} {{ generate_tooltip(_('tooltip - json schema')) }}</h4>
+
             <input id="json_schema_url" name="json_schema_url" type="text" />
             <button class="btn btn-small" id="add_json_schema_url" type="button">{{ _('Add JSONSchema URL')}}</button>
             <button class="btn btn-small hide" id="refresh_json_schema" title="{{ _('Refresh') }}"><i class="icon-refresh"></i></button>
