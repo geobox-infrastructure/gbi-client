@@ -518,7 +518,9 @@ var attributeLabel = {
     'schemaRefreshFail': OpenLayers.i18n('Refreshing schema failed'),
     'saveAttributeChanges': OpenLayers.i18n('Apply'),
     'label': OpenLayers.i18n('Show property in map'),
-    'remove': OpenLayers.i18n('Remove property from feature')
+    'remove': OpenLayers.i18n('Remove property from feature'),
+    'attribute': OpenLayers.i18n('Attribute'),
+    'value': OpenLayers.i18n('Value')
 };
 
 var attributeTitle = {
@@ -674,8 +676,8 @@ gbi.widgets.AttributeEditor.viewOnlyTemplate = '\
         <table class="table table-hover">\
             <thead>\
                 <tr>\
-                    <th>Key</th>\
-                    <th>Value</th>\
+                    <th>' + attributeLabel.attribute + '</th>\
+                    <th>' + attributeLabel.value + '</th>\
                 </tr>\
             </thead>\
             <tbody>\

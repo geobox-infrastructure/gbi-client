@@ -3,6 +3,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'Not defined': "{{ _('Not defined') }}",
     'Unsaved changes present. Sure, you want to leave the editor?': "{{ _('Unsaved changes present. Sure, you want to leave the editor?') }}",
     'Required': "{{ _('This filed is required') }}",
+    'Finish edit first': "{{ _('Finish edit first') }}",
 
     // layermanager widget
     'addLayerSuccessful': "{{ _('add layer successful') }}",
