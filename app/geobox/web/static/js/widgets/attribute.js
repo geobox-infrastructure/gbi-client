@@ -634,18 +634,6 @@ gbi.widgets.AttributeEditor.invalidFeaturesTemplate = '\
     </div>\
 ';
 
-
-gbi.widgets.AttributeEditor.updateRemoveSchemaTemplate = '\
-    <div>\
-        <span>' + attributeLabel.usedJsonSchema + ': <%=jsonSchemaURL%> </span>\
-        <button class="btn btn-small" id="refresh_json_schema" title="' + attributeTitle.refresh + '"><i class="icon-refresh"></i></button>\
-        <button class="btn btn-small" id="remove_json_schema" title="' + attributeTitle.remove + '"><i class="icon-remove"></i></button>\
-    </div>\
-    <div class="alert alert-success" style="display: none" id="json_schema_refreshed">' + attributeLabel.successfulRefereshed + '</div>\
-    <div class="alert alert-error" style="display: none" id="json_schema_refresh_fail">' + attributeLabel.schemaRefreshFail + '</div>\
-';
-
-
 gbi.widgets.AttributeEditor.alpacaViews = {
     "edit": {
         "id": "VIEW_GBI_EDIT",
