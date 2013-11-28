@@ -18,12 +18,17 @@ $(document).ready(function() {
     'gbi.layer.vector.featuresStoreCleared': [disableExportSelectedGeometriesButton]
   };
   var olLayerEvents = {
-    'featureselected': [storeSelectedFeatures, updateArea],
-    'featureunselected': [updateArea],
-    'featuremodified': [updateArea]
+    'featureselected': [storeSelectedFeatures, updateArea, enableAttributeEdit],
+    'featureunselected': [updateArea, disableAttributeEdit],
+    'featuremodified': [updateArea],
+    'featureadded': [activateEditModeWrapper]
   };
   var editor = initEditor();
   var activeLayer = editor.layerManager.active();
+
+  function activateEditModeWrapper() {
+    activateEditMode()
+  }
 
   $('#exportVectorLayer form').submit(function(event) {
     if(!checkFilenameInput(this)) {
@@ -155,7 +160,11 @@ $(document).ready(function() {
     return false;
   });
 
-  $('#activate_attribute_edit_mode').click(function() {
+
+  // activate / deactivate attribute edit mode block
+  $('#activate_attribute_edit_mode').click(function() { activateEditMode(); })
+
+  function activateEditMode() {
     var storedActiveControls
     if(!activeLayer) {
       return false;
@@ -213,7 +222,9 @@ $(document).ready(function() {
       $('#disable-overlay').removeClass('hide')
       editor.widgets.attributeEditor.activateEditMode();
     }
-  });
+  }
+
+  // end attribute edit mode block
 
   $('#export_type').change(function() {
     if($(this).val() == 'odata') {
