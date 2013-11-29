@@ -587,9 +587,8 @@ gbi.widgets.AttributeEditor.addedAttributeTemplate = '\
 '
 
 gbi.widgets.AttributeEditor.newAttributeTemplate = '\
-    <h4>'+attributeLabel.formTitle+'</h4>\
     <form class="form-horizontal"> \
-        <input type="text" id="_newKey" class="input-medium" placeholder="'+attributeLabel.key+'">\
+        <input type="text" id="_newKey" class="input-small" placeholder="'+attributeLabel.key+'">\
         <input type="text" id="_newValue" class="input-medium" placeholder="'+attributeLabel.val+'">\
         <button id="addKeyValue" class="btn btn-small"><i class="icon-plus"></i></button>\
     </form>\
@@ -597,6 +596,7 @@ gbi.widgets.AttributeEditor.newAttributeTemplate = '\
 
 gbi.widgets.AttributeEditor.alpacaTemplate = '\
     <% if(table && invalid) { %>\
+        <br>\
         <div class="alert alert-error">' + attributeLabel.containsInvalidAttributes + '</div>\
     <% } %>\
     <div id="alpaca_schema"></div>\
