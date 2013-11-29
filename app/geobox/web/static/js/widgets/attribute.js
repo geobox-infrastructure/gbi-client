@@ -633,6 +633,7 @@ gbi.widgets.AttributeEditor.alpacaViews = {
             "
         }
     },
+    //TODO find out why controlFieldMessage ${message} is empty
     "table": {
         "id": "VIEW_GBI_TABLE",
         "parent": "VIEW_BOOTSTRAP_DISPLAY",
@@ -653,13 +654,15 @@ gbi.widgets.AttributeEditor.alpacaViews = {
                 <tr class="table-row">\
                     <td style="display: table-cell">${options.label}</td>\
                     <td style="display: table-cell">${data}</td>\
+                    <td style="display: table-cell" class="error">{{html Alpaca.fieldTemplate(this,"controlFieldMessage")}}</td>\
                     <td>\
                         <button id="_${id}_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button">\
                             <i class="icon-eye-open"></i>\
                         </button>\
                     </td>\
                 </tr>\
-            '
+            ',
+            "controlFieldMessage": '<span>${message}</span>',
         }
     },
     "table_invalid": {
