@@ -79,6 +79,8 @@ gbi.widgets.AttributeEditor.prototype = {
                     var id = self._isInvalidFeature(f.feature);
                     if(id != -1) {
                         self.selectedInvalidFeature = self.invalidFeatures[id];
+                    } else if (f.feature.layer.gbiLayer.validateFeatureAttributes(f.feature) === false) {
+                        self.selectedInvalidFeature = f;
                     }
                 }
                 if($.inArray(f.feature, self.selectedFeatures) == -1) {
