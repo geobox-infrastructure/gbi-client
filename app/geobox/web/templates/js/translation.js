@@ -143,6 +143,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "Create thematical map using exact values": "{{ _('Create thematical map using exact values') }}",
     "Create thematical map using ranges": "{{ _('Create thematical map using ranges') }}",
     "Add value field": "{{ _('Add value field') }}",
+    "Select attribute": "{{ _('Select attribute') }}",
 
     // add wms
     'load wms capabilities': "{{ _('load wms capabilities') }}",

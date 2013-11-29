@@ -23,7 +23,8 @@ var thematicalVectorConfiguratorLabel = {
     'mapSettings': OpenLayers.i18n('Map Settings'),
     'listSettings': OpenLayers.i18n('List Settings'),
     'maxListAttributesArrived': OpenLayers.i18n('Maximum of selectable shortlist attributes arrived'),
-    'maxPopupAttributesArrived': OpenLayers.i18n('Maximum of selectable popup attributes arrived')
+    'maxPopupAttributesArrived': OpenLayers.i18n('Maximum of selectable popup attributes arrived'),
+    'selectAttribute': OpenLayers.i18n('Select attribute')
 };
 var ThematicalVectorConfiguratorTitles = {
     'showExact': OpenLayers.i18n('Create thematical map using exact values'),
@@ -110,6 +111,16 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
         });
 
         $('#attribute').change(function() {
+            var attributeValues = self.activeLayer ? self.activeLayer.attributeValues($(this).val()) : [];
+            var maxValues = 20;
+            $('.exactInputControl tbody tr:visible').remove()
+            $.each(attributeValues.sort(), function(idx, value) {
+                self.addInput('exact', {'value': value});
+                maxValues--;
+                if(maxValues==0) {
+                    return false;
+                }
+            });
             $.each($('.exactInputControl select'), function(idx, element) {
                 element = $(element);
                 self.fillExactInputSelect(element, element.val());
@@ -183,10 +194,6 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
                     break;
             }
 
-        } else {
-            this.addInput('exact');
-            this.addInput('range');
-        }
     },
     toggleExact: function() {
         var self = this;
@@ -264,7 +271,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
                 maxInput.keyup(function() {self.execute()})
                 tds.push(maxInput)
         }
-        var colorValue = filterOption ? filterOption.symbolizer.fillColor : gbi.widgets.ThematicalVectorConfigurator.defaultColors[idx];
+        var colorValue = filterOption && filterOption.symbolizer ? filterOption.symbolizer.fillColor : gbi.widgets.ThematicalVectorConfigurator.defaultColors[idx];
         var color = $(gbi.widgets.ThematicalVectorConfigurator.colorTemplate);
         color.attr('id', colorBaseId + idx);
         color.addClass(colorClass);
@@ -403,6 +410,18 @@ gbi.widgets.ThematicalVectorConfigurator.defaultColors = gbi.widgets.ThematicalV
     '#fb9a99',
     '#fdbf6f',
     '#cab2d6',
+    //additional
+    // Todo make nice
+    '#0f4784',
+    '#03700c',
+    '#933a3c',
+    '#cf3fe0',
+    '#5a2d8a',
+    '#96bed3',
+    '#a2cf7a',
+    '#eb8a89',
+    '#edaf5f',
+    '#baa2c6',
 ];
 
 gbi.widgets.ThematicalVectorConfigurator.template = '\
@@ -411,6 +430,7 @@ gbi.widgets.ThematicalVectorConfigurator.template = '\
         <label class="control-label" for="attribute">' + thematicalVectorConfiguratorLabel.attribute + ':</label>\
         <div class="controls">\
             <select id="attribute">\
+                <option disabled="disabled" selected="selected">' + thematicalVectorConfiguratorLabel.selectAttribute + '</option>\
             <% for(var key in attributes) { %>\
                 <option value="<%=attributes[key]%>"><%=attributes[key]%></option>\
             <% } %>\
