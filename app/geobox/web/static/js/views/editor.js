@@ -21,13 +21,16 @@ $(document).ready(function() {
     'featureselected': [storeSelectedFeatures, updateArea, enableAttributeEdit],
     'featureunselected': [updateArea, disableAttributeEdit],
     'featuremodified': [updateArea],
-    'featureadded': [activateEditModeWrapper]
+    'loadend': [registerEventsAfterLoadEnd]
   };
+  var olLayerEventsAfterLoaded = {
+    'featureadded': [activateEditMode]
+  }
   var editor = initEditor();
   var activeLayer = editor.layerManager.active();
 
   function activateEditModeWrapper() {
-    activateEditMode()
+    activateEditMode();
   }
 
   $('#exportVectorLayer form').submit(function(event) {
@@ -435,6 +438,17 @@ $(document).ready(function() {
         });
       });
     }
+  };
+
+  function registerEventsAfterLoadEnd() {
+    var layer = activeLayer;
+    if(layer) {
+      $.each(olLayerEventsAfterLoaded, function(type, funcList) {
+        $.each(funcList, function(idx, func) {
+          layer.registerEvent(type, editor, func);
+        });
+      });
+    }
   }
 
   function unregisterEvents(layer) {
@@ -445,6 +459,11 @@ $(document).ready(function() {
     });
     if(layer) {
       $.each(olLayerEvents, function(type, funcList) {
+        $.each(funcList, function(idx, func) {
+          layer.unregisterEvent(type, editor, func);
+        })
+      });
+      $.each(olLayerEventsAfterLoaded, function(type, funcList) {
         $.each(funcList, function(idx, func) {
           layer.unregisterEvent(type, editor, func);
         })
