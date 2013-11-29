@@ -395,7 +395,7 @@ gbi.widgets.AttributeEditor.prototype = {
         $.each(self.selectedFeatures, function(idx, feature) {
             $.each(attributes, function(idx, key) {
                 var equal = true;
-                var value = feature.attributes[key];
+                var value = feature.attributes ? feature.attributes[key] : undefined;
                 if(key in selectedFeatureAttributes) {
                     equal = selectedFeatureAttributes[key].value == value;
                     if(!equal) {
