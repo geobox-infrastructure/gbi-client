@@ -224,6 +224,7 @@ gbi.widgets.AttributeEditor.prototype = {
             this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate, {
                 'table': false,
                 'invalid': false,
+                'additionalAttributes': Object.keys(alpacaOptions['nonSchema']['properties']).length > 0
             }));
             $.alpaca(self.options.alpacaSchemaElement, {
                 "schema": self.jsonSchema,
@@ -468,6 +469,7 @@ gbi.widgets.AttributeEditor.prototype = {
             this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate, {
                 'table': true,
                 'invalid': self.selectedInvalidFeature,
+                'additionalAttributes': Object.keys(alpacaOptions['nonSchema']['properties']).length > 0
             }));
 
             $.alpaca(self.options.alpacaSchemaElement, {
@@ -595,7 +597,9 @@ gbi.widgets.AttributeEditor.alpacaTemplate = '\
         <div class="alert alert-error">' + attributeLabel.containsInvalidAttributes + '</div>\
     <% } %>\
     <div id="alpaca_schema"></div>\
-    <div id="alpaca_non_schema"></div>\
+    <% if(additionalAttributes) { %>\
+        <div id="alpaca_non_schema"></div>\
+    <% } %>\
 ';
 
 gbi.widgets.AttributeEditor.invalidFeaturesTemplate = '\
