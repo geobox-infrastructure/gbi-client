@@ -185,30 +185,10 @@ $(document).ready(function() {
         activeToolbar.deactivateAllControls();
         $('#attribute-edit-mode').find('#save_btn').click(function() {
           editor.widgets.attributeEditor.saveChanges();
-          editor.widgets.attributeEditor.deactivateEditMode();
-          $.each(storedActiveControls, function(idx, control) {
-            control.activate();
-          });
-          $('#edit-toolbar-mode').removeClass('hide');
-          $('#attribute-edit-mode').addClass('hide');
-          $('#json-schema-container button').removeAttr('disabled');
-          $('#disable-overlay').addClass('hide');
-          editor.map.removeControl(clickPopup);
-          clickPopup.destroy();
-          delete clickPopup
+          deactivateEditMode(activeLayer, storedActiveControls, clickPopup)
         });
         $('#attribute-edit-mode').find('#cancel_btn').click(function() {
-          editor.widgets.attributeEditor.deactivateEditMode();
-          $.each(storedActiveControls, function(idx, control) {
-            control.activate();
-          });
-          $('#edit-toolbar-mode').removeClass('hide');
-          $('#attribute-edit-mode').addClass('hide');
-          $('#json-schema-container button').removeAttr('disabled');
-          $('#disable-overlay').addClass('hide');
-          editor.map.removeControl(clickPopup);
-          clickPopup.destroy();
-          delete clickPopup
+          deactivateEditMode(activeLayer, storedActiveControls, clickPopup)
         });
       }
 
@@ -218,6 +198,27 @@ $(document).ready(function() {
       $('#disable-overlay').removeClass('hide')
       editor.widgets.attributeEditor.activateEditMode();
     }
+  };
+
+  function deactivateEditMode(activeLayer, storedActiveControls, clickPopup) {
+    editor.widgets.attributeEditor.deactivateEditMode();
+    $.each(storedActiveControls, function(idx, control) {
+      control.activate();
+      if(control instanceof gbi.Controls.Select) {
+        var selectedFeatures = activeLayer.selectedFeatures().slice();
+        activeLayer.unSelectAllFeatures();
+        $.each(selectedFeatures, function(idx, feature) {
+          control.selectFeature(feature);
+        });
+      }
+    });
+    $('#edit-toolbar-mode').removeClass('hide');
+    $('#attribute-edit-mode').addClass('hide');
+    $('#json-schema-container button').removeAttr('disabled');
+    $('#disable-overlay').addClass('hide');
+    editor.map.removeControl(clickPopup);
+    clickPopup.destroy();
+    delete clickPopup
   }
 
   // end attribute edit mode block
