@@ -221,7 +221,10 @@ gbi.widgets.AttributeEditor.prototype = {
         if(self.jsonSchema) {
             var alpacaOptions = self.prepareAlpacaOptions();
 
-            this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate));
+            this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate, {
+                'table': false,
+                'invalid': false,
+            }));
             $.alpaca(self.options.alpacaSchemaElement, {
                 "schema": self.jsonSchema,
                 "data": alpacaOptions['data'],
@@ -462,7 +465,10 @@ gbi.widgets.AttributeEditor.prototype = {
         if(self.jsonSchema) {
             var alpacaOptions = self.prepareAlpacaOptions();
 
-            this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate));
+            this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate, {
+                'table': true,
+                'invalid': self.selectedInvalidFeature,
+            }));
 
             $.alpaca(self.options.alpacaSchemaElement, {
                 "schema": self.jsonSchema,
@@ -520,7 +526,8 @@ var attributeLabel = {
     'label': OpenLayers.i18n('Show property in map'),
     'remove': OpenLayers.i18n('Remove property from feature'),
     'attribute': OpenLayers.i18n('Attribute'),
-    'value': OpenLayers.i18n('Value')
+    'value': OpenLayers.i18n('Value'),
+    'containsInvalidAttributes': OpenLayers.i18n('Feature attributes violate schema')
 };
 
 var attributeTitle = {
@@ -584,6 +591,9 @@ gbi.widgets.AttributeEditor.newAttributeTemplate = '\
 ';
 
 gbi.widgets.AttributeEditor.alpacaTemplate = '\
+    <% if(table && invalid) { %>\
+        <div class="alert alert-error">' + attributeLabel.containsInvalidAttributes + '</div>\
+    <% } %>\
     <div id="alpaca_schema"></div>\
     <div id="alpaca_non_schema"></div>\
 ';

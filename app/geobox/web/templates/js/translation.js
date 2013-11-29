@@ -159,6 +159,8 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'No BBox given': "{{ _('No BBox given') }}",
     'Tiles estimated': "{{ _('Tiles estimated') }}",
     'Seeding stopped': "{{ _('Seeding stopped') }}",
-    'No layer to seed': "{{ _('No layer to seed') }}"
+    'No layer to seed': "{{ _('No layer to seed') }}",
+
+    'Feature attributes violate schema': "{{ _('Feature attributes violate schema') }}"
 
 });
