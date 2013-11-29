@@ -270,6 +270,7 @@ gbi.widgets.AttributeEditor.prototype = {
         self.featureChanges['added'][key] = value;
 
         if(self.element.find('input#' + key).length == 0) {
+            $('#no-attributes').addClass('hide');
             self.element.find('.view_attributes').last().after(
                 tmpl(gbi.widgets.AttributeEditor.addedAttributeTemplate, {
                     key: key,
@@ -539,7 +540,9 @@ var attributeTitle = {
 
 gbi.widgets.AttributeEditor.template = '\
     <% if(attributes.length == 0) { %>\
-        <span>'+attributeLabel.noAttributes+'.</span>\
+        <form class="form-inline view_attributes">\
+            <span id="no-attributes">'+attributeLabel.noAttributes+'.</span>\
+        </form>\
     <% } else { %>\
         <% for(var key in attributes) { %>\
             <form class="form-inline view_attributes">\
