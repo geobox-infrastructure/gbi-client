@@ -20,18 +20,11 @@ $(document).ready(function() {
   var olLayerEvents = {
     'featureselected': [storeSelectedFeatures, updateArea, enableAttributeEdit],
     'featureunselected': [updateArea, disableAttributeEdit],
-    'featuremodified': [updateArea],
-    'loadend': [registerEventsAfterLoadEnd]
+    'featuremodified': [updateArea]
   };
-  var olLayerEventsAfterLoaded = {
-    'featureadded': [activateEditMode]
-  }
+
   var editor = initEditor();
   var activeLayer = editor.layerManager.active();
-
-  function activateEditModeWrapper() {
-    activateEditMode();
-  }
 
   $('#exportVectorLayer form').submit(function(event) {
     if(!checkFilenameInput(this)) {
@@ -440,17 +433,6 @@ $(document).ready(function() {
     }
   };
 
-  function registerEventsAfterLoadEnd() {
-    var layer = activeLayer;
-    if(layer) {
-      $.each(olLayerEventsAfterLoaded, function(type, funcList) {
-        $.each(funcList, function(idx, func) {
-          layer.registerEvent(type, editor, func);
-        });
-      });
-    }
-  }
-
   function unregisterEvents(layer) {
     $.each(gbiLayerEvents, function(type, funcList) {
       $.each(funcList, function(idx, func) {
@@ -459,11 +441,6 @@ $(document).ready(function() {
     });
     if(layer) {
       $.each(olLayerEvents, function(type, funcList) {
-        $.each(funcList, function(idx, func) {
-          layer.unregisterEvent(type, editor, func);
-        })
-      });
-      $.each(olLayerEventsAfterLoaded, function(type, funcList) {
         $.each(funcList, function(idx, func) {
           layer.unregisterEvent(type, editor, func);
         })
