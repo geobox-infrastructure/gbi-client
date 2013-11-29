@@ -544,6 +544,7 @@ gbi.widgets.AttributeEditor.template = '\
             <span id="no-attributes">'+attributeLabel.noAttributes+'.</span>\
         </form>\
     <% } else { %>\
+        <br>\
         <% for(var key in attributes) { %>\
             <form class="form-inline view_attributes">\
                 <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
