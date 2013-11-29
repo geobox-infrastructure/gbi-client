@@ -590,7 +590,7 @@ gbi.widgets.AttributeEditor.alpacaTemplate = '\
 
 gbi.widgets.AttributeEditor.invalidFeaturesTemplate = '\
     <div>\
-        <h4>' + attributeLabel.featuresWithInvalidAttributes + '</h4>\
+        <h6>' + attributeLabel.featuresWithInvalidAttributes + '</h6>\
         <p><%=features.length%> ' + attributeLabel.invalidFeaturesLeft + '</p>\
         <% if(!editMode) { %>\
             <button class="btn btn-small" id="prev_invalid_feature">' + attributeLabel.prev + '</button>\
