@@ -135,7 +135,7 @@ $(document).ready(function() {
     activeLayer = layer;
     registerEvents(activeLayer);
     $(this).attr('disabled', 'disabled').removeClass('btn-success');
-    $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+    $('.discard-changes-btn').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('save-enabled');
     if(activeLayer.odataUrl) {
       $('#odata_url').val(activeLayer.odataUrl);
@@ -219,7 +219,7 @@ $(document).ready(function() {
     editor.map.removeControl(clickPopup);
     clickPopup.destroy();
     delete clickPopup
-  }
+  };
 
   // end attribute edit mode block
 
@@ -236,13 +236,13 @@ $(document).ready(function() {
   }).change();
 
   // save-button enabeling events
-  $('#save-changes').click(function() {
+  $('.save-changes-btn').click(function() {
     if(activeLayer) {
       activeLayer.save();
       activeLayer._saveMetaDocument();
     }
     $(this).attr('disabled', 'disabled').removeClass('btn-success');
-    $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+    $('.discard-changes-btn').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('save-enabled');
     $('#export_vectorlayer').removeAttr('disabled');
     enableExportSelectedGeometriesButton();
@@ -372,12 +372,12 @@ $(document).ready(function() {
     }
   });
 
-  $('#discard-changes').click(function() {
+  $('.discard-changes-btn').click(function() {
     if(activeLayer) {
       activeLayer.refresh();
     }
-    $('#save-changes').attr('disabled', 'disabled').removeClass('btn-success');
-    $('#discard-changes').attr('disabled', 'disabled').removeClass('btn-danger');
+    $('.save-changes-btn').attr('disabled', 'disabled').removeClass('btn-success');
+    $('.discard-changes-btn').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('save-enabled');
   });
 
@@ -475,8 +475,8 @@ $(document).ready(function() {
   function enableSaveButton() {
     if(activeLayer instanceof gbi.Layers.Couch) {
       $('#save-tab').addClass('save-enabled');
-      $('#save-changes').removeAttr('disabled').addClass('btn-success');
-      $('#discard-changes').removeAttr('disabled').addClass('btn-danger');
+      $('.save-changes-btn').removeAttr('disabled').addClass('btn-success');
+      $('.discard-changes-btn').removeAttr('disabled').addClass('btn-danger');
       $('#export_vectorlayer, #export_selected_geometries').attr('disabled', 'disabled');
     }
   };

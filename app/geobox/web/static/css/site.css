@@ -352,3 +352,7 @@ hr#save_dividing_line {
 .table-row {
     display: table-row;
 }
+
+#editor-save-container {
+    margin-top: 10px;
+}

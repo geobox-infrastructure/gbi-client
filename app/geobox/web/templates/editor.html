@@ -75,11 +75,22 @@
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid">
-  <h1>{{_('editor')}}
-    {{ generate_tooltip(_('tooltip - editor') ) }}
-  </h1>
+<div class="row-fluid" style="text-align: bottom;">
 
+  <div class="span4">
+    <h1>{{_('editor')}}
+      {{ generate_tooltip(_('tooltip - editor') ) }}
+    </h1>
+  </div>
+  <div class="span4 text-center" id="editor-save-container">
+    <strong>{{ _('Changes') }}</strong><br>
+    <div class="btn-group pull-middle">
+      <button class="btn btn-small save-changes-btn" disabled="disabled">{{ _('save') }}</button>
+      <button class="btn btn-small discard-changes-btn" disabled="disabled">{{ _('discard') }}</button>
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
   <div class="span8 map" id='map'>
     <div id="measure-result-container" class="label hide">{{ _('Area') }}: <span id="measure-result">0</span> ha</div>
   </div>
@@ -207,8 +218,8 @@
           <p>{{ _('infotext - editor save') }}</p>
           <hr>
           <h5>{{ _('save') }}</h5>
-          <button class="btn btn-small" id="save-changes" disabled="disabled">{{ _('save') }}</button>
-          <button class="btn btn-small" id="discard-changes" disabled="disabled">{{ _('discard') }}</button>
+          <button class="btn btn-small save-changes-btn" disabled="disabled">{{ _('save') }}</button>
+          <button class="btn btn-small discard-changes-btn" disabled="disabled">{{ _('discard') }}</button>
           <hr>
           <h5>{{ _('save as') }}</h5>
           <div class="input-append">
