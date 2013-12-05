@@ -346,6 +346,7 @@
           {{ select(export_form.srs) }}
           {{ select(export_form.destination) }}
           {{ input(export_form.odata_url) }}
+          <p id="odata_help_text">{{ _('infotext - odata export') }}</p>
         </div>
         <div class="modal-footer">
           <a href="#" id="abort_export_layer" class="btn" data-dismiss="modal">{{_('abort')}}</a>

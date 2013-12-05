@@ -228,10 +228,12 @@ $(document).ready(function() {
       $('#srs').hide().prev().hide();
       $('#destination').hide().prev().hide();
       $('#odata_url').parent().parent().show();
+      $('#odata_help_text').show();
     } else {
       $('#srs').show().prev().show();
       $('#destination').show().prev().show();
       $('#odata_url').parent().parent().hide();
+      $('#odata_help_text').hide();
     }
   }).change();
 
