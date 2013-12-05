@@ -83,10 +83,12 @@
     </h1>
   </div>
   <div class="span4 text-center" id="editor-save-container">
-    <strong>{{ _('Changes') }}</strong><br>
-    <div class="btn-group pull-middle">
-      <button class="btn btn-small save-changes-btn" disabled="disabled">{{ _('save') }}</button>
-      <button class="btn btn-small discard-changes-btn" disabled="disabled">{{ _('discard') }}</button>
+    <div class="pull-right">
+      <span><strong>{{ _('Current changes') }}:</strong></span>
+      <div class="btn-group">
+        <button class="btn btn-small save-changes-btn" disabled="disabled">{{ _('save') }}</button>
+        <button class="btn btn-small discard-changes-btn" disabled="disabled">{{ _('discard') }}</button>
+      </div>
     </div>
   </div>
 </div>
