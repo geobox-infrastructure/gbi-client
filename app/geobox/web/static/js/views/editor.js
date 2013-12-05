@@ -15,7 +15,8 @@ $(document).ready(function() {
     'gbi.layer.vector.schemaLoaded': [enableSaveButton],
     'gbi.layer.vector.schemaRemoved': [enableSaveButton],
     'gbi.layer.vector.featuresStored': [enableExportSelectedGeometriesButton],
-    'gbi.layer.vector.featuresStoreCleared': [disableExportSelectedGeometriesButton]
+    'gbi.layer.vector.featuresStoreCleared': [disableExportSelectedGeometriesButton],
+    'gbi.layer.refreshed': [refreshWidgets, refreshJSONSchemaInput]
   };
   var olLayerEvents = {
     'featureselected': [storeSelectedFeatures, updateArea, enableAttributeEdit],
@@ -491,6 +492,14 @@ $(document).ready(function() {
 
   function disableExportSelectedGeometriesButton() {
     $('#export_selected_geometries').attr('disabled', 'disabled');
+  }
+
+  function refreshWidgets() {
+    $.each(editor.widgets, function(name, widget) {
+      if($.isFunction(widget.render)) {
+        widget.render();
+      }
+    });
   }
 
   // json schema block
