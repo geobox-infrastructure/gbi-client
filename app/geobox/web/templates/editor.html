@@ -149,17 +149,6 @@
             <button id="select_all_features" class="btn btn-small">{{ _('select all features') }}</button>
           </div>
           <hr>
-          <h4>{{ _('Attributes') }} {{ generate_tooltip(_('infotext - attributes') ) }}</h4>
-
-          <div id="edit-toolbar-mode">
-            <button id="activate_attribute_edit_mode" class="btn btn-small" disabled="disabled" title="{{ _('tooltip - edit attributes') }}">{{ _('edit attributes') }}</button>
-          </div>
-          <div id="attribute-edit-mode" class="hide">
-            <button id="save_btn" class="btn btn-small btn-success">{{ _('apply') }}</button>
-            <button id="cancel_btn" class="btn btn-small btn-danger">{{ _('discard') }}</button>
-          </div>
-          <div id="attributemanager"></div>
-          <hr>
           <div id="json-schema-container">
             <h4>{{ _('JSON Schema') }} {{ generate_tooltip(_('tooltip - json schema')) }}</h4>
 
@@ -173,6 +162,17 @@
             <div class="alert alert-error" style="display: none" id="json_schema_refresh_fail">{{ _('Refreshing schema failed') }}</div>
             <div class="alert alert-error" style="display: none" id="json_schema_no_active_layer">{{ _('No active layer') }}</div>
           </div>
+          <hr>
+          <h4>{{ _('Attributes') }} {{ generate_tooltip(_('infotext - attributes') ) }}</h4>
+
+          <div id="edit-toolbar-mode">
+            <button id="activate_attribute_edit_mode" class="btn btn-small" disabled="disabled" title="{{ _('tooltip - edit attributes') }}">{{ _('edit attributes') }}</button>
+          </div>
+          <div id="attribute-edit-mode" class="hide">
+            <button id="save_btn" class="btn btn-small btn-success">{{ _('apply') }}</button>
+            <button id="cancel_btn" class="btn btn-small btn-danger">{{ _('discard') }}</button>
+          </div>
+          <div id="attributemanager"></div>
         </div>
 
         <div class="tab-pane fade" id="filter">
