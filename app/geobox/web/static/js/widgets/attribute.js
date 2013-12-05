@@ -6,7 +6,8 @@ gbi.widgets.AttributeEditor = function(editor, options) {
         element: 'attributemanager',
         alpacaSchemaElement: 'alpaca_schema',
         alpacaNonSchemaElement: 'alpaca_non_schema',
-        allowNewAttributes: true
+        allowNewAttributes: true,
+        scrollHeight: 350
     };
     this.layerManager = editor.layerManager;
     this.options = $.extend({}, defaults, options);
@@ -226,7 +227,8 @@ gbi.widgets.AttributeEditor.prototype = {
             this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate, {
                 'table': false,
                 'invalid': false,
-                'additionalAttributes': Object.keys(alpacaOptions['nonSchema']['properties']).length > 0
+                'additionalAttributes': Object.keys(alpacaOptions['nonSchema']['properties']).length > 0,
+                'scrollHeight': self.options.scrollHeight
             }));
             $.alpaca(self.options.alpacaSchemaElement, {
                 "schema": self.jsonSchema,
@@ -255,7 +257,8 @@ gbi.widgets.AttributeEditor.prototype = {
                 gbi.widgets.AttributeEditor.template, {
                     attributes: attributes,
                     selectedFeatureAttributes: selectedFeatureAttributes,
-                    editable: editable
+                    editable: editable,
+                    scrollHeight: this.options.scrollHeight
                 }
             ));
 
@@ -472,7 +475,8 @@ gbi.widgets.AttributeEditor.prototype = {
             this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate, {
                 'table': true,
                 'invalid': self.selectedInvalidFeature,
-                'additionalAttributes': Object.keys(alpacaOptions['nonSchema']['properties']).length > 0
+                'additionalAttributes': Object.keys(alpacaOptions['nonSchema']['properties']).length > 0,
+                'scrollHeight': self.options.scrollHeight
             }));
 
             $.alpaca(self.options.alpacaSchemaElement, {
@@ -492,7 +496,8 @@ gbi.widgets.AttributeEditor.prototype = {
             self.element.append(tmpl(
                 gbi.widgets.AttributeEditor.viewOnlyTemplate, {
                     attributes: attributes,
-                    selectedFeatureAttributes: selectedFeatureAttributes
+                    selectedFeatureAttributes: selectedFeatureAttributes,
+                    scrollHeight: self.options.scrollHeight
                 }
             ))
         }
@@ -546,33 +551,34 @@ gbi.widgets.AttributeEditor.template = '\
             <span id="no-attributes">'+attributeLabel.noAttributes+'.</span>\
         </form>\
     <% } else { %>\
-        <br>\
-        <% for(var key in attributes) { %>\
-            <form class="form-inline view_attributes">\
-                <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
-                <% if(selectedFeatureAttributes[attributes[key]]) { %>\
-                    <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
-                        <input class="input-medium" type="text" id="<%=attributes[key]%>" value="<%=selectedFeatureAttributes[attributes[key]]["value"]%>" \
-                    <% } else {%>\
-                        <input class="input-medium" type="text" id="<%=attributes[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
+        <div style="overflow: auto; height: <%=scrollHeight %>px;">\
+            <% for(var key in attributes) { %>\
+                <form class="form-inline view_attributes">\
+                    <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
+                    <% if(selectedFeatureAttributes[attributes[key]]) { %>\
+                        <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
+                            <input class="input-medium" type="text" id="<%=attributes[key]%>" value="<%=selectedFeatureAttributes[attributes[key]]["value"]%>" \
+                        <% } else {%>\
+                            <input class="input-medium" type="text" id="<%=attributes[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
+                        <% } %>\
+                    <% } else { %>\
+                        <input class="input-medium" type="text" id="<%=attributes[key]%>"\
                     <% } %>\
-                <% } else { %>\
-                    <input class="input-medium" type="text" id="<%=attributes[key]%>"\
-                <% } %>\
-                <% if(!editable) { %>\
-                    disabled=disabled \
-                <% } %>\
-                />\
-                <% if(editable) { %>\
-                <button id="_<%=attributes[key]%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button"> \
-                    <i class="icon-eye-open"></i>\
-                </button>\
-                <button id="_<%=attributes[key]%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
-                    <i class="icon-remove"></i>\
-                </button> \
-                <% } %>\
-            </form>\
-        <% } %>\
+                    <% if(!editable) { %>\
+                        disabled=disabled \
+                    <% } %>\
+                    />\
+                    <% if(editable) { %>\
+                    <button id="_<%=attributes[key]%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button"> \
+                        <i class="icon-eye-open"></i>\
+                    </button>\
+                    <button id="_<%=attributes[key]%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
+                        <i class="icon-remove"></i>\
+                    </button> \
+                    <% } %>\
+                </form>\
+            <% } %>\
+        </div>\
     <% } %>\
 ';
 
@@ -602,9 +608,10 @@ gbi.widgets.AttributeEditor.alpacaTemplate = '\
         <br>\
         <div class="alert alert-error">' + attributeLabel.containsInvalidAttributes + '</div>\
     <% } %>\
-    <div id="alpaca_schema"></div>\
+    <div id="alpaca_schema" style="overflow: auto; height: <%=scrollHeight/2 %>px;"></div>\
     <% if(additionalAttributes) { %>\
-        <div id="alpaca_non_schema"></div>\
+        <hr>\
+        <div id="alpaca_non_schema" style="overflow: auto; height: <%=scrollHeight/2 %>px;"></div>\
     <% } %>\
 ';
 
@@ -706,7 +713,7 @@ gbi.widgets.AttributeEditor.alpacaViews = {
 };
 
 gbi.widgets.AttributeEditor.viewOnlyTemplate = '\
-    <div>\
+    <div style="overflow: auto; height: <%=scrollHeight %>px;">\
         <table class="table table-hover">\
             <thead>\
                 <tr>\
