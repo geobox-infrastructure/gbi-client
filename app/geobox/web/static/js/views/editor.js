@@ -504,20 +504,25 @@ $(document).ready(function() {
 
   // json schema block
   $('#add_json_schema_url').click(function() {
-    $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
-      $('#json_schema_refreshed').show().fadeOut(3000);
-      $(activeLayer).off('gbi.layer.vector.schemaLoaded');
-      $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
-      refreshJSONSchemaInput()
-    });
-    $(activeLayer).on('gbi.layer.vector.loadSchemaFail', function(event, schema) {
-      $('#json_schema_load_fail').show().fadeOut(3000);
-      $(activeLayer).off('gbi.layer.vector.schemaLoaded');
-      $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
-    });
-    var schemaURL = $('#json_schema_url').val();
-    activeLayer.addSchemaFromUrl(schemaURL);
-  })
+    if(activeLayer) {
+      $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
+        $('#json_schema_refreshed').show().fadeOut(3000);
+        $(activeLayer).off('gbi.layer.vector.schemaLoaded');
+        $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
+        refreshJSONSchemaInput()
+      });
+      $(activeLayer).on('gbi.layer.vector.loadSchemaFail', function(event, schema) {
+        $('#json_schema_load_fail').show().fadeOut(3000);
+        $(activeLayer).off('gbi.layer.vector.schemaLoaded');
+        $(activeLayer).off('gbi.layer.vector.loadSchemaFail');
+      });
+      var schemaURL = $('#json_schema_url').val();
+      activeLayer.unSelectAllFeatures();
+      activeLayer.addSchemaFromUrl(schemaURL);
+    } else {
+      $('#json_schema_no_active_layer').show().fadeOut(3000);
+    }
+  });
 
   $('#refresh_json_schema').click(function() {
     $(activeLayer).on('gbi.layer.vector.schemaLoaded', function(event, schema) {
