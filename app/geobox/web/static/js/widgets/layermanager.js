@@ -21,6 +21,7 @@ gbi.widgets.LayerManager = function(editor, options) {
         element: 'layermanager',
         showActiveLayer: true,
         allowSeeding: false,
+        listHeight: 350,
         tiny: false
     };
 
@@ -106,6 +107,7 @@ gbi.widgets.LayerManager.prototype = {
             rasterLayers: rasterLayers,
             vectorLayers: vectorLayers,
             allowSeeding: this.options.allowSeeding,
+            listHeight: this.options.listHeight,
             accordion: accordion,
             self: this}));
 
@@ -195,6 +197,12 @@ gbi.widgets.LayerManager.prototype = {
                 $('#invalid_layer_name').show().fadeOut(3000);
             }
         });
+
+        var activeElement = $('.layerElement.active');
+        if(activeElement.length == 1) {
+            var scrollParent = activeElement.scrollParent();
+            scrollParent.scrollTop(activeElement.prop('clientHeight'));
+        }
 
         if(this.options.tiny) {
             this.element.find('.gbi_widgets_LayerManager_Minimize').click(function(event) {
@@ -301,7 +309,8 @@ gbi.widgets.LayerManager.templates = {
              </a>\
         </div>\
         <div id="collapseBackground" class="accordion-body collapse <% if(accordion == "collapseBackground") { %> in <% } %>">\
-            <div class="accordion-inner"><ul class="nav nav-pills nav-stacked">\
+            <div class="accordion-inner">\
+                <ul class="nav nav-pills nav-stacked" style="overflow: auto; height: <%=listHeight %>px;">\
                 <% for(var i=0; i<backgroundLayers.length; i++) { %>\
                     <li class="layerElement">\
                         <label class="inline" for="visible_<%=backgroundLayers[i].id%>">\
@@ -328,7 +337,8 @@ gbi.widgets.LayerManager.templates = {
             </a>\
         </div>\
         <div id="collapseRaster" class="accordion-body collapse <% if(accordion == "collapseRaster") { %> in <% } %> ">\
-            <div class="accordion-inner"><ul class="nav nav-pills nav-stacked">\
+            <div class="accordion-inner">\
+                <ul class="nav nav-pills nav-stacked" style="overflow: auto; height: <%=listHeight %>px;">\
                 <% for(var i=0; i<rasterLayers.length; i++) { %>\
                     <li class="layerElement">\
                         <div class="btn-group pull-right"> \
@@ -363,7 +373,8 @@ gbi.widgets.LayerManager.templates = {
             </a>\
         </div>\
         <div id="collapseVector" class="accordion-body collapse <% if(accordion == "collapseVector") { %> in <% } %>">\
-            <div class="accordion-inner"><ul class="nav nav-pills nav-stacked">\
+            <div class="accordion-inner">\
+                <ul class="nav nav-pills nav-stacked" style="overflow: auto; height: <%=listHeight %>px;">\
                 <% for(var i=0; i<vectorLayers.length; i++) { %>\
                     <li class="layerElement <% if(vectorLayers[i].isActive) { %> active <% } %>">\
                     <a href="#" class="vectorLayer" id="<%=vectorLayers[i].id%> "> \
