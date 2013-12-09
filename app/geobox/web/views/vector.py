@@ -47,6 +47,7 @@ def only_if_enabled():
 def prepare_geojson_form(form):
     geojson_files = get_geojson_list()
     form.file_name.choices = [(name, name) for name in geojson_files]
+    form.file_name.choices.insert(0, ('', _('-- select a geojson --')))
 
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
     form.layers.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
