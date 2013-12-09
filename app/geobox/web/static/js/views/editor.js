@@ -377,6 +377,7 @@ $(document).ready(function() {
 
   $('.discard-changes-btn').click(function() {
     if(activeLayer) {
+      activeLayer.unSelectAllFeatures();
       activeLayer.refresh();
     }
     $('.save-changes-btn').attr('disabled', 'disabled').removeClass('btn-success');
