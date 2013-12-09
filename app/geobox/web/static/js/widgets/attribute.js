@@ -247,7 +247,7 @@ gbi.widgets.AttributeEditor.prototype = {
 
 
             if(self.jsonSchema.additionalProperties !== false) {
-                this.element.append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
+                this.element.find('#alpaca_schema').append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
             } else {
                 this.element.append($('<span>'+attributeLabel.addAttributesNotPossible+'.</span>'))
             }
@@ -264,7 +264,7 @@ gbi.widgets.AttributeEditor.prototype = {
 
 
             if(editable && this.options.allowNewAttributes) {
-                this.element.append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
+                this.element.find('#attribute-list').append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
             } else {
                 this.element.append($('<span>'+attributeLabel.addAttributesNotPossible+'.</span>'))
             }
@@ -551,7 +551,7 @@ gbi.widgets.AttributeEditor.template = '\
             <span id="no-attributes">'+attributeLabel.noAttributes+'.</span>\
         </form>\
     <% } else { %>\
-        <div style="overflow: auto; height: <%=scrollHeight %>px;">\
+        <div id="attribute-list" style="overflow: auto; height: <%=scrollHeight %>px;">\
             <% for(var key in attributes) { %>\
                 <form class="form-inline view_attributes">\
                     <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
@@ -608,10 +608,12 @@ gbi.widgets.AttributeEditor.alpacaTemplate = '\
         <br>\
         <div class="alert alert-error">' + attributeLabel.containsInvalidAttributes + '</div>\
     <% } %>\
-    <div id="alpaca_schema" style="overflow: auto; height: <%=scrollHeight/2 %>px;"></div>\
     <% if(additionalAttributes) { %>\
+        <div id="alpaca_schema" style="overflow: auto; height: <%=scrollHeight/2 %>px;"></div>\
         <hr>\
         <div id="alpaca_non_schema" style="overflow: auto; height: <%=scrollHeight/2 %>px;"></div>\
+    <% } else { %>\
+        <div id="alpaca_schema" style="overflow: auto; height: <%=scrollHeight %>px;"></div>\
     <% } %>\
 ';
 
