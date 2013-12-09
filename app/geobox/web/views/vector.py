@@ -144,6 +144,7 @@ def import_vector():
 
     shape_files, missing_files = get_shapefile_list()
     form.file_name.choices = [(name, name) for name in shape_files]
+    form.file_name.choices.insert(0, ('', _('-- select a shapefile --')))
 
     if not len(request.files):
         if form.validate_on_submit():
