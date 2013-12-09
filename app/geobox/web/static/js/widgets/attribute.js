@@ -489,7 +489,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 "schema": alpacaOptions['nonSchema'],
                 "data": alpacaOptions['data'],
                 "options": alpacaOptions['nonSchemaOptions'],
-                view: "VIEW_GBI_TABLE_INVALID"
+                view: self.jsonSchema.additionalProperties === false ? "VIEW_GBI_TABLE_INVALID" : "VIEW_GBI_TABLE"
             });
         } else {
             var selectedFeatureAttributes = self.prepareSelectedFeatureAttributes(attributes);
