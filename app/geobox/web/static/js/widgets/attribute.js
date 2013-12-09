@@ -247,7 +247,7 @@ gbi.widgets.AttributeEditor.prototype = {
 
 
             if(self.jsonSchema.additionalProperties !== false) {
-                this.element.find('#alpaca_schema').append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
+                this.element.find('#alpaca-container').append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
             } else {
                 this.element.append($('<span>'+attributeLabel.addAttributesNotPossible+'.</span>'))
             }
@@ -604,17 +604,17 @@ gbi.widgets.AttributeEditor.newAttributeTemplate = '\
 ';
 
 gbi.widgets.AttributeEditor.alpacaTemplate = '\
-    <% if(table && invalid) { %>\
-        <br>\
-        <div class="alert alert-error">' + attributeLabel.containsInvalidAttributes + '</div>\
-    <% } %>\
-    <% if(additionalAttributes) { %>\
-        <div id="alpaca_schema" style="overflow: auto; height: <%=scrollHeight/2 %>px;"></div>\
+    <div id="alpaca-container" style="overflow: auto; height: <%=scrollHeight %>px;">\
+        <% if(table && invalid) { %>\
+            <br>\
+            <div class="alert alert-error">' + attributeLabel.containsInvalidAttributes + '</div>\
+        <% } %>\
+        <div id="alpaca_schema"></div>\
         <hr>\
-        <div id="alpaca_non_schema" style="overflow: auto; height: <%=scrollHeight/2 %>px;"></div>\
-    <% } else { %>\
-        <div id="alpaca_schema" style="overflow: auto; height: <%=scrollHeight %>px;"></div>\
-    <% } %>\
+        <% if(additionalAttributes) { %>\
+            <div id="alpaca_non_schema"></div>\
+        <% } %>\
+    </div>\
 ';
 
 gbi.widgets.AttributeEditor.invalidFeaturesTemplate = '\
