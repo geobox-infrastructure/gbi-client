@@ -358,7 +358,6 @@ class VectorCouchDB(CouchDBBase):
         CouchDBBase.__init__(self, url, db_name)
         self.db_name = db_name
         self.title = title or db_name
-        print self.title
         self.init_layer()
 
     def init_db(self, couch_db_url=None):

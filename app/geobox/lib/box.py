@@ -57,6 +57,7 @@ class FeatureInserter(object):
         self.prefix = prefix
         self.session = requests.Session()
         self.inserted_layers = set()
+        self._dbs = {}
         if auth:
             self.session.auth = auth
 
@@ -71,7 +72,10 @@ class FeatureInserter(object):
 
     def insert(self, feature):
         couchdb_layer = '%s%s' % (self.prefix, feature.layer)
-        couch = VectorCouchDB(self.url, couchdb_layer, couchdb_layer)
+        couch = self._dbs.get(couchdb_layer, None)
+        if not couch:
+            couch = VectorCouchDB(self.url, couchdb_layer, couchdb_layer)
+            self._dbs[couchdb_layer] = couch
         feature_dict = {
             'geometry': feature.geometry,
             'properties': feature.properties,
@@ -91,7 +95,7 @@ class FeatureInserter(object):
         source_md = source.load_record('schema_' + layer)
         title = source_md.get('title', layer) if source_md else layer
 
-        couch = VectorCouchDB(self.url, couchdb_layer, title )
+        couch = VectorCouchDB(self.url, couchdb_layer, title)
 
         md_doc = {
             'title': title,
