@@ -383,6 +383,7 @@ $(document).ready(function() {
     $('.save-changes-btn').attr('disabled', 'disabled').removeClass('btn-success');
     $('.discard-changes-btn').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('save-enabled');
+    $('#export_vectorlayer').removeAttr('disabled');
     enableExportSelectedGeometriesButton();
   });
 
