@@ -20,7 +20,7 @@ $(document).ready(function() {
   };
   var olLayerEvents = {
     'featureselected': [storeSelectedFeatures, updateArea, enableAttributeEdit],
-    'featureunselected': [updateArea, disableAttributeEdit],
+    'featureunselected': [updateArea, disableAttributeEdit, removeStoredFeature],
     'featuremodified': [updateArea]
   };
 
@@ -383,6 +383,7 @@ $(document).ready(function() {
     $('.save-changes-btn').attr('disabled', 'disabled').removeClass('btn-success');
     $('.discard-changes-btn').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('save-enabled');
+    enableExportSelectedGeometriesButton();
   });
 
   orderToolbar();
@@ -396,6 +397,10 @@ $(document).ready(function() {
     layer.storeFeatures(selectedFeatures);
   };
 
+  function removeStoredFeature(f) {
+    var layer = f.feature.layer.gbiLayer;
+    layer.removeStoredFeature(f.feature);
+  }
   function orderToolbar() {
     var toolbarButton = $('#edit-toolbar .olButton');
     var toolbarWork = ['DrawFeaturePoint', 'DrawFeatureLine', 'DrawFeaturePolygon'];
