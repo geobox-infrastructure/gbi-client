@@ -173,10 +173,26 @@ $(document).ready(function() {
 
     $(".import_json").click(function() {
         var formAction = $(this).attr('href');
+        var filename = $(this).attr('data-download-url')
         $("#import_json_form").attr('action', formAction)
+
+        $('#importGeoJSON').on('shown', function() {
+            $('#importGeoJSON #name').val(filename);
+            $('#importGeoJSON #layers').change(function() {
+                if(this.selectedIndex == 0) {
+                    $('#importGeoJSON #name').val(filename);
+                } else {
+                    $('#importGeoJSON #name').val('');
+                }
+            })
+        });
+        $('#importGeoJSON').on('hidden', function() {
+            $('#importGeoJSON #layers').off('change');
+        });
+
         $("#importGeoJSON").modal('show');
         $("#file_name option").remove();
-        var filename = $(this).attr('data-download-url')
+
         $('#file_name').append($("<option></option>")
                     .attr("value", filename)
                     .text(filename));
