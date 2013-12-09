@@ -40,4 +40,6 @@
     </div>
 {% endblock %}
 
-
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/vector_import.js') }}"></script>
+{% endblock %}
