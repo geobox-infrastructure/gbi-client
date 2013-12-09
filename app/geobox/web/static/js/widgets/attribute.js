@@ -296,8 +296,8 @@ gbi.widgets.AttributeEditor.prototype = {
         } else {
             self.element.find('input#' + key).val(value);
         }
-        self.element.find('#_newKey').val('');
         self.element.find('#_newValue').val('');
+        self.element.find('#_newKey').val('').focus();
         this.changed = true;
     },
     edit: function(key, value) {
