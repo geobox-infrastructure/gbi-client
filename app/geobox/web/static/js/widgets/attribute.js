@@ -296,6 +296,18 @@ gbi.widgets.AttributeEditor.prototype = {
         } else {
             self.element.find('input#' + key).val(value);
         }
+
+        if(self.jsonSchema) {
+            self.element.find('#alpaca_non_schema').empty();
+            var alpacaOptions = self.prepareAlpacaOptions();
+            $.alpaca(self.options.alpacaNonSchemaElement, {
+                "schema": alpacaOptions['nonSchema'],
+                "data": alpacaOptions['data'],
+                "options": alpacaOptions['nonSchemaOptions'],
+                view: "VIEW_GBI_EDIT"
+            });
+        }
+
         self.element.find('#_newValue').val('');
         self.element.find('#_newKey').val('').focus();
         this.changed = true;
@@ -459,6 +471,15 @@ gbi.widgets.AttributeEditor.prototype = {
                 }
             })
         });
+
+        $.each(self.featureChanges['added'], function(key, value) {
+            nonSchema.properties[key] = {
+                "type": "any",
+                "title": key
+            };
+            data[key] = value;
+        });
+
         return {
             nonSchema: nonSchema,
             schemaOptions: schemaOptions,
@@ -471,7 +492,6 @@ gbi.widgets.AttributeEditor.prototype = {
 
         if(self.jsonSchema) {
             var alpacaOptions = self.prepareAlpacaOptions();
-
             this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate, {
                 'table': true,
                 'invalid': self.selectedInvalidFeature,
