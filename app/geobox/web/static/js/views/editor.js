@@ -20,7 +20,7 @@ $(document).ready(function() {
   };
   var olLayerEvents = {
     'featureselected': [storeSelectedFeatures, updateArea, enableAttributeEdit],
-    'featureunselected': [updateArea, disableAttributeEdit, removeStoredFeature],
+    'featureunselected': [updateArea, disableAttributeEdit],
     'featuremodified': [updateArea]
   };
 
