@@ -265,7 +265,7 @@ gbi.widgets.AttributeEditor.prototype = {
 
 
             if(editable && this.options.allowNewAttributes) {
-                this.element.find('#attribute-list').append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
+                this.element.find('#attribute-container').append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));
             } else {
                 this.element.append($('<span>'+attributeLabel.addAttributesNotPossible+'.</span>'))
             }
@@ -568,40 +568,40 @@ var attributeTitle = {
 };
 
 gbi.widgets.AttributeEditor.template = '\
+    <div id="attribute-container" style="overflow: auto; height: <%=scrollHeight %>px;">\
     <% if(attributes.length == 0) { %>\
         <form class="form-inline view_attributes">\
             <span id="no-attributes">'+attributeLabel.noAttributes+'.</span>\
         </form>\
     <% } else { %>\
-        <div id="attribute-list" style="overflow: auto; height: <%=scrollHeight %>px;">\
-            <% for(var key in attributes) { %>\
-                <form class="form-inline view_attributes">\
-                    <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
-                    <% if(selectedFeatureAttributes[attributes[key]]) { %>\
-                        <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
-                            <input class="input-medium" type="text" id="<%=attributes[key]%>" value="<%=selectedFeatureAttributes[attributes[key]]["value"]%>" \
-                        <% } else {%>\
-                            <input class="input-medium" type="text" id="<%=attributes[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
-                        <% } %>\
-                    <% } else { %>\
-                        <input class="input-medium" type="text" id="<%=attributes[key]%>"\
+        <% for(var key in attributes) { %>\
+            <form class="form-inline view_attributes">\
+                <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
+                <% if(selectedFeatureAttributes[attributes[key]]) { %>\
+                    <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
+                        <input class="input-medium" type="text" id="<%=attributes[key]%>" value="<%=selectedFeatureAttributes[attributes[key]]["value"]%>" \
+                    <% } else {%>\
+                        <input class="input-medium" type="text" id="<%=attributes[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
                     <% } %>\
-                    <% if(!editable) { %>\
-                        disabled=disabled \
-                    <% } %>\
-                    />\
-                    <% if(editable) { %>\
-                    <button id="_<%=attributes[key]%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button"> \
-                        <i class="icon-eye-open"></i>\
-                    </button>\
-                    <button id="_<%=attributes[key]%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
-                        <i class="icon-remove"></i>\
-                    </button> \
-                    <% } %>\
-                </form>\
-            <% } %>\
-        </div>\
+                <% } else { %>\
+                    <input class="input-medium" type="text" id="<%=attributes[key]%>"\
+                <% } %>\
+                <% if(!editable) { %>\
+                    disabled=disabled \
+                <% } %>\
+                />\
+                <% if(editable) { %>\
+                <button id="_<%=attributes[key]%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button"> \
+                    <i class="icon-eye-open"></i>\
+                </button>\
+                <button id="_<%=attributes[key]%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
+                    <i class="icon-remove"></i>\
+                </button> \
+                <% } %>\
+            </form>\
+        <% } %>\
     <% } %>\
+    </div>\
 ';
 
 gbi.widgets.AttributeEditor.addedAttributeTemplate = '\
