@@ -492,7 +492,7 @@ $(document).ready(function() {
   };
 
   function enableExportSelectedGeometriesButton() {
-    if(!$('#save-tab').hasClass('save-enabled') && activeLayer.storedFeatures().length > 0) {
+    if(activeLayer && !$('#save-tab').hasClass('save-enabled') && activeLayer.storedFeatures().length > 0) {
       $('#export_selected_geometries').removeAttr('disabled');
     }
   }
