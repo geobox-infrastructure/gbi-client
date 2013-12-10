@@ -244,11 +244,7 @@ $(document).ready(function() {
       activeLayer.save();
       activeLayer._saveMetaDocument();
     }
-    $('.save-changes-btn').attr('disabled', 'disabled').removeClass('btn-success');
-    $('.discard-changes-btn').attr('disabled', 'disabled').removeClass('btn-danger');
-    $('#save-tab').removeClass('save-enabled');
-    $('#export_vectorlayer').removeAttr('disabled');
-    enableExportSelectedGeometriesButton();
+    deactivateSaveDiscard();
   });
 
   // savepoint settings
@@ -380,12 +376,16 @@ $(document).ready(function() {
       activeLayer.unSelectAllFeatures();
       activeLayer.refresh();
     }
+    deactivateSaveDiscard();
+  });
+
+  function deactivateSaveDiscard() {
     $('.save-changes-btn').attr('disabled', 'disabled').removeClass('btn-success');
     $('.discard-changes-btn').attr('disabled', 'disabled').removeClass('btn-danger');
     $('#save-tab').removeClass('save-enabled');
     $('#export_vectorlayer').removeAttr('disabled');
     enableExportSelectedGeometriesButton();
-  });
+  }
 
   orderToolbar();
   if(activeLayer) {
