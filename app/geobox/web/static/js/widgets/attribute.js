@@ -371,7 +371,6 @@ gbi.widgets.AttributeEditor.prototype = {
         var activeLayer = this.layerManager.active();
 
         $.each(activeLayer.selectedFeatures(), function(_idx, feature) {
-            console.log(feature)
             // remove
             $.each(self.featureChanges['removed'], function(idx, key) {
                 activeLayer.removeFeatureAttribute(feature, key);
