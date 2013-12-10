@@ -228,7 +228,8 @@ gbi.widgets.AttributeEditor.prototype = {
                 'table': false,
                 'invalid': false,
                 'additionalAttributes': Object.keys(alpacaOptions['nonSchema']['properties']).length > 0,
-                'scrollHeight': self.options.scrollHeight
+                'scrollHeight': self.options.scrollHeight,
+                'schema_name': self.jsonSchema['title']
             }));
             $.alpaca(self.options.alpacaSchemaElement, {
                 "schema": self.jsonSchema,
@@ -496,7 +497,8 @@ gbi.widgets.AttributeEditor.prototype = {
                 'table': true,
                 'invalid': self.selectedInvalidFeature,
                 'additionalAttributes': Object.keys(alpacaOptions['nonSchema']['properties']).length > 0,
-                'scrollHeight': self.options.scrollHeight
+                'scrollHeight': self.options.scrollHeight,
+                'schema_name': self.jsonSchema['title']
             }));
 
             $.alpaca(self.options.alpacaSchemaElement, {
@@ -629,9 +631,11 @@ gbi.widgets.AttributeEditor.alpacaTemplate = '\
             <br>\
             <div class="alert alert-error">' + attributeLabel.containsInvalidAttributes + '</div>\
         <% } %>\
+        <h4><%=schema_name%></h4>\
         <div id="alpaca_schema"></div>\
         <hr>\
         <% if(additionalAttributes) { %>\
+            <h4>' + attributeLabel.additionalProperties + '</h4>\
             <div id="alpaca_non_schema"></div>\
         <% } %>\
     </div>\
