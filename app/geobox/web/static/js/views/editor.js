@@ -24,6 +24,8 @@ $(document).ready(function() {
     'featuremodified': [updateArea]
   };
 
+  $(gbi).on('gbi.layermanager.layer.active', deactivateSaveDiscard)
+
   var editor = initEditor();
   var activeLayer = editor.layerManager.active();
 
