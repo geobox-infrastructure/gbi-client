@@ -125,13 +125,13 @@ gbi.widgets.ThematicalVectorLegend.prototype = {
         var self = this;
         self.legend = this.activeLayer ? this.activeLayer.filteredFeatures() : false;
         if(self.legend) {
-            var units = 'km';
+            var units = 'ha';
             $.each(self.legend.result, function(idx, r) {
                 var area = 0;
                 $.each(r.features, function(idx, feature) {
                     area += feature.geometry.getGeodesicArea(self.editor.map.olMap.getProjectionObject())
                 });
-                area /= 1000000;
+                area /= 10000;
                 area = Math.round(area * 10000) / 10000;
                 element.find('#_' + r.id + '_area').text(area)
             });
@@ -158,7 +158,7 @@ gbi.widgets.ThematicalVectorLegend.template = '\
             <tr>\
                 <th class="text-center">' + thematicalVectorLegendLabel.color + '</th>\
                 <th class="text-center">' + thematicalVectorLegendLabel.value + '</th>\
-                <th class="text-center">' + thematicalVectorLegendLabel.areaIn + ' <span id="area-unit"></span><sup>2</sup></th>\
+                <th class="text-center">' + thematicalVectorLegendLabel.areaIn + ' <span id="area-unit"></span></th>\
                 <% if(featureList) { %><th class="text-center">&nbsp;</th><% } %>\
             </tr>\
         </thead>\
