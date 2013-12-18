@@ -346,16 +346,15 @@ hr#save_dividing_line {
 }
 
 #disable-overlay {
-
-    position: absolute;background-color: #bbb;
+    position: absolute;
+    background-color: #bbb;
     z-index: 1000;
     opacity: 0.5;
-    width: 30%;
+    width: 100%;
 }
 
 #disable-overlay, #edit-toolbar-container {
     height: 100px;
-
 }
 
 .table-row {
@@ -382,4 +381,9 @@ hr#save_dividing_line {
 .editor-nav-tabs > li > a {
     padding-left: 8px;
     padding-right: 8px;
+}
+
+#editor-tabs {
+    overflow: auto;
+    position: relative;
 }
