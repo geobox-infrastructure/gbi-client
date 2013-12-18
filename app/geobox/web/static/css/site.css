@@ -254,8 +254,17 @@ hr#save_dividing_line {
 #layermanager_active_layer {
     position: absolute;
     top: 6px;
+    right: 32px;
+    z-index: 1005;
+    line-height: 15px;
+}
+
+#zoom_to_active_layer {
+    position: absolute;
+    top: 6px;
     right: 6px;
     z-index: 1005;
+    cursor: pointer;
 }
 
 .gbi_widgets_LayerManager {
