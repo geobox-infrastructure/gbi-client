@@ -481,6 +481,8 @@ $(document).ready(function() {
         }
       });
     });
+    $('#selected-area-label').removeClass('hide');
+    $('#drawn-area-label').addClass('hide');
     displayArea(area);
   };
 
@@ -861,6 +863,8 @@ function initEditor() {
 
   var measuredDraw = new gbi.Controls.MeasuredDraw(toolbar.vectorActive, {
     measureCallback: function(result) {
+      $('#selected-area-label').addClass('hide');
+      $('#drawn-area-label').removeClass('hide');
       var target = $('#measure-result');
       target.empty()
       var area = result.measure;
