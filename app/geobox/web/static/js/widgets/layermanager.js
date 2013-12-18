@@ -209,7 +209,9 @@ gbi.widgets.LayerManager.prototype = {
         var activeElement = $('.layerElement.active');
         if(activeElement.length == 1) {
             var scrollParent = activeElement.scrollParent();
-            scrollParent.scrollTop(activeElement.prop('clientHeight'));
+            var elementOffset = activeElement.position().top;
+            var containerOffset = activeElement.closest('.accordion-body').position().top;
+            scrollParent.scrollTop(elementOffset - containerOffset)
         }
 
         if(this.options.tiny) {
@@ -318,7 +320,7 @@ gbi.widgets.LayerManager.templates = {
         </div>\
         <div id="collapseBackground" class="accordion-body collapse <% if(accordion == "collapseBackground") { %> in <% } %>">\
             <div class="accordion-inner">\
-                <ul class="nav nav-pills nav-stacked" style="overflow: auto; height: <%=listHeight %>px;">\
+                <ul class="nav nav-pills nav-stacked">\
                 <% for(var i=0; i<backgroundLayers.length; i++) { %>\
                     <li class="layerElement">\
                         <label class="inline" for="visible_<%=backgroundLayers[i].id%>">\
@@ -346,7 +348,7 @@ gbi.widgets.LayerManager.templates = {
         </div>\
         <div id="collapseRaster" class="accordion-body collapse <% if(accordion == "collapseRaster") { %> in <% } %> ">\
             <div class="accordion-inner">\
-                <ul class="nav nav-pills nav-stacked" style="overflow: auto; height: <%=listHeight %>px;">\
+                <ul class="nav nav-pills nav-stacked">\
                 <% for(var i=0; i<rasterLayers.length; i++) { %>\
                     <li class="layerElement">\
                         <div class="btn-group pull-right"> \
@@ -382,7 +384,7 @@ gbi.widgets.LayerManager.templates = {
         </div>\
         <div id="collapseVector" class="accordion-body collapse <% if(accordion == "collapseVector") { %> in <% } %>">\
             <div class="accordion-inner">\
-                <ul class="nav nav-pills nav-stacked" style="overflow: auto; height: <%=listHeight %>px;">\
+                <ul class="nav nav-pills nav-stacked">\
                 <% for(var i=0; i<vectorLayers.length; i++) { %>\
                     <li class="layerElement <% if(vectorLayers[i].isActive) { %> active <% } %>">\
                     <a href="#" class="vectorLayer" id="<%=vectorLayers[i].id%> "> \

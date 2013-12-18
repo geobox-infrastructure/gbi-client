@@ -567,7 +567,7 @@ var attributeTitle = {
 };
 
 gbi.widgets.AttributeEditor.template = '\
-    <div id="attribute-container" style="overflow: auto; height: <%=scrollHeight %>px;">\
+    <div id="attribute-container">\
     <% if(attributes.length == 0) { %>\
         <form class="form-inline view_attributes">\
             <span id="no-attributes">'+attributeLabel.noAttributes+'.</span>\
@@ -625,7 +625,7 @@ gbi.widgets.AttributeEditor.newAttributeTemplate = '\
 ';
 
 gbi.widgets.AttributeEditor.alpacaTemplate = '\
-    <div id="alpaca-container" style="overflow: auto; height: <%=scrollHeight %>px;">\
+    <div id="alpaca-container">\
         <% if(table && invalid) { %>\
             <br>\
             <div class="alert alert-error">' + attributeLabel.containsInvalidAttributes + '</div>\
@@ -738,7 +738,7 @@ gbi.widgets.AttributeEditor.alpacaViews = {
 };
 
 gbi.widgets.AttributeEditor.viewOnlyTemplate = '\
-    <div style="overflow: auto; height: <%=scrollHeight %>px;">\
+    <div>\
         <table class="table table-hover">\
             <thead>\
                 <tr>\

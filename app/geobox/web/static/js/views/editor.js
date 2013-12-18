@@ -26,6 +26,18 @@ $(document).ready(function() {
   var editor = initEditor();
   var activeLayer = editor.layerManager.active();
 
+  var resizeTab = function() {
+    var element = $('#editor-tabs');
+    var browserHeight = $(window).height();
+    var offsetTop = element.prop('offsetTop');
+    element.css('max-height', browserHeight - offsetTop - 20);
+  }
+
+  resizeTab();
+  $(window).resize(function() {
+      resizeTab();
+  });
+
   $.each(editor.layerManager.vectorLayers, function(idx, layer) {
     layer.registerEvent('featureselected', editor, updateArea)
     layer.registerEvent('featureunselected', editor, updateArea)
