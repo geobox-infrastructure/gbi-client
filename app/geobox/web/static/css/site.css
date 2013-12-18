@@ -369,3 +369,17 @@ hr#save_dividing_line {
 #attribute-edit-mode {
     margin-bottom: 20px;
 }
+
+.editor-nav-tabs {
+    margin-bottom: 0px;
+}
+
+.editor-nav-tabs > li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.editor-nav-tabs > li > a {
+    padding-left: 8px;
+    padding-right: 8px;
+}
