@@ -19,13 +19,24 @@ $(document).ready(function() {
     'gbi.layer.refreshed': [refreshWidgets, refreshJSONSchemaInput]
   };
   var olLayerEvents = {
-    'featureselected': [storeSelectedFeatures, updateArea, enableAttributeEdit],
-    'featureunselected': [updateArea, disableAttributeEdit],
-    'featuremodified': [updateArea]
+    'featureselected': [storeSelectedFeatures, enableAttributeEdit],
+    'featureunselected': [disableAttributeEdit]
   };
 
   var editor = initEditor();
   var activeLayer = editor.layerManager.active();
+
+  $.each(editor.layerManager.vectorLayers, function(idx, layer) {
+    layer.registerEvent('featureselected', editor, updateArea)
+    layer.registerEvent('featureunselected', editor, updateArea)
+    layer.registerEvent('featuremodified', editor, updateArea)
+  });
+
+  $(gbi).on('gbi.layermanager.vectorlayer.add', function(event, layer) {
+    layer.registerEvent('featureselected', editor, updateArea)
+    layer.registerEvent('featureunselected', editor, updateArea)
+    layer.registerEvent('featuremodified', editor, updateArea)
+  });
 
   $('#exportVectorLayer form').submit(function(event) {
     if(!checkFilenameInput(this)) {
@@ -462,12 +473,13 @@ $(document).ready(function() {
   };
 
   function updateArea() {
-    var features = activeLayer.selectedFeatures();
     var area = 0;
-    $.each(features, function(idx, feature) {
-      if($.isFunction(feature.geometry.getGeodesicArea)) {
-        area += feature.geometry.getGeodesicArea(new OpenLayers.Projection('EPSG:3857'));
-      }
+    $.each(editor.layerManager.vectorLayers, function(idx, layer) {
+      $.each(layer.selectedFeatures(), function(idx, feature) {
+        if($.isFunction(feature.geometry.getGeodesicArea)) {
+          area += feature.geometry.getGeodesicArea(new OpenLayers.Projection('EPSG:3857'));
+        }
+      });
     });
     displayArea(area);
   };
