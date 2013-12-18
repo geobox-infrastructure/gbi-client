@@ -38,7 +38,7 @@ gbi.widgets.LayerManager = function(editor, options) {
 
     // add active layer
     if(this.options.showActiveLayer) {
-        this.activeLayerDIV = $('<div id="layermanager_active_layer" class="label label-success">'+layerManagerLabel.activeLayer+': <span></span></div>');
+        this.activeLayerDIV = $('<div id="layermanager_active_layer" class="label label-success">'+layerManagerLabel.activeLayer+': <span></span></div><div id="zoom_to_active_layer" class="label label-success hide"><i class="icon-white icon-search"></i></div>');
         $('.olMapViewport').append(this.activeLayerDIV);
     }
 
@@ -79,6 +79,11 @@ gbi.widgets.LayerManager.prototype = {
                     if (gbiLayer.isActive) {
                         if (self.options.showActiveLayer) {
                             $('#layermanager_active_layer > span').html(gbiLayer.options.title);
+                            $('#zoom_to_active_layer').removeClass('hide');
+                            $('#zoom_to_active_layer .icon-search')
+                                .click(function() {
+                                    self.zoomToExtent(gbiLayer);
+                                });
                         }
                     }
                 }
@@ -94,6 +99,9 @@ gbi.widgets.LayerManager.prototype = {
         });
         if (!this.layerManager.active()) {
             $('#layermanager_active_layer > span').html(layerManagerLabel.noActiveLayer);
+            $('#zoom_to_active_layer').addClass('hide');
+            $('#zoom_to_active_layer .icon-search').off('click');
+
         }
 
         if (!accordion) {
