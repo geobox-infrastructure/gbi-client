@@ -781,7 +781,9 @@ function initEditor() {
     map: {
       element: 'map',
       numZoomLevels : numZoomLevels,
-      theme: OpenlayersThemeURL
+      theme: OpenlayersThemeURL,
+      autoResize: true,
+      autoResizeSpaceBelowMap: 20
     },
     imgPath: OpenlayersImageURL,
     imageBaseLayer: true
