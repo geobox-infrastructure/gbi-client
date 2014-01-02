@@ -746,6 +746,7 @@ $(document).ready(function() {
     var options = {
       name: _layer.title,
       url: wms.getMapUrl,
+      layer: _layer.name,
       params: {
         layers: [_layer.name],
         format: 'image/png',
