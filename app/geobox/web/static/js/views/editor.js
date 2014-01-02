@@ -776,6 +776,7 @@ $(document).ready(function() {
     if(offline) {
       editor.widgets.seeding.render();
     }
+    $('#layermanager #collapseRaster').collapse('show')
   }
 
   function searchWMS() {
