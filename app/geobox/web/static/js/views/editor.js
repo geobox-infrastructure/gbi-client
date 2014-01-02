@@ -759,7 +759,7 @@ function loadCouchDBs() {
                   cacheURL = cacheURL.replace('{TileCol}', '${x}');
                   cacheURL = cacheURL.replace('{TileRow}', '${y}');
                 }
-                raster_sources.push(new gbi.Layers.WMTS({
+                raster_sources.push(new gbi.Layers.SMS({
                   name: metadata.title,
                   url: wmtsURL + metadata.name + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile',
                   cacheURL: cacheURL,
