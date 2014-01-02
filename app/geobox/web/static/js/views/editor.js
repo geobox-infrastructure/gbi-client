@@ -760,14 +760,18 @@ $(document).ready(function() {
       options.singleTile = false;
     }
 
+    var layerConstructor = gbi.Layers.WMS;
+
     if(offline && wms.openData) {
       var couchURL = createCouchTileStore(_layer.name, _layer.title, wms.getMapUrl);
-      options.cacheURL = couchURL + '/GoogleMapsCompatible-${z}-${x}-${y}/tile';
       options.sourceURL = 'http://localhost:8888/proxy/' + wms.getMapUrl;
       options.url = couchURL + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile';
       options.singleTile = false;
+      options.sourceType = 'wms';
+      options.requestEncoding = 'REST';
+      layerConstructor = gbi.Layers.SMS;
     }
-    var layer = new gbi.Layers.WMS(options);
+    var layer = new layerConstructor(options);
     editor.addLayer(layer);
   }
 
@@ -884,23 +888,25 @@ function loadCouchDBs() {
               }
 
               if (metadata.type == 'tiles') {
-                var cacheURL = false;
-                if(offline) {
-                  cacheURL = OpenlayersCouchURL + metadata.name + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile';
-                  cacheURL = cacheURL.replace('{TileMatrix}', '${z}');
-                  cacheURL = cacheURL.replace('{TileCol}', '${x}');
-                  cacheURL = cacheURL.replace('{TileRow}', '${y}');
-                }
-                raster_sources.push(new gbi.Layers.SMS({
+                var layerConstructor = offline ? gbi.Layers.SMS : gbi.Layers.WMTS;
+                var options = {
                   name: metadata.title,
                   url: wmtsURL + metadata.name + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile',
-                  cacheURL: cacheURL,
                   sourceURL: metadata.source.url,
                   layer:  metadata.name,
                   format: metadata.source.format,
                   data: metadata,
-                  requestEncoding: 'REST'
-                }));
+                  requestEncoding: 'REST',
+                  sourceType: metadata.source.type
+                }
+                if(offline && options.sourceType == 'wms') {
+                  options['params'] = {
+                    layers: [metadata.name],
+                    format: 'image/png',
+                    transparent: true
+                  }
+                }
+                raster_sources.push(new layerConstructor(options));
               }
             }
           }
