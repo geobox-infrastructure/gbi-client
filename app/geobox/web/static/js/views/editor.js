@@ -773,6 +773,9 @@ $(document).ready(function() {
     }
     var layer = new layerConstructor(options);
     editor.addLayer(layer);
+    if(offline) {
+      editor.widgets.seeding.render();
+    }
   }
 
   function searchWMS() {
