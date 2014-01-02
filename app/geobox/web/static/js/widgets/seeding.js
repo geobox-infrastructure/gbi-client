@@ -68,6 +68,8 @@ gbi.widgets.Seeding.prototype = {
                 .change(function() {
                     var name = $(this).val();
                     var layer = self.editor.layerManager.layerByName(name);
+                    $('#seeding-start-level').empty();
+                    $('#seeding-end-level').empty();
                     for(var i = layer.data.levelMin; i <= layer.data.levelMax; i ++) {
                         var option = $('<option value=' + i + '>' + i + '</option>');
                         $('#seeding-start-level').append(option.clone());
