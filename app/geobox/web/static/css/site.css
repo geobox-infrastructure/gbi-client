@@ -387,3 +387,9 @@ hr#save_dividing_line {
     overflow: auto;
     position: relative;
 }
+
+#wmsSearchResultsContainer {
+    height: 300px;
+    overflow: auto;
+    margin-bottom: 15px;
+}

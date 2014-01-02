@@ -696,6 +696,137 @@ $(document).ready(function() {
     e.stopPropagation();
     return false;
   })
+
+  var wmsSearchResults = []
+
+  function createCouchTileStore(layer, title, url) {
+    var name = 'external_wms_tiles_' + layer;
+    var metadata = {
+      'name': name,
+      'title': title,
+      'type': 'tiles',
+      'levelMin': 0,
+      'levelMax': 18,
+      'source': {
+        'url': url,
+        'srs': 'EPSG:3857',
+        'type': 'wms',
+        'layers': [layer],
+        'format': 'image/png'
+      }
+    };
+    var couchdbURL = OpenlayersCouchURL + name;
+
+    $.ajax({
+      url: couchdbURL,
+      async: false
+    }).fail(function(response) {
+      // create new couchdb
+      $.ajax({
+          type: 'put',
+          url: couchdbURL,
+          async: false
+      }).done(function(response) {
+        $.ajax({
+          type: 'put',
+          url: couchdbURL + '/metadata',
+          async: false,
+          data: JSON.stringify(metadata),
+          contentType: 'application/json',
+          processData: false
+        });
+      });
+    })
+    return couchdbURL;
+  }
+
+  function addWMSSearchResultLayer(wms_id, layer_id) {
+    var wms = wmsSearchResults[wms_id];
+    var _layer = wms['layer'][layer_id];
+    var options = {
+      name: _layer.title,
+      url: wms.getMapUrl,
+      params: {
+        layers: [_layer.name],
+        format: 'image/png',
+        transparent: true
+      }
+    }
+    var bbox = _layer['bbox'] || wms['bbox'] || false;
+    if(bbox) {
+      var bounds = new OpenLayers.Bounds.fromString(bbox).transform(new OpenLayers.Projection('EPSG:4326'), editor.map.options.projection);
+      options.maxExtent = bounds;
+      options.singleTile = false;
+    }
+
+    if(offline && wms.openData) {
+      var couchURL = createCouchTileStore(_layer.name, _layer.title, wms.getMapUrl);
+      options.cacheURL = couchURL + '/GoogleMapsCompatible-${z}-${x}-${y}/tile';
+      options.sourceURL = 'http://localhost:8888/proxy/' + wms.getMapUrl;
+      options.url = couchURL + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile';
+      options.singleTile = false;
+    }
+    var layer = new gbi.Layers.WMS(options);
+    editor.addLayer(layer);
+  }
+
+  function searchWMS() {
+    $.get(wmsSearchURL, {
+        'languageCode': 'de',
+        'maxResults': 40,
+        'resultTarget': 'web',
+        'searchText': $('#wms_search_text').val()
+      }, null, 'json'
+    ).done(function(data) {
+      if(data && data['wms'] && data['wms']['srv'] && data['wms']['srv'].length > 0) {
+        wmsSearchResults = data['wms']['srv'];
+        $('#wmsSearchResults tbody').empty();
+        $.each(wmsSearchResults, function(idx, wms) {
+          var container = $('<tr ></tr>');
+          var wmsServerTitle = $('<td rowspan="' + (wms.layer.length + 1) + '">' + wms['title'] + '</td>');
+          if(wms['abstract']) {
+            var tooltip = $('<span class="tooltip_element icon-info-sign" title="' + wms['abstract'] + '"></span>');
+            tooltip.tooltip();
+            wmsServerTitle.append(tooltip);
+          }
+          container.append(wmsServerTitle);
+          $('#wmsSearchResults tbody').append(container);
+          var wmsLayerList = $('<tr></tr>');
+          $.each(wms['layer'], function(l_idx, layer) {
+            var layerContainer = $('<tr></tr>');
+            var layerTitle = $('<td>' + layer['title'] + '</td>');
+            if(layer['abstract']) {
+              var tooltip = $('<span class="tooltip_element icon-info-sign" title="' + layer['abstract'] + '"></span>');
+              tooltip.tooltip();
+              layerTitle.append(tooltip);
+            }
+            layerContainer.append(layerTitle);
+            var addLayerBtn = $('<button class="btn btn-small" data-wms_id="' + idx + '" data-layer_id="' + l_idx + '"><i class="icon-plus"></i></button>');
+            addLayerBtn.click(function() {
+              addWMSSearchResultLayer($(this).data('wms_id'), $(this).data('layer_id'));
+              $(this)
+                .attr('disabled', 'disabled')
+                .find('i')
+                  .removeClass('icon-plus')
+                  .addClass('icon-ok')
+            });
+            layerContainer.append($('<td></td>').append(addLayerBtn));
+            $('#wmsSearchResults tbody').append(layerContainer);
+          });
+        });
+        $('#wmsSearchResultsModal').modal('show')
+      } else {
+        wmsSearchResults = [];
+        $('#noWMSSearchResults').removeClass('hide').show().fadeOut(3000)
+      }
+    })
+  .fail(function(data) {
+    wmsSearchResults = [];
+    $('#noWMSSearchResults').removeClass('hide').show().fadeOut(3000)
+  });
+  };
+
+  $('#start_wms_search_btn').click(searchWMS)
 });
 
 function displayArea(area) {

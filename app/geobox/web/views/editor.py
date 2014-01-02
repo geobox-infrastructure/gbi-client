@@ -67,7 +67,8 @@ def editor():
         preview_features=preview_features,
         wfs_search_sources=wfs_search_sources,
         wfs_search_form=wfs_search_form,
-        with_server=True,
+        with_server=False,
+        wms_search_url=current_app.config.geobox_state.config.get('web', 'wms_search_url')
     )
 
 @editor_view.route('/editor/export/<export_type>', methods=['POST'])
