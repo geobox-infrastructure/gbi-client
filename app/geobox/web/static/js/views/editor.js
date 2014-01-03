@@ -905,7 +905,7 @@ function loadCouchDBs() {
                 }
                 if(offline && options.sourceType == 'wms') {
                   options['params'] = {
-                    layers: [metadata.name],
+                    layers: metadata.source.layers,
                     format: 'image/png',
                     transparent: true
                   }
