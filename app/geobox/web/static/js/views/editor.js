@@ -782,10 +782,10 @@ $(document).ready(function() {
     }
     var layer = new layerConstructor(options);
     editor.addLayer(layer);
+    editor.widgets.layermanager.render('collapseRaster')
     if(offline) {
       editor.widgets.seeding.render();
     }
-    $('#layermanager #collapseRaster').collapse('show')
   }
 
   function searchWMS() {
