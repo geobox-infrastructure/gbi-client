@@ -144,7 +144,7 @@ gbi.widgets.LayerManager.prototype = {
 
             self.element.find('#up_' + layer.id).click(function() {
                 if(self.layerManager.up(layer)) {
-                self.render(self.findAccordion(this));
+                    self.render(self.findAccordion(this));
                 }
                 return false;
             });
@@ -366,7 +366,7 @@ gbi.widgets.LayerManager.templates = {
                             </label>\
                             <% if(allowSeeding && rasterLayers[i].isSeedable()) { %>\
                                 <label for="seed_<%=rasterLayers[i].id%>">\
-                                    <input type="checkbox" id="seed_<%=rasterLayers[i].id%>" />\
+                                    <input type="checkbox" id="seed_<%=rasterLayers[i].id%>" <% if(rasterLayers[i].isSeeding()) { %>checked="checked"<% } %> />\
                                     ' + layerManagerLabel.seeding + '\
                                 </label>\
                             <% } %>\
