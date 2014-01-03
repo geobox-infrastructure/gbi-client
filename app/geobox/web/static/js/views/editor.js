@@ -748,9 +748,8 @@ $(document).ready(function() {
     return couchdbURL;
   }
 
-  function addWMSSearchResultLayer(wms_id, layer_id) {
-    var wms = wmsSearchResults[wms_id];
-    var _layer = wms['layer'][layer_id];
+  function addWMSSearchResultLayer(wms, _layer, temporary) {
+    temporary = temporary ? true : false;
     var options = {
       name: _layer.title,
       url: wms.getMapUrl,
@@ -769,8 +768,7 @@ $(document).ready(function() {
     }
 
     var layerConstructor = gbi.Layers.WMS;
-
-    if(offline && wms.openData) {
+    if(!temporary) {
       options.data = prepareSeedableWMSMetadata(_layer.name, _layer.title, wms.getMapUrl, bbox);
       var couchURL = createCouchTileStore(options.data);
       options.sourceURL = 'http://localhost:8888/proxy/' + wms.getMapUrl;
@@ -800,7 +798,7 @@ $(document).ready(function() {
         wmsSearchResults = data['wms']['srv'];
         $('#wmsSearchResults tbody').empty();
         $.each(wmsSearchResults, function(idx, wms) {
-          var container = $('<tr ></tr>');
+          var container = $('<tr></tr>');
           var wmsServerTitle = $('<td rowspan="' + (wms.layer.length + 1) + '">' + wms['title'] + '</td>');
           if(wms['abstract']) {
             var tooltip = $('<span class="tooltip_element icon-info-sign" title="' + wms['abstract'] + '"></span>');
@@ -819,16 +817,33 @@ $(document).ready(function() {
               layerTitle.append(tooltip);
             }
             layerContainer.append(layerTitle);
-            var addLayerBtn = $('<button class="btn btn-small" data-wms_id="' + idx + '" data-layer_id="' + l_idx + '"><i class="icon-plus"></i></button>');
-            addLayerBtn.click(function() {
-              addWMSSearchResultLayer($(this).data('wms_id'), $(this).data('layer_id'));
-              $(this)
+            var addLayerTemporaryBtn = $('<button class="btn btn-small" title="' + OpenLayers.i18n('Add temporary') + '"><i class="icon-time"></i></button>');
+            addLayerTemporaryBtn.click(function() {
+              addWMSSearchResultLayer(wms, layer, true);
+              $(this).parent().find('button')
                 .attr('disabled', 'disabled')
-                .find('i')
-                  .removeClass('icon-plus')
+                .find('i.icon-time')
+                  .removeClass('icon-time')
                   .addClass('icon-ok')
             });
-            layerContainer.append($('<td></td>').append(addLayerBtn));
+            if(offline && wms.openData) {
+              var buttonContainer = $('<div class="btn-group"></div>');
+              buttonContainer.append(addLayerTemporaryBtn);
+              var addLayerPermanentBtn = $('<button class="btn btn-small" title="' + OpenLayers.i18n('Add permanent') + '"><i class="icon-plus"></i></button>');
+              addLayerPermanentBtn.click(function() {
+                addWMSSearchResultLayer(wms, layer);
+                $(this).parent().find('button')
+                  .attr('disabled', 'disabled')
+                  .find('i.icon-plus')
+                    .removeClass('icon-plus')
+                    .addClass('icon-ok')
+              });
+              buttonContainer.append(addLayerPermanentBtn)
+              layerContainer.append($('<td></td>').append(buttonContainer));
+            } else {
+              layerContainer.append($('<td></td>').append(addLayerTemporaryBtn));
+            }
+
             $('#wmsSearchResults tbody').append(layerContainer);
           });
         });
