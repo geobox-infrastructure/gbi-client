@@ -136,7 +136,17 @@ gbi.widgets.Seeding.prototype = {
 
         //var sourceURL = Seed.CORSProxyURL + self.seededLayer.data.source.url;
         var sourceURL = self.seededLayer.data.source.url;
-        var seedingSource = new Seed.Source.WMTSSource(sourceURL);
+        var seedingSource = false;
+        if(self.seededLayer.data.source.type == 'wms') {
+            var wmsSourceURL = sourceURL;
+            wmsSourceURL += 'LAYERS=' + self.seededLayer.data.source.layers.join(',');
+            wmsSourceURL += '&FORMAT=' + self.seededLayer.data.source.format;
+            wmsSourceURL += '&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&SRS=EPSG:3857';
+            wmsSourceURL += '&BBOX={BBOX}&WIDTH=256&HEIGHT=256'
+            seedingSource = new Seed.Source.WMSSource(wmsSourceURL);
+        } else {
+            seedingSource = new Seed.Source.WMTSSource(sourceURL);
+        }
 
         //var cacheURL = Seed.CORSProxyURL + self.seededLayer.options.url;
         var cacheURL = self.seededLayer.options.url;
