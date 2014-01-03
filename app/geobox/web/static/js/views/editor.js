@@ -699,7 +699,7 @@ $(document).ready(function() {
 
   var wmsSearchResults = []
 
-  function createCouchTileStore(layer, title, url) {
+  function prepareSeedableWMSMetadata(layer, title, url, bbox) {
     var name = 'external_wms_tiles_' + layer;
     var metadata = {
       'name': name,
@@ -715,7 +715,15 @@ $(document).ready(function() {
         'format': 'image/png'
       }
     };
-    var couchdbURL = OpenlayersCouchURL + name;
+    if(bbox) {
+      metadata.source.bbox = bbox;
+    }
+    return metadata;
+  }
+
+  function createCouchTileStore(layer, metadata) {
+
+    var couchdbURL = OpenlayersCouchURL + metadata.name;
 
     $.ajax({
       url: couchdbURL,
@@ -763,7 +771,8 @@ $(document).ready(function() {
     var layerConstructor = gbi.Layers.WMS;
 
     if(offline && wms.openData) {
-      var couchURL = createCouchTileStore(_layer.name, _layer.title, wms.getMapUrl);
+      options.data = prepareSeedableWMSMetadata(_layer.name, _layer.title, wms.getMapUrl, bbox);
+      var couchURL = createCouchTileStore(options.data);
       options.sourceURL = 'http://localhost:8888/proxy/' + wms.getMapUrl;
       options.url = couchURL + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile';
       options.singleTile = false;
