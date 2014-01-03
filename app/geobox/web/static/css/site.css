@@ -388,6 +388,10 @@ hr#save_dividing_line {
     position: relative;
 }
 
+#wmsSearchContainer {
+    margin-top: 10px;
+}
+
 #wmsSearchResultsContainer {
     height: 300px;
     overflow: auto;
