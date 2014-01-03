@@ -44,7 +44,7 @@ gbi.widgets.Seeding.prototype = {
     CLASS_NAME: 'gbi.widgets.Seeding',
     render: function() {
         var self = this;
-        var wmtsLayer = false;
+        var smsLayer = false;
 
         self.element
             .empty()
@@ -53,15 +53,15 @@ gbi.widgets.Seeding.prototype = {
             .css('transition', 'width 0s ease 0s');
 
         $.each(self.editor.layerManager.rasterLayers, function(idx, layer) {
-            if(layer instanceof gbi.Layers.WMTS) {
-                wmtsLayer = true;
+            if(layer instanceof gbi.Layers.SMS) {
+                smsLayer = true;
                 var option = $('<option value="' + layer.options.title + '">' + layer.options.title + '</option>');
                 self.element.find('#seeding-layer')
                     .append(option);
             }
         });
 
-        if(wmtsLayer) {
+        if(smsLayer) {
             self.element.find('#no-seeding-layer')
                 .hide();
             self.element.find('#seeding-layer')
