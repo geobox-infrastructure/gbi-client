@@ -721,7 +721,7 @@ $(document).ready(function() {
     return metadata;
   }
 
-  function createCouchTileStore(layer, metadata) {
+  function createCouchTileStore(metadata) {
 
     var couchdbURL = OpenlayersCouchURL + metadata.name;
 
