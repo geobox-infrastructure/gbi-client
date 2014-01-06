@@ -771,7 +771,7 @@ $(document).ready(function() {
     if(!temporary) {
       options.data = prepareSeedableWMSMetadata(_layer.name, _layer.title, wms.getMapUrl, bbox);
       var couchURL = createCouchTileStore(options.data);
-      options.sourceURL = 'http://localhost:8888/proxy/' + wms.getMapUrl;
+      options.sourceURL = wms.getMapUrl;
       options.url = couchURL + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile';
       options.singleTile = false;
       options.sourceType = 'wms';
