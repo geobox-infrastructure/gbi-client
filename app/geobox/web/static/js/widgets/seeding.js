@@ -148,7 +148,6 @@ gbi.widgets.Seeding.prototype = {
             seedingSource = new Seed.Source.WMTSSource(sourceURL);
         }
 
-        //var cacheURL = Seed.CORSProxyURL + self.seededLayer.options.url;
         var cacheURL = self.seededLayer.options.url;
         var seedingCache = new Seed.Cache.CouchDB(cacheURL);
 
