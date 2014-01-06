@@ -802,7 +802,10 @@ $(document).ready(function() {
           var wmsServerTitle = $('<td rowspan="' + (wms.layer.length + 1) + '">' + wms['title'] + '</td>');
           if(wms['abstract']) {
             var tooltip = $('<span class="tooltip_element icon-info-sign" title="' + wms['abstract'] + '"></span>');
-            tooltip.tooltip();
+            tooltip.tooltip({
+              delay: { show: 500, hide: 100 },
+              placement: 'right'
+            });
             wmsServerTitle.append(tooltip);
           }
           container.append(wmsServerTitle);
@@ -813,7 +816,10 @@ $(document).ready(function() {
             var layerTitle = $('<td>' + layer['title'] + '</td>');
             if(layer['abstract']) {
               var tooltip = $('<span class="tooltip_element icon-info-sign" title="' + layer['abstract'] + '"></span>');
-              tooltip.tooltip();
+              tooltip.tooltip({
+                delay: { show: 500, hide: 100 },
+                placement: 'right'
+              });
               layerTitle.append(tooltip);
             }
             layerContainer.append(layerTitle);
