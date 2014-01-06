@@ -817,7 +817,7 @@ $(document).ready(function() {
               layerTitle.append(tooltip);
             }
             layerContainer.append(layerTitle);
-            var addLayerTemporaryBtn = $('<button class="btn btn-small" title="' + OpenLayers.i18n('Add temporary') + '"><i class="icon-time"></i></button>');
+            var addLayerTemporaryBtn = $('<button class="btn btn-small" title="' + OpenLayers.i18n('Add temporary') + '"><i class="icon-plus"></i></button>');
             addLayerTemporaryBtn.click(function() {
               addWMSSearchResultLayer(wms, layer, true);
               $(this).parent().find('button')
@@ -826,10 +826,13 @@ $(document).ready(function() {
                   .removeClass('icon-time')
                   .addClass('icon-ok')
             });
-            if(offline && wms.openData) {
+            if(offline) {
               var buttonContainer = $('<div class="btn-group"></div>');
               buttonContainer.append(addLayerTemporaryBtn);
-              var addLayerPermanentBtn = $('<button class="btn btn-small" title="' + OpenLayers.i18n('Add permanent') + '"><i class="icon-plus"></i></button>');
+              var addLayerPermanentBtn = $('<button class="btn btn-small" title="' + OpenLayers.i18n('Add permanent') + '"><i class="icon-file"></i></button>');
+              if(!wms.openData) {
+                addLayerPermanentBtn.attr('disabled', 'disabled');
+              }
               addLayerPermanentBtn.click(function() {
                 addWMSSearchResultLayer(wms, layer);
                 $(this).parent().find('button')
