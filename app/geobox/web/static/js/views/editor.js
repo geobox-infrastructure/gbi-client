@@ -23,8 +23,34 @@ $(document).ready(function() {
     'featureunselected': [disableAttributeEdit]
   };
 
-  var editor = initEditor();
-  var activeLayer = editor.layerManager.active();
+  var activeLayer;
+
+  function selectMultipleFeaturesWrapper (func) {
+    activeLayer.unregisterEvent('featureselected', editor, updateArea);
+    activeLayer.unregisterEvent('featureselected', editor, storeSelectedFeatures);
+    activeLayer.unregisterEvent('featureselected', editor, enableAttributeEdit);
+    activeLayer.unregisterEvent('featureselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureSelected);
+
+    func();
+
+    activeLayer.registerEvent('featureselected', editor, updateArea)
+    activeLayer.registerEvent('featureselected', editor, storeSelectedFeatures)
+    activeLayer.registerEvent('featureselected', editor, enableAttributeEdit)
+    activeLayer.registerEvent('featureselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureSelected);
+    var feature = activeLayer.selectedFeatures()[0]
+    if(feature !== undefined) {
+      storeSelectedFeatures({feature: feature})
+      enableAttributeEdit({feature: feature})
+    }
+    updateArea()
+    $.each(activeLayer.selectedFeatures(), function(idx, feature) {
+      editor.widgets.attributeEditor.handleFeatureSelected({feature: feature}, false);
+    });
+    editor.widgets.attributeEditor.render();
+  }
+
+  var editor = initEditor(selectMultipleFeaturesWrapper);
+  activeLayer = editor.layerManager.active();
 
   var resizeTab = function() {
     var element = $('#editor-tabs');
@@ -177,29 +203,12 @@ $(document).ready(function() {
       return false;
     }
     if(activeLayer instanceof gbi.Layers.SaveableVector) {
-      activeLayer.unregisterEvent('featureselected', editor, updateArea);
-      activeLayer.unregisterEvent('featureselected', editor, storeSelectedFeatures);
-      activeLayer.unregisterEvent('featureselected', editor, enableAttributeEdit);
-      activeLayer.unregisterEvent('featureselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureSelected);
-
-      activeLayer.selectAllFeatures();
-
-      activeLayer.registerEvent('featureselected', editor, updateArea)
-      activeLayer.registerEvent('featureselected', editor, storeSelectedFeatures)
-      activeLayer.registerEvent('featureselected', editor, enableAttributeEdit)
-      activeLayer.registerEvent('featureselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureSelected);
-      var feature = activeLayer.selectedFeatures()[0]
-      storeSelectedFeatures({feature: feature})
-      storeSelectedFeatures({feature: feature})
-      updateArea()
-      $.each(activeLayer.selectedFeatures(), function(idx, feature) {
-        editor.widgets.attributeEditor.handleFeatureSelected({feature: feature}, false);
-      });
-      editor.widgets.attributeEditor.render();
+      selectMultipleFeaturesWrapper(function() {
+        activeLayer.selectAllFeatures();
+      })
     }
     return false;
   });
-
 
   // activate / deactivate attribute edit mode block
   $('#activate_attribute_edit_mode').click(function() { activateEditMode(); })
@@ -973,7 +982,7 @@ function loadCouchDBs() {
 }
 
 
-function initEditor() {
+function initEditor(selectMultipleFeaturesWrapper) {
   var layers = loadCouchDBs();
   var couchLayers = layers[0];
   var raster_sources = layers[1];
@@ -1029,7 +1038,8 @@ function initEditor() {
 
   var layermanager = new gbi.widgets.LayerManager(editor, {
     element: 'layermanager',
-    allowSeeding: offline
+    allowSeeding: offline,
+    selectMultipleFeaturesWrapper: selectMultipleFeaturesWrapper
   });
 
   editor.widgets = {}
