@@ -177,7 +177,25 @@ $(document).ready(function() {
       return false;
     }
     if(activeLayer instanceof gbi.Layers.SaveableVector) {
+      activeLayer.unregisterEvent('featureselected', editor, updateArea);
+      activeLayer.unregisterEvent('featureselected', editor, storeSelectedFeatures);
+      activeLayer.unregisterEvent('featureselected', editor, enableAttributeEdit);
+      activeLayer.unregisterEvent('featureselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureSelected);
+
       activeLayer.selectAllFeatures();
+
+      activeLayer.registerEvent('featureselected', editor, updateArea)
+      activeLayer.registerEvent('featureselected', editor, storeSelectedFeatures)
+      activeLayer.registerEvent('featureselected', editor, enableAttributeEdit)
+      activeLayer.registerEvent('featureselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureSelected);
+      var feature = activeLayer.selectedFeatures()[0]
+      storeSelectedFeatures({feature: feature})
+      storeSelectedFeatures({feature: feature})
+      updateArea()
+      $.each(activeLayer.selectedFeatures(), function(idx, feature) {
+        editor.widgets.attributeEditor.handleFeatureSelected({feature: feature}, false);
+      });
+      editor.widgets.attributeEditor.render();
     }
     return false;
   });
