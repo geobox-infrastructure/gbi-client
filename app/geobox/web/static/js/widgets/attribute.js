@@ -74,22 +74,7 @@ gbi.widgets.AttributeEditor.prototype = {
             layers = self.layerManager.vectorLayers;
         }
         $.each(layers, function(idx, layer) {
-            layer.registerEvent('featureselected', self, function(f) {
-                self.jsonSchema = layer.jsonSchema || this.options.jsonSchema || false;
-                if(self.invalidFeatures) {
-                    var id = self._isInvalidFeature(f.feature);
-                    if(id != -1) {
-                        self.selectedInvalidFeature = self.invalidFeatures[id];
-                    } else if (f.feature.layer.gbiLayer.validateFeatureAttributes(f.feature) === false) {
-                        self.selectedInvalidFeature = f;
-                    }
-                }
-                if($.inArray(f.feature, self.selectedFeatures) == -1) {
-                    self.selectedFeatures.push(f.feature);
-                }
-                self.render();
-                $('#attributeTab').tab('show');
-            });
+            layer.registerEvent('featureselected', self, self.handleFeatureSelected);
             layer.registerEvent('featureunselected', self, function(f) {
                 if(self.selectedInvalidFeature && self.selectedInvalidFeature.feature.id == f.feature.id) {
                     self.selectedInvalidFeature = false;
@@ -101,6 +86,26 @@ gbi.widgets.AttributeEditor.prototype = {
                 }
             });
         });
+    },
+    handleFeatureSelected: function(f, render) {
+        var self = this;
+        render = render === false ? false : true;
+        self.jsonSchema = layer.jsonSchema || this.options.jsonSchema || false;
+        if(self.invalidFeatures) {
+            var id = self._isInvalidFeature(f.feature);
+            if(id != -1) {
+                self.selectedInvalidFeature = self.invalidFeatures[id];
+            } else if (f.feature.layer.gbiLayer.validateFeatureAttributes(f.feature) === false) {
+                self.selectedInvalidFeature = f;
+            }
+        }
+        if($.inArray(f.feature, self.selectedFeatures) == -1) {
+            self.selectedFeatures.push(f.feature);
+        }
+        if(render) {
+            self.render();
+        }
+        $('#attributeTab').tab('show');
     },
     render: function() {
         var self = this;
