@@ -70,6 +70,7 @@
     {% else %}
       var offline = true;
     {% endif %}
+    var wmsSearchURL = '{{ wms_search_url }}';
    </script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/views/editor.js') }}"></script>
 {% endblock %}
@@ -94,7 +95,7 @@
   <div class="span4">
     <ul id="tabs" class="nav nav-tabs editor-nav-tabs">
       <li class="active">
-        <a href="#layermanager" data-toggle="tab">{{ _('map layer') }}</a>
+        <a href="#layermanager_tab" data-toggle="tab">{{ _('map layer') }}</a>
       </li>
       <li>
         <a id="layer-tab" href="#layer" data-toggle="tab">{{ _('look') }}</a>
@@ -134,7 +135,14 @@
     <div class="bs-docs-example">
       <div class="tab-content" id="editor-tabs">
         <!-- load layermanager widget -->
-        <div class="tab-pane fade in active" id="layermanager"></div>
+        <div class="tab-pane fade in active" id="layermanager_tab">
+          <div class="input-append" id="wmsSearchContainer">
+            <input class="span5" id="wms_search_text" name="new_vector_layer" type="text">
+            <button class="btn" id="start_wms_search_btn" type="button">{{ _('Search wms')}}</button>
+          </div>
+          <span id="noWMSSearchResults" class="alert alert-error hide">{{ _('No search results') }}</span>
+          <div id="layermanager"></div>
+        </div>
 
         <div class="tab-pane fade" id="layer">
           <h4>{{ _('Styling') }}</h4>
@@ -381,7 +389,23 @@
     </div>
     {% endif %}
 
-
+    <!-- modal for wms search results -->
+    <div id="wmsSearchResultsModal" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{_('WMS search results')}} </h3>
+      </div>
+      <div id="wmsSearchResultsContainer">
+        <table id="wmsSearchResults" class="table table-striped">
+          <thead>
+            <tr>
+              <th>{{ _('Server') }}</th>
+              <th>{{ _('Layer') }}</th>
+            </tr>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 

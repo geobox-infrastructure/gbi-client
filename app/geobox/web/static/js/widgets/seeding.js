@@ -44,7 +44,7 @@ gbi.widgets.Seeding.prototype = {
     CLASS_NAME: 'gbi.widgets.Seeding',
     render: function() {
         var self = this;
-        var wmtsLayer = false;
+        var smsLayer = false;
 
         self.element
             .empty()
@@ -53,21 +53,23 @@ gbi.widgets.Seeding.prototype = {
             .css('transition', 'width 0s ease 0s');
 
         $.each(self.editor.layerManager.rasterLayers, function(idx, layer) {
-            if(layer instanceof gbi.Layers.WMTS) {
-                wmtsLayer = true;
+            if(layer instanceof gbi.Layers.SMS) {
+                smsLayer = true;
                 var option = $('<option value="' + layer.options.title + '">' + layer.options.title + '</option>');
                 self.element.find('#seeding-layer')
                     .append(option);
             }
         });
 
-        if(wmtsLayer) {
+        if(smsLayer) {
             self.element.find('#no-seeding-layer')
                 .hide();
             self.element.find('#seeding-layer')
                 .change(function() {
                     var name = $(this).val();
                     var layer = self.editor.layerManager.layerByName(name);
+                    $('#seeding-start-level').empty();
+                    $('#seeding-end-level').empty();
                     for(var i = layer.data.levelMin; i <= layer.data.levelMax; i ++) {
                         var option = $('<option value=' + i + '>' + i + '</option>');
                         $('#seeding-start-level').append(option.clone());
@@ -134,9 +136,18 @@ gbi.widgets.Seeding.prototype = {
 
         //var sourceURL = Seed.CORSProxyURL + self.seededLayer.data.source.url;
         var sourceURL = self.seededLayer.data.source.url;
-        var seedingSource = new Seed.Source.WMTSSource(sourceURL);
+        var seedingSource = false;
+        if(self.seededLayer.data.source.type == 'wms') {
+            var wmsSourceURL = sourceURL;
+            wmsSourceURL += 'LAYERS=' + self.seededLayer.data.source.layers.join(',');
+            wmsSourceURL += '&FORMAT=' + self.seededLayer.data.source.format;
+            wmsSourceURL += '&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&SRS=EPSG:3857';
+            wmsSourceURL += '&BBOX={BBOX}&WIDTH=256&HEIGHT=256'
+            seedingSource = new Seed.Source.WMSSource(wmsSourceURL);
+        } else {
+            seedingSource = new Seed.Source.WMTSSource(sourceURL);
+        }
 
-        //var cacheURL = Seed.CORSProxyURL + self.seededLayer.options.url;
         var cacheURL = self.seededLayer.options.url;
         var seedingCache = new Seed.Cache.CouchDB(cacheURL);
 
