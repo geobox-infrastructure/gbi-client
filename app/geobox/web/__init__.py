@@ -69,10 +69,12 @@ def create_app(app_state):
             g.db.close()
 
     from .helper import css_alert_category, add_auth_to_url
+    import geobox.app
     app.jinja_env.globals.update(
         css_alert_category=css_alert_category,
         add_auth_to_url=add_auth_to_url,
         app_state=app_state,
+        geobox_client_version=geobox.app.version,
     )
 
     configure_i18n(app, app_state.locale())

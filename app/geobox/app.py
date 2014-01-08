@@ -19,6 +19,8 @@ import logging
 import threading
 import webbrowser
 
+version = '__dev__'
+
 def app_server_thread(app_state):
     """Webserver background thread"""
     from geobox.web import create_app

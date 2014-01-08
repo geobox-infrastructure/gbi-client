@@ -1,3 +1,4 @@
+import re
 import string
 import sys
 import tarfile
@@ -161,6 +162,12 @@ def build_app_command():
     if gbi_editor.exists():
         gbi_editor.rmtree()
     path('../gbi-editor/src').copytree(gbi_editor)
+
+    # insert version
+    app_content = path('../app/geobox/app.py').bytes()
+    app_content = re.sub(r"^version = '[^']*'", "version = '%s'" % config['version'], app_content)
+    path('../app/geobox/app.py').write_bytes(app_content)
+
     pyinstaller_spec_tpl = open(path('geobox.spec.tpl')).read()
     template = string.Template(pyinstaller_spec_tpl)
     pyinstaller_spec = path('geobox.spec')
