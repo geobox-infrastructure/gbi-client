@@ -9,6 +9,7 @@ gbi.widgets.AttributeEditor = function(editor, options) {
         allowNewAttributes: true,
         scrollHeight: 350
     };
+    this.editor = editor;
     this.layerManager = editor.layerManager;
     this.options = $.extend({}, defaults, options);
     this.element = $('#' + this.options.element);
@@ -76,12 +77,13 @@ gbi.widgets.AttributeEditor.prototype = {
         $.each(layers, function(idx, layer) {
             layer.registerEvent('featureselected', self, self.handleFeatureSelected);
             layer.registerEvent('featureunselected', self, self.handleFeatureUnselected);
-            layer.registerEvent('start_featuresunselecting', self, self.stopListeningFeaturesunselected);
-            layer.registerEvent('finished_featuresunselecting', self, self.continueListeningFeaturesunselected);
         });
     },
     handleFeatureSelected: function(f, render) {
         var self = this;
+        if(self.editor.bulkMode) {
+            return;
+        }
         render = render === false ? false : true;
 
         self.jsonSchema = layer.jsonSchema || this.options.jsonSchema || false;
@@ -103,6 +105,9 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     handleFeatureUnselected: function(f, render) {
         var self = this;
+        if(self.editor.bulkMode) {
+            return;
+        }
         render = render === false ? false : true;
 
         if(self.selectedInvalidFeature && self.selectedInvalidFeature.feature.id == f.feature.id) {
@@ -116,14 +121,8 @@ gbi.widgets.AttributeEditor.prototype = {
             }
         }
     },
-    stopListeningFeaturesunselected: function() {
-        self = this;
-        $.each(self.layerManager.vectorLayers, function(idx, layer) {
-            layer.unregisterEvent('featureunselected', self, self.handleFeatureUnselected);
-        });
-    },
-    continueListeningFeaturesunselected: function(layer) {
-        self = this;
+    updateLayerFeatures: function(layer) {
+        var self = this;
         $.each(layer.features, function(idx, feature) {
             var id = $.inArray(feature, self.selectedFeatures);
             if(id != -1) {
@@ -145,7 +144,6 @@ gbi.widgets.AttributeEditor.prototype = {
             attributes = self.jsonSchema ? activeLayer.schemaAttributes() : this.renderAttributes || activeLayer.featuresAttributes();
         }
         this.element.empty();
-
 
         if(self.invalidFeatures && self.invalidFeatures.length > 0) {
             self.renderInvalidFeatures(activeLayer);
@@ -296,7 +294,6 @@ gbi.widgets.AttributeEditor.prototype = {
                     scrollHeight: this.options.scrollHeight
                 }
             ));
-
 
             if(editable && this.options.allowNewAttributes) {
                 this.element.find('#attribute-container').append(tmpl(gbi.widgets.AttributeEditor.newAttributeTemplate));

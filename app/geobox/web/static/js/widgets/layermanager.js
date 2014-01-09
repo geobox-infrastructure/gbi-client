@@ -274,9 +274,7 @@ gbi.widgets.LayerManager.prototype = {
         var self = this;
         self.layerManager.active(layer);
         layer.visible(true);
-        self.options.selectMultipleFeaturesWrapper(function() {
-            layer.selectFeatures(layer.storedFeatures())
-        })
+        layer.selectFeatures(layer.storedFeatures())
         self.render(self.findAccordion($('#' + layer.id)));
     },
     createLayer: function(title) {

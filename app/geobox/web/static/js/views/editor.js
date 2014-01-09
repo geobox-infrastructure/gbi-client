@@ -21,62 +21,39 @@ $(document).ready(function() {
   var olLayerEvents = {
     'featureselected': [storeSelectedFeatures, enableAttributeEdit],
     'featureunselected': [disableAttributeEdit],
-    'start_featuresunselecting': [disableUnselectFeatureEvents],
-    'finished_featuresunselecting': [enableUnselectFeatureEvents]
+    'start_bulk': [enableBulkMode],
+    'end_bulk': [disableBulkMode]
   };
 
-  var activeLayer;
+  var editor = initEditor();
+  var activeLayer = editor.layerManager.active();
 
-  function disableUnselectFeatureEvents() {
-    activeLayer.unregisterEvent('featureunselected', editor, disableAttributeEdit);
-    activeLayer.unregisterEvent('featureunselected', editor, updateArea);
-    activeLayer.unregisterEvent('featureunselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureUnselected)
+  function enableBulkMode() {
+    editor.bulkMode = true;
   }
 
-  function enableUnselectFeatureEvents() {
-    activeLayer.registerEvent('featureunselected', editor, disableAttributeEdit);
-    activeLayer.registerEvent('featureunselected', editor, updateArea);
-    activeLayer.registerEvent('featureunselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureUnselected)
-    disableAttributeEdit();
+  function disableBulkMode(layer) {
+    editor.bulkMode = false;
+    postBulkActions(layer)
+  }
+
+  function postBulkActions(layer) {
+    if(layer.selectedFeatures.length > 0) {
+      var feature = activeLayer.selectedFeatures()[0]
+      if(feature !== undefined) {
+        storeSelectedFeatures({feature: feature})
+      }
+      $.each(layer.selectedFeatures, function(idx, feature) {
+        editor.widgets.attributeEditor.handleFeatureSelected({feature: feature}, false);
+      });
+      enableAttributeEdit({feature: feature})
+    } else  {
+      disableAttributeEdit();
+      editor.widgets.attributeEditor.updateLayerFeatures(layer)
+    }
     updateArea();
     editor.widgets.attributeEditor.render();
   }
-
-  function selectMultipleFeaturesWrapper(func) {
-    activeLayer.unregisterEvent('featureselected', editor, updateArea);
-    activeLayer.unregisterEvent('featureselected', editor, storeSelectedFeatures);
-    activeLayer.unregisterEvent('featureselected', editor, enableAttributeEdit);
-    activeLayer.unregisterEvent('featureselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureSelected);
-
-    func();
-
-    activeLayer.registerEvent('featureselected', editor, updateArea)
-    activeLayer.registerEvent('featureselected', editor, storeSelectedFeatures)
-    activeLayer.registerEvent('featureselected', editor, enableAttributeEdit)
-    activeLayer.registerEvent('featureselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureSelected);
-
-    var feature = activeLayer.selectedFeatures()[0]
-    if(feature !== undefined) {
-      storeSelectedFeatures({feature: feature})
-      enableAttributeEdit({feature: feature})
-    }
-    updateArea()
-    $.each(activeLayer.selectedFeatures(), function(idx, feature) {
-      editor.widgets.attributeEditor.handleFeatureSelected({feature: feature}, false);
-    });
-    editor.widgets.attributeEditor.render();
-  }
-
-  function unselectMultipleFeaturesWrapper(func) {
-    disableUnselectFeatureEvents();
-
-    func();
-
-    enableUnselectFeatureEvents();
-  }
-
-  var editor = initEditor(selectMultipleFeaturesWrapper);
-  activeLayer = editor.layerManager.active();
 
   var resizeTab = function() {
     var element = $('#editor-tabs');
@@ -173,14 +150,7 @@ $(document).ready(function() {
         if (activeLayer && toolbar.select && toolbar.select.olControl) {
           if(tab == '#edit') {
             var selectedFeatures = activeLayer.olLayer.selectedFeatures.slice();
-            // select features with toolbar.select for unselecting
-            $.each(selectedFeatures, function(idx, feature) {
-              f_idx = $.inArray(feature, activeLayer.olLayer.selectedFeatures)
-              if(f_idx != -1) {
-                activeLayer.olLayer.selectedFeatures.splice(f_idx, 1);
-                toolbar.select.olControl.select(feature);
-              }
-            });
+            toolbar.select.selectFeatures(selectedFeatures);
           }
         }
         if (toolbar.select && toolbar.select.olControl && tab == '#edit') {
@@ -228,10 +198,14 @@ $(document).ready(function() {
     if (!activeLayer) {
       return false;
     }
-    if(activeLayer instanceof gbi.Layers.SaveableVector) {
-      selectMultipleFeaturesWrapper(function() {
-        activeLayer.selectAllFeatures();
-      })
+    var activeToolbar = false;
+    $.each(editor.map.toolbars, function(idx, toolbar) {
+      if ($(toolbar.options.div).is(':visible')) {
+        activeToolbar = toolbar;
+      }
+    });
+    if(activeLayer instanceof gbi.Layers.SaveableVector && activeToolbar) {
+      activeToolbar.select.selectFeatures(activeLayer.features);
     }
     return false;
   });
@@ -254,7 +228,7 @@ $(document).ready(function() {
       editor.map.addControl(clickPopup);
       clickPopup.olControl.activate();
       var activeToolbar = false;
-      $.each(self.editor.map.toolbars, function(idx, toolbar) {
+      $.each(editor.map.toolbars, function(idx, toolbar) {
         if ($(toolbar.options.div).is(':visible')) {
           activeToolbar = toolbar;
         }
@@ -285,14 +259,8 @@ $(document).ready(function() {
       control.activate();
       if(control instanceof gbi.Controls.Select) {
         var selectedFeatures = activeLayer.selectedFeatures().slice();
-        unselectMultipleFeaturesWrapper(function() {
-          activeLayer.unSelectAllFeatures();
-        });
-        selectMultipleFeaturesWrapper(function() {
-          $.each(selectedFeatures, function(idx, feature) {
-            control.selectFeature(feature);
-          });
-        })
+        activeLayer.unSelectAllFeatures();
+        control.selectFeatures(selectedFeatures);
       }
     });
     $('#edit-toolbar-mode').removeClass('hide');
@@ -475,6 +443,9 @@ $(document).ready(function() {
   }
 
   function storeSelectedFeatures(f) {
+    if(editor.bulkMode) {
+      return;
+    }
     var layer = f.feature.layer.gbiLayer;
     var selectedFeatures = f.feature.layer.selectedFeatures;
     layer.storeFeatures(selectedFeatures);
@@ -542,6 +513,9 @@ $(document).ready(function() {
   };
 
   function updateArea() {
+    if(editor.bulkMode) {
+      return;
+    }
     var area = 0;
     $.each(editor.layerManager.vectorLayers, function(idx, layer) {
       $.each(layer.selectedFeatures(), function(idx, feature) {
@@ -556,12 +530,18 @@ $(document).ready(function() {
   };
 
   function enableAttributeEdit() {
+    if(editor.bulkMode) {
+      return;
+    }
     if(activeLayer.selectedFeatures().length > 0) {
       $('#activate_attribute_edit_mode').removeAttr('disabled');
     }
   }
 
   function disableAttributeEdit() {
+    if(editor.bulkMode) {
+      return;
+    }
     if(activeLayer.selectedFeatures().length < 1) {
       $('#activate_attribute_edit_mode').attr('disabled', 'disabled');
     }
@@ -1012,7 +992,7 @@ function loadCouchDBs() {
 }
 
 
-function initEditor(selectMultipleFeaturesWrapper) {
+function initEditor() {
   var layers = loadCouchDBs();
   var couchLayers = layers[0];
   var raster_sources = layers[1];
@@ -1032,6 +1012,7 @@ function initEditor(selectMultipleFeaturesWrapper) {
     imgPath: OpenlayersImageURL,
     imageBaseLayer: true
   });
+  editor.bulkMode = false;
 
   if ((typeof backgroundLayer !== 'undefined') && backgroundLayer) {
     editor.addLayer(backgroundLayer)
@@ -1068,8 +1049,7 @@ function initEditor(selectMultipleFeaturesWrapper) {
 
   var layermanager = new gbi.widgets.LayerManager(editor, {
     element: 'layermanager',
-    allowSeeding: offline,
-    selectMultipleFeaturesWrapper: selectMultipleFeaturesWrapper
+    allowSeeding: offline
   });
 
   editor.widgets = {}
