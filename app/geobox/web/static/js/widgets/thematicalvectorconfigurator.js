@@ -162,7 +162,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
         });
 
         if(this.activeLayer && this.activeLayer.featureStylingRule) {
-            element.find('#attribute').val(this.activeLayer.featureStylingRule.attribute);
+            element.find('#attribute').val(this.activeLayer.featureStylingRule.filterAttribute);
             this.mode = this.activeLayer.featureStylingRule.filterType;
             switch(this.mode) {
                 case 'exact':
@@ -230,18 +230,25 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
     },
     fillExactInputSelect: function(element, value) {
         var self = this;
+        var selectedOption = false
         element.empty();
-        element.append($('<option disabled selected>' + thematicalVectorConfiguratorLabel.selectValue + '</option>'));
         var optionValues = self.activeLayer ? self.activeLayer.attributeValues($('#attribute').val()) : [];
+        var baseOption = $('<option disabled>' + thematicalVectorConfiguratorLabel.selectValue + '</option>')
+        element.append(baseOption);
         // convert all optionValues to string, cause value is a string
         $.each(optionValues, function(idx, value) {
             optionValues[idx] = value.toString();
         })
-        $.each(optionValues, function(idx, value) {
-            element.append($('<option value="'+ value+'">'+value+'</option>'));
+        $.each(optionValues, function(idx, _value) {
+            var optionElement = $('<option value="'+ _value+'">'+_value+'</option>')
+            if(value == _value) {
+                optionElement.attr('selected', 'selected');
+                selectedOption = true;
+            }
+            element.append(optionElement);
         });
-        if(value && $.inArray(value, optionValues) != -1) {
-            element.val(value);
+        if(!selectedOption) {
+            baseOption.attr('selected', 'selected')
         }
     },
     addInput: function(mode, filterOption) {
