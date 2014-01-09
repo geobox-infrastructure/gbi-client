@@ -25,7 +25,7 @@ $(document).ready(function() {
 
   var activeLayer;
 
-  function selectMultipleFeaturesWrapper (func) {
+  function selectMultipleFeaturesWrapper(func) {
     activeLayer.unregisterEvent('featureselected', editor, updateArea);
     activeLayer.unregisterEvent('featureselected', editor, storeSelectedFeatures);
     activeLayer.unregisterEvent('featureselected', editor, enableAttributeEdit);
@@ -37,6 +37,7 @@ $(document).ready(function() {
     activeLayer.registerEvent('featureselected', editor, storeSelectedFeatures)
     activeLayer.registerEvent('featureselected', editor, enableAttributeEdit)
     activeLayer.registerEvent('featureselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureSelected);
+
     var feature = activeLayer.selectedFeatures()[0]
     if(feature !== undefined) {
       storeSelectedFeatures({feature: feature})
@@ -46,6 +47,21 @@ $(document).ready(function() {
     $.each(activeLayer.selectedFeatures(), function(idx, feature) {
       editor.widgets.attributeEditor.handleFeatureSelected({feature: feature}, false);
     });
+    editor.widgets.attributeEditor.render();
+  }
+
+  function unselectMultipleFeaturesWrapper(func) {
+    activeLayer.unregisterEvent('featureunselected', editor, disableAttributeEdit);
+    activeLayer.unregisterEvent('featureunselected', editor, updateArea);
+    activeLayer.unregisterEvent('featureunselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureUnselected)
+
+    func();
+
+    activeLayer.registerEvent('featureunselected', editor, disableAttributeEdit);
+    activeLayer.registerEvent('featureunselected', editor, updateArea);
+    activeLayer.registerEvent('featureunselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureUnselected)
+    disableAttributeEdit();
+    updateArea();
     editor.widgets.attributeEditor.render();
   }
 
@@ -259,10 +275,14 @@ $(document).ready(function() {
       control.activate();
       if(control instanceof gbi.Controls.Select) {
         var selectedFeatures = activeLayer.selectedFeatures().slice();
-        activeLayer.unSelectAllFeatures();
-        $.each(selectedFeatures, function(idx, feature) {
-          control.selectFeature(feature);
+        unselectMultipleFeaturesWrapper(function() {
+          activeLayer.unSelectAllFeatures();
         });
+        selectMultipleFeaturesWrapper(function() {
+          $.each(selectedFeatures, function(idx, feature) {
+            control.selectFeature(feature);
+          });
+        })
       }
     });
     $('#edit-toolbar-mode').removeClass('hide');
