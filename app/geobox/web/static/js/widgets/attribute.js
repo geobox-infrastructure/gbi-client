@@ -75,21 +75,13 @@ gbi.widgets.AttributeEditor.prototype = {
         }
         $.each(layers, function(idx, layer) {
             layer.registerEvent('featureselected', self, self.handleFeatureSelected);
-            layer.registerEvent('featureunselected', self, function(f) {
-                if(self.selectedInvalidFeature && self.selectedInvalidFeature.feature.id == f.feature.id) {
-                    self.selectedInvalidFeature = false;
-                }
-                var idx = $.inArray(f.feature, self.selectedFeatures);
-                if(idx != -1) {
-                    self.selectedFeatures.splice(idx, 1);
-                    self.render();
-                }
-            });
+            layer.registerEvent('featureunselected', self, self.handleFeatureUnselected);
         });
     },
     handleFeatureSelected: function(f, render) {
         var self = this;
         render = render === false ? false : true;
+
         self.jsonSchema = layer.jsonSchema || this.options.jsonSchema || false;
         if(self.invalidFeatures) {
             var id = self._isInvalidFeature(f.feature);
@@ -106,6 +98,21 @@ gbi.widgets.AttributeEditor.prototype = {
             self.render();
         }
         $('#attributeTab').tab('show');
+    },
+    handleFeatureUnselected: function(f, render) {
+        var self = this;
+        render = render === false ? false : true;
+
+        if(self.selectedInvalidFeature && self.selectedInvalidFeature.feature.id == f.feature.id) {
+            self.selectedInvalidFeature = false;
+        }
+        var idx = $.inArray(f.feature, self.selectedFeatures);
+        if(idx != -1) {
+            self.selectedFeatures.splice(idx, 1);
+            if(render) {
+                self.render();
+            }
+        }
     },
     render: function() {
         var self = this;
