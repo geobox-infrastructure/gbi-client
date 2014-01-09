@@ -87,7 +87,7 @@ gbi.widgets.AttributeEditor.prototype = {
         }
         render = render === false ? false : true;
 
-        self.jsonSchema = layer.jsonSchema || this.options.jsonSchema || false;
+        self.jsonSchema = self.activeLayer.jsonSchema || self.jsonSchema || self.options.jsonSchema || false;
         if(self.invalidFeatures) {
             var id = self._isInvalidFeature(f.feature);
             if(id != -1) {
