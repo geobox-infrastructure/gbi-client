@@ -25,7 +25,9 @@ gbi.widgets.Filter.prototype = {
                 var attr = $('#filterAttr').val();
                 var value = $('#filterValue').val();
                 self.setFilter(attr, value);
-                $(layer).on('gbi.layer.vector.unstoredFeature', self.clearFields)
+                $(layer).on('gbi.layer.vector.unstoredFeature', function(event, layer) {
+                    self.clearFields(event, layer);
+                });
             });
         } else {
             $('#setFilter').attr('disabled', 'disabled');
