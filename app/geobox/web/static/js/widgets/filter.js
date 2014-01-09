@@ -37,6 +37,7 @@ gbi.widgets.Filter.prototype = {
         self.element.find('#filterValue').val(value);
     },
     clearFields: function(event, layer) {
+        var self = this;
         self.element.find('#filterAttr').val('');
         self.element.find('#filterValue').val('');
         delete layer._filterWidget;
