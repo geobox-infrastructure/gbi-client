@@ -13,7 +13,7 @@ gbi.widgets.Filter = function(editor, options) {
 };
 gbi.widgets.Filter.prototype = {
     render: function() {
-        self = this
+        var self = this
         self.element.empty().append(tmpl(gbi.widgets.Filter.template, {srs: self.options.srs}));
 
         var layer = self.editor.layerManager.active()
