@@ -20,10 +20,27 @@ $(document).ready(function() {
   };
   var olLayerEvents = {
     'featureselected': [storeSelectedFeatures, enableAttributeEdit],
-    'featureunselected': [disableAttributeEdit]
+    'featureunselected': [disableAttributeEdit],
+    'start_featuresunselecting': [disableUnselectFeatureEvents],
+    'finished_featuresunselecting': [enableUnselectFeatureEvents]
   };
 
   var activeLayer;
+
+  function disableUnselectFeatureEvents() {
+    activeLayer.unregisterEvent('featureunselected', editor, disableAttributeEdit);
+    activeLayer.unregisterEvent('featureunselected', editor, updateArea);
+    activeLayer.unregisterEvent('featureunselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureUnselected)
+  }
+
+  function enableUnselectFeatureEvents() {
+    activeLayer.registerEvent('featureunselected', editor, disableAttributeEdit);
+    activeLayer.registerEvent('featureunselected', editor, updateArea);
+    activeLayer.registerEvent('featureunselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureUnselected)
+    disableAttributeEdit();
+    updateArea();
+    editor.widgets.attributeEditor.render();
+  }
 
   function selectMultipleFeaturesWrapper(func) {
     activeLayer.unregisterEvent('featureselected', editor, updateArea);
@@ -51,18 +68,11 @@ $(document).ready(function() {
   }
 
   function unselectMultipleFeaturesWrapper(func) {
-    activeLayer.unregisterEvent('featureunselected', editor, disableAttributeEdit);
-    activeLayer.unregisterEvent('featureunselected', editor, updateArea);
-    activeLayer.unregisterEvent('featureunselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureUnselected)
+    disableUnselectFeatureEvents();
 
     func();
 
-    activeLayer.registerEvent('featureunselected', editor, disableAttributeEdit);
-    activeLayer.registerEvent('featureunselected', editor, updateArea);
-    activeLayer.registerEvent('featureunselected', editor.widgets.attributeEditor, editor.widgets.attributeEditor.handleFeatureUnselected)
-    disableAttributeEdit();
-    updateArea();
-    editor.widgets.attributeEditor.render();
+    enableUnselectFeatureEvents();
   }
 
   var editor = initEditor(selectMultipleFeaturesWrapper);

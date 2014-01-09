@@ -76,6 +76,8 @@ gbi.widgets.AttributeEditor.prototype = {
         $.each(layers, function(idx, layer) {
             layer.registerEvent('featureselected', self, self.handleFeatureSelected);
             layer.registerEvent('featureunselected', self, self.handleFeatureUnselected);
+            layer.registerEvent('start_featuresunselecting', self, self.stopListeningFeaturesunselected);
+            layer.registerEvent('finished_featuresunselecting', self, self.continueListeningFeaturesunselected);
         });
     },
     handleFeatureSelected: function(f, render) {
@@ -113,6 +115,26 @@ gbi.widgets.AttributeEditor.prototype = {
                 self.render();
             }
         }
+    },
+    stopListeningFeaturesunselected: function() {
+        self = this;
+        $.each(self.layerManager.vectorLayers, function(idx, layer) {
+            layer.unregisterEvent('featureunselected', self, self.handleFeatureUnselected);
+        });
+    },
+    continueListeningFeaturesunselected: function(layer) {
+        self = this;
+        $.each(layer.features, function(idx, feature) {
+            var id = $.inArray(feature, self.selectedFeatures);
+            if(id != -1) {
+                self.selectedFeatures.splice(id, 1);
+            }
+        });
+        $.each(layer.selectedFeatures, function(idx, feature) {
+            self.selectedFeatures.push(feature);
+        });
+        layer.gbiLayer.registerEvent('featureunselected', self, self.handleFeatureUnselected);
+        self.render()
     },
     render: function() {
         var self = this;
