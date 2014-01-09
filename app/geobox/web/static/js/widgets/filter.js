@@ -71,6 +71,7 @@ gbi.widgets.Filter.template = '\
             <input type="text" id="filterValue" class="input-small" />\
         </div>\
     </div>\
-    <button id="setFilter" class="btn btn-small">'+filterLabel.loadFilter+'</button>\
+    <button id="setFilter" class="btn btn-small" type="button">'+filterLabel.loadFilter+'</button>\
     </div>\
+</form>\
 ';
