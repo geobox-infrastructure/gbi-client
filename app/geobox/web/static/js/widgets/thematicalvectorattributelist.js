@@ -88,10 +88,11 @@ gbi.widgets.ThematicalVectorAttributeList.prototype = {
             element.append($('<div>' + thematicalVectorAttributeListLabels.noLayer + '</div>'));
             return;
         }
-        if(fullListAttributes.length == 0) {
+        if(!fullListAttributes || fullListAttributes.length == 0) {
             element.append($('<div>' + thematicalVectorAttributeListLabels.noAttribute + '</div>'));
             return;
         }
+
         element.append(tmpl(
             gbi.widgets.ThematicalVectorAttributeList.template, {
                 shortListAttributes: shortListAttributes,
