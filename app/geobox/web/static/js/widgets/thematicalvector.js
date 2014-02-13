@@ -25,9 +25,6 @@ gbi.widgets.ThematicalVector = function(editor, options) {
     self.activeLayer = self.editor.layerManager.active();
     self.active = false;
 
-    $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
-        self.activate(event, layer);
-    });
 
     $(gbi).on('gbi.widgets.thematicalVector.activate', function(event, layer) {
         self.activate(event, layer);
@@ -93,10 +90,7 @@ gbi.widgets.ThematicalVector.prototype = {
             self.active = $(this).prop('checked');
             if(self.activeLayer) {
                 if(self.active) {
-                    self.activeLayer.activateFeatureStylingRule();
-                    if(self.activeLayer.popupAttributes().length > 0) {
-                        self.activeLayer.activateHover();
-                    }
+                    self._activate();
                 } else {
                     self.activeLayer.deactivateFeatureStylingRule();
                     self.activeLayer.deactivateHover();
@@ -131,12 +125,21 @@ gbi.widgets.ThematicalVector.prototype = {
         if(self.activeLayer) {
             self.active = self.element.find('#thematical-map-active').prop('checked');
             if(self.activeLayer && self.active) {
-                self.activeLayer.activateFeatureStylingRule();
-                if(self.activeLayer.popupAttributes().length > 0) {
-                    self.activeLayer.activateHover();
-                }
+                self._activate();
             }
             self.render();
+        }
+    },
+    _activate: function() {
+        var self = this;
+        $.each(self.editor.layerManager.vectorLayers, function(idx, _layer) {
+            if(_layer.hasSelectedFeatures()) {
+                _layer.unSelectAllFeatures();
+            }
+        });
+        self.activeLayer.activateFeatureStylingRule();
+        if(self.activeLayer.popupAttributes().length > 0) {
+            self.activeLayer.activateHover();
         }
     }
 };
