@@ -6,6 +6,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'Finish edit first': "{{ _('Finish edit first') }}",
     'Add temporary': "{{ _('Add temporary') }}",
     'Add permanent': "{{ _('Add permanent') }}",
+    'temporary': "{{ _('Temporary') }}",
 
     // layermanager widget
     'addLayerSuccessful': "{{ _('add layer successful') }}",

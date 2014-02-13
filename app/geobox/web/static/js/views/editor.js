@@ -799,6 +799,9 @@ $(document).ready(function() {
         transparent: true
       }
     }
+    if(temporary) {
+      options.name = options.name + ' (' + OpenLayers.i18n('temporary') + ')';
+    }
     var bbox = _layer['bbox'] || wms['bbox'] || false;
     if(bbox) {
       var bounds = new OpenLayers.Bounds.fromString(bbox).transform(new OpenLayers.Projection('EPSG:4326'), editor.map.options.projection);
