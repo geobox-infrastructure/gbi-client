@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-02-13 14:43+0100\n"
-"PO-Revision-Date: 2014-02-13 14:43+0100\n"
+"POT-Creation-Date: 2014-02-13 15:40+0100\n"
+"PO-Revision-Date: 2014-02-13 15:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -820,6 +820,10 @@ msgstr "WMS Suchergebnisse"
 #: geobox/web/templates/editor.html:402
 msgid "Server"
 msgstr "Server"
+
+#: geobox/web/templates/editor.html:410
+msgid "close"
+msgstr "Schließen"
 
 #: geobox/web/templates/index.html:10
 msgid "Welcome to GeoBox"
