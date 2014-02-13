@@ -25,6 +25,7 @@ from geobox.lib.tabular import geojson_to_rows, csv_export, ods_export
 from geobox.web.forms import ExportVectorForm, WFSSearchForm, CreateCouchAppForm
 from geobox.web.helper import get_external_couch_url
 from .boxes import get_couch_box_db
+from ..utils import request_is_local
 
 editor_view = Blueprint('editor_view', __name__)
 
@@ -68,7 +69,8 @@ def editor():
         wfs_search_sources=wfs_search_sources,
         wfs_search_form=wfs_search_form,
         with_server=True,
-        wms_search_url=current_app.config.geobox_state.config.get('web', 'wms_search_url')
+        wms_search_url=current_app.config.geobox_state.config.get('web', 'wms_search_url'),
+        is_local=request_is_local()
     )
 
 @editor_view.route('/editor/export/<export_type>', methods=['POST'])
