@@ -101,8 +101,8 @@ def export_list(export_type='csv'):
 
 @editor_view.route('/editor-offline')
 def editor_offline():
-    return render_template('editor.html', with_server=False)
 
+    return render_template('editor.html', with_server=False, wms_cors_proxy_url=current_app.config.geobox_state.config.get('web', 'wms_cors_proxy_url'))
 
 @editor_view.route('/editor/couch_app/create', methods=["GET", "POST"])
 def create_couch_app():

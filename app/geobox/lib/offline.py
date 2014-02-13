@@ -72,7 +72,7 @@ def create_offline_editor(app, couchurl, dbname, appname):
     log.info('collecting files for couchapp')
     attachments = {}
     with app.test_request_context('/'):
-        editorhtml = render_template('editor.html', with_server=False, wms_search_url=app.config.geobox_state.config.get('web', 'wms_search_url'))
+        editorhtml = render_template('editor.html', with_server=False, wms_search_url=app.config.geobox_state.config.get('web', 'wms_search_url'), wms_cors_proxy_url=app.config.geobox_state.config.get('web', 'wms_cors_proxy_url'))
         editorhtml = editorhtml.replace('"/static/', '"')
         editorhtml = editorhtml.replace('"/translations.js', '"translations.js')
         attachments['index.html'] = {

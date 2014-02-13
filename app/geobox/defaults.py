@@ -40,7 +40,8 @@ except ImportError:
                 'available_srs': ['EPSG:4326', 'EPSG:3857', 'EPSG:31467', 'EPSG:25832'],
                 'context_document_url': 'http://gbiserver.omniscale.net/context',
                 'coverages_from_couchdb': 'flaechen-box',
-                'wms_search_url': 'http://www.gismobile.de/rlpmobile/mod_mapbender/search_proxy.php?'
+                'wms_search_url': 'http://www.gismobile.de/rlpmobile/mod_mapbender/search_proxy.php?',
+                'wms_cors_proxy_url': 'http://www.geoportal.rlp.de/cors_proxy/'
             },
             'mapproxy': {
                 'port': 8091,

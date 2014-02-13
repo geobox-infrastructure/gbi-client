@@ -808,9 +808,11 @@ $(document).ready(function() {
 
     var layerConstructor = gbi.Layers.WMS;
     if(!temporary) {
-      options.data = prepareSeedableWMSMetadata(_layer.name, _layer.title, wms.getMapUrl, bbox);
+
+      var sourceURL = wmsCorsProxyURL + wms.id + '?' + wms.getMapUrl.split('?')[1];
+      options.data = prepareSeedableWMSMetadata(_layer.name, _layer.title, sourceURL, bbox);
       var couchURL = createCouchTileStore(options.data);
-      options.sourceURL = wms.getMapUrl;
+      options.sourceURL = sourceURL;
       options.url = couchURL + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile';
       options.singleTile = false;
       options.sourceType = 'wms';

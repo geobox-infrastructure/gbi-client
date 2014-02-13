@@ -69,6 +69,7 @@
       var offline = false;
     {% else %}
       var offline = true;
+      var wmsCorsProxyURL = '{{ wms_cors_proxy_url }}';
     {% endif %}
     var wmsSearchURL = '{{ wms_search_url }}';
    </script>
