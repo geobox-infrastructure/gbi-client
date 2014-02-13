@@ -11,7 +11,8 @@ var thematicalVectorLegendLabel = {
 };
 var thematicalVectorLegendTitles = {
     'showFeatureList': OpenLayers.i18n('Show filtered features in list'),
-    'selectFeatures': OpenLayers.i18n('Select filtered features')
+    'selectFeatures': OpenLayers.i18n('Select filtered features'),
+    'unselectFeatures': OpenLayers.i18n('Unselect filtered features')
 }
 
 gbi.widgets = gbi.widgets || {};
@@ -109,6 +110,21 @@ gbi.widgets.ThematicalVectorLegend.prototype = {
                                 self._removeSelectControl(element);
                             }
                             self.options.filterWidget.setFilter(entry.attribute, entry.value);
+                            $('#' + self.editor.map.options.element).unbind('click', self.handleMapClick);
+                            $('#' + self.editor.map.options.element).one('click', {'self': self, 'element': element}, self.handleMapClick);
+                            element.find('.unselect_features_btn').addClass('hide');
+                            element.find('.select_features_btn').removeClass('hide');
+                            $(this).addClass('hide');
+                            $('#_' + entry.id + '_unselect_features').removeClass('hide');
+                        });
+                        $('#_' + entry.id + '_unselect_features').click(function() {
+                            if(self instanceof gbi.widgets.ThematicalVectorLegendChangeAttributes && self.selectControl) {
+                                self._removeSelectControl(element);
+                            }
+                            self.options.filterWidget.setFilter(null, null);
+                            $('#' + self.editor.map.options.element).unbind('click', self.handleMapClick);
+                            $(this).addClass('hide');
+                            $('#_' + entry.id + '_select_features').removeClass('hide');
                         });
                     }
                 });
@@ -120,6 +136,11 @@ gbi.widgets.ThematicalVectorLegend.prototype = {
                 self.thematicalVector.showSettings();
             });
         }
+    },
+    handleMapClick: function(e) {
+        e.data.element.find('.unselect_features_btn').addClass('hide');
+        e.data.element.find('.select_features_btn').removeClass('hide');
+        e.data.self.options.filterWidget.setFilter(null, null);
     },
     updateAreas: function(element) {
         var self = this;
@@ -174,8 +195,11 @@ gbi.widgets.ThematicalVectorLegend.template = '\
                                 <i class="icon-list"></i>\
                             </button>\
                             <% if(selectable) { %>\
-                                <button id="_<%=entries[key].id%>_select_features" class="btn btn-small" title="' + thematicalVectorLegendTitles.selectFeatures + '">\
+                                <button id="_<%=entries[key].id%>_select_features" class="btn btn-small select_features_btn" title="' + thematicalVectorLegendTitles.selectFeatures + '">\
                                     <i class="icon-check"></i>\
+                                </button>\
+                                <button id="_<%=entries[key].id%>_unselect_features" class="btn btn-small hide unselect_features_btn" title="' + thematicalVectorLegendTitles.unselectFeatures + '">\
+                                    <i class="icon-share"></i>\
                                 </button>\
                             <% } %>\
                         </td>\
@@ -212,6 +236,10 @@ $.extend(gbi.widgets.ThematicalVectorLegendChangeAttributes.prototype, {
                 var _this = $(this);
                 var id = _this.attr('id').split('_')[1]
                 self._removeSelectControl(element);
+                $('#' + self.editor.map.options.element).unbind('click', self.handleMapClick);
+                self.activeLayer.unSelectAllFeatures();
+                element.find('.unselect_features_btn').addClass('hide');
+                element.find('.select_features_btn').removeClass('hide');
                 self._addSelectControl(element, id, self.legend.attribute, _this.children().first().text())
             });
         }
