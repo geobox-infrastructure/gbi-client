@@ -210,6 +210,15 @@ $(document).ready(function() {
     return false;
   });
 
+  $('#unselect_all_features').click(function() {
+    $.each(editor.layerManager.vectorLayers, function(idx, layer) {
+      if(layer.hasSelectedFeatures()) {
+        layer.unSelectAllFeatures();
+      }
+    });
+    return false;
+  });
+
   // activate / deactivate attribute edit mode block
   $('#activate_attribute_edit_mode').click(function() { activateEditMode(); })
 
