@@ -50,7 +50,7 @@ def editor():
         couchbox = get_couch_box_db(box_name)
         couch_src = CouchFileBox('http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port')), couchbox)
         preview_features = couch_src.get_attachment(filename)
-        preview_layername = "%s (temp)" % (filename)
+        preview_layername = "%s (%s)" % (filename, _('Temporary'))
 
     base_layer = g.db.query(ExternalWMTSSource).filter_by(background_layer=True).first()
     base_layer.bbox = base_layer.bbox_from_view_coverage()
