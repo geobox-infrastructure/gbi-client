@@ -22,6 +22,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     'Zoom to layer extent': "{{ _('Zoom to layer extent') }}",
     'Remove layer': "{{ _('Remove layer') }}",
     'On the fly seeding': "{{ _('On the fly seeding') }}",
+    'Zoom to layer extent': "{{ _('Zoom to layer max extent') }}",
 
     // measure - widget
     'coords': "{{ _('coordinates') }}",

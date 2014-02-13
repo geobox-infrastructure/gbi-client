@@ -10,7 +10,8 @@ var layerManagerLabel = {
     'down': OpenLayers.i18n('Layer down'),
     'dataExtent': OpenLayers.i18n('Zoom to layer extent'),
     'remove': OpenLayers.i18n('Remove layer'),
-    'seeding': OpenLayers.i18n('On the fly seeding')
+    'seeding': OpenLayers.i18n('On the fly seeding'),
+    'zoomToLayerExtent': OpenLayers.i18n('Zoom to layer extent')
 }
 
 gbi.widgets = gbi.widgets || {};
@@ -155,19 +156,26 @@ gbi.widgets.LayerManager.prototype = {
                 return false;
             });
             self.element.find('#data_extent_' + layer.id).click(function(e) {
+                var clickedElement = this;
                 if(!layer.visible()) {
                     var loadEndCallback = function() {
                         layer.unregisterEvent('loadend', gbi, loadEndCallback);
-                        self.zoomToExtent(layer);
+                        self.zoomToExtent(layer, clickedElement);
                         self.changeLayer(layer, self.activateLayer);
                     }
                     layer.registerEvent('loadend', gbi, loadEndCallback);
                     layer.visible(true)
                 } else {
-                    self.zoomToExtent(layer);
+                    self.zoomToExtent(layer, clickedElement);
                     self.changeLayer(layer, self.activateLayer);
                 }
                 return false;
+            });
+            self.element.find('#layer_extent_' + layer.id).click(function(e) {
+                if(!layer.visible()) {
+                    layer.visible(true);
+                }
+                self.zoomToExtent(layer, this);
             });
             self.element.find('#remove_' + layer.id).click(function() {
                 var element = this;
@@ -231,16 +239,19 @@ gbi.widgets.LayerManager.prototype = {
 
     },
     findAccordion: function(element) {
-       var accordion = $(element).closest('.accordion-body ');
-       return $(accordion).attr('id');
+        if(element === undefined) {
+            return;
+        }
+        var accordion = $(element).closest('.accordion-body');
+        return $(accordion).attr('id');
     },
-    zoomToExtent: function(layer) {
+    zoomToExtent: function(layer, element) {
         var self = this;
-        var extent = layer.olLayer.getDataExtent();
+        var extent = layer.isVector ? layer.olLayer.getDataExtent() : layer.olLayer.maxExtent;
         if (extent) {
             self.editor.map.olMap.zoomToExtent(extent);
         }
-        self.render(self.findAccordion(this));
+        self.render(self.findAccordion(element));
     },
     // checks for changes in active layer and raise modal if changes present
     // after accept or discard modal or if no changes found
@@ -328,6 +339,9 @@ gbi.widgets.LayerManager.templates = {
                             <%=backgroundLayers[i].olLayer.name%> \
                         </label>\
                         <div class="btn-group pull-right"> \
+                            <button id="layer_extent_<%=backgroundLayers[i].id%>" title="' + layerManagerLabel.zoomToLayerExtent + '" class="btn btn-small"> \
+                                <i class="icon-search"></i>\
+                            </button> \
                             <button id="up_<%=backgroundLayers[i].id%>" class="btn btn-small" title="' + layerManagerLabel.up + '">\
                                 <i class="icon-chevron-up"></i>\
                             </button> \
@@ -352,6 +366,9 @@ gbi.widgets.LayerManager.templates = {
                 <% for(var i=0; i<rasterLayers.length; i++) { %>\
                     <li class="layerElement">\
                         <div class="btn-group pull-right"> \
+                            <button id="layer_extent_<%=rasterLayers[i].id%>" title="' + layerManagerLabel.zoomToLayerExtent + '" class="btn btn-small"> \
+                                <i class="icon-search"></i>\
+                            </button> \
                             <button id="up_<%=rasterLayers[i].id%>" class="btn btn-small" title="' + layerManagerLabel.up + '">\
                                 <i class="icon-chevron-up"></i>\
                             </button> \
