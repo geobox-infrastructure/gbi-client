@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-02-13 16:24+0100\n"
+"POT-Creation-Date: 2014-02-13 17:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,7 +210,7 @@ msgstr ""
 
 #: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:13
 #: geobox/web/templates/index.html:62
-#: geobox/web/templates/js/translation.js:137
+#: geobox/web/templates/js/translation.js:138
 msgid "settings"
 msgstr ""
 
@@ -354,7 +354,7 @@ msgid "Layer copy status"
 msgstr ""
 
 #: geobox/web/templates/create_couch_app_status.html:19
-#: geobox/web/templates/editor.html:403
+#: geobox/web/templates/editor.html:405
 msgid "Layer"
 msgstr ""
 
@@ -409,21 +409,21 @@ msgstr ""
 msgid "open export on external explorer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:82
+#: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:83
 #: geobox/web/templates/index.html:54 geobox/web/templates/index.html:56
 msgid "editor"
 msgstr ""
 
-#: geobox/web/templates/editor.html:83
+#: geobox/web/templates/editor.html:84
 msgid "tooltip - editor"
 msgstr ""
 
-#: geobox/web/templates/editor.html:88
+#: geobox/web/templates/editor.html:89
 msgid "Current changes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:90 geobox/web/templates/editor.html:233
-#: geobox/web/templates/editor.html:234
+#: geobox/web/templates/editor.html:91 geobox/web/templates/editor.html:235
+#: geobox/web/templates/editor.html:236
 #: geobox/web/templates/admin/external_unlock.html:20
 #: geobox/web/templates/admin/external_wms.html:51
 #: geobox/web/templates/admin/external_wmts.html:24
@@ -432,20 +432,20 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:91 geobox/web/templates/editor.html:183
-#: geobox/web/templates/editor.html:235
+#: geobox/web/templates/editor.html:92 geobox/web/templates/editor.html:185
+#: geobox/web/templates/editor.html:237
 msgid "discard"
 msgstr ""
 
-#: geobox/web/templates/editor.html:98
+#: geobox/web/templates/editor.html:99
 msgid "map layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:101
+#: geobox/web/templates/editor.html:102
 msgid "look"
 msgstr ""
 
-#: geobox/web/templates/editor.html:104
+#: geobox/web/templates/editor.html:105
 #: geobox/web/templates/admin/external_raster_list.html:135
 #: geobox/web/templates/admin/external_raster_list.html:137
 #: geobox/web/templates/projects/exports.html:29
@@ -453,342 +453,346 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:107 geobox/web/templates/editor.html:189
+#: geobox/web/templates/editor.html:108 geobox/web/templates/editor.html:191
 msgid "filter"
 msgstr ""
 
-#: geobox/web/templates/editor.html:110
+#: geobox/web/templates/editor.html:111
 msgid "measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:114 geobox/web/templates/editor.html:204
-#: geobox/web/templates/editor.html:214
+#: geobox/web/templates/editor.html:115 geobox/web/templates/editor.html:206
+#: geobox/web/templates/editor.html:216
 msgid "search"
 msgstr ""
 
-#: geobox/web/templates/editor.html:118 geobox/web/templates/editor.html:275
+#: geobox/web/templates/editor.html:119 geobox/web/templates/editor.html:277
 msgid "offline seeding"
 msgstr ""
 
-#: geobox/web/templates/editor.html:122 geobox/web/templates/editor.html:224
+#: geobox/web/templates/editor.html:123 geobox/web/templates/editor.html:226
 msgid "thematical map"
 msgstr ""
 
-#: geobox/web/templates/editor.html:125
+#: geobox/web/templates/editor.html:126
 msgid "documents"
 msgstr ""
 
-#: geobox/web/templates/editor.html:132
+#: geobox/web/templates/editor.html:133
 msgid "Selected area"
 msgstr ""
 
-#: geobox/web/templates/editor.html:132
+#: geobox/web/templates/editor.html:133
 msgid "Drawn area"
 msgstr ""
 
-#: geobox/web/templates/editor.html:141
+#: geobox/web/templates/editor.html:142
 msgid "Search wms"
 msgstr ""
 
-#: geobox/web/templates/editor.html:143
+#: geobox/web/templates/editor.html:144
 msgid "No search results"
 msgstr ""
 
-#: geobox/web/templates/editor.html:148
+#: geobox/web/templates/editor.html:149
 msgid "Styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:149
+#: geobox/web/templates/editor.html:150
 msgid "infotext - edit styling"
 msgstr ""
 
-#: geobox/web/templates/editor.html:154
+#: geobox/web/templates/editor.html:155
 msgid "Edit"
 msgstr ""
 
-#: geobox/web/templates/editor.html:155
+#: geobox/web/templates/editor.html:156
 msgid "infotext - edit controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:159
+#: geobox/web/templates/editor.html:160
 msgid "select all features"
 msgstr ""
 
-#: geobox/web/templates/editor.html:163
+#: geobox/web/templates/editor.html:161
+msgid "unselect all features"
+msgstr ""
+
+#: geobox/web/templates/editor.html:165
 msgid "JSON Schema"
 msgstr ""
 
-#: geobox/web/templates/editor.html:163
+#: geobox/web/templates/editor.html:165
 msgid "tooltip - json schema"
 msgstr ""
 
-#: geobox/web/templates/editor.html:166
-#: geobox/web/templates/js/translation.js:65
+#: geobox/web/templates/editor.html:168
+#: geobox/web/templates/js/translation.js:66
 msgid "Add JSONSchema URL"
 msgstr ""
 
-#: geobox/web/templates/editor.html:167
-#: geobox/web/templates/js/translation.js:67
-msgid "Refresh"
-msgstr ""
-
-#: geobox/web/templates/editor.html:168
-#: geobox/web/templates/js/translation.js:68
-msgid "Remove"
-msgstr ""
-
 #: geobox/web/templates/editor.html:169
-msgid "Successful loaded"
+#: geobox/web/templates/js/translation.js:68
+msgid "Refresh"
 msgstr ""
 
 #: geobox/web/templates/editor.html:170
 #: geobox/web/templates/js/translation.js:69
-msgid "Loading schema failed"
+msgid "Remove"
 msgstr ""
 
 #: geobox/web/templates/editor.html:171
-#: geobox/web/templates/js/translation.js:38
-msgid "Successful refreshed"
+msgid "Successful loaded"
 msgstr ""
 
 #: geobox/web/templates/editor.html:172
 #: geobox/web/templates/js/translation.js:70
+msgid "Loading schema failed"
+msgstr ""
+
+#: geobox/web/templates/editor.html:173
+#: geobox/web/templates/js/translation.js:39
+msgid "Successful refreshed"
+msgstr ""
+
+#: geobox/web/templates/editor.html:174
+#: geobox/web/templates/js/translation.js:71
 msgid "Refreshing schema failed"
 msgstr ""
 
-#: geobox/web/templates/editor.html:173 geobox/web/templates/editor.html:253
-#: geobox/web/templates/editor.html:261
+#: geobox/web/templates/editor.html:175 geobox/web/templates/editor.html:255
+#: geobox/web/templates/editor.html:263
 msgid "No active layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:176
-#: geobox/web/templates/js/translation.js:104
+#: geobox/web/templates/editor.html:178
+#: geobox/web/templates/js/translation.js:105
 msgid "Attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:176
+#: geobox/web/templates/editor.html:178
 msgid "infotext - attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:179
+#: geobox/web/templates/editor.html:181
 msgid "tooltip - edit attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:179
+#: geobox/web/templates/editor.html:181
 msgid "edit attributes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:182
+#: geobox/web/templates/editor.html:184
 msgid "apply"
 msgstr ""
 
-#: geobox/web/templates/editor.html:190
+#: geobox/web/templates/editor.html:192
 msgid "infotext - filter controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:195
+#: geobox/web/templates/editor.html:197
 msgid "Measure"
 msgstr ""
 
-#: geobox/web/templates/editor.html:196
+#: geobox/web/templates/editor.html:198
 msgid "infotext - measure controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:206
+#: geobox/web/templates/editor.html:208
 msgid "infotext - search controls"
 msgstr ""
 
-#: geobox/web/templates/editor.html:209
+#: geobox/web/templates/editor.html:211
 msgid "No features found"
 msgstr ""
 
-#: geobox/web/templates/editor.html:212
+#: geobox/web/templates/editor.html:214
 msgid "search request is being processed"
 msgstr ""
 
-#: geobox/web/templates/editor.html:215
+#: geobox/web/templates/editor.html:217
 msgid "remove search"
 msgstr ""
 
-#: geobox/web/templates/editor.html:216
+#: geobox/web/templates/editor.html:218
 msgid "hide searchlayer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:218
+#: geobox/web/templates/editor.html:220
 msgid "infotext - no wfs search"
 msgstr ""
 
-#: geobox/web/templates/editor.html:225
+#: geobox/web/templates/editor.html:227
 msgid "infotext - thematical map"
 msgstr ""
 
-#: geobox/web/templates/editor.html:230
+#: geobox/web/templates/editor.html:232
 msgid "save changes"
 msgstr ""
 
-#: geobox/web/templates/editor.html:231
+#: geobox/web/templates/editor.html:233
 msgid "infotext - editor save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:237 geobox/web/templates/editor.html:240
+#: geobox/web/templates/editor.html:239 geobox/web/templates/editor.html:242
 msgid "save as"
 msgstr ""
 
-#: geobox/web/templates/editor.html:242
+#: geobox/web/templates/editor.html:244
 msgid "No active layer or invalid layer name"
 msgstr ""
 
-#: geobox/web/templates/editor.html:243
+#: geobox/web/templates/editor.html:245
 msgid "Layer saved as"
 msgstr ""
 
-#: geobox/web/templates/editor.html:246
+#: geobox/web/templates/editor.html:248
 msgid "Export"
 msgstr ""
 
-#: geobox/web/templates/editor.html:248
+#: geobox/web/templates/editor.html:250
 msgid "Export layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:251
+#: geobox/web/templates/editor.html:253
 msgid "Export selected geometries"
 msgstr ""
 
-#: geobox/web/templates/editor.html:254
+#: geobox/web/templates/editor.html:256
 msgid "Failed to export selected geometries"
 msgstr ""
 
-#: geobox/web/templates/editor.html:255
+#: geobox/web/templates/editor.html:257
 msgid "Selected geometries exported"
 msgstr ""
 
-#: geobox/web/templates/editor.html:258
+#: geobox/web/templates/editor.html:260
 msgid "savepoints"
 msgstr ""
 
-#: geobox/web/templates/editor.html:259
+#: geobox/web/templates/editor.html:261
 msgid "create savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:260
+#: geobox/web/templates/editor.html:262
 msgid "create new savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:262
+#: geobox/web/templates/editor.html:264
 msgid "save point created"
 msgstr ""
 
-#: geobox/web/templates/editor.html:263
+#: geobox/web/templates/editor.html:265
 msgid "error - could not create savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:265
+#: geobox/web/templates/editor.html:267
 msgid "load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:268
+#: geobox/web/templates/editor.html:270
 msgid "load"
 msgstr ""
 
-#: geobox/web/templates/editor.html:269 geobox/web/templates/boxes/base.html:61
+#: geobox/web/templates/editor.html:271 geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr ""
 
-#: geobox/web/templates/editor.html:276
+#: geobox/web/templates/editor.html:278
 msgid "infotext - offline seeding"
 msgstr ""
 
-#: geobox/web/templates/editor.html:288
+#: geobox/web/templates/editor.html:290
 msgid "Sure you want load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:291
+#: geobox/web/templates/editor.html:293
 msgid "infotext load savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:294 geobox/web/templates/editor.html:309
-#: geobox/web/templates/editor.html:324 geobox/web/templates/editor.html:340
-#: geobox/web/templates/editor.html:365 geobox/web/templates/editor.html:385
+#: geobox/web/templates/editor.html:296 geobox/web/templates/editor.html:311
+#: geobox/web/templates/editor.html:326 geobox/web/templates/editor.html:342
+#: geobox/web/templates/editor.html:367 geobox/web/templates/editor.html:387
 #: geobox/web/templates/admin/external_wms.html:70
 #: geobox/web/templates/boxes/base.html:84
 #: geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr ""
 
-#: geobox/web/templates/editor.html:295
+#: geobox/web/templates/editor.html:297
 msgid "yes load"
 msgstr ""
 
-#: geobox/web/templates/editor.html:303
+#: geobox/web/templates/editor.html:305
 msgid "Sure you want remove savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:306
+#: geobox/web/templates/editor.html:308
 msgid "infotext remove savepoint"
 msgstr ""
 
-#: geobox/web/templates/editor.html:310 geobox/web/templates/editor.html:341
+#: geobox/web/templates/editor.html:312 geobox/web/templates/editor.html:343
 msgid "yes delete"
 msgstr ""
 
-#: geobox/web/templates/editor.html:318
+#: geobox/web/templates/editor.html:320
 msgid "Sure you want change layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:321
+#: geobox/web/templates/editor.html:323
 msgid "infotext change layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:325
+#: geobox/web/templates/editor.html:327
 msgid "yes change and discard"
 msgstr ""
 
-#: geobox/web/templates/editor.html:326
+#: geobox/web/templates/editor.html:328
 msgid "yes change and save"
 msgstr ""
 
-#: geobox/web/templates/editor.html:334
+#: geobox/web/templates/editor.html:336
 msgid "Sure you want delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:337
+#: geobox/web/templates/editor.html:339
 msgid "infotext delete layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:350
+#: geobox/web/templates/editor.html:352
 msgid "export vector layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:354
+#: geobox/web/templates/editor.html:356
 msgid "infotext export layer"
 msgstr ""
 
-#: geobox/web/templates/editor.html:362
+#: geobox/web/templates/editor.html:364
 msgid "infotext - odata export"
 msgstr ""
 
-#: geobox/web/templates/editor.html:366 geobox/web/templates/editor.html:386
+#: geobox/web/templates/editor.html:368 geobox/web/templates/editor.html:388
 #: geobox/web/templates/index.html:39
 msgid "export"
 msgstr ""
 
-#: geobox/web/templates/editor.html:375
+#: geobox/web/templates/editor.html:377
 msgid "export selected geometries"
 msgstr ""
 
-#: geobox/web/templates/editor.html:379
+#: geobox/web/templates/editor.html:381
 msgid "infotext export selected geometries"
 msgstr ""
 
-#: geobox/web/templates/editor.html:396
+#: geobox/web/templates/editor.html:398
 msgid "WMS search results"
 msgstr ""
 
-#: geobox/web/templates/editor.html:402
+#: geobox/web/templates/editor.html:404
 msgid "Server"
 msgstr ""
 
-#: geobox/web/templates/editor.html:410
+#: geobox/web/templates/editor.html:412
 msgid "close"
 msgstr ""
 
@@ -1177,511 +1181,515 @@ msgstr ""
 msgid "Add permanent"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:11
-msgid "add layer successful"
+#: geobox/web/templates/js/translation.js:9
+msgid "Temporary"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:12
-msgid "not possible to add layer"
+msgid "add layer successful"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:13
-msgid "background map"
+msgid "not possible to add layer"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:14
-msgid "raster map"
+msgid "background map"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:15
-msgid "vector map"
+msgid "raster map"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:16
-msgid "add vector map"
+msgid "vector map"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:17
-msgid "active layer"
+msgid "add vector map"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:18
-msgid "no active layer"
+msgid "active layer"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:19
-msgid "Given layer name is invalid"
+msgid "no active layer"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:20
-msgid "Layer up"
+msgid "Given layer name is invalid"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:21
-msgid "Layer down"
+msgid "Layer up"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:22
-msgid "Zoom to layer extent"
+msgid "Layer down"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:23
-msgid "Remove layer"
+msgid "Zoom to layer extent"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:24
-msgid "On the fly seeding"
+msgid "Remove layer"
 msgstr ""
 
 #: geobox/web/templates/js/translation.js:25
+msgid "On the fly seeding"
+msgstr ""
+
+#: geobox/web/templates/js/translation.js:26
 msgid "Zoom to layer max extent"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:28
+#: geobox/web/templates/js/translation.js:29
 msgid "coordinates"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:29
+#: geobox/web/templates/js/translation.js:30
 msgid "mesasure result"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:32
+#: geobox/web/templates/js/translation.js:33
 msgid "no attributes"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:33
+#: geobox/web/templates/js/translation.js:34
 msgid "key"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:34
+#: geobox/web/templates/js/translation.js:35
 msgid "value"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:35
+#: geobox/web/templates/js/translation.js:36
 msgid "add "
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:36
+#: geobox/web/templates/js/translation.js:37
 msgid "add new attribute"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:37
+#: geobox/web/templates/js/translation.js:38
 msgid "Same attribute with different values"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:39
+#: geobox/web/templates/js/translation.js:40
 msgid "Save attribute changes"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:42
+#: geobox/web/templates/js/translation.js:43
 msgid "line"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:43
+#: geobox/web/templates/js/translation.js:44
 msgid "polygon"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:44
+#: geobox/web/templates/js/translation.js:45
 msgid "stroke width"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:45
+#: geobox/web/templates/js/translation.js:46
 msgid "stroke color"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:46
+#: geobox/web/templates/js/translation.js:47
 msgid "fill color"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:47
+#: geobox/web/templates/js/translation.js:48
 msgid "fill opacity"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:48
+#: geobox/web/templates/js/translation.js:49
 msgid "save styling"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:51
+#: geobox/web/templates/js/translation.js:52
 msgid "loadFilter"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:54
+#: geobox/web/templates/js/translation.js:55
 msgid "point"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:55
+#: geobox/web/templates/js/translation.js:56
 msgid "color"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:56
+#: geobox/web/templates/js/translation.js:57
 msgid "infotext - point styling"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:57
+#: geobox/web/templates/js/translation.js:58
 msgid "radius"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:58
+#: geobox/web/templates/js/translation.js:59
 msgid "set styling"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:59
+#: geobox/web/templates/js/translation.js:60
 msgid "Add attributes is not possible"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:60
+#: geobox/web/templates/js/translation.js:61
 msgid "Features with invalid attributes left"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:61
+#: geobox/web/templates/js/translation.js:62
 msgid "Next"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:62
+#: geobox/web/templates/js/translation.js:63
 msgid "Previous"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:63
+#: geobox/web/templates/js/translation.js:64
 msgid "Additional attributes"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:64
+#: geobox/web/templates/js/translation.js:65
 msgid "This attribute is not defined in given schema. Remove it!"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:66
+#: geobox/web/templates/js/translation.js:67
 msgid "URL of used JSONSchema"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:71
+#: geobox/web/templates/js/translation.js:72
 msgid "Show property in map"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:72
+#: geobox/web/templates/js/translation.js:73
 msgid "Remove property from feature"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:73
+#: geobox/web/templates/js/translation.js:74
 msgid "Features with non valid attributes present"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:78
+#: geobox/web/templates/js/translation.js:79
 msgid "Draw polygon"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:79
+#: geobox/web/templates/js/translation.js:80
 msgid "Draw line"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:80
+#: geobox/web/templates/js/translation.js:81
 msgid "Draw rect"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:81
+#: geobox/web/templates/js/translation.js:82
 msgid "Draw point"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:82
+#: geobox/web/templates/js/translation.js:83
 msgid "Edit feature"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:83
+#: geobox/web/templates/js/translation.js:84
 msgid "Delete feature"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:84
+#: geobox/web/templates/js/translation.js:85
 msgid "Split feature"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:85
+#: geobox/web/templates/js/translation.js:86
 msgid "Merge features"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:86
+#: geobox/web/templates/js/translation.js:87
 msgid "Unmerge features"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:87
+#: geobox/web/templates/js/translation.js:88
 msgid "Select feature(s)"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:88
+#: geobox/web/templates/js/translation.js:89
 msgid "Snap on features"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:89
+#: geobox/web/templates/js/translation.js:90
 msgid "Copy feature(s)"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:92
+#: geobox/web/templates/js/translation.js:93
 msgid "Measure point"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:93
+#: geobox/web/templates/js/translation.js:94
 msgid "Measure path"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:94
+#: geobox/web/templates/js/translation.js:95
 msgid "Measure area"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:97
+#: geobox/web/templates/js/translation.js:98
 msgid "Bad JSON: "
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:98
+#: geobox/web/templates/js/translation.js:99
 msgid "Only OpenLayers.Feature.Vector is supported."
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:99
+#: geobox/web/templates/js/translation.js:100
 msgid "Feature was"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:102
+#: geobox/web/templates/js/translation.js:103
 msgid "Select a value"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:103
+#: geobox/web/templates/js/translation.js:104
 msgid "Attribute"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:105
+#: geobox/web/templates/js/translation.js:106
 msgid "Exact"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:106
+#: geobox/web/templates/js/translation.js:107
 msgid "Range"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:107
+#: geobox/web/templates/js/translation.js:108
 msgid "Value"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:108
+#: geobox/web/templates/js/translation.js:109
 msgid "Color"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:109
+#: geobox/web/templates/js/translation.js:110
 msgid "Min"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:110
+#: geobox/web/templates/js/translation.js:111
 msgid "Max"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:111
+#: geobox/web/templates/js/translation.js:112
 msgid "Execute"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:112
+#: geobox/web/templates/js/translation.js:113
 msgid "Legend for"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:113
+#: geobox/web/templates/js/translation.js:114
 msgid "Area in"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:114
+#: geobox/web/templates/js/translation.js:115
 msgid "No thematical map present for this layer"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:115
+#: geobox/web/templates/js/translation.js:116
 msgid "Add input"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:116
+#: geobox/web/templates/js/translation.js:117
 msgid "Remove input"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:117
+#: geobox/web/templates/js/translation.js:118
 msgid "No layer selected"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:118
+#: geobox/web/templates/js/translation.js:119
 msgid "No attributes selected"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:119
+#: geobox/web/templates/js/translation.js:120
 msgid "Show all features"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:120
+#: geobox/web/templates/js/translation.js:121
 msgid "Show in list"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:121
+#: geobox/web/templates/js/translation.js:122
 msgid "Apply"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:122
+#: geobox/web/templates/js/translation.js:123
 msgid "Map settings"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:123
+#: geobox/web/templates/js/translation.js:124
 msgid "Legend"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:124
+#: geobox/web/templates/js/translation.js:125
 msgid "Short list"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:125
+#: geobox/web/templates/js/translation.js:126
 msgid "Complete list"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:126
+#: geobox/web/templates/js/translation.js:127
 msgid "List settings"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:127
+#: geobox/web/templates/js/translation.js:128
 msgid "Active"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:128
+#: geobox/web/templates/js/translation.js:129
 msgid "Choose value"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:129
+#: geobox/web/templates/js/translation.js:130
 msgid "No entries"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:130
+#: geobox/web/templates/js/translation.js:131
 msgid "Apply changes"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:131
+#: geobox/web/templates/js/translation.js:132
 msgid "Discard changes"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:132
+#: geobox/web/templates/js/translation.js:133
 msgid "Show in popup"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:133
+#: geobox/web/templates/js/translation.js:134
 msgid "csv"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:134
+#: geobox/web/templates/js/translation.js:135
 msgid "odt"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:135
+#: geobox/web/templates/js/translation.js:136
 msgid "create settings"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:136
+#: geobox/web/templates/js/translation.js:137
 msgid "legend"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:138
+#: geobox/web/templates/js/translation.js:139
 msgid "list"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:139
+#: geobox/web/templates/js/translation.js:140
 msgid "active"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:140
+#: geobox/web/templates/js/translation.js:141
 msgid "map settings"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:141
+#: geobox/web/templates/js/translation.js:142
 msgid "list settings"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:142
+#: geobox/web/templates/js/translation.js:143
 msgid "layer has not attributes"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:143
+#: geobox/web/templates/js/translation.js:144
 msgid "Select filtered features"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:144
+#: geobox/web/templates/js/translation.js:145
 msgid "Show feature list with user defined attributes"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:145
+#: geobox/web/templates/js/translation.js:146
 msgid "Show feature list with all attributes"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:146
+#: geobox/web/templates/js/translation.js:147
 msgid "Create thematical map using exact values"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:147
+#: geobox/web/templates/js/translation.js:148
 msgid "Create thematical map using ranges"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:148
+#: geobox/web/templates/js/translation.js:149
 msgid "Add value field"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:149
+#: geobox/web/templates/js/translation.js:150
 msgid "Select attribute"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:150
+#: geobox/web/templates/js/translation.js:151
 msgid "Max autogenerated colors reached"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:151
+#: geobox/web/templates/js/translation.js:152
 msgid "Unselect filtered features"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:154
+#: geobox/web/templates/js/translation.js:155
 msgid "load wms capabilities"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:155
+#: geobox/web/templates/js/translation.js:156
 msgid "preview not possible"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:156
+#: geobox/web/templates/js/translation.js:157
 msgid "Show filtered features in list"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:159
+#: geobox/web/templates/js/translation.js:160
 msgid "Layer to seed"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:160
+#: geobox/web/templates/js/translation.js:161
 msgid "Start level"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:161
+#: geobox/web/templates/js/translation.js:162
 msgid "End level"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:162
+#: geobox/web/templates/js/translation.js:163
 msgid "Start seeding"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:163
+#: geobox/web/templates/js/translation.js:164
 msgid "Stop seeding"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:164
+#: geobox/web/templates/js/translation.js:165
 msgid "Seeding finished"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:165
+#: geobox/web/templates/js/translation.js:166
 msgid "No BBox given"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:166
+#: geobox/web/templates/js/translation.js:167
 msgid "Tiles estimated"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:167
+#: geobox/web/templates/js/translation.js:168
 msgid "Seeding stopped"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:168
+#: geobox/web/templates/js/translation.js:169
 msgid "No layer to seed"
 msgstr ""
 
-#: geobox/web/templates/js/translation.js:170
+#: geobox/web/templates/js/translation.js:171
 msgid "Feature attributes violate schema"
 msgstr ""
 
