@@ -234,7 +234,9 @@ $(document).ready(function() {
         }
       });
       if(activeToolbar) {
-        storedActiveControls = activeToolbar.activeControls();
+        // Always activate select control after finish edit mode
+        //storedActiveControls = activeToolbar.activeControls();
+        storedActiveControls = [activeToolbar.select];
         activeToolbar.deactivateAllControls();
         $('#attribute-edit-mode').find('#save_btn').click(function() {
           editor.widgets.attributeEditor.saveChanges();
