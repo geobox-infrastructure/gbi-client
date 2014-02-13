@@ -875,7 +875,7 @@ $(document).ready(function() {
               var buttonContainer = $('<div class="btn-group"></div>');
               buttonContainer.append(addLayerTemporaryBtn);
               var addLayerPermanentBtn = $('<button class="btn btn-small" title="' + OpenLayers.i18n('Add permanent') + '"><i class="icon-file"></i></button>');
-              if(!wms.openData) {
+              if(wms['isopen'] != "1") {
                 addLayerPermanentBtn.attr('disabled', 'disabled');
               }
               addLayerPermanentBtn.click(function() {
