@@ -326,6 +326,7 @@ gbi.widgets.ThematicalVectorConfigurator.prototype = {
         $('.' + mode + 'InputControl tbody').append(tr);
         color.minicolors({
             'value': colorValue,
+            'position': 'left top',
             change: function() {
                     self.execute();
                 }

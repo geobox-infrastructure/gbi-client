@@ -124,6 +124,7 @@ gbi.widgets.PointStyleEditor.prototype = {
         $('.color_picker').each(function() {
             $(this).minicolors({
                 'value': $(this).val(),
+                'position': 'left top',
                 change: function() {
                     self.setStyle();
                 }

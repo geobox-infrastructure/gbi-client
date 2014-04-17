@@ -44,6 +44,8 @@ gbi.widgets.StyleEditor.prototype = {
         $('.color_picker').each(function() {
             $(this).minicolors({
                 'value': $(this).val(),
+                'position': 'left top',
+                'swatchPosition': 'right',
                 change: function() {
                     self.setStyle();
                 }
