@@ -285,10 +285,23 @@ gbi.widgets.LayerManager.prototype = {
     },
     activateLayer: function(layer) {
         var self = this;
-        self.layerManager.active(layer);
-        layer.visible(true);
-        layer.selectFeatures(layer.storedFeatures())
-        self.render(self.findAccordion($('#' + layer.id)));
+        if(layer instanceof gbi.Layers.Couch && !layer.loaded) {
+            var loadEndCallback = function() {
+                self.layerManager.active(layer);
+                layer.selectFeatures(layer.storedFeatures())
+                self.render(self.findAccordion($('#' + layer.id)));
+                layer.unregisterEvent('loadend', gbi, loadEndCallback);
+            }
+            layer.visible(true);
+            layer.registerEvent('loadend', gbi, loadEndCallback);
+        } else {
+            layer.visible(true);
+            self.layerManager.active(layer);
+            layer.selectFeatures(layer.storedFeatures())
+            self.render(self.findAccordion($('#' + layer.id)));
+        }
+
+
     },
     createLayer: function(title) {
         var self = this;
