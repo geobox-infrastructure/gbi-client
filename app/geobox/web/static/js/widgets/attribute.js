@@ -626,7 +626,7 @@ gbi.widgets.AttributeEditor.template = '\
                     <i class="icon-eye-open"></i>\
                 </button>\
                 <button id="_<%=attributes[key]%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
-                    <i class="icon-remove"></i>\
+                    <i class="icon-trash"></i>\
                 </button> \
                 <% } %>\
             </form>\
@@ -643,7 +643,7 @@ gbi.widgets.AttributeEditor.addedAttributeTemplate = '\
         <i class="icon-eye-open"></i>\
     </button>\
     <button id="_<%=key%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
-        <i class="icon-remove"></i>\
+        <i class="icon-trash"></i>\
     </button> \
 </form>\
 '
