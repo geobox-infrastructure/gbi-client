@@ -87,6 +87,8 @@ class Mapping(object):
                     if isinstance(val, basestring):
                         val = val.encode(self.shp_encoding)
                     data['properties'][shp] = val
+                else:
+                    data['properties'][shp] = None
 
             return data
 
