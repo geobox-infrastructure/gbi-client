@@ -159,7 +159,7 @@ gbi.widgets.LayerManager.prototype = {
             });
             self.element.find('#data_extent_' + layer.id).click(function(e) {
                 var clickedElement = this;
-                if(!layer.visible()) {
+                if(layer instanceof gbi.Layers.Couch && !layer.loaded) {
                     var loadEndCallback = function() {
                         layer.unregisterEvent('loadend', gbi, loadEndCallback);
                         self.zoomToExtent(layer, clickedElement);
