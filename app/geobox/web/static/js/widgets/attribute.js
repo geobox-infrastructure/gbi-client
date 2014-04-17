@@ -367,6 +367,7 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     label: function(key) {
         var symbolizers;
+        var context = {};
         if(this.labelValue == key) {
             symbolizers = {};
             $('#_' + key + '_label i')
@@ -374,11 +375,19 @@ gbi.widgets.AttributeEditor.prototype = {
                 .addClass('icon-eye-open');
             this.labelValue = undefined;
         } else {
-            var symbol = {'label':'${' + key + '}'};
+            var symbol = {
+                'label': '${' + key + '}',
+                'fontSize': '${zoomLevel}'
+            };
             var symbolizers = {
                 'Point': symbol,
                 'Line': symbol,
                 'Polygon': symbol
+            };
+            var context = {
+                zoomLevel: function(feature) {
+                    return ;
+                }
             };
             $('.add-label-button i')
                 .removeClass('icon-eye-close')
@@ -387,8 +396,14 @@ gbi.widgets.AttributeEditor.prototype = {
                 .removeClass('icon-eye-open')
                 .addClass('icon-eye-close');
             this.labelValue = key;
+            var context = {
+                zoomLevel: function(feature) {
+                    return feature.layer.map.getZoom();
+                }
+            }
         }
-        this.layerManager.active().setStyle(symbolizers, true)
+        this.layerManager.active().setStyle(symbolizers, true, context);
+
     },
     setAttributes: function(attributes) {
         this.renderAttributes = attributes;
