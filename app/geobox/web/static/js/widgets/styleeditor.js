@@ -134,11 +134,13 @@ gbi.widgets.StyleEditor.prototype = {
 var styleLabel = {
     'line': OpenLayers.i18n('line'),
     'polygon': OpenLayers.i18n('polygon'),
+    'point': OpenLayers.i18n('point'),
     'strokeColor': OpenLayers.i18n('strokeColor'),
     'strokeWidth': OpenLayers.i18n('strokeWidth'),
     'fillColor': OpenLayers.i18n('fillColor'),
     'fillOpacity': OpenLayers.i18n('fillOpacity'),
-    'saveStyling':  OpenLayers.i18n('saveStyling')
+    'saveStyling':  OpenLayers.i18n('saveStyling'),
+    'radius': OpenLayers.i18n('radius')
 }
 
 gbi.widgets.StyleEditor.template = '\
@@ -162,7 +164,7 @@ gbi.widgets.StyleEditor.template = '\
     <div class="control-group">\
         <label for="polygon_strokeWidth" class="control-label">'+styleLabel.strokeWidth+':</label>\
         <div class="controls"> \
-            <input id="polygon_strokeWidth" class="polygon_strokeWidth styleControl input-small" />\
+            <input type="text" id="polygon_strokeWidth" class="polygon_strokeWidth styleControl input-small" />\
         </div>\
     </div>\
     <div class="control-group">\
@@ -183,6 +185,25 @@ gbi.widgets.StyleEditor.template = '\
             <input id="polygon_fillOpacity" class="polygon_fillOpacity styleControl input-small" />\
             <div class="noUiSlider polygon_fillOpacity"></div>\
         </div> \
+    </div>\
+    <h4>'+styleLabel.point+'</h4>\
+    <div class="control-group">\
+        <label for="point_radius" class="control-label">'+styleLabel.radius + ':</label>\
+        <div class="controls"> \
+            <input type="text" id="point_radius" class="point_pointRadius styleControl input-small" value="<%=symbolizers.Point.pointRadius%>"/>\
+        </div>\
+    </div>\
+    <div class="control-group">\
+        <label for="point_strokeColor" class="control-label">'+styleLabel.strokeColor+':</label>\
+        <div class="controls"> \
+            <input id="point_strokeColor" class="color_picker point_strokeColor styleControl input-small" value="<%=symbolizers.Point.strokeColor%>"/>\
+        </div>\
+    </div>\
+    <div class="control-group">\
+        <label for="point_fillColor" class="control-label">'+styleLabel.fillColor+':</label>\
+        <div class="controls"> \
+            <input id="point_fillColor" class="color_picker point_fillColor styleControl input-small" value="<%=symbolizers.Point.fillColor%>"/>\
+        </div>\
     </div>\
 </form>\
 ';
