@@ -264,6 +264,7 @@ $.extend(gbi.widgets.ThematicalVectorLegendChangeAttributes.prototype, {
             element.find('tr.warning').removeClass('warning');
             self.activeLayer.unregisterEvent('featureselected', self.selectControlObject, self._changeFeatureAttributeValue)
             self.editor.map.removeControl(self.selectControl);
+            self.selectControl.destroy();
             self.selectControl = false;
             self.selectControlObject = false;
         }

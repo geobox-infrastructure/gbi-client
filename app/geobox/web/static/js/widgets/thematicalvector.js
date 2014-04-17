@@ -35,7 +35,13 @@ gbi.widgets.ThematicalVector = function(editor, options) {
             self.activeLayer.deactivateHover();
             self.activeLayer.deactivateFeatureStylingRule();
         }
-        self.active = self.element.find('#thematical-map-active').prop('checked');;
+        self.active = self.element.find('#thematical-map-active').prop('checked');
+        if(
+            self.components["legend"] instanceof gbi.widgets.ThematicalVectorLegendChangeAttributes
+            && self.components["legend"].selectControl
+        ) {
+            self.components["legend"].deactivate();
+        }
         self.render();
     });
 
