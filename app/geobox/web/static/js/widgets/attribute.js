@@ -374,7 +374,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 .addClass('icon-eye-open');
             this.labelValue = undefined;
         } else {
-            var symbol = {'label': key + ': ${' + key + '}'};
+            var symbol = {'label':'${' + key + '}'};
             var symbolizers = {
                 'Point': symbol,
                 'Line': symbol,
