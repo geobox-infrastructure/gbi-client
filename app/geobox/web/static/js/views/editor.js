@@ -530,7 +530,7 @@ $(document).ready(function() {
     var area = 0;
     $.each(editor.layerManager.vectorLayers, function(idx, layer) {
       $.each(layer.selectedFeatures(), function(idx, feature) {
-        if($.isFunction(feature.geometry.getGeodesicArea)) {
+        if(feature.geometry instanceof OpenLayers.Geometry.Polygon && $.isFunction(feature.geometry.getGeodesicArea)) {
           area += feature.geometry.getGeodesicArea(new OpenLayers.Projection('EPSG:3857'));
         }
       });
