@@ -11,7 +11,9 @@ var layerManagerLabel = {
     'dataExtent': OpenLayers.i18n('Zoom to layer extent'),
     'remove': OpenLayers.i18n('Remove layer'),
     'seeding': OpenLayers.i18n('On the fly seeding'),
-    'zoomToLayerExtent': OpenLayers.i18n('Zoom to layer extent')
+    'zoomToLayerExtent': OpenLayers.i18n('Zoom to layer extent'),
+    'visibility': OpenLayers.i18n('visibility'),
+    'setActive': OpenLayers.i18n('setActive')
 }
 
 gbi.widgets = gbi.widgets || {};
@@ -403,10 +405,10 @@ gbi.widgets.LayerManager.templates = {
             <div class="accordion-inner">\
                 <ul class="nav nav-pills nav-stacked">\
                 <% for(var i=0; i<vectorLayers.length; i++) { %>\
-                    <li class="layerElement <% if(vectorLayers[i].isActive) { %> active <% } %>">\
+                    <li class="layerElement <% if(vectorLayers[i].isActive) { %> active <% } %>" title="' + layerManagerLabel.setActive + '">\
                     <a href="#" class="vectorLayer" id="<%=vectorLayers[i].id%> "> \
                         <span class="inline">\
-                            <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" />\
+                            <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.visibility + '"/>\
                             <%=vectorLayers[i].olLayer.title%> \
                         </span><br>\
                         <div class="btn-group controls"> \
