@@ -51,7 +51,7 @@ gbi.widgets.Measure.prototype = {
     measureHandler: function(measure) {
         var element = $('#measure-output');
         var output = OpenLayers.i18n('measureResult')+': ';
-        var decimalPlace = 100000; // five decimal place
+        var decimalPlace = 10000; // four decimal place
         switch(measure.type) {
             case gbi.Controls.Measure.TYPE_POINT:
                 var output = OpenLayers.i18n('coords')+': ';

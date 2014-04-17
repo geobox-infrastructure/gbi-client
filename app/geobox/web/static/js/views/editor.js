@@ -926,7 +926,7 @@ $(document).ready(function() {
 
 function displayArea(area) {
   area /= 10000;
-  area = Math.round(area*100000)/100000;
+  area = Math.round(area*10000)/10000;
   $('#measure-result')
     .empty()
     .text(area);
