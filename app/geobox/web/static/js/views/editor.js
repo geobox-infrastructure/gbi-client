@@ -1065,7 +1065,8 @@ function initEditor() {
 
   var layermanager = new gbi.widgets.LayerManager(editor, {
     element: 'layermanager',
-    allowSeeding: offline
+    allowSeeding: offline,
+    spinnerURL: spinnerURL
   });
 
   editor.widgets = {}

@@ -70,6 +70,7 @@
       var offline = true;
       var wmsCorsProxyURL = '{{ wms_cors_proxy_url }}';
     {% endif %}
+    var spinnerURL = "{{ url_for('static', filename='img/loader.gif') }}"
     var wmsSearchURL = '{{ wms_search_url }}';
    </script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/views/editor.js') }}"></script>

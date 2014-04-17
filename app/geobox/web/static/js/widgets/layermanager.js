@@ -128,6 +128,14 @@ gbi.widgets.LayerManager.prototype = {
                 .prop('checked', layer.visible())
                 .click(function(e) {
                     var status = $(this).prop("checked");
+                    $('#wait_for_loaded_' + layer.id).removeClass('hide');
+                    if(layer instanceof gbi.Layers.Couch && !layer.loaded) {
+                        var loadEndCallback = function() {
+                            $('#wait_for_loaded_' + layer.id).addClass('hide');
+                            layer.unregisterEvent('loadend', gbi, loadEndCallback);
+                        }
+                        layer.registerEvent('loadend', gbi, loadEndCallback);
+                    }
                     layer.visible(status);
                     e.stopPropagation()
 
@@ -160,10 +168,12 @@ gbi.widgets.LayerManager.prototype = {
             self.element.find('#data_extent_' + layer.id).click(function(e) {
                 var clickedElement = this;
                 if(layer instanceof gbi.Layers.Couch && !layer.loaded) {
+                    $('#wait_for_loaded_' + layer.id).removeClass('hide');
                     var loadEndCallback = function() {
                         layer.unregisterEvent('loadend', gbi, loadEndCallback);
                         self.zoomToExtent(layer, clickedElement);
                         self.changeLayer(layer, self.activateLayer);
+                        $('#wait_for_loaded_' + layer.id).addClass('hide');
                     }
                     layer.registerEvent('loadend', gbi, loadEndCallback);
                     layer.visible(true)
@@ -286,9 +296,11 @@ gbi.widgets.LayerManager.prototype = {
     activateLayer: function(layer) {
         var self = this;
         if(layer instanceof gbi.Layers.Couch && !layer.loaded) {
+            $('#wait_for_loaded_' + layer.id).removeClass('hide');
             var loadEndCallback = function() {
                 self.layerManager.active(layer);
                 layer.selectFeatures(layer.storedFeatures())
+                $('#wait_for_loaded_' + layer.id).addClass('hide');
                 self.render(self.findAccordion($('#' + layer.id)));
                 layer.unregisterEvent('loadend', gbi, loadEndCallback);
             }
@@ -419,25 +431,27 @@ gbi.widgets.LayerManager.templates = {
                 <ul class="nav nav-pills nav-stacked">\
                 <% for(var i=0; i<vectorLayers.length; i++) { %>\
                     <li class="layerElement <% if(vectorLayers[i].isActive) { %> active <% } %>" title="' + layerManagerLabel.setActive + '">\
-                    <a href="#" class="vectorLayer" id="<%=vectorLayers[i].id%> "> \
-                        <span class="inline">\
-                            <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.visibility + '"/>\
-                            <%=vectorLayers[i].olLayer.title%> \
-                        </span><br>\
-                        <div class="btn-group controls"> \
-                            <button id="up_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.up + '" class="btn btn-small">\
-                                <i class="icon-chevron-up"></i>\
-                            </button> \
-                            <button id="down_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.down + '" class="btn btn-small"> \
-                                <i class="icon-chevron-down"></i>\
-                            </button> \
-                            <button id="data_extent_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.dataExtent + '" class="btn btn-small"> \
-                                <i class="icon-search"></i>\
-                            </button> \
-                            <button id="remove_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.remove+ '" class="btn btn-small"> \
-                                <i class="icon-remove"></i>\
-                            </button> \
-                        </div> \
+                        <a href="#" class="vectorLayer" id="<%=vectorLayers[i].id%> "> \
+                            <span class="inline">\
+                                <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.visibility + '"/>\
+                                <%=vectorLayers[i].olLayer.title%> \
+                            </span>\
+                            <img id="wait_for_loaded_<%=vectorLayers[i].id%>" class="hide" src="<%=self.options.spinnerURL%>" />\
+                            <br>\
+                            <div class="btn-group controls"> \
+                                <button id="up_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.up + '" class="btn btn-small">\
+                                    <i class="icon-chevron-up"></i>\
+                                </button> \
+                                <button id="down_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.down + '" class="btn btn-small"> \
+                                    <i class="icon-chevron-down"></i>\
+                                </button> \
+                                <button id="data_extent_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.dataExtent + '" class="btn btn-small"> \
+                                    <i class="icon-search"></i>\
+                                </button> \
+                                <button id="remove_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.remove+ '" class="btn btn-small"> \
+                                    <i class="icon-remove"></i>\
+                                </button> \
+                            </div> \
                         </a>\
                     </li>\
                 <% } %>\
