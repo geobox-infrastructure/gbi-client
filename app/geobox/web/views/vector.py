@@ -142,6 +142,7 @@ def import_vector():
 
     form = forms.ImportVectorEdit(request.form)
     form.srs.choices = [(srs, srs) for srs in current_app.config.geobox_state.config.get('web', 'available_srs')]
+    form.srs.choices.insert(0, ('', _('-- select srs --')))
 
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
     form.layers.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]

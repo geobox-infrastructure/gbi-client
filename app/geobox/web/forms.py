@@ -218,7 +218,7 @@ class ImportGeoJSONEdit(Form):
 
 class ImportVectorEdit(Form):
     file_name = SelectField(lazy_gettext('file name'), validators=[Required()])
-    srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
+    srs = SelectField(lazy_gettext('srs'), validators=[Required()])
     layers = SelectField(lazy_gettext('select existing layer'), validators=[Optional()])
     name = TextField(lazy_gettext('new layer'), validators=[Optional()])
 
