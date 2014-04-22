@@ -26,7 +26,6 @@ from wtforms.validators import Required, ValidationError, Optional, Regexp
 from wtforms.ext.csrf.session import SessionSecureForm
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
-
 from flaskext.babel import lazy_gettext, gettext, ngettext
 from geobox.model import LocalWMTSSource, ExternalWMTSSource, ExternalWFSSource, Project
 
@@ -46,6 +45,17 @@ class _Auto():
     '''
     pass
 
+class ExtendedSelectField(SelectField):
+    def iter_choices(self):
+        for value, label, help_text in self.choices:
+            yield (value, label, self.coerce(value) == self.data)
+
+    def pre_validate(self, form):
+        for v, _, help_text in self.choices:
+            if self.data == v:
+                break
+        else:
+            raise ValueError(self.gettext('Not a valid choice'))
 
 # Form class from Flask-WTF 0.8 extension
 class Form(SessionSecureForm):
@@ -203,7 +213,7 @@ class ImportProjectEdit(ProjectEdit):
 
 class ExportProjectEdit(ProjectEdit):
     format = SelectField(lazy_gettext('format'), choices=[('MBTiles', 'MBTiles'), ('GTiff', 'TIFF'), ('JPEG', 'JPEG'), ('CouchDB', 'CouchDB')], coerce=str)
-    srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
+    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Optional()])
     start_level = SelectField(lazy_gettext('start level'), coerce=int, validators=[Optional()])
     end_level = SelectField(lazy_gettext('end level'), coerce=int, validators=[Optional()])
     raster_source = QuerySelectField(lazy_gettext('raster_source'),query_factory=get_local_wmts_source, get_label='wmts_source.title', validators=[Optional()])
@@ -218,7 +228,7 @@ class ImportGeoJSONEdit(Form):
 
 class ImportVectorEdit(Form):
     file_name = SelectField(lazy_gettext('file name'), validators=[Required()])
-    srs = SelectField(lazy_gettext('srs'), validators=[Required()])
+    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Required()])
     layers = SelectField(lazy_gettext('select existing layer'), validators=[Optional()])
     name = TextField(lazy_gettext('new layer'), validators=[Optional()])
 
@@ -230,7 +240,7 @@ class ExportVectorForm(Form):
     geojson = HiddenField(lazy_gettext('geojson'))
     filename = TextField(lazy_gettext('filename'), validators=[Required()])
     export_type = SelectField(lazy_gettext('export_type'), choices=[('shp', 'SHP'), ('geojson', 'GeoJSON'), ('odata', 'OData')], coerce=str, validators=[Required()])
-    srs = SelectField(lazy_gettext('srs'), validators=[Optional()])
+    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Optional()])
     destination = SelectField(lazy_gettext('destination'), validators=[Required()])
     odata_url = TextField(lazy_gettext('odata_url'))
 
