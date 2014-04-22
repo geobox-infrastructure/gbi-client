@@ -140,7 +140,7 @@ def import_vector():
         else:
             not_allowed_files.append(upload_file.filename)
     form = forms.ImportVectorEdit(request.form)
-    form.srs.choices = current_app.config.geobox_state.config.get('web', 'available_srs')
+    form.srs.choices = list(current_app.config.geobox_state.config.get('web', 'available_srs'))
     form.srs.choices.insert(0, ('', _('-- select srs --')))
 
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))

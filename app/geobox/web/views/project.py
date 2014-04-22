@@ -170,7 +170,7 @@ def export_edit(id=None):
     form = forms.ExportProjectEdit(request.form)
     form.end_level.choices = form.start_level.choices = get_levels(model.LocalWMTSSource)
 
-    form.srs.choices = current_app.config.geobox_state.config.get('web', 'available_srs')
+    form.srs.choices = list(current_app.config.geobox_state.config.get('web', 'available_srs'))
     if form.validate_on_submit():
         proj.title = form.data['title']
         proj.export_raster_layers = []

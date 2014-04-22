@@ -32,7 +32,7 @@ editor_view = Blueprint('editor_view', __name__)
 @editor_view.route('/editor')
 def editor():
     export_form = ExportVectorForm(request.form)
-    export_form.srs.choices = current_app.config.geobox_state.config.get('web', 'available_srs')
+    export_form.srs.choices = list(current_app.config.geobox_state.config.get('web', 'available_srs'))
 
     user = User(current_app.config.geobox_state.config.get('user', 'type'))
 
