@@ -455,7 +455,7 @@ gbi.widgets.LayerManager.templates = {
                                 <input type="checkbox" id="visible_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.visibility + '"/>\
                                 <%=vectorLayers[i].olLayer.title%> \
                             </span>\
-                            <img id="wait_for_loaded_<%=vectorLayers[i].id%>" class="hide" src="<%=self.options.spinnerURL%>" />\
+                            <img id="wait_for_loaded_<%=vectorLayers[i].id%>" <% if(!vectorLayers[i].loading) { %>class="hide"<% } %> src="<%=self.options.spinnerURL%>" />\
                             <br>\
                             <div class="btn-group controls"> \
                                 <button id="up_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.up + '" class="btn btn-small">\
