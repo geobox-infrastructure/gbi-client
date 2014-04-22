@@ -31,6 +31,7 @@ gbi.widgets.LayerManager = function(editor, options) {
     this.editor = editor;
     this.layerManager = editor.layerManager;
     this.options = $.extend({}, defaults, options);
+    this.zoomToEvent = false
 
     if(this.options.tiny) {
         this.element = $('<div></div>');
@@ -177,12 +178,20 @@ gbi.widgets.LayerManager.prototype = {
             self.element.find('#data_extent_' + layer.id).click(function(e) {
                 var clickedElement = this;
                 if(layer instanceof gbi.Layers.Couch && !layer.loaded) {
+                    if(self.zoomToEvent !== false) {
+                        self.zoomToEvent['layer'].unregisterEvent('loadend', gbi, self.zoomToEvent['callback']);
+                    }
                     var loadEndCallback = function() {
                         layer.unregisterEvent('loadend', gbi, loadEndCallback);
                         self.zoomToExtent(layer, clickedElement);
                         self.changeLayer(layer, self.activateLayer);
+                        self.zoomToEvent = false;
                     }
                     layer.registerEvent('loadend', gbi, loadEndCallback);
+                    self.zoomToEvent = {
+                        'layer': layer,
+                        'callback': loadEndCallback
+                    }
                     layer.visible(true)
                 } else {
                     self.zoomToExtent(layer, clickedElement);
