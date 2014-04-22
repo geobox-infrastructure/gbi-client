@@ -144,9 +144,29 @@ var styleLabel = {
 }
 
 gbi.widgets.StyleEditor.template = '\
-<h3>'+styleLabel.line+'</h3>\
 <form class="form-horizontal"> \
-     <div class="control-group">\
+    <h3>'+styleLabel.point+'</h3>\
+    <div class="control-group">\
+        <label for="point_radius" class="control-label">'+styleLabel.radius + ':</label>\
+        <div class="controls"> \
+            <input type="text" id="point_radius" class="point_pointRadius styleControl input-small" value="<%=symbolizers.Point.pointRadius%>"/>\
+        </div>\
+    </div>\
+    <div class="control-group">\
+        <label for="point_strokeColor" class="control-label">'+styleLabel.strokeColor+':</label>\
+        <div class="controls"> \
+            <input id="point_strokeColor" class="color_picker point_strokeColor styleControl input-small" value="<%=symbolizers.Point.strokeColor%>"/>\
+        </div>\
+    </div>\
+    <div class="control-group">\
+        <label for="point_fillColor" class="control-label">'+styleLabel.fillColor+':</label>\
+        <div class="controls"> \
+            <input id="point_fillColor" class="color_picker point_fillColor styleControl input-small" value="<%=symbolizers.Point.fillColor%>"/>\
+        </div>\
+    </div>\
+    <hr> \
+    <h3>'+styleLabel.line+'</h3>\
+    <div class="control-group">\
         <label for="line_strokeWidth" class="control-label">'+styleLabel.strokeWidth + ':</label>\
          <div class="controls"> \
             <input type="text" id="line_strokeWidth" class="line_strokeWidth styleControl input-small" />\
@@ -185,25 +205,6 @@ gbi.widgets.StyleEditor.template = '\
             <input id="polygon_fillOpacity" class="polygon_fillOpacity styleControl input-small" />\
             <div class="noUiSlider polygon_fillOpacity"></div>\
         </div> \
-    </div>\
-    <h4>'+styleLabel.point+'</h4>\
-    <div class="control-group">\
-        <label for="point_radius" class="control-label">'+styleLabel.radius + ':</label>\
-        <div class="controls"> \
-            <input type="text" id="point_radius" class="point_pointRadius styleControl input-small" value="<%=symbolizers.Point.pointRadius%>"/>\
-        </div>\
-    </div>\
-    <div class="control-group">\
-        <label for="point_strokeColor" class="control-label">'+styleLabel.strokeColor+':</label>\
-        <div class="controls"> \
-            <input id="point_strokeColor" class="color_picker point_strokeColor styleControl input-small" value="<%=symbolizers.Point.strokeColor%>"/>\
-        </div>\
-    </div>\
-    <div class="control-group">\
-        <label for="point_fillColor" class="control-label">'+styleLabel.fillColor+':</label>\
-        <div class="controls"> \
-            <input id="point_fillColor" class="color_picker point_fillColor styleControl input-small" value="<%=symbolizers.Point.fillColor%>"/>\
-        </div>\
     </div>\
 </form>\
 ';
