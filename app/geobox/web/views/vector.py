@@ -121,7 +121,8 @@ def import_vector():
     for upload_file in request.files.getlist('file_upload'):
         import_dir = current_app.config.geobox_state.user_data_path('import')
         target = os.path.join(import_dir, upload_file.filename)
-        if os.path.splitext(target)[1].lower() in ('.shp', '.shx', '.dbf'):
+        upload_file_ext = os.path.splitext(target)[1].lower()
+        if upload_file_ext in ('.shp', '.shx', '.dbf'):
             try:
                 if not os.path.isdir(import_dir):
                     os.mkdir(import_dir)
@@ -133,6 +134,9 @@ def import_vector():
                 upload_failures.append(upload_file.filename)
 
             uploaded_shapes.append(upload_file.filename)
+        elif upload_file_ext in ('.sbn', '.sbx', '.prj', '.index', '.cpg'):
+            # ignore files without showing message
+            continue
         else:
             not_allowed_files.append(upload_file.filename)
 
