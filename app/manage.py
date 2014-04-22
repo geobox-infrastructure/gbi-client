@@ -17,7 +17,7 @@ def babel_refresh_command():
     wtforms_dir = os.path.dirname(wtforms.__file__)
     extensions = ' '.join([wtforms_dir])
 
-    sh('pybabel extract -F babel.cfg -k lazy_gettext -k _l -o geobox/web/translations/messages.pot geobox/web geobox/model geobox/lib ' + extensions)
+    sh('pybabel extract -F babel.cfg -k lazy_gettext -k _l -o geobox/web/translations/messages.pot geobox geobox/web geobox/model geobox/lib ' + extensions)
     sh('pybabel update -i geobox/web/translations/messages.pot -d geobox/web/translations')
 
 def babel_compile_command():

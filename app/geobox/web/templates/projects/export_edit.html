@@ -2,7 +2,7 @@
 
 {% block title %}{{ _('export project edit') }}{% endblock %}
 
-{% from "form_macros.html" import input, select %}
+{% from "form_macros.html" import input, select, select_with_help %}
 {% from 'projects/macros.html' import map_tools, download_volume %}
 {% from "macros.html" import generate_base_layer, generate_sources, generate_couch_layers %}
 {% block content %}
@@ -19,7 +19,7 @@
                         {{ generate_tooltip(_('tooltip - export rasterlayer') ) }}
                     </h4>
                     {{ form.format }}
-                    {{ form.srs }}
+                    {{ select_with_help(form.srs) }}
                    {{ map_tools(coverage_form, couchlayers_form) }}
                     <hr>
                     <div class="raster_layer" id="rl_0">

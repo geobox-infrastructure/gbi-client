@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-17 09:57+0200\n"
-"PO-Revision-Date: 2014-04-17 09:58+0100\n"
+"POT-Creation-Date: 2014-04-22 10:16+0200\n"
+"PO-Revision-Date: 2014-04-22 10:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -16,6 +16,90 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+
+#: geobox/defaults.py:43
+msgid "WGS 84 (EPSG:4326)"
+msgstr "WGS 84 (EPSG:4326)"
+
+#: geobox/defaults.py:43
+msgid "EPSG:4326 help text"
+msgstr "WGS 84"
+
+#: geobox/defaults.py:44
+msgid "WGS 84 / Pseudo-Mercator (EPSG:3857)"
+msgstr "Pseudo-Mercator (EPSG:3857)"
+
+#: geobox/defaults.py:44
+msgid "EPSG:3857 help text"
+msgstr "Pseudo-Mercator"
+
+#: geobox/defaults.py:45
+msgid "Gauss-Kruger zone 3 (EPSG:31467)"
+msgstr "Gauß-Krüger Zone 3 (EPSG:31467)"
+
+#: geobox/defaults.py:45
+msgid "EPSG:31467 help text"
+msgstr "Gauß-Krüger Zone 3"
+
+#: geobox/defaults.py:46
+msgid "UTM zone 32N (EPSG:25832)"
+msgstr "UTM Zone 32 Nord (EPSG:25832)"
+
+#: geobox/defaults.py:46
+msgid "EPSG:25832 help text"
+msgstr "UTM Zone 32 Nord"
+
+#: geobox/lib/trayicon.py:58
+msgid "GeoBox"
+msgstr "GeoBox"
+
+#: geobox/lib/trayicon.py:112
+msgid "Close"
+msgstr "Beenden"
+
+#: geobox/lib/trayicon.py:128
+msgid "Open"
+msgstr "Öffnen"
+
+#: geobox/lib/vectorconvert.py:42
+msgid "invalid geometry type"
+msgstr "Ungültiger Geometrietyp"
+
+#: geobox/lib/vectorconvert.py:44
+#: geobox/lib/vectorconvert.py:51
+msgid "invalid mapping"
+msgstr "Ungültiges Mapping"
+
+#: geobox/model/layer.py:24
+#: geobox/model/tasks.py:116
+msgid "raster import"
+msgstr "Rasterimport"
+
+#: geobox/model/layer.py:35
+#: geobox/model/tasks.py:135
+msgid "raster export"
+msgstr "Rasterexport"
+
+#: geobox/model/layer.py:47
+#: geobox/model/tasks.py:90
+msgid "vector export"
+msgstr "Vektorexport"
+
+#: geobox/model/project.py:59
+msgid "project export"
+msgstr "Exportprojekt"
+
+#: geobox/model/project.py:70
+msgid "project import"
+msgstr "Importprojekt"
+
+#: geobox/model/tasks.py:78
+msgid "vector import"
+msgstr "Vektorimport"
+
+#: geobox/model/tasks.py:103
+msgid "replication"
+msgstr "Replikation"
 
 #: geobox/web/__init__.py:100
 msgid "Sorry, method not allowed"
@@ -2046,13 +2130,13 @@ msgstr "Dateityp ist nich erlaubt"
 
 #: geobox/web/views/boxes.py:108
 #: geobox/web/views/vector.py:83
-#: geobox/web/views/vector.py:163
+#: geobox/web/views/vector.py:166
 msgid "please select new layer or current layer to import"
 msgstr "Der Layer konnte nicht eindeutig zugeordnet werden. Bitte wählen Sie einen Layer aus der Liste oder geben Sie einen Namen für einen neuen Layer ein."
 
 #: geobox/web/views/boxes.py:116
 #: geobox/web/views/vector.py:93
-#: geobox/web/views/vector.py:173
+#: geobox/web/views/vector.py:176
 msgid "None of the characters used for the layer is allowed"
 msgstr "Angegebener Layername ist ungültig"
 
@@ -2088,7 +2172,7 @@ msgstr "Die GeoBox CouchApp wurde erfolgreich in Ihrer CouchDB erstellt und steh
 #: geobox/web/views/project.py:100
 #: geobox/web/views/project.py:214
 #: geobox/web/views/vector.py:108
-#: geobox/web/views/vector.py:188
+#: geobox/web/views/vector.py:191
 msgid "form error"
 msgstr "Fehler bei Eingaben"
 
@@ -2155,97 +2239,44 @@ msgid "-- select a geojson --"
 msgstr "-- GEOJSON auswählen -- "
 
 #: geobox/web/views/vector.py:54
-#: geobox/web/views/vector.py:145
+#: geobox/web/views/vector.py:148
 msgid "-- select layer or add new --"
 msgstr "-- Layer auswählen -- "
 
 #: geobox/web/views/vector.py:71
-#: geobox/web/views/vector.py:193
+#: geobox/web/views/vector.py:196
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr "Fehler beim Hochladen der Datei %(name)s"
 
 #: geobox/web/views/vector.py:73
-#: geobox/web/views/vector.py:197
+#: geobox/web/views/vector.py:200
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr "Datei %(name)s hochgeladen"
 
 #: geobox/web/views/vector.py:75
-#: geobox/web/views/vector.py:195
+#: geobox/web/views/vector.py:198
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr "Dateityp der Datei %(name)s ist nicht erlaubt"
 
-#: geobox/web/views/vector.py:141
-#, fuzzy
+#: geobox/web/views/vector.py:144
 msgid "-- select srs --"
-msgstr "Auswahl Koordinatensysteme"
+msgstr "Koordinatensystem auswählen"
 
-#: geobox/web/views/vector.py:149
+#: geobox/web/views/vector.py:152
 msgid "-- select a shapefile --"
 msgstr "Shapefile auswählen"
 
-#: geobox/web/views/vector.py:159
+#: geobox/web/views/vector.py:162
 msgid "invalid shapefile"
 msgstr "Ungültiges Shapefile/fehlende Dateien"
 
-#: geobox/web/views/vector.py:191
+#: geobox/web/views/vector.py:194
 #, python-format
 msgid "file %(name)s missing"
 msgstr "Datei %(name)s fehlt"
-
-#: geobox/model/layer.py:24
-#: geobox/model/tasks.py:116
-msgid "raster import"
-msgstr "Rasterimport"
-
-#: geobox/model/layer.py:35
-#: geobox/model/tasks.py:135
-msgid "raster export"
-msgstr "Rasterexport"
-
-#: geobox/model/layer.py:47
-#: geobox/model/tasks.py:90
-msgid "vector export"
-msgstr "Vektorexport"
-
-#: geobox/model/project.py:59
-msgid "project export"
-msgstr "Exportprojekt"
-
-#: geobox/model/project.py:70
-msgid "project import"
-msgstr "Importprojekt"
-
-#: geobox/model/tasks.py:78
-msgid "vector import"
-msgstr "Vektorimport"
-
-#: geobox/model/tasks.py:103
-msgid "replication"
-msgstr "Replikation"
-
-#: geobox/lib/trayicon.py:58
-msgid "GeoBox"
-msgstr "GeoBox"
-
-#: geobox/lib/trayicon.py:112
-msgid "Close"
-msgstr "Beenden"
-
-#: geobox/lib/trayicon.py:128
-msgid "Open"
-msgstr "Öffnen"
-
-#: geobox/lib/vectorconvert.py:42
-msgid "invalid geometry type"
-msgstr "Ungültiger Geometrietyp"
-
-#: geobox/lib/vectorconvert.py:44
-#: geobox/lib/vectorconvert.py:51
-msgid "invalid mapping"
-msgstr "Ungültiges Mapping"
 
 #: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/validators.py:55
 #, python-format

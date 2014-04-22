@@ -2,7 +2,7 @@
 
 {% block title %}{{ _('shapefile import') }}{% endblock %}
 
-{% from "form_macros.html" import input, select %}
+{% from "form_macros.html" import input, select, select_with_help %}
 
 {% block content %}
     <h1>{{_('shapefile import')}}</h1>
@@ -31,7 +31,7 @@
             <form id="import_form" method="POST">
                 {{ form.csrf_token }}
                 {{ select(form.file_name) }}
-                {{ select(form.srs) }}
+                {{ select_with_help(form.srs) }}
                 {{ select(form.layers) }}
                 {{ input(form.name) }}
                 <br>

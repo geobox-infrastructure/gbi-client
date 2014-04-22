@@ -1,5 +1,5 @@
 {% extends "base_map.html" %}
-{% from "form_macros.html" import select, input %}
+{% from "form_macros.html" import select, input, select_with_help %}
 
 {% block title %}{{ _('editor') }}{% endblock %}
 
@@ -360,7 +360,7 @@
           {{ export_form.geojson }}
           {{ input(export_form.filename) }}
           {{ select(export_form.export_type) }}
-          {{ select(export_form.srs) }}
+          {{ select_with_help(export_form.srs) }}
           {{ select(export_form.destination) }}
           {{ input(export_form.odata_url) }}
           <p id="odata_help_text">{{ _('infotext - odata export') }}</p>

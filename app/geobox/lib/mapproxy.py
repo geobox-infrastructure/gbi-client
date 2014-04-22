@@ -137,9 +137,10 @@ class MapProxyConfiguration(object):
         log.info('Mapproxy configuration written to %s', self.yaml_file)
 
 def write_mapproxy_config(app_state):
+    available_srs = [srs[0] for srs in app_state.config.get('web', 'available_srs')]
     mpc = MapProxyConfiguration(
         db_session=app_state.user_db_session(),
-        srs=app_state.config.get('web', 'available_srs'),
+        srs=available_srs,
         target_dir=app_state.user_data_path(),
         couchdb_url='http://127.0.0.1:%s' % app_state.config.get('couchdb', 'port'),
         template_dir=app_state.data_path('mapproxy_templates'),

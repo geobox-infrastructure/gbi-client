@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from flaskext.babel import lazy_gettext as _
+
 try:
     # try to load app specific GeoBoxConfig at first
     from geobox.appconfig import GeoBoxConfig
@@ -37,7 +39,11 @@ except ImportError:
             },
             'web': {
                 'port': 8090,
-                'available_srs': ['EPSG:4326', 'EPSG:3857', 'EPSG:31467', 'EPSG:25832'],
+                'available_srs': [
+                    ('EPSG:4326', _('WGS 84 (EPSG:4326)'), _('EPSG:4326 help text')),
+                    ('EPSG:3857', _('WGS 84 / Pseudo-Mercator (EPSG:3857)'), _('EPSG:3857 help text')),
+                    ('EPSG:31467', _('Gauss-Kruger zone 3 (EPSG:31467)'), _('EPSG:31467 help text')),
+                    ('EPSG:25832', _('UTM zone 32N (EPSG:25832)'), _('EPSG:25832 help text'))],
                 'context_document_url': 'http://gbiserver.omniscale.net/context',
                 'coverages_from_couchdb': 'flaechen-box',
                 'wms_search_url': 'http://www.gismobile.de/rlpmobile/mod_mapbender/search_proxy.php?',
