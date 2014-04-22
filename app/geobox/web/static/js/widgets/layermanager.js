@@ -45,6 +45,17 @@ gbi.widgets.LayerManager = function(editor, options) {
         $('.olMapViewport').append(this.activeLayerDIV);
     }
 
+    $.each(this.layerManager.vectorLayers, function(idx, layer) {
+        if(layer instanceof gbi.Layers.Couch) {
+            layer.registerEvent('loadstart', gbi, function() {
+                self.showSpinner(layer);
+            });
+            layer.registerEvent('loadend', gbi, function() {
+                self.hideSpinner(layer);
+            });
+        }
+    });
+
     this.render();
 
     if(this.options.tiny) {
@@ -52,11 +63,17 @@ gbi.widgets.LayerManager = function(editor, options) {
     }
 
     $(gbi).on('gbi.layermanager.layer.remove', function(event, layer) {
-         self.render();
+        self.render();
     });
 
     $(gbi).on('gbi.layermanager.layer.add', function(event, layer) {
-         self.render();
+        layer.registerEvent('loadstart', gbi, function() {
+            self.showSpinner(layer);
+        });
+        layer.registerEvent('loadend', gbi, function() {
+            self.hideSpinner(layer);
+        });
+        self.render();
     });
 
     $(gbi).on('gbi.layermanager.layer.active', function(event, layer) {
@@ -128,14 +145,6 @@ gbi.widgets.LayerManager.prototype = {
                 .prop('checked', layer.visible())
                 .click(function(e) {
                     var status = $(this).prop("checked");
-                    $('#wait_for_loaded_' + layer.id).removeClass('hide');
-                    if(layer instanceof gbi.Layers.Couch && !layer.loaded) {
-                        var loadEndCallback = function() {
-                            $('#wait_for_loaded_' + layer.id).addClass('hide');
-                            layer.unregisterEvent('loadend', gbi, loadEndCallback);
-                        }
-                        layer.registerEvent('loadend', gbi, loadEndCallback);
-                    }
                     layer.visible(status);
                     e.stopPropagation()
 
@@ -168,12 +177,10 @@ gbi.widgets.LayerManager.prototype = {
             self.element.find('#data_extent_' + layer.id).click(function(e) {
                 var clickedElement = this;
                 if(layer instanceof gbi.Layers.Couch && !layer.loaded) {
-                    $('#wait_for_loaded_' + layer.id).removeClass('hide');
                     var loadEndCallback = function() {
                         layer.unregisterEvent('loadend', gbi, loadEndCallback);
                         self.zoomToExtent(layer, clickedElement);
                         self.changeLayer(layer, self.activateLayer);
-                        $('#wait_for_loaded_' + layer.id).addClass('hide');
                     }
                     layer.registerEvent('loadend', gbi, loadEndCallback);
                     layer.visible(true)
@@ -296,11 +303,9 @@ gbi.widgets.LayerManager.prototype = {
     activateLayer: function(layer) {
         var self = this;
         if(layer instanceof gbi.Layers.Couch && !layer.loaded) {
-            $('#wait_for_loaded_' + layer.id).removeClass('hide');
             var loadEndCallback = function() {
                 self.layerManager.active(layer);
                 layer.selectFeatures(layer.storedFeatures())
-                $('#wait_for_loaded_' + layer.id).addClass('hide');
                 self.render(self.findAccordion($('#' + layer.id)));
                 layer.unregisterEvent('loadend', gbi, loadEndCallback);
             }
@@ -343,8 +348,13 @@ gbi.widgets.LayerManager.prototype = {
             $("#help_text").attr('class','alert alert-error').html(notPossible).show().fadeOut(6000);
             delete couchLayer;
         }
+    },
+    showSpinner: function(layer) {
+        $('#wait_for_loaded_' + layer.id).removeClass('hide');
+    },
+    hideSpinner: function(layer) {
+        $('#wait_for_loaded_' + layer.id).addClass('hide');
     }
-
 };
 
 gbi.widgets.LayerManager.templates = {
