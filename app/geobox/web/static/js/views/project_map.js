@@ -35,23 +35,12 @@ function initProjectEditor(options) {
         styleMap: styleMap,
         displayInLayerSwitcher: false,
         eventListeners: {
-            featureadded: function(f) {
-                if (!drawLayer.loading) {
-                    toggleStartButton(editor);
-                    getDataVolume(editor);
-                }
-            },
-            featuresadded: function() {
-                toggleStartButton(editor);
-            },
-            featureremoved: function(f) {
-                if (f.feature) {
-                    f.feature.destroy();
-                }
+            featuresadded: function(f) {
                 getDataVolume(editor)
                 toggleStartButton(editor);
             },
-            featuresremoved: function() {
+            featuresremoved: function(f) {
+                getDataVolume(editor)
                 toggleStartButton(editor);
             },
             afterfeaturemodified: function(feature) {
@@ -60,7 +49,6 @@ function initProjectEditor(options) {
                 }
             }
         }
-
     });
     editor.addLayer(drawLayer);
     editor.layerManager.active(drawLayer);
