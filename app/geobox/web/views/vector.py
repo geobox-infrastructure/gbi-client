@@ -223,6 +223,7 @@ def get_shapefile_list():
     for shape_file in shp_files:
         missing = False
         s_path, s_name = os.path.split(shape_file)
+        s_name = s_name.decode('utf-8')
         name, ext = os.path.splitext(s_name)
         if not os.path.exists(os.path.join(s_path, name +'.shx')):
             missing = True
