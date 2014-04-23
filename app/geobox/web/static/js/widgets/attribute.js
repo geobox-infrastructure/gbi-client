@@ -138,12 +138,19 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     render: function() {
         var self = this;
-        var attributes = [];
+        var attributes = {};
         var activeLayer = this.layerManager.active();
+
         self.invalidFeatures = $.isFunction(activeLayer.validateFeaturesAttributes) ? activeLayer.validateFeaturesAttributes() : [];
+
         if(activeLayer) {
-            attributes = self.jsonSchema ? activeLayer.schemaAttributes() : this.renderAttributes || activeLayer.featuresAttributes();
+            var _attributes = false;
+            _attributes = self.jsonSchema ? activeLayer.schemaAttributes() : this.renderAttributes || activeLayer.featuresAttributes();
+            $.each(_attributes, function(idx, attrib) {
+                attributes[self.attributeID(attrib)] = attrib;
+            });
         }
+
         this.element.empty();
 
         if(self.invalidFeatures && self.invalidFeatures.length > 0) {
@@ -163,7 +170,12 @@ gbi.widgets.AttributeEditor.prototype = {
         //prepare list of all possible rendered attributes
         var renderedAttributes = [];
         if(self.jsonSchema) {
-            renderedAttributes = activeLayer.schemaAttributes() || [];
+            var schemaAttributes = activeLayer.schemaAttributes()
+            if(schemaAttributes) {
+                $.each(schemaAttributes, function(idx, attribute) {
+                    renderedAttributes.push(self.attributeID(attribute));
+                });
+            }
         }
         if(this.renderAttributes) {
             $.each(this.renderAttributes, function(idx, attribute) {
@@ -176,7 +188,7 @@ gbi.widgets.AttributeEditor.prototype = {
         if (activeLayer) {
             $.each(activeLayer.featuresAttributes(), function(idx, attribute) {
                 if($.inArray(attribute, renderedAttributes) == -1) {
-                    renderedAttributes.push(attribute);
+                    renderedAttributes.push(self.attributeID(attribute));
                 }
             });
         }
@@ -191,7 +203,11 @@ gbi.widgets.AttributeEditor.prototype = {
                 return false;
             });
             $('#_'+key+'_label').click(function() {
-                self.label(key);
+                var label = attributes[key]
+                if(label === undefined) {
+                    label = self.getAttributeNameByKey(key);
+                }
+                self.label(key, label);
                 return false;
             });
         });
@@ -303,15 +319,18 @@ gbi.widgets.AttributeEditor.prototype = {
             }
         }
     },
-    add: function(key, value) {
+    add: function(label, value) {
         var self = this;
-        self.featureChanges['added'][key] = value;
+        self.featureChanges['added'][label] = value;
+
+        var key = self.attributeID(label);
 
         if(self.element.find('input#' + key).length == 0) {
             $('#no-attributes').addClass('hide');
             self.element.find('.view_attributes').last().after(
                 tmpl(gbi.widgets.AttributeEditor.addedAttributeTemplate, {
                     key: key,
+                    label: label,
                     value: value
                 }))
             $('#_'+key+'_remove').click(function() {
@@ -347,7 +366,7 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     edit: function(key, value) {
         var self = this;
-        self.featureChanges['edited'][key] = value;
+        self.featureChanges['edited'][self.getAttributeNameByKey(key)] = value;
         this.changed = true;
     },
     remove: function(key) {
@@ -365,7 +384,7 @@ gbi.widgets.AttributeEditor.prototype = {
             self.label(key);
         }
     },
-    label: function(key) {
+    label: function(key, label) {
         var symbolizers;
         var context = {};
         if(this.labelValue == key) {
@@ -376,7 +395,7 @@ gbi.widgets.AttributeEditor.prototype = {
             this.labelValue = undefined;
         } else {
             var symbol = {
-                'label': '${' + key + '}',
+                'label': '${label}',
                 'fontSize': '${zoomLevel}'
             };
             var symbolizers = {
@@ -399,6 +418,9 @@ gbi.widgets.AttributeEditor.prototype = {
             var context = {
                 zoomLevel: function(feature) {
                     return feature.layer.map.getZoom();
+                },
+                label: function(feature) {
+                    return feature.attributes[label];
                 }
             }
         }
@@ -406,8 +428,12 @@ gbi.widgets.AttributeEditor.prototype = {
 
     },
     setAttributes: function(attributes) {
-        this.renderAttributes = attributes;
-        this.render();
+        var self = this;
+        self.renderAttributes = [];
+        $.each(attributes, function(idx, attribute) {
+            self.renderAttributes.push(self.attributeID(attribute));
+        });
+        self.render();
     },
     setJsonSchema: function(schema) {
         this.jsonSchema = schema;
@@ -457,9 +483,9 @@ gbi.widgets.AttributeEditor.prototype = {
         var self = this;
         var selectedFeatureAttributes = {};
         $.each(self.selectedFeatures, function(idx, feature) {
-            $.each(attributes, function(idx, key) {
+            $.each(attributes, function(key, label) {
                 var equal = true;
-                var value = feature.attributes ? feature.attributes[key] : undefined;
+                var value = feature.attributes ? feature.attributes[label] : undefined;
                 if(key in selectedFeatureAttributes) {
                     equal = selectedFeatureAttributes[key].value == value;
                     if(!equal) {
@@ -478,6 +504,7 @@ gbi.widgets.AttributeEditor.prototype = {
         var nonSchemaOptions = {"fields": {}};
 
         $.each(self.jsonSchema.properties, function(name, prop) {
+            name = self.attributeID(name);
             schemaOptions.fields[name] = {'id': name};
         });
 
@@ -489,7 +516,8 @@ gbi.widgets.AttributeEditor.prototype = {
 
         var data = {};
         $.each(self.selectedFeatures, function(idx, feature) {
-            $.each(feature.attributes, function(key, value) {
+            $.each(feature.attributes, function(label, value) {
+                var key = self.attributeID(label)
                 //fill options for non schema
                 if(!(key in schemaOptions.fields) && !(key in nonSchemaOptions.fields)) {
                     nonSchemaOptions.fields[key] = {
@@ -513,7 +541,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 if(!(key in self.jsonSchema.properties) && !(key in nonSchema.properties)) {
                     nonSchema.properties[key] = {
                         "type": "any",
-                        "title": key
+                        "title": label
                     }
                 }
             })
@@ -526,7 +554,6 @@ gbi.widgets.AttributeEditor.prototype = {
             };
             data[key] = value;
         });
-
         return {
             nonSchema: nonSchema,
             schemaOptions: schemaOptions,
@@ -577,6 +604,20 @@ gbi.widgets.AttributeEditor.prototype = {
     deactivateEditMode: function() {
         this.editMode = false;
         this.render();
+    },
+    attributeID: function(attribute) {
+        return attribute.replace(/[^\w]/gi, '');
+    },
+    getAttributeNameByKey: function(key) {
+        var self = this;
+        var attributeName;
+        $.each(activeLayer.featuresAttributes(), function(idx, attribute) {
+            if(self.attributeID(attribute) == key) {
+                attributeName = attribute;
+                return false;
+            }
+        });
+        return attributeName
     }
 };
 
@@ -622,25 +663,25 @@ gbi.widgets.AttributeEditor.template = '\
     <% } else { %>\
         <% for(var key in attributes) { %>\
             <form class="form-inline view_attributes">\
-                <label class="key-label" for="_<%=attributes[key]%>"><%=attributes[key]%></label>\
-                <% if(selectedFeatureAttributes[attributes[key]]) { %>\
-                    <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
-                        <input class="input-medium" type="text" id="<%=attributes[key]%>" value="<%=selectedFeatureAttributes[attributes[key]]["value"]%>" \
+                <label class="key-label" for="_<%=key%>"><%=attributes[key]%></label>\
+                <% if(selectedFeatureAttributes[key]) { %>\
+                    <% if(selectedFeatureAttributes[key]["equal"]) {%>\
+                        <input class="input-medium" type="text" id="<%=key%>" value="<%=selectedFeatureAttributes[key]["value"]%>" \
                     <% } else {%>\
-                        <input class="input-medium" type="text" id="<%=attributes[key]%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
+                        <input class="input-medium" type="text" id="<%=key%>" placeholder="'+attributeLabel.sameKeyDifferentValue+'" \
                     <% } %>\
                 <% } else { %>\
-                    <input class="input-medium" type="text" id="<%=attributes[key]%>"\
+                    <input class="input-medium" type="text" id="<%=key%>"\
                 <% } %>\
                 <% if(!editable) { %>\
                     disabled=disabled \
                 <% } %>\
                 />\
                 <% if(editable) { %>\
-                <button id="_<%=attributes[key]%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button"> \
+                <button id="_<%=key%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button"> \
                     <i class="icon-eye-open"></i>\
                 </button>\
-                <button id="_<%=attributes[key]%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
+                <button id="_<%=key%>_remove" title="' + attributeLabel.remove + '" class="btn btn-small"> \
                     <i class="icon-trash"></i>\
                 </button> \
                 <% } %>\
@@ -652,7 +693,7 @@ gbi.widgets.AttributeEditor.template = '\
 
 gbi.widgets.AttributeEditor.addedAttributeTemplate = '\
 <form class="form-inline view_attributes">\
-    <label class="key-label" for="_<%=key%>"><%=key%></label>\
+    <label class="key-label" for="_<%=key%>"><%=label%></label>\
     <input class="input-medium" type="text" id="<%=key%>" value="<%=value%>">\
     <button id="_<%=key%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button"> \
         <i class="icon-eye-open"></i>\
@@ -798,14 +839,14 @@ gbi.widgets.AttributeEditor.viewOnlyTemplate = '\
                 <tr>\
                     <td><%=attributes[key]%></td>\
                     <td>\
-                        <% if(selectedFeatureAttributes[attributes[key]]["equal"]) {%>\
-                            <%=selectedFeatureAttributes[attributes[key]]["value"]%>\
+                        <% if(selectedFeatureAttributes[key]["equal"]) {%>\
+                            <%=selectedFeatureAttributes[key]["value"]%>\
                         <% } else {%>\
                             '+attributeLabel.sameKeyDifferentValue+'\
                         <% } %>\
                     </td>\
                     <td>\
-                        <button id="_<%=attributes[key]%>_label" title="Show labels" class="btn btn-small add-label-button">\
+                        <button id="_<%=key%>_label" title="Show labels" class="btn btn-small add-label-button">\
                             <i class="icon-eye-open"></i>\
                         </button>\
                     </td>\
