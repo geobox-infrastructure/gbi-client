@@ -71,28 +71,34 @@ function deleteAllFeatures(editor) {
 
 function loadFeatures(editor, data, complete) {
     var drawLayer = editor.layerManager.active();
-    drawLayer.loading = true;
     var parser = new OpenLayers.Format.GeoJSON();
+    var toAdd = false;
 
     if (jQuery.isArray(data) && complete == true) {
-        drawLayer.addFeatures(data);
+        toAdd = data;
     } else if (jQuery.isArray(data)) {
-       $.each(data, function(index, geom) {
+        toAdd = [];
+        $.each(data, function(index, geom) {
             // check if data is geojson or openlayers.features e.g. from couch layer
             if (geom.CLASS_NAME && geom.CLASS_NAME == 'OpenLayers.Feature.Vector') {
-                drawLayer.addFeatures(geom);
+                toAdd.push(geom);
             } else {
-                drawLayer.addFeatures(parser.read(geom.geometry));
+                toAdd.push(parser.read(geom.geometry));
             }
-       });
+        });
     } else {
         featureCollection = parser.read(data);
-        if (featureCollection)
-            drawLayer.addFeatures(featureCollection);
+        if (featureCollection) {
+            toAdd = featureCollection;
+        }
     }
+
+    if(toAdd !== false) {
+        drawLayer.addFeatures(toAdd);
+    }
+
     if (drawLayer.olLayer.features.length > 0) {
         editor.map.olMap.zoomToExtent(drawLayer.olLayer.getDataExtent());
     }
     getDataVolume(editor);
-    drawLayer.loading = false;
 }
