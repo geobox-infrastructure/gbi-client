@@ -843,7 +843,8 @@ $(document).ready(function() {
     $.get(wmsSearchURL, {
         'languageCode': 'de',
         'maxResults': 40,
-        'resultTarget': 'web',
+        'searchResources': 'wms',
+        'resultTarget': 'webclient',
         'searchText': $('#wms_search_text').val()
       }, null, 'json'
     ).done(function(data) {

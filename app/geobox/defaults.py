@@ -46,7 +46,7 @@ except ImportError:
                     ('EPSG:25832', _('UTM zone 32N (EPSG:25832)'), _('EPSG:25832 help text'))],
                 'context_document_url': 'http://gbiserver.omniscale.net/context',
                 'coverages_from_couchdb': 'flaechen-box',
-                'wms_search_url': 'http://www.gismobile.de/rlpmobile/mod_mapbender/search_proxy.php?',
+                'wms_search_url': 'http://www.geoportal.rlp.de/mapbender/php/mod_callMetadata.php?',
                 'wms_cors_proxy_url': 'http://www.geoportal.rlp.de/cors_proxy/'
             },
             'mapproxy': {
