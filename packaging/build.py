@@ -165,7 +165,7 @@ def build_app_command():
 
     # insert version
     app_content = path('../app/geobox/app.py').bytes()
-    app_content = re.sub(r"^version = '[^']*'", "version = '%s'" % config['version'], app_content)
+    app_content = re.sub(r"version = '[^']*'", "version = '%s'" % config['version'], app_content)
     path('../app/geobox/app.py').write_bytes(app_content)
 
     pyinstaller_spec_tpl = open(path('geobox.spec.tpl')).read()
