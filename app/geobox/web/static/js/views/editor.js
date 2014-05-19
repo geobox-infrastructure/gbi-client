@@ -848,8 +848,8 @@ $(document).ready(function() {
         'searchText': $('#wms_search_text').val()
       }, null, 'json'
     ).done(function(data) {
-      if(data && data['wms'] && data['wms']['srv'] && data['wms']['srv'].length > 0) {
-        wmsSearchResults = data['wms']['srv'];
+      if(data && data['wms'] && data['wms']['wms'] && data['wms']['wms']['srv'].length > 0) {
+        wmsSearchResults = data['wms']['wms']['srv'];
         $('#wmsSearchResults tbody').empty();
         $.each(wmsSearchResults, function(idx, wms) {
           var container = $('<tr></tr>');
