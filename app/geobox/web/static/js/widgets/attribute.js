@@ -32,13 +32,15 @@ gbi.widgets.AttributeEditor = function(editor, options) {
     $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.table)
     $.alpaca.registerView(gbi.widgets.AttributeEditor.alpacaViews.table_invalid)
 
-    var activeLayer = this.layerManager.active();
-    var listenOn = activeLayer instanceof gbi.Layers.Couch ? 'gbi.layer.couch.loadFeaturesEnd' : 'gbi.layer.saveableVector.loadFeaturesEnd';
-    if(!activeLayer.loaded) {
-        $(activeLayer).on(listenOn, function() {
-            self.render();
-            $(activeLayer).off(listenOn, this);
-        });
+    this.activeLayer = this.layerManager.active();
+    if(this.activeLayer !== false) {
+        var listenOn = this.activeLayer instanceof gbi.Layers.Couch ? 'gbi.layer.couch.loadFeaturesEnd' : 'gbi.layer.saveableVector.loadFeaturesEnd';
+        if(!this.activeLayer.loaded) {
+            $(tis.activeLayer).on(listenOn, function() {
+                self.render();
+                $(this.activeLayer).off(listenOn, this);
+            });
+        }
     }
 
     this.registerEvents();
@@ -139,13 +141,12 @@ gbi.widgets.AttributeEditor.prototype = {
     render: function() {
         var self = this;
         var attributes = {};
-        var activeLayer = this.layerManager.active();
 
-        self.invalidFeatures = $.isFunction(activeLayer.validateFeaturesAttributes) ? activeLayer.validateFeaturesAttributes() : [];
+        self.invalidFeatures = $.isFunction(self.activeLayer.validateFeaturesAttributes) ? self.activeLayer.validateFeaturesAttributes() : [];
 
-        if(activeLayer) {
+        if(self.activeLayer) {
             var _attributes = false;
-            _attributes = self.jsonSchema ? activeLayer.schemaAttributes() : this.renderAttributes || activeLayer.featuresAttributes();
+            _attributes = self.jsonSchema ? self.activeLayer.schemaAttributes() : this.renderAttributes || self.activeLayer.featuresAttributes();
             $.each(_attributes, function(idx, attrib) {
                 attributes[self.attributeID(attrib)] = attrib;
             });
@@ -154,23 +155,23 @@ gbi.widgets.AttributeEditor.prototype = {
         this.element.empty();
 
         if(self.invalidFeatures && self.invalidFeatures.length > 0) {
-            self.renderInvalidFeatures(activeLayer);
+            self.renderInvalidFeatures(self.activeLayer);
         } else {
             self.selectedInvalidFeature = false;
         }
 
         if(self.selectedFeatures.length > 0) {
             if(self.editMode) {
-                self.renderInputMask(attributes, activeLayer);
+                self.renderInputMask(attributes, self.activeLayer);
             } else {
-                self.renderAttributeTable(attributes, activeLayer);
+                self.renderAttributeTable(attributes, self.activeLayer);
             }
         }
 
         //prepare list of all possible rendered attributes
         var renderedAttributes = [];
         if(self.jsonSchema) {
-            var schemaAttributes = activeLayer.schemaAttributes()
+            var schemaAttributes = self.activeLayer.schemaAttributes()
             if(schemaAttributes) {
                 $.each(schemaAttributes, function(idx, attribute) {
                     renderedAttributes.push(self.attributeID(attribute));
@@ -185,8 +186,8 @@ gbi.widgets.AttributeEditor.prototype = {
             });
         }
 
-        if (activeLayer) {
-            $.each(activeLayer.featuresAttributes(), function(idx, attribute) {
+        if (self.activeLayer) {
+            $.each(self.activeLayer.featuresAttributes(), function(idx, attribute) {
                 if($.inArray(attribute, renderedAttributes) == -1) {
                     renderedAttributes.push(self.attributeID(attribute));
                 }
@@ -441,27 +442,26 @@ gbi.widgets.AttributeEditor.prototype = {
     },
     saveChanges: function() {
         var self = this;
-        var activeLayer = this.layerManager.active();
 
-        $.each(activeLayer.selectedFeatures(), function(_idx, feature) {
+        $.each(self.activeLayer.selectedFeatures(), function(_idx, feature) {
             // remove
             $.each(self.featureChanges['removed'], function(idx, key) {
-                activeLayer.removeFeatureAttribute(feature, key);
+                self.activeLayer.removeFeatureAttribute(feature, key);
             });
             // edit
             $.each(self.featureChanges['edited'], function(key, value) {
                 if(value) {
-                    activeLayer.changeFeatureAttribute(feature, key, value);
+                    self.activeLayer.changeFeatureAttribute(feature, key, value);
                 } else {
-                    activeLayer.removeFeatureAttribute(feature, key);
+                    self.activeLayer.removeFeatureAttribute(feature, key);
                 }
             });
             // add
             $.each(self.featureChanges['added'], function(key, value) {
-                activeLayer.changeFeatureAttribute(feature, key, value)
+                self.activeLayer.changeFeatureAttribute(feature, key, value)
             });
 
-            if(self.selectedInvalidFeature && feature.id == self.selectedInvalidFeature.feature.id && activeLayer.validateFeatureAttributes(feature)) {
+            if(self.selectedInvalidFeature && feature.id == self.selectedInvalidFeature.feature.id && self.activeLayer.validateFeatureAttributes(feature)) {
                 self.selectedInvalidFeature = false;
             }
 
@@ -561,7 +561,7 @@ gbi.widgets.AttributeEditor.prototype = {
             data: data
         }
     },
-    renderAttributeTable: function(attributes, activeLayer) {
+    renderAttributeTable: function(attributes) {
         var self = this;
 
         if(self.jsonSchema) {
@@ -611,7 +611,7 @@ gbi.widgets.AttributeEditor.prototype = {
     getAttributeNameByKey: function(key) {
         var self = this;
         var attributeName;
-        $.each(activeLayer.featuresAttributes(), function(idx, attribute) {
+        $.each(self.activeLayer.featuresAttributes(), function(idx, attribute) {
             if(self.attributeID(attribute) == key) {
                 attributeName = attribute;
                 return false;
