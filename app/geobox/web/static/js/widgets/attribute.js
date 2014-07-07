@@ -307,6 +307,7 @@ gbi.widgets.AttributeEditor.prototype = {
             this.element.append(tmpl(
                 gbi.widgets.AttributeEditor.template, {
                     attributes: attributes,
+                    noAttributes: $.isEmptyObject(attributes),
                     selectedFeatureAttributes: selectedFeatureAttributes,
                     editable: editable,
                     scrollHeight: this.options.scrollHeight
@@ -656,7 +657,7 @@ var attributeTitle = {
 
 gbi.widgets.AttributeEditor.template = '\
     <div id="attribute-container">\
-    <% if(attributes.length == 0) { %>\
+    <% if(noAttributes) { %>\
         <form class="form-inline view_attributes">\
             <span id="no-attributes">'+attributeLabel.noAttributes+'.</span>\
         </form>\
