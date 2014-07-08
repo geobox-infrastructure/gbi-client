@@ -142,84 +142,108 @@ gbi.widgets.AttributeEditor.prototype = {
         var self = this;
         var attributes = {};
 
-        self.invalidFeatures = $.isFunction(self.activeLayer.validateFeaturesAttributes) ? self.activeLayer.validateFeaturesAttributes() : [];
+        self.element.empty();
 
-        if(self.activeLayer) {
-            var _attributes = false;
-            _attributes = self.jsonSchema ? self.activeLayer.schemaAttributes() : this.renderAttributes || self.activeLayer.featuresAttributes();
-            $.each(_attributes, function(idx, attrib) {
+        var layer = self.affectedLayer();
+
+        if(layer === -1) {
+            return;
+        }
+
+        if(layer === false) {
+            self.element.append(tmpl(gbi.widgets.AttributeEditor.multipleLayersAffectedTemplate));
+            return;
+        }
+
+        $.each(layer.featuresAttributes(), function(idx, attrib) {
+            attributes[self.attributeID(attrib)] = attrib;
+        });
+
+        if(layer == self.activeLayer && self.jsonSchema) {
+            attributes = {};
+            $.each(layer.schemaAttributes(), function(idx, attrib) {
                 attributes[self.attributeID(attrib)] = attrib;
             });
-        }
 
-        this.element.empty();
-
-        if(self.invalidFeatures && self.invalidFeatures.length > 0) {
-            self.renderInvalidFeatures(self.activeLayer);
-        } else {
-            self.selectedInvalidFeature = false;
-        }
-
-        if(self.selectedFeatures.length > 0) {
-            if(self.editMode) {
-                self.renderInputMask(attributes, self.activeLayer);
+            self.invalidFeatures = $.isFunction(layer.validateFeaturesAttributes) ? layer.validateFeaturesAttributes() : [];
+            if(self.invalidFeatures && self.invalidFeatures.length > 0) {
+                self.renderInvalidFeatures(layer);
             } else {
-                self.renderAttributeTable(attributes, self.activeLayer);
+                self.selectedInvalidFeature = false;
             }
         }
 
-        //prepare list of all possible rendered attributes
-        var renderedAttributes = [];
-        if(self.jsonSchema) {
-            var schemaAttributes = self.activeLayer.schemaAttributes()
-            if(schemaAttributes) {
-                $.each(schemaAttributes, function(idx, attribute) {
-                    renderedAttributes.push(self.attributeID(attribute));
+        if(self.editMode) {
+            self.renderInputMask(attributes, layer);
+            //prepare list of all possible rendered attributes
+            var renderedAttributes = [];
+            if(self.jsonSchema) {
+                var schemaAttributes = layer.schemaAttributes()
+                if(schemaAttributes) {
+                    $.each(schemaAttributes, function(idx, attribute) {
+                        renderedAttributes.push(self.attributeID(attribute));
+                    });
+                }
+            }
+            if(this.renderAttributes) {
+                $.each(this.renderAttributes, function(idx, attribute) {
+                    if($.inArray(attribute, renderedAttributes) == -1) {
+                        renderedAttributes.push(attribute);
+                    }
                 });
             }
-        }
-        if(this.renderAttributes) {
-            $.each(this.renderAttributes, function(idx, attribute) {
-                if($.inArray(attribute, renderedAttributes) == -1) {
-                    renderedAttributes.push(attribute);
-                }
-            });
-        }
 
-        if (self.activeLayer) {
-            $.each(self.activeLayer.featuresAttributes(), function(idx, attribute) {
+            $.each(layer.featuresAttributes(), function(idx, attribute) {
                 if($.inArray(attribute, renderedAttributes) == -1) {
                     renderedAttributes.push(self.attributeID(attribute));
                 }
             });
-        }
 
-        //bind events
-        $.each(renderedAttributes, function(idx, key) {
-            $('#'+key).keyup(function() {
-                self.edit(key, $(this).val());
+            //bind events
+            $.each(renderedAttributes, function(idx, key) {
+                $('#'+key).keyup(function() {
+                    self.edit(key, $(this).val());
+                });
+                $('#_'+key+'_remove').click(function() {
+                    self.remove(key);
+                    return false;
+                });
+                $('#_'+key+'_label').click(function() {
+                    var label = attributes[key]
+                    if(label === undefined) {
+                        label = self.getAttributeNameByKey(key);
+                    }
+                    self.label(key, label);
+                    return false;
+                });
             });
-            $('#_'+key+'_remove').click(function() {
-                self.remove(key);
-                return false;
-            });
-            $('#_'+key+'_label').click(function() {
-                var label = attributes[key]
-                if(label === undefined) {
-                    label = self.getAttributeNameByKey(key);
+            $('#addKeyValue').click(function() {
+                var key = $('#_newKey').val();
+                var val = $('#_newValue').val();
+                if (key && val) {
+                    self.add(key, val);
                 }
-                self.label(key, label);
                 return false;
             });
-        });
-        $('#addKeyValue').click(function() {
-            var key = $('#_newKey').val();
-            var val = $('#_newValue').val();
-            if (key && val) {
-                self.add(key, val);
+        } else {
+            self.renderAttributeTable(attributes, layer == self.activeLayer ? self.jsonSchema : false);
+        }
+    },
+    affectedLayer: function() {
+        var self = this;
+        if(self.selectedFeatures.length > 0) {
+            var layers = [];
+            $.each(self.selectedFeatures, function(idx, feature) {
+                layers.push(feature.layer);
+            });
+            $.unique(layers);
+            if(layers.length > 1) {
+                return false;
+            } else {
+                return layers[0].gbiLayer;
             }
-            return false;
-        });
+        }
+        return -1
     },
     renderInvalidFeatures: function(activeLayer) {
         var self = this;
@@ -644,7 +668,8 @@ var attributeLabel = {
     'remove': OpenLayers.i18n('Remove property from feature'),
     'attribute': OpenLayers.i18n('Attribute'),
     'value': OpenLayers.i18n('Value'),
-    'containsInvalidAttributes': OpenLayers.i18n('Feature attributes violate schema')
+    'containsInvalidAttributes': OpenLayers.i18n('Feature attributes violate schema'),
+    'multipleLayersAffected': OpenLayers.i18n('Cannot display properties of Features across multiple layers')
 };
 
 var attributeTitle = {
@@ -687,6 +712,10 @@ gbi.widgets.AttributeEditor.template = '\
         <% } %>\
     <% } %>\
     </div>\
+';
+
+gbi.widgets.AttributeEditor.multipleLayersAffectedTemplate = '\
+    <div class="alert alert-info">' + attributeLabel.multipleLayersAffected + '</div>\
 ';
 
 gbi.widgets.AttributeEditor.addedAttributeTemplate = '\
