@@ -429,14 +429,6 @@ gbi.widgets.AttributeEditor.prototype = {
         this.layerManager.active().setStyle(symbolizers, true, context);
 
     },
-    setAttributes: function(attributes) {
-        var self = this;
-        self.renderAttributes = [];
-        $.each(attributes, function(idx, attribute) {
-            self.renderAttributes.push(self.attributeID(attribute));
-        });
-        self.render();
-    },
     setJsonSchema: function(schema) {
         this.jsonSchema = schema;
         this.render();
