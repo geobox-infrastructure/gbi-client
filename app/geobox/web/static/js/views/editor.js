@@ -544,7 +544,7 @@ $(document).ready(function() {
     if(editor.bulkMode) {
       return;
     }
-    if(activeLayer.selectedFeatures().length > 0) {
+    if(editor.widgets.attributeEditor.isEditable()) {
       $('#activate_attribute_edit_mode').removeAttr('disabled');
     }
   }
@@ -553,7 +553,7 @@ $(document).ready(function() {
     if(editor.bulkMode) {
       return;
     }
-    if(activeLayer.selectedFeatures().length < 1) {
+    if(!editor.widgets.attributeEditor.isEditable()) {
       $('#activate_attribute_edit_mode').attr('disabled', 'disabled');
     }
   }

@@ -613,6 +613,10 @@ gbi.widgets.AttributeEditor.prototype = {
             ))
         }
     },
+    isEditable: function() {
+        var layer = this.affectedLayer();
+        return (layer == this.activeLayer);
+    },
     activateEditMode: function() {
         this.editMode = true;
         this.render();
