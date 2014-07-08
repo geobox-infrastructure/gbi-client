@@ -174,59 +174,59 @@ gbi.widgets.AttributeEditor.prototype = {
 
         if(self.editMode) {
             self.renderInputMask(attributes, layer);
-            //prepare list of all possible rendered attributes
-            var renderedAttributes = [];
-            if(self.jsonSchema) {
-                var schemaAttributes = layer.schemaAttributes()
-                if(schemaAttributes) {
-                    $.each(schemaAttributes, function(idx, attribute) {
-                        renderedAttributes.push(self.attributeID(attribute));
-                    });
-                }
-            }
-            if(this.renderAttributes) {
-                $.each(this.renderAttributes, function(idx, attribute) {
-                    if($.inArray(attribute, renderedAttributes) == -1) {
-                        renderedAttributes.push(attribute);
-                    }
-                });
-            }
-
-            $.each(layer.featuresAttributes(), function(idx, attribute) {
-                if($.inArray(attribute, renderedAttributes) == -1) {
-                    renderedAttributes.push(self.attributeID(attribute));
-                }
-            });
-
-            //bind events
-            $.each(renderedAttributes, function(idx, key) {
-                $('#'+key).keyup(function() {
-                    self.edit(key, $(this).val());
-                });
-                $('#_'+key+'_remove').click(function() {
-                    self.remove(key);
-                    return false;
-                });
-                $('#_'+key+'_label').click(function() {
-                    var label = attributes[key]
-                    if(label === undefined) {
-                        label = self.getAttributeNameByKey(key);
-                    }
-                    self.label(key, label);
-                    return false;
-                });
-            });
-            $('#addKeyValue').click(function() {
-                var key = $('#_newKey').val();
-                var val = $('#_newValue').val();
-                if (key && val) {
-                    self.add(key, val);
-                }
-                return false;
-            });
         } else {
             self.renderAttributeTable(attributes, layer == self.activeLayer ? self.jsonSchema : false);
         }
+        //prepare list of all possible rendered attributes
+        var renderedAttributes = [];
+        if(self.jsonSchema) {
+            var schemaAttributes = layer.schemaAttributes()
+            if(schemaAttributes) {
+                $.each(schemaAttributes, function(idx, attribute) {
+                    renderedAttributes.push(self.attributeID(attribute));
+                });
+            }
+        }
+        if(this.renderAttributes) {
+            $.each(this.renderAttributes, function(idx, attribute) {
+                if($.inArray(attribute, renderedAttributes) == -1) {
+                    renderedAttributes.push(attribute);
+                }
+            });
+        }
+
+        $.each(layer.featuresAttributes(), function(idx, attribute) {
+            if($.inArray(attribute, renderedAttributes) == -1) {
+                renderedAttributes.push(self.attributeID(attribute));
+            }
+        });
+
+        //bind events
+        $.each(renderedAttributes, function(idx, key) {
+            $('#'+key).keyup(function() {
+                self.edit(key, $(this).val());
+            });
+            $('#_'+key+'_remove').click(function() {
+                self.remove(key);
+                return false;
+            });
+            $('#_'+key+'_label').click(function() {
+                var label = attributes[key]
+                if(label === undefined) {
+                    label = self.getAttributeNameByKey(key);
+                }
+                self.label(key, label);
+                return false;
+            });
+        });
+        $('#addKeyValue').click(function() {
+            var key = $('#_newKey').val();
+            var val = $('#_newValue').val();
+            if (key && val) {
+                self.add(key, val);
+            }
+            return false;
+        });
     },
     affectedLayer: function() {
         var self = this;
