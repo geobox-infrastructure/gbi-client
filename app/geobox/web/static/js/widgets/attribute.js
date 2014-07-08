@@ -604,7 +604,12 @@ gbi.widgets.AttributeEditor.prototype = {
     getAttributeNameByKey: function(key) {
         var self = this;
         var attributeName;
-        $.each(self.activeLayer.featuresAttributes(), function(idx, attribute) {
+        var lookupAttributes = self.activeLayer.featuresAttributes();
+        if(self.jsonSchema) {
+            lookupAttributes = lookupAttributes.concat(self.activeLayer.schemaAttributes());
+            $.unique(lookupAttributes);
+        }
+        $.each(lookupAttributes, function(idx, attribute) {
             if(self.attributeID(attribute) == key) {
                 attributeName = attribute;
                 return false;
