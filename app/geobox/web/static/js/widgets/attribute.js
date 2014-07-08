@@ -135,7 +135,6 @@ gbi.widgets.AttributeEditor.prototype = {
         $.each(layer.selectedFeatures, function(idx, feature) {
             self.selectedFeatures.push(feature);
         });
-        layer.gbiLayer.registerEvent('featureunselected', self, self.handleFeatureUnselected);
         self.render()
     },
     render: function() {
