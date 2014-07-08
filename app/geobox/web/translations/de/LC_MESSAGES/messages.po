@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-22 10:16+0200\n"
-"PO-Revision-Date: 2014-04-22 10:29+0100\n"
+"POT-Creation-Date: 2014-07-08 13:30+0200\n"
+"PO-Revision-Date: 2014-07-08 13:31+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -129,7 +129,17 @@ msgstr "Einloggen erforderlich"
 msgid "Please login to see this page"
 msgstr "Sie müssen sich anmelden um diese Seite aufrufen zu können"
 
-#: geobox/web/forms.py:165
+#: geobox/web/forms.py:58
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
+#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:419
+msgid "Not a valid choice"
+msgstr "Keine gültige Auswahl."
+
+#: geobox/web/forms.py:175
 #: geobox/web/templates/downloads.html:12
 #: geobox/web/templates/admin/external_raster_list.html:40
 #: geobox/web/templates/admin/external_raster_list.html:121
@@ -139,174 +149,174 @@ msgstr "Sie müssen sich anmelden um diese Seite aufrufen zu können"
 msgid "title"
 msgstr "Titel"
 
-#: geobox/web/forms.py:170
+#: geobox/web/forms.py:180
 msgid "level needs to be bigger or equal to start level"
 msgstr "Das Endlevel muss größer oder gleich dem Startlevel sein"
 
-#: geobox/web/forms.py:173
+#: geobox/web/forms.py:183
 #: geobox/web/templates/admin/external_raster_list.html:43
 #: geobox/web/templates/admin/external_raster_list.html:83
 msgid "username"
 msgstr "Benutzername"
 
-#: geobox/web/forms.py:174
+#: geobox/web/forms.py:184
 msgid "Password"
 msgstr "Passwort"
 
-#: geobox/web/forms.py:175
+#: geobox/web/forms.py:185
 msgid "context server url"
 msgstr "URL zum Kontextdkoument"
 
-#: geobox/web/forms.py:191
+#: geobox/web/forms.py:201
 msgid "select coverage"
 msgstr "Geometrie aus Projekt laden"
 
-#: geobox/web/forms.py:194
+#: geobox/web/forms.py:204
 msgid "select couch"
 msgstr "Geometrie aus Editor laden"
 
-#: geobox/web/forms.py:197
 #: geobox/web/forms.py:207
+#: geobox/web/forms.py:217
 msgid "start level"
 msgstr "Startlevel"
 
-#: geobox/web/forms.py:198
 #: geobox/web/forms.py:208
+#: geobox/web/forms.py:218
 msgid "end level"
 msgstr "Endlevel"
 
-#: geobox/web/forms.py:199
 #: geobox/web/forms.py:209
+#: geobox/web/forms.py:219
 msgid "raster_source"
 msgstr "Rasterdatenquelle"
 
-#: geobox/web/forms.py:200
+#: geobox/web/forms.py:210
 msgid "update_tiles"
 msgstr "Kacheln aktualisieren"
 
-#: geobox/web/forms.py:205
+#: geobox/web/forms.py:215
 #: geobox/web/templates/admin/external_raster_list.html:13
 msgid "format"
 msgstr "Format"
 
-#: geobox/web/forms.py:206
-#: geobox/web/forms.py:221
-#: geobox/web/forms.py:233
+#: geobox/web/forms.py:216
+#: geobox/web/forms.py:231
+#: geobox/web/forms.py:243
 #: geobox/web/templates/admin/external_raster_list.html:123
 msgid "srs"
 msgstr "Koordinatensystem"
 
-#: geobox/web/forms.py:215
+#: geobox/web/forms.py:225
 msgid "geojson file name"
 msgstr "geojson Dateiname"
 
-#: geobox/web/forms.py:216
-#: geobox/web/forms.py:222
+#: geobox/web/forms.py:226
+#: geobox/web/forms.py:232
 msgid "select existing layer"
 msgstr "Bestehenden Layer auswählen"
 
-#: geobox/web/forms.py:217
-#: geobox/web/forms.py:223
+#: geobox/web/forms.py:227
+#: geobox/web/forms.py:233
 msgid "new layer"
 msgstr "oder neuen Layer erstellen"
 
-#: geobox/web/forms.py:220
+#: geobox/web/forms.py:230
 msgid "file name"
 msgstr "Shapefile"
 
-#: geobox/web/forms.py:226
+#: geobox/web/forms.py:236
 msgid "path"
 msgstr "Verzeichnis"
 
-#: geobox/web/forms.py:229
+#: geobox/web/forms.py:239
 #: geobox/web/templates/admin/external_raster_list.html:11
 #: geobox/web/templates/admin/external_raster_list.html:80
 msgid "name"
 msgstr "Name"
 
-#: geobox/web/forms.py:230
+#: geobox/web/forms.py:240
 msgid "geojson"
 msgstr "GeoJSON"
 
-#: geobox/web/forms.py:231
+#: geobox/web/forms.py:241
 #: geobox/web/templates/boxes/base.html:34
 msgid "filename"
 msgstr "Dateiname"
 
-#: geobox/web/forms.py:232
+#: geobox/web/forms.py:242
 msgid "export_type"
 msgstr "Type"
 
-#: geobox/web/forms.py:234
+#: geobox/web/forms.py:244
 msgid "destination"
 msgstr "Ziel"
 
-#: geobox/web/forms.py:235
+#: geobox/web/forms.py:245
 msgid "odata_url"
 msgstr "OData URL"
 
-#: geobox/web/forms.py:238
+#: geobox/web/forms.py:248
 msgid "file"
 msgstr "Datei"
 
-#: geobox/web/forms.py:242
-#: geobox/web/forms.py:247
+#: geobox/web/forms.py:252
+#: geobox/web/forms.py:257
 msgid "rastersource_username"
 msgstr "Benutzername"
 
-#: geobox/web/forms.py:243
-#: geobox/web/forms.py:248
+#: geobox/web/forms.py:253
+#: geobox/web/forms.py:258
 msgid "rastersource_password"
 msgstr "Passwort"
 
-#: geobox/web/forms.py:246
+#: geobox/web/forms.py:256
 msgid "rastersource_url"
 msgstr "URL"
 
-#: geobox/web/forms.py:249
+#: geobox/web/forms.py:259
 msgid "rastersource_name"
 msgstr "Name"
 
-#: geobox/web/forms.py:250
+#: geobox/web/forms.py:260
 msgid "rastersource_title"
 msgstr "Title"
 
-#: geobox/web/forms.py:251
+#: geobox/web/forms.py:261
 msgid "rastersource_format"
 msgstr "Format"
 
-#: geobox/web/forms.py:252
+#: geobox/web/forms.py:262
 msgid "rastersource_llbox"
 msgstr "BoundingBox (Lat/Lon)"
 
-#: geobox/web/forms.py:255
+#: geobox/web/forms.py:265
 msgid "rastersource_srs_input"
 msgstr "SRS (manuell)"
 
-#: geobox/web/forms.py:256
+#: geobox/web/forms.py:266
 msgid "rastersource_layer_input"
 msgstr "Layer (manuell)"
 
-#: geobox/web/forms.py:257
+#: geobox/web/forms.py:267
 msgid "wms_version"
 msgstr "Version"
 
-#: geobox/web/forms.py:261
+#: geobox/web/forms.py:271
 msgid "layers"
 msgstr "Layer"
 
-#: geobox/web/forms.py:263
+#: geobox/web/forms.py:273
 msgid "search_string"
 msgstr "Suchanfrage"
 
-#: geobox/web/forms.py:266
+#: geobox/web/forms.py:276
 msgid "couchapp_couch_url"
 msgstr "URL der Ziel CouchDB"
 
 #: geobox/web/templates/admin.html:4
 #: geobox/web/templates/admin.html:13
 #: geobox/web/templates/index.html:62
-#: geobox/web/templates/js/translation.js:140
+#: geobox/web/templates/js/translation.js:141
 msgid "settings"
 msgstr "Einstellungen"
 
@@ -636,17 +646,17 @@ msgid "tooltip - json schema"
 msgstr "Sie können die URL eines JSON Schema angeben, um dieses Schema auf die Attribute der Geometrien des Aktiven Layers anzuwenden"
 
 #: geobox/web/templates/editor.html:170
-#: geobox/web/templates/js/translation.js:68
+#: geobox/web/templates/js/translation.js:69
 msgid "Add JSONSchema URL"
 msgstr "Schema laden"
 
 #: geobox/web/templates/editor.html:171
-#: geobox/web/templates/js/translation.js:70
+#: geobox/web/templates/js/translation.js:71
 msgid "Refresh"
 msgstr "Aktualisieren"
 
 #: geobox/web/templates/editor.html:172
-#: geobox/web/templates/js/translation.js:71
+#: geobox/web/templates/js/translation.js:72
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -655,7 +665,7 @@ msgid "Successful loaded"
 msgstr "Erfolgreich aktualisiert"
 
 #: geobox/web/templates/editor.html:174
-#: geobox/web/templates/js/translation.js:72
+#: geobox/web/templates/js/translation.js:73
 msgid "Loading schema failed"
 msgstr "Laden des JSON-Schema fehlgeschlagen"
 
@@ -665,7 +675,7 @@ msgid "Successful refreshed"
 msgstr "Erfolgreich aktualisiert"
 
 #: geobox/web/templates/editor.html:176
-#: geobox/web/templates/js/translation.js:73
+#: geobox/web/templates/js/translation.js:74
 msgid "Refreshing schema failed"
 msgstr "Aktualisieren des JSON-Schema fehlgeschlagen"
 
@@ -676,7 +686,7 @@ msgid "No active layer"
 msgstr "Kein Layer aktiv"
 
 #: geobox/web/templates/editor.html:180
-#: geobox/web/templates/js/translation.js:107
+#: geobox/web/templates/js/translation.js:108
 msgid "Attributes"
 msgstr "Eigenschaften"
 
@@ -1413,415 +1423,419 @@ msgstr "Unterschiedliche Werte"
 msgid "Save attribute changes"
 msgstr "Änderungen speichern"
 
-#: geobox/web/templates/js/translation.js:45
+#: geobox/web/templates/js/translation.js:43
+msgid "Cannot display properties of Features across multiple layers"
+msgstr "Eigenschaften können nicht layerübergreifend angezeigt werden"
+
+#: geobox/web/templates/js/translation.js:46
 msgid "line"
 msgstr "Linie"
 
-#: geobox/web/templates/js/translation.js:46
+#: geobox/web/templates/js/translation.js:47
 msgid "polygon"
 msgstr "Polygon"
 
-#: geobox/web/templates/js/translation.js:47
+#: geobox/web/templates/js/translation.js:48
 msgid "stroke width"
 msgstr "Linienstärke"
 
-#: geobox/web/templates/js/translation.js:48
+#: geobox/web/templates/js/translation.js:49
 msgid "stroke color"
 msgstr "Linienfarbe"
 
-#: geobox/web/templates/js/translation.js:49
+#: geobox/web/templates/js/translation.js:50
 msgid "fill color"
 msgstr "Flächenfarbe"
 
-#: geobox/web/templates/js/translation.js:50
+#: geobox/web/templates/js/translation.js:51
 msgid "fill opacity"
 msgstr "Flächentransparenz in \\%%"
 
-#: geobox/web/templates/js/translation.js:51
+#: geobox/web/templates/js/translation.js:52
 msgid "save styling"
 msgstr "Aussehen speichern"
 
-#: geobox/web/templates/js/translation.js:54
+#: geobox/web/templates/js/translation.js:55
 msgid "loadFilter"
 msgstr "Geometrien auswählen"
 
-#: geobox/web/templates/js/translation.js:57
+#: geobox/web/templates/js/translation.js:58
 msgid "point"
 msgstr "Punkt"
 
-#: geobox/web/templates/js/translation.js:58
+#: geobox/web/templates/js/translation.js:59
 msgid "color"
 msgstr "Farbe"
 
-#: geobox/web/templates/js/translation.js:59
+#: geobox/web/templates/js/translation.js:60
 msgid "infotext - point styling"
 msgstr "Ändern Sie das Aussehen des ausgewählten Punktes. Ohne Speichern gehen die Änderungen verloren."
 
-#: geobox/web/templates/js/translation.js:60
+#: geobox/web/templates/js/translation.js:61
 msgid "radius"
 msgstr "Radius"
 
-#: geobox/web/templates/js/translation.js:61
+#: geobox/web/templates/js/translation.js:62
 msgid "set styling"
 msgstr "Aussehen speichern"
 
-#: geobox/web/templates/js/translation.js:62
+#: geobox/web/templates/js/translation.js:63
 msgid "Add attributes is not possible"
 msgstr "Das Hinzufügen von Attributen ist nicht möglich"
 
-#: geobox/web/templates/js/translation.js:63
+#: geobox/web/templates/js/translation.js:64
 msgid "Features with invalid attributes left"
 msgstr "Geometrien mit invaliden Attributen übrig"
 
-#: geobox/web/templates/js/translation.js:64
+#: geobox/web/templates/js/translation.js:65
 msgid "Next"
 msgstr "Nachstes"
 
-#: geobox/web/templates/js/translation.js:65
+#: geobox/web/templates/js/translation.js:66
 msgid "Previous"
 msgstr "Vorheriges"
 
-#: geobox/web/templates/js/translation.js:66
+#: geobox/web/templates/js/translation.js:67
 msgid "Additional attributes"
 msgstr "Zusätzliche Attribute"
 
-#: geobox/web/templates/js/translation.js:67
+#: geobox/web/templates/js/translation.js:68
 msgid "This attribute is not defined in given schema. Remove it!"
 msgstr "Attribut nicht im Schema definiert. Bitte entfernen!"
 
-#: geobox/web/templates/js/translation.js:69
+#: geobox/web/templates/js/translation.js:70
 msgid "URL of used JSONSchema"
 msgstr "URL des benutzten JSON-Schema"
 
-#: geobox/web/templates/js/translation.js:74
+#: geobox/web/templates/js/translation.js:75
 msgid "Show property in map"
 msgstr "Eigenschaft für alle Geometrien in der Karte anzeigen"
 
-#: geobox/web/templates/js/translation.js:75
+#: geobox/web/templates/js/translation.js:76
 msgid "Remove property from feature"
 msgstr "Eigenschaft für gewählte Geometrie(n) entfernen"
 
-#: geobox/web/templates/js/translation.js:76
+#: geobox/web/templates/js/translation.js:77
 msgid "Features with non valid attributes present"
 msgstr "Der Layer enthält Geometrien mit ungültigen Eigenschaften"
 
-#: geobox/web/templates/js/translation.js:81
+#: geobox/web/templates/js/translation.js:82
 msgid "Draw polygon"
 msgstr "Polygon zeichnen"
 
-#: geobox/web/templates/js/translation.js:82
+#: geobox/web/templates/js/translation.js:83
 msgid "Draw line"
 msgstr "Linie zeichnen"
 
-#: geobox/web/templates/js/translation.js:83
+#: geobox/web/templates/js/translation.js:84
 msgid "Draw rect"
 msgstr "Rechteck zeichnen"
 
-#: geobox/web/templates/js/translation.js:84
+#: geobox/web/templates/js/translation.js:85
 msgid "Draw point"
 msgstr "Punkt zeichnen"
 
-#: geobox/web/templates/js/translation.js:85
+#: geobox/web/templates/js/translation.js:86
 msgid "Edit feature"
 msgstr "Geometrie bearbeiten"
 
-#: geobox/web/templates/js/translation.js:86
+#: geobox/web/templates/js/translation.js:87
 msgid "Delete feature"
 msgstr "Geometrie(n) löschen"
 
-#: geobox/web/templates/js/translation.js:87
+#: geobox/web/templates/js/translation.js:88
 msgid "Split feature"
 msgstr "Geometrie teilen"
 
-#: geobox/web/templates/js/translation.js:88
+#: geobox/web/templates/js/translation.js:89
 msgid "Merge features"
 msgstr "Geometrien zusammenfügen"
 
-#: geobox/web/templates/js/translation.js:89
+#: geobox/web/templates/js/translation.js:90
 msgid "Unmerge features"
 msgstr "Geometrien trennen"
 
-#: geobox/web/templates/js/translation.js:90
+#: geobox/web/templates/js/translation.js:91
 msgid "Select feature(s)"
 msgstr "Geometrie(n) auswählen"
 
-#: geobox/web/templates/js/translation.js:91
+#: geobox/web/templates/js/translation.js:92
 msgid "Snap on features"
 msgstr "An Geometrien einrasten"
 
-#: geobox/web/templates/js/translation.js:92
+#: geobox/web/templates/js/translation.js:93
 msgid "Copy feature(s)"
 msgstr "Geometrie(n) kopieren"
 
-#: geobox/web/templates/js/translation.js:95
+#: geobox/web/templates/js/translation.js:96
 msgid "Measure point"
 msgstr "Punkt bestimmen"
 
-#: geobox/web/templates/js/translation.js:96
+#: geobox/web/templates/js/translation.js:97
 msgid "Measure path"
 msgstr "Strecke messen"
 
-#: geobox/web/templates/js/translation.js:97
+#: geobox/web/templates/js/translation.js:98
 msgid "Measure area"
 msgstr "Fläche messen"
 
-#: geobox/web/templates/js/translation.js:100
+#: geobox/web/templates/js/translation.js:101
 msgid "Bad JSON: "
 msgstr "Schlechtes JSON: "
 
-#: geobox/web/templates/js/translation.js:101
+#: geobox/web/templates/js/translation.js:102
 msgid "Only OpenLayers.Feature.Vector is supported."
 msgstr "Es werden nur Objekte des Typs OpenLayers.Feature.Vector unterstützt."
 
-#: geobox/web/templates/js/translation.js:102
+#: geobox/web/templates/js/translation.js:103
 msgid "Feature was"
 msgstr "Objekt war"
 
-#: geobox/web/templates/js/translation.js:105
+#: geobox/web/templates/js/translation.js:106
 msgid "Select a value"
 msgstr "Wert auswählen"
 
-#: geobox/web/templates/js/translation.js:106
+#: geobox/web/templates/js/translation.js:107
 msgid "Attribute"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/js/translation.js:108
+#: geobox/web/templates/js/translation.js:109
 msgid "Exact"
 msgstr "Exakte Werte"
 
-#: geobox/web/templates/js/translation.js:109
+#: geobox/web/templates/js/translation.js:110
 msgid "Range"
 msgstr "Wertebereich"
 
-#: geobox/web/templates/js/translation.js:110
+#: geobox/web/templates/js/translation.js:111
 msgid "Value"
 msgstr "Wert"
 
-#: geobox/web/templates/js/translation.js:111
+#: geobox/web/templates/js/translation.js:112
 msgid "Color"
 msgstr "Farbe"
 
-#: geobox/web/templates/js/translation.js:112
+#: geobox/web/templates/js/translation.js:113
 msgid "Min"
 msgstr "Minimum"
 
-#: geobox/web/templates/js/translation.js:113
+#: geobox/web/templates/js/translation.js:114
 msgid "Max"
 msgstr "Maximum"
 
-#: geobox/web/templates/js/translation.js:114
+#: geobox/web/templates/js/translation.js:115
 msgid "Execute"
 msgstr "Ausführen"
 
-#: geobox/web/templates/js/translation.js:115
+#: geobox/web/templates/js/translation.js:116
 msgid "Legend for"
 msgstr "Legende für"
 
-#: geobox/web/templates/js/translation.js:116
+#: geobox/web/templates/js/translation.js:117
 msgid "Area in"
 msgstr "Fläche in"
 
-#: geobox/web/templates/js/translation.js:117
+#: geobox/web/templates/js/translation.js:118
 msgid "No thematical map present for this layer"
 msgstr "Für diesen Layer existiert keine thematische Karte"
 
-#: geobox/web/templates/js/translation.js:118
+#: geobox/web/templates/js/translation.js:119
 msgid "Add input"
 msgstr "Wert hinzufügen"
 
-#: geobox/web/templates/js/translation.js:119
+#: geobox/web/templates/js/translation.js:120
 msgid "Remove input"
 msgstr "Eintrag entfernen"
 
-#: geobox/web/templates/js/translation.js:120
+#: geobox/web/templates/js/translation.js:121
 msgid "No layer selected"
 msgstr "Keine Ebene ausgewählt"
 
-#: geobox/web/templates/js/translation.js:121
+#: geobox/web/templates/js/translation.js:122
 msgid "No attributes selected"
 msgstr "Keine Eigenschaften ausgewählt"
 
-#: geobox/web/templates/js/translation.js:122
+#: geobox/web/templates/js/translation.js:123
 msgid "Show all features"
 msgstr "Alle Einträge anzeigen"
 
-#: geobox/web/templates/js/translation.js:123
+#: geobox/web/templates/js/translation.js:124
 msgid "Show in list"
 msgstr "In Liste anzeigen"
 
-#: geobox/web/templates/js/translation.js:124
+#: geobox/web/templates/js/translation.js:125
 msgid "Apply"
 msgstr "Übernehmen"
 
-#: geobox/web/templates/js/translation.js:125
+#: geobox/web/templates/js/translation.js:126
 msgid "Map settings"
 msgstr "Karteneinstellungen"
 
-#: geobox/web/templates/js/translation.js:126
+#: geobox/web/templates/js/translation.js:127
 msgid "Legend"
 msgstr "Legende"
 
-#: geobox/web/templates/js/translation.js:127
+#: geobox/web/templates/js/translation.js:128
 msgid "Short list"
 msgstr "Kurze Liste"
 
-#: geobox/web/templates/js/translation.js:128
+#: geobox/web/templates/js/translation.js:129
 msgid "Complete list"
 msgstr "Komplette Liste"
 
-#: geobox/web/templates/js/translation.js:129
+#: geobox/web/templates/js/translation.js:130
 msgid "List settings"
 msgstr "Liste/Popup Einstellungen"
 
-#: geobox/web/templates/js/translation.js:130
+#: geobox/web/templates/js/translation.js:131
 msgid "Active"
 msgstr "Aktivieren"
 
-#: geobox/web/templates/js/translation.js:131
+#: geobox/web/templates/js/translation.js:132
 msgid "Choose value"
 msgstr "Wert auswählen"
 
-#: geobox/web/templates/js/translation.js:132
+#: geobox/web/templates/js/translation.js:133
 msgid "No entries"
 msgstr "Keine Einträge"
 
-#: geobox/web/templates/js/translation.js:133
+#: geobox/web/templates/js/translation.js:134
 msgid "Apply changes"
 msgstr "Änderungen übernehmen"
 
-#: geobox/web/templates/js/translation.js:134
+#: geobox/web/templates/js/translation.js:135
 msgid "Discard changes"
 msgstr "Änderungen verwerfen"
 
-#: geobox/web/templates/js/translation.js:135
+#: geobox/web/templates/js/translation.js:136
 msgid "Show in popup"
 msgstr "In Popup anzeigen"
 
-#: geobox/web/templates/js/translation.js:136
+#: geobox/web/templates/js/translation.js:137
 msgid "csv"
 msgstr "CSV exportieren"
 
-#: geobox/web/templates/js/translation.js:137
+#: geobox/web/templates/js/translation.js:138
 msgid "odt"
 msgstr "ODT exportieren"
 
-#: geobox/web/templates/js/translation.js:138
+#: geobox/web/templates/js/translation.js:139
 msgid "create settings"
 msgstr "Zu den Einstellungen"
 
-#: geobox/web/templates/js/translation.js:139
+#: geobox/web/templates/js/translation.js:140
 msgid "legend"
 msgstr "Legende"
 
-#: geobox/web/templates/js/translation.js:141
+#: geobox/web/templates/js/translation.js:142
 msgid "list"
 msgstr "Liste"
 
-#: geobox/web/templates/js/translation.js:142
+#: geobox/web/templates/js/translation.js:143
 msgid "active"
 msgstr "Aktivieren"
 
-#: geobox/web/templates/js/translation.js:143
+#: geobox/web/templates/js/translation.js:144
 msgid "map settings"
 msgstr "Karte"
 
-#: geobox/web/templates/js/translation.js:144
+#: geobox/web/templates/js/translation.js:145
 msgid "list settings"
 msgstr "Liste"
 
-#: geobox/web/templates/js/translation.js:145
+#: geobox/web/templates/js/translation.js:146
 msgid "layer has not attributes"
 msgstr "Der Layer besitzt keine Attribute"
 
-#: geobox/web/templates/js/translation.js:146
+#: geobox/web/templates/js/translation.js:147
 msgid "Select filtered features"
 msgstr "Geometrien auswählen"
 
-#: geobox/web/templates/js/translation.js:147
+#: geobox/web/templates/js/translation.js:148
 msgid "Show feature list with user defined attributes"
 msgstr "Zeigt Liste mit ausgewählten Attributen"
 
-#: geobox/web/templates/js/translation.js:148
+#: geobox/web/templates/js/translation.js:149
 msgid "Show feature list with all attributes"
 msgstr "Zeigt Liste mit allen Attributen"
 
-#: geobox/web/templates/js/translation.js:149
+#: geobox/web/templates/js/translation.js:150
 msgid "Create thematical map using exact values"
 msgstr "Erstellt eine thematische Karte mit exakten Werten"
 
-#: geobox/web/templates/js/translation.js:150
+#: geobox/web/templates/js/translation.js:151
 msgid "Create thematical map using ranges"
 msgstr "Erstellt eine thematische Karte mit Wertbereichen"
 
-#: geobox/web/templates/js/translation.js:151
+#: geobox/web/templates/js/translation.js:152
 msgid "Add value field"
 msgstr "Fügt ein Legendenfeld hinzu"
 
-#: geobox/web/templates/js/translation.js:152
+#: geobox/web/templates/js/translation.js:153
 msgid "Select attribute"
 msgstr "Eigenschaft auswählen"
 
-#: geobox/web/templates/js/translation.js:153
+#: geobox/web/templates/js/translation.js:154
 msgid "Max autogenerated colors reached"
 msgstr "Maximale Anzahl an automatisch<br>generierten Wert-Farb-Paaren erreicht"
 
-#: geobox/web/templates/js/translation.js:154
+#: geobox/web/templates/js/translation.js:155
 msgid "Unselect filtered features"
 msgstr "Auswahl aufheben"
 
-#: geobox/web/templates/js/translation.js:157
+#: geobox/web/templates/js/translation.js:158
 msgid "load wms capabilities"
 msgstr "Capabilities wurden geladen"
 
-#: geobox/web/templates/js/translation.js:158
+#: geobox/web/templates/js/translation.js:159
 msgid "preview not possible"
 msgstr "Vorschau nicht möglich. Kein Layer gewählt oder Koordiantensystem wird nicht unterstützt."
 
-#: geobox/web/templates/js/translation.js:159
+#: geobox/web/templates/js/translation.js:160
 msgid "Show filtered features in list"
 msgstr "Zeige in Liste"
 
-#: geobox/web/templates/js/translation.js:162
+#: geobox/web/templates/js/translation.js:163
 msgid "Layer to seed"
 msgstr "Datenimport für Layer"
 
-#: geobox/web/templates/js/translation.js:163
+#: geobox/web/templates/js/translation.js:164
 msgid "Start level"
 msgstr "Startlevel"
 
-#: geobox/web/templates/js/translation.js:164
+#: geobox/web/templates/js/translation.js:165
 msgid "End level"
 msgstr "Endlevel"
 
-#: geobox/web/templates/js/translation.js:165
+#: geobox/web/templates/js/translation.js:166
 msgid "Start seeding"
 msgstr "Datenimport gestarten"
 
-#: geobox/web/templates/js/translation.js:166
+#: geobox/web/templates/js/translation.js:167
 msgid "Stop seeding"
 msgstr "Datenimport gestoppen"
 
-#: geobox/web/templates/js/translation.js:167
+#: geobox/web/templates/js/translation.js:168
 msgid "Seeding finished"
 msgstr "Datenimport beendet"
 
-#: geobox/web/templates/js/translation.js:168
+#: geobox/web/templates/js/translation.js:169
 msgid "No BBox given"
 msgstr "Kein Bereich für den Datenimport in der Karte markiert"
 
-#: geobox/web/templates/js/translation.js:169
+#: geobox/web/templates/js/translation.js:170
 msgid "Tiles estimated"
 msgstr "Kacheln werden importiert"
 
-#: geobox/web/templates/js/translation.js:170
+#: geobox/web/templates/js/translation.js:171
 msgid "Seeding stopped"
 msgstr "Datenimport gestoppt"
 
-#: geobox/web/templates/js/translation.js:171
+#: geobox/web/templates/js/translation.js:172
 msgid "No layer to seed"
 msgstr "Kein Layer für Datenimport vorhanden"
 
-#: geobox/web/templates/js/translation.js:173
+#: geobox/web/templates/js/translation.js:174
 msgid "Feature attributes violate schema"
 msgstr "Attribute der selektierten Geometrie(n) verletzen das Schema.<br>Bitte editieren Sie die Attribute."
 
@@ -2360,15 +2374,6 @@ msgstr "Ungültiger Wert. Der Wert muss eines der folgenen sein: %(values)s."
 #, python-format
 msgid "Invalid value, can't be any of: %(values)s."
 msgstr "Ungültiger Wert: %(values)s sind nicht möglich."
-
-#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
-#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
-#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
-#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
-#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
-#: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:419
-msgid "Not a valid choice"
-msgstr "Keine gültige Auswahl."
 
 #: /home/kai/.virtualenvs/cust-igreen-gbi-client/local/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:109
 msgid "Not a valid list"

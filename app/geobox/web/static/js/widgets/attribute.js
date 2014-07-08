@@ -876,7 +876,7 @@ gbi.widgets.AttributeEditor.viewOnlyTemplate = '\
                         <% } %>\
                     </td>\
                     <td>\
-                        <button id="_<%=key%>_label" title="Show labels" class="btn btn-small add-label-button">\
+                        <button id="_<%=key%>_label" title="' + attributeLabel.label + '" class="btn btn-small add-label-button">\
                             <i class="icon-eye-open"></i>\
                         </button>\
                     </td>\

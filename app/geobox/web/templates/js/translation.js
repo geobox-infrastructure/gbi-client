@@ -40,6 +40,7 @@ OpenLayers.Lang['en'] = OpenLayers.Util.applyDefaults({
     "sameKeyDifferentValue": "{{ _('Same attribute with different values') }}",
     "Successful refreshed": "{{ _('Successful refreshed') }}",
     "Save attribute changes": "{{ _('Save attribute changes') }}",
+    "Cannot display properties of Features across multiple layers": "{{ _('Cannot display properties of Features across multiple layers') }}",
 
     // styling - widget
     'line': "{{ _('line') }}",
