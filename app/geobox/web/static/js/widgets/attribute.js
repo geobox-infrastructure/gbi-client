@@ -577,21 +577,21 @@ gbi.widgets.AttributeEditor.prototype = {
             data: data
         }
     },
-    renderAttributeTable: function(attributes) {
+    renderAttributeTable: function(attributes, jsonSchema) {
         var self = this;
 
-        if(self.jsonSchema) {
+        if(jsonSchema) {
             var alpacaOptions = self.prepareAlpacaOptions();
             this.element.append(tmpl(gbi.widgets.AttributeEditor.alpacaTemplate, {
                 'table': true,
                 'invalid': self.selectedInvalidFeature,
                 'additionalAttributes': Object.keys(alpacaOptions['nonSchema']['properties']).length > 0,
                 'scrollHeight': self.options.scrollHeight,
-                'schema_name': self.jsonSchema['title']
+                'schema_name': jsonSchema['title']
             }));
 
             $.alpaca(self.options.alpacaSchemaElement, {
-                "schema": self.jsonSchema,
+                "schema": jsonSchema,
                 "data": alpacaOptions['data'],
                 "options": alpacaOptions['schemaOptions'],
                 view: "VIEW_GBI_TABLE"
@@ -600,7 +600,7 @@ gbi.widgets.AttributeEditor.prototype = {
                 "schema": alpacaOptions['nonSchema'],
                 "data": alpacaOptions['data'],
                 "options": alpacaOptions['nonSchemaOptions'],
-                view: self.jsonSchema.additionalProperties === false ? "VIEW_GBI_TABLE_INVALID" : "VIEW_GBI_TABLE"
+                view: jsonSchema.additionalProperties === false ? "VIEW_GBI_TABLE_INVALID" : "VIEW_GBI_TABLE"
             });
         } else {
             var selectedFeatureAttributes = self.prepareSelectedFeatureAttributes(attributes);
