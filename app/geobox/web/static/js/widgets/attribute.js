@@ -176,6 +176,9 @@ gbi.widgets.AttributeEditor.prototype = {
             self.renderInputMask(attributes, layer);
         } else {
             self.renderAttributeTable(attributes, layer == self.activeLayer ? self.jsonSchema : false);
+            if(layer != self.activeLayer) {
+                $('.add-label-button').hide();
+            }
         }
         //prepare list of all possible rendered attributes
         var renderedAttributes = [];
