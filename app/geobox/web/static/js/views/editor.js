@@ -19,8 +19,7 @@ $(document).ready(function() {
     'gbi.layer.refreshed': [refreshWidgets, refreshJSONSchemaInput]
   };
   var olLayerEvents = {
-    'featureselected': [storeSelectedFeatures, enableAttributeEdit],
-    'featureunselected': [disableAttributeEdit],
+    'featureselected': [storeSelectedFeatures],
     'start_bulk': [enableBulkMode],
     'end_bulk': [disableBulkMode]
   };
@@ -46,9 +45,7 @@ $(document).ready(function() {
       $.each(layer.selectedFeatures, function(idx, feature) {
         editor.widgets.attributeEditor.handleFeatureSelected({feature: feature}, false);
       });
-      enableAttributeEdit({feature: feature})
     } else  {
-      disableAttributeEdit();
     }
     updateArea();
     editor.widgets.attributeEditor.updateLayerFeatures(layer);
@@ -69,14 +66,20 @@ $(document).ready(function() {
 
   $.each(editor.layerManager.vectorLayers, function(idx, layer) {
     layer.registerEvent('featureselected', editor, updateArea)
+    layer.registerEvent('featureselected', editor, toggleAttributeEdit)
     layer.registerEvent('featureunselected', editor, updateArea)
+    layer.registerEvent('featureunselected', editor, toggleAttributeEdit)
     layer.registerEvent('featuremodified', editor, updateArea)
+    layer.registerEvent('end_bulk', editor, toggleAttributeEdit)
   });
 
   $(gbi).on('gbi.layermanager.vectorlayer.add', function(event, layer) {
     layer.registerEvent('featureselected', editor, updateArea)
+    layer.registerEvent('featureselected', editor, toggleAttributeEdit)
     layer.registerEvent('featureunselected', editor, updateArea)
+    layer.registerEvent('featureunselected', editor, toggleAttributeEdit)
     layer.registerEvent('featuremodified', editor, updateArea)
+    layer.registerEvent('end_bulk', editor, toggleAttributeEdit)
   });
 
   $('#exportVectorLayer form').submit(function(event) {
@@ -540,20 +543,13 @@ $(document).ready(function() {
     displayArea(area);
   };
 
-  function enableAttributeEdit() {
+  function toggleAttributeEdit() {
     if(editor.bulkMode) {
       return;
     }
     if(editor.widgets.attributeEditor.isEditable()) {
       $('#activate_attribute_edit_mode').removeAttr('disabled');
-    }
-  }
-
-  function disableAttributeEdit() {
-    if(editor.bulkMode) {
-      return;
-    }
-    if(!editor.widgets.attributeEditor.isEditable()) {
+    } else {
       $('#activate_attribute_edit_mode').attr('disabled', 'disabled');
     }
   }
