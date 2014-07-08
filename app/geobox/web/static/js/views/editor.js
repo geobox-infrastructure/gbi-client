@@ -49,9 +49,9 @@ $(document).ready(function() {
       enableAttributeEdit({feature: feature})
     } else  {
       disableAttributeEdit();
-      editor.widgets.attributeEditor.updateLayerFeatures(layer)
     }
     updateArea();
+    editor.widgets.attributeEditor.updateLayerFeatures(layer);
     editor.widgets.attributeEditor.render();
   }
 
