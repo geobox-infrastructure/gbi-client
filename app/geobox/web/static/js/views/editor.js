@@ -127,13 +127,17 @@ $(document).ready(function() {
     $('#odata_url').val(activeLayer.odataUrl);
   }
 
-  $('#tabs a').click(function (e) {
+  $('#tabs > li > a').click(function (e) {
     e.preventDefault();
-    $(this).tab('show');
-  });
-
-  $("#tabs > li > a ").click(function() {
+    if($(this).parent().hasClass('active')) {
+      return false;
+    }
     var tab = $(this).attr('href');
+
+    if(editor.widgets.attributeEditor.editMode === true) {
+      $('#attributeEditModeActiveModal').modal('show')
+      return false
+    }
 
     // seeding widgets changes active layer back to real active layer when deactivate
     if(offline) {
@@ -167,6 +171,8 @@ $(document).ready(function() {
     if(offline && tab == '#seeding') {
       editor.widgets.seeding.activate();
     }
+
+    $(this).tab('show');
   });
 
   $('a[data-toggle="tab"]').on('shown', function (e) {
