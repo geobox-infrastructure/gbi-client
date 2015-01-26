@@ -206,8 +206,14 @@ gbi.widgets.AttributeEditor.prototype = {
 
         //bind events
         $.each(renderedAttributes, function(idx, key) {
-            $('#'+key).keyup(function() {
+            $("input[type!='checkbox']#"+key).keyup(function() {
                 self.edit(key, $(this).val());
+            });
+            $('select#'+key).change(function() {
+                self.edit(key, $(this).val());
+            });
+            $("input[type='checkbox']#"+key).change(function() {
+                self.edit(key, $(this).is(':checked'))
             });
             $('#_'+key+'_remove').click(function() {
                 self.remove(key);
@@ -525,6 +531,12 @@ gbi.widgets.AttributeEditor.prototype = {
         $.each(self.jsonSchema.properties, function(name, prop) {
             name = self.attributeID(name);
             schemaOptions.fields[name] = {'id': name};
+            // If schema property contains enum, always render field as
+            // select-field. Review if radio-button-groups should be supported
+            // too
+            if(prop.enum !== undefined) {
+                schemaOptions.fields[name].type = 'select';
+            }
         });
 
         var nonSchema = {
