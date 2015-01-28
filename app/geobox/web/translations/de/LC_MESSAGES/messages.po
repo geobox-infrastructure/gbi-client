@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-26 18:30+0100\n"
-"PO-Revision-Date: 2015-01-26 18:32+0100\n"
+"POT-Creation-Date: 2015-01-28 09:11+0100\n"
+"PO-Revision-Date: 2015-01-28 09:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -932,11 +932,15 @@ msgstr "Schließen"
 
 #: geobox/web/templates/editor.html:423
 msgid "Attribute edit mode active"
-msgstr "Editiermodus für Attribute aktiv"
+msgstr "Eigenschaften bearbeiten aktiv"
 
 #: geobox/web/templates/editor.html:427
-msgid "Finish attribute editing before proceed"
-msgstr "Beenden Sie das Bearbeiten der Attribute bevor Sie fortfahren"
+msgid ""
+"Finish attribute editing by accepting or rejecting your changes before "
+"proceed"
+msgstr ""
+"Beenden Sie das Bearbeiten der Eigenschaften indem Sie Ihre Änderungen "
+"übernehmen oder verwerfen bevor Sie fortfahren"
 
 #: geobox/web/templates/index.html:10
 msgid "Welcome to GeoBox"

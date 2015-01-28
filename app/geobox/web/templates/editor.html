@@ -417,15 +417,13 @@
     </div>
 
     <!-- modal for edit mode active warning -->
-    <div id="attributeEditModeActiveModal" class="modal hide text-error">
+    <div id="attributeEditModeActiveModal" class="modal hide">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>{{_('Attribute edit mode active')}} </h3>
       </div>
-      <div id="editModeActiveContainer" class="text-center">
-        <br>
-        <p>{{_('Finish attribute editing before proceed')}}</p>
-        </br>
+      <div id="editModeActiveContainer" class="modal-body">
+        <p>{{_('Finish attribute editing by accepting or rejecting your changes before proceed')}}</p>
       </div>
       <div class="modal-footer">
         <div class=" text-center">

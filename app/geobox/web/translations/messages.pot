@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-26 18:30+0100\n"
+"POT-Creation-Date: 2015-01-28 09:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -891,7 +891,9 @@ msgid "Attribute edit mode active"
 msgstr ""
 
 #: geobox/web/templates/editor.html:427
-msgid "Finish attribute editing before proceed"
+msgid ""
+"Finish attribute editing by accepting or rejecting your changes before "
+"proceed"
 msgstr ""
 
 #: geobox/web/templates/index.html:10

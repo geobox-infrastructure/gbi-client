@@ -397,3 +397,8 @@ hr#save_dividing_line {
     overflow: auto;
     margin-bottom: 15px;
 }
+
+#attributeEditModeActiveModal {
+    overflow: auto;
+    margin-bottom: 15px;
+}
