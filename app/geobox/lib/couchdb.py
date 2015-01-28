@@ -465,10 +465,6 @@ class VectorCouchDB(CouchDBBase):
                                         if(row.value.hasOwnProperty(prop)){
                                             if(typeof(row.value[prop]) === "number" || /[-+]?[0-9]*\.?[0-9]+/.test(row.value[prop])) {
                                                 send('<d:'+prop+' m:type="Edm.Double">'+row.value[prop]+'</d:'+prop+'>');
-                                            } else if (!isNaN(Date.parse(row.value[prop]))) {
-                                                var d = Date.parse(row.value[prop]);
-                                                var date = new Date(d).toUTCString();
-                                                send('<d:'+prop+' m:type="Edm.DateTime">'+date+'</d:'+prop+'>');
                                             } else {
                                                 send('<d:'+prop+' m:type="Edm.String">'+row.value[prop]+'</d:'+prop+'>');
                                             }
