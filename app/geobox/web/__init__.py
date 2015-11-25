@@ -15,6 +15,8 @@
 
 import os
 import sys
+import csv
+from ..model import GBIServer
 
 from flask import Flask, g, request, make_response, jsonify, render_template, flash, redirect, url_for, session, abort
 
@@ -50,6 +52,7 @@ def create_app(app_state):
     app.register_blueprint(views.boxes)
     app.register_blueprint(views.raster)
 
+    load_servers_from_list(app_state)
 
     @app.before_request
     def before_request():
@@ -73,6 +76,20 @@ def create_app(app_state):
     configure_i18n(app, app_state.locale())
     configure_errorhandlers(app)
     return app
+
+
+def load_servers_from_list(app_state):
+    db_session = app_state.user_db_session()
+    log.info('reading %s', app_state.config.get('web', 'server_list'))
+    with open(app_state.config.get('web', 'server_list'), 'r') as server_list:
+        for row in csv.reader(server_list):
+            server = db_session.query(GBIServer).filter_by(url=row[1]).first()
+            if server is None:
+                server = GBIServer(title=row[0], url=row[1])
+                db_session.add(server)
+                log.info('Create server entry for %s', row[0])
+    db_session.commit()
+
 
 def configure_i18n(app, locale):
     babel = Babel(app)
