@@ -1,0 +1,1 @@
+../app/manage.py
