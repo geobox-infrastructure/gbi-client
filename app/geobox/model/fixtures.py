@@ -18,10 +18,23 @@ from geobox import model
 
 def add_fixtures(session):
 
-    source = model.ExternalWMTSSource(name='osm2', title='OpenStreetMap', url='http://a.tile.openstreetmap.org/', format='png', download_level_start=8, download_level_end=18, layer='osm2')
-    session.add(source)
+    wmts_source = model.ExternalWMTSSource(
+        name='osm2',
+        title='OpenStreetMap',
+        url='http://a.tile.openstreetmap.org/',
+        format='png',
+        download_level_start=8,
+        download_level_end=18,
+        layer='osm2',
+    )
+    session.add(wmts_source)
 
-    source = model.LocalWMTSSource(name='testLocalWMTSSource', layer='test_layer', format='png', is_base_layer=False, is_overlay=True, download_level_start=3, download_level_end=15)
+    source = model.LocalWMTSSource(
+        name='testLocalWMTSSource',
+        wmts_source=wmts_source,
+        download_level_start=3,
+        download_level_end=15,
+    )
     session.add(source)
 
     project = model.ExportProject(
@@ -29,20 +42,29 @@ def add_fixtures(session):
         export_format='JPEG',
         export_raster_layers=[
             model.ExportRasterLayer(
-                start_level=5, end_level=12, source=model.LocalWMTSSource(
-                    name='testLocalWMTSSource3', layer='test_layer3',
-                    format='png', is_base_layer=False, is_overlay=True,
-                    download_level_start=4, download_level_end=18)
+                start_level=5,
+                end_level=12,
+                source=model.LocalWMTSSource(
+                    name='testLocalWMTSSource3',
+                    wmts_source=wmts_source,
+                    download_level_start=4,
+                    download_level_end=18,
+                )
             )
         ],
         export_vector_layers=[
             model.ExportVectorLayer(
-                file_name="bar.shp", mapping_name='Lines'
+                file_name="bar.shp"
             )
         ],
         tasks=[
             model.RasterExportTask(
-                layer=model.LocalWMTSSource(name='testLocalWMTSSource2', layer='test_layer2', format='png', is_base_layer=False, is_overlay=True, download_level_start=6, download_level_end=18),
+                layer=model.LocalWMTSSource(
+                    name='testLocalWMTSSource2',
+                    wmts_source=wmts_source,
+                    download_level_start=6,
+                    download_level_end=18,
+                ),
                 export_format='TIFF'
             )
         ]
@@ -56,8 +78,10 @@ def add_fixtures(session):
                 start_level=6, end_level=10, source=model.ExternalWMTSSource(
                     name='osm', title='OSM',
                     url='http://a.tile.openstreetmap.org/',
-                    format='png', download_level_start=4, download_level_end=18,
-                    layer='osm'
+                    format='png',
+                    download_level_start=4,
+                    download_level_end=18,
+                    layer='osm',
                 )
             )
         ]

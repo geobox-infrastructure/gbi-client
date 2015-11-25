@@ -1,0 +1,62 @@
+GBI Repository
+##############
+
+GBI-Client
+==========
+
+Requirements
+------------
+
+- couchdb
+
+
+gbi-editor
+~~~~~~~~~~
+
+::
+	git submodule update --init --recursive
+
+
+Application
+-----------
+
+::
+    mkvirtualenv gbi-client --system-site-packages
+
+
+Install Python dependencies::
+
+    pip install -r ./requirements.txt
+
+
+Development Modus with own couchdb
+----------------------------------
+
+Start your couchdb.
+Notice: You have to start the couch with Admin Party.
+
+Create tables and insert fixtures in the sqlite database
+
+::
+
+    python manage.py fixtures
+
+
+
+Start the app:
+
+::
+
+    python manage.py webserver
+
+
+
+Development Modus system couchdb
+--------------------------------
+
+The geobox app starts its own couchdb.
+
+
+::
+	cd ../app/
+	python -m geobox.app
