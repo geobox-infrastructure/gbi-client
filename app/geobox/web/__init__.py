@@ -50,17 +50,10 @@ def create_app(app_state):
     app.register_blueprint(views.boxes)
     app.register_blueprint(views.raster)
 
+
     @app.before_request
     def before_request():
-        from helper import request_for_static
-
         g.db = app_state.user_db_session()
-        if request_for_static():
-            return
-
-        username = session.get('username', False)
-        if not username and request.endpoint != 'user_view.login':
-             abort(403)
 
     @app.teardown_request
     def teardown_request(exception):
