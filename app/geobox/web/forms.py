@@ -27,7 +27,10 @@ from wtforms.ext.csrf.session import SessionSecureForm
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 from flaskext.babel import lazy_gettext, gettext, ngettext
-from geobox.model import LocalWMTSSource, ExternalWMTSSource, ExternalWFSSource, Project
+from geobox.model import (
+    LocalWMTSSource, ExternalWMTSSource, ExternalWFSSource, Project, GBIServer
+)
+
 
 class BabelTranslations(object):
     def gettext(self, string):
@@ -197,6 +200,9 @@ def get_all_projects_withs_coverages():
 def get_wfs_source():
     return g.db.query(ExternalWFSSource).filter_by(active=True).all()
 
+def get_gbi_servers():
+    return g.db.query(GBIServer).all()
+
 class SelectCoverage(Form):
     select_coverage = QuerySelectField(lazy_gettext('select coverage'), query_factory=get_all_projects_withs_coverages, get_label='title')
 
@@ -274,3 +280,10 @@ class WFSSearchForm(Form):
 
 class CreateCouchAppForm(Form):
     couch_url = TextField(lazy_gettext('couchapp_couch_url'), validators=[Required()])
+
+
+class RefreshGBIServerForm(Form):
+    username = TextField(lazy_gettext('username'))
+    password = PasswordField(lazy_gettext('Password'))
+    server_url = QuerySelectField(lazy_gettext('gbi server'),
+                                  query_factory=get_gbi_servers, get_label='title')

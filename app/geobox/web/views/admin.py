@@ -19,6 +19,7 @@ import codecs
 from flask import Blueprint, render_template, current_app, abort, flash, g, request, redirect, url_for, session
 from flaskext.babel import _
 from ...model.sources import LocalWMTSSource
+from ...model.server import GBIServer
 
 from ..utils import request_is_local
 from ..helper import redirect_back
@@ -36,27 +37,29 @@ def restrict_to_local():
     if not request_is_local():
         abort(403)
 
+
 @admin_view.route('/admin')
 def admin():
-    form = forms.LoginForm(request.form)
-    form.server_url.data = current_app.config.geobox_state.config.get('web', 'context_document_url')
-    del(form.username)
+    form = forms.RefreshGBIServerForm(request.form)
 
     tilebox_form = forms.TileBoxPathForm()
-    tilebox_form.path.data = current_app.config.geobox_state.config.get('tilebox', 'path')
+    tilebox_form.path.data = current_app.config.geobox_state.config.get(
+        'tilebox', 'path'
+    )
 
     return render_template('admin.html', localnet=get_localnet_status(),
-        form=form, tilebox_form=tilebox_form)
+                           form=form, tilebox_form=tilebox_form)
 
 
 @admin_view.route('/admin/refresh_context', methods=['POST'])
 def refresh_context():
     app_state = current_app.config.geobox_state
-    context_document_url = request.form.get('server_url', False)
-    if not context_document_url:
-        context_document_url = app_state.config.get('web', 'context_document_url')
+    form = forms.RefreshGBIServerForm(request.form)
+    context_document_url = form.server_url.data.url
+
     try:
-        context.reload_context_document(context_document_url, app_state, session['username'], request.form['password'])
+        context.reload_context_document(context_document_url, app_state,
+                                        form.username.data, form.password.data)
     except context.AuthenticationError:
         flash(_('username or password not correct'), 'error')
     except ValueError:

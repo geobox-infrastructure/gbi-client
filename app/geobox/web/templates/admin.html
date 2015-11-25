@@ -36,7 +36,8 @@
     <form id="reloadContextDocument" method="POST" action="{{ url_for('.refresh_context') }} " class="form-horizontal">
         {{ form.csrf_token }}
         {{ input(form.server_url) }}
-        {{ input(form.password) }}
+        {{ input(form.username, tooltip=_('tooltip load context document username')) }}
+        {{ input(form.password, tooltip=_('tooltip load context document password')) }}
         <div class="control-group">
           <div class="controls">
             <button type="submit" class="btn btn-small">{{ _('load context')}}</button>
