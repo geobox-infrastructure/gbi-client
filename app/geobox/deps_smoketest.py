@@ -89,7 +89,7 @@ def test_fiona():
 
 def test_pil():
     """Testing PIL: Python Image Library."""
-    import Image
+    from PIL import Image
 
     tempdir = tempfile.mkdtemp()
     tempimgfile = os.path.join(tempdir, 'test.png')
@@ -103,7 +103,7 @@ def test_pil():
 
 def test_gdal():
     """Testing GDAL: Python bindings to GDAL for GeoTIFF/JPEG export."""
-    import Image
+    from PIL import Image
     import gdal
     import gdalconst
 
