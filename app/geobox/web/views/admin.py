@@ -117,7 +117,7 @@ def set_home_server():
 
 @admin_view.route('/admin/reject_home_server', methods=['GET'])
 def reject_home_server():
-    app_state.new_home_server = None
+    current_app.config.geobox_state.new_home_server = None
     return redirect_back(url_for('main.index'))
 
 
