@@ -43,12 +43,18 @@ def restrict_to_local():
         abort(403)
 
 
-@admin_view.route('/admin')
-def admin():
+def prepare_set_server():
     server_list = current_app.config.geobox_state.server_list
-    auth_server = [s['url'] for s in server_list if s['auth']]
     form = forms.SetGBIServerForm(request.form)
     form.url.choices = [(s['url'], s['title']) for s in server_list]
+
+    auth_server = [s['url'] for s in server_list if s['auth']]
+    return form, auth_server
+
+
+@admin_view.route('/admin')
+def admin():
+    form, auth_server = prepare_set_server()
 
     tilebox_form = forms.TileBoxPathForm()
     tilebox_form.path.data = current_app.config.geobox_state.config.get(
@@ -62,13 +68,12 @@ def admin():
 
 @admin_view.route('/admin/set_gbi_server', methods=['GET', 'POST'])
 def set_gbi_server():
-    server_list = current_app.config.geobox_state.server_list
-    form = forms.SetGBIServerForm(request.form)
-    form.url.choices = [(s['url'], s['title']) for s in server_list]
+    form, auth_server = prepare_set_server()
+
     if form.validate_on_submit():
         _refresh_context(form.url.data, form.username.data, form.password.data)
         return redirect(url_for('main.index'))
-    auth_server = [s['url'] for s in server_list if s['auth']]
+
     return render_template('admin/set_server.html', form=form,
                            auth_server=json.dumps(auth_server))
 
@@ -84,16 +89,6 @@ def _refresh_context(url, username=None, password=None):
         flash(_('unable to fetch context document'), 'error')
     else:
         flash(_('load context document successful'), 'sucess')
-
-
-@admin_view.route('/admin/refresh_context', methods=['POST'])
-def refresh_context():
-
-    form = forms.RefreshGBIServerForm(request.form)
-    _refresh_context(form.server_url.data.url, form.username.data,
-                     form.password.data)
-
-    return redirect(url_for('.admin'))
 
 
 @admin_view.route('/admin/tilebox_restart', methods=['POST'])
