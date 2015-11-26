@@ -15,4 +15,9 @@ $(document).ready(function() {
     };
     $('#url').change(authRequired);
     authRequired();
+
+    $('#set-server-form').submit(function() {
+        $('#load-context-document').show();
+        return true;
+    });
 });

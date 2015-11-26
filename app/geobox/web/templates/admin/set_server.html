@@ -9,7 +9,12 @@
 
 <h1>{{_('set gbi server')}}</h1>
 
-<form method="POST" class="form-horizontal">
+<div id="load-context-document" class="alert hide">
+  <img src="{{ url_for('static', filename='img/loader.gif')}}">
+  <span>{{_('context document will be loaded and boxes are copied')}}</span>
+</div>
+
+<form id="set-server-form" method="POST" class="form-horizontal">
 
   <div class="control-group">
       {{ form.csrf_token }}
