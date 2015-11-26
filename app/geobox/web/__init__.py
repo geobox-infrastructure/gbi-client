@@ -44,7 +44,6 @@ def create_app(app_state):
     app.register_blueprint(views.editor)
     app.register_blueprint(views.tasks)
     app.register_blueprint(views.project)
-    app.register_blueprint(views.user)
     app.register_blueprint(views.admin)
     app.register_blueprint(views.vector)
     app.register_blueprint(views.downloads)
