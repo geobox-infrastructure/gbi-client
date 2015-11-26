@@ -14,7 +14,7 @@
 # limitations under the License.
 
 __all__ = [
-    'main', 'tasks', 'project', 'user',
+    'main', 'tasks', 'project',
     'admin', 'vector', 'downloads',
     'proxy', 'boxes', 'raster', 'editor',
 ]
@@ -23,7 +23,6 @@ __all__ = [
 from .main import main
 from .tasks import tasks_view as tasks
 from .project import project
-from .user import user_view as user
 from .admin import admin_view as admin
 from .vector import vector
 from .downloads import download_view as downloads
