@@ -54,6 +54,9 @@ class ExternalWMTSSource(Base):
     is_user_defined = sa.Column(sa.Boolean(), default=False)
     is_protected = sa.Column(sa.Boolean(), default=False)
 
+    gbi_server_id = sa.Column(sa.Integer, sa.ForeignKey('servers.id'), nullable=False)
+    gbi_server = orm.relationship('GBIServer', backref='wmts_sources')
+
     def bbox_from_view_coverage(self):
         coverage = coverage_from_geojson(self.view_coverage)
         bbox = coverage.bbox

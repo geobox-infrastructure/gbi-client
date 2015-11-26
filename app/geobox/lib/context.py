@@ -211,6 +211,7 @@ def reload_context_document(context_document_url, app_state, user, password):
     for source in updater.sources_from_context(context):
         if not first_source:
             first_source = source
+        source.gbi_server = gbi_server
         session.add(source)
 
     for source in session.query(model.ExternalWMTSSource):
