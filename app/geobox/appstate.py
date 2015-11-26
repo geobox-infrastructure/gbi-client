@@ -25,9 +25,10 @@ from contextlib import contextmanager
 import babel.support
 
 import sqlalchemy.exc
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, not_
 from sqlalchemy.orm import sessionmaker
 from geobox.model.meta import Base
+from geobox.model import GBIServer
 
 from geobox.utils import port_used
 
@@ -65,8 +66,17 @@ class GeoBoxState(object):
         self._ports = set()
         self.tilebox = TileBoxServer(self)
 
+        # combine loaded server list with stored servers
         with open(self.config.get('web', 'server_list'), 'r') as server_list_file:
             self.server_list = json.loads(server_list_file.read())['server']
+        session = self.user_db_session()
+        query = session.query(GBIServer)
+        query = query.filter(not_(GBIServer.url.in_([
+            s['url'] for s in self.server_list
+        ])))
+        self.server_list += [
+            dict(title=s.title, url=s.url, auth=s.auth) for s in query.all()
+        ]
 
     @classmethod
     def initialize(cls):
