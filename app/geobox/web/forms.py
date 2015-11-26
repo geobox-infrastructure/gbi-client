@@ -182,10 +182,6 @@ class ProjectEdit(Form):
         if form.data['download_level_start'] > field.data:
             raise ValidationError(lazy_gettext('level needs to be bigger or equal to start level'))
 
-class LoginForm(Form):
-    username = TextField(lazy_gettext('username'), validators=[Required()])
-    password = PasswordField(lazy_gettext('Password'), validators=[Required()])
-    server_url = TextField(lazy_gettext('context server url'))
 
 def get_local_wmts_source():
     return g.db.query(LocalWMTSSource).all()
