@@ -55,6 +55,7 @@ def prepare_set_server():
 @admin_view.route('/admin')
 def admin():
     form, auth_server = prepare_set_server()
+    form.next.data = 'admin.admin'
 
     tilebox_form = forms.TileBoxPathForm()
     tilebox_form.path.data = current_app.config.geobox_state.config.get(
@@ -72,7 +73,7 @@ def set_gbi_server():
 
     if form.validate_on_submit():
         _refresh_context(form.url.data, form.username.data, form.password.data)
-        return redirect(url_for('main.index'))
+        return redirect(url_for(form.next.data))
 
     return render_template('admin/set_server.html', form=form,
                            auth_server=json.dumps(auth_server))

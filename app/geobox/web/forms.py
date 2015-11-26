@@ -282,10 +282,11 @@ class SetGBIServerForm(Form):
     url = SelectField(lazy_gettext('gbi server'))
     username = TextField(lazy_gettext('username'))
     password = PasswordField(lazy_gettext('Password'))
-
+    next = HiddenField(default='main.index')
 
 class RefreshGBIServerForm(Form):
     username = TextField(lazy_gettext('username'))
     password = PasswordField(lazy_gettext('Password'))
     server_url = QuerySelectField(lazy_gettext('gbi server'),
                                   query_factory=get_gbi_servers, get_label='title')
+
