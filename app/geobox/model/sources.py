@@ -103,6 +103,9 @@ class ExternalWFSSource(Base):
     password = sa.Column(sa.String(64))
     is_protected = sa.Column(sa.Boolean(), default=False)
 
+    gbi_server_id = sa.Column(sa.Integer, sa.ForeignKey('servers.id'), nullable=False)
+    gbi_server = orm.relationship('GBIServer', backref='wfs_sources')
+
 
     @classmethod
     def by_id(cls, id):

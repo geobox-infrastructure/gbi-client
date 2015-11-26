@@ -222,6 +222,7 @@ def reload_context_document(context_document_url, app_state, user, password):
     for source in context.wfs_sources():
         wfs_source = wfs_source_for_conf(session, source, prefix)
         session.add(wfs_source)
+        wfs_source.gbi_server = gbi_server
 
     app_state.config.set('app', 'logging_server', context.logging_server())
     app_state.config.write()
