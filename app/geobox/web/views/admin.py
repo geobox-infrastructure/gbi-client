@@ -15,8 +15,12 @@
 # limitations under the License.
 
 import codecs
+import json
 
-from flask import Blueprint, render_template, current_app, abort, flash, g, request, redirect, url_for, session
+from flask import (
+    Blueprint, render_template, current_app, abort, flash, g, request,
+    redirect, url_for
+)
 from flaskext.babel import _
 from ...model.sources import LocalWMTSSource
 from ...model.server import GBIServer
@@ -31,6 +35,7 @@ from geobox.lib.mapproxy import write_mapproxy_config
 from geobox.web import forms
 
 admin_view = Blueprint('admin', __name__)
+
 
 @admin_view.before_request
 def restrict_to_local():
@@ -51,21 +56,51 @@ def admin():
                            form=form, tilebox_form=tilebox_form)
 
 
-@admin_view.route('/admin/refresh_context', methods=['POST'])
-def refresh_context():
-    app_state = current_app.config.geobox_state
-    form = forms.RefreshGBIServerForm(request.form)
-    context_document_url = form.server_url.data.url
+@admin_view.route('/admin/set_gbi_server', methods=['GET', 'POST'])
+def set_gbi_server():
+    server_list = current_app.config.geobox_state.server_list
+    form = forms.SetGBIServerForm(request.form)
+    form.url.choices = [(s['url'], s['title']) for s in server_list]
+    if form.validate_on_submit():
 
+        gbi_server = g.db.query(GBIServer).filter(
+            GBIServer.url == form.url.data).first()
+        if gbi_server is None:
+            server = [s for s in server_list if s['url'] == form.url.data]
+            if len(server) == 0:
+                raise Exception('Invalid server')
+            server = server[0]
+            gbi_server = GBIServer(title=server['title'], url=server['url'],
+                                   auth=server['auth'])
+        g.db.add(gbi_server)
+        g.db.commit()
+        _refresh_context(gbi_server.url, form.username.data,
+                         form.password.data)
+        return redirect(url_for('main.index'))
+    auth_server = [s['url'] for s in server_list if s['auth']]
+    return render_template('admin/set_server.html', form=form,
+                           auth_server=json.dumps(auth_server))
+
+
+def _refresh_context(url, username=None, password=None):
+    app_state = current_app.config.geobox_state
     try:
-        context.reload_context_document(context_document_url, app_state,
-                                        form.username.data, form.password.data)
+        context.reload_context_document(url, app_state,
+                                        username, password)
     except context.AuthenticationError:
         flash(_('username or password not correct'), 'error')
     except ValueError:
         flash(_('unable to fetch context document'), 'error')
     else:
         flash(_('load context document successful'), 'sucess')
+
+
+@admin_view.route('/admin/refresh_context', methods=['POST'])
+def refresh_context():
+
+    form = forms.RefreshGBIServerForm(request.form)
+    _refresh_context(form.server_url.data.url, form.username.data,
+                     form.password.data)
 
     return redirect(url_for('.admin'))
 

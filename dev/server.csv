@@ -1,3 +1,0 @@
-GBIServer,http://gbiserver.omniscale.net/context,true
-NoAuthServer,http://pkgs.omniscale.net/gbi/context/osm/context.json,false
-AuthServer,http://pkgs.omniscale.net/gbi/context/auth/context.json,false

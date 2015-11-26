@@ -282,6 +282,12 @@ class CreateCouchAppForm(Form):
     couch_url = TextField(lazy_gettext('couchapp_couch_url'), validators=[Required()])
 
 
+class SetGBIServerForm(Form):
+    url = SelectField(lazy_gettext('gbi server'))
+    username = TextField(lazy_gettext('username'))
+    password = PasswordField(lazy_gettext('Password'))
+
+
 class RefreshGBIServerForm(Form):
     username = TextField(lazy_gettext('username'))
     password = PasswordField(lazy_gettext('Password'))

@@ -19,6 +19,7 @@ import uuid
 import threading
 import tempfile
 import shutil
+import json
 from contextlib import contextmanager
 
 import babel.support
@@ -63,6 +64,9 @@ class GeoBoxState(object):
         self._port_lock = threading.Lock()
         self._ports = set()
         self.tilebox = TileBoxServer(self)
+
+        with open(self.config.get('web', 'server_list'), 'r') as server_list_file:
+            self.server_list = json.loads(server_list_file.read())['server']
 
     @classmethod
     def initialize(cls):

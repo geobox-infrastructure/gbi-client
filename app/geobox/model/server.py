@@ -27,5 +27,5 @@ class GBIServer(Base):
     url = sa.Column(sa.String(), nullable=False)
     prefix = sa.Column(sa.String())
     title = sa.Column(sa.String())
-    username = sa.Column(sa.String())
+    auth = sa.Column(sa.Boolean(), default=False)
     last_update = sa.Column(sa.DateTime())
