@@ -174,8 +174,23 @@ def wfs_source_for_conf(session, layer, prefix):
     source.active = True
     return source
 
+
 def reload_context_document(context_document_url, app_state, user, password):
     session = app_state.user_db_session()
+    server_list = app_state.server_list
+
+    # add selected gbi server if not in db
+    gbi_server = session.query(model.GBIServer).filter(
+        model.GBIServer.url == context_document_url).first()
+    if gbi_server is None:
+        server = [s for s in server_list if s['url'] == context_document_url]
+        if len(server) == 0:
+            raise Exception('Invalid server')
+        server = server[0]
+        gbi_server = model.GBIServer(title=server['title'], url=server['url'],
+                                     auth=server['auth'])
+        session.add(gbi_server)
+
     try:
         result = requests.get(context_document_url, auth=(user, password))
     except requests.exceptions.ConnectionError:
@@ -226,14 +241,19 @@ def reload_context_document(context_document_url, app_state, user, password):
 
     couchdb = CouchDB('http://127.0.0.1:%d' % app_state.config.get_int('couchdb', 'port'), '_replicator')
     coverage_box = app_state.config.get('web', 'coverages_from_couchdb')
-    for couchdb_source in context.couchdb_sources():
+    couchdb_sources = context.couchdb_sources()
+
+    if len(couchdb_sources) > 0:
+        session.query(model.GBIServer).update({'home_server': False})
+        gbi_server.home_server = True
+
+    for couchdb_source in couchdb_sources:
         if couchdb_source['dbname_user'] == coverage_box:
             # insert features from area/coverage box into layers
             insert_database_features(couchdb.couch_url, couchdb_source, vector_prefix)
         else:
             # replicate other couchdb sources
             replicate_database(couchdb, couchdb_source, app_state)
-
 
     context_user = context.user()
     if context_user:
@@ -242,6 +262,7 @@ def reload_context_document(context_document_url, app_state, user, password):
         app_state.config.set('user', 'type', '0') # set default to 0
 
     session.commit()
+
 
 def source_couchdb_url(couchdb_source):
     dburl = couchdb_source['url'] + '/' + couchdb_source['dbname']

@@ -23,17 +23,19 @@
     </ul>
   </div>
 
-  <div class="span12">
-    <h2>{{_('boxes')}}</h2>
-    <ul class="nav nav-list">
-      {% if is_consultant %}
-      <li><a href="{{ url_for('boxes.files', box_name='file') }}">{{ _('filebox') }}</a></li>
-      {% else %}
-      <li><a href="{{ url_for('boxes.files', box_name='download') }}">{{ _('downloadbox') }}</a></li>
-      <li><a href="{{ url_for('boxes.files', box_name='upload') }}">{{ _('uploadbox') }}</a></li>
-      {% endif %}
-    </ul>
-  </div>
+  {% if home_server %}
+    <div class="span12">
+      <h2>{{_('boxes')}}</h2>
+      <ul class="nav nav-list">
+        {% if is_consultant %}
+        <li><a href="{{ url_for('boxes.files', box_name='file') }}">{{ _('filebox') }}</a></li>
+        {% else %}
+        <li><a href="{{ url_for('boxes.files', box_name='download') }}">{{ _('downloadbox') }}</a></li>
+        <li><a href="{{ url_for('boxes.files', box_name='upload') }}">{{ _('uploadbox') }}</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endif %}
 
   <div class="span12">
     <h2>{{_('export')}}</h2>

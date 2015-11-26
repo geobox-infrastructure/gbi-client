@@ -62,20 +62,7 @@ def set_gbi_server():
     form = forms.SetGBIServerForm(request.form)
     form.url.choices = [(s['url'], s['title']) for s in server_list]
     if form.validate_on_submit():
-
-        gbi_server = g.db.query(GBIServer).filter(
-            GBIServer.url == form.url.data).first()
-        if gbi_server is None:
-            server = [s for s in server_list if s['url'] == form.url.data]
-            if len(server) == 0:
-                raise Exception('Invalid server')
-            server = server[0]
-            gbi_server = GBIServer(title=server['title'], url=server['url'],
-                                   auth=server['auth'])
-        g.db.add(gbi_server)
-        g.db.commit()
-        _refresh_context(gbi_server.url, form.username.data,
-                         form.password.data)
+        _refresh_context(form.url.data, form.username.data, form.password.data)
         return redirect(url_for('main.index'))
     auth_server = [s['url'] for s in server_list if s['auth']]
     return render_template('admin/set_server.html', form=form,

@@ -16,18 +16,24 @@
 import os
 from flask import (
     Blueprint, render_template, current_app, abort, send_from_directory,
-    make_response, request,
+    make_response, request, g
 )
-from geobox.model import User
+from geobox.model import User, GBIServer
 from ..utils import request_is_local
 
 main = Blueprint('main', __name__)
 
+
 @main.route('/')
 def index():
-    user = User(int(current_app.config.geobox_state.config.get('user', 'type')))
+    user = User(current_app.config.geobox_state.config.get_int('user', 'type'))
     is_consultant = user.is_consultant
-    return render_template('index.html', is_local=request_is_local(), is_consultant=is_consultant)
+    query = g.db.query(GBIServer).filter(GBIServer.home_server==True)
+    has_home_server = query.count() == 1
+    return render_template('index.html', is_local=request_is_local(),
+                           is_consultant=is_consultant,
+                           home_server=has_home_server)
+
 
 @main.route('/translations.js')
 def javascript_translation():
