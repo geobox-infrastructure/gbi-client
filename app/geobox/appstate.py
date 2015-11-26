@@ -64,6 +64,7 @@ class GeoBoxState(object):
         self._translations = None
         self._port_lock = threading.Lock()
         self._ports = set()
+        self.new_home_server = None
         self.tilebox = TileBoxServer(self)
 
         # combine loaded server list with stored servers

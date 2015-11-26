@@ -29,4 +29,5 @@ class GBIServer(Base):
     title = sa.Column(sa.String())
     auth = sa.Column(sa.Boolean(), default=False)
     last_update = sa.Column(sa.DateTime())
+    active_home_server = sa.Column(sa.Boolean(), default=False)
     home_server = sa.Column(sa.Boolean(), default=False)

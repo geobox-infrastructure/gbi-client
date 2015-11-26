@@ -72,7 +72,8 @@ def set_gbi_server():
     form, auth_server = prepare_set_server()
 
     if form.validate_on_submit():
-        _refresh_context(form.url.data, form.username.data, form.password.data)
+        _refresh_context(form.url.data, form.username.data,
+                         form.password.data)
         return redirect(url_for(form.next.data))
 
     return render_template('admin/set_server.html', form=form,
@@ -90,6 +91,34 @@ def _refresh_context(url, username=None, password=None):
         flash(_('unable to fetch context document'), 'error')
     else:
         flash(_('load context document successful'), 'sucess')
+
+
+@admin_view.route('/admin/set_home_server', methods=['GET'])
+def set_home_server():
+    app_state = current_app.config.geobox_state
+    if app_state.new_home_server is None:
+        flash(_('unable to set homeserver'), 'error')
+
+    session = app_state.user_db_session()
+    home_server = session.query(GBIServer).filter_by(
+        id=app_state.new_home_server.id).first()
+
+    if home_server is None:
+        flash(_('unable to set homeserver'), 'error')
+
+    home_server.active_home_server = True
+    session.commit()
+    flash(_('assigned %(homeserver)s as homeserver',
+            homeserver=home_server.title))
+    app_state.new_home_server = None
+
+    return redirect_back(url_for('main.index'))
+
+
+@admin_view.route('/admin/reject_home_server', methods=['GET'])
+def reject_home_server():
+    app_state.new_home_server = None
+    return redirect_back(url_for('main.index'))
 
 
 @admin_view.route('/admin/tilebox_restart', methods=['POST'])

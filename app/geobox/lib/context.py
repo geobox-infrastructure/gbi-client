@@ -231,12 +231,13 @@ def reload_context_document(context_document_url, app_state, user, password):
     coverage_box = app_state.config.get('web', 'coverages_from_couchdb')
     couchdb_sources = context.couchdb_sources()
 
+    new_home_server = False
     if len(couchdb_sources) > 0:
         query = session.query(model.GBIServer)
-        query = query.filter(model.GBIServer.home_server==True)
-        if query.count() == 0:
-            gbi_server.home_server = True
+        query = query.filter_by(active_home_server=True)
+        new_home_server = query.count() == 0
 
+    # TODO add couchdb sources if current gbi_server is no home-server?
     for couchdb_source in couchdb_sources:
         if couchdb_source['dbname_user'] == coverage_box:
             # insert features from area/coverage box into layers
@@ -249,9 +250,12 @@ def reload_context_document(context_document_url, app_state, user, password):
     if context_user:
         app_state.config.set('user', 'type', str(context_user['type']))
     else:
-        app_state.config.set('user', 'type', '0') # set default to 0
+        app_state.config.set('user', 'type', '0')  # set default to 0
 
     session.commit()
+
+    if new_home_server:
+        app_state.new_home_server = gbi_server
 
 
 def source_couchdb_url(couchdb_source):
