@@ -232,8 +232,10 @@ def reload_context_document(context_document_url, app_state, user, password):
     couchdb_sources = context.couchdb_sources()
 
     if len(couchdb_sources) > 0:
-        session.query(model.GBIServer).update({'home_server': False})
-        gbi_server.home_server = True
+        query = session.query(model.GBIServer)
+        query = query.filter(model.GBIServer.home_server==True)
+        if query.count() == 0:
+            gbi_server.home_server = True
 
     for couchdb_source in couchdb_sources:
         if couchdb_source['dbname_user'] == coverage_box:
