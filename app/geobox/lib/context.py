@@ -205,20 +205,13 @@ def reload_context_document(context_document_url, app_state, user, password):
     vector_prefix = "%s_%s_" % (prefix, app_state.config.get('app', 'vector_prefix'))
     version = context.doc.get('version')
 
-    all_active_sources = set(session.query(model.ExternalWMTSSource).filter_by(active=True).filter_by(is_user_defined=False).all())
     updater = ContextModelUpdater(session, version)
 
     first_source = None
     for source in updater.sources_from_context(context):
         if not first_source:
             first_source = source
-        if source in all_active_sources:
-            all_active_sources.remove(source)
         session.add(source)
-
-    # set all sources that are not in the context as inactive
-    for active_source in all_active_sources:
-        active_source.active = False
 
     for source in session.query(model.ExternalWMTSSource):
         if source != first_source:
