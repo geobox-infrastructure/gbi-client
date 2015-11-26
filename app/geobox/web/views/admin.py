@@ -45,7 +45,10 @@ def restrict_to_local():
 
 @admin_view.route('/admin')
 def admin():
-    form = forms.RefreshGBIServerForm(request.form)
+    server_list = current_app.config.geobox_state.server_list
+    auth_server = [s['url'] for s in server_list if s['auth']]
+    form = forms.SetGBIServerForm(request.form)
+    form.url.choices = [(s['url'], s['title']) for s in server_list]
 
     tilebox_form = forms.TileBoxPathForm()
     tilebox_form.path.data = current_app.config.geobox_state.config.get(
@@ -53,7 +56,8 @@ def admin():
     )
 
     return render_template('admin.html', localnet=get_localnet_status(),
-                           form=form, tilebox_form=tilebox_form)
+                           form=form, tilebox_form=tilebox_form,
+                           auth_server=json.dumps(auth_server))
 
 
 @admin_view.route('/admin/set_gbi_server', methods=['GET', 'POST'])

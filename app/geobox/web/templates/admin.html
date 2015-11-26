@@ -1,15 +1,9 @@
 {% extends "base.html" %}
-{% from "form_macros.html" import input %}
+{% from "form_macros.html" import input, set_server %}
 
 {% block title %} {{_('settings')}} {% endblock %}
 
 {% block content %}
-
-    <div id="reloadContextDocumentMsg" class="alert hide">
-      <img src="{{ url_for('static', filename='img/loader.gif')}}">
-      <span>{{_('context document will be loaded and boxes are copied')}}</span>
-    </div>
-
     <h3>{{ _('settings') }}</h3>
     <h4>{{ _('local net access') }}
         {{ generate_tooltip(_('tooltip local net access') ) }}
@@ -33,17 +27,7 @@
     </button>
 
     <h4>{{ _('Context documents') }}</h4>
-    <form id="reloadContextDocument" method="POST" action="{{ url_for('.refresh_context') }} " class="form-horizontal">
-        {{ form.csrf_token }}
-        {{ input(form.server_url) }}
-        {{ input(form.username, tooltip=_('tooltip load context document username')) }}
-        {{ input(form.password, tooltip=_('tooltip load context document password')) }}
-        <div class="control-group">
-          <div class="controls">
-            <button type="submit" class="btn btn-small">{{ _('load context')}}</button>
-          </div>
-        </div>
-    </form>
+    {{ set_server(form) }}
 
     <h4>{{ _('Logging') }}</h4>
     <a href="{{ url_for('.log_view') }}">{{ _('open logview') }}</a>
@@ -70,5 +54,9 @@
 {% endblock %}
 
 {% block javascript %}
+    <script type="text/javascript">
+        var authServer = {{ auth_server | safe}};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/set_server.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/views/admin.js') }}"></script>
 {% endblock %}

@@ -60,3 +60,26 @@
     </div>
 </div>
 {%- endmacro %}
+
+{% macro set_server(form) -%}
+    <div id="load-context-document" class="alert hide">
+        <img src="{{ url_for('static', filename='img/loader.gif')}}">
+        <span>{{_('context document will be loaded and boxes are copied')}}</span>
+    </div>
+
+    <form id="set-server-form" method="POST" class="form-horizontal" action="{{ url_for('admin.set_gbi_server') }}">
+
+        <div class="control-group">
+            {{ form.csrf_token }}
+            {{ input(form.url, style="width: 30em") }}
+            {{ input(form.username) }}
+            {{ input(form.password) }}
+        </div>
+        <div class="no-auth-required">{{ _('no auth required') }}</div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-small">{{ _('set') }}</button>
+            </div>
+        </div>
+    </form>
+{%- endmacro %}
