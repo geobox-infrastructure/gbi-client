@@ -64,7 +64,7 @@
     <div class="modal-footer">
       <a href="{{ url_for('admin.reject_home_server') }}" class="btn">{{ _('no') }}</a>
       <a href="{{ url_for('admin.set_home_server') }}" class="btn btn-primary" id="assign-home-server">{{ _('yes') }}</a>
-      <div id="wait-home-server-assigned" class="alert hide">
+      <div id="wait-home-server-assigned" class="alert hide text-center">
         <img src="{{ url_for('static', filename='img/loader.gif')}}">
         <span>{{_('boxes are copied')}}</span>
       </div>
