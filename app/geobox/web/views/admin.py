@@ -149,6 +149,8 @@ def add_gbi_server():
             flash(_('server already exists'), 'error')
         else:
             load_context(gbi_server, db_session, form, app_state)
+    else:
+        flash(_('title as well as url required'), 'error')
     return redirect(url_for(form.next.data))
 
 
