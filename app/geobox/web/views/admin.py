@@ -22,11 +22,11 @@ from flask import (
     redirect, url_for
 )
 from flaskext.babel import _
-from ...model.sources import LocalWMTSSource
-from ...model.server import GBIServer
+from geobox.model.sources import LocalWMTSSource
+from geobox.model.server import GBIServer
 
-from ..utils import request_is_local
-from ..helper import redirect_back
+from geobox.web.utils import request_is_local
+from geobox.web.helper import redirect_back
 
 from geobox.lib import context
 from geobox.lib.fs import open_file_explorer
@@ -67,30 +67,58 @@ def admin():
                            auth_server=json.dumps(auth_server))
 
 
+def gbi_server_from_list(app_state, url):
+    server_list = app_state.server_list
+    server = [s for s in server_list if s['url'] == url]
+
+    if len(server) == 0:
+        return None
+
+    server = server[0]
+    return GBIServer(title=server['title'], url=server['url'],
+                     auth=server['auth'])
+
+
 @admin_view.route('/admin/set_gbi_server', methods=['GET', 'POST'])
 def set_gbi_server():
     form, auth_server = prepare_set_server()
 
     if form.validate_on_submit():
-        _refresh_context(form.url.data, form.username.data,
-                         form.password.data)
+        app_state = current_app.config.geobox_state
+        db_session = app_state.user_db_session()
+
+        gbi_server = GBIServer.by_url(db_session, form.url.data)
+        if gbi_server is None:
+            gbi_server = gbi_server_from_list(app_state, form.url.data)
+            if gbi_server is None:
+                flash(_('unable to determine selected server'))
+                return redirect(url_for(form.next.data))
+            db_session.add(gbi_server)
+
+        try:
+            context.load_context_document(gbi_server, db_session,
+                                          form.username.data,
+                                          form.password.data)
+        except context.AuthenticationError:
+            flash(_('username or password not correct'), 'error')
+        except ValueError:
+            flash(_('unable to fetch context document'), 'error')
+        else:
+            flash(_('load context document successful'), 'sucess')
+            context.update_raster_sources(gbi_server, db_session)
+            context.update_wfs_sources(gbi_server, db_session)
+
+            db_session.commit()
+
+            if gbi_server.home_server and app_state.home_server is None:
+                app_state.new_home_server = gbi_server
+            elif gbi_server.home_server and gbi_server.active_home_server:
+                context.update_couchdb_sources(gbi_server, app_state)
+
         return redirect(url_for(form.next.data))
 
     return render_template('admin/set_server.html', form=form,
                            auth_server=json.dumps(auth_server))
-
-
-def _refresh_context(url, username=None, password=None):
-    app_state = current_app.config.geobox_state
-    try:
-        context.reload_context_document(url, app_state,
-                                        username, password)
-    except context.AuthenticationError:
-        flash(_('username or password not correct'), 'error')
-    except ValueError:
-        flash(_('unable to fetch context document'), 'error')
-    else:
-        flash(_('load context document successful'), 'sucess')
 
 
 @admin_view.route('/admin/set_home_server', methods=['GET'])
@@ -99,18 +127,31 @@ def set_home_server():
     if app_state.new_home_server is None:
         flash(_('unable to set homeserver'), 'error')
 
-    session = app_state.user_db_session()
-    home_server = session.query(GBIServer).filter_by(
+    db_session = app_state.user_db_session()
+    gbi_server = db_session.query(GBIServer).filter_by(
         id=app_state.new_home_server.id).first()
 
-    if home_server is None:
+    if gbi_server is None:
         flash(_('unable to set homeserver'), 'error')
+    gbi_server.context = app_state.new_home_server.context
 
-    home_server.active_home_server = True
-    session.commit()
+    gbi_server.active_home_server = True
+    db_session.commit()
+
+    context.update_couchdb_sources(gbi_server, app_state)
+
+    context_user = context.user()
+    if context_user:
+        app_state.config.set('user', 'type', str(context_user['type']))
+    else:
+        app_state.config.set('user', 'type', '0')  # set default to 0
+
+    app_state.config.write()
+
     flash(_('assigned %(homeserver)s as homeserver',
-            homeserver=home_server.title))
+            homeserver=gbi_server.title))
     app_state.new_home_server = None
+    app_state.home_server = gbi_server
 
     return redirect_back(url_for('main.index'))
 

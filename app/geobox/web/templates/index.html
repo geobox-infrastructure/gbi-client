@@ -23,7 +23,7 @@
     </ul>
   </div>
 
-  {% if home_server %}
+  {% if app_state.home_server is not none %}
     <div class="span12">
       <h2>{{_('boxes')}}</h2>
       <ul class="nav nav-list">

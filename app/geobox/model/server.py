@@ -14,8 +14,8 @@
 # limitations under the License.
 
 import sqlalchemy as sa
-
-from . meta import Base
+from flask import current_app
+from geobox.model.meta import Base
 
 __all__ = ['GBIServer']
 
@@ -31,3 +31,24 @@ class GBIServer(Base):
     last_update = sa.Column(sa.DateTime())
     active_home_server = sa.Column(sa.Boolean(), default=False)
     home_server = sa.Column(sa.Boolean(), default=False)
+    logging_url = sa.Column(sa.String())
+    _context = None
+
+    @property
+    def vector_prefix(self):
+        return "%s_%s_" % (
+            self.prefix,
+            current_app.config.geobox_state.config.get('app', 'vector_prefix')
+        )
+
+    @classmethod
+    def by_url(cls, db_session, url):
+        q = db_session.query(cls).filter_by(url=url)
+        return q.first()
+
+    def set_context(self, context):
+        self._context = context
+
+    def get_context(self):
+        return self._context
+    context = property(get_context, set_context)

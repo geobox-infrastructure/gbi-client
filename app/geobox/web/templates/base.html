@@ -57,7 +57,6 @@
 {% if app_state.new_home_server %}
   <div id="new-home-server-modal" class="modal hide" tabindex="-1" role="dialog">
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h3>{{ _('new home server') }} {{ app_state.new_home_server.title }}</h3>
     </div>
     <div class="modal-body">
@@ -65,7 +64,11 @@
     </div>
     <div class="modal-footer">
       <a href="{{ url_for('admin.reject_home_server') }}" class="btn">{{ _('no') }}</a>
-      <a href="{{ url_for('admin.set_home_server') }}" class="btn btn-primary">{{ _('yes') }}</a>
+      <a href="{{ url_for('admin.set_home_server') }}" class="btn btn-primary" id="assign-home-server">{{ _('yes') }}</a>
+      <div id="wait-home-server-assigned" class="alert hide">
+        <img src="{{ url_for('static', filename='img/loader.gif')}}">
+        <span>{{_('boxes are copied')}}</span>
+      </div>
     </div>
   </div>
 {% endif %}
@@ -86,7 +89,12 @@
       var OpenlayersImageURL = "{{ url_for('static', filename='img/') }}";
       {% if app_state.new_home_server is not none %}
         $(document).ready(function() {
-          $('#new-home-server-modal').modal({show: true});
+          var modalElement = $('#new-home-server-modal')
+          modalElement.modal({show: true});
+          modalElement.find('#assign-home-server').click(function() {
+            modalElement.find('#wait-home-server-assigned').removeClass('hide');
+            modalElement.find('a').addClass('hide');
+          })
         });
       {% endif %}
   </script>

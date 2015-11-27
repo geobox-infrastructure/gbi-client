@@ -21,8 +21,10 @@ from geobox.lib.box import FeatureInserter
 from geobox.lib.couchdb import CouchDB, CouchDBBase
 from werkzeug.exceptions import NotFound
 
+
 class ContextError(Exception):
     pass
+
 
 class Context(object):
     def __init__(self, doc):
@@ -46,8 +48,18 @@ class Context(object):
     def couchdb_sources(self):
         return self.doc.get('couchdb_sources', [])
 
+    def has_couchdb_sources(self):
+        return len(self.couchdb_sources()) > 0
+
     def user(self):
         return self.doc.get('user', {})
+
+    def prefix(self):
+        return self.doc.get('portal', {}).get('prefix').lower()
+
+    def version(self):
+        return self.doc.get('version')
+
 
 class ContextModelUpdater(object):
     """
@@ -139,8 +151,10 @@ class ContextModelUpdater(object):
 
         return json.dumps(restriction['geometry'])
 
+
 class AuthenticationError(Exception):
     pass
+
 
 def wfs_source_for_conf(session, layer, prefix):
     query = session.query(model.ExternalWFSSource).filter_by(name=layer['name'])
@@ -175,24 +189,9 @@ def wfs_source_for_conf(session, layer, prefix):
     return source
 
 
-def reload_context_document(context_document_url, app_state, user, password):
-    session = app_state.user_db_session()
-    server_list = app_state.server_list
-
-    # add selected gbi server if not in db
-    gbi_server = session.query(model.GBIServer).filter(
-        model.GBIServer.url == context_document_url).first()
-    if gbi_server is None:
-        server = [s for s in server_list if s['url'] == context_document_url]
-        if len(server) == 0:
-            raise Exception('Invalid server')
-        server = server[0]
-        gbi_server = model.GBIServer(title=server['title'], url=server['url'],
-                                     auth=server['auth'])
-        session.add(gbi_server)
-
+def load_context_document(gbi_server, db_session, user, password):
     try:
-        result = requests.get(context_document_url, auth=(user, password))
+        result = requests.get(gbi_server.url, auth=(user, password))
     except requests.exceptions.ConnectionError:
         raise NotFound()
 
@@ -201,61 +200,51 @@ def reload_context_document(context_document_url, app_state, user, password):
 
     context_doc = result.json()
     context = Context(context_doc)
-    prefix = context.doc.get('portal', {}).get('prefix').lower()
-    vector_prefix = "%s_%s_" % (prefix, app_state.config.get('app', 'vector_prefix'))
-    version = context.doc.get('version')
+    gbi_server.context = context
+    gbi_server.logging_url = context.logging_server()
+    gbi_server.prefix = context.prefix()
+    gbi_server.home_server = context.has_couchdb_sources()
+    db_session.commit()
 
-    updater = ContextModelUpdater(session, version)
+
+def update_raster_sources(gbi_server, db_session):
+    updater = ContextModelUpdater(db_session, gbi_server.context.version())
 
     first_source = None
-    for source in updater.sources_from_context(context):
+    for source in updater.sources_from_context(gbi_server.context):
         if not first_source:
             first_source = source
         source.gbi_server = gbi_server
-        session.add(source)
+        db_session.add(source)
 
-    for source in session.query(model.ExternalWMTSSource):
+    for source in db_session.query(model.ExternalWMTSSource):
         if source != first_source:
             source.background_layer = False
 
-    # load WFS layer for search
-    for source in context.wfs_sources():
-        wfs_source = wfs_source_for_conf(session, source, prefix)
-        session.add(wfs_source)
+
+def update_wfs_sources(gbi_server, db_session):
+    for source in gbi_server.context.wfs_sources():
+        wfs_source = wfs_source_for_conf(db_session, source, gbi_server.prefix)
         wfs_source.gbi_server = gbi_server
+        db_session.add(wfs_source)
 
-    app_state.config.set('app', 'logging_server', context.logging_server())
-    app_state.config.write()
 
-    couchdb = CouchDB('http://127.0.0.1:%d' % app_state.config.get_int('couchdb', 'port'), '_replicator')
+def update_couchdb_sources(gbi_server, app_state):
+    couchdb_port = app_state.config.get_int('couchdb', 'port')
+    couchdb = CouchDB('http://127.0.0.1:%d' % couchdb_port, '_replicator')
     coverage_box = app_state.config.get('web', 'coverages_from_couchdb')
-    couchdb_sources = context.couchdb_sources()
+    couchdb_sources = gbi_server.context.couchdb_sources()
 
-    new_home_server = False
-    if len(couchdb_sources) > 0:
-        query = session.query(model.GBIServer)
-        query = query.filter_by(active_home_server=True)
-        new_home_server = query.count() == 0
-
-    # TODO add couchdb sources if current gbi_server is no home-server?
     for couchdb_source in couchdb_sources:
         if couchdb_source['dbname_user'] == coverage_box:
             # insert features from area/coverage box into layers
-            insert_database_features(couchdb.couch_url, couchdb_source, vector_prefix)
+            insert_database_features(
+                couchdb.couch_url,
+                couchdb_source,
+                gbi_server.vector_prefix)
         else:
             # replicate other couchdb sources
             replicate_database(couchdb, couchdb_source, app_state)
-
-    context_user = context.user()
-    if context_user:
-        app_state.config.set('user', 'type', str(context_user['type']))
-    else:
-        app_state.config.set('user', 'type', '0')  # set default to 0
-
-    session.commit()
-
-    if new_home_server:
-        app_state.new_home_server = gbi_server
 
 
 def source_couchdb_url(couchdb_source):
@@ -271,23 +260,24 @@ def source_couchdb_url(couchdb_source):
         )
     return dburl
 
+
 def insert_database_features(dst_dburl, src_conf, prefix=None):
     auth = None
     if 'username' in src_conf:
         auth = src_conf['username'], src_conf['password']
-    source_couchdb = CouchDBBase(src_conf['url'],
-        src_conf['dbname'],
-        auth=auth,
-    )
+    source_couchdb = CouchDBBase(src_conf['url'], src_conf['dbname'],
+                                 auth=auth)
     inserter = FeatureInserter(dst_dburl, prefix=prefix)
 
     inserter.from_source(source_couchdb)
 
-def replicate_database(couchdb, couchdb_source, app_state):
 
+def replicate_database(couchdb, couchdb_source, app_state):
     dbname_user = couchdb_source['dbname_user']
     dburl = source_couchdb_url(couchdb_source)
-    target_couchdb = CouchDB('http://127.0.0.1:%d' % app_state.config.get_int('couchdb', 'port'), dbname_user)
+    couch_url = 'http://127.0.0.1:%d' % app_state.config.get_int(
+        'couchdb', 'port')
+    target_couchdb = CouchDB(couch_url, dbname_user)
     target_couchdb.init_db()
 
     couchdb.replication(
