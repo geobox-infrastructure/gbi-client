@@ -171,7 +171,7 @@ def set_home_server():
 
     context.update_couchdb_sources(gbi_server, app_state)
 
-    context_user = context.user()
+    context_user = gbi_server.context.user()
     if context_user:
         app_state.config.set('user', 'type', str(context_user['type']))
     else:
@@ -182,7 +182,6 @@ def set_home_server():
     flash(_('assigned %(homeserver)s as homeserver',
             homeserver=gbi_server.title))
     app_state.new_home_server = None
-    app_state.home_server = gbi_server
 
     return redirect_back(url_for('main.index'))
 
