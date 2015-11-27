@@ -26,7 +26,7 @@ from flaskext.babel import gettext as _
 from geobox.lib.couchdb import CouchFileBox
 from geobox.lib.file_validation import get_file_information
 from geobox.web.forms import UploadForm, ImportGeoJSONEdit
-from geobox.model import VectorImportTask, User
+from geobox.model import VectorImportTask, User, GBIServer
 from geobox.lib.server_logging import send_task_logging
 from .vector import prepare_geojson_form
 
@@ -77,14 +77,20 @@ def couchid_to_link(filename, couch_url):
     return "%s/%s/file" % (couch_url, urllib.quote(filename))
 
 def get_couch_box_db(box_name):
+    app_state = current_app.config.geobox_state
     if box_name == 'download':
-        return current_app.config.geobox_state.config.get('couchdb', 'download_box')
+        couch_box_name = app_state.config.get('couchdb', 'download_box')
     elif box_name == 'upload':
-        return current_app.config.geobox_state.config.get('couchdb', 'upload_box')
+        couch_box_name = app_state.config.get('couchdb', 'upload_box')
     elif box_name == 'file':
-        return current_app.config.geobox_state.config.get('couchdb', 'file_box')
+        couch_box_name = app_state.config.get('couchdb', 'file_box')
     else:
         raise NotFound()
+    gbi_server = GBIServer.current_home_server(g.db)
+    if gbi_server is None:
+        return couch_box_name
+    return '%s_%s' % (gbi_server.prefix, couch_box_name)
+
 
 @boxes.route("/box/<box_name>/check_file", methods=["POST"])
 def check_file_exists(box_name):

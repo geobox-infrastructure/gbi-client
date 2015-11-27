@@ -244,7 +244,7 @@ def update_couchdb_sources(gbi_server, app_state):
                 gbi_server.vector_prefix)
         else:
             # replicate other couchdb sources
-            replicate_database(couchdb, couchdb_source, app_state)
+            replicate_database(couchdb, couchdb_source, app_state, gbi_server.prefix)
 
 
 def source_couchdb_url(couchdb_source):
@@ -272,8 +272,10 @@ def insert_database_features(dst_dburl, src_conf, prefix=None):
     inserter.from_source(source_couchdb)
 
 
-def replicate_database(couchdb, couchdb_source, app_state):
+def replicate_database(couchdb, couchdb_source, app_state, prefix=None):
     dbname_user = couchdb_source['dbname_user']
+    if prefix is not None:
+        dbname_user = '%s_%s' % (prefix, dbname_user)
     dburl = source_couchdb_url(couchdb_source)
     couch_url = 'http://127.0.0.1:%d' % app_state.config.get_int(
         'couchdb', 'port')
