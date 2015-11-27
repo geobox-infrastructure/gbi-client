@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('verify authentification') }}{% endblock %}
+
+{% from "form_macros.html" import input %}
+
+{% block content %}
+
+<h1>{{_('verify authentification')}}</h1>
+<form method="POST" class="form-horizontal">
+    <div class="control-group">
+        {{ form.csrf_token }}
+        {{ input(form.username) }}
+        {{ input(form.password) }}
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-small">{{ _('authorize') }}</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
