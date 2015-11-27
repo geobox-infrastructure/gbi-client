@@ -32,6 +32,7 @@ from geobox.lib.coverage import coverage as make_coverage
 from geobox.lib.couchdb import CouchDB, vector_layers_metadata
 from geobox.lib.fs import diskspace_available_in_mb
 from geobox.lib.mapproxy import write_mapproxy_config
+from geobox.lib import context
 
 from geobox import model
 from geobox.web import forms
@@ -84,7 +85,6 @@ def import_edit(id=None):
 
         proj.download_size = float(form.data.get('download_size', 0.0))
         proj.update_tiles = form.data.get('update_tiles', False)
-
         g.db.add(model.ImportRasterLayer(
             source=form.raster_source.data,
             start_level=int(form.start_level.data),
@@ -93,8 +93,7 @@ def import_edit(id=None):
         ))
         g.db.commit()
         if form.start.data == 'start':
-            create_raster_import_task(proj)
-            redirect_url = url_for('tasks.list')
+            redirect_url = url_for('project.start_raster_import', id=proj.id)
         return redirect(redirect_url)
     elif request.method == 'POST':
         flash(_('form error'), 'error')
@@ -111,12 +110,17 @@ def import_edit(id=None):
     if form.coverage.data:
         coverage = form.coverage.data
 
-    base_layer = g.db.query(model.ExternalWMTSSource).filter_by(background_layer=True).first()
+    base_layer = g.db.query(model.ExternalWMTSSource).filter_by(
+        background_layer=True).first()
     base_layer.bbox = base_layer.bbox_from_view_coverage()
 
-    free_disk_space = diskspace_available_in_mb(current_app.config.geobox_state.user_data_path())
+    free_disk_space = diskspace_available_in_mb(
+        current_app.config.geobox_state.user_data_path())
 
-    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
+    couch_url = 'http://%s:%s' % (
+        '127.0.0.1',
+        current_app.config.geobox_state.config.get('couchdb', 'port')
+    )
     couch_layers = list(vector_layers_metadata(couch_url))
 
     couchlayers_form = forms.SelectCouchLayers()
@@ -125,10 +129,13 @@ def import_edit(id=None):
         couch_titles.append((key, couch['title']))
     couchlayers_form.select_couch.choices = couch_titles
 
-    return render_template('projects/import_edit.html',
-        proj=proj, form=form, sources=sources,couch_layers=couch_layers,
-        base_layer=base_layer,coverage_form=coverage_form,couchlayers_form=couchlayers_form,
-        coverage=coverage, free_disk_space=free_disk_space, with_server=True)
+    return render_template('projects/import_edit.html', proj=proj, form=form,
+                           sources=sources, couch_layers=couch_layers,
+                           base_layer=base_layer, coverage_form=coverage_form,
+                           couchlayers_form=couchlayers_form,
+                           coverage=coverage, free_disk_space=free_disk_space,
+                           with_server=True)
+
 
 def validate_max_tiles(form):
     feature_collection = json.loads(form.coverage.data)
@@ -255,13 +262,34 @@ def remove(id):
     return redirect_back('.export_list')
 
 
-@project.route('/import/<int:id>/start', methods=['POST'])
+@project.route('/import/<int:id>/start', methods=['GET', 'POST'])
 def start_raster_import(id):
     proj = g.db.query(model.ImportProject).get(id)
     if not proj:
         abort(404)
-    create_raster_import_task(proj)
-    return redirect_back('.import_list')
+    form = forms.SetGBIServerForm(request.form)
+    del form.url
+    gbi_server = proj.import_raster_layers[0].source.gbi_server
+    if not gbi_server.auth:
+        create_raster_import_task(proj)
+        return redirect(url_for('tasks.list'))
+
+    if form.validate_on_submit():
+        try:
+            context.load_context_document(gbi_server, g.db,
+                                          form.username.data,
+                                          form.password.data)
+        except context.AuthenticationError:
+            flash(_('username or password not correct'), 'error')
+        except ValueError:
+            flash(_('unable to fetch context document'), 'error')
+        else:
+            create_raster_import_task(proj)
+            return redirect(url_for('tasks.list'))
+
+    return render_template('projects/verify_import_auth.html', form=form,
+                           server_title=gbi_server.title)
+
 
 @project.route('/export/<int:id>/start', methods=['POST'])
 def start_export(id):
@@ -270,6 +298,7 @@ def start_export(id):
         abort(404)
     create_export_tasks(proj)
     return redirect_back('.export_list')
+
 
 @project.route('/project/load_coverage', methods=['POST'])
 def load_coverage():
@@ -420,6 +449,7 @@ def create_export_tasks(proj):
 
     g.db.commit()
     return True
+
 
 def create_raster_import_task(proj):
     raster_source = proj.import_raster_layers[0].source
