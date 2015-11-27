@@ -123,7 +123,7 @@ def set_gbi_server():
                 return redirect(url_for(form.next.data))
             db_session.add(gbi_server)
 
-            load_context(gbi_server, db_session, form, app_state)
+        load_context(gbi_server, db_session, form, app_state)
 
         return redirect(url_for(form.next.data))
 
