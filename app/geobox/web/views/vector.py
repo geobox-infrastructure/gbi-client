@@ -180,14 +180,8 @@ def import_vector():
                 title=title,
                 file_name=form.file_name.data,
                 srs=form.srs.data,
-                type_ = 'shp',
+                type_='shp',
             )
-            home_server = GBIServer.current_home_server(
-                current_app.config.geobox_state.user_db_session()
-            )
-            if home_server is not None:
-                send_task_logging(home_server.logging_url,
-                                  current_app.config.geobox_state, task)
             g.db.add(task)
             g.db.commit()
             return redirect(url_for('tasks.list'))
