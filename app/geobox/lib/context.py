@@ -204,6 +204,8 @@ def load_context_document(gbi_server, db_session, user, password):
     gbi_server.logging_url = context.logging_server()
     gbi_server.prefix = context.prefix()
     gbi_server.home_server = context.has_couchdb_sources()
+    if user is not None and user != '':
+        gbi_server.username = user
     db_session.commit()
 
 

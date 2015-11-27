@@ -25,6 +25,7 @@ class GBIServer(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     url = sa.Column(sa.String(), nullable=False, unique=True)
+    username = sa.Column(sa.String())
     prefix = sa.Column(sa.String())
     title = sa.Column(sa.String())
     auth = sa.Column(sa.Boolean(), default=False)

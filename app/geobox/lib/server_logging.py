@@ -8,12 +8,12 @@ import logging
 log = logging.getLogger(__name__)
 
 
-def send_task_logging(logging_server, app_state, task):
+def send_task_logging(logging_server, user, app_state, task):
     if not logging_server:
         return
 
     json_log = {
-        'user': app_state.config.get('user', 'name'),
+        'user': user,
         'time': datetime.datetime.now().isoformat(),
     }
 

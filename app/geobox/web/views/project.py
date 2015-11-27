@@ -443,8 +443,9 @@ def create_export_tasks(proj):
         g.db.add(task)
 
         logging_server = raster_source.wmts_source.gbi_server.logging_url
+        user = raster_source.wmts_source.gbi_server.username
         send_task_logging(
-            logging_server, current_app.config.geobox_state, task
+            logging_server, user, current_app.config.geobox_state, task
         )
 
     g.db.commit()
@@ -482,7 +483,8 @@ def create_raster_import_task(proj):
     )
 
     logging_server = raster_source.gbi_server.logging_url
-    send_task_logging(logging_server, current_app.config.geobox_state, task)
+    user = raster_source.gbi_server.username
+    send_task_logging(logging_server, user, current_app.config.geobox_state, task)
 
     g.db.add(task)
     g.db.commit()
