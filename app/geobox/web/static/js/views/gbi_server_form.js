@@ -20,4 +20,8 @@ $(document).ready(function() {
         $('#load-context-document').show();
         return true;
     });
+    $('#add-server-form').submit(function() {
+        $('#load-context-document').show();
+        return true;
+    });
 });

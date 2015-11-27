@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "form_macros.html" import input, set_server %}
+{% from "form_macros.html" import input, gbi_server_form %}
 
 {% block title %} {{_('settings')}} {% endblock %}
 
@@ -27,7 +27,7 @@
     </button>
 
     <h4>{{ _('Context documents') }}</h4>
-    {{ set_server(form) }}
+    {{ gbi_server_form(form, add_server_form) }}
 
     <h4>{{ _('Logging') }}</h4>
     <a href="{{ url_for('.log_view') }}">{{ _('open logview') }}</a>
@@ -57,6 +57,6 @@
     <script type="text/javascript">
         var authServer = {{ auth_server | safe}};
     </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/views/set_server.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/gbi_server_form.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/views/admin.js') }}"></script>
 {% endblock %}

@@ -22,6 +22,8 @@ from flask import (
     redirect, url_for
 )
 from flaskext.babel import _
+from sqlalchemy.exc import IntegrityError
+
 from geobox.model.sources import LocalWMTSSource
 from geobox.model.server import GBIServer
 
@@ -48,14 +50,17 @@ def prepare_set_server():
     form = forms.SetGBIServerForm(request.form)
     form.url.choices = [(s['url'], s['title']) for s in server_list]
 
+    add_server_form = forms.AddGBIServerForm()
+
     auth_server = [s['url'] for s in server_list if s['auth']]
-    return form, auth_server
+    return form, add_server_form, auth_server
 
 
 @admin_view.route('/admin')
 def admin():
-    form, auth_server = prepare_set_server()
+    form, add_server_form, auth_server = prepare_set_server()
     form.next.data = 'admin.admin'
+    add_server_form.next.data = 'admin.admin'
 
     tilebox_form = forms.TileBoxPathForm()
     tilebox_form.path.data = current_app.config.geobox_state.config.get(
@@ -64,6 +69,7 @@ def admin():
 
     return render_template('admin.html', localnet=get_localnet_status(),
                            form=form, tilebox_form=tilebox_form,
+                           add_server_form=add_server_form,
                            auth_server=json.dumps(auth_server))
 
 
@@ -79,9 +85,31 @@ def gbi_server_from_list(app_state, url):
                      auth=server['auth'])
 
 
+def load_context(gbi_server, db_session, form, app_state):
+    try:
+        context.load_context_document(gbi_server, db_session,
+                                      form.username.data,
+                                      form.password.data)
+    except context.AuthenticationError:
+        flash(_('username or password not correct'), 'error')
+    except ValueError:
+        flash(_('unable to fetch context document'), 'error')
+    else:
+        flash(_('load context document successful'), 'sucess')
+        context.update_raster_sources(gbi_server, db_session)
+        context.update_wfs_sources(gbi_server, db_session)
+
+        db_session.commit()
+
+        if gbi_server.home_server and app_state.home_server is None:
+            app_state.new_home_server = gbi_server
+        elif gbi_server.home_server and gbi_server.active_home_server:
+            context.update_couchdb_sources(gbi_server, app_state)
+
+
 @admin_view.route('/admin/set_gbi_server', methods=['GET', 'POST'])
 def set_gbi_server():
-    form, auth_server = prepare_set_server()
+    form, add_server_form, auth_server = prepare_set_server()
 
     if form.validate_on_submit():
         app_state = current_app.config.geobox_state
@@ -95,30 +123,33 @@ def set_gbi_server():
                 return redirect(url_for(form.next.data))
             db_session.add(gbi_server)
 
-        try:
-            context.load_context_document(gbi_server, db_session,
-                                          form.username.data,
-                                          form.password.data)
-        except context.AuthenticationError:
-            flash(_('username or password not correct'), 'error')
-        except ValueError:
-            flash(_('unable to fetch context document'), 'error')
-        else:
-            flash(_('load context document successful'), 'sucess')
-            context.update_raster_sources(gbi_server, db_session)
-            context.update_wfs_sources(gbi_server, db_session)
-
-            db_session.commit()
-
-            if gbi_server.home_server and app_state.home_server is None:
-                app_state.new_home_server = gbi_server
-            elif gbi_server.home_server and gbi_server.active_home_server:
-                context.update_couchdb_sources(gbi_server, app_state)
+            load_context(gbi_server, db_session, form, app_state)
 
         return redirect(url_for(form.next.data))
 
     return render_template('admin/set_server.html', form=form,
+                           add_server_form=add_server_form,
                            auth_server=json.dumps(auth_server))
+
+
+@admin_view.route('/admin/add_gbi_server', methods=['POST'])
+def add_gbi_server():
+    form = forms.AddGBIServerForm(request.form)
+    app_state = current_app.config.geobox_state
+
+    if form.validate_on_submit():
+        auth = bool(form.username.data and form.password.data)
+        gbi_server = GBIServer(title=form.title.data, url=form.url.data,
+                               auth=auth)
+        db_session = app_state.user_db_session()
+        db_session.add(gbi_server)
+        try:
+            db_session.commit()
+        except IntegrityError:
+            flash(_('server already exists'), 'error')
+        else:
+            load_context(gbi_server, db_session, form, app_state)
+    return redirect(url_for(form.next.data))
 
 
 @admin_view.route('/admin/set_home_server', methods=['GET'])

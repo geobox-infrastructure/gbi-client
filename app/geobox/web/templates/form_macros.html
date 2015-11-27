@@ -61,14 +61,13 @@
 </div>
 {%- endmacro %}
 
-{% macro set_server(form) -%}
+{% macro gbi_server_form(form, add_server_form) -%}
+    <h4>{{_('set gbi server')}}</h4>
     <div id="load-context-document" class="alert hide">
         <img src="{{ url_for('static', filename='img/loader.gif')}}">
         <span>{{_('context document will be loaded and boxes are copied')}}</span>
     </div>
-
-    <form id="set-server-form" method="POST" class="form-horizontal" action="{{ url_for('admin.set_gbi_server') }}">
-
+    <form id="set-server-form" name="set-server-form" method="POST" class="form-horizontal" action="{{ url_for('admin.set_gbi_server') }}">
         <div class="control-group">
             {{ form.csrf_token }}
             {{ input(form.url, style="width: 30em") }}
@@ -81,6 +80,21 @@
             <div class="controls">
                 <button type="submit" class="btn btn-small">{{ _('set') }}</button>
             </div>
+        </div>
+    </form>
+
+    <h4>{{ _('Add server') }}</h4>
+    <form id="add-server-form" name="add-server-form" method="POST" action="{{ url_for('admin.add_gbi_server') }}" class="form-horizontal">
+        {{ add_server_form.csrf_token }}
+        {{ input(add_server_form.title) }}
+        {{ input(add_server_form.url, style="width: 30em") }}
+        {{ input(add_server_form.username) }}
+        {{ input(add_server_form.password) }}
+        {{ add_server_form.next }}
+        <div class="control-group">
+          <div class="controls">
+            <button type="submit" class="btn btn-small">{{ _('add')}}</button>
+          </div>
         </div>
     </form>
 {%- endmacro %}

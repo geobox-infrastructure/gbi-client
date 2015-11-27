@@ -24,7 +24,7 @@ class GBIServer(Base):
     __tablename__ = 'servers'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    url = sa.Column(sa.String(), nullable=False)
+    url = sa.Column(sa.String(), nullable=False, unique=True)
     prefix = sa.Column(sa.String())
     title = sa.Column(sa.String())
     auth = sa.Column(sa.Boolean(), default=False)

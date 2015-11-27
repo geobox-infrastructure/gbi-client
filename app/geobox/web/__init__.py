@@ -59,7 +59,11 @@ def create_app(app_state):
 
         gbi_server = g.db.query(GBIServer).all()
 
-        if len(gbi_server) == 0 and request.endpoint != 'admin.set_gbi_server':
+        if (
+            len(gbi_server) == 0
+            and request.endpoint not in ('admin.set_gbi_server',
+                                         'admin.add_gbi_server')
+        ):
             return redirect(url_for('admin.set_gbi_server'))
 
     @app.teardown_request
