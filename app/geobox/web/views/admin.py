@@ -129,7 +129,8 @@ def set_gbi_server():
 
     return render_template('admin/set_server.html', form=form,
                            add_server_form=add_server_form,
-                           auth_server=json.dumps(auth_server))
+                           auth_server=json.dumps(auth_server),
+                           disable_menu=True)
 
 
 @admin_view.route('/admin/add_gbi_server', methods=['POST'])

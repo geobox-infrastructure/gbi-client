@@ -26,11 +26,13 @@
         <span class="brand">GeoBox CouchApp</span>
       {% else %}
       <a class="brand" href="/">GeoBox</a>
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-            <li><a class="nav" href="/">{{ _('home') }}</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
+        {% if disable_menu != True %}
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+              <li><a class="nav" href="/">{{ _('home') }}</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+        {% endif %}
       {% endif %}
     </div>
   </div>
@@ -49,9 +51,6 @@
   {% endif %}
 {% endwith %}
 
-{% if app_state.new_home_server is not none %}
-  {{ app_state.new_home_server.title }}
-{% endif %}
 {% block content %}{% endblock %}
 
 {% if app_state.new_home_server %}
