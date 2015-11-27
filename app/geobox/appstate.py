@@ -68,8 +68,10 @@ class GeoBoxState(object):
         self.tilebox = TileBoxServer(self)
 
         # combine loaded server list with stored servers
-        with open(self.config.get('web', 'server_list'), 'r') as server_list_file:
-            self.server_list = json.loads(server_list_file.read())['server']
+        with open(self.config.get('web', 'server_list'), 'r') as f:
+            self.server_list = json.loads(f.read())['server']
+        # TODO find better solotion. Accessing database here blocks manage.py
+        #      init_db when changes in table made
         session = self.user_db_session()
         query = session.query(GBIServer)
         query = query.filter(not_(GBIServer.url.in_([
@@ -79,6 +81,9 @@ class GeoBoxState(object):
             dict(title=s.title, url=s.url, auth=s.auth) for s in query.all()
         ]
 
+        query = session.query(GBIServer)
+        query = query.filter_by(active_home_server=True)
+        self.home_server = query.first()
     @classmethod
     def initialize(cls):
         # XXX olt: default .ini path
