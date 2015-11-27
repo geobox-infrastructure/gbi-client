@@ -67,28 +67,32 @@ class GeoBoxState(object):
         self.new_home_server = None
         self.tilebox = TileBoxServer(self)
 
-        # combine loaded server list with stored servers
-        with open(self.config.get('web', 'server_list'), 'r') as f:
-            self.server_list = json.loads(f.read())['server']
-        # TODO find better solotion. Accessing database here blocks manage.py
-        #      init_db when changes in table made
-        session = self.user_db_session()
-        query = session.query(GBIServer)
-        query = query.filter(not_(GBIServer.url.in_([
-            s['url'] for s in self.server_list
-        ])))
-        self.server_list += [
-            dict(title=s.title, url=s.url, auth=s.auth) for s in query.all()
-        ]
-
-        query = session.query(GBIServer)
-        query = query.filter_by(active_home_server=True)
-        self.home_server = query.first()
     @classmethod
     def initialize(cls):
         # XXX olt: default .ini path
         config = GeoBoxConfig.from_file('./geobox.ini')
         return cls(config)
+
+    @property
+    def server_list(self):
+        _server_list = []
+        # combine loaded server list with stored servers
+        with open(self.config.get('web', 'server_list'), 'r') as f:
+            _server_list = json.loads(f.read())['server']
+        session = self.user_db_session()
+        query = session.query(GBIServer)
+        query = query.filter(not_(GBIServer.url.in_([
+            s['url'] for s in _server_list
+        ])))
+        _server_list += [
+            dict(title=s.title, url=s.url, auth=s.auth) for s in query.all()
+        ]
+        return _server_list
+
+    @property
+    def home_server(self):
+        session = self.user_db_session()
+        return GBIServer.current_home_server(session)
 
     def migrate_db(self, engine):
         """
