@@ -412,7 +412,11 @@ def create_export_tasks(proj):
             project=proj
         )
         g.db.add(task)
-        send_task_logging(current_app.config.geobox_state, task)
+
+        logging_server = raster_source.wmts_source.gbi_server.logging_url
+        send_task_logging(
+            logging_server, current_app.config.geobox_state, task
+        )
 
     g.db.commit()
     return True
@@ -446,7 +450,10 @@ def create_raster_import_task(proj):
         update_tiles=proj.update_tiles,
         project=proj
     )
-    send_task_logging(current_app.config.geobox_state, task)
+
+    logging_server = raster_source.gbi_server.logging_url
+    send_task_logging(logging_server, current_app.config.geobox_state, task)
+
     g.db.add(task)
     g.db.commit()
     write_mapproxy_config(current_app.config.geobox_state)

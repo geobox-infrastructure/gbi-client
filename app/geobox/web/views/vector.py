@@ -25,7 +25,7 @@ from geobox.lib.server_logging import send_task_logging
 from geobox.lib.vectorconvert import is_valid_shapefile, ConvertError
 from geobox.lib.fs import open_file_explorer
 from geobox.lib.couchdb import vector_layers_metadata
-from geobox.model import VectorImportTask, User
+from geobox.model import VectorImportTask, User, GBIServer
 from geobox.web import forms
 from geobox.model.tasks import VectorExportTask
 
@@ -99,7 +99,12 @@ def import_geojson():
                 file_name=form.file_name.data,
                 type_ = 'geojson'
             )
-            send_task_logging(current_app.config.geobox_state, task)
+            home_server = GBIServer.current_home_server(
+                current_app.config.geobox_state.user_db_session()
+            )
+            if home_server is not None:
+                send_task_logging(home_server.logging_url,
+                                  current_app.config.geobox_state, task)
             g.db.add(task)
             g.db.commit()
             return redirect(url_for('tasks.list'))
@@ -183,7 +188,12 @@ def import_vector():
                 srs=form.srs.data,
                 type_ = 'shp',
             )
-            send_task_logging(current_app.config.geobox_state, task)
+            home_server = GBIServer.current_home_server(
+                current_app.config.geobox_state.user_db_session()
+            )
+            if home_server is not None:
+                send_task_logging(home_server.logging_url,
+                                  current_app.config.geobox_state, task)
             g.db.add(task)
             g.db.commit()
             return redirect(url_for('tasks.list'))
@@ -271,17 +281,24 @@ def export_selected_geometries():
         abort(500)
     return jsonify({'status': 'success'})
 
-def create_export_task(proj, layername, export_type, destination, filename, geojson):
+
+def create_export_task(proj, layername, export_type, destination, filename,
+                       geojson):
     task = VectorExportTask(
-       db_name=layername,
-       srs=proj,
-       type_=export_type,
-       destination=destination,
-       file_name=filename,
-       geojson=geojson,
+        db_name=layername,
+        srs=proj,
+        type_=export_type,
+        destination=destination,
+        file_name=filename,
+        geojson=geojson,
     )
 
     g.db.add(task)
-    send_task_logging(current_app.config.geobox_state, task)
+    home_server = GBIServer.current_home_server(
+        current_app.config.geobox_state.user_db_session()
+    )
+    if home_server is not None:
+        send_task_logging(home_server.logging_url,
+                          current_app.config.geobox_state, task)
     g.db.commit()
     return redirect(url_for('tasks.list'))

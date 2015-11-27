@@ -46,6 +46,11 @@ class GBIServer(Base):
         q = db_session.query(cls).filter_by(url=url)
         return q.first()
 
+    @classmethod
+    def current_home_server(cls, db_session):
+        q = db_session.query(cls).filter_by(active_home_server=True)
+        return q.first()
+
     def set_context(self, context):
         self._context = context
 

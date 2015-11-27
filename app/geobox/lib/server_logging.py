@@ -7,9 +7,8 @@ from geobox.model.tasks import *
 import logging
 log = logging.getLogger(__name__)
 
-def send_task_logging(app_state, task):
-    logging_server = app_state.config.get('app', 'logging_server')
 
+def send_task_logging(logging_server, app_state, task):
     if not logging_server:
         return
 
@@ -45,7 +44,8 @@ def send_task_logging(app_state, task):
         json_log['zoom_level_start'] = task.zoom_level_start
         json_log['zoom_level_end'] = task.zoom_level_end
     try:
-        r = requests.post(logging_server, data=json.dumps(json_log), headers={'content-type': 'application/json'})
+        r = requests.post(logging_server, data=json.dumps(json_log),
+                          headers={'content-type': 'application/json'})
         if r and r.status_code != 200:
             log.warn("Could not log to server. Server response status code %r" % (r.status_code))
     except requests.exceptions.RequestException, ex:
