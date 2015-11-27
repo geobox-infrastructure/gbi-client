@@ -123,7 +123,6 @@ def import_json(box_name, id):
         type_ = 'geojson',
         source = get_couch_box_db(box_name)
     )
-    send_task_logging(current_app.config.geobox_state, task)
     g.db.add(task)
     g.db.commit()
     flash(_("file will be imported"), 'success')
