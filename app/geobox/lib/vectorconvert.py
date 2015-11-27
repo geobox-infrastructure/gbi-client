@@ -16,9 +16,10 @@
 import os
 import glob
 import json
+import tempfile
 
 from zipfile import ZipFile
-
+from xml.etree import ElementTree as etree
 from fiona import collection
 
 try:
@@ -54,6 +55,38 @@ def load_json_from_shape(shape_file, mapping):
                 yield record
     except OSError, e:
         logging.error(e)
+
+def load_json_from_gml(gml_file, mapping):
+    fd, fixed_gmlfile = tempfile.mkstemp(".xml")
+    try:
+        with os.fdopen(fd, 'w') as f:
+            remove_xml_schemalocations(gml_file, f)
+        with collection(fixed_gmlfile, 'r') as source:
+            if not source.schema['geometry'] == mapping.geom_type and mapping.geom_type != '*':
+                raise ConvertError(_('invalid mapping'))
+            for record in source:
+                record = mapping.as_json_record(record)
+                yield record
+    except OSError, e:
+        logging.error(e)
+    finally:
+        os.unlink(fixed_gmlfile)
+
+def remove_xml_schemalocations(filename, dest):
+    """
+    Remove xsi:schemaLocation from XML.
+
+    OGR/Fiona reads schemas to get feature metadata.
+    FloRLP GML (and possible other GML) contains URLs
+    that are not accessible. This triggers long timeouts.
+    OGR will parse the whole GML to get the feature metadata,
+    which should not be an issue for our smaller GMLs.
+    """
+    with open(filename) as f:
+        tree = etree.parse(f)
+    root = tree.getroot()
+    root.attrib['{http://www.w3.org/2001/XMLSchema-instance}:schemaLocation'] = ''
+    tree.write(dest)
 
 def fields_from_properties(records):
     columns = {}
