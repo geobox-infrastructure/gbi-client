@@ -32,18 +32,16 @@ from .vector import prepare_geojson_form
 
 boxes = Blueprint('boxes', __name__)
 
+
 @boxes.route("/box/<box_name>", methods=["GET", "POST"])
 def files(box_name, user_id=None):
-
     user = User(current_app.config.geobox_state.config.get('user', 'type'))
     is_consultant = user.is_consultant
 
     if (box_name == 'file' and not is_consultant):
         raise NotFound()
-
     if ((box_name == 'download' or box_name == 'upload') and is_consultant):
         raise NotFound()
-
     form = UploadForm()
     import_form = ImportGeoJSONEdit()
     import_form = prepare_geojson_form(import_form)
@@ -51,7 +49,11 @@ def files(box_name, user_id=None):
     couch_box = get_couch_box_db(box_name)
 
     host = request.headers.get('Host').split(':')[0]
-    couch = CouchFileBox('http://%s:%s' %(host, current_app.config.geobox_state.config.get('couchdb', 'port'), ), couch_box)
+    couch = CouchFileBox(
+        'http://%s:%s' % (
+            host,
+            current_app.config.geobox_state.config.get('couchdb', 'port')
+        ), couch_box)
     if form.validate_on_submit():
         file = request.files['file']
         overwrite = True if request.form.get('overwrite') == 'true' else False
@@ -65,16 +67,18 @@ def files(box_name, user_id=None):
 
     files = couch.all_files()
     for f in files:
-        f['download_link'] = couchid_to_link(f['id'], couch_url=couch.couch_url)
-
+        f['download_link'] = couchid_to_link(f['id'],
+                                             couch_url=couch.couch_url)
 
     return render_template("boxes/%s.html" % box_name, form=form, files=files,
-        box_name=box_name, import_form=import_form)
+                           box_name=box_name, import_form=import_form)
+
 
 def couchid_to_link(filename, couch_url):
     if isinstance(filename, unicode):
         filename = filename.encode('utf-8')
     return "%s/%s/file" % (couch_url, urllib.quote(filename))
+
 
 def get_couch_box_db(box_name):
     app_state = current_app.config.geobox_state
