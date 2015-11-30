@@ -107,35 +107,55 @@ def load_context(gbi_server, db_session, form, app_state):
             context.update_couchdb_sources(gbi_server, app_state)
 
 
-@admin_view.route('/admin/set_gbi_server', methods=['GET', 'POST'])
-def set_gbi_server():
+def _set_gbi_server(form):
+    app_state = current_app.config.geobox_state
+    db_session = app_state.user_db_session()
+
+    gbi_server = GBIServer.by_url(db_session, form.url.data)
+    if gbi_server is None:
+        gbi_server = gbi_server_from_list(app_state, form.url.data)
+        if gbi_server is None:
+            flash(_('unable to determine selected server'))
+            return redirect(url_for(form.next.data))
+        db_session.add(gbi_server)
+
+    load_context(gbi_server, db_session, form, app_state)
+
+
+@admin_view.route('/admin/initial_set_server', methods=['GET', 'POST'])
+def initial_set_server():
     form, add_server_form, auth_server = prepare_set_server()
 
     if form.validate_on_submit():
-        app_state = current_app.config.geobox_state
-        db_session = app_state.user_db_session()
-
-        gbi_server = GBIServer.by_url(db_session, form.url.data)
-        if gbi_server is None:
-            gbi_server = gbi_server_from_list(app_state, form.url.data)
-            if gbi_server is None:
-                flash(_('unable to determine selected server'))
-                return redirect(url_for(form.next.data))
-            db_session.add(gbi_server)
-
-        load_context(gbi_server, db_session, form, app_state)
-
+        _set_gbi_server(form)
         return redirect(url_for(form.next.data))
 
-    return render_template('admin/set_server.html', form=form,
+    return render_template('admin/initial_set_server.html', form=form,
                            add_server_form=add_server_form,
                            auth_server=json.dumps(auth_server),
                            disable_menu=True)
 
 
-@admin_view.route('/admin/add_gbi_server', methods=['POST'])
-def add_gbi_server():
+@admin_view.route('/admin/set_server', methods=['GET', 'POST'])
+def set_server():
+    form, add_server_form, auth_server = prepare_set_server()
+    if request.method == 'GET':
+        form.next.data = 'admin.set_server'
+    if form.validate_on_submit():
+        _set_gbi_server(form)
+
+        return redirect(url_for(form.next.data))
+
+    return render_template('admin/set_server.html', form=form,
+                           auth_server=json.dumps(auth_server))
+
+
+@admin_view.route('/admin/add_server', methods=['GET', 'POST'])
+def add_server():
     form = forms.AddGBIServerForm(request.form)
+    if request.method == 'GET':
+        form.next.data = 'admin.add_server'
+
     app_state = current_app.config.geobox_state
 
     if form.validate_on_submit():
@@ -150,9 +170,8 @@ def add_gbi_server():
             flash(_('server already exists'), 'error')
         else:
             load_context(gbi_server, db_session, form, app_state)
-    else:
-        flash(_('title as well as url required'), 'error')
-    return redirect(url_for(form.next.data))
+        return redirect(url_for(form.next.data))
+    return render_template('admin/add_server.html', form=form)
 
 
 @admin_view.route('/admin/set_home_server', methods=['GET'])

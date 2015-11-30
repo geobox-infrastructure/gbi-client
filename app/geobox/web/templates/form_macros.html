@@ -61,7 +61,7 @@
 </div>
 {%- endmacro %}
 
-{% macro gbi_server_form(form, add_server_form) -%}
+{% macro set_server_form(form) -%}
     <div class="row">
         <div class="span8">
             <h4>{{_('set gbi server')}}</h4>
@@ -70,7 +70,7 @@
                 <span>{{_('context document will be loaded and boxes are copied')}}</span>
             </div>
 
-            <form id="set-server-form" name="set-server-form" method="POST" class="form-horizontal " action="{{ url_for('admin.set_gbi_server') }}">
+            <form id="set-server-form" name="set-server-form" method="POST" class="form-horizontal " action="{{ url_for('admin.set_server') }}">
                 {{ form.csrf_token }}
                 {{ input(form.url, style="width: 30em") }}
                 {{ input(form.username) }}
@@ -83,15 +83,21 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+{%- endmacro %}
 
+{% macro add_server_form(form) -%}
+    <div class="row">
+        <div class="span8">
             <h4>{{ _('Add server') }}</h4>
-            <form id="add-server-form" name="add-server-form" method="POST" action="{{ url_for('admin.add_gbi_server') }}" class="form-horizontal span6">
-                {{ add_server_form.csrf_token }}
-                {{ input(add_server_form.title) }}
-                {{ input(add_server_form.url, style="width: 30em") }}
-                {{ input(add_server_form.username) }}
-                {{ input(add_server_form.password) }}
-                {{ add_server_form.next }}
+            <form id="add-server-form" name="add-server-form" method="POST" action="{{ url_for('admin.add_server') }}" class="form-horizontal span6">
+                {{ form.csrf_token }}
+                {{ input(form.title) }}
+                {{ input(form.url, style="width: 30em") }}
+                {{ input(form.username) }}
+                {{ input(form.password) }}
+                {{ form.next }}
                 <div class="control-group">
                   <div class="controls">
                     <button type="submit" class="btn btn-small">{{ _('add')}}</button>

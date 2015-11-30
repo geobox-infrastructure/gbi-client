@@ -1,18 +1,8 @@
-{% extends "base.html" %}
+{% extends "admin.html" %}
+{% from "form_macros.html" import input, set_server_form %}
 
-{% block title %}{{ _('set gbi server') }}{% endblock %}
+{% block title %} {{_('Set server')}} {% endblock %}
 
-{% from "form_macros.html" import gbi_server_form %}
-
-{% block content %}
-
-{{ gbi_server_form(form, add_server_form) }}
-
-{% endblock %}
-
-{% block javascript %}
-    <script type="text/javascript">
-    var authServer = {{ auth_server | safe}};
-    </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/views/gbi_server_form.js') }}"></script>
+{% block content_right %}
+    {{ set_server_form(form) }}
 {% endblock %}

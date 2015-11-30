@@ -1,0 +1,8 @@
+{% extends "admin.html" %}
+{% from "form_macros.html" import input, add_server_form %}
+
+{% block title %} {{_('Add server')}} {% endblock %}
+
+{% block content_right %}
+    {{ add_server_form(form) }}
+{% endblock %}

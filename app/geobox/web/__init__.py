@@ -61,10 +61,11 @@ def create_app(app_state):
 
         if (
             len(gbi_server) == 0
-            and request.endpoint not in ('admin.set_gbi_server',
-                                         'admin.add_gbi_server')
+            and request.endpoint not in ('admin.initial_set_server',
+                                         'admin.set_server',
+                                         'admin.add_server')
         ):
-            return redirect(url_for('admin.set_gbi_server'))
+            return redirect(url_for('admin.initial_set_server'))
 
     @app.teardown_request
     def teardown_request(exception):
