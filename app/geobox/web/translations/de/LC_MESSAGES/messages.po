@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-11-27 17:44+0100\n"
-"PO-Revision-Date: 2015-11-27 17:54+0100\n"
+"POT-Creation-Date: 2015-11-30 11:50+0100\n"
+"PO-Revision-Date: 2015-11-30 11:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -62,11 +62,12 @@ msgstr "Beenden"
 msgid "Open"
 msgstr "Öffnen"
 
-#: geobox/lib/vectorconvert.py:42
+#: geobox/lib/vectorconvert.py:43
 msgid "invalid geometry type"
 msgstr "Ungültiger Geometrietyp"
 
-#: geobox/lib/vectorconvert.py:44 geobox/lib/vectorconvert.py:51
+#: geobox/lib/vectorconvert.py:45 geobox/lib/vectorconvert.py:52
+#: geobox/lib/vectorconvert.py:66
 msgid "invalid mapping"
 msgstr "Ungültiges Mapping"
 
@@ -98,31 +99,31 @@ msgstr "Vektorimport"
 msgid "replication"
 msgstr "Replikation"
 
-#: geobox/web/__init__.py:105
+#: geobox/web/__init__.py:106
 msgid "Sorry, method not allowed"
 msgstr "Keine Berechtigung."
 
-#: geobox/web/__init__.py:111
+#: geobox/web/__init__.py:112
 msgid "Sorry, page not found"
 msgstr "Die Seite wurde nicht gefunden"
 
-#: geobox/web/__init__.py:117
+#: geobox/web/__init__.py:118
 msgid "Sorry, not allowed"
 msgstr "Keine Berechtigung."
 
-#: geobox/web/__init__.py:118
+#: geobox/web/__init__.py:119
 msgid "Please log in first..."
 msgstr "Bitte loggen Sie sich ein"
 
-#: geobox/web/__init__.py:125
+#: geobox/web/__init__.py:126
 msgid "Sorry, an error has occurred"
 msgstr "Entschuldigen Sie bitte, es ist ein Fehler aufgetreten"
 
-#: geobox/web/__init__.py:131
+#: geobox/web/__init__.py:132
 msgid "Login required"
 msgstr "Einloggen erforderlich"
 
-#: geobox/web/__init__.py:132
+#: geobox/web/__init__.py:133
 msgid "Please login to see this page"
 msgstr "Sie müssen sich anmelden um diese Seite aufrufen zu können"
 
@@ -304,113 +305,67 @@ msgstr "Passwort"
 msgid "gbi server context document"
 msgstr "GBI-Server-URL"
 
-#: geobox/web/templates/admin.html:4 geobox/web/templates/admin.html:7
-#: geobox/web/templates/index.html:64
+#: geobox/web/templates/admin.html:4 geobox/web/templates/index.html:64
 #: geobox/web/templates/js/translation.js:141
 msgid "settings"
 msgstr "Einstellungen"
 
-#: geobox/web/templates/admin.html:8
-msgid "local net access"
-msgstr "Zugriff für lokales Netzwerk"
+#: geobox/web/templates/admin.html:11 geobox/web/templates/admin.html:15
+msgid "Network"
+msgstr "Netzwerk"
 
-#: geobox/web/templates/admin.html:9
-msgid "tooltip local net access"
-msgstr ""
-"Erlauben Sie den Zugriff von anderen Computern auf die Anwendung und die "
-"erstellten Daten."
+#: geobox/web/templates/admin.html:20 geobox/web/templates/editor.html:406
+msgid "Server"
+msgstr "Server"
 
-#: geobox/web/templates/admin.html:13
-#: geobox/web/templates/tasks/task_list.html:28
-#: geobox/web/templates/tasks/task_list.html:88
-msgid "status"
-msgstr "Status"
-
-#: geobox/web/templates/admin.html:15
-msgid "activated"
-msgstr "Aktiv"
-
-#: geobox/web/templates/admin.html:17
-msgid "deactivated"
-msgstr "Inaktiv"
-
-#: geobox/web/templates/admin.html:23
-msgid "deactivate"
-msgstr "Deaktivieren"
-
-#: geobox/web/templates/admin.html:25
-msgid "activate"
-msgstr "Aktivieren"
+#: geobox/web/templates/admin.html:24
+msgid "set server"
+msgstr "Server festlegen"
 
 #: geobox/web/templates/admin.html:29
-msgid "Context documents"
-msgstr "Kontextdokument"
+msgid "add server"
+msgstr "Server hinzufügen"
 
-#: geobox/web/templates/admin.html:32
-msgid "Logging"
-msgstr "Logging"
+#: geobox/web/templates/admin.html:43 geobox/web/templates/admin.html:48
+msgid "Logs"
+msgstr "Log Übersicht"
 
-#: geobox/web/templates/admin.html:33
-msgid "open logview"
-msgstr "Log öffnen"
-
-#: geobox/web/templates/admin.html:35
+#: geobox/web/templates/admin.html:53 geobox/web/templates/admin.html:57
 msgid "Files"
 msgstr "Dateien"
 
-#: geobox/web/templates/admin.html:36
-msgid "open external file explorer"
-msgstr "GeoBox-Verzeichnis öffnen"
-
-#: geobox/web/templates/admin.html:39
-msgid "External tile box"
-msgstr "Externe TileBox einbinden"
-
-#: geobox/web/templates/admin.html:45
-msgid "add and start tilebox"
-msgstr "Hinzufügen/Neustarten"
-
-#: geobox/web/templates/admin.html:46
-#: geobox/web/templates/admin/external_raster_list.html:26
-#: geobox/web/templates/admin/external_raster_list.html:139
-#: geobox/web/templates/projects/exports.html:35
-#: geobox/web/templates/projects/imports.html:46
-#: geobox/web/templates/tasks/task_list.html:52
-msgid "remove"
-msgstr "Entfernen"
-
-#: geobox/web/templates/admin.html:52
+#: geobox/web/templates/admin.html:69
 msgid "GeoBox Version"
 msgstr "GeoBox Version"
 
-#: geobox/web/templates/base.html:31 geobox/web/templates/index.html:3
+#: geobox/web/templates/base.html:32 geobox/web/templates/index.html:3
 msgid "home"
 msgstr "Menü"
 
-#: geobox/web/templates/base.html:63
+#: geobox/web/templates/base.html:59
 msgid "new home server"
 msgstr "Neuen Home-Server festlegen"
 
-#: geobox/web/templates/base.html:66
+#: geobox/web/templates/base.html:62
 msgid ""
 "The server is a home server. Would you like to assign it as your home server?"
 msgstr ""
 "Der ausgewählte GBI-Server kann als Home-Server verwendet werden.Wollen Sie "
 "diesen GBI-Server als Ihren Home-Server festlegen?"
 
-#: geobox/web/templates/base.html:69
+#: geobox/web/templates/base.html:65
 #: geobox/web/templates/admin/external_raster_list.html:55
 #: geobox/web/templates/admin/external_raster_list.html:95
 msgid "no"
 msgstr "Nein"
 
-#: geobox/web/templates/base.html:70
+#: geobox/web/templates/base.html:66
 #: geobox/web/templates/admin/external_raster_list.html:53
 #: geobox/web/templates/admin/external_raster_list.html:93
 msgid "yes"
 msgstr "Ja"
 
-#: geobox/web/templates/base.html:73
+#: geobox/web/templates/base.html:69
 msgid "boxes are copied"
 msgstr "Boxen werden kopiert"
 
@@ -504,6 +459,7 @@ msgid "updated"
 msgstr "Aktualisiert"
 
 #: geobox/web/templates/downloads.html:14
+#: geobox/web/templates/admin/files.html:3
 msgid "files"
 msgstr "Dateien"
 
@@ -937,10 +893,6 @@ msgstr ""
 msgid "WMS search results"
 msgstr "WMS Suchergebnisse"
 
-#: geobox/web/templates/editor.html:406
-msgid "Server"
-msgstr "Server"
-
 #: geobox/web/templates/editor.html:414 geobox/web/templates/editor.html:430
 msgid "close"
 msgstr "Schließen"
@@ -957,28 +909,29 @@ msgstr ""
 "Beenden Sie das Bearbeiten der Eigenschaften indem Sie Ihre Änderungen "
 "übernehmen oder verwerfen bevor Sie fortfahren"
 
-#: geobox/web/templates/form_macros.html:65
-#: geobox/web/templates/admin/set_server.html:3
-msgid "set gbi server"
-msgstr "GBI-Server festlegen"
-
 #: geobox/web/templates/form_macros.html:68
 msgid "context document will be loaded and boxes are copied"
 msgstr "Daten werden vom Server geladen und kopiert"
 
-#: geobox/web/templates/form_macros.html:78
+#: geobox/web/templates/form_macros.html:75
+#: geobox/web/templates/admin/initial_set_server.html:3
+msgid "set gbi server"
+msgstr "GBI-Server festlegen"
+
+#: geobox/web/templates/form_macros.html:85
 msgid "no auth required"
 msgstr "Für diesen Server ist keine Anmeldung erforderlich"
 
-#: geobox/web/templates/form_macros.html:81
+#: geobox/web/templates/form_macros.html:88
 msgid "set"
 msgstr "Benutzen"
 
-#: geobox/web/templates/form_macros.html:86
+#: geobox/web/templates/form_macros.html:99
+#: geobox/web/templates/admin/add_server.html:4
 msgid "Add server"
 msgstr "Hinzufügen"
 
-#: geobox/web/templates/form_macros.html:96
+#: geobox/web/templates/form_macros.html:112
 msgid "add"
 msgstr "Hinzufügen"
 
@@ -1050,14 +1003,6 @@ msgstr "Datenquellen"
 msgid "administation"
 msgstr "Administration"
 
-#: geobox/web/templates/log_view.html:3
-msgid "log_view"
-msgstr "Log Übersicht"
-
-#: geobox/web/templates/log_view.html:7
-msgid "logs"
-msgstr "Log Übersicht"
-
 #: geobox/web/templates/macros.html:121
 msgid "download coverage"
 msgstr "Downloadberecht."
@@ -1086,6 +1031,15 @@ msgstr "Layer"
 #: geobox/web/templates/projects/imports.html:15
 msgid "zoom level"
 msgstr "Level"
+
+#: geobox/web/templates/admin/external_raster_list.html:26
+#: geobox/web/templates/admin/external_raster_list.html:139
+#: geobox/web/templates/admin/files.html:13
+#: geobox/web/templates/projects/exports.html:35
+#: geobox/web/templates/projects/imports.html:46
+#: geobox/web/templates/tasks/task_list.html:52
+msgid "remove"
+msgstr "Entfernen"
 
 #: geobox/web/templates/admin/external_raster_list.html:34
 msgid "external raster source overview"
@@ -1227,6 +1181,68 @@ msgid "tooltip - userdefined wmts source url"
 msgstr ""
 "Die WMTS-Quelle benötigt eine URL, die Platzhalter für Zoom-Level "
 "({TileMatrix}), Kachel-Spalte ({TileCol}) und -Zeile ({TileRow}) enthält."
+
+#: geobox/web/templates/admin/files.html:6
+msgid "External tile box"
+msgstr "Externe TileBox einbinden"
+
+#: geobox/web/templates/admin/files.html:12
+msgid "add and start tilebox"
+msgstr "Hinzufügen/Neustarten"
+
+#: geobox/web/templates/admin/files.html:17
+msgid "open external file explorer"
+msgstr "GeoBox-Verzeichnis öffnen"
+
+#: geobox/web/templates/admin/files.html:18
+msgid "open"
+msgstr "Öffnen"
+
+#: geobox/web/templates/admin/log_view.html:3
+msgid "log_view"
+msgstr "Log Übersicht"
+
+#: geobox/web/templates/admin/log_view.html:7
+msgid "logs"
+msgstr "Log Übersicht"
+
+#: geobox/web/templates/admin/network.html:3
+msgid "network"
+msgstr "Netzwerk"
+
+#: geobox/web/templates/admin/network.html:6
+msgid "local net access"
+msgstr "Zugriff für lokales Netzwerk"
+
+#: geobox/web/templates/admin/network.html:8
+#: geobox/web/templates/tasks/task_list.html:28
+#: geobox/web/templates/tasks/task_list.html:88
+msgid "status"
+msgstr "Status"
+
+#: geobox/web/templates/admin/network.html:10
+msgid "activated"
+msgstr "Aktiv"
+
+#: geobox/web/templates/admin/network.html:12
+msgid "deactivated"
+msgstr "Inaktiv"
+
+#: geobox/web/templates/admin/network.html:16
+msgid "Change local net access"
+msgstr "Zugriff für lokales Netzwerk einstellen"
+
+#: geobox/web/templates/admin/network.html:19
+msgid "deactivate"
+msgstr "Deaktivieren"
+
+#: geobox/web/templates/admin/network.html:21
+msgid "activate"
+msgstr "Aktivieren"
+
+#: geobox/web/templates/admin/set_server.html:4
+msgid "Set server"
+msgstr "Server festlegen"
 
 #: geobox/web/templates/boxes/base.html:5
 msgid "box"
@@ -2243,36 +2259,32 @@ msgstr "Kontextdokument konnte nicht aktualisiert werden"
 msgid "load context document successful"
 msgstr "Daten wurden erfolgreich aktualisiert."
 
-#: geobox/web/views/admin.py:122
+#: geobox/web/views/admin.py:118
 msgid "unable to determine selected server"
 msgstr "Ausgewählter Server kann nicht gefunden werden"
 
-#: geobox/web/views/admin.py:149
+#: geobox/web/views/admin.py:172
 msgid "server already exists"
 msgstr "Server ist bereits vorhanden"
 
-#: geobox/web/views/admin.py:153
-msgid "title as well as url required"
-msgstr "Titel und GBI-Server-URL sind erforderlich"
-
-#: geobox/web/views/admin.py:161 geobox/web/views/admin.py:168
+#: geobox/web/views/admin.py:183 geobox/web/views/admin.py:190
 msgid "unable to set homeserver"
 msgstr "Home-Server kann nicht festgelegt werden"
 
-#: geobox/web/views/admin.py:184
+#: geobox/web/views/admin.py:206
 #, python-format
 msgid "assigned %(homeserver)s as homeserver"
 msgstr "\"%(homeserver)s\" als Home-Server festgelegt"
 
-#: geobox/web/views/admin.py:228
+#: geobox/web/views/admin.py:250
 msgid "delete sucessful"
 msgstr "Erfolgreich gelöscht"
 
-#: geobox/web/views/admin.py:230
+#: geobox/web/views/admin.py:252
 msgid "delete not sucessful"
 msgstr "Löschen nicht möglich"
 
-#: geobox/web/views/admin.py:242
+#: geobox/web/views/admin.py:270
 msgid "settings changed. restart required"
 msgstr ""
 "Die Einstellungen wurden verändert - bitte starten Sie die Anwendung neu"
@@ -2331,7 +2343,7 @@ msgstr ""
 "nun unter der URL %(couchapp_url)s für Sie bereit"
 
 #: geobox/web/views/project.py:99 geobox/web/views/project.py:221
-#: geobox/web/views/vector.py:107 geobox/web/views/vector.py:195
+#: geobox/web/views/vector.py:107 geobox/web/views/vector.py:189
 msgid "form error"
 msgstr "Fehler bei Eingaben"
 
@@ -2399,17 +2411,17 @@ msgstr "-- GEOJSON auswählen -- "
 msgid "-- select layer or add new --"
 msgstr "-- Layer auswählen -- "
 
-#: geobox/web/views/vector.py:71 geobox/web/views/vector.py:200
+#: geobox/web/views/vector.py:71 geobox/web/views/vector.py:194
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr "Fehler beim Hochladen der Datei %(name)s"
 
-#: geobox/web/views/vector.py:73 geobox/web/views/vector.py:204
+#: geobox/web/views/vector.py:73 geobox/web/views/vector.py:198
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr "Datei %(name)s hochgeladen"
 
-#: geobox/web/views/vector.py:75 geobox/web/views/vector.py:202
+#: geobox/web/views/vector.py:75 geobox/web/views/vector.py:196
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr "Dateityp der Datei %(name)s ist nicht erlaubt"
@@ -2426,7 +2438,7 @@ msgstr "Shapefile auswählen"
 msgid "invalid shapefile"
 msgstr "Ungültiges Shapefile/fehlende Dateien"
 
-#: geobox/web/views/vector.py:198
+#: geobox/web/views/vector.py:192
 #, python-format
 msgid "file %(name)s missing"
 msgstr "Datei %(name)s fehlt"
@@ -2581,14 +2593,19 @@ msgstr "Kein gültigen Zeitpunkt angegeben."
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
-#~ msgid "context server url"
-#~ msgstr "URL zum Kontextdkoument"
+#~ msgid "tooltip local net access"
+#~ msgstr ""
+#~ "Erlauben Sie den Zugriff von anderen Computern auf die Anwendung und die "
+#~ "erstellten Daten."
 
-#~ msgid "load context"
-#~ msgstr "Daten aktualisieren"
+#~ msgid "Context documents"
+#~ msgstr "Kontextdokument"
 
-#~ msgid "login"
-#~ msgstr "Anmelden"
+#~ msgid "Logging"
+#~ msgstr "Logging"
 
-#~ msgid "logout"
-#~ msgstr "Abmelden"
+#~ msgid "open logview"
+#~ msgstr "Log öffnen"
+
+#~ msgid "title as well as url required"
+#~ msgstr "Titel und GBI-Server-URL sind erforderlich"
