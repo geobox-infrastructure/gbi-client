@@ -461,10 +461,13 @@ def create_raster_import_task(proj):
         wmts_source=raster_source).first()
 
     if local_raster_source:
-        local_raster_source.download_level_start = min(local_raster_source.download_level_start, start_level)
-        local_raster_source.download_level_end = max(local_raster_source.download_level_end, end_level)
+        local_raster_source.download_level_start = min(
+            local_raster_source.download_level_start, start_level)
+        local_raster_source.download_level_end = max(
+            local_raster_source.download_level_end, end_level)
     else:
-        name = "%s_%s_%s" % (raster_source.prefix, current_app.config.geobox_state.config.get('app', 'raster_prefix'), raster_source.name)
+        gbi_server = raster_source.gbi_server
+        name = gbi_server.raster_prefix + raster_source.name
         local_raster_source = model.LocalWMTSSource(
             download_level_start=start_level,
             download_level_end=end_level,
@@ -484,7 +487,8 @@ def create_raster_import_task(proj):
 
     logging_server = raster_source.gbi_server.logging_url
     user = raster_source.gbi_server.username
-    send_task_logging(logging_server, user, current_app.config.geobox_state, task)
+    send_task_logging(logging_server, user, current_app.config.geobox_state,
+                      task)
 
     g.db.add(task)
     g.db.commit()

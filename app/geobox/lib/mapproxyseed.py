@@ -305,6 +305,7 @@ def create_tile_manager(cache, sources, grid, format, tile_filter=None,
         pre_store_filter=pre_store_filter, image_opts=image_opts)
     return mgr
 
+
 def create_couchdb_cache(app_state, task=False, layer=False):
     cache_dir = app_state.user_temp_dir()
 
@@ -312,7 +313,9 @@ def create_couchdb_cache(app_state, task=False, layer=False):
         db_name = task.layer.name
         file_ext = task.source.format
     if layer:
-        db_name = "%s_%s_%s" % (layer.prefix, app_state.config.get('app', 'raster_prefix'), layer.name)
+        gbi_server = layer.gbi_server
+        gbi_server.app_state = app_state
+        db_name = gbi_server.raster_prefix + layer.name
         file_ext = layer.format
 
     port = app_state.config.get('couchdb', 'port')
@@ -321,7 +324,8 @@ def create_couchdb_cache(app_state, task=False, layer=False):
     md_template = CouchDBMDTemplate({})
 
     return CouchDBCache(url=url, db_name=db_name, md_template=md_template,
-        lock_dir=cache_dir, file_ext=file_ext, tile_grid=DEFAULT_GRID)
+                        lock_dir=cache_dir, file_ext=file_ext,
+                        tile_grid=DEFAULT_GRID)
 
 
 def create_metadata_doc(couchdb, layer):

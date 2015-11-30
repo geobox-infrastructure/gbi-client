@@ -34,12 +34,20 @@ class GBIServer(Base):
     home_server = sa.Column(sa.Boolean(), default=False)
     logging_url = sa.Column(sa.String())
     _context = None
+    _app_state = None
+
+    @property
+    def raster_prefix(self):
+        return "%s_%s_" % (
+            self.prefix,
+            self.app_state.config.get('app', 'raster_prefix')
+        )
 
     @property
     def vector_prefix(self):
         return "%s_%s_" % (
             self.prefix,
-            current_app.config.geobox_state.config.get('app', 'vector_prefix')
+            self.app_state.config.get('app', 'vector_prefix')
         )
 
     @classmethod
@@ -58,3 +66,12 @@ class GBIServer(Base):
     def get_context(self):
         return self._context
     context = property(get_context, set_context)
+
+    def set_app_state(self, app_state):
+        self._app_state = app_state
+
+    def get_app_state(self):
+        if self._app_state is None:
+            return current_app.config.geobox_state
+        return self._app_state
+    app_state = property(get_app_state, set_app_state)
