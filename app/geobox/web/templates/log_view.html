@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "admin.html" %}
 
 {% block title %}{{ _('log_view') }}{% endblock %}
 
-{% block content %}
+{% block content_right %}
 
 <h1>{{_('logs')}}</h1>
 <pre class="pre-scrollable" id="log_view">{{ log }}</pre>
