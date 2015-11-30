@@ -14,6 +14,7 @@
 # limitations under the License.
 
 import werkzeug.datastructures
+import re
 
 from jinja2 import Markup
 
@@ -297,3 +298,7 @@ class GMLUploadForm(Form):
     upload_file = FileField(lazy_gettext('Choose gml'),
                             validators=[Required()])
     srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Required()])
+
+    def validate_upload_file(form, field):
+        if field.data and re.match('.*\.xml', field.data.filename) is None:
+            raise ValidationError(lazy_gettext('only xml files allowed'))
