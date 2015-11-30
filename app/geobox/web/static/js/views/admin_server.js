@@ -3,7 +3,7 @@ $(document).ready(function() {
     var passwordContainer = $('#password').closest('.control-group');
     var noAuthRequiredElement = $('.no-auth-required');
     var authRequired = function() {
-        if(authServer.indexOf($('#url').val()) > -1) {
+        if(window.authServer.indexOf($('#url').val()) > -1) {
             usernameContainer.removeClass('hide');
             passwordContainer.removeClass('hide');
             noAuthRequiredElement.addClass('hide');
@@ -13,8 +13,10 @@ $(document).ready(function() {
             noAuthRequiredElement.removeClass('hide');
         }
     };
-    $('#url').change(authRequired);
-    authRequired();
+    if(window.authServer !== undefined) {
+        $('#url').change(authRequired);
+        authRequired();
+    }
 
     $('#set-server-form').submit(function() {
         $('#load-context-document').show();
