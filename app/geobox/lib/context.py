@@ -70,17 +70,14 @@ class ContextModelUpdater(object):
         self.version = version
 
     def sources_from_context(self, context):
-        first = True
         prefix = context.doc.get('portal', {}).get('prefix').lower()
         for source in context.wmts_sources():
-            yield self.source_for_conf(source, first, prefix, source_type='wmts')
-            first = False
+            yield self.source_for_conf(source, prefix, source_type='wmts')
 
         for source in context.wms_sources():
-            yield self.source_for_conf(source, first, prefix, source_type='wms')
-            first = False
+            yield self.source_for_conf(source, prefix, source_type='wms')
 
-    def source_for_conf(self, layer, first, prefix, source_type):
+    def source_for_conf(self, layer, prefix, source_type):
         query = self.session.query(model.ExternalWMTSSource).filter_by(name=layer['name'])
         query = query.filter_by(source_type=source_type)
         if prefix:
@@ -108,6 +105,7 @@ class ContextModelUpdater(object):
         source.format = layer['format']
         source.is_baselayer = layer['baselayer']
         source.is_overlay = layer['overlay']
+        source.background_layer = layer.get('is_background_layer', False)
 
         source.max_tiles = layer.get('max_tiles')
 
@@ -118,12 +116,6 @@ class ContextModelUpdater(object):
         assert source_type in ('wmts', 'wms')
         source.source_type = source_type
 
-        ### first source is background layer
-        if first:
-            source.background_layer = True
-        else:
-            source.background_layer = False
-
         if 'view_restriction' in layer:
             source.view_coverage = self.coverage_from_restriction(layer['view_restriction'])
             source.view_level_start = layer['view_restriction'].get('zoom_level_start')
@@ -131,7 +123,7 @@ class ContextModelUpdater(object):
         else:
             source.view_coverage = None
             source.view_level_start = None
-            source.view_level_end  = None
+            source.view_level_end = None
         if 'download_restriction' in layer:
             source.download_coverage = self.coverage_from_restriction(layer['download_restriction'])
             source.download_level_start = layer['download_restriction'].get('zoom_level_start')
@@ -139,7 +131,7 @@ class ContextModelUpdater(object):
         else:
             source.download_coverage = None
             source.download_level_start = None
-            source.download_level_end  = None
+            source.download_level_end = None
 
         source.active = True
         return source
@@ -212,16 +204,9 @@ def load_context_document(gbi_server, db_session, user, password):
 def update_raster_sources(gbi_server, db_session):
     updater = ContextModelUpdater(db_session, gbi_server.context.version())
 
-    first_source = None
     for source in updater.sources_from_context(gbi_server.context):
-        if not first_source:
-            first_source = source
         source.gbi_server = gbi_server
         db_session.add(source)
-
-    for source in db_session.query(model.ExternalWMTSSource):
-        if source != first_source:
-            source.background_layer = False
 
 
 def update_wfs_sources(gbi_server, db_session):

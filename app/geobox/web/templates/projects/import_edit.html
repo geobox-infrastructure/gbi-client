@@ -4,7 +4,7 @@
 
 {% from "form_macros.html" import input, select, checkbox %}
 {% from 'projects/macros.html' import map_tools, download_volume %}
-{% from "macros.html" import generate_base_layer, generate_sources, generate_couch_layers %}
+{% from "macros.html" import generate_base_layers, generate_sources, generate_couch_layers %}
 {% block content %}
     <div class="row-fluid">
         <div class="span3">
@@ -44,7 +44,7 @@
     <script type="text/javascript">
         var loadCoverageURL = '{{ url_for('project.load_coverage') }}';
 
-        {{ generate_base_layer(base_layer) }}
+        {{ generate_base_layers(base_layers) }}
         {{ generate_sources(sources) }}
         {{ generate_couch_layers(couch_layers, 'false')}}
 

@@ -53,8 +53,9 @@ def editor():
         preview_features = couch_src.get_attachment(filename)
         preview_layername = "%s (%s)" % (filename, _('Temporary'))
 
-    base_layer = g.db.query(ExternalWMTSSource).filter_by(background_layer=True).first()
-    base_layer.bbox = base_layer.bbox_from_view_coverage()
+    base_layers = g.db.query(ExternalWMTSSource).filter_by(background_layer=True).all()
+    for base_layer in base_layers:
+        base_layer.bbox = base_layer.bbox_from_view_coverage()
 
     wfs_search_sources = g.db.query(ExternalWFSSource).filter_by(active=True).all()
     if not wfs_search_sources:
@@ -62,7 +63,7 @@ def editor():
     wfs_search_form = WFSSearchForm(request.form)
 
     return render_template('editor.html',
-        base_layer=base_layer,
+        base_layers=base_layers,
         export_form=export_form,
         preview_layername=preview_layername,
         preview_features=preview_features,

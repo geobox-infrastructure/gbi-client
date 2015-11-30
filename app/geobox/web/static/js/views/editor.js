@@ -1033,11 +1033,16 @@ function initEditor() {
   });
   editor.bulkMode = false;
 
-  if ((typeof backgroundLayer !== 'undefined') && backgroundLayer) {
-    editor.addLayer(backgroundLayer)
-    if (backgroundLayer.olLayer.restrictedExtent) {
-      editor.map.olMap.zoomToExtent(backgroundLayer.olLayer.restrictedExtent);
+  if ((typeof backgroundLayers !== 'undefined') && backgroundLayers.length > 0) {
+    editor.addLayers(backgroundLayers);
+    var zoomExtent = new OpenLayers.Bounds();
+    for(var i = 0; i < backgroundLayers.length; i++) {
+      var olLayer = backgroundLayers[i].olLayer;
+      if (olLayer.restrictedExtent) {
+        zoomExtent.extend(olLayer.restrictedExtent);
+      }
     }
+    editor.map.olMap.zoomToExtent(zoomExtent);
   }
 
   $.each(raster_sources, function(index, layer) {

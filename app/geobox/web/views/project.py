@@ -110,9 +110,10 @@ def import_edit(id=None):
     if form.coverage.data:
         coverage = form.coverage.data
 
-    base_layer = g.db.query(model.ExternalWMTSSource).filter_by(
-        background_layer=True).first()
-    base_layer.bbox = base_layer.bbox_from_view_coverage()
+    base_layers = g.db.query(model.ExternalWMTSSource).filter_by(
+        background_layer=True).all()
+    for base_layer in base_layers:
+        base_layer.bbox = base_layer.bbox_from_view_coverage()
 
     free_disk_space = diskspace_available_in_mb(
         current_app.config.geobox_state.user_data_path())
@@ -131,7 +132,7 @@ def import_edit(id=None):
 
     return render_template('projects/import_edit.html', proj=proj, form=form,
                            sources=sources, couch_layers=couch_layers,
-                           base_layer=base_layer, coverage_form=coverage_form,
+                           base_layers=base_layers, coverage_form=coverage_form,
                            couchlayers_form=couchlayers_form,
                            coverage=coverage, free_disk_space=free_disk_space,
                            with_server=True)
@@ -228,8 +229,9 @@ def export_edit(id=None):
     if form.coverage.data:
         coverage = form.coverage.data
 
-    base_layer = g.db.query(model.ExternalWMTSSource).filter_by(background_layer=True).first()
-    base_layer.bbox = base_layer.bbox_from_view_coverage()
+    base_layers = g.db.query(model.ExternalWMTSSource).filter_by(background_layer=True).all()
+    for base_layer in base_layers:
+        base_layer.bbox = base_layer.bbox_from_view_coverage()
 
     free_disk_space = diskspace_available_in_mb(current_app.config.geobox_state.user_data_path())
     cache_url = get_external_couch_url(request)
@@ -245,7 +247,7 @@ def export_edit(id=None):
 
     return render_template('projects/export_edit.html', proj=proj, form=form,
         raster_sources=raster_sources,couch_layers=couch_layers,
-        layers=proj.export_raster_layers, base_layer=base_layer, coverage=coverage,
+        layers=proj.export_raster_layers, base_layers=base_layers, coverage=coverage,
         free_disk_space=free_disk_space,coverage_form=coverage_form, couchlayers_form=couchlayers_form,
         cache_url=cache_url)
 

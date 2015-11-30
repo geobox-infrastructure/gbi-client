@@ -1,27 +1,33 @@
-{% macro generate_base_layer(layer) -%}
-    {% if layer.view_level_end %}
-    var numZoomLevels = {{ layer.view_level_end }} + 1;
-    {% else %}
-    var numZoomLevels = 18;
-    {% endif %}
+{% macro generate_base_layers(layers) -%}
+    var numZoomLevels = [];
+    var backgroundLayers = [];
+    {% for layer in layers %}
+        backgroundLayers.push(new gbi.Layers.WMTS({
+            name: '{{ layer.title }}',
+            {% if not layer_name %}
+                url: '{{ add_auth_to_url(layer.url, layer.username, layer.password)}}',
+                layer: false,
+                requestEncoding: 'REST',
+            {% else %}
+                url: {% if layer.url %} '{{add_auth_to_url(layer.url, layer.username, layer.password)}}' {% else %} '{{ cache_url }}' {% endif %},
+                layer: '{{ layer_name }}',
+            {% endif %}
+            format: '{{ layer.format }}',
+            background: true,
+            {% if layer.bbox %}
+            restrictedExtent: new OpenLayers.Bounds{{ layer.bbox }}
+            {% endif %}
+        }));
+        {% if layer.view_level_end %}
+            numZoomLevels.push({{ layer.view_level_end }});
+        {% endif %}
+    {% endfor %}
 
-    var backgroundLayer = new gbi.Layers.WMTS({
-        name: '{{ layer.title }}',
-        {% if not layer_name %}
-            url: '{{ add_auth_to_url(layer.url, layer.username, layer.password)}}',
-            layer: false,
-            requestEncoding: 'REST',
-        {% else %}
-            url: {% if layer.url %} '{{add_auth_to_url(layer.url, layer.username, layer.password)}}' {% else %} '{{ cache_url }}' {% endif %},
-            layer: '{{ layer_name }}',
-        {% endif %}
-        format: '{{ layer.format }}',
-        background: true,
-        // isBaseLayer: true,
-        {% if layer.bbox %}
-        restrictedExtent: new OpenLayers.Bounds{{ layer.bbox }}
-        {% endif %}
-    });
+    if(numZoomLevels.length === 0) {
+        numZoomLevels = 18;
+    } else {
+        numZoomLevels = Math.max.apply(Math, numZoomLevels) + 1;
+    }
 {%- endmacro %}
 
 {% macro generate_couch_layers(layers, show_layer='true', hover_popup=False) -%}

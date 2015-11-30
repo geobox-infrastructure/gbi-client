@@ -4,7 +4,7 @@
 
 {% from "form_macros.html" import input, select, select_with_help %}
 {% from 'projects/macros.html' import map_tools, download_volume %}
-{% from "macros.html" import generate_base_layer, generate_sources, generate_couch_layers %}
+{% from "macros.html" import generate_base_layers, generate_sources, generate_couch_layers %}
 {% block content %}
     <div class="row-fluid">
         <div class="span3">
@@ -67,7 +67,7 @@
         var buttonAddVector = '{{ _('add vector') }}';
         var startLevelText = '{{ form.start_level.label.text }}';
         var level = '{{ _('level') }}';
-        {{ generate_base_layer(base_layer) }}
+        {{ generate_base_layers(base_layers) }}
         {{ generate_sources(raster_sources, cache_url) }}
         {{ generate_couch_layers(couch_layers, 'false')}}
 
