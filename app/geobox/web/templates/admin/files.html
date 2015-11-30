@@ -1,0 +1,20 @@
+{% extends "admin.html" %}
+
+{% block title %}{{ _('files') }}{% endblock %}
+
+{% block content_right %}
+    <h4>{{ _('External tile box') }}</h4>
+    <form method="POST" action="{{ url_for('.tilebox_restart') }} " class="form-horizontal">
+        {{ tilebox_form.csrf_token }}
+        {{ input(tilebox_form.path) }}
+        <div class="control-group">
+          <div class="controls">
+            <button type="submit" name="restart" class="btn btn-small">{{ _('add and start tilebox')}}</button>
+            <button type="submit" name="stop" class="btn btn-small">{{ _('remove')}}</button>
+          </div>
+        </div>
+    </form>
+    <h4>{{ _('open external file explorer') }}</h4>
+    <a class="btn btn-small" href="{{ url_for('.file_browser') }}">{{ _('open') }}</a>
+{% endblock %}
+

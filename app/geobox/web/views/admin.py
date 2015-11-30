@@ -251,6 +251,12 @@ def remove_source(id):
 
     return redirect(url_for('.admin'))
 
+@admin_view.route('/file_browser', methods=['GET'])
+def file_browser():
+    open_file_explorer(current_app.config.geobox_state.user_data_path())
+    return redirect_back('.admin')
+
+
 @admin_view.route('/localnet_access', methods=['POST'])
 def localnet_access():
     localnet_status = get_localnet_status()
@@ -260,17 +266,32 @@ def localnet_access():
         current_app.config.geobox_state.config.set('app', 'host', '0.0.0.0')
     current_app.config.geobox_state.config.write()
     flash(_('settings changed. restart required'), 'error')
-    return redirect(url_for('.admin'))
+    return redirect(url_for('admin.network'))
 
-@admin_view.route('/log_view', methods=['GET'])
-def log_view():
-    log = codecs.open(current_app.config.geobox_state.user_data_path('log', 'geobox.log'), "r", "utf-8").read()
-    return render_template('log_view.html', log=log)
-
-@admin_view.route('/file_browser', methods=['GET'])
-def file_browser():
-    open_file_explorer(current_app.config.geobox_state.user_data_path())
-    return redirect_back('.admin')
 
 def get_localnet_status():
-    return False if current_app.config.geobox_state.config.get('app', 'host') == '127.0.0.1' else True
+    host = current_app.config.geobox_state.config.get('app', 'host')
+    return False if host == '127.0.0.1' else True
+
+
+@admin_view.route('/admin/network', methods=['GET'])
+def network():
+    return render_template('admin/network.html',
+                           localnet=get_localnet_status())
+
+
+@admin_view.route('/admin/log_view', methods=['GET'])
+def log_view():
+    log_file = current_app.config.geobox_state.user_data_path('log',
+                                                              'geobox.log')
+    log = codecs.open(log_file, "r", "utf-8").read()
+    return render_template('admin/log_view.html', log=log)
+
+
+@admin_view.route('/admin/files', methods=['GET'])
+def files():
+    tilebox_form = forms.TileBoxPathForm()
+    tilebox_form.path.data = current_app.config.geobox_state.config.get(
+        'tilebox', 'path'
+    )
+    return render_template('admin/files.html', tilebox_form=tilebox_form)

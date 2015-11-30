@@ -4,59 +4,68 @@
 {% block title %} {{_('settings')}} {% endblock %}
 
 {% block content %}
-    <h3>{{ _('settings') }}</h3>
-    <h4>{{ _('local net access') }}
-        {{ generate_tooltip(_('tooltip local net access') ) }}
-    </h4>
+    <div class="row">
+        <div class="span3">
+            {% block content_left %}
 
-    <p id="localnet_status">
-        {{_('status')}}:
-        {% if localnet %}
-            {{ _('activated') }}
-        {% else %}
-            {{ _('deactivated') }}
-        {% endif %}
-    </p>
+                <h5>{{ _('Network') }}</h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="{% if url_for('admin.network') == request.path %}active{% endif%}">
+                        <a href="{{ url_for('admin.network', refresh=True) }}">
+                            {{ _('Network') }}
+                        </a>
+                    </li>
+                </ul>
 
-    <button class="btn btn-small" id="localnet" data-toggle_localnet_access_url="{{ url_for('.localnet_access') }}">
-        {% if localnet %}
-            {{ _('deactivate') }}
-        {% else %}
-            {{ _('activate') }}
-        {% endif %}
-    </button>
+                <h5>{{ _('Server') }}</h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="{% if url_for('admin.set_server') == request.path %}active{% endif%}">
+                        <a href="{{ url_for('admin.set_server') }}">
+                            {{ _('set server') }}
+                        </a>
+                    </li>
+                    <li class="{% if url_for('admin.add_server') == request.path %}active{% endif%}">
+                        <a href="{{ url_for('admin.add_server') }}">
+                            {{ _('add server') }}
+                        </a>
+                    </li>
+                </ul>
+{#
+                <h5>{{ _('GML') }}</h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="{% if url_for('admin.upload_gml') == request.path %}active{% endif%}">
+                        <a href="{{ url_for('admin.upload_gml') }}">
+                            {{ _('upload authorization box') }}
+                        </a>
+                    </li>
+                </ul>
+#}
+                <h5>{{ _('Logs') }}</h5>
+                <ul class="nav nav-pills nav-stacked">
 
-    <h4>{{ _('Context documents') }}</h4>
-    {{ gbi_server_form(form, add_server_form) }}
+                    <li class="{% if url_for('admin.log_view') == request.path %}active{% endif%}">
+                        <a href="{{ url_for('admin.log_view') }}">
+                            {{ _('Logs') }}
+                        </a>
+                    </li>
+                </ul>
 
-    <h4>{{ _('Logging') }}</h4>
-    <a href="{{ url_for('.log_view') }}">{{ _('open logview') }}</a>
-
-    <h4>{{ _('Files') }}</h4>
-    <a href="{{ url_for('.file_browser') }}">{{ _('open external file explorer') }}</a>
-
-
-    <h4>{{ _('External tile box') }}</h4>
-    <form method="POST" action="{{ url_for('.tilebox_restart') }} " class="form-horizontal">
-        {{ tilebox_form.csrf_token }}
-        {{ input(tilebox_form.path) }}
-        <div class="control-group">
-          <div class="controls">
-            <button type="submit" name="restart" class="btn btn-small">{{ _('add and start tilebox')}}</button>
-            <button type="submit" name="stop" class="btn btn-small">{{ _('remove')}}</button>
-          </div>
+                <h5>{{ _('Files') }}</h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="{% if url_for('admin.files') == request.path %}active{% endif%}">
+                        <a href="{{ url_for('admin.files') }}">
+                            {{ _('Files') }}
+                        </a>
+                    </li>
+                </ul>
+            {% endblock %}
         </div>
-    </form>
-
+        <div class="span9">
+            {% block content_right %}{% endblock %}
+        </div>
+    </div>
     <hr>
-    <div style="color: #aaa; font-size: smaller; text-align: right;">{{ _('GeoBox Version')}}: {{ geobox_client_version }}</div>
-
-{% endblock %}
-
-{% block javascript %}
-    <script type="text/javascript">
-        var authServer = {{ auth_server | safe}};
-    </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/views/gbi_server_form.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/views/admin.js') }}"></script>
+    <div style="color: #aaa; font-size: smaller; text-align: right;">
+        {{ _('GeoBox Version')}}: {{ geobox_client_version }}
+    </div>
 {% endblock %}

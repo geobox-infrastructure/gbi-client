@@ -3,6 +3,7 @@
 {% block title %} {{_('network')}} {% endblock %}
 
 {% block content_right %}
+<h4>{{ _('local net access') }}</h4>
     <p id="localnet_status">
         {{_('status')}}:
         {% if localnet %}
@@ -12,6 +13,7 @@
         {% endif %}
     </p>
 
+<h4>{{ _('Change local net access') }}</h4>
     <button class="btn btn-small" id="localnet" data-toggle_localnet_access_url="{{ url_for('.localnet_access') }}">
         {% if localnet %}
             {{ _('deactivate') }}

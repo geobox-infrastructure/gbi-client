@@ -2,10 +2,10 @@
 
 {% block title %}{{ _('set gbi server') }}{% endblock %}
 
-{% from "form_macros.html" import set_server_form, add_server_form  as add_server_form_macro %}
+{% from "form_macros.html" import set_server_form, add_server_form  as add_server_form_macro, load_context_document_msg %}
 
 {% block content %}
-
+{{ load_context_document_msg() }}
 {{ set_server_form(form) }}
 {{ add_server_form_macro(add_server_form) }}
 
@@ -15,5 +15,5 @@
     <script type="text/javascript">
     var authServer = {{ auth_server | safe}};
     </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/views/gbi_server_form.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/admin_server.js') }}"></script>
 {% endblock %}

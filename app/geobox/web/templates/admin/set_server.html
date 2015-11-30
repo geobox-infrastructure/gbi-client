@@ -1,8 +1,16 @@
 {% extends "admin.html" %}
-{% from "form_macros.html" import input, set_server_form %}
+{% from "form_macros.html" import set_server_form, load_context_document_msg %}
 
 {% block title %} {{_('Set server')}} {% endblock %}
 
 {% block content_right %}
+    {{ load_context_document_msg() }}
     {{ set_server_form(form) }}
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+    var authServer = {{ auth_server | safe}};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/admin_server.js') }}"></script>
 {% endblock %}

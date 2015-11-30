@@ -4,11 +4,11 @@
 
 {% block content_right %}
 
-<h1>{{_('logs')}}</h1>
+<h4>{{_('logs')}}</h4>
 <pre class="pre-scrollable" id="log_view">{{ log }}</pre>
 
 {% endblock %}
 
 {% block javascript %}
-  <script type="text/javascript" src="{{ url_for('static', filename='js/views/log_view.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/views/admin_log_view.js') }}"></script>
 {% endblock %}
