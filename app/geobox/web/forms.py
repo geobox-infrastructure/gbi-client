@@ -291,3 +291,9 @@ class AddGBIServerForm(Form):
     username = TextField(lazy_gettext('username'))
     password = PasswordField(lazy_gettext('Password'))
     next = HiddenField(default='main.index')
+
+
+class GMLUploadForm(Form):
+    upload_file = FileField(lazy_gettext('Choose gml'),
+                            validators=[Required()])
+    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Required()])

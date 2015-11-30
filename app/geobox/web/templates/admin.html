@@ -30,7 +30,7 @@
                         </a>
                     </li>
                 </ul>
-{#
+                {% if app_state.home_server is not none %}
                 <h5>{{ _('GML') }}</h5>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="{% if url_for('admin.upload_gml') == request.path %}active{% endif%}">
@@ -39,7 +39,7 @@
                         </a>
                     </li>
                 </ul>
-#}
+                {% endif %}
                 <h5>{{ _('Logs') }}</h5>
                 <ul class="nav nav-pills nav-stacked">
 

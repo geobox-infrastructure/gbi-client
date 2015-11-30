@@ -295,3 +295,45 @@ def files():
         'tilebox', 'path'
     )
     return render_template('admin/files.html', tilebox_form=tilebox_form)
+
+
+# TODO move at right place
+from geobox.lib.vectorconvert import load_json_from_gml
+from geobox.lib.vectormapping import Mapping
+from geobox.lib.couchdb import VectorCouchDB
+from geobox.web.forms import GMLUploadForm
+
+
+@admin_view.route('/admin/upload_gml', methods=['GET', 'POST'])
+def upload_gml():
+    app_state = current_app.config.geobox_state
+
+    form = GMLUploadForm()
+    form.srs.choices = list(app_state.config.get('web', 'available_srs'))
+    form.srs.choices.insert(0, ('', _('-- select srs --'), ''))
+
+    if form.validate_on_submit():
+        upload_file = request.files['upload_file']
+        if upload_file:
+            mapping = Mapping(None, None, '*', other_srs=form.srs.data)
+            couch_url = 'http://%s:%s' % (
+                '127.0.0.1',
+                app_state.config.get('couchdb', 'port')
+            )
+            db_name = app_state.home_server.vector_prefix
+            db_name += app_state.config.get('web',
+                                            'authorization_layer_name')
+            couch = VectorCouchDB(
+                couch_url,
+                db_name,
+                app_state.config.get('web', 'authorization_layer_title')
+            )
+            couch.clear_db()
+            couch.store_records(load_json_from_gml(
+                upload_file, mapping
+            ))
+
+            flash(_('file %(name)s uploaded', name=upload_file.filename),
+                  'info')
+
+    return render_template('admin/upload_gml.html', form=form)
