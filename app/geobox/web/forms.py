@@ -206,13 +206,25 @@ class SelectCoverage(Form):
 class SelectCouchLayers(Form):
     select_couch = SelectField(lazy_gettext('select couch'), choices=[],)
 
+
+def raster_source_label(external_source):
+    return '%s (%s)' % (
+        external_source.title,
+        external_source.gbi_server.title
+    )
+
+
 class ImportProjectEdit(ProjectEdit):
     start_level = SelectField(lazy_gettext('start level'), coerce=int)
     end_level = SelectField(lazy_gettext('end level'), coerce=int)
-    raster_source = QuerySelectField(lazy_gettext('raster_source'), query_factory=get_external_wmts_source, get_label='title')
+    raster_source = QuerySelectField(
+        lazy_gettext('raster_source'),
+        query_factory=get_external_wmts_source,
+        get_label=raster_source_label)
     update_tiles = BooleanField(lazy_gettext('update_tiles'))
     coverage = HiddenField()
     download_size = HiddenField()
+
 
 class ExportProjectEdit(ProjectEdit):
     format = SelectField(lazy_gettext('format'), choices=[('MBTiles', 'MBTiles'), ('GTiff', 'TIFF'), ('JPEG', 'JPEG'), ('CouchDB', 'CouchDB')], coerce=str)
