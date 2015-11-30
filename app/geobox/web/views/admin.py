@@ -205,7 +205,7 @@ def set_home_server():
             homeserver=gbi_server.title))
     app_state.new_home_server = None
 
-    return redirect_back(url_for('main.index'))
+    return redirect_back(url_for('admin.upload_gml'))
 
 
 @admin_view.route('/admin/reject_home_server', methods=['GET'])
