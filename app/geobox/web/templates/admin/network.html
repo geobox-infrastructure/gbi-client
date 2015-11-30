@@ -1,0 +1,26 @@
+{% extends "admin.html" %}
+
+{% block title %} {{_('network')}} {% endblock %}
+
+{% block content_right %}
+    <p id="localnet_status">
+        {{_('status')}}:
+        {% if localnet %}
+            {{ _('activated') }}
+        {% else %}
+            {{ _('deactivated') }}
+        {% endif %}
+    </p>
+
+    <button class="btn btn-small" id="localnet" data-toggle_localnet_access_url="{{ url_for('.localnet_access') }}">
+        {% if localnet %}
+            {{ _('deactivate') }}
+        {% else %}
+            {{ _('activate') }}
+        {% endif %}
+    </button>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/admin_network.js') }}"></script>
+{% endblock %}
