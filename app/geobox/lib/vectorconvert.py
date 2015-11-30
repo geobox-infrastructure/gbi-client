@@ -72,7 +72,7 @@ def load_json_from_gml(gml_file, mapping):
     finally:
         os.unlink(fixed_gmlfile)
 
-def remove_xml_schemalocations(filename, dest):
+def remove_xml_schemalocations(document, dest):
     """
     Remove xsi:schemaLocation from XML.
 
@@ -82,8 +82,11 @@ def remove_xml_schemalocations(filename, dest):
     OGR will parse the whole GML to get the feature metadata,
     which should not be an issue for our smaller GMLs.
     """
-    with open(filename) as f:
-        tree = etree.parse(f)
+    if isinstance(document, basestring):
+        with open(document) as f:
+            tree = etree.parse(f)
+    else:
+        tree = etree.parse(document)
     root = tree.getroot()
     root.attrib['{http://www.w3.org/2001/XMLSchema-instance}:schemaLocation'] = ''
     tree.write(dest)
