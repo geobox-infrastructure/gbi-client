@@ -278,7 +278,7 @@ def start_raster_import(id):
 
     if form.validate_on_submit():
         try:
-            context.load_context_document(gbi_server, g.db,
+            context.test_context_document(gbi_server.url,
                                           form.username.data,
                                           form.password.data)
         except context.AuthenticationError:
