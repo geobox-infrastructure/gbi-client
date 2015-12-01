@@ -311,6 +311,7 @@ from geobox.lib.vectorconvert import load_json_from_gml
 from geobox.lib.vectormapping import Mapping
 from geobox.lib.couchdb import VectorCouchDB
 from geobox.web.forms import GMLUploadForm
+from geobox.model.sources import ExternalWMTSSource
 
 
 @admin_view.route('/admin/upload_gml', methods=['GET', 'POST'])
@@ -343,6 +344,15 @@ def upload_gml():
             couch.store_records(load_json_from_gml(
                 upload_file, mapping
             ))
+
+            download_coverage = couch.coverage()
+
+            db_session = app_state.user_db_session()
+            sources = db_session.query(ExternalWMTSSource).filter_by(is_public=False).all()
+            for source in sources:
+                source.download_coverage = json.dumps(download_coverage)
+                print source.title, 'updated download coverage'
+            db_session.commit()
 
             flash(_('file %(name)s uploaded', name=upload_file.filename),
                   'info')

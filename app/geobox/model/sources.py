@@ -21,6 +21,7 @@ from . meta import Base
 
 __all__ = ['ExternalWMTSSource', 'LocalWMTSSource', 'ExternalWFSSource']
 
+
 class ExternalWMTSSource(Base):
     __tablename__ = 'external_wmts_sources'
 
@@ -53,6 +54,7 @@ class ExternalWMTSSource(Base):
 
     is_user_defined = sa.Column(sa.Boolean(), default=False)
     is_protected = sa.Column(sa.Boolean(), default=False)
+    is_public = sa.Column(sa.Boolean(), default=False)
 
     gbi_server_id = sa.Column(sa.Integer, sa.ForeignKey('servers.id'), nullable=False)
     gbi_server = orm.relationship('GBIServer', backref='wmts_sources')
@@ -106,7 +108,6 @@ class ExternalWFSSource(Base):
     gbi_server_id = sa.Column(sa.Integer, sa.ForeignKey('servers.id'), nullable=False)
     gbi_server = orm.relationship('GBIServer', backref='wfs_sources')
 
-
     @classmethod
     def by_id(cls, id):
         q = cls.query.filter(cls.id == id)
@@ -116,4 +117,3 @@ class ExternalWFSSource(Base):
     def by_name(cls, name):
         q = cls.query.filter(cls.name == name)
         return q.first_or_404()
-

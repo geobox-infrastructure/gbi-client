@@ -93,6 +93,7 @@ class ContextModelUpdater(object):
         source.title = layer['title']
         source.url = layer['url']
         source.is_protected = layer.get('is_protected')
+        source.is_public = layer.get('is_public')
 
         if source_type == 'wmts' and self.version == '0.1':
             source.url = source.url + layer['layer'] + '/GoogleMapsCompatible-{TileMatrix}-{TileCol}-{TileRow}/tile'
@@ -123,14 +124,10 @@ class ContextModelUpdater(object):
             source.view_coverage = None
             source.view_level_start = None
             source.view_level_end = None
-        if 'download_restriction' in layer:
-            source.download_coverage = self.coverage_from_restriction(layer['download_restriction'])
-            source.download_level_start = layer['download_restriction'].get('zoom_level_start')
-            source.download_level_end = layer['download_restriction'].get('zoom_level_end')
-        else:
-            source.download_coverage = None
-            source.download_level_start = None
-            source.download_level_end = None
+
+        source.download_coverage = None
+        source.download_level_start = layer['download_restriction'].get('zoom_level_start')
+        source.download_level_end = layer['download_restriction'].get('zoom_level_end')
 
         source.active = True
         return source

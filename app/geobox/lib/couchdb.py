@@ -23,6 +23,7 @@ import time
 import subprocess
 import shlex
 import datetime
+import shapely
 
 from contextlib import contextmanager
 from ConfigParser import ConfigParser
@@ -535,6 +536,35 @@ class VectorCouchDB(CouchDBBase):
             doc = json.loads(resp.content)
             return self._load_records(doc.get('rows', []))
         return []
+
+    def coverage(self):
+        resp = self.req_session.get('%s%s' % (
+            self.couch_db_url,
+            '/_all_docs?include_docs=true')
+        )
+        data = resp.json()
+
+        geometries = []
+        for row in data.get('rows', []):
+            geom = row['doc'].get('geometry')
+            if not geom:
+                continue
+            try:
+                geom = shapely.geometry.asShape(geom)
+            except ValueError:
+                continue  # not a GeoJSON geometry
+
+            if geom.type == 'MultiPolygon':
+                geometries.extend(geom)
+            elif geom.type == 'Polygon':
+                geometries.append(geom)
+            else:
+                # use boundary of non polygon geometries
+                geometries.append(shapely.geometry.box(geom.bounds))
+        if geometries:
+            coverage = shapely.geometry.MultiPolygon(geometries).buffer(0)
+            return shapely.geometry.mapping(coverage)
+
 
 class CouchFileBox(CouchDBBase):
     def __init__(self, url, db_name):
