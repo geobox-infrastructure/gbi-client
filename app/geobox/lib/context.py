@@ -17,8 +17,7 @@ import json
 from shapely.geometry import asShape
 import requests
 from geobox import model
-from geobox.lib.box import FeatureInserter
-from geobox.lib.couchdb import CouchDB, CouchDBBase
+from geobox.lib.couchdb import CouchDB
 from werkzeug.exceptions import NotFound
 
 
@@ -219,19 +218,11 @@ def update_wfs_sources(gbi_server, db_session):
 def update_couchdb_sources(gbi_server, app_state):
     couchdb_port = app_state.config.get_int('couchdb', 'port')
     couchdb = CouchDB('http://127.0.0.1:%d' % couchdb_port, '_replicator')
-    coverage_box = app_state.config.get('web', 'coverages_from_couchdb')
     couchdb_sources = gbi_server.context.couchdb_sources()
 
     for couchdb_source in couchdb_sources:
-        if couchdb_source['dbname_user'] == coverage_box:
-            # insert features from area/coverage box into layers
-            insert_database_features(
-                couchdb.couch_url,
-                couchdb_source,
-                gbi_server.vector_prefix)
-        else:
-            # replicate other couchdb sources
-            replicate_database(couchdb, couchdb_source, app_state, gbi_server.prefix)
+        replicate_database(couchdb, couchdb_source, app_state,
+                           gbi_server.prefix)
 
 
 def source_couchdb_url(couchdb_source):
@@ -246,17 +237,6 @@ def source_couchdb_url(couchdb_source):
             dburl,
         )
     return dburl
-
-
-def insert_database_features(dst_dburl, src_conf, prefix=None):
-    auth = None
-    if 'username' in src_conf:
-        auth = src_conf['username'], src_conf['password']
-    source_couchdb = CouchDBBase(src_conf['url'], src_conf['dbname'],
-                                 auth=auth)
-    inserter = FeatureInserter(dst_dburl, prefix=prefix)
-
-    inserter.from_source(source_couchdb)
 
 
 def replicate_database(couchdb, couchdb_source, app_state, prefix=None):
