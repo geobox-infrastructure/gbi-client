@@ -7,15 +7,16 @@
     <div class="row">
         <div class="span3">
             {% block content_left %}
-
-                <h5>{{ _('Network') }}</h5>
+                {% if app_state.home_server is not none %}
+                <h5>{{ _('GML') }}</h5>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="{% if url_for('admin.network') == request.path %}active{% endif%}">
-                        <a href="{{ url_for('admin.network', refresh=True) }}">
-                            {{ _('Network') }}
+                    <li class="{% if url_for('admin.upload_gml') == request.path %}active{% endif%}">
+                        <a href="{{ url_for('admin.upload_gml') }}">
+                            {{ _('upload authorization box') }}
                         </a>
                     </li>
                 </ul>
+                {% endif %}
 
                 <h5>{{ _('Server') }}</h5>
                 <ul class="nav nav-pills nav-stacked">
@@ -30,16 +31,6 @@
                         </a>
                     </li>
                 </ul>
-                {% if app_state.home_server is not none %}
-                <h5>{{ _('GML') }}</h5>
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="{% if url_for('admin.upload_gml') == request.path %}active{% endif%}">
-                        <a href="{{ url_for('admin.upload_gml') }}">
-                            {{ _('upload authorization box') }}
-                        </a>
-                    </li>
-                </ul>
-                {% endif %}
                 <h5>{{ _('Logs') }}</h5>
                 <ul class="nav nav-pills nav-stacked">
 
@@ -55,6 +46,15 @@
                     <li class="{% if url_for('admin.files') == request.path %}active{% endif%}">
                         <a href="{{ url_for('admin.files') }}">
                             {{ _('Files') }}
+                        </a>
+                    </li>
+                </ul>
+
+                <h5>{{ _('Network') }}</h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="{% if url_for('admin.network') == request.path %}active{% endif%}">
+                        <a href="{{ url_for('admin.network', refresh=True) }}">
+                            {{ _('Network') }}
                         </a>
                     </li>
                 </ul>
