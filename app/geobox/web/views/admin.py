@@ -329,6 +329,7 @@ def upload_gml():
                 app_state.config.get('web', 'authorization_layer_title')
             )
             couch.clear_db()
+            couch.init_layer()
             couch.store_records(load_json_from_gml(
                 upload_file, mapping
             ))
