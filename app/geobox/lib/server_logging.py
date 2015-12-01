@@ -23,7 +23,7 @@ def send_task_logging(logging_server, user, app_state, task):
         json_log['format'] = 'SHP'
     elif isinstance(task, VectorExportTask):
         json_log['action'] = 'vector_export'
-        json_log['source'] = app_state.config.get('web', 'coverages_from_couchdb')
+        json_log['source'] = app_state.config.get('web', 'authorization_layer_name')
         json_log['format'] = 'SHP'
     elif isinstance(task, RasterImportTask):
         json_log['action'] = 'raster_import'

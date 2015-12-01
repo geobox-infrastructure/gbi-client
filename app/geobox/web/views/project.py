@@ -309,7 +309,7 @@ def load_coverage():
     if couchdb_coverage == 'true':
         couch = CouchDB('http://%s:%s' % ('127.0.0.1',
             current_app.config.geobox_state.config.get('couchdb', 'port')),
-            current_app.config.geobox_state.config.get('web', 'coverages_from_couchdb'))
+            current_app.config.geobox_state.config.get('web', 'authorization_layer_name'))
 
         records = couch.load_records()
         coverage = []

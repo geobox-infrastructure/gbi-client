@@ -46,7 +46,8 @@ except ImportError:
                     ('EPSG:31467', _('Gauss-Kruger zone 3 (EPSG:31467)'), _('EPSG:31467 help text')),
                     ('EPSG:25832', _('UTM zone 32N (EPSG:25832)'), _('EPSG:25832 help text'))],
                 'context_document_url': 'http://gbiserver.omniscale.net/context',
-                'coverages_from_couchdb': 'flaechen-box',
+                'authorization_layer_name': 'flaechenbox',
+                'authorization_layer_title': 'Berechtigungslayer',
                 'wms_search_url': 'http://www.geoportal.rlp.de/mapbender/php/mod_callMetadata.php?',
                 'wms_cors_proxy_url': 'http://www.geoportal.rlp.de/cors_proxy/'
             },
@@ -76,8 +77,8 @@ except ImportError:
                     env("ERL_LIBS", "/usr/local/lib/couchdb/erlang/lib", platform='darwin'),
                     env("ERL_LIBS", "/usr/lib/couchdb/erlang/lib", platform='linux'),
                 ],
-                'download_box': 'download-box',
-                'upload_box': 'upload-box',
+                'download_box': 'downloadbox',
+                'upload_box': 'uploadbox',
                 'file_box': 'filebox',
             },
             'tilebox': {

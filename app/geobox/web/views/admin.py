@@ -320,9 +320,10 @@ def upload_gml():
                 '127.0.0.1',
                 app_state.config.get('couchdb', 'port')
             )
-            db_name = app_state.home_server.vector_prefix
-            db_name += app_state.config.get('web',
-                                            'authorization_layer_name')
+            db_name = '%s_%s' % (
+                app_state.home_server.prefix,
+                app_state.config.get('web', 'authorization_layer_name')
+            )
             couch = VectorCouchDB(
                 couch_url,
                 db_name,
