@@ -301,8 +301,6 @@ class SetGBIServerForm(Form):
 class AddGBIServerForm(Form):
     title = TextField(lazy_gettext('title'), validators=[Required()])
     url = TextField(lazy_gettext('gbi server context document'), validators=[Required()])
-    username = TextField(lazy_gettext('username'))
-    password = PasswordField(lazy_gettext('Password'))
     next = HiddenField(default='main.index')
 
 

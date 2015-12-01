@@ -200,6 +200,20 @@ def load_context_document(gbi_server, db_session, user, password):
     db_session.commit()
 
 
+def test_context_document(url, user=None, password=None):
+    auth = (user, password)
+    auth = None if None in auth else auth
+    try:
+        result = requests.get(url, auth=(user, password))
+    except requests.exceptions.ConnectionError:
+        raise NotFound()
+
+    if result.status_code in (401, 403):
+        raise AuthenticationError()
+
+    return True
+
+
 def update_raster_sources(gbi_server, db_session):
     updater = ContextModelUpdater(db_session, gbi_server.context.version())
 

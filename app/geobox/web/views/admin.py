@@ -23,6 +23,7 @@ from flask import (
 )
 from flaskext.babel import _
 from sqlalchemy.exc import IntegrityError
+from werkzeug.exceptions import NotFound
 
 from geobox.model.sources import LocalWMTSSource
 from geobox.model.server import GBIServer
@@ -92,7 +93,7 @@ def load_context(gbi_server, db_session, form, app_state):
                                       form.password.data)
     except context.AuthenticationError:
         flash(_('username or password not correct'), 'error')
-    except ValueError:
+    except (ValueError, NotFound):
         flash(_('unable to fetch context document'), 'error')
     else:
         flash(_('load context document successful'), 'sucess')
@@ -125,7 +126,7 @@ def _set_gbi_server(form):
 @admin_view.route('/admin/initial_set_server', methods=['GET', 'POST'])
 def initial_set_server():
     form, add_server_form, auth_server = prepare_set_server()
-
+    add_server_form.next.data = 'admin.initial_set_server'
     if form.validate_on_submit():
         _set_gbi_server(form)
         return redirect(url_for(form.next.data))
@@ -159,7 +160,15 @@ def add_server():
     app_state = current_app.config.geobox_state
 
     if form.validate_on_submit():
-        auth = bool(form.username.data and form.password.data)
+        auth = False
+        try:
+            context.test_context_document(form.url.data)
+        except NotFound:
+            flash(_('unable to fetch context document'), 'error')
+            return redirect(url_for(form.next.data))
+        except context.AuthenticationError:
+            auth = True
+
         gbi_server = GBIServer(title=form.title.data, url=form.url.data,
                                auth=auth)
         db_session = app_state.user_db_session()
@@ -169,7 +178,7 @@ def add_server():
         except IntegrityError:
             flash(_('server already exists'), 'error')
         else:
-            load_context(gbi_server, db_session, form, app_state)
+            flash(_('server added'), 'info')
         return redirect(url_for(form.next.data))
     return render_template('admin/add_server.html', form=form)
 
