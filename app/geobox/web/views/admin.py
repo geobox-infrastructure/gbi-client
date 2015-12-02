@@ -94,8 +94,10 @@ def load_context(gbi_server, db_session, form, app_state):
                                       form.password.data)
     except context.AuthenticationError:
         flash(_('username or password not correct'), 'error')
+        return False
     except (ValueError, NotFound):
         flash(_('unable to fetch context document'), 'error')
+        return False
     else:
         flash(_('load context document successful'), 'sucess')
         context.update_raster_sources(gbi_server, db_session)
@@ -107,6 +109,7 @@ def load_context(gbi_server, db_session, form, app_state):
             app_state.new_home_server = gbi_server
         elif gbi_server.home_server and gbi_server.active_home_server:
             context.update_couchdb_sources(gbi_server, app_state)
+        return True
 
 
 def _set_gbi_server(form):
@@ -121,7 +124,7 @@ def _set_gbi_server(form):
             return redirect(url_for(form.next.data))
         db_session.add(gbi_server)
 
-    load_context(gbi_server, db_session, form, app_state)
+    return load_context(gbi_server, db_session, form, app_state)
 
 
 @admin_view.route('/admin/initial_set_server', methods=['GET', 'POST'])
@@ -129,8 +132,10 @@ def initial_set_server():
     form, add_server_form, auth_server = prepare_set_server()
     add_server_form.next.data = 'admin.initial_set_server'
     if form.validate_on_submit():
-        _set_gbi_server(form)
-        return redirect(url_for(form.next.data))
+        if _set_gbi_server(form):
+            return redirect(url_for(form.next.data))
+        else:
+            return redirect_back(url_for(form.next.data))
 
     return render_template('admin/initial_set_server.html', form=form,
                            add_server_form=add_server_form,
@@ -353,7 +358,6 @@ def upload_gml():
             sources = db_session.query(ExternalWMTSSource).filter_by(is_public=False).all()
             for source in sources:
                 source.download_coverage = json.dumps(download_coverage)
-                print source.title, 'updated download coverage'
             db_session.commit()
 
             flash(_('file %(name)s uploaded', name=upload_file.filename),
