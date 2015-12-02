@@ -39,6 +39,7 @@
       <tr>
         <th>{{ _('title') }}</th>
         <th>{{ _('layer name') }}</th>
+        <th>{{ _('server') }}</th>
         <th>{{ _('protected') }}</th>
         <th>{{ _('username') }}</th>
       </tr>
@@ -48,6 +49,7 @@
       <tr>
         <td>{{ source.title }}</td>
         <td>{{ source.layer }}</td>
+        <td>{{ source.gbi_server.title }}</td>
         <td>
           {% if source.is_protected %}
               {{ _('yes') }}
