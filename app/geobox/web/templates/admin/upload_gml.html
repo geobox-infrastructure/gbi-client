@@ -6,7 +6,7 @@
 
 {% block content_right %}
 <h4>{{ _('GML import') }}</h4>
-<form id="upload_form" method="POST" enctype="multipart/form-data">
+<form id="upload_form" method="POST" enctype="multipart/form-data" class="form-horizontal">
     {{ form.csrf_token }}
     {{ input(form.upload_file) }}
     {{ input(form.srs) }}
