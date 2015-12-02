@@ -565,6 +565,21 @@ class VectorCouchDB(CouchDBBase):
             coverage = shapely.geometry.MultiPolygon(geometries).buffer(0)
             return shapely.geometry.mapping(coverage)
 
+    def remove_all_features(self):
+        resp = self.req_session.get(
+            '%s/_all_docs?include_docs=true' % self.couch_db_url
+        )
+        data = resp.json()
+        for row in data.get('rows', []):
+            geom = row['doc'].get('geometry')
+            if not geom:
+                continue
+            self.req_session.delete('%s/%s?rev=%s' % (
+                self.couch_db_url,
+                row['id'],
+                row['doc'].get('_rev')
+            ))
+
 
 class CouchFileBox(CouchDBBase):
     def __init__(self, url, db_name):
