@@ -24,6 +24,7 @@ from flask import (
 from flaskext.babel import _
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound
+from requests.exceptions import MissingSchema
 
 from geobox.model.sources import LocalWMTSSource
 from geobox.model.server import GBIServer
@@ -131,11 +132,6 @@ def _set_gbi_server(form):
 def initial_set_server():
     form, add_server_form, auth_server = prepare_set_server()
     add_server_form.next.data = 'admin.initial_set_server'
-    if form.validate_on_submit():
-        if _set_gbi_server(form):
-            return redirect(url_for(form.next.data))
-        else:
-            return redirect_back(url_for(form.next.data))
 
     return render_template('admin/initial_set_server.html', form=form,
                            add_server_form=add_server_form,
@@ -149,9 +145,12 @@ def set_server():
     if request.method == 'GET':
         form.next.data = 'admin.set_server'
     if form.validate_on_submit():
-        _set_gbi_server(form)
-
-        return redirect(url_for(form.next.data))
+        if _set_gbi_server(form):
+            return redirect(url_for(form.next.data))
+        else:
+            return redirect(request.referrer)
+    elif request.method == 'POST':
+        return redirect(request.referrer)
 
     return render_template('admin/set_server.html', form=form,
                            auth_server=json.dumps(auth_server))
@@ -169,7 +168,7 @@ def add_server():
         auth = False
         try:
             context.test_context_document(form.url.data)
-        except NotFound:
+        except (NotFound, MissingSchema):
             flash(_('unable to fetch context document'), 'error')
             return redirect(url_for(form.next.data))
         except context.AuthenticationError:
@@ -186,6 +185,9 @@ def add_server():
         else:
             flash(_('server added'), 'info')
         return redirect(url_for(form.next.data))
+    elif request.method == 'POST':
+        flash(_('server could not added'), 'error')
+        return redirect(request.referrer)
     return render_template('admin/add_server.html', form=form)
 
 
