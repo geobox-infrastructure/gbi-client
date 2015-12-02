@@ -222,7 +222,7 @@ def set_home_server():
             homeserver=gbi_server.title))
     app_state.new_home_server = None
 
-    if app_state.config.get('user', 'type') == user.CUSTOMER:
+    if app_state.config.get('user', 'type') == str(user.CUSTOMER):
         return redirect(url_for('admin.upload_gml'))
     return redirect(url_for('main.index'))
 
