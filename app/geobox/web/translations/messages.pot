@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-02 13:47+0100\n"
+"POT-Creation-Date: 2015-12-02 14:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2056,7 +2056,11 @@ msgstr ""
 msgid "verify authentification"
 msgstr ""
 
-#: geobox/web/templates/projects/verify_import_auth.html:18
+#: geobox/web/templates/projects/verify_import_auth.html:10
+msgid "authentification for raster import required"
+msgstr ""
+
+#: geobox/web/templates/projects/verify_import_auth.html:19
 msgid "authorize"
 msgstr ""
 

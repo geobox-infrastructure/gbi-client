@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-02 13:47+0100\n"
-"PO-Revision-Date: 2015-12-02 13:51+0100\n"
+"POT-Creation-Date: 2015-12-02 14:50+0100\n"
+"PO-Revision-Date: 2015-12-02 15:31+0100\n"
 "Last-Translator: \n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -294,7 +294,7 @@ msgstr "URL der Ziel CouchDB"
 
 #: geobox/web/forms.py:308
 msgid "gbi server"
-msgstr "GBI-Server"
+msgstr "Server"
 
 #: geobox/web/forms.py:309
 #: geobox/web/templates/admin/external_raster_list.html:43
@@ -308,7 +308,7 @@ msgstr "Passwort"
 
 #: geobox/web/forms.py:316
 msgid "gbi server context document"
-msgstr "GBI-Server-URL"
+msgstr "GeoBox-Server-URL"
 
 #: geobox/web/forms.py:321
 msgid "Choose gml"
@@ -937,7 +937,7 @@ msgstr "Daten werden vom Server geladen und kopiert"
 #: geobox/web/templates/form_macros.html:75
 #: geobox/web/templates/admin/initial_set_server.html:3
 msgid "set gbi server"
-msgstr "GBI-Server festlegen"
+msgstr "GeoBox-Server auswählen"
 
 #: geobox/web/templates/form_macros.html:85
 msgid "no auth required"
@@ -950,7 +950,7 @@ msgstr "Benutzen"
 #: geobox/web/templates/form_macros.html:99
 #: geobox/web/templates/admin/add_server.html:4
 msgid "Add server"
-msgstr "Hinzufügen"
+msgstr "Weiteren GeoBox-Server  hinzufügen"
 
 #: geobox/web/templates/form_macros.html:110
 msgid "add"
@@ -1231,9 +1231,9 @@ msgstr "Willkommen zum GeoBox Client"
 #: geobox/web/templates/admin/initial_set_server.html:10
 msgid "welcome text"
 msgstr ""
-"Für die korrekte Eintrichtung wählen Sie bitte einen GBI Server aus."
-"<br>Sollte Ihr bevorzugter GBI Server nicht in der Liste enthalten sein, "
-"haben Sie die Möglichkeit, diesen hinzuzufügen."
+"Zur Einrichtung de GeoBox-Clients wählen Sie bitte einen GeoBox-Server aus."
+"<br>Sollte der gewünschte Server nicht in der Liste enthalten sein haben Sie "
+"die Möglichkeit diesen hinzuzufügen."
 
 #: geobox/web/templates/admin/log_view.html:3
 msgid "log_view"
@@ -1290,15 +1290,12 @@ msgstr "GML importieren"
 msgid "upload gml text"
 msgstr ""
 "Bitte wählen Sie das GML Dokument mit Ihren Schlägen aus und geben Sie das "
-"Koordinatensystem, in dem das Dokument vorliegt an.<br>Ihre Schläge werden "
-"dann in die Anwendung importiert.<br>Im Editor können Sie Ihre Schläge "
-"bearbeiten."
+"Koordinatensystem an.<br>Ihre Daten werden in die Anwendung importiert und "
+"können anschließend editiert werden."
 
 #: geobox/web/templates/admin/upload_gml.html:10
 msgid "upload gml attention"
-msgstr ""
-"Der Import ersetzt alle Geometrien im %(auth_layer_title)s durch die "
-"Geometrien aus dem hochgeladenen GML"
+msgstr "Hinweis: Der Import ersetzt alle Geometrien im %(auth_layer_title)s."
 
 #: geobox/web/templates/admin/upload_gml.html:15
 #: geobox/web/templates/vector/geojson.html:18
@@ -2156,11 +2153,17 @@ msgstr "Freier Speicherplatz"
 #: geobox/web/templates/projects/verify_import_auth.html:3
 #: geobox/web/templates/projects/verify_import_auth.html:9
 msgid "verify authentification"
-msgstr "Autorisierung erforderlich"
+msgstr "Anmeldung erforderlich"
 
-#: geobox/web/templates/projects/verify_import_auth.html:18
+#: geobox/web/templates/projects/verify_import_auth.html:10
+msgid "authentification for raster import required"
+msgstr ""
+"Die von Ihnen angefragte Karte erfordert eine Anmeldung.<br>Bitte geben Sie "
+"Ihre Anmeldedaten für den Server \"%(server)s\" ein."
+
+#: geobox/web/templates/projects/verify_import_auth.html:19
 msgid "authorize"
-msgstr "Autorisieren"
+msgstr "Anmelden"
 
 #: geobox/web/templates/tasks/detail.html:3
 msgid "task detail"
@@ -2365,7 +2368,7 @@ msgstr "Server ist bereits vorhanden"
 
 #: geobox/web/views/admin.py:186
 msgid "server added"
-msgstr "Server hinzugefügt"
+msgstr "Server hinzugefügt. Sie können diesen nun auswählen"
 
 #: geobox/web/views/admin.py:189
 msgid "server could not added"
