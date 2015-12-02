@@ -27,6 +27,7 @@ from werkzeug.exceptions import NotFound
 
 from geobox.model.sources import LocalWMTSSource
 from geobox.model.server import GBIServer
+from geobox.model.user import User
 
 from geobox.web.utils import request_is_local
 from geobox.web.helper import redirect_back
@@ -214,7 +215,9 @@ def set_home_server():
             homeserver=gbi_server.title))
     app_state.new_home_server = None
 
-    return redirect(url_for('admin.upload_gml'))
+    if app_state.config.get('user', 'type') == User.CUSTOMER:
+        return redirect(url_for('admin.upload_gml'))
+    return redirect(url_for('main.index'))
 
 
 @admin_view.route('/admin/reject_home_server', methods=['GET'])
