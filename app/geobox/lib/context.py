@@ -44,6 +44,9 @@ class Context(object):
     def logging_server(self):
         return self.doc.get('logging', {}).get('url')
 
+    def update_coverage_url(self):
+        return self.doc.get('update_coverage', {}).get('url')
+
     def couchdb_sources(self):
         return self.doc.get('couchdb_sources', [])
 
@@ -189,6 +192,7 @@ def load_context_document(gbi_server, db_session, user, password):
     context = Context(context_doc)
     gbi_server.context = context
     gbi_server.logging_url = context.logging_server()
+    gbi_server.update_coverage_url = context.update_coverage_url()
     gbi_server.prefix = context.prefix()
     gbi_server.home_server = context.has_couchdb_sources()
     if user is not None and user != '':

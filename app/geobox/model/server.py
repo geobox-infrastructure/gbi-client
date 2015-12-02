@@ -33,6 +33,8 @@ class GBIServer(Base):
     active_home_server = sa.Column(sa.Boolean(), default=False)
     home_server = sa.Column(sa.Boolean(), default=False)
     logging_url = sa.Column(sa.String())
+    update_coverage_url = sa.Column(sa.String())
+
     _context = None
     _app_state = None
 

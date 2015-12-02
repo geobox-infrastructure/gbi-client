@@ -14,6 +14,7 @@
 # limitations under the License.
 
 import json
+import requests
 from flask import Blueprint, request, current_app
 
 from geobox.lib.proxy import proxy_couchdb_request
@@ -26,9 +27,11 @@ proxy = Blueprint('proxy', __name__)
 @proxy.route('/proxy/<path:url>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 @proxy.route('/proxy/', build_only=True)
 def proxy_request(url):
+    app_state = current_app.config.geobox_state
+
     response = proxy_couchdb_request(request, url)
     if '201' in response.status:
-        app_state = current_app.config.geobox_state
+
         if app_state.config.get('web', 'authorization_layer_name') in url:
             couch_url = 'http://%s:%s' % (
                 '127.0.0.1',
@@ -42,8 +45,13 @@ def proxy_request(url):
             download_coverage = couch.coverage()
 
             db_session = app_state.user_db_session()
-            sources = db_session.query(ExternalWMTSSource).filter_by(is_public=False).all()
+            sources = db_session.query(ExternalWMTSSource).filter_by(
+                is_public=False).all()
             for source in sources:
                 source.download_coverage = json.dumps(download_coverage)
             db_session.commit()
+
+            if app_state.home_server is not None:
+                requests.get(app_state.home_server.update_coverage_url)
+
     return response
