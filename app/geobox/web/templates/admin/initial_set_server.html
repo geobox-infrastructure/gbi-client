@@ -5,10 +5,11 @@
 {% from "form_macros.html" import set_server_form, add_server_form  as add_server_form_macro, load_context_document_msg %}
 
 {% block content %}
-{{ load_context_document_msg() }}
-{{ set_server_form(form) }}
-{{ add_server_form_macro(add_server_form) }}
-
+    {{ load_context_document_msg() }}
+    <h4>{{ _('welcome title')}}</h4>
+    <p>{{ _('welcome text') }}</p>
+    {{ set_server_form(form) }}
+    {{ add_server_form_macro(add_server_form) }}
 {% endblock %}
 
 {% block javascript %}

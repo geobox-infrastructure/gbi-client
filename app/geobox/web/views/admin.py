@@ -362,7 +362,7 @@ def upload_gml():
                 source.download_coverage = json.dumps(download_coverage)
             db_session.commit()
 
-            flash(_('file %(name)s uploaded', name=upload_file.filename),
+            flash(_('gml file %(name)s successfully uploaded and geometries added to %(auth_layer_title)s', name=upload_file.filename, auth_layer_title=app_state.config.get('web', 'authorization_layer_title')),
                   'info')
 
     return render_template('admin/upload_gml.html', form=form)
