@@ -968,6 +968,7 @@ function loadCouchDBs() {
                   visibility: false,
                   loadStyle: true,
                   hoverPopup: true,
+                  undeletable: metadata.undeletable || false,
                   callbacks: {
                     changes: function(unsavedChanges) {
                       if(unsavedChanges) {

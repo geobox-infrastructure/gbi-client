@@ -467,9 +467,11 @@ gbi.widgets.LayerManager.templates = {
                                 <button id="data_extent_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.dataExtent + '" class="btn btn-small"> \
                                     <i class="icon-search"></i>\
                                 </button> \
+                                <% if(vectorLayers[i].undeletable !== true) { %>\
                                 <button id="remove_<%=vectorLayers[i].id%>" title="' + layerManagerLabel.remove+ '" class="btn btn-small"> \
                                     <i class="icon-remove"></i>\
                                 </button> \
+                                <% } %>\
                             </div> \
                         </a>\
                     </li>\
