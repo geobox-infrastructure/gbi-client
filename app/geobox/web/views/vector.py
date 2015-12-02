@@ -39,28 +39,51 @@ log = logging.getLogger(__name__)
 
 vector = Blueprint('vector', __name__)
 
+
 @vector.before_request
 def only_if_enabled():
     if not current_app.config.geobox_state.config.get('app', 'vector_import'):
         abort(404)
+
+
+def prepare_layer_list(form):
+    couch_url = 'http://%s:%s' % (
+        '127.0.0.1',
+        current_app.config.geobox_state.config.get('couchdb', 'port'))
+    form.layers.choices = [
+        (item['dbname'], item['title'])
+        for item in vector_layers_metadata(couch_url)
+    ]
+    form.layers.choices.insert(0, ('', _('-- select layer or add new --')))
+    return form
+
 
 def prepare_geojson_form(form):
     geojson_files = get_geojson_list()
     form.file_name.choices = [(name, name) for name in geojson_files]
     form.file_name.choices.insert(0, ('', _('-- select a geojson --')))
 
-    couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
-    form.layers.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]
-    form.layers.choices.insert(0, ('', _('-- select layer or add new --')))
-    return form
+    return prepare_layer_list(form)
 
-@vector.route('/vector/import_geojson', methods=['GET', 'POST'])
-def import_geojson():
-    # upload geojson
+
+def prepare_gml_form(form):
+    gml_files = get_gml_list()
+    form.file_name.choices = [(name, name) for name in gml_files]
+    form.file_name.choices.insert(0, ('', _('-- select a gml file --')))
+
+    form.srs.choices = list(
+        current_app.config.geobox_state.config.get('web', 'available_srs')
+    )
+    form.srs.choices.insert(0, ('', _('-- select srs --'), ''))
+
+    return prepare_layer_list(form)
+
+
+def handle_uploaded_files(filetype):
     for upload_file in request.files.getlist('file_upload'):
         import_dir = current_app.config.geobox_state.user_data_path('import')
         target = os.path.join(import_dir, upload_file.filename)
-        if os.path.splitext(target)[1].lower() in ('.json'):
+        if os.path.splitext(target)[1].lower() in (filetype):
             try:
                 if not os.path.isdir(import_dir):
                     os.mkdir(import_dir)
@@ -68,54 +91,100 @@ def import_geojson():
                 f.write(upload_file.stream.read())
                 f.close()
             except IOError:
-                flash(_('failed to upload %(name)s', name=upload_file.filename), 'error')
+                flash(_('failed to upload %(name)s',
+                        name=upload_file.filename),
+                      'error')
 
-            flash(_('file %(name)s uploaded', name=upload_file.filename), 'info')
+            flash(_('file %(name)s uploaded',
+                    name=upload_file.filename),
+                  'info')
         else:
-            flash(_('filetype of %(name)s not allowed', name=upload_file.filename), 'error')
+            flash(_('filetype of %(name)s not allowed',
+                    name=upload_file.filename),
+                  'error')
+
+
+def handle_import(form, _type):
+    if form.validate_on_submit():
+        if (
+            (form.layers.data and form.name.data) or
+            (not form.layers.data and not form.name.data)
+        ):
+            flash(_('please select new layer or current layer to import'),
+                  'error')
+            return redirect(url_for('.import_%s' % _type))
+
+        title = None
+        if form.layers.data:
+            layer = form.layers.data
+        else:
+            title = form.name.data
+            layer = 'local_vector_' + re.sub(r'[^a-z0-9]*', '', title.lower())
+            if layer == 'local_vector_':
+                flash(
+                    _('None of the characters used for the layer is allowed')
+                )
+                return redirect(url_for('.import_%s' % _type))
+
+        task = VectorImportTask(
+            db_name=layer,
+            title=title,
+            file_name=form.file_name.data,
+            type_=_type
+        )
+        if isinstance(form, forms.ImportGMLEdit):
+            task.srs = form.srs.data
+        g.db.add(task)
+        g.db.commit()
+        return redirect(url_for('tasks.list'))
+
+    elif request.method == 'POST':
+        flash(_('form error'), 'error')
+
+
+@vector.route('/vector/import_geojson', methods=['GET', 'POST'])
+def import_geojson():
+    # upload geojson
+    handle_uploaded_files(('.json'))
 
     form = forms.ImportGeoJSONEdit(request.form)
     form = prepare_geojson_form(form)
 
     if not len(request.files):
-        if form.validate_on_submit():
-            if (form.layers.data and form.name.data) or (not form.layers.data and not form.name.data):
-                flash(_('please select new layer or current layer to import'), 'error')
-                return redirect(url_for('.import_geojson'))
-
-            title = None
-            if form.layers.data:
-                layer = form.layers.data
-            else:
-                title = form.name.data
-                layer = 'local_vector_' + re.sub(r'[^a-z0-9]*', '',  title.lower())
-                if layer == 'local_vector_':
-                    flash(_('None of the characters used for the layer is allowed'))
-                    return redirect(url_for('.import_geojson'))
-
-            task = VectorImportTask(
-                db_name=layer,
-                title=title,
-                file_name=form.file_name.data,
-                type_ = 'geojson'
-            )
-            g.db.add(task)
-            g.db.commit()
-            return redirect(url_for('tasks.list'))
-
-        elif request.method == 'POST':
-            flash(_('form error'), 'error')
+        r = handle_import(form, 'geojson')
+        if r is not None:
+            return r
 
     file_browser = request_is_local()
-    return render_template('vector/geojson.html', form=form, file_browser=file_browser)
+    return render_template('vector/geojson.html', form=form,
+                           file_browser=file_browser)
+
+
+@vector.route('/vector/import_gml', methods=['GET', 'POST'])
+def import_gml():
+    # upload gml
+    handle_uploaded_files(('.xml'))
+
+    form = forms.ImportGMLEdit(request.form)
+    form = prepare_gml_form(form)
+
+    if not len(request.files):
+        r = handle_import(form, 'gml')
+        if r is not None:
+            return r
+
+    file_browser = request_is_local()
+    return render_template('vector/gml.html', form=form,
+                           file_browser=file_browser)
+
 
 @vector.route('/vector/import', methods=['GET', 'POST'])
 def import_vector():
     from ...lib.vectormapping import Mapping
 
-    uploaded_shapes=[]
-    upload_failures=[]
-    not_allowed_files=[]
+    uploaded_shapes = []
+    upload_failures = []
+    not_allowed_files = []
 
     for upload_file in request.files.getlist('file_upload'):
         import_dir = current_app.config.geobox_state.user_data_path('import')
@@ -200,16 +269,29 @@ def import_vector():
     file_browser = request_is_local()
     return render_template('vector/import.html', form=form, file_browser=file_browser)
 
-def get_geojson_list():
+
+def get_file_list(filetype):
     file_list = []
 
     import_dir = current_app.config.geobox_state.user_data_path('import')
-    files = set((glob.glob(os.path.join(import_dir, '*.json')) + glob.glob(os.path.join(import_dir, '*.JSON'))))
-    for geojson_file in files:
-        s_path, s_name = os.path.split(geojson_file)
+    files = set((
+        glob.glob(os.path.join(import_dir, filetype)) +
+        glob.glob(os.path.join(import_dir, filetype.upper()))
+    ))
+    for _file in files:
+        s_path, s_name = os.path.split(_file)
         name, ext = os.path.splitext(s_name)
-        file_list.append((s_name))
+        file_list.append((s_name.decode('utf-8')))
+
     return file_list
+
+
+def get_geojson_list():
+    return get_file_list('*.json')
+
+
+def get_gml_list():
+    return get_file_list('*.xml')
 
 
 def get_shapefile_list():

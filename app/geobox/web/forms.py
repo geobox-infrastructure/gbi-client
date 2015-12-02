@@ -236,10 +236,23 @@ class ExportProjectEdit(ProjectEdit):
     coverage = HiddenField(validators=[Optional()])
     download_size = HiddenField()
 
+
 class ImportGeoJSONEdit(Form):
-    file_name = SelectField(lazy_gettext('geojson file name'), validators=[Required()])
-    layers = SelectField(lazy_gettext('select existing layer'), validators=[Optional()])
+    file_name = SelectField(lazy_gettext('geojson file name'),
+                            validators=[Required()])
+    layers = SelectField(lazy_gettext('select existing layer'),
+                         validators=[Optional()])
     name = TextField(lazy_gettext('new layer'), validators=[Optional()])
+
+
+class ImportGMLEdit(Form):
+    file_name = SelectField(lazy_gettext('gml file name'),
+                            validators=[Required()])
+    layers = SelectField(lazy_gettext('select existing layer'),
+                         validators=[Optional()])
+    name = TextField(lazy_gettext('new layer'), validators=[Optional()])
+    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Required()])
+
 
 class ImportVectorEdit(Form):
     file_name = SelectField(lazy_gettext('file name'), validators=[Required()])

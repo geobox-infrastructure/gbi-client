@@ -19,6 +19,7 @@
       {% if app_state.config.get('app', 'vector_import') %}
         <li><a href="{{ url_for('vector.import_vector') }}">{{ _('import shape') }}</a></li>
         <li><a href="{{ url_for('vector.import_geojson') }}">{{ _('import geojson') }}</a></li>
+        <li><a href="{{ url_for('vector.import_gml') }}">{{ _('import gml') }}</a></li>
       {% endif %}
     </ul>
   </div>

@@ -22,11 +22,15 @@ from shutil import rmtree
 from geobox.process.base import ProcessBase
 from geobox.lib.couchdb import VectorCouchDB, CouchFileBox
 from geobox.lib.vectormapping import Mapping
-from geobox.lib.vectorconvert import load_json_from_shape, write_json_to_shape, fields_from_properties, write_json_to_file, create_feature_collection, ConvertError, zip_shapefiles
-
+from geobox.lib.vectorconvert import (
+    load_json_from_shape, write_json_to_shape, fields_from_properties,
+    write_json_to_file, create_feature_collection, ConvertError,
+    zip_shapefiles, load_json_from_gml
+)
 
 import logging
 log = logging.getLogger(__name__)
+
 
 class VectorExportProcess(ProcessBase):
     def process(self):
@@ -117,6 +121,10 @@ class VectorImportProcess(ProcessBase):
                         records = json.loads(open(input_file).read())
                         couch.store_records(
                             records['features']
+                        )
+                    elif task.type_ == 'gml':
+                        couch.store_records(
+                            load_json_from_gml(input_file, mapping)
                         )
                     elif task.type_ == 'shp':
                         couch.store_records(

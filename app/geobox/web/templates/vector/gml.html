@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('gml import') }}{% endblock %}
+
+{% from "form_macros.html" import input, select %}
+
+{% block content %}
+    <h1>{{_('gml import')}}</h1>
+    <div class="row-fluid">
+        <div class="span4">
+            <h3>1. {{_('Upload GML')}}
+                {{ generate_tooltip(_('tooltip upload gml') ) }}
+            </h3>
+            <form id="upload_form" method="POST" enctype="multipart/form-data">
+                <div>
+                    <input type="file" id="file_upload" name="file_upload" multiple>
+                </div>
+                <button type="submit" class="btn btn-small" id="save_btn">{{ _('upload') }}</button>
+            </form>
+            {% if file_browser %}
+                <p>{{_('you can also save your gml directly to the geobox import folder. Reload this site after this.')}}
+                <p>
+                <a href="{{ url_for('.import_file_browser') }}">
+                    {{ _('open external explorer for import') }}</a></p>
+            {% endif %}
+        </div>
+        <div class="span4 offset1">
+            <h3>2. {{_('import gmldata')}}
+                {{ generate_tooltip(_('tooltip import gml vectordata') ) }}
+            </h3>
+            <form id="import_form" method="POST">
+                {{ form.csrf_token }}
+                {{ select(form.file_name) }}
+                {{ select(form.srs) }}
+                {{ select(form.layers) }}
+                {{ input(form.name) }}
+
+                <button type="submit" class="btn btn-small" id="save_btn">{{ _('import') }}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/views/vector_import.js') }}"></script>
+{% endblock %}
