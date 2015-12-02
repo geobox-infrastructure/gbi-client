@@ -7,7 +7,7 @@
 {% block content_right %}
 <h4>{{ _('GML import') }}</h4>
 <p>{{ _('upload gml text') }}</p>
-<b>{{ _('upload gml attention', auth_layer_title=app_state.config.get('web', 'authorization_layer_title')) }}</b>
+<div class="alert">{{ _('upload gml attention', auth_layer_title=app_state.config.get('web', 'authorization_layer_title')) }}</div>
 <form id="upload_form" method="POST" enctype="multipart/form-data" class="form-horizontal">
     {{ form.csrf_token }}
     {{ input(form.upload_file) }}
