@@ -47,7 +47,6 @@ class ExternalWMTSSource(Base):
     view_level_start = sa.Column(sa.Integer)
     view_level_end = sa.Column(sa.Integer)
 
-    is_baselayer = sa.Column(sa.Boolean(), default=False)
     is_overlay = sa.Column(sa.Boolean(), default=True)
     background_layer = sa.Column(sa.Boolean(), default=False)
     active = sa.Column(sa.Boolean(), default=True)

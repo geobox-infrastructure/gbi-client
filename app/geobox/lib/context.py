@@ -103,7 +103,6 @@ class ContextModelUpdater(object):
             source.password = layer.get('password')
 
         source.format = layer['format']
-        source.is_baselayer = layer['baselayer']
         source.is_overlay = layer['overlay']
         source.background_layer = layer.get('is_background_layer', False)
 
