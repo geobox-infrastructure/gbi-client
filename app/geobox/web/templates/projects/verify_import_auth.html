@@ -6,7 +6,8 @@
 
 {% block content %}
 
-<h1>{{_('verify authentification')}}</h1>
+<h4>{{_('verify authentification')}}</h4>
+<p>{{ _('authentification for raster import required', server=server_title) }}</p>
 <form method="POST" class="form-horizontal">
     <div class="control-group">
         {{ form.csrf_token }}
