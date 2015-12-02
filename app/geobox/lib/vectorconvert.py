@@ -32,7 +32,11 @@ from flaskext.babel import _
 import logging
 import re
 
+from fiona import supported_drivers
+supported_drivers['GML'] = 'r'
+
 logging.basicConfig(level=logging.INFO)
+
 
 class ConvertError(Exception):
     pass
