@@ -221,7 +221,7 @@ class GeoBoxState(object):
                 return port
 
     def _user_data_db_engine(self):
-        filename = self.user_data_path('userdata.db', make_dirs=True)
+        filename = self.user_data_path('geobox-client.db', make_dirs=True)
 
         engine = create_engine('sqlite:///' + filename)
         return engine, filename

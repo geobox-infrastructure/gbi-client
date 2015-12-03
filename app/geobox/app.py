@@ -44,7 +44,7 @@ def couchdb_server_thread(app_state):
     if app_state.config.has_option('couchdb', 'data_dir'):
         data_dir = app_state.config.get('couchdb', 'data_dir')
     else:
-        data_dir = app_state.user_data_path('couchdb', make_dirs=True)
+        data_dir = app_state.user_data_path('storage', make_dirs=True)
     return CouchDBServerThread(app_state, host=host, port=port, data_dir=data_dir, erl_cmd=erl_cmd, bin_dir=bin_dir)
 
 def tray_icon_thread(app_state):
