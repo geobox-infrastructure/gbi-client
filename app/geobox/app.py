@@ -20,8 +20,6 @@ import logging
 import threading
 import webbrowser
 
-from geobox.model.sources import ExternalWMTSSource
-
 version = '0.7.0'
 
 
@@ -102,6 +100,7 @@ def add_default_background_layer(app_state):
     try:
         app_state.config.get('web', 'default_background_id')
     except KeyError:
+        from geobox.model.sources import ExternalWMTSSource
         db_session = app_state.user_db_session()
         source = ExternalWMTSSource()
         source.name = source_conf['name']
@@ -155,6 +154,8 @@ def main(config_filename, port_check=True, open_webbrowser=False):
         background_process_thread,
         mapproxy_thread,
     ]
+
+    add_default_background_layer(app_state)
 
     if sys.platform == 'win32':
         factories.append(tray_icon_thread)
