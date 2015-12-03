@@ -32,7 +32,7 @@ def raster_list():
     external_sources = g.db.query(ExternalWMTSSource).filter_by(is_user_defined=False).filter_by(active=True).all()
     external_wfs_sources = g.db.query(ExternalWFSSource).filter_by(active=True).all()
 
-    user_sources = g.db.query(ExternalWMTSSource).filter_by(is_user_defined=True).all()
+    user_sources = g.db.query(ExternalWMTSSource).filter_by(is_user_defined=True).filter_by(background_layer=False).all()
     local_sources = g.db.query(LocalWMTSSource).all()
     return render_template('admin/external_raster_list.html', external_sources=external_sources,
         user_sources=user_sources, external_wfs_sources=external_wfs_sources, local_sources=local_sources)

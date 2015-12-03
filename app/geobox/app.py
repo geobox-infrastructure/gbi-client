@@ -15,9 +15,12 @@
 
 import sys
 import os
+import json
 import logging
 import threading
 import webbrowser
+
+from geobox.model.sources import ExternalWMTSSource
 
 version = '0.6.8'
 
@@ -88,6 +91,35 @@ def open_webbrowser_in_background(host, port):
     t = threading.Thread(target=_open)
     t.daemon = True
     t.start()
+
+
+def add_default_background_layer(app_state):
+    try:
+        source_conf = app_state.config.get('web', 'default_background')
+    except KeyError:
+        return
+    try:
+        app_state.config.get('web', 'default_background_id')
+    except KeyError:
+        db_session = app_state.user_db_session()
+        source = ExternalWMTSSource()
+        source.name = source_conf['name']
+        source.title = source_conf['title']
+        source.url = source_conf['url']
+        source.format = source_conf['format']
+        source.background_layer = True
+        source.is_user_defined = True
+        source.view_coverage = json.dumps(source_conf['view']['coverage'])
+        source.view_level_start = source_conf['view']['level_start']
+        source.view_level_end = source_conf['view']['level_end']
+        source.download_coverage = json.dumps(source_conf['view']['coverage'])
+        source.download_level_start = source_conf['view']['level_start']
+        source.download_level_end = source_conf['view']['level_end']
+        db_session.add(source)
+        db_session.commit()
+        app_state.config.set('web', 'default_background_id', source.id)
+        app_state.config.write()
+
 
 def main(config_filename, port_check=True, open_webbrowser=False):
     from .appstate import GeoBoxState
