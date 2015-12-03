@@ -65,6 +65,8 @@ def init_lib_paths():
 
         locations = [gdal_test_location, geos_test_location, proj_test_location, osgeo_deploy_location]
 
+        os.environ['REQUESTS_CA_BUNDLE'] = os.path.join(sys._MEIPASS, 'requests', 'cacert.pem')
+
     path_found = False
     for loc in locations:
         if os.path.exists(loc):

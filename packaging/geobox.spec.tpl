@@ -33,9 +33,12 @@ exe = EXE(pyz,
           upx=True,
           console=${build_with_console})
 
+import requests
+
 package_data = (
       package_data_toc('..\\app\\geobox', ('.html', '.css', '.js', '.png', '.gif', '.mo', '.ini', '.ico', '.pdf'))
     + package_data_toc('data\\pyproj', ('epsg', ))
+    + package_data_toc(os.path.dirname(requests.__file__), ('.pem',))
 )
 
 coll = COLLECT(exe,
