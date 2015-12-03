@@ -19,7 +19,7 @@ import logging
 import threading
 import webbrowser
 
-version = '0.6.8'
+version = '0.7.0'
 
 def app_server_thread(app_state):
     """Webserver background thread"""
