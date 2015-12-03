@@ -39,7 +39,7 @@ except ImportError:
             },
             'web': {
                 'port': 8090,
-                'server_list': '/home/kai/dev/gbi-client/dev/server.json',
+                'server_list': [],
                 'available_srs': [
                     ('EPSG:4326', _('WGS 84 (EPSG:4326)'), _('EPSG:4326 help text')),
                     ('EPSG:3857', _('WGS 84 / Pseudo-Mercator (EPSG:3857)'), _('EPSG:3857 help text')),

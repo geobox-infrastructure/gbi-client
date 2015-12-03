@@ -75,10 +75,10 @@ class GeoBoxState(object):
 
     @property
     def server_list(self):
-        _server_list = []
+        _server_list = self.config.get('web', 'server_list')
+        if _server_list is None:
+            _server_list = []
         # combine loaded server list with stored servers
-        with open(self.config.get('web', 'server_list'), 'r') as f:
-            _server_list = json.loads(f.read())['server']
         session = self.user_db_session()
         query = session.query(GBIServer)
         query = query.filter(not_(GBIServer.url.in_([
