@@ -208,9 +208,13 @@ class SelectCouchLayers(Form):
 
 
 def raster_source_label(external_source):
+    server_title = lazy_gettext('local')
+    if external_source.gbi_server is not None:
+        server_title = external_source.gbi_server.title
+
     return '%s (%s)' % (
         external_source.title,
-        external_source.gbi_server.title
+        server_title
     )
 
 

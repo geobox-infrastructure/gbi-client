@@ -55,7 +55,7 @@ class ExternalWMTSSource(Base):
     is_protected = sa.Column(sa.Boolean(), default=False)
     is_public = sa.Column(sa.Boolean(), default=False)
 
-    gbi_server_id = sa.Column(sa.Integer, sa.ForeignKey('servers.id'), nullable=False)
+    gbi_server_id = sa.Column(sa.Integer, sa.ForeignKey('servers.id'))
     gbi_server = orm.relationship('GBIServer', backref='wmts_sources')
 
     def bbox_from_view_coverage(self):

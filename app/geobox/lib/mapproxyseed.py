@@ -314,8 +314,11 @@ def create_couchdb_cache(app_state, task=False, layer=False):
         file_ext = task.source.format
     if layer:
         gbi_server = layer.gbi_server
-        gbi_server.app_state = app_state
-        db_name = gbi_server.raster_prefix + layer.name
+        if gbi_server is not None:
+            gbi_server.app_state = app_state
+            db_name = gbi_server.raster_prefix + layer.name
+        else:
+            db_name = "%s_%s_%s" % (layer.prefix, app_state.config.get('app', 'raster_prefix'), layer.name)
         file_ext = layer.format
 
     port = app_state.config.get('couchdb', 'port')

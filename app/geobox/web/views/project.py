@@ -272,7 +272,7 @@ def start_raster_import(id):
     form = forms.SetGBIServerForm(request.form)
     del form.url
     gbi_server = proj.import_raster_layers[0].source.gbi_server
-    if not gbi_server.auth:
+    if gbi_server is None or not gbi_server.auth:
         create_raster_import_task(proj)
         return redirect(url_for('tasks.list'))
 
@@ -444,11 +444,12 @@ def create_export_tasks(proj):
         )
         g.db.add(task)
 
-        logging_server = raster_source.wmts_source.gbi_server.logging_url
-        user = raster_source.wmts_source.gbi_server.username
-        send_task_logging(
-            logging_server, user, current_app.config.geobox_state, task
-        )
+        if raster_source.wmts_source.gbi_server is not None:
+            logging_server = raster_source.wmts_source.gbi_server.logging_url
+            user = raster_source.wmts_source.gbi_server.username
+            send_task_logging(
+                logging_server, user, current_app.config.geobox_state, task
+            )
 
     g.db.commit()
     return True
@@ -469,7 +470,12 @@ def create_raster_import_task(proj):
             local_raster_source.download_level_end, end_level)
     else:
         gbi_server = raster_source.gbi_server
-        name = gbi_server.raster_prefix + raster_source.name
+        if gbi_server is None:
+            name = "%s_%s_%s" % (raster_source.prefix,
+                                 current_app.config.geobox_state.config.get('app', 'raster_prefix'),
+                                 raster_source.name)
+        else:
+            name = gbi_server.raster_prefix + raster_source.name
         local_raster_source = model.LocalWMTSSource(
             download_level_start=start_level,
             download_level_end=end_level,
@@ -487,10 +493,12 @@ def create_raster_import_task(proj):
         project=proj
     )
 
-    logging_server = raster_source.gbi_server.logging_url
-    user = raster_source.gbi_server.username
-    send_task_logging(logging_server, user, current_app.config.geobox_state,
-                      task)
+    if raster_source.gbi_server is not None:
+        logging_server = raster_source.gbi_server.logging_url
+        user = raster_source.gbi_server.username
+        send_task_logging(logging_server, user,
+                          current_app.config.geobox_state,
+                          task)
 
     g.db.add(task)
     g.db.commit()
