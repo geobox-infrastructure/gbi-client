@@ -32,7 +32,10 @@ def proxy_request(url):
     response = proxy_couchdb_request(request, url)
     if '201' in response.status:
 
-        if app_state.config.get('web', 'authorization_layer_name') in url:
+        if (
+            app_state.config.get('web', 'authorization_layer_name') in url
+            and 'metadata' not in url
+        ):
             couch_url = 'http://%s:%s' % (
                 '127.0.0.1',
                 app_state.config.get('couchdb', 'port')
