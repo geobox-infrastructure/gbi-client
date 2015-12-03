@@ -35,9 +35,7 @@ boxes = Blueprint('boxes', __name__)
 
 @boxes.route("/box/<box_name>", methods=["GET", "POST"])
 def files(box_name, user_id=None):
-    user = User(current_app.config.geobox_state.config.get('user', 'type'))
-    is_consultant = user.is_consultant
-
+    is_consultant = current_app.config.geobox_state.user.is_consultant
     if (box_name == 'file' and not is_consultant):
         raise NotFound()
     if ((box_name == 'download' or box_name == 'upload') and is_consultant):

@@ -72,12 +72,10 @@ def admin():
     tilebox_form.path.data = current_app.config.geobox_state.config.get(
         'tilebox', 'path'
     )
-    user = User(current_app.config.geobox_state.config.get('user', 'type'))
     return render_template('admin.html', localnet=get_localnet_status(),
                            form=form, tilebox_form=tilebox_form,
                            add_server_form=add_server_form,
-                           auth_server=json.dumps(auth_server),
-                           is_customer=user.is_customer)
+                           auth_server=json.dumps(auth_server))
 
 
 def gbi_server_from_list(app_state, url):
@@ -226,8 +224,7 @@ def set_home_server():
             homeserver=gbi_server.title))
     app_state.new_home_server = None
 
-    user = User(current_app.config.geobox_state.config.get('user', 'type'))
-    if user.is_customer:
+    if app_state.user.is_customer:
         return redirect(url_for('admin.upload_gml'))
     return redirect(url_for('main.index'))
 

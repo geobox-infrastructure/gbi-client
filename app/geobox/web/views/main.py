@@ -26,8 +26,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    user = User(current_app.config.geobox_state.config.get_int('user', 'type'))
-    is_consultant = user.is_consultant
+    is_consultant = current_app.config.geobox_state.user.is_consultant
     query = g.db.query(GBIServer).filter(GBIServer.home_server==True)
     has_home_server = query.count() == 1
     return render_template('index.html', is_local=request_is_local(),

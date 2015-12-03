@@ -28,7 +28,7 @@ import sqlalchemy.exc
 from sqlalchemy import create_engine, not_
 from sqlalchemy.orm import sessionmaker
 from geobox.model.meta import Base
-from geobox.model import GBIServer
+from geobox.model import GBIServer, User
 
 from geobox.utils import port_used
 
@@ -93,6 +93,10 @@ class GeoBoxState(object):
     def home_server(self):
         session = self.user_db_session()
         return GBIServer.current_home_server(session)
+
+    @property
+    def user(self):
+        return User(self.config.get('user', 'type'))
 
     def migrate_db(self, engine):
         """

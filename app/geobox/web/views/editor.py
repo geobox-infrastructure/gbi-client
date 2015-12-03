@@ -34,7 +34,7 @@ def editor():
     export_form = ExportVectorForm(request.form)
     export_form.srs.choices = list(current_app.config.geobox_state.config.get('web', 'available_srs'))
 
-    user = User(current_app.config.geobox_state.config.get('user', 'type'))
+    user = current_app.config.geobox_state.user
 
     target_box_name = 'file_box' if user.is_consultant else 'upload_box'
     target_box_label = _('filebox') if user.is_consultant else _('upload_box')
