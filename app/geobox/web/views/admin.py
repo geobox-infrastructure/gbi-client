@@ -28,7 +28,7 @@ from requests.exceptions import MissingSchema
 
 from geobox.model.sources import LocalWMTSSource, ExternalWMTSSource
 from geobox.model.server import GBIServer
-from geobox.model import user
+from geobox.model.user import User
 
 from geobox.web.utils import request_is_local
 from geobox.web.helper import redirect_back
@@ -72,11 +72,12 @@ def admin():
     tilebox_form.path.data = current_app.config.geobox_state.config.get(
         'tilebox', 'path'
     )
-
+    user = User(current_app.config.geobox_state.config.get('user', 'type'))
     return render_template('admin.html', localnet=get_localnet_status(),
                            form=form, tilebox_form=tilebox_form,
                            add_server_form=add_server_form,
-                           auth_server=json.dumps(auth_server))
+                           auth_server=json.dumps(auth_server),
+                           is_customer=user.is_customer)
 
 
 def gbi_server_from_list(app_state, url):
@@ -225,7 +226,8 @@ def set_home_server():
             homeserver=gbi_server.title))
     app_state.new_home_server = None
 
-    if app_state.config.get('user', 'type') == str(user.CUSTOMER):
+    user = User(current_app.config.geobox_state.config.get('user', 'type'))
+    if user.is_customer:
         return redirect(url_for('admin.upload_gml'))
     return redirect(url_for('main.index'))
 

@@ -14,10 +14,11 @@
 # limitations under the License.
 
 
-CUSTOMER = 0 #landwirte
-SERVICE_PROVIDER = 1 #dienstleister
-CONSULTANT = 50 #berater
+CUSTOMER = 0  # landwirte
+SERVICE_PROVIDER = 1  # dienstleister
+CONSULTANT = 50  # berater
 ADMIN = 99
+
 
 class User():
 
@@ -27,3 +28,7 @@ class User():
     @property
     def is_consultant(self):
         return True if int(self.type) == CONSULTANT else False
+
+    @property
+    def is_customer(self):
+        return True if int(self.type) == CUSTOMER else False
