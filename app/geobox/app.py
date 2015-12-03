@@ -22,7 +22,8 @@ import webbrowser
 
 from geobox.model.sources import ExternalWMTSSource
 
-version = '0.6.8'
+version = '0.7.0'
+
 
 def app_server_thread(app_state):
     """Webserver background thread"""
@@ -224,5 +225,3 @@ if __name__ == '__main__':
             sys.exit(0)
 
     main(options.config, open_webbrowser=options.open_webbrowser)
-
-
