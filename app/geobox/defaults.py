@@ -45,7 +45,6 @@ except ImportError:
                     ('EPSG:3857', _('WGS 84 / Pseudo-Mercator (EPSG:3857)'), _('EPSG:3857 help text')),
                     ('EPSG:31467', _('Gauss-Kruger zone 3 (EPSG:31467)'), _('EPSG:31467 help text')),
                     ('EPSG:25832', _('UTM zone 32N (EPSG:25832)'), _('EPSG:25832 help text'))],
-                'context_document_url': 'http://gbiserver.omniscale.net/context',
                 'authorization_layer_name': 'flaechenbox',
                 'authorization_layer_title': 'Berechtigungslayer',
                 'wms_search_url': 'http://www.geoportal.rlp.de/mapbender/php/mod_callMetadata.php?',
