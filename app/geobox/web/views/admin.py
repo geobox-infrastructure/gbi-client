@@ -26,7 +26,7 @@ from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound
 from requests.exceptions import MissingSchema
 
-from geobox.model.sources import LocalWMTSSource
+from geobox.model.sources import LocalWMTSSource, ExternalWMTSSource
 from geobox.model.server import GBIServer
 from geobox.model import user
 
@@ -35,9 +35,12 @@ from geobox.web.helper import redirect_back
 
 from geobox.lib import context
 from geobox.lib.fs import open_file_explorer
-from geobox.lib.couchdb import CouchDB
+from geobox.lib.couchdb import CouchDB, VectorCouchDB
 from geobox.lib.mapproxy import write_mapproxy_config
 from geobox.web import forms
+
+from geobox.lib.vectormapping import Mapping
+from geobox.lib.vectorconvert import load_json_from_gml
 
 admin_view = Blueprint('admin', __name__)
 
@@ -316,19 +319,11 @@ def files():
     return render_template('admin/files.html', tilebox_form=tilebox_form)
 
 
-# TODO move at right place
-from geobox.lib.vectorconvert import load_json_from_gml
-from geobox.lib.vectormapping import Mapping
-from geobox.lib.couchdb import VectorCouchDB
-from geobox.web.forms import GMLUploadForm
-from geobox.model.sources import ExternalWMTSSource
-
-
 @admin_view.route('/admin/upload_gml', methods=['GET', 'POST'])
 def upload_gml():
     app_state = current_app.config.geobox_state
 
-    form = GMLUploadForm()
+    form = forms.GMLUploadForm()
     form.srs.choices = list(app_state.config.get('web', 'available_srs'))
     form.srs.choices.insert(0, ('', _('-- select srs --'), ''))
 
