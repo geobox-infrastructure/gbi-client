@@ -8,17 +8,20 @@ Nach erfolgreicher Installation des GeoBox-Client kann die Anwendung über das W
 
 Die Anwendung selbst lässt sich über einen Webbrowser steuern. Nach dem Starten der Anwendung wird automatisch Ihr Standardbrowser mit der dazugehörigen Webseite geöffnet. Sollte die Seite nicht automatisch öffnen, erreichen Sie die Anwendung unter der Webadresse `http://127.0.0.1:8090/`.
 
+Erster Start
+''''''''''''
+
+Nach dem ersten Start der Anwendung werden Sie aufgefordert, einen GeoBox-Server auszuwählen. Geben Sie Ihren Benutzernamen und Passwort für den ausgewählten Server an, sofern Sie dazu aufgefordert werden.
+
+Steht der gewünschte Server nicht zur Auswahl haben Sie die Möglichkeit diesen hinzuzufügen.
+
+Wenn der ausgewählte Server ein Home-Server ist, können Sie im nächsten Schritt diesen als Ihren Home-Server festlegen. Anschließend können Sie ein GML Dokument mit Ihren Schlaggeometrien importieren.
+
+
 Aufbau der Webseite
 -------------------
 
 Die Webseite besteht aus einer Navigationsleiste im oberen Bereich, sowie dem inhaltlichen Bereich, der alle Informationen und Funktionen bereitstellt. Durch Anklicken des Titels gelangen Sie jederzeit zur Startseite zurück.
-
-Anmeldung
-'''''''''
-
-Die Anmeldung erfolgt über die Angabe des Benutzernamens und des zugehörigen Passworts. Bitte verwenden Sie hier die Anmeldedaten Ihres GeoBox-Server Zuganges.
-Nach dem Anmelden werden Ihre Flächenboxen vom GeoBox-Server in den GeoBox-Client übertragen. Je nach Datenmenge kann dieses einige Minuten dauern.
-
 
 Startseite
 ''''''''''
@@ -28,6 +31,7 @@ Startseite
   - Importieren von Rasterdaten
   - Importieren von Shapedateien
   - Importieren von GeoJSON-Dateien
+  - Importieren von GML-Dateien
   - Übersicht über Ihre Download-Box
   - Übersicht über Ihre Upload-Box
   - Exportieren von Rasterdaten
@@ -40,7 +44,3 @@ Startseite
 
 Die einzelnen Funktionen werden im Folgenden näher erläutert.
 
-Abmelden eines Nutzers
-''''''''''''''''''''''
-
-Um einen Benutzer von der Anwendung abzumelden, wählen Sie `Abmelden` in dem Navigationsmenü aus.

@@ -9,7 +9,7 @@ Ist eine Übersicht der von Ihnen importierten Rasterquellen. Es werden der `Nam
 Externe Rasterquellen
 ---------------------
 
-Ist eine Übersicht der von dem GeoBox-Server für Sie zur Verfügung gestellten Rasterquellen. Es werden der `Titel` und der `Layer Name` angezeigt. Außerdem wird angezeigt, ob die entsprechende Quelle abgesichert ist. Sollte dies der Fall sein, können Sie die Quelle über den Button `Entsperren` freischalten. Nach Betätigung des Button `Entsperren` werden Sie aufgefordert, Benutzername und Passwort für die Quelle anzugeben. Der angegebene Benutzername wird anschließend in der Spalte `Benutzername` angezeigt.
+Ist eine Übersicht der von dem GeoBox-Server für Sie zur Verfügung gestellten Rasterquellen. Es werden der `Titel`, der `Layer Name`, sowie der zugehörige GeoBox-Server angezeigt. Außerdem wird angezeigt, ob die entsprechende Quelle abgesichert ist. Sollte dies der Fall sein, können Sie die Quelle über den Button `Entsperren` freischalten. Nach Betätigung des Button `Entsperren` werden Sie aufgefordert, Benutzername und Passwort für die Quelle anzugeben. Der angegebene Benutzername wird anschließend in der Spalte `Benutzername` angezeigt.
 
 Externe Suchdienste
 -------------------

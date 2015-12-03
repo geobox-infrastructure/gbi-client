@@ -10,9 +10,6 @@ Benutzerhandbuch
 
   einfuehrung
   import
-  import_raster
-  import_shape
-  import_geojson
   boxen
   export
   aufgaben
