@@ -31,12 +31,12 @@
                         </a>
                     </li>
                 </ul>
-                <h5>{{ _('Logs') }}</h5>
+                <h5>{{ _('Log') }}</h5>
                 <ul class="nav nav-pills nav-stacked">
 
                     <li class="{% if url_for('admin.log_view') == request.path %}active{% endif%}">
                         <a href="{{ url_for('admin.log_view') }}">
-                            {{ _('Logs') }}
+                            {{ _('Overview') }}
                         </a>
                     </li>
                 </ul>

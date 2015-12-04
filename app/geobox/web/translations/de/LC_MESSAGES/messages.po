@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-04 14:45+0100\n"
-"PO-Revision-Date: 2015-12-04 14:51+0100\n"
+"POT-Creation-Date: 2015-12-04 15:12+0100\n"
+"PO-Revision-Date: 2015-12-04 15:13+0100\n"
 "Last-Translator: \n"
 "Language: de\n"
 "Language-Team: de <LL@li.org>\n"
@@ -351,8 +351,8 @@ msgid "add server"
 msgstr "Hinzufügen"
 
 #: geobox/web/templates/admin.html:34
-msgid "Logs"
-msgstr "Log Übersicht"
+msgid "Log"
+msgstr "Logs"
 
 #: geobox/web/templates/admin.html:39
 msgid "Overview"
@@ -1258,7 +1258,7 @@ msgid "log_view"
 msgstr "Log Übersicht"
 
 #: geobox/web/templates/admin/log_view.html:7
-msgid "logs"
+msgid "Log overview"
 msgstr "Log Übersicht"
 
 #: geobox/web/templates/admin/network.html:3
@@ -1296,9 +1296,6 @@ msgid "activate"
 msgstr "Aktivieren"
 
 #: geobox/web/templates/admin/server_list.html:4
-msgid "Server list"
-msgstr "Server Übersicht"
-
 #: geobox/web/templates/admin/server_list.html:7
 msgid "server overview"
 msgstr "Server Übersicht"
@@ -1310,10 +1307,6 @@ msgstr "Zuletzt aktualisiert"
 #: geobox/web/templates/admin/server_list.html:32
 msgid "refresh"
 msgstr "Aktualisieren"
-
-#: geobox/web/templates/admin/set_server.html:4
-msgid "Set server"
-msgstr "Server festlegen"
 
 #: geobox/web/templates/admin/upload_gml.html:5
 #: geobox/web/templates/admin/upload_gml.html:8
@@ -2379,63 +2372,64 @@ msgstr ""
 "werden. Bitte wählen Sie das entsprechende Shapefile, das Koordiantensystem "
 "und den dazu passenden Layer aus. "
 
-#: geobox/web/views/admin.py:99 geobox/web/views/project.py:285
+#: geobox/web/views/admin.py:102 geobox/web/views/admin.py:165
+#: geobox/web/views/project.py:285
 msgid "username or password not correct"
 msgstr "Benutzername oder Passwort sind nicht korrekt."
 
-#: geobox/web/views/admin.py:102 geobox/web/views/admin.py:180
+#: geobox/web/views/admin.py:105 geobox/web/views/admin.py:184
 #: geobox/web/views/project.py:287
 msgid "unable to fetch context document"
 msgstr "Kontextdokument konnte nicht aktualisiert werden"
 
-#: geobox/web/views/admin.py:105
+#: geobox/web/views/admin.py:108
 msgid "load context document successful"
 msgstr "Daten wurden erfolgreich aktualisiert."
 
-#: geobox/web/views/admin.py:126
+#: geobox/web/views/admin.py:129
 msgid "unable to determine selected server"
 msgstr "Ausgewählter Server kann nicht gefunden werden"
 
-#: geobox/web/views/admin.py:193
+#: geobox/web/views/admin.py:197
 msgid "server already exists"
 msgstr "Server ist bereits vorhanden"
 
-#: geobox/web/views/admin.py:195
+#: geobox/web/views/admin.py:199
 msgid "server added"
 msgstr "Server hinzugefügt. Sie können diesen nun auswählen"
 
-#: geobox/web/views/admin.py:198
+#: geobox/web/views/admin.py:202
 msgid "server could not added"
 msgstr "Server konnte nicht hinzugefügt werden"
 
-#: geobox/web/views/admin.py:209 geobox/web/views/admin.py:216
+#: geobox/web/views/admin.py:213 geobox/web/views/admin.py:220
 msgid "unable to set homeserver"
 msgstr "Home-Server kann nicht festgelegt werden"
 
-#: geobox/web/views/admin.py:232
+#: geobox/web/views/admin.py:236
 #, python-format
 msgid "assigned %(homeserver)s as homeserver"
 msgstr "\"%(homeserver)s\" als Home-Server festgelegt"
 
-#: geobox/web/views/admin.py:278
+#: geobox/web/views/admin.py:282
 msgid "delete sucessful"
 msgstr "Erfolgreich gelöscht"
 
-#: geobox/web/views/admin.py:280
+#: geobox/web/views/admin.py:284
 msgid "delete not sucessful"
 msgstr "Löschen nicht möglich"
 
-#: geobox/web/views/admin.py:298
+#: geobox/web/views/admin.py:302
 msgid "settings changed. restart required"
 msgstr ""
 "Die Einstellungen wurden verändert - bitte starten Sie die Anwendung neu"
 
-#: geobox/web/views/admin.py:336 geobox/web/views/vector.py:77
+#: geobox/web/views/admin.py:340 geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:212
 msgid "-- select srs --"
 msgstr "Koordinatensystem auswählen"
 
-#: geobox/web/views/admin.py:368
+#: geobox/web/views/admin.py:372
 #, python-format
 msgid ""
 "gml file %(name)s successfully uploaded and geometries added to "
@@ -2749,4 +2743,13 @@ msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
 #~ msgid "set server"
+#~ msgstr "Server festlegen"
+
+#~ msgid "Logs"
+#~ msgstr "Log Übersicht"
+
+#~ msgid "Server list"
+#~ msgstr "Server Übersicht"
+
+#~ msgid "Set server"
 #~ msgstr "Server festlegen"
