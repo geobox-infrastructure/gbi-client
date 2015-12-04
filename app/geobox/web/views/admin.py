@@ -370,5 +370,6 @@ def upload_gml():
 
             flash(_('gml file %(name)s successfully uploaded and geometries added to %(auth_layer_title)s', name=upload_file.filename, auth_layer_title=app_state.config.get('web', 'authorization_layer_title')),
                   'info')
+            return redirect(url_for('main.index'))
 
     return render_template('admin/upload_gml.html', form=form)
