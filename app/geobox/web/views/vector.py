@@ -74,7 +74,6 @@ def prepare_gml_form(form):
     form.srs.choices = list(
         current_app.config.geobox_state.config.get('web', 'available_srs')
     )
-    form.srs.choices.insert(0, ('', _('-- select srs --'), ''))
 
     return prepare_layer_list(form)
 
@@ -209,7 +208,6 @@ def import_vector():
             not_allowed_files.append(upload_file.filename)
     form = forms.ImportVectorEdit(request.form)
     form.srs.choices = list(current_app.config.geobox_state.config.get('web', 'available_srs'))
-    form.srs.choices.insert(0, ('', _('-- select srs --'), ''))
 
     couch_url = 'http://%s:%s' % ('127.0.0.1', current_app.config.geobox_state.config.get('couchdb', 'port'))
     form.layers.choices = [(item['dbname'], item['title']) for item in vector_layers_metadata(couch_url)]

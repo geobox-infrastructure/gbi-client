@@ -49,10 +49,35 @@ class _Auto():
     '''
     pass
 
-class ExtendedSelectField(SelectField):
+
+class SRSSelectField(SelectField):
+    def __init__(self, first_choice=None, default_choice=None, **kwargs):
+        super(SRSSelectField, self).__init__(**kwargs)
+        self.first_choice = first_choice
+        self.preselect = None
+
+    def __call__(self, **kwargs):
+        if self.first_choice:
+            self.choices.insert(0, ('', self.first_choice, ''))
+        # allow preselecting default option
+        if self.default:
+            self.preselect = self.default
+        # overwrite when data present
+        if self.data:
+            self.preselect = self.data
+        return super(SRSSelectField, self).__call__(**kwargs)
+
     def iter_choices(self):
         for value, label, help_text in self.choices:
-            yield (value, label, self.coerce(value) == self.data)
+            selected = (
+                self.preselect is not None and
+                self.coerce(value) == self.preselect
+            )
+            yield (
+                value,
+                label,
+                selected
+            )
 
     def pre_validate(self, form):
         for v, _, help_text in self.choices:
@@ -232,7 +257,9 @@ class ImportProjectEdit(ProjectEdit):
 
 class ExportProjectEdit(ProjectEdit):
     format = SelectField(lazy_gettext('format'), choices=[('MBTiles', 'MBTiles'), ('GTiff', 'TIFF'), ('JPEG', 'JPEG'), ('CouchDB', 'CouchDB')], coerce=str)
-    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Optional()])
+    srs = SRSSelectField(lazy_gettext('srs'), validators=[Optional()],
+                         first_choice=lazy_gettext('-- select srs --'),
+                         default='EPSG:25832')
     start_level = SelectField(lazy_gettext('start level'), coerce=int, validators=[Optional()])
     end_level = SelectField(lazy_gettext('end level'), coerce=int, validators=[Optional()])
     raster_source = QuerySelectField(lazy_gettext('raster_source'),query_factory=get_local_wmts_source, get_label='wmts_source.title', validators=[Optional()])
@@ -255,12 +282,16 @@ class ImportGMLEdit(Form):
     layers = SelectField(lazy_gettext('select existing layer'),
                          validators=[Optional()])
     name = TextField(lazy_gettext('new layer'), validators=[Optional()])
-    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Required()])
+    srs = SRSSelectField(lazy_gettext('srs'), validators=[Required()],
+                         first_choice=lazy_gettext('-- select srs --'),
+                         default='EPSG:25832')
 
 
 class ImportVectorEdit(Form):
     file_name = SelectField(lazy_gettext('file name'), validators=[Required()])
-    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Required()])
+    srs = SRSSelectField(lazy_gettext('srs'), validators=[Required()],
+                         first_choice=lazy_gettext('-- select srs --'),
+                         default='EPSG:25832')
     layers = SelectField(lazy_gettext('select existing layer'), validators=[Optional()])
     name = TextField(lazy_gettext('new layer'), validators=[Optional()])
 
@@ -272,7 +303,9 @@ class ExportVectorForm(Form):
     geojson = HiddenField(lazy_gettext('geojson'))
     filename = TextField(lazy_gettext('filename'), validators=[Required()])
     export_type = SelectField(lazy_gettext('export_type'), choices=[('shp', 'SHP'), ('geojson', 'GeoJSON'), ('odata', 'OData')], coerce=str, validators=[Required()])
-    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Optional()])
+    srs = SRSSelectField(lazy_gettext('srs'), validators=[Optional()],
+                         first_choice=lazy_gettext('-- select srs --'),
+                         default='EPSG:25832')
     destination = SelectField(lazy_gettext('destination'), validators=[Required()])
     odata_url = TextField(lazy_gettext('odata_url'))
 
@@ -324,7 +357,10 @@ class AddGBIServerForm(Form):
 class GMLUploadForm(Form):
     upload_file = FileField(lazy_gettext('Choose gml'),
                             validators=[Required()])
-    srs = ExtendedSelectField(lazy_gettext('srs'), validators=[Required()])
+    srs = SRSSelectField(label=lazy_gettext('srs'),
+                         validators=[Required()],
+                         first_choice=lazy_gettext('-- select srs --'),
+                         default='EPSG:25832')
 
     def validate_upload_file(form, field):
         if field.data and re.match('.*\.xml', field.data.filename) is None:
