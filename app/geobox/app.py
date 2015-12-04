@@ -109,6 +109,7 @@ def add_default_background_layer(app_state):
         source.format = source_conf['format']
         source.background_layer = True
         source.is_user_defined = True
+        source.is_public = True
         source.view_coverage = json.dumps(source_conf['view']['coverage'])
         source.view_level_start = source_conf['view']['level_start']
         source.view_level_end = source_conf['view']['level_end']
