@@ -49,26 +49,26 @@ except ImportError:
                 'authorization_layer_title': 'Berechtigungslayer',
                 'wms_search_url': 'http://www.geoportal.rlp.de/mapbender/php/mod_callMetadata.php?',
                 'wms_cors_proxy_url': 'http://www.geoportal.rlp.de/cors_proxy/',
-                'default_background': {
-                    'url': '',
-                    'name': 'default_background',
-                    'title': 'Default Background',
-                    'format': 'png',
-                    'view': {
-                        'coverage': {
-                            "type": "Polygon",
-                            "coordinates": [[
-                                [-20037508.3428, -20037508.3428],
-                                [-20037508.3428,  20037508.3428],
-                                [ 20037508.3428,  20037508.3428],
-                                [ 20037508.3428, -20037508.3428],
-                                [-20037508.3428, -20037508.3428]
-                            ]]
-                        },
-                        'level_start': 0,
-                        'level_end': 18
-                    }
-                }
+                # 'default_background': {
+                #     'url': '',
+                #     'name': 'default_background',
+                #     'title': 'Default Background',
+                #     'format': 'png',
+                #     'view': {
+                #         'coverage': {
+                #             "type": "Polygon",
+                #             "coordinates": [[
+                #                 [-20037508.3428, -20037508.3428],
+                #                 [-20037508.3428,  20037508.3428],
+                #                 [ 20037508.3428,  20037508.3428],
+                #                 [ 20037508.3428, -20037508.3428],
+                #                 [-20037508.3428, -20037508.3428]
+                #             ]]
+                #         },
+                #         'level_start': 0,
+                #         'level_end': 18
+                #     }
+                # }
             },
             'mapproxy': {
                 'port': 8091,
