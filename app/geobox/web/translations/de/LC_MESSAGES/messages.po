@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2015-12-04 15:12+0100\n"
-"PO-Revision-Date: 2015-12-04 15:13+0100\n"
+"PO-Revision-Date: 2015-12-04 15:23+0100\n"
 "Last-Translator: \n"
 "Language: de\n"
 "Language-Team: de <LL@li.org>\n"
@@ -992,7 +992,7 @@ msgstr "Importieren"
 
 #: geobox/web/templates/index.html:18
 msgid "import raster"
-msgstr "Rasterdaten Importieren"
+msgstr "Rasterdaten importieren"
 
 #: geobox/web/templates/index.html:20
 msgid "import shape"
@@ -1024,7 +1024,7 @@ msgstr "Upload-Box"
 
 #: geobox/web/templates/index.html:44
 msgid "export raster"
-msgstr "Rasterdaten Exportieren"
+msgstr "Rasterdaten exportieren"
 
 #: geobox/web/templates/index.html:49 geobox/web/templates/index.html:51
 #: geobox/web/templates/tasks/task_list.html:83
