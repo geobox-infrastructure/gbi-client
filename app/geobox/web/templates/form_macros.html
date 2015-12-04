@@ -69,7 +69,7 @@
 </div>
 {%- endmacro %}
 
-{% macro set_server_form(form) -%}
+{% macro set_server_form(form, url=None) -%}
     <div class="row">
         <div class="span8">
             <h4>{{_('set gbi server')}}</h4>
@@ -78,7 +78,7 @@
             {% endif %}
             <form id="set-server-form" name="set-server-form" method="POST" class="form-horizontal " action="{{ url_for('admin.set_server') }}">
                 {{ form.csrf_token }}
-                {{ input(form.url, style="width: 30em") }}
+                {{ input(form.url, style="width: 30em", value=url) }}
                 {{ input(form.username) }}
                 {{ input(form.password) }}
                 {{ form.next }}

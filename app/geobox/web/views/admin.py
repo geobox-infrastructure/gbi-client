@@ -51,10 +51,13 @@ def restrict_to_local():
         abort(403)
 
 
-def prepare_set_server():
-    server_list = current_app.config.geobox_state.server_list
+def prepare_set_server(url_valid=False):
+    server_list = current_app.config.geobox_state.unused_server_list
     form = forms.SetGBIServerForm(request.form)
     form.url.choices = [(s['url'], s['title']) for s in server_list]
+    # replace url choices when sure url is correct
+    if url_valid:
+        form.url.choices = [(form.url.data, '')]
 
     add_server_form = forms.AddGBIServerForm()
 
@@ -79,7 +82,7 @@ def admin():
 
 
 def gbi_server_from_list(app_state, url):
-    server_list = app_state.server_list
+    server_list = app_state.unused_server_list
     server = [s for s in server_list if s['url'] == url]
 
     if len(server) == 0:
@@ -141,42 +144,49 @@ def initial_set_server():
                            disable_menu=True)
 
 
-@admin_view.route('/admin/set_server', methods=['GET', 'POST'])
-def set_server():
+@admin_view.route('/admin/server_list', methods=['GET'])
+def server_list():
+    app_state = current_app.config.geobox_state
+    db_session = app_state.user_db_session()
+    query = db_session.query(GBIServer)
+    query = query.filter(GBIServer.last_update != None)
+    gbi_servers = query.all()
     form, add_server_form, auth_server = prepare_set_server()
-    if request.method == 'GET':
-        form.next.data = 'admin.set_server'
+    return render_template('admin/server_list.html', servers=gbi_servers, form=form)
+
+
+@admin_view.route('/admin/set_server', methods=['POST'])
+def set_server():
+    form, add_server_form, auth_server = prepare_set_server(url_valid=True)
     if form.validate_on_submit():
         if _set_gbi_server(form):
             return redirect(url_for(form.next.data))
-        else:
-            return redirect(request.referrer)
-    elif request.method == 'POST':
         return redirect(request.referrer)
-
-    return render_template('admin/set_server.html', form=form,
-                           auth_server=json.dumps(auth_server))
+    flash(_('username or password not correct'), 'error')
+    return redirect(request.referrer)
 
 
 @admin_view.route('/admin/add_server', methods=['GET', 'POST'])
 def add_server():
-    form = forms.AddGBIServerForm(request.form)
+    form, add_server_form, auth_server = prepare_set_server()
     if request.method == 'GET':
-        form.next.data = 'admin.add_server'
+        add_server_form.next.data = 'admin.add_server'
+        form.next.data = 'admin.server_list'
 
     app_state = current_app.config.geobox_state
 
-    if form.validate_on_submit():
+    if add_server_form.validate_on_submit():
         auth = False
         try:
-            context.test_context_document(form.url.data)
+            context.test_context_document(add_server_form.url.data)
         except (NotFound, MissingSchema, ContextError):
             flash(_('unable to fetch context document'), 'error')
-            return redirect(url_for(form.next.data))
+            return redirect(url_for(add_server_form.next.data))
         except context.AuthenticationError:
             auth = True
 
-        gbi_server = GBIServer(title=form.title.data, url=form.url.data,
+        gbi_server = GBIServer(title=add_server_form.title.data,
+                               url=add_server_form.url.data,
                                auth=auth)
         db_session = app_state.user_db_session()
         db_session.add(gbi_server)
@@ -186,11 +196,13 @@ def add_server():
             flash(_('server already exists'), 'error')
         else:
             flash(_('server added'), 'info')
-        return redirect(url_for(form.next.data))
+        return redirect(url_for(add_server_form.next.data))
     elif request.method == 'POST':
         flash(_('server could not added'), 'error')
         return redirect(request.referrer)
-    return render_template('admin/add_server.html', form=form)
+    return render_template('admin/add_server.html', form=form,
+                           add_server_form=add_server_form,
+                           auth_server=auth_server)
 
 
 @admin_view.route('/admin/set_home_server', methods=['GET'])

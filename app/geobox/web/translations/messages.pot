@@ -8,44 +8,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-03 10:13+0100\n"
+"POT-Creation-Date: 2015-12-04 14:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.6\n"
+"Generated-By: Babel 2.1.1\n"
 
-#: geobox/defaults.py:44
+#: geobox/defaults.py:56
 msgid "WGS 84 (EPSG:4326)"
 msgstr ""
 
-#: geobox/defaults.py:44
+#: geobox/defaults.py:56
 msgid "EPSG:4326 help text"
 msgstr ""
 
-#: geobox/defaults.py:45
+#: geobox/defaults.py:57
 msgid "WGS 84 / Pseudo-Mercator (EPSG:3857)"
 msgstr ""
 
-#: geobox/defaults.py:45
+#: geobox/defaults.py:57
 msgid "EPSG:3857 help text"
 msgstr ""
 
-#: geobox/defaults.py:46
+#: geobox/defaults.py:58
 msgid "Gauss-Kruger zone 3 (EPSG:31467)"
 msgstr ""
 
-#: geobox/defaults.py:46
+#: geobox/defaults.py:58
 msgid "EPSG:31467 help text"
 msgstr ""
 
-#: geobox/defaults.py:47
+#: geobox/defaults.py:59
 msgid "UTM zone 32N (EPSG:25832)"
 msgstr ""
 
-#: geobox/defaults.py:47
+#: geobox/defaults.py:59
 msgid "EPSG:25832 help text"
 msgstr ""
 
@@ -216,6 +216,7 @@ msgstr ""
 #: geobox/web/forms.py:271
 #: geobox/web/templates/admin/external_raster_list.html:11
 #: geobox/web/templates/admin/external_raster_list.html:82
+#: geobox/web/templates/admin/server_list.html:11
 msgid "name"
 msgstr ""
 
@@ -302,10 +303,11 @@ msgstr ""
 #: geobox/web/forms.py:313
 #: geobox/web/templates/admin/external_raster_list.html:44
 #: geobox/web/templates/admin/external_raster_list.html:85
+#: geobox/web/templates/admin/server_list.html:26
 msgid "username"
 msgstr ""
 
-#: geobox/web/forms.py:314
+#: geobox/web/forms.py:314 geobox/web/templates/admin/server_list.html:27
 msgid "Password"
 msgstr ""
 
@@ -326,39 +328,43 @@ msgstr ""
 msgid "settings"
 msgstr ""
 
-#: geobox/web/templates/admin.html:12
+#: geobox/web/templates/admin.html:11
 msgid "GML"
 msgstr ""
 
-#: geobox/web/templates/admin.html:16
+#: geobox/web/templates/admin.html:15
 msgid "upload authorization box"
 msgstr ""
 
-#: geobox/web/templates/admin.html:22 geobox/web/templates/editor.html:406
+#: geobox/web/templates/admin.html:21 geobox/web/templates/editor.html:406
 msgid "Server"
 msgstr ""
 
-#: geobox/web/templates/admin.html:26
-msgid "set server"
+#: geobox/web/templates/admin.html:25
+msgid "server list"
 msgstr ""
 
-#: geobox/web/templates/admin.html:31
+#: geobox/web/templates/admin.html:30
 msgid "add server"
 msgstr ""
 
-#: geobox/web/templates/admin.html:35 geobox/web/templates/admin.html:40
+#: geobox/web/templates/admin.html:34
 msgid "Logs"
 msgstr ""
 
-#: geobox/web/templates/admin.html:45 geobox/web/templates/admin.html:49
+#: geobox/web/templates/admin.html:39
+msgid "Overview"
+msgstr ""
+
+#: geobox/web/templates/admin.html:44 geobox/web/templates/admin.html:48
 msgid "Files"
 msgstr ""
 
-#: geobox/web/templates/admin.html:54 geobox/web/templates/admin.html:58
+#: geobox/web/templates/admin.html:53 geobox/web/templates/admin.html:57
 msgid "Network"
 msgstr ""
 
-#: geobox/web/templates/admin.html:70
+#: geobox/web/templates/admin.html:69
 msgid "GeoBox Version"
 msgstr ""
 
@@ -1222,6 +1228,22 @@ msgstr ""
 
 #: geobox/web/templates/admin/network.html:21
 msgid "activate"
+msgstr ""
+
+#: geobox/web/templates/admin/server_list.html:4
+msgid "Server list"
+msgstr ""
+
+#: geobox/web/templates/admin/server_list.html:7
+msgid "server overview"
+msgstr ""
+
+#: geobox/web/templates/admin/server_list.html:12
+msgid "last update"
+msgstr ""
+
+#: geobox/web/templates/admin/server_list.html:32
+msgid "refresh"
 msgstr ""
 
 #: geobox/web/templates/admin/set_server.html:4
@@ -2223,91 +2245,91 @@ msgstr ""
 msgid "tooltip import vectordata"
 msgstr ""
 
-#: geobox/web/views/admin.py:97 geobox/web/views/project.py:285
+#: geobox/web/views/admin.py:99 geobox/web/views/project.py:285
 msgid "username or password not correct"
 msgstr ""
 
-#: geobox/web/views/admin.py:100 geobox/web/views/admin.py:172
+#: geobox/web/views/admin.py:102 geobox/web/views/admin.py:180
 #: geobox/web/views/project.py:287
 msgid "unable to fetch context document"
 msgstr ""
 
-#: geobox/web/views/admin.py:103
+#: geobox/web/views/admin.py:105
 msgid "load context document successful"
 msgstr ""
 
-#: geobox/web/views/admin.py:124
+#: geobox/web/views/admin.py:126
 msgid "unable to determine selected server"
 msgstr ""
 
-#: geobox/web/views/admin.py:184
+#: geobox/web/views/admin.py:193
 msgid "server already exists"
 msgstr ""
 
-#: geobox/web/views/admin.py:186
+#: geobox/web/views/admin.py:195
 msgid "server added"
 msgstr ""
 
-#: geobox/web/views/admin.py:189
+#: geobox/web/views/admin.py:198
 msgid "server could not added"
 msgstr ""
 
-#: geobox/web/views/admin.py:198 geobox/web/views/admin.py:205
+#: geobox/web/views/admin.py:209 geobox/web/views/admin.py:216
 msgid "unable to set homeserver"
 msgstr ""
 
-#: geobox/web/views/admin.py:221
+#: geobox/web/views/admin.py:232
 #, python-format
 msgid "assigned %(homeserver)s as homeserver"
 msgstr ""
 
-#: geobox/web/views/admin.py:267
+#: geobox/web/views/admin.py:278
 msgid "delete sucessful"
 msgstr ""
 
-#: geobox/web/views/admin.py:269
+#: geobox/web/views/admin.py:280
 msgid "delete not sucessful"
 msgstr ""
 
-#: geobox/web/views/admin.py:287
+#: geobox/web/views/admin.py:298
 msgid "settings changed. restart required"
 msgstr ""
 
-#: geobox/web/views/admin.py:333 geobox/web/views/vector.py:77
+#: geobox/web/views/admin.py:336 geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:212
 msgid "-- select srs --"
 msgstr ""
 
-#: geobox/web/views/admin.py:365
+#: geobox/web/views/admin.py:368
 #, python-format
 msgid ""
 "gml file %(name)s successfully uploaded and geometries added to "
 "%(auth_layer_title)s"
 msgstr ""
 
-#: geobox/web/views/boxes.py:64
+#: geobox/web/views/boxes.py:63
 msgid "upload success"
 msgstr ""
 
-#: geobox/web/views/boxes.py:66
+#: geobox/web/views/boxes.py:65
 msgid "file type not allowed"
 msgstr ""
 
-#: geobox/web/views/boxes.py:118 geobox/web/views/vector.py:113
+#: geobox/web/views/boxes.py:117 geobox/web/views/vector.py:113
 #: geobox/web/views/vector.py:234
 msgid "please select new layer or current layer to import"
 msgstr ""
 
-#: geobox/web/views/boxes.py:126 geobox/web/views/vector.py:125
+#: geobox/web/views/boxes.py:125 geobox/web/views/vector.py:125
 #: geobox/web/views/vector.py:244
 msgid "None of the characters used for the layer is allowed"
 msgstr ""
 
-#: geobox/web/views/boxes.py:138
+#: geobox/web/views/boxes.py:137
 msgid "file will be imported"
 msgstr ""
 
-#: geobox/web/views/boxes.py:146
+#: geobox/web/views/boxes.py:145
 msgid "file deleted"
 msgstr ""
 

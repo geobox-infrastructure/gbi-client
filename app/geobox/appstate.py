@@ -74,20 +74,27 @@ class GeoBoxState(object):
         return cls(config)
 
     @property
-    def server_list(self):
-        _server_list = self.config.get('web', 'server_list')
-        if _server_list is None:
-            _server_list = []
-        # combine loaded server list with stored servers
+    def unused_server_list(self):
+        server_list = []
+        urls = []
         session = self.user_db_session()
         query = session.query(GBIServer)
-        query = query.filter(not_(GBIServer.url.in_([
-            s['url'] for s in _server_list
-        ])))
-        _server_list += [
-            dict(title=s.title, url=s.url, auth=s.auth) for s in query.all()
-        ]
-        return _server_list
+        query = query.filter_by(last_update=None)
+        for row in query.all():
+            server_list.append(
+                dict(title=row.title, url=row.url, auth=row.auth)
+            )
+            urls.append(row.url)
+        try:
+            conf_server_list = self.config.get('web', 'server_list')
+        except KeyError:
+            pass
+        else:
+            for conf_server in conf_server_list:
+                if conf_server['url'] not in urls:
+                    server_list.append(conf_server)
+
+        return server_list
 
     @property
     def home_server(self):

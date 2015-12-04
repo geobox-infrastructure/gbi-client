@@ -20,9 +20,9 @@
 
                 <h5>{{ _('Server') }}</h5>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="{% if url_for('admin.set_server') == request.path %}active{% endif%}">
-                        <a href="{{ url_for('admin.set_server') }}">
-                            {{ _('set server') }}
+                    <li class="{% if url_for('admin.server_list') == request.path %}active{% endif%}">
+                        <a href="{{ url_for('admin.server_list') }}">
+                            {{ _('server list') }}
                         </a>
                     </li>
                     <li class="{% if url_for('admin.add_server') == request.path %}active{% endif%}">

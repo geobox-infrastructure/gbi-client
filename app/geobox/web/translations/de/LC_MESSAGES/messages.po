@@ -7,46 +7,47 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-03 10:13+0100\n"
-"PO-Revision-Date: 2015-12-03 15:26+0100\n"
+"POT-Creation-Date: 2015-12-04 14:45+0100\n"
+"PO-Revision-Date: 2015-12-04 14:51+0100\n"
 "Last-Translator: \n"
+"Language: de\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.6\n"
+"Generated-By: Babel 2.1.1\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: geobox/defaults.py:44
+#: geobox/defaults.py:56
 msgid "WGS 84 (EPSG:4326)"
 msgstr "WGS 84 (EPSG:4326)"
 
-#: geobox/defaults.py:44
+#: geobox/defaults.py:56
 msgid "EPSG:4326 help text"
 msgstr "WGS 84"
 
-#: geobox/defaults.py:45
+#: geobox/defaults.py:57
 msgid "WGS 84 / Pseudo-Mercator (EPSG:3857)"
 msgstr "Pseudo-Mercator (EPSG:3857)"
 
-#: geobox/defaults.py:45
+#: geobox/defaults.py:57
 msgid "EPSG:3857 help text"
 msgstr "Pseudo-Mercator"
 
-#: geobox/defaults.py:46
+#: geobox/defaults.py:58
 msgid "Gauss-Kruger zone 3 (EPSG:31467)"
 msgstr "Gauß-Krüger Zone 3 (EPSG:31467)"
 
-#: geobox/defaults.py:46
+#: geobox/defaults.py:58
 msgid "EPSG:31467 help text"
 msgstr "Gauß-Krüger Zone 3"
 
-#: geobox/defaults.py:47
+#: geobox/defaults.py:59
 msgid "UTM zone 32N (EPSG:25832)"
 msgstr "UTM Zone 32 Nord (EPSG:25832)"
 
-#: geobox/defaults.py:47
+#: geobox/defaults.py:59
 msgid "EPSG:25832 help text"
 msgstr "UTM Zone 32 Nord"
 
@@ -217,6 +218,7 @@ msgstr "Verzeichnis"
 #: geobox/web/forms.py:271
 #: geobox/web/templates/admin/external_raster_list.html:11
 #: geobox/web/templates/admin/external_raster_list.html:82
+#: geobox/web/templates/admin/server_list.html:11
 msgid "name"
 msgstr "Name"
 
@@ -303,16 +305,17 @@ msgstr "Server"
 #: geobox/web/forms.py:313
 #: geobox/web/templates/admin/external_raster_list.html:44
 #: geobox/web/templates/admin/external_raster_list.html:85
+#: geobox/web/templates/admin/server_list.html:26
 msgid "username"
 msgstr "Benutzername"
 
-#: geobox/web/forms.py:314
+#: geobox/web/forms.py:314 geobox/web/templates/admin/server_list.html:27
 msgid "Password"
 msgstr "Passwort"
 
 #: geobox/web/forms.py:320
 msgid "gbi server context document"
-msgstr "GeoBox-Server-URL"
+msgstr "Server-URL"
 
 #: geobox/web/forms.py:325
 msgid "Choose gml"
@@ -327,39 +330,43 @@ msgstr "Es sind nur XML-Dateien zulässig"
 msgid "settings"
 msgstr "Einstellungen"
 
-#: geobox/web/templates/admin.html:12
+#: geobox/web/templates/admin.html:11
 msgid "GML"
 msgstr "GML"
 
-#: geobox/web/templates/admin.html:16
+#: geobox/web/templates/admin.html:15
 msgid "upload authorization box"
 msgstr "Berechtigungsbox hochladen"
 
-#: geobox/web/templates/admin.html:22 geobox/web/templates/editor.html:406
+#: geobox/web/templates/admin.html:21 geobox/web/templates/editor.html:406
 msgid "Server"
 msgstr "Server"
 
-#: geobox/web/templates/admin.html:26
-msgid "set server"
-msgstr "Server festlegen"
+#: geobox/web/templates/admin.html:25
+msgid "server list"
+msgstr "Übersicht"
 
-#: geobox/web/templates/admin.html:31
+#: geobox/web/templates/admin.html:30
 msgid "add server"
-msgstr "Server hinzufügen"
+msgstr "Hinzufügen"
 
-#: geobox/web/templates/admin.html:35 geobox/web/templates/admin.html:40
+#: geobox/web/templates/admin.html:34
 msgid "Logs"
 msgstr "Log Übersicht"
 
-#: geobox/web/templates/admin.html:45 geobox/web/templates/admin.html:49
+#: geobox/web/templates/admin.html:39
+msgid "Overview"
+msgstr "Übersicht"
+
+#: geobox/web/templates/admin.html:44 geobox/web/templates/admin.html:48
 msgid "Files"
 msgstr "Dateien"
 
-#: geobox/web/templates/admin.html:54 geobox/web/templates/admin.html:58
+#: geobox/web/templates/admin.html:53 geobox/web/templates/admin.html:57
 msgid "Network"
 msgstr "Netzwerk"
 
-#: geobox/web/templates/admin.html:70
+#: geobox/web/templates/admin.html:69
 msgid "GeoBox Version"
 msgstr "GeoBox Version"
 
@@ -375,8 +382,11 @@ msgstr "Neuen Home-Server festlegen"
 msgid ""
 "The server is a home server. Would you like to assign it as your home server?"
 msgstr ""
-"Der ausgewählte GeoBox-Server kann als Home-Server verwendet werden. An diesen Server werden Ihre Berechtigungsgeometrien und Dokumente übertragen die zum Tausch benötigt werden. <br><br> Bitte beachten Sie, dass der Home-Server nachträglich nicht mehr geändert werden kann.<br><br>"
-"Möchten Sie diesen GeoBox-Server als Ihren Home-Server festlegen?"
+"Der ausgewählte GeoBox-Server kann als Home-Server verwendet werden. An "
+"diesen Server werden Ihre Berechtigungsgeometrien und Dokumente übertragen "
+"die zum Tausch benötigt werden. <br><br> Bitte beachten Sie, dass der Home-"
+"Server nachträglich nicht mehr geändert werden kann.<br><br>Möchten Sie "
+"diesen GeoBox-Server als Ihren Home-Server festlegen?"
 
 #: geobox/web/templates/base.html:65
 #: geobox/web/templates/admin/external_raster_list.html:57
@@ -941,7 +951,7 @@ msgstr "Daten werden vom Server geladen und kopiert"
 #: geobox/web/templates/form_macros.html:75
 #: geobox/web/templates/admin/initial_set_server.html:3
 msgid "set gbi server"
-msgstr "GeoBox-Server auswählen"
+msgstr "Server auswählen"
 
 #: geobox/web/templates/form_macros.html:85
 msgid "no auth required"
@@ -954,7 +964,7 @@ msgstr "Benutzen"
 #: geobox/web/templates/form_macros.html:99
 #: geobox/web/templates/admin/add_server.html:4
 msgid "Add server"
-msgstr "Weiteren GeoBox-Server  hinzufügen"
+msgstr "Weiteren Server  hinzufügen"
 
 #: geobox/web/templates/form_macros.html:110
 msgid "add"
@@ -1284,6 +1294,22 @@ msgstr "Deaktivieren"
 #: geobox/web/templates/admin/network.html:21
 msgid "activate"
 msgstr "Aktivieren"
+
+#: geobox/web/templates/admin/server_list.html:4
+msgid "Server list"
+msgstr "Server Übersicht"
+
+#: geobox/web/templates/admin/server_list.html:7
+msgid "server overview"
+msgstr "Server Übersicht"
+
+#: geobox/web/templates/admin/server_list.html:12
+msgid "last update"
+msgstr "Zuletzt aktualisiert"
+
+#: geobox/web/templates/admin/server_list.html:32
+msgid "refresh"
+msgstr "Aktualisieren"
 
 #: geobox/web/templates/admin/set_server.html:4
 msgid "Set server"
@@ -2353,63 +2379,63 @@ msgstr ""
 "werden. Bitte wählen Sie das entsprechende Shapefile, das Koordiantensystem "
 "und den dazu passenden Layer aus. "
 
-#: geobox/web/views/admin.py:97 geobox/web/views/project.py:285
+#: geobox/web/views/admin.py:99 geobox/web/views/project.py:285
 msgid "username or password not correct"
 msgstr "Benutzername oder Passwort sind nicht korrekt."
 
-#: geobox/web/views/admin.py:100 geobox/web/views/admin.py:172
+#: geobox/web/views/admin.py:102 geobox/web/views/admin.py:180
 #: geobox/web/views/project.py:287
 msgid "unable to fetch context document"
 msgstr "Kontextdokument konnte nicht aktualisiert werden"
 
-#: geobox/web/views/admin.py:103
+#: geobox/web/views/admin.py:105
 msgid "load context document successful"
 msgstr "Daten wurden erfolgreich aktualisiert."
 
-#: geobox/web/views/admin.py:124
+#: geobox/web/views/admin.py:126
 msgid "unable to determine selected server"
 msgstr "Ausgewählter Server kann nicht gefunden werden"
 
-#: geobox/web/views/admin.py:184
+#: geobox/web/views/admin.py:193
 msgid "server already exists"
 msgstr "Server ist bereits vorhanden"
 
-#: geobox/web/views/admin.py:186
+#: geobox/web/views/admin.py:195
 msgid "server added"
 msgstr "Server hinzugefügt. Sie können diesen nun auswählen"
 
-#: geobox/web/views/admin.py:189
+#: geobox/web/views/admin.py:198
 msgid "server could not added"
 msgstr "Server konnte nicht hinzugefügt werden"
 
-#: geobox/web/views/admin.py:198 geobox/web/views/admin.py:205
+#: geobox/web/views/admin.py:209 geobox/web/views/admin.py:216
 msgid "unable to set homeserver"
 msgstr "Home-Server kann nicht festgelegt werden"
 
-#: geobox/web/views/admin.py:221
+#: geobox/web/views/admin.py:232
 #, python-format
 msgid "assigned %(homeserver)s as homeserver"
 msgstr "\"%(homeserver)s\" als Home-Server festgelegt"
 
-#: geobox/web/views/admin.py:267
+#: geobox/web/views/admin.py:278
 msgid "delete sucessful"
 msgstr "Erfolgreich gelöscht"
 
-#: geobox/web/views/admin.py:269
+#: geobox/web/views/admin.py:280
 msgid "delete not sucessful"
 msgstr "Löschen nicht möglich"
 
-#: geobox/web/views/admin.py:287
+#: geobox/web/views/admin.py:298
 msgid "settings changed. restart required"
 msgstr ""
 "Die Einstellungen wurden verändert - bitte starten Sie die Anwendung neu"
 
-#: geobox/web/views/admin.py:333 geobox/web/views/vector.py:77
+#: geobox/web/views/admin.py:336 geobox/web/views/vector.py:77
 #: geobox/web/views/vector.py:212
 msgid "-- select srs --"
 msgstr "Koordinatensystem auswählen"
 
-#: geobox/web/views/admin.py:365
+#: geobox/web/views/admin.py:368
 #, python-format
 msgid ""
 "gml file %(name)s successfully uploaded and geometries added to "
@@ -2418,31 +2444,31 @@ msgstr ""
 "GML Datei %(name)s erfolgreich hochgeladen. Geometrien wurden in den "
 "%(auth_layer_title)s übernommen"
 
-#: geobox/web/views/boxes.py:64
+#: geobox/web/views/boxes.py:63
 msgid "upload success"
 msgstr "Datei erfolgreich hochgeladen"
 
-#: geobox/web/views/boxes.py:66
+#: geobox/web/views/boxes.py:65
 msgid "file type not allowed"
 msgstr "Dateityp ist nich erlaubt"
 
-#: geobox/web/views/boxes.py:118 geobox/web/views/vector.py:113
+#: geobox/web/views/boxes.py:117 geobox/web/views/vector.py:113
 #: geobox/web/views/vector.py:234
 msgid "please select new layer or current layer to import"
 msgstr ""
 "Der Layer konnte nicht eindeutig zugeordnet werden. Bitte wählen Sie einen "
 "Layer aus der Liste oder geben Sie einen Namen für einen neuen Layer ein."
 
-#: geobox/web/views/boxes.py:126 geobox/web/views/vector.py:125
+#: geobox/web/views/boxes.py:125 geobox/web/views/vector.py:125
 #: geobox/web/views/vector.py:244
 msgid "None of the characters used for the layer is allowed"
 msgstr "Angegebener Layername ist ungültig"
 
-#: geobox/web/views/boxes.py:138
+#: geobox/web/views/boxes.py:137
 msgid "file will be imported"
 msgstr "Datei wird importiert"
 
-#: geobox/web/views/boxes.py:146
+#: geobox/web/views/boxes.py:145
 msgid "file deleted"
 msgstr "Datei wurde gelöscht"
 
@@ -2721,3 +2747,6 @@ msgstr "Kein gültigen Zeitpunkt angegeben."
 #: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:649
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
+
+#~ msgid "set server"
+#~ msgstr "Server festlegen"

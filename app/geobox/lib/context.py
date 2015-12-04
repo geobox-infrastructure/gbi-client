@@ -16,6 +16,7 @@
 import json
 from shapely.geometry import asShape
 import requests
+import datetime
 from geobox import model
 from geobox.lib.couchdb import CouchDB
 from werkzeug.exceptions import NotFound
@@ -195,6 +196,7 @@ def load_context_document(gbi_server, db_session, user, password):
     gbi_server.update_coverage_url = context.update_coverage_url()
     gbi_server.prefix = context.prefix()
     gbi_server.home_server = context.has_couchdb_sources()
+    gbi_server.last_update = datetime.datetime.now()
     if user is not None and user != '':
         gbi_server.username = user
     db_session.commit()

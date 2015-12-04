@@ -1,0 +1,39 @@
+{% extends "admin.html" %}
+{% from "form_macros.html" import input %}
+
+{% block title %} {{_('server overview')}} {% endblock %}
+
+{% block content_right %}
+    <h4>{{ _('server overview') }}</h4>
+    <table class="table server-overview">
+        <thead>
+            <tr>
+                <th>{{ _('name') }}</th>
+                <th>{{ _('last update') }}</th>
+                <th></th>
+            </tr>
+        <tbody>
+        {% for server in servers %}
+            <tr>
+                <td>{{ server.title }}</td>
+                <td>{{ server.last_update.strftime('%d.%m.%Y %H:%M:%S') }}</td>
+                <td>
+                    <form class="form-inline text-right" action="{{ url_for('admin.set_server') }}" method="post">
+                        {{ form.csrf_token }}
+                        <input type="hidden" value="{{server.url}}" name="url"/>
+                        <input type="hidden" value="admin.server_list" name="next" />
+                        {% if server.auth %}
+                            {{ form.username(placeholder=_('username')) }}
+                            {{ form.password(placeholder=_('Password')) }}
+                        {% else %}
+                            {{ form.username(type="hidden") }}
+                            {{ form.password(type="hidden") }}
+                        {% endif %}
+                        <input class="btn btn-small" type="submit" value="{{ _('refresh') }}" />
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
