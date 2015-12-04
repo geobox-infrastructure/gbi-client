@@ -375,8 +375,8 @@ msgstr "Neuen Home-Server festlegen"
 msgid ""
 "The server is a home server. Would you like to assign it as your home server?"
 msgstr ""
-"Der ausgewählte GeoBox-Server kann als Home-Server verwendet werden.Wollen "
-"Sie diesen GeoBox-Server als Ihren Home-Server festlegen?"
+"Der ausgewählte GeoBox-Server kann als Home-Server verwendet werden. An diesen Server werden Ihre Berechtigungsgeometrien und Dokumente übertragen die zum Tausch benötigt werden. <br><br> Bitte beachten Sie, dass der Home-Server nachträglich nicht mehr geändert werden kann.<br><br>"
+"Möchten Sie diesen GeoBox-Server als Ihren Home-Server festlegen?"
 
 #: geobox/web/templates/base.html:65
 #: geobox/web/templates/admin/external_raster_list.html:57
