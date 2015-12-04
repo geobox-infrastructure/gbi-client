@@ -137,6 +137,9 @@ class CouchDBProcess(object):
         parser.set('log', 'level', 'error')
         parser.set('log', 'file', self.log_file)
 
+        parser.add_section('replicator')
+        parser.set('replicator', 'checkpoint_interval', 60 * 1000) # 60s
+
         with open(self._local_ini, 'w') as fp:
             parser.write(fp)
 

@@ -53,9 +53,10 @@ def unpack_command():
             tar.close()
 
 keep_erl_libs = [
+    'appmon-*',
     'common_test-*',
     'compiler-*',
-    'couch-*',
+    'couch*',
     'crypto-*',
     'debugger-*',
     'ejson-*',
@@ -82,10 +83,6 @@ keep_erl_libs = [
 ]
 
 def prepare_command():
-    prepare_couchdb_command()
-    prepare_geocouch_command()
-
-def prepare_couchdb_command():
     log.mark('preparing couchdb')
     log.info('removing unneeded erlang packages')
     with config['couchdb_dir'].as_working_dir():
@@ -105,16 +102,10 @@ def prepare_couchdb_command():
         for rm in [
             'erts-*/src', 'erts-*/include', 'erts-*/man', 'erts-*/doc',
             'lib/*/src', 'lib/*/examples', 'lib/*/include',
-            'share/doc', 'share/man',
+            'share/info', 'share/couchdb/www/docs/',
         ]:
             for p in path('.').glob(rm):
                 p.rmtree(ignore_errors=True)
-
-def prepare_geocouch_command():
-    log.mark('preparing geocouch')
-    lib_geocouch_dir = config['couchdb_dir'] / 'lib' / 'geocouch'
-    lib_geocouch_dir.ensure_dir()
-    (config['geocouch_dir'] / 'ebin').copytree(lib_geocouch_dir / 'ebin')
 
 def clean_command():
     """
