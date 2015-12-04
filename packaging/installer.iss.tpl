@@ -35,7 +35,7 @@ Source: "${erl_dir}\*.*"; DestDir: "{app}\couchdb"; Flags: ignoreversion uninsre
 ; bin dir
 Source: "${erl_dir}\bin\*.*"; DestDir: "{app}\couchdb\bin"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 ; other dirs copied '*.*'
-Source: "${erl_dir}\erts-5.8.5\*.*"; DestDir: "{app}\couchdb\erts-5.8.5"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
+Source: "${erl_dir}\erts-5.10.3\*.*"; DestDir: "{app}\couchdb\erts-5.10.3"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 Source: "${erl_dir}\lib\*.*"; DestDir: "{app}\couchdb\lib"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 Source: "${erl_dir}\share\*.*"; DestDir: "{app}\couchdb\share"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 Source: "${erl_dir}\releases\*.*"; DestDir: "{app}\couchdb\releases"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
@@ -51,8 +51,8 @@ Source: "${proj4_dir}\data\epsg"; DestDir: "{app}\osgeo\data"; Flags: ignorevers
 Source: "${proj4_dir}\lib\*.*"; DestDir: "{app}\osgeo\bin"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 Source: "${dist_dir}\geobox\*.*"; DestDir: "{app}\geobox"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 
-Source: "${geocouch_dir}\ebin\*.*"; DestDir: "{app}\couchdb\lib\geocouch\ebin"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
-Source: "${geocouch_dir}\etc\*.*"; DestDir: "{app}\couchdb\etc"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
+; Source: "${geocouch_dir}\ebin\*.*"; DestDir: "{app}\couchdb\lib\geocouch\ebin"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
+; Source: "${geocouch_dir}\etc\*.*"; DestDir: "{app}\couchdb\etc"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 
 Source: "${mapproxy_templates_dir}\*.*"; DestDir: "{app}\geobox\mapproxy_templates"; Flags: ignoreversion uninsrestartdelete restartreplace recursesubdirs
 
