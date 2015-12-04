@@ -202,7 +202,7 @@ def add_server():
         return redirect(request.referrer)
     return render_template('admin/add_server.html', form=form,
                            add_server_form=add_server_form,
-                           auth_server=auth_server)
+                           auth_server=json.dumps(auth_server))
 
 
 @admin_view.route('/admin/set_home_server', methods=['GET'])
