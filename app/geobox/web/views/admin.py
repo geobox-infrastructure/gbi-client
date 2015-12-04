@@ -28,7 +28,6 @@ from requests.exceptions import MissingSchema
 
 from geobox.model.sources import LocalWMTSSource, ExternalWMTSSource
 from geobox.model.server import GBIServer
-from geobox.model.user import User
 
 from geobox.web.utils import request_is_local
 from geobox.web.helper import redirect_back
@@ -36,6 +35,7 @@ from geobox.web.helper import redirect_back
 from geobox.lib import context
 from geobox.lib.fs import open_file_explorer
 from geobox.lib.couchdb import CouchDB, VectorCouchDB
+from geobox.lib.context import ContextError
 from geobox.lib.mapproxy import write_mapproxy_config
 from geobox.web import forms
 
@@ -170,7 +170,7 @@ def add_server():
         auth = False
         try:
             context.test_context_document(form.url.data)
-        except (NotFound, MissingSchema):
+        except (NotFound, MissingSchema, ContextError):
             flash(_('unable to fetch context document'), 'error')
             return redirect(url_for(form.next.data))
         except context.AuthenticationError:

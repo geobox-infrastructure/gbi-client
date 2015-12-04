@@ -211,6 +211,13 @@ def test_context_document(url, user=None, password=None):
     if result.status_code in (401, 403):
         raise AuthenticationError()
 
+    # check if we can load context document
+    try:
+        context_doc = result.json()
+        Context(context_doc)
+    except (ValueError, ContextError):
+        raise ContextError()
+
     return True
 
 
