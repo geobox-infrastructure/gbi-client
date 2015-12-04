@@ -271,8 +271,9 @@ def start_raster_import(id):
         abort(404)
     form = forms.SetGBIServerForm(request.form)
     del form.url
-    gbi_server = proj.import_raster_layers[0].source.gbi_server
-    if gbi_server is None or not gbi_server.auth:
+    source = proj.import_raster_layers[0].source
+    gbi_server = source.gbi_server
+    if source.is_public or gbi_server is None or not gbi_server.auth:
         create_raster_import_task(proj)
         return redirect(url_for('tasks.list'))
 
