@@ -336,6 +336,7 @@ def upload_gml():
 
     form = forms.GMLUploadForm()
     form.srs.choices = list(app_state.config.get('web', 'available_srs'))
+    form.srs.choices.insert(0, ('', _('-- select srs --'), ''))
 
     if form.validate_on_submit():
         upload_file = request.files['upload_file']
