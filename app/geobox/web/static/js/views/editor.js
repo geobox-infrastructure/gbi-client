@@ -757,7 +757,42 @@ $(document).ready(function() {
 
   // end wfs search
 
-  // parcel search
+  var parcelSearchCoordinate = [];
+
+  var selectParcelSearchCoordinateControl = new gbi.Controls.Measure({
+    measureType: gbi.Controls.Measure.TYPE_POINT,
+    mapSRS: editor.map.olMap.projection.projCode,
+    displaySRS: 'EPSG:4326'
+  }, function(result) {
+    parcelSearchCoordinate = result.measure;
+    var targetElement = $('#parcel-search-coordiante');
+    var decimalPlace = 10000;
+    targetElement.html(
+      Math.round(result.measure[0]*decimalPlace)/decimalPlace + ', ' +
+      Math.round(result.measure[1]*decimalPlace)/decimalPlace
+    );
+    $('#start-parcel-coordinate-search').removeAttr('disabled');
+  });
+  editor.addControl(selectParcelSearchCoordinateControl);
+
+  $('#start-parcel-coordinate-search').click(function() {
+    console.log(parcelSearchCoordinate);
+  });
+
+  var selectParcelSearchFeaturesControl = new gbi.Controls.Select(editor.layerManager.vectorLayers, {
+    multiple: true
+  });
+  editor.addControl(selectParcelSearchFeaturesControl);
+
+  $('#start-parcel-feature-search').click(function() {
+    var searchFeatures = [];
+    $.each(editor.layerManager.vectorLayers, function(id, layer) {
+      searchFeatures = searchFeatures.concat(layer.selectedFeatures());
+    });
+    console.log(searchFeatures);
+  });
+
+  // parcel id search
 
   var validateParcelId = function(parcelId) {
     // TODO validate real parcel id's
@@ -769,7 +804,6 @@ $(document).ready(function() {
 
   var allParcelIdsValid = function() {
     var errors = $('#parcel-search-preperation-table .error');
-    console.log(errors.length);
     if(errors.length === 0) {
       $('#parcel-start-search').removeAttr('disabled');
     } else {
@@ -778,19 +812,32 @@ $(document).ready(function() {
   };
 
   var showParcelSearchContainer = function(id) {
+    console.log('showParcelSearchContainer', id);
     $('.parcel-search-type-container').addClass('hide');
     $('#parcel_single_request, #parcel_multi_request').each(function() {
       $(this).val('');
     });
-    var idSearch = $.inArray(id, ['single', 'multi']) !== -1;
+    var idSearch = $.inArray(id, ['single', 'collection']) !== -1;
     if(idSearch) {
       $('#parcel-id-search').removeClass('hide');
+    }
+    if(id === 'point') {
+      selectParcelSearchCoordinateControl.activate();
+    } else {
+      selectParcelSearchCoordinateControl.deactivate();
+    }
+    if(id === 'collection') {
+      console.log('selectParcelSearchFeaturesControl activate');
+      selectParcelSearchFeaturesControl.activate();
+    } else {
+      selectParcelSearchFeaturesControl.deactivate();
     }
     $('#parcel-' + id + '-search-container').removeClass('hide');
   }
 
   var parcelSearchTypeSelect = $('#parcel-search-type');
   parcelSearchTypeSelect.change(function() {
+    console.log('parcelsearchtype changed');
     showParcelSearchContainer((parcelSearchTypeSelect.val()));
   })
   showParcelSearchContainer((parcelSearchTypeSelect.val()));
@@ -855,7 +902,9 @@ $(document).ready(function() {
       requestIds.push($(this).val());
     });
     console.log(requestIds);
-  })
+  });
+
+  // end parcel id search
 
   $('#disable-overlay').click(function(e) {
     e.preventDefault();

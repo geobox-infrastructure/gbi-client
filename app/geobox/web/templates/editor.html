@@ -255,10 +255,15 @@
                 </table>
                 <button class="btn btn-small hide parcel-search-type-container" id="parcel-start-search" disabled="disabled">{{ _('Start parcel id search') }}</button>
               </div>
-              <div id="parcel-point-search-container" class="hide parcel-search-type-container">Point search</div>
-              <div id="parcel-collection-search-container" class="hide parcel-search-type-container">Collection search</div>
-
-
+              <div id="parcel-point-search-container" class="hide parcel-search-type-container">
+                <p>{{ _('infotext - parcel point search') }}</p>
+                <p id="parcel-search-coordiante"></p>
+                <button class="btn btn-small" id="start-parcel-coordinate-search" disabled="disabled">{{ _('Start parcel coordinate search') }}</button>
+              </div>
+              <div id="parcel-collection-search-container" class="hide parcel-search-type-container">
+                <p>{{ _('infotext - parcel feature search') }}</p>
+                <button class="btn btn-small" id="start-parcel-feature-search">{{ _('Start parcel feature search') }}</button>
+              </div>
             </div>
           {% endif %}
           <div id="local-search-container" class="search-container hide">
