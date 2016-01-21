@@ -22,7 +22,7 @@ from geobox.model import ExternalWMTSSource, ExternalWFSSource, User
 from geobox.lib import offline
 from geobox.lib.couchdb import CouchFileBox, all_layers, replication_status, CouchDBBase, CouchDB
 from geobox.lib.tabular import geojson_to_rows, csv_export, ods_export
-from geobox.web.forms import ExportVectorForm, WFSSearchForm, CreateCouchAppForm
+from geobox.web.forms import ExportVectorForm, WFSSearchForm, CreateCouchAppForm, ParcelSearchForm
 from geobox.web.helper import get_external_couch_url
 from .boxes import get_couch_box_db
 from ..utils import request_is_local
@@ -31,7 +31,7 @@ editor_view = Blueprint('editor_view', __name__)
 
 @editor_view.route('/editor')
 def editor():
-    export_form = ExportVectorForm(request.form)
+    export_form = ExportVectorForm()
     export_form.srs.choices = list(current_app.config.geobox_state.config.get('web', 'available_srs'))
 
     user = current_app.config.geobox_state.user
@@ -61,14 +61,17 @@ def editor():
     if not wfs_search_sources:
         wfs_search_sources = False
     wfs_search_form = WFSSearchForm(request.form)
+    parcel_search_form = ParcelSearchForm(request.form)
 
     return render_template('editor.html',
         base_layers=base_layers,
         export_form=export_form,
         preview_layername=preview_layername,
         preview_features=preview_features,
+        parcel_service=True,
         wfs_search_sources=wfs_search_sources,
         wfs_search_form=wfs_search_form,
+        parcel_search_form=parcel_search_form,
         with_server=True,
         wms_search_url=current_app.config.geobox_state.config.get('web', 'wms_search_url'),
         is_local=request_is_local()

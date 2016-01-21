@@ -206,21 +206,64 @@
          {% if with_server %}
          <div class="tab-pane fade" id="search">
           <h4>{{ _('search') }}</h4>
+          <select id="search-type">
+            {% if wfs_search_sources %}<option value="wfs">{{ _('WFS search') }}</option>{% endif %}
+            {% if parcel_service %}<option value="parcel">{{ _('Parcel search service') }}</option>{% endif %}
+            <option value="local">{{ _('Search in local layer') }}</option>
+          </select>
           {% if wfs_search_sources %}
-            <p>{{ _('infotext - search controls') }}</p>
-            {{ input(wfs_search_form.wfs_layers) }}
-            {{ input(wfs_search_form.search_value) }}
-            <div id="no_features_found" class="alert alert-error" style="display: none">{{ _('No features found') }}</div>
-            <div id="wfsSearchInProgress" class="alert hide">
-              <img src="{{ url_for('static', filename='img/loader.gif')}}">
-              <span>{{_('search request is being processed')}}</span>
+            <div id="wfs-search-container" class="search-container hide">
+              <p>{{ _('infotext - search controls') }}</p>
+              {{ input(wfs_search_form.wfs_layers) }}
+              {{ input(wfs_search_form.search_value) }}
+              <div id="no_features_found" class="alert alert-error" style="display: none">{{ _('No features found') }}</div>
+              <div id="wfsSearchInProgress" class="alert hide">
+                <img src="{{ url_for('static', filename='img/loader.gif')}}">
+                <span>{{_('search request is being processed')}}</span>
+              </div>
+              <button class="btn btn-small" id="start_search">{{_('search')}}</button>
+              <button class="btn btn-small" id="remove_search" disabled=disabled>{{_('remove search')}}</button>
+              <button class="btn btn-small" id="hide_searchlayer" disabled=disabled>{{_('hide searchlayer')}}</button>
             </div>
-            <button class="btn btn-small" id="start_search">{{_('search')}}</button>
-            <button class="btn btn-small" id="remove_search" disabled=disabled>{{_('remove search')}}</button>
-            <button class="btn btn-small" id="hide_searchlayer" disabled=disabled>{{_('hide searchlayer')}}</button>
-          {% else %}
-            <p>{{ _('infotext - no wfs search') }}</p>
           {% endif %}
+          {% if parcel_service %}
+            <div id="parcel-search-container" class="search-container hide">
+              <p>{{ _('infotext - parcel search') }}</p>
+              <select id="parcel-search-type">
+                <option value="single">{{ _('Single id') }}</option>
+                <option value="multi">{{ _('Multiple ids') }}</option>
+                <option value="point">{{ _('Map location') }}</option>
+                <option value="collection">{{ _('Select geometries in map') }}</option>
+              </select>
+              <div id="parcel-id-search" class="parcel-search-type-container hide">
+                <div id="parcel-single-search-container" class="parcel-search-type-container hide">
+                  {{ input(parcel_search_form.parcel_single_request) }}
+                </div>
+                <div id="parcel-multi-search-container" class="parcel-search-type-container hide">
+                  {{ input(parcel_search_form.parcel_multi_request) }}
+                </div>
+                <button class="btn btn-small" id="prepare-parcel-id-search">{{ _('Prepare parcel id search') }}</button>
+                <table class="table hide  parcel-search-type-container" id="parcel-search-preperation-table">
+                  <thead>
+                    <tr>
+                      <th>{{ _('parcel id') }}</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+                <button class="btn btn-small hide parcel-search-type-container" id="parcel-start-search" disabled="disabled">{{ _('Start parcel id search') }}</button>
+              </div>
+              <div id="parcel-point-search-container" class="hide parcel-search-type-container">Point search</div>
+              <div id="parcel-collection-search-container" class="hide parcel-search-type-container">Collection search</div>
+
+
+            </div>
+          {% endif %}
+          <div id="local-search-container" class="search-container hide">
+            Local Search
+          </div>
         </div>
         {% endif %}
 

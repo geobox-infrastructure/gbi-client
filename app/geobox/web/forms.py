@@ -330,6 +330,10 @@ class WFSSearchForm(Form):
         get_label=lambda a: ('%s (%s)' % (a.name, a.search_property)), get_pk=lambda a: a.name)
     search_value = TextAreaField(lazy_gettext('search_string'))
 
+class ParcelSearchForm(Form):
+    parcel_single_request = TextField(lazy_gettext('parcel_id'))
+    parcel_multi_request = TextAreaField(lazy_gettext('multiple_parcel_ids'))
+
 class CreateCouchAppForm(Form):
     couch_url = TextField(lazy_gettext('couchapp_couch_url'), validators=[Required()])
 

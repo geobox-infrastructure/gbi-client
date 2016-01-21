@@ -695,6 +695,20 @@ $(document).ready(function() {
     return false;
   });
 
+  var showSearchContainer = function(id) {
+    $('.search-container').addClass('hide');
+    $('#' + id + '-search-container').removeClass('hide');
+  }
+
+  var searchTypeSelect = $('#search-type');
+  showSearchContainer((searchTypeSelect.val()));
+
+  searchTypeSelect.change(function() {
+    showSearchContainer((searchTypeSelect.val()));
+  });
+
+  // wfs search
+
   var activeSearchLayer;
   $('#start_search').click(function() {
     if (activeSearchLayer) {
@@ -740,6 +754,108 @@ $(document).ready(function() {
     $(this).prop('disabled', 'disabled');
     return false;
   });
+
+  // end wfs search
+
+  // parcel search
+
+  var validateParcelId = function(parcelId) {
+    // TODO validate real parcel id's
+    if(parcelId === 'foo') {
+      return true;
+    }
+    return false;
+  };
+
+  var allParcelIdsValid = function() {
+    var errors = $('#parcel-search-preperation-table .error');
+    console.log(errors.length);
+    if(errors.length === 0) {
+      $('#parcel-start-search').removeAttr('disabled');
+    } else {
+      $('#parcel-start-search').attr('disabled', 'disabled');
+    }
+  };
+
+  var showParcelSearchContainer = function(id) {
+    $('.parcel-search-type-container').addClass('hide');
+    $('#parcel_single_request, #parcel_multi_request').each(function() {
+      $(this).val('');
+    });
+    var idSearch = $.inArray(id, ['single', 'multi']) !== -1;
+    if(idSearch) {
+      $('#parcel-id-search').removeClass('hide');
+    }
+    $('#parcel-' + id + '-search-container').removeClass('hide');
+  }
+
+  var parcelSearchTypeSelect = $('#parcel-search-type');
+  parcelSearchTypeSelect.change(function() {
+    showParcelSearchContainer((parcelSearchTypeSelect.val()));
+  })
+  showParcelSearchContainer((parcelSearchTypeSelect.val()));
+
+  var createPreparationTable = function(searchValues) {
+    var preperationTableBody = $('#parcel-search-preperation-table tbody');
+    preperationTableBody.empty();
+    $.each(searchValues, function(id, value) {
+      var row = $('<tr></tr>');
+      var idCol = $('<td></td>');
+      var valid = validateParcelId(value);
+      var inputContainer = $('<div class="control-group"></div>');
+      inputContainer.addClass(valid ? 'success' : 'error');
+      var idInput = $('<input class="validated-parcel-id" value="' + value + '" />');
+      var cT;
+      idInput.keyup(function() {
+        clearTimeout(cT);
+        inputContainer.removeClass('success').removeClass('error');
+        cT = setTimeout(function() {
+          var newValid = validateParcelId(idInput.val());
+          inputContainer.addClass(newValid ? 'success' : 'error');
+          allParcelIdsValid();
+        }, 250);
+      });
+      inputContainer.append(idInput);
+      idCol.append(inputContainer);
+      var actionCol = $('<td></td>');
+      var removeButton = $('<button class="btn btn-small btn-danger"><i class="icon-remove"></i></button>')
+      removeButton.click(function() {
+        searchValues.splice(searchValues.indexOf(value), 1);
+        createPreparationTable(searchValues);
+      })
+      actionCol.append(removeButton);
+      row.append(idCol).append(actionCol);
+      preperationTableBody.append(row);
+    });
+    allParcelIdsValid();
+  };
+
+  $('#prepare-parcel-id-search').click(function() {
+    var singleSearchValue = $('#parcel_single_request').val();
+    var multiSearchValue = $('#parcel_multi_request').val();
+    var searchValues = [];
+    if(multiSearchValue.length > 0) {
+      searchValues = multiSearchValue.split(',');
+    } else if(singleSearchValue.length > 0) {
+      searchValues.push(singleSearchValue);
+    } else {
+      return;
+    }
+
+    $('#parcel-search-preperation-table').removeClass('hide');
+
+    createPreparationTable(searchValues);
+
+    $('#parcel-start-search').removeClass('hide');
+  });
+
+  $('#parcel-start-search').click(function() {
+    var requestIds = [];
+    var parcelIds = $('.validated-parcel-id').each(function() {
+      requestIds.push($(this).val());
+    });
+    console.log(requestIds);
+  })
 
   $('#disable-overlay').click(function(e) {
     e.preventDefault();
