@@ -708,7 +708,8 @@ $(document).ready(function() {
   });
 
   /* start search */
-  var activeSearchLayer;
+  var activeWFSSearchLayer;
+  var parcelSearchResultLayer;
   var parcelSearchCoordinate = [];
 
   var parcelSearchCoordinateControl = new gbi.Controls.Measure({
@@ -789,33 +790,33 @@ $(document).ready(function() {
 
   /* wfs search ui */
   $('#server-search #wfs-search-start').click(function() {
-    if (activeSearchLayer) {
-      activeSearchLayer.olLayer.filter = null
-      activeSearchLayer.olLayer.removeAllFeatures();
+    if (activeWFSSearchLayer) {
+      activeWFSSearchLayer.olLayer.filter = null
+      activeWFSSearchLayer.olLayer.removeAllFeatures();
     }
 
     var value = $('#server-search #wfs-search-value').val();
 
     var layername = $("#search_source").val().split('_').slice(1).join('_');
-    activeSearchLayer = editor.layerManager.layerByName(layername);
+    activeWFSSearchLayer = editor.layerManager.layerByName(layername);
 
     if (value) {
       value = value.split("\n")
-      $(activeSearchLayer).one('gbi.layer.WFS.filter_applied', function(event) {
+      $(activeWFSSearchLayer).one('gbi.layer.WFS.filter_applied', function(event) {
         $('#wfs-search-in-progress').addClass('hide');
-        var foundFeaturesCount = activeSearchLayer.features.length;
+        var foundFeaturesCount = activeWFSSearchLayer.features.length;
         if(!foundFeaturesCount) {
           $('#wfs-no-features-found').show().fadeOut(3000);
         }
       });
       $('#wfs-search-in-progress').removeClass('hide');
-      activeSearchLayer.filter(
-        activeSearchLayer.olLayer.searchProperty, value, 'like', true
+      activeWFSSearchLayer.filter(
+        activeWFSSearchLayer.olLayer.searchProperty, value, 'like', true
       );
       $('#wfs-search-remove').removeAttr('disabled');
     } else {
-      activeSearchLayer.olLayer.removeAllFeatures();
-      activeSearchLayer.removeFilter();
+      activeWFSSearchLayer.olLayer.removeAllFeatures();
+      activeWFSSearchLayer.removeFilter();
     }
     $('#wfs-hide-search-layer').removeAttr('disabled');
     return false;
@@ -828,7 +829,7 @@ $(document).ready(function() {
   });
 
   $('#wfs-hide-search-layer').click(function() {
-    activeSearchLayer.visible(false)
+    activeWFSSearchLayer.visible(false)
     $(this).prop('disabled', 'disabled');
     return false;
   });
@@ -837,6 +838,9 @@ $(document).ready(function() {
 
   var validateParcelId = function(parcelId) {
     // TODO validate real parcel id's
+    // "072500-010-00023/000" => "07250001000023000"
+    // check if all digits after cleanup
+    // length must be 17
     if(parcelId === 'foo') {
       return true;
     }
@@ -887,6 +891,50 @@ $(document).ready(function() {
     allParcelIdsValid();
   };
 
+  var createParcelSearchResultTable = function(features, requestedIds) {
+    requestedIds = requestedIds || [];
+    var resultTableBody = $('#parcel-search-result-table tbody');
+    resultTableBody.empty();
+    $.each(features, function(idx, feature) {
+      var row = $('<tr></tr>');
+      var idCol = $('<td>' + feature.properties.id + '</td>');
+      var requestedIdIdx = requestedIds.indexOf(feature.properties.id);
+      if(requestedIdIdx !== -1) {
+        requestedIds.splice(requestedIdIdx, 1);
+      }
+      row.append(idCol);
+      var actionCol = $('<td></td>');
+      row.append(actionCol);
+      resultTableBody.append(row);
+    });
+    $.each(requestedIds, function(idx, id) {
+      var row = $('<tr class="error"><td>' + id + '</td><td></td>');
+      resultTableBody.append(row);
+    });
+    $('#parcel-search-result').removeClass('hide');
+  };
+
+  var handleParcelSearchResponse = function(featureCollection, requestedIds) {
+    createParcelSearchResultTable(featureCollection.features, requestedIds);
+    if(featureCollection.features.length === 0) {
+      return;
+    }
+    if(parcelSearchResultLayer === undefined) {
+      parcelSearchResultLayer = new gbi.Layers.GeoJSON({
+        featureCollection: featureCollection,
+        displayInLayerSwitcher: false,
+        visibility: true
+      });
+
+      editor.addLayer(parcelSearchResultLayer);
+
+      var extent = parcelSearchResultLayer.olLayer.getDataExtent();
+      if (extent) {
+        editor.map.olMap.zoomToExtent(extent);
+      }
+    }
+  };
+
   $('#server-search #search_source').change(function() {
     showSearchTypeContainer($(this).val().split('_')[0]);
   });
@@ -919,7 +967,7 @@ $(document).ready(function() {
     });
     $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {'ids': requestIds.join(',')})
       .done(function(response) {
-        console.log(response);
+        handleParcelSearchResponse(response, requestIds);
       });
   });
 
@@ -929,7 +977,7 @@ $(document).ready(function() {
       'lon': parcelSearchCoordinate[1]
     })
       .done(function(response) {
-        console.log(response);
+        handleParcelSearchResponse(response);
       });
   });
 
@@ -944,7 +992,9 @@ $(document).ready(function() {
       url: 'http://localhost:8888/proxy/http://localhost:5000/search/12345/query',
       data: writer.write(searchFeatures),
       contentType: 'application/json'
-    }).done(function(response) { console.log(response); });
+    }).done(function(response) {
+      handleParcelSearchResponse(response);
+    });
   });
 
   var initSearchTab = function() {
