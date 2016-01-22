@@ -28,8 +28,10 @@ from wtforms.ext.csrf.session import SessionSecureForm
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 from flaskext.babel import lazy_gettext, gettext, ngettext
+
+from sqlalchemy.sql import functions
 from geobox.model import (
-    LocalWMTSSource, ExternalWMTSSource, ExternalWFSSource, Project, GBIServer
+    LocalWMTSSource, ExternalWMTSSource, ExternalWFSSource, Project, GBIServer, ParcelSearchSource
 )
 
 
@@ -219,6 +221,22 @@ def get_all_projects_withs_coverages():
 def get_wfs_source():
     return g.db.query(ExternalWFSSource).filter_by(active=True).all()
 
+
+from sqlalchemy.sql import literal_column
+
+
+def get_server_search_sources():
+    return g.db.query(
+        ExternalWFSSource.name.op('||')(literal_column("' ('")).op('||')(ExternalWFSSource.search_property).op('||')(literal_column("')'")).label('label'),
+        literal_column("'wfs_'").op('||')
+        (ExternalWFSSource.name).label('value')
+    ).filter_by(active=True).union_all(g.db.query(
+        GBIServer.title.label('label'),
+        literal_column("'parcel_'").op('||')
+        (ParcelSearchSource.id).label('value')
+    ).filter(ParcelSearchSource.active==True).join(ParcelSearchSource.gbi_server)).all()
+
+
 def get_gbi_servers():
     return g.db.query(GBIServer).all()
 
@@ -325,14 +343,17 @@ class WMSForm(RasterSourceForm):
     version = SelectField(lazy_gettext('wms_version'), choices=[('1.1.1', '1.1.1'), ('1.3.0', '1.3.0')],
         validators=[Required()])
 
-class WFSSearchForm(Form):
-    wfs_layers = QuerySelectField(lazy_gettext('layers'), query_factory=get_wfs_source,
-        get_label=lambda a: ('%s (%s)' % (a.name, a.search_property)), get_pk=lambda a: a.name)
-    search_value = TextAreaField(lazy_gettext('search_string'))
 
-class ParcelSearchForm(Form):
-    parcel_single_request = TextField(lazy_gettext('parcel_id'))
-    parcel_multi_request = TextAreaField(lazy_gettext('multiple_parcel_ids'))
+
+class ServerSearchForm(Form):
+    search_source=QuerySelectField(lazy_gettext('source'),
+                                   query_factory=get_server_search_sources,
+                                   get_label=lambda a: a.label,
+                                   get_pk=lambda a: a.value)
+
+
+class ServerSeachForm(Form):
+    target = QuerySelectField(lazy_gettext('Search in'), query_factory=get_server_search_sources)
 
 class CreateCouchAppForm(Form):
     couch_url = TextField(lazy_gettext('couchapp_couch_url'), validators=[Required()])

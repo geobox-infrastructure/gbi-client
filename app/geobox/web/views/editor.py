@@ -22,7 +22,7 @@ from geobox.model import ExternalWMTSSource, ExternalWFSSource, User
 from geobox.lib import offline
 from geobox.lib.couchdb import CouchFileBox, all_layers, replication_status, CouchDBBase, CouchDB
 from geobox.lib.tabular import geojson_to_rows, csv_export, ods_export
-from geobox.web.forms import ExportVectorForm, WFSSearchForm, CreateCouchAppForm, ParcelSearchForm
+from geobox.web.forms import ExportVectorForm, CreateCouchAppForm, ServerSearchForm
 from geobox.web.helper import get_external_couch_url
 from .boxes import get_couch_box_db
 from ..utils import request_is_local
@@ -60,8 +60,7 @@ def editor():
     wfs_search_sources = g.db.query(ExternalWFSSource).filter_by(active=True).all()
     if not wfs_search_sources:
         wfs_search_sources = False
-    wfs_search_form = WFSSearchForm(request.form)
-    parcel_search_form = ParcelSearchForm(request.form)
+    server_search_form = ServerSearchForm()
 
     return render_template('editor.html',
         base_layers=base_layers,
@@ -70,8 +69,8 @@ def editor():
         preview_features=preview_features,
         parcel_service=True,
         wfs_search_sources=wfs_search_sources,
-        wfs_search_form=wfs_search_form,
-        parcel_search_form=parcel_search_form,
+        parcel_search_sources=[('TestPacelSearch', 'http://localhost:8888/proxy/http://localhost:5000/search/12345/query')],
+        server_search_form=server_search_form,
         with_server=True,
         wms_search_url=current_app.config.geobox_state.config.get('web', 'wms_search_url'),
         is_local=request_is_local()

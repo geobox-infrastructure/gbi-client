@@ -127,6 +127,8 @@ $(document).ready(function() {
     $('#odata_url').val(activeLayer.odataUrl);
   }
 
+  var serverSearchActive = false;
+
   $('#tabs > li > a').click(function (e) {
     e.preventDefault();
     if($(this).parent().hasClass('active')) {
@@ -166,6 +168,16 @@ $(document).ready(function() {
           orderToolbar();
         }
       });
+
+      if(tab == '#search') {
+        initSearchTab();
+        serverSearchActive = true;
+      } else {
+        if(serverSearchActive) {
+          leaveSearchTab();
+          serverSearchActive = false;
+        }
+      }
     }
     // sedding widgets changes active layer to its draw layer when activate
     if(offline && tab == '#seeding') {
@@ -695,104 +707,133 @@ $(document).ready(function() {
     return false;
   });
 
-  var showSearchContainer = function(id) {
-    $('.search-container').addClass('hide');
-    $('#' + id + '-search-container').removeClass('hide');
-  }
-
-  var searchTypeSelect = $('#search-type');
-  showSearchContainer((searchTypeSelect.val()));
-
-  searchTypeSelect.change(function() {
-    showSearchContainer((searchTypeSelect.val()));
-  });
-
-  // wfs search
-
+  /* start search */
   var activeSearchLayer;
-  $('#start_search').click(function() {
-    if (activeSearchLayer) {
-      activeSearchLayer.olLayer.filter = null
-      activeSearchLayer.olLayer.removeAllFeatures();
-    }
-
-    var value = $('#search_value').val();
-
-    var layername = $("#wfs_layers").val()
-    activeSearchLayer = editor.layerManager.layerByName(layername);
-
-    if (value) {
-      value = value.split("\n")
-      $(activeSearchLayer).one('gbi.layer.WFS.filter_applied', function(event) {
-        $('#wfsSearchInProgress').hide()
-        var foundFeaturesCount = activeSearchLayer.features.length;
-        if(!foundFeaturesCount) {
-          $('#no_features_found').show().fadeOut(3000);
-        }
-      });
-      $('#wfsSearchInProgress').show()
-      activeSearchLayer.filter(
-        activeSearchLayer.olLayer.searchProperty, value, 'like', true
-      );
-      $('#remove_search').removeAttr('disabled');
-    } else {
-      activeSearchLayer.olLayer.removeAllFeatures();
-      activeSearchLayer.removeFilter();
-    }
-    $('#hide_searchlayer').removeAttr('disabled');
-    return false;
-  });
-
-  $('#remove_search').click(function() {
-    $("#search_value").val('');
-    $(this).prop('disabled', 'disabled');
-    return false;
-  });
-
-  $('#hide_searchlayer').click(function() {
-    activeSearchLayer.visible(false)
-    $(this).prop('disabled', 'disabled');
-    return false;
-  });
-
-  // end wfs search
-
   var parcelSearchCoordinate = [];
 
-  var selectParcelSearchCoordinateControl = new gbi.Controls.Measure({
+  var parcelSearchCoordinateControl = new gbi.Controls.Measure({
     measureType: gbi.Controls.Measure.TYPE_POINT,
     mapSRS: editor.map.olMap.projection.projCode,
     displaySRS: 'EPSG:4326'
   }, function(result) {
     parcelSearchCoordinate = result.measure;
-    var targetElement = $('#parcel-search-coordiante');
+    var targetElement = $('#parcel-search-coordinate-coordinate');
     var decimalPlace = 10000;
     targetElement.html(
       Math.round(result.measure[0]*decimalPlace)/decimalPlace + ', ' +
       Math.round(result.measure[1]*decimalPlace)/decimalPlace
     );
-    $('#start-parcel-coordinate-search').removeAttr('disabled');
+    $('#parcel-search-coordinate-start').removeAttr('disabled');
   });
-  editor.addControl(selectParcelSearchCoordinateControl);
-
-  $('#start-parcel-coordinate-search').click(function() {
-    console.log(parcelSearchCoordinate);
-  });
-
-  var selectParcelSearchFeaturesControl = new gbi.Controls.Select(editor.layerManager.vectorLayers, {
+  editor.addControl(parcelSearchCoordinateControl);
+  var parcelSearchFeatureControl = new gbi.Controls.Select(editor.layerManager.vectorLayers, {
     multiple: true
   });
-  editor.addControl(selectParcelSearchFeaturesControl);
+  editor.addControl(parcelSearchFeatureControl);
 
-  $('#start-parcel-feature-search').click(function() {
-    var searchFeatures = [];
-    $.each(editor.layerManager.vectorLayers, function(id, layer) {
-      searchFeatures = searchFeatures.concat(layer.selectedFeatures());
+  /* general search ui */
+    var leaveCoordinateSearch = function() {
+    parcelSearchCoordinateControl.deactivate();
+  };
+
+  var leaveFeatureSearch = function() {
+    parcelSearchFeatureControl.deactivate();
+
+    $.each(editor.layerManager.vectorLayers, function(idx, layer) {
+      if(layer.hasSelectedFeatures()) {
+        layer.unSelectAllFeatures();
+      }
     });
-    console.log(searchFeatures);
+  };
+
+  var showParcelSearchType = function(searchType) {
+    $('#parcel-search-container .initial-hidden').addClass('hide');
+    $('#parcel-search-container .initial-disabled').attr('disabled', 'disabled');
+    parcelSearchCoordinateControl.deactivate();
+    parcelSearchFeatureControl.deactivate();
+
+    $('#parcel-search-container #parcel-search-' + searchType).removeClass('hide');
+    switch(searchType) {
+      case 'coordinate':
+        leaveFeatureSearch();
+        parcelSearchCoordinateControl.activate();
+      break;
+      case 'feature':
+        leaveCoordinateSearch();
+        parcelSearchFeatureControl.activate();
+      break;
+      default:
+        leaveCoordinateSearch();
+        leaveFeatureSearch;
+      break;
+    };
+  };
+
+  var showSearchTypeContainer = function(searchType) {
+    $('#server-search .initial-hidden').addClass('hide');
+    $('#server-search .initial-disabled').attr('disabled', 'disabled');
+    switch(searchType) {
+      case 'wfs':
+        $('#server-search #wfs-search-container').removeClass('hide');
+      break;
+      case 'parcel':
+        $('#server-search #parcel-search-container .select-parcel-search-group button').removeClass('active');
+        var firstButtonId = $('#server-search #parcel-search-container .select-parcel-search-group button:first').addClass('active').attr('id');
+        var firstButtonId = firstButtonId.split('-');
+        showParcelSearchType(firstButtonId[firstButtonId.length - 1]);
+
+        $('#server-search #parcel-search-container').removeClass('hide');
+      break;
+    };
+  };
+
+  /* wfs search ui */
+  $('#server-search #wfs-search-start').click(function() {
+    if (activeSearchLayer) {
+      activeSearchLayer.olLayer.filter = null
+      activeSearchLayer.olLayer.removeAllFeatures();
+    }
+
+    var value = $('#server-search #wfs-search-value').val();
+
+    var layername = $("#search_source").val().split('_').slice(1).join('_');
+    activeSearchLayer = editor.layerManager.layerByName(layername);
+
+    if (value) {
+      value = value.split("\n")
+      $(activeSearchLayer).one('gbi.layer.WFS.filter_applied', function(event) {
+        $('#wfs-search-in-progress').addClass('hide');
+        var foundFeaturesCount = activeSearchLayer.features.length;
+        if(!foundFeaturesCount) {
+          $('#wfs-no-features-found').show().fadeOut(3000);
+        }
+      });
+      $('#wfs-search-in-progress').removeClass('hide');
+      activeSearchLayer.filter(
+        activeSearchLayer.olLayer.searchProperty, value, 'like', true
+      );
+      $('#wfs-search-remove').removeAttr('disabled');
+    } else {
+      activeSearchLayer.olLayer.removeAllFeatures();
+      activeSearchLayer.removeFilter();
+    }
+    $('#wfs-hide-search-layer').removeAttr('disabled');
+    return false;
   });
 
-  // parcel id search
+  $('#wfs-search-remove').click(function() {
+    $("#server-search #wfs-search-value").val('');
+    $(this).prop('disabled', 'disabled');
+    return false;
+  });
+
+  $('#wfs-hide-search-layer').click(function() {
+    activeSearchLayer.visible(false)
+    $(this).prop('disabled', 'disabled');
+    return false;
+  });
+
+  /* parcel search ui */
 
   var validateParcelId = function(parcelId) {
     // TODO validate real parcel id's
@@ -803,47 +844,16 @@ $(document).ready(function() {
   };
 
   var allParcelIdsValid = function() {
-    var errors = $('#parcel-search-preperation-table .error');
+    var errors = $('#parcel-search-id-preperation-table .error');
     if(errors.length === 0) {
-      $('#parcel-start-search').removeAttr('disabled');
+      $('#parcel-search-id-start').removeAttr('disabled');
     } else {
-      $('#parcel-start-search').attr('disabled', 'disabled');
+      $('#parcel-search-id-start').attr('disabled', 'disabled');
     }
   };
 
-  var showParcelSearchContainer = function(id) {
-    console.log('showParcelSearchContainer', id);
-    $('.parcel-search-type-container').addClass('hide');
-    $('#parcel_single_request, #parcel_multi_request').each(function() {
-      $(this).val('');
-    });
-    var idSearch = $.inArray(id, ['single', 'collection']) !== -1;
-    if(idSearch) {
-      $('#parcel-id-search').removeClass('hide');
-    }
-    if(id === 'point') {
-      selectParcelSearchCoordinateControl.activate();
-    } else {
-      selectParcelSearchCoordinateControl.deactivate();
-    }
-    if(id === 'collection') {
-      console.log('selectParcelSearchFeaturesControl activate');
-      selectParcelSearchFeaturesControl.activate();
-    } else {
-      selectParcelSearchFeaturesControl.deactivate();
-    }
-    $('#parcel-' + id + '-search-container').removeClass('hide');
-  }
-
-  var parcelSearchTypeSelect = $('#parcel-search-type');
-  parcelSearchTypeSelect.change(function() {
-    console.log('parcelsearchtype changed');
-    showParcelSearchContainer((parcelSearchTypeSelect.val()));
-  })
-  showParcelSearchContainer((parcelSearchTypeSelect.val()));
-
   var createPreparationTable = function(searchValues) {
-    var preperationTableBody = $('#parcel-search-preperation-table tbody');
+    var preperationTableBody = $('#parcel-search-id-preperation-table tbody');
     preperationTableBody.empty();
     $.each(searchValues, function(id, value) {
       var row = $('<tr></tr>');
@@ -877,34 +887,93 @@ $(document).ready(function() {
     allParcelIdsValid();
   };
 
-  $('#prepare-parcel-id-search').click(function() {
-    var singleSearchValue = $('#parcel_single_request').val();
-    var multiSearchValue = $('#parcel_multi_request').val();
-    var searchValues = [];
-    if(multiSearchValue.length > 0) {
-      searchValues = multiSearchValue.split(',');
-    } else if(singleSearchValue.length > 0) {
-      searchValues.push(singleSearchValue);
-    } else {
+  $('#server-search #search_source').change(function() {
+    showSearchTypeContainer($(this).val().split('_')[0]);
+  });
+
+  $('#server-search #parcel-search-container .select-parcel-search-group button').click(function() {
+    $('#server-search #parcel-search-container .select-parcel-search-group button').removeClass('active');
+    $(this).addClass('active');
+    var buttonId = $(this).attr('id');
+    buttonId = buttonId.split('-');
+    showParcelSearchType(buttonId[buttonId.length - 1]);
+  });
+
+  $('#server-search #parcel-search-id-prepare').click(function() {
+    var searchValues = $('#server-search #parcel-search-id-input').val().split(',');
+    if(searchValues.length === 0) {
       return;
     }
 
-    $('#parcel-search-preperation-table').removeClass('hide');
+    $('#server-search  #parcel-search-id-preperation-table').removeClass('hide');
 
     createPreparationTable(searchValues);
 
-    $('#parcel-start-search').removeClass('hide');
+    $('#parcel-search-id-start').removeClass('hide');
   });
 
-  $('#parcel-start-search').click(function() {
+  $('#server-search #parcel-search-id-start').click(function() {
     var requestIds = [];
     var parcelIds = $('.validated-parcel-id').each(function() {
       requestIds.push($(this).val());
     });
-    console.log(requestIds);
+    $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {'ids': requestIds.join(',')})
+      .done(function(response) {
+        console.log(response);
+      });
   });
 
-  // end parcel id search
+  $('#server-search #parcel-search-coordinate-start').click(function() {
+    $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {
+      'lat': parcelSearchCoordinate[0],
+      'lon': parcelSearchCoordinate[1]
+    })
+      .done(function(response) {
+        console.log(response);
+      });
+  });
+
+  $('#server-search #parcel-search-feature-start').click(function() {
+    var searchFeatures = [];
+    $.each(editor.layerManager.vectorLayers, function(id, layer) {
+      searchFeatures = searchFeatures.concat(layer.selectedFeatures());
+    });
+    var writer = new OpenLayers.Format.GeoJSON();
+    $.ajax({
+      type: 'post',
+      url: 'http://localhost:8888/proxy/http://localhost:5000/search/12345/query',
+      data: writer.write(searchFeatures),
+      contentType: 'application/json'
+    }).done(function(response) { console.log(response); });
+  });
+
+  var initSearchTab = function() {
+    $('#search-tabs .initial-hidden').addClass('hide');
+    $('#search-tabs .initial-disabled').attr('disabled', 'disabled');
+    $('.search-nav-tabs li').removeClass('active');
+    $('.search-nav-tabs li:first').addClass('active');
+    $('#search-tabs .tab-pane').removeClass('in').removeClass('active');
+    var firstTab = $('#search-tabs .tab-pane:first').addClass('in').addClass('active').attr('id');
+
+    $.each(editor.layerManager.vectorLayers, function(idx, layer) {
+      if(layer.hasSelectedFeatures()) {
+        layer.unSelectAllFeatures();
+      }
+    });
+
+    if(firstTab !== 'server-search') {
+      return;
+    }
+    $('#server-search #parcel-coordinate-search-coordinate').html('');
+    var searchType = $('#server-search #search_source').val().split('_')[0];
+    showSearchTypeContainer(searchType);
+  };
+
+  var leaveSearchTab = function() {
+    leaveCoordinateSearch();
+    leaveFeatureSearch();
+  };
+  /* end search */
 
   $('#disable-overlay').click(function(e) {
     e.preventDefault();

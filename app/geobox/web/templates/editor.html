@@ -203,74 +203,87 @@
           <div id="measure-output"></div>
         </div>
 
-         {% if with_server %}
-         <div class="tab-pane fade" id="search">
+        <!-- start search -->
+
+        {% if with_server %}
+        <div class="tab-pane fade" id="search">
           <h4>{{ _('search') }}</h4>
-          <select id="search-type">
-            {% if wfs_search_sources %}<option value="wfs">{{ _('WFS search') }}</option>{% endif %}
-            {% if parcel_service %}<option value="parcel">{{ _('Parcel search service') }}</option>{% endif %}
-            <option value="local">{{ _('Search in local layer') }}</option>
-          </select>
-          {% if wfs_search_sources %}
-            <div id="wfs-search-container" class="search-container hide">
+          <ul id="tabs" class="nav nav-tabs search-nav-tabs">
+            {% if wfs_search_sources or parcel_search_sources %}
+            <li class="active">
+              <a href="#server-search" data-toggle="tab">{{ _('server search') }}</a>
+            </li>
+            {% endif %}
+            <li {% if not (wfs_search_sources or parcel_search_sources) %}class="active"{% endif %}>
+              <a href="#local-search" data-toggle="tab">{{ _('local search') }}</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="search-tabs">
+            {% if wfs_search_sources or parcel_search_sources %}
+            <div class="tab-pane fade in" id="server-search">
               <p>{{ _('infotext - search controls') }}</p>
-              {{ input(wfs_search_form.wfs_layers) }}
-              {{ input(wfs_search_form.search_value) }}
-              <div id="no_features_found" class="alert alert-error" style="display: none">{{ _('No features found') }}</div>
-              <div id="wfsSearchInProgress" class="alert hide">
-                <img src="{{ url_for('static', filename='img/loader.gif')}}">
-                <span>{{_('search request is being processed')}}</span>
-              </div>
-              <button class="btn btn-small" id="start_search">{{_('search')}}</button>
-              <button class="btn btn-small" id="remove_search" disabled=disabled>{{_('remove search')}}</button>
-              <button class="btn btn-small" id="hide_searchlayer" disabled=disabled>{{_('hide searchlayer')}}</button>
-            </div>
-          {% endif %}
-          {% if parcel_service %}
-            <div id="parcel-search-container" class="search-container hide">
-              <p>{{ _('infotext - parcel search') }}</p>
-              <select id="parcel-search-type">
-                <option value="single">{{ _('Single id') }}</option>
-                <option value="multi">{{ _('Multiple ids') }}</option>
-                <option value="point">{{ _('Map location') }}</option>
-                <option value="collection">{{ _('Select geometries in map') }}</option>
-              </select>
-              <div id="parcel-id-search" class="parcel-search-type-container hide">
-                <div id="parcel-single-search-container" class="parcel-search-type-container hide">
-                  {{ input(parcel_search_form.parcel_single_request) }}
+              {{ input(server_search_form.search_source) }}
+              <div id="wfs-search-container" class="hide initial-hidden search-container">
+                <textarea id="wfs-search-value"></textarea>
+                <div id="wfs-no-features-found" class="alert alert-error hide initial-hidden">{{ _('No features found') }}</div>
+                <div id="wfs-search-in-progress" class="alert hide initial-hidden">
+                  <img src="{{ url_for('static', filename='img/loader.gif')}}">
+                  <span>{{_('search request is being processed')}}</span>
                 </div>
-                <div id="parcel-multi-search-container" class="parcel-search-type-container hide">
-                  {{ input(parcel_search_form.parcel_multi_request) }}
+                <button class="btn btn-small" id="wfs-search-start">{{_('search')}}</button>
+                <button class="btn btn-small initial-disabled" id="wfs-search-remove" disabled="disabled">{{_('remove search')}}</button>
+                <button class="btn btn-small initial-disabled" id="wfs-hide-search-layer" disabled="disabled">{{_('hide searchlayer')}}</button>
+              </div>
+              <div id="parcel-search-container" class="hide initial-hidden search-container">
+                <div class="btn-toolbar">
+                  <div class="btn-group select-parcel-search-group">
+                    <button class="btn btn-small active" id="select-parcel-search-id">{{ _('Parcel id search') }}</button>
+                    <button class="btn btn-small" id="select-parcel-search-coordinate">{{ _('Parcel coordinate search') }}</button>
+                    <button class="btn btn-small" id="select-parcel-search-feature">{{ _('Parcel feature search') }}</button>
+                  </div>
                 </div>
-                <button class="btn btn-small" id="prepare-parcel-id-search">{{ _('Prepare parcel id search') }}</button>
-                <table class="table hide  parcel-search-type-container" id="parcel-search-preperation-table">
-                  <thead>
-                    <tr>
-                      <th>{{ _('parcel id') }}</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-                <button class="btn btn-small hide parcel-search-type-container" id="parcel-start-search" disabled="disabled">{{ _('Start parcel id search') }}</button>
-              </div>
-              <div id="parcel-point-search-container" class="hide parcel-search-type-container">
-                <p>{{ _('infotext - parcel point search') }}</p>
-                <p id="parcel-search-coordiante"></p>
-                <button class="btn btn-small" id="start-parcel-coordinate-search" disabled="disabled">{{ _('Start parcel coordinate search') }}</button>
-              </div>
-              <div id="parcel-collection-search-container" class="hide parcel-search-type-container">
-                <p>{{ _('infotext - parcel feature search') }}</p>
-                <button class="btn btn-small" id="start-parcel-feature-search">{{ _('Start parcel feature search') }}</button>
+                <div id="parcel-search-id" class="hide initial-hidden">
+                  <textarea id="parcel-search-id-input"></textarea>
+                  <button class="btn btn-small" id="parcel-search-id-prepare">{{ _('Prepare parcel id search') }}</button>
+                  <table class="table hide initial-hidden" id="parcel-search-id-preperation-table">
+                    <thead>
+                      <tr>
+                        <th>{{ _('parcel id') }}</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                  <button class="btn btn-small hide initial-hidden initial-disabled" id="parcel-search-id-start" disabled="disabled">{{ _('Start parcel id search') }}</button>
+                </div>
+                <div id="parcel-search-coordinate" class="hide initial-hidden">
+                  <div>{{ _('Selected coordinate') }}: <span id="parcel-search-coordinate-coordinate"></span></div>
+                  <button class="btn btn-small initial-disabled" id="parcel-search-coordinate-start" disabled="disabled">{{ _('Start parcel coordinate search') }}</button>
+                </div>
+                <div id="parcel-search-feature" class="hide initial-hidden">
+                  <button class="btn btn-small" id="parcel-search-feature-start">{{ _('Start parcel feature search') }}</button>
+                </div>
+                <div id="parcel-search-result" class="hide initial-hidden">
+                  <table class="table" id="parcel-search-result-table">
+                    <thead>
+                      <tr>
+                        <th>{{ _('parcel id') }}</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          {% endif %}
-          <div id="local-search-container" class="search-container hide">
-            Local Search
+            {% endif %}
+            <div class="tab-pane fade" id="local-search">Local Search</div>
           </div>
         </div>
         {% endif %}
+        <!-- end search -->
 
         <div class="tab-pane fade" id="thematical">
           <h4>{{ _('thematical map') }}</h4>
