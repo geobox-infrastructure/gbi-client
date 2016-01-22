@@ -244,18 +244,7 @@
                 </div>
                 <div id="parcel-search-id" class="hide initial-hidden">
                   <textarea id="parcel-search-id-input"></textarea>
-                  <button class="btn btn-small" id="parcel-search-id-prepare">{{ _('Prepare parcel id search') }}</button>
-                  <table class="table hide initial-hidden" id="parcel-search-id-preperation-table">
-                    <thead>
-                      <tr>
-                        <th>{{ _('parcel id') }}</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                  <button class="btn btn-small hide initial-hidden initial-disabled" id="parcel-search-id-start" disabled="disabled">{{ _('Start parcel id search') }}</button>
+                  <button class="btn btn-small" id="parcel-search-id-start">{{ _('Start parcel id search') }}</button>
                 </div>
                 <div id="parcel-search-coordinate" class="hide initial-hidden">
                   <div>{{ _('Selected coordinate') }}: <span id="parcel-search-coordinate-coordinate"></span></div>
@@ -268,8 +257,8 @@
                   <table class="table" id="parcel-search-result-table">
                     <thead>
                       <tr>
+                        <th><input type="checkbox" id="toggle-all-results" /></th>
                         <th>{{ _('parcel id') }}</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>

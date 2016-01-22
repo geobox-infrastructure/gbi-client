@@ -26,6 +26,7 @@ $(document).ready(function() {
 
   var editor = initEditor();
   var activeLayer = editor.layerManager.active();
+  var parcelSearchResultLayer;
 
   function enableBulkMode() {
     editor.bulkMode = true;
@@ -160,6 +161,10 @@ $(document).ready(function() {
           if(tab == '#edit') {
             var selectedFeatures = activeLayer.olLayer.selectedFeatures.slice();
             toolbar.select.selectFeatures(selectedFeatures);
+            if(parcelSearchResultLayer !== undefined) {
+              var parcelSelectedFeatures = parcelSearchResultLayer.olLayer.selectedFeatures.slice();
+              toolbar.select.selectFeatures(parcelSelectedFeatures);
+            }
           }
         }
         if (toolbar.select && toolbar.select.olControl && tab == '#edit') {
@@ -709,7 +714,6 @@ $(document).ready(function() {
 
   /* start search */
   var activeWFSSearchLayer;
-  var parcelSearchResultLayer;
   var parcelSearchCoordinate = [];
 
   var parcelSearchCoordinateControl = new gbi.Controls.Measure({
@@ -844,48 +848,10 @@ $(document).ready(function() {
     return false;
   };
 
-  var allParcelIdsValid = function() {
-    var errors = $('#parcel-search-id-preperation-table .error');
-    if(errors.length === 0) {
-      $('#parcel-search-id-start').removeAttr('disabled');
-    } else {
-      $('#parcel-search-id-start').attr('disabled', 'disabled');
-    }
-  };
-
-  var createPreparationTable = function(searchValues) {
-    var preperationTableBody = $('#parcel-search-id-preperation-table tbody');
-    preperationTableBody.empty();
-    $.each(searchValues, function(id, value) {
-      var row = $('<tr></tr>');
-      var idCol = $('<td></td>');
-      var valid = validateParcelId(value);
-      var inputContainer = $('<div class="control-group"></div>');
-      inputContainer.addClass(valid ? 'success' : 'error');
-      var idInput = $('<input class="validated-parcel-id" value="' + value + '" />');
-      var cT;
-      idInput.keyup(function() {
-        clearTimeout(cT);
-        inputContainer.removeClass('success').removeClass('error');
-        cT = setTimeout(function() {
-          var newValid = validateParcelId(idInput.val());
-          inputContainer.addClass(newValid ? 'success' : 'error');
-          allParcelIdsValid();
-        }, 250);
-      });
-      inputContainer.append(idInput);
-      idCol.append(inputContainer);
-      var actionCol = $('<td></td>');
-      var removeButton = $('<button class="btn btn-small btn-danger"><i class="icon-remove"></i></button>')
-      removeButton.click(function() {
-        searchValues.splice(searchValues.indexOf(value), 1);
-        createPreparationTable(searchValues);
-      })
-      actionCol.append(removeButton);
-      row.append(idCol).append(actionCol);
-      preperationTableBody.append(row);
-    });
-    allParcelIdsValid();
+  var allFeatureSelectCheckboxesChecked = function() {
+    var checkboxes = $('#server-search #parcel-search-result-table .toggle-parcel-feature');
+    var selectedCheckboxes = $('#server-search #parcel-search-result-table .toggle-parcel-feature:checked');
+    return checkboxes.length === selectedCheckboxes.length;
   };
 
   var createParcelSearchResultTable = function(features, requestedIds) {
@@ -894,8 +860,22 @@ $(document).ready(function() {
     resultTableBody.empty();
     $.each(features, function(idx, feature) {
       var row = $('<tr></tr>');
-      var idCol = $('<td>' + feature.properties.id + '</td>');
-      var requestedIdIdx = requestedIds.indexOf(feature.properties.id);
+
+      var selectCol = $('<td></td>');
+      var selectCheckbox = $('<input type="checkbox" class="toggle-parcel-feature" />');
+      selectCheckbox.click(function() {
+        $('#server-search #parcel-search-result-table #toggle-all-results').prop('checked', allFeatureSelectCheckboxesChecked());
+        if($(this).prop('checked')) {
+          parcelSearchResultLayer.selectFeature(feature);
+        } else {
+          parcelSearchResultLayer.unSelectFeature(feature);
+        }
+      });
+      selectCol.append(selectCheckbox);
+      row.append(selectCol);
+
+      var idCol = $('<td>' + feature.attributes.id + '</td>');
+      var requestedIdIdx = requestedIds.indexOf(feature.attributes.id);
       if(requestedIdIdx !== -1) {
         requestedIds.splice(requestedIdIdx, 1);
       }
@@ -905,17 +885,15 @@ $(document).ready(function() {
       resultTableBody.append(row);
     });
     $.each(requestedIds, function(idx, id) {
-      var row = $('<tr class="error"><td>' + id + '</td><td></td>');
+      var validId = validateParcelId(id);
+      var rowClass = validId ? 'danger' : 'error';
+      var row = $('<tr class="' + rowClass + '"><td></td><td>' + id + '</td>');
       resultTableBody.append(row);
     });
     $('#parcel-search-result').removeClass('hide');
   };
 
   var handleParcelSearchResponse = function(featureCollection, requestedIds) {
-    createParcelSearchResultTable(featureCollection.features, requestedIds);
-    if(featureCollection.features.length === 0) {
-      return;
-    }
     if(parcelSearchResultLayer === undefined) {
       parcelSearchResultLayer = new gbi.Layers.GeoJSON({
         featureCollection: featureCollection,
@@ -929,6 +907,7 @@ $(document).ready(function() {
       if (extent) {
         editor.map.olMap.zoomToExtent(extent);
       }
+      createParcelSearchResultTable(parcelSearchResultLayer.features, requestedIds);
     }
   };
 
@@ -944,23 +923,10 @@ $(document).ready(function() {
     showParcelSearchType(buttonId[buttonId.length - 1]);
   });
 
-  $('#server-search #parcel-search-id-prepare').click(function() {
-    var searchValues = $('#server-search #parcel-search-id-input').val().split(',');
-    if(searchValues.length === 0) {
-      return;
-    }
-
-    $('#server-search  #parcel-search-id-preperation-table').removeClass('hide');
-
-    createPreparationTable(searchValues);
-
-    $('#parcel-search-id-start').removeClass('hide');
-  });
-
   $('#server-search #parcel-search-id-start').click(function() {
     var requestIds = [];
-    var parcelIds = $('.validated-parcel-id').each(function() {
-      requestIds.push($(this).val());
+    var parcelIds = $.each($('#server-search #parcel-search-id-input').val().split(','), function(idx, parcelId) {
+      requestIds.push(parcelId.trim());
     });
     $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {'ids': requestIds.join(',')})
       .done(function(response) {
@@ -991,6 +957,14 @@ $(document).ready(function() {
       contentType: 'application/json'
     }).done(function(response) {
       handleParcelSearchResponse(response);
+    });
+  });
+
+  $('#server-search #parcel-search-result-table #toggle-all-results').click(function() {
+    var checkboxes = $('#server-search #parcel-search-result-table .toggle-parcel-feature');
+    var checked = allFeatureSelectCheckboxesChecked();
+    checkboxes.each(function() {
+      $(this).prop('checked', !checked);
     });
   });
 
