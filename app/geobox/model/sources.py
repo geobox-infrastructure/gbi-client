@@ -19,7 +19,7 @@ from sqlalchemy import orm
 from geobox.lib.coverage import coverage_from_geojson
 from . meta import Base
 
-__all__ = ['ExternalWMTSSource', 'LocalWMTSSource', 'ExternalWFSSource']
+__all__ = ['ExternalWMTSSource', 'LocalWMTSSource', 'ExternalWFSSource', 'ParcelSearchSource']
 
 
 class ExternalWMTSSource(Base):
@@ -116,3 +116,13 @@ class ExternalWFSSource(Base):
     def by_name(cls, name):
         q = cls.query.filter(cls.name == name)
         return q.first_or_404()
+
+
+class ParcelSearchSource(Base):
+    __tablename__ = 'parcel_search_sources'
+    id = sa.Column(sa.Integer, primary_key=True)
+    url = sa.Column(sa.String, nullable=False)
+    active = sa.Column(sa.String, default=True)
+    gbi_server_id = sa.Column(sa.Integer, sa.ForeignKey('servers.id'),
+                              nullable=False)
+    gbi_server = orm.relationship('GBIServer', backref='parcel_search_sources')
