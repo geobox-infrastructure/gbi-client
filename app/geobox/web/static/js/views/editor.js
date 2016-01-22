@@ -175,6 +175,7 @@ $(document).ready(function() {
       });
 
       if(tab == '#search') {
+        initSearchTab();
         serverSearchActive = true;
       } else {
         if(serverSearchActive) {
@@ -967,6 +968,14 @@ $(document).ready(function() {
       $(this).prop('checked', !checked);
     });
   });
+
+  var initSearchTab = function() {
+    var parcelSearchVisible = !$('#parcel-search-container').hasClass('hide');
+    if(parcelSearchVisible) {
+      var parcelSearchType = $('#server-search #parcel-search-container .select-parcel-search-group button.active').attr('id').split('-').splice(-1, 1).join('');
+      showParcelSearchType(parcelSearchType);
+    }
+  }
 
   var leaveSearchTab = function() {
     leaveCoordinateSearch();
