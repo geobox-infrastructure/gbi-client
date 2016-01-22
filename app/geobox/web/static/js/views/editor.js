@@ -893,21 +893,22 @@ $(document).ready(function() {
   };
 
   var handleParcelSearchResponse = function(featureCollection, requestedIds) {
-    if(parcelSearchResultLayer === undefined) {
-      parcelSearchResultLayer = new gbi.Layers.GeoJSON({
-        featureCollection: featureCollection,
-        displayInLayerSwitcher: false,
-        visibility: true
-      });
-
-      editor.addLayer(parcelSearchResultLayer);
-
-      var extent = parcelSearchResultLayer.olLayer.getDataExtent();
-      if (extent) {
-        editor.map.olMap.zoomToExtent(extent);
-      }
-      createParcelSearchResultTable(parcelSearchResultLayer.features, requestedIds);
+    if(parcelSearchResultLayer !== undefined) {
+      editor.removeLayer(parcelSearchResultLayer);
     }
+    parcelSearchResultLayer = new gbi.Layers.GeoJSON({
+      featureCollection: featureCollection,
+      displayInLayerSwitcher: false,
+      visibility: true
+    });
+    editor.addLayer(parcelSearchResultLayer);
+
+    var extent = parcelSearchResultLayer.olLayer.getDataExtent();
+    if (extent) {
+      editor.map.olMap.zoomToExtent(extent);
+    }
+    createParcelSearchResultTable(parcelSearchResultLayer.features, requestedIds);
+
   };
 
   $('#server-search #search_source').change(function() {
