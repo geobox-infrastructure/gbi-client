@@ -837,11 +837,8 @@ $(document).ready(function() {
   /* parcel search ui */
 
   var validateParcelId = function(parcelId) {
-    // TODO validate real parcel id's
-    // "072500-010-00023/000" => "07250001000023000"
-    // check if all digits after cleanup
-    // length must be 17
-    if(parcelId === 'foo') {
+    var preparedParcelId = parcelId.replace(/-/g, '').replace(/\//g, '');
+    if(preparedParcelId.length === 17) {
       return true;
     }
     return false;
