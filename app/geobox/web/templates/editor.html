@@ -220,10 +220,10 @@
           </ul>
           <div class="tab-content" id="search-tabs">
             {% if wfs_search_sources or parcel_search_sources %}
-            <div class="tab-pane fade in" id="server-search">
+            <div class="tab-pane fade in active" id="server-search">
               <p>{{ _('infotext - search controls') }}</p>
               {{ input(server_search_form.search_source) }}
-              <div id="wfs-search-container" class="hide initial-hidden search-container">
+              <div id="wfs-search-container" class="initial-hidden search-container">
                 <textarea id="wfs-search-value"></textarea>
                 <div id="wfs-no-features-found" class="alert alert-error hide initial-hidden">{{ _('No features found') }}</div>
                 <div id="wfs-search-in-progress" class="alert hide initial-hidden">

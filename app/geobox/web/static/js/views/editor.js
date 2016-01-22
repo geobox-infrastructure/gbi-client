@@ -175,7 +175,6 @@ $(document).ready(function() {
       });
 
       if(tab == '#search') {
-        initSearchTab();
         serverSearchActive = true;
       } else {
         if(serverSearchActive) {
@@ -967,28 +966,6 @@ $(document).ready(function() {
       $(this).prop('checked', !checked);
     });
   });
-
-  var initSearchTab = function() {
-    $('#search-tabs .initial-hidden').addClass('hide');
-    $('#search-tabs .initial-disabled').attr('disabled', 'disabled');
-    $('.search-nav-tabs li').removeClass('active');
-    $('.search-nav-tabs li:first').addClass('active');
-    $('#search-tabs .tab-pane').removeClass('in').removeClass('active');
-    var firstTab = $('#search-tabs .tab-pane:first').addClass('in').addClass('active').attr('id');
-
-    $.each(editor.layerManager.vectorLayers, function(idx, layer) {
-      if(layer.hasSelectedFeatures()) {
-        layer.unSelectAllFeatures();
-      }
-    });
-
-    if(firstTab !== 'server-search') {
-      return;
-    }
-    $('#server-search #parcel-coordinate-search-coordinate').html('');
-    var searchType = $('#server-search #search_source').val().split('_')[0];
-    showSearchTypeContainer(searchType);
-  };
 
   var leaveSearchTab = function() {
     leaveCoordinateSearch();
