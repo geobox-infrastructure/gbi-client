@@ -245,13 +245,16 @@
                 <div id="parcel-search-id" class="hide initial-hidden">
                   <textarea id="parcel-search-id-input"></textarea>
                   <button class="btn btn-small" id="parcel-search-id-start">{{ _('Start parcel id search') }}</button>
+                  <div class="alert alert-danger hide" id="parcel-search-id-no-ids-error">{{ _('No parcel ids given') }}</div>
                 </div>
                 <div id="parcel-search-coordinate" class="hide initial-hidden">
                   <div>{{ _('Selected coordinate') }}: <span id="parcel-search-coordinate-coordinate"></span></div>
                   <button class="btn btn-small initial-disabled" id="parcel-search-coordinate-start" disabled="disabled">{{ _('Start parcel coordinate search') }}</button>
+                  <div class="alert alert-danger hide" id="parcel-search-coordinate-no-coordinate-error">{{ _('No search coordinate given') }}</div>
                 </div>
                 <div id="parcel-search-feature" class="hide initial-hidden">
                   <button class="btn btn-small" id="parcel-search-feature-start">{{ _('Start parcel feature search') }}</button>
+                  <div class="alert alert-danger hide" id="parcel-search-feature-no-feature-error">{{ _('No search feature(s) given') }}</div>
                 </div>
                 <div id="parcel-search-result" class="hide">
                   <h4>{{ _('Last search results') }}</h4>

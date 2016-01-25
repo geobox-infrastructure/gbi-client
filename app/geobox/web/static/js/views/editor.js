@@ -938,8 +938,15 @@ $(document).ready(function() {
   $('#server-search #parcel-search-id-start').click(function() {
     var requestIds = [];
     var parcelIds = $.each($('#server-search #parcel-search-id-input').val().split(','), function(idx, parcelId) {
-      requestIds.push(parcelId.trim());
+      parcelId = parcelId.trim();
+      if(parcelId !== '') {
+        requestIds.push(parcelId);
+      }
     });
+    if(requestIds.length === 0) {
+      $('#server-search #parcel-search-id-no-ids-error').show().fadeOut(3000);
+      return;
+    }
     $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {'ids': requestIds.join(',')})
       .done(function(response) {
         handleParcelSearchResponse(response, requestIds);
@@ -947,6 +954,10 @@ $(document).ready(function() {
   });
 
   $('#server-search #parcel-search-coordinate-start').click(function() {
+    if(parcelSearchCoordinate === undefined || parcelSearchCoordinate.length === 0) {
+      $('#server-search #parcel-search-coordinate-no-coordinate-error').show().fadeOut(3000);
+      return;
+    }
     $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {
       'lat': parcelSearchCoordinate[0],
       'lon': parcelSearchCoordinate[1]
@@ -961,6 +972,10 @@ $(document).ready(function() {
     $.each(editor.layerManager.vectorLayers, function(id, layer) {
       searchFeatures = searchFeatures.concat(layer.selectedFeatures());
     });
+    if(searchFeatures.length === 0) {
+      $('#server-search #parcel-search-feature-no-feature-error').show().fadeOut(3000);
+      return;
+    }
     var writer = new OpenLayers.Format.GeoJSON();
     $.ajax({
       type: 'post',
