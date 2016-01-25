@@ -947,8 +947,10 @@ $(document).ready(function() {
       $('#server-search #parcel-search-id-no-ids-error').show().fadeOut(3000);
       return;
     }
+    $('#server-search #parcel-search-in-progress').show();
     $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {'ids': requestIds.join(',')})
       .done(function(response) {
+        $('#server-search #parcel-search-in-progress').hide();
         handleParcelSearchResponse(response, requestIds);
       });
   });
@@ -958,11 +960,13 @@ $(document).ready(function() {
       $('#server-search #parcel-search-coordinate-no-coordinate-error').show().fadeOut(3000);
       return;
     }
+    $('#server-search #parcel-search-in-progress').show();
     $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {
       'lat': parcelSearchCoordinate[0],
       'lon': parcelSearchCoordinate[1]
     })
       .done(function(response) {
+        $('#server-search #parcel-search-in-progress').hide();
         handleParcelSearchResponse(response);
       });
   });
@@ -977,12 +981,14 @@ $(document).ready(function() {
       return;
     }
     var writer = new OpenLayers.Format.GeoJSON();
+    $('#server-search #parcel-search-in-progress').show();
     $.ajax({
       type: 'post',
       url: 'http://localhost:8888/proxy/http://localhost:5000/search/12345/query',
       data: writer.write(searchFeatures),
       contentType: 'application/json'
     }).done(function(response) {
+      $('#server-search #parcel-search-in-progress').hide();
       handleParcelSearchResponse(response);
     });
   });
