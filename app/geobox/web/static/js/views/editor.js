@@ -1013,13 +1013,15 @@ $(document).ready(function() {
     var parcelSearchVisible = !$('#parcel-search-container').hasClass('hide');
     if(parcelSearchVisible) {
       var parcelSearchType = $('#server-search #parcel-search-container .select-parcel-search-group button.active').attr('id').split('-').splice(-1, 1).join('');
-      var selectedFeaturesIds = [];
-      $.each(parcelSearchResultLayer.selectedFeatures(), function(idx, feature) {
-        selectedFeaturesIds.push(feature.attributes.id)
-      });
-      $('#server-search #parcel-search-result-table .toggle-parcel-feature').each(function(idx, element) {
-        $(element).prop('checked', $.inArray(element.id, selectedFeaturesIds) !== -1);
-      });
+      if(parcelSearchResultLayer !== undefined) {
+        var selectedFeaturesIds = [];
+        $.each(parcelSearchResultLayer.selectedFeatures(), function(idx, feature) {
+          selectedFeaturesIds.push(feature.attributes.id)
+        });
+        $('#server-search #parcel-search-result-table .toggle-parcel-feature').each(function(idx, element) {
+          $(element).prop('checked', $.inArray(element.id, selectedFeaturesIds) !== -1);
+        });
+      }
       showParcelSearchType(parcelSearchType);
     }
   }
