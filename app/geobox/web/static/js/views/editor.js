@@ -896,10 +896,16 @@ $(document).ready(function() {
     $('#parcel-search-result').removeClass('hide');
   };
 
-  var handleParcelSearchResponse = function(featureCollection, requestedIds) {
+  var beforeParcelSearch = function() {
     if(parcelSearchResultLayer !== undefined) {
       editor.removeLayer(parcelSearchResultLayer);
+      parcelSearchResultLayer = undefined;
     }
+    $('#parcel-search-result-table tbody').empty();
+    $('#server-search #parcel-search-result').hide();
+  }
+
+  var handleParcelSearchResponse = function(featureCollection, requestedIds) {
     parcelSearchResultLayer = new gbi.Layers.GeoJSON({
       featureCollection: featureCollection,
       displayInLayerSwitcher: false,
@@ -940,6 +946,8 @@ $(document).ready(function() {
   });
 
   $('#server-search #parcel-search-id-start').click(function() {
+    beforeParcelSearch();
+
     var requestIds = [];
     var parcelIds = $.each($('#server-search #parcel-search-id-input').val().split(','), function(idx, parcelId) {
       parcelId = parcelId.trim();
@@ -947,10 +955,12 @@ $(document).ready(function() {
         requestIds.push(parcelId);
       }
     });
+
     if(requestIds.length === 0) {
       $('#server-search #parcel-search-id-no-ids-error').show().fadeOut(3000);
       return;
     }
+
     $('#server-search #parcel-search-in-progress').show();
     var url = parcelSearchSources[$('#server-search #search_source').val()];
     $.get(url, {'ids': requestIds.join(',')})
@@ -961,6 +971,8 @@ $(document).ready(function() {
   });
 
   $('#server-search #parcel-search-coordinate-start').click(function() {
+    beforeParcelSearch();
+
     if(parcelSearchCoordinate === undefined || parcelSearchCoordinate.length === 0) {
       $('#server-search #parcel-search-coordinate-no-coordinate-error').show().fadeOut(3000);
       return;
@@ -978,6 +990,8 @@ $(document).ready(function() {
   });
 
   $('#server-search #parcel-search-feature-start').click(function() {
+    beforeParcelSearch();
+
     var searchFeatures = [];
     $.each(editor.layerManager.vectorLayers, function(id, layer) {
       searchFeatures = searchFeatures.concat(layer.selectedFeatures());
