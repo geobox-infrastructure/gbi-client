@@ -886,7 +886,7 @@ $(document).ready(function() {
     });
     $.each(requestedIds, function(idx, id) {
       var validId = validateParcelId(id);
-      var rowClass = validId ? 'danger' : 'error';
+      var rowClass = validId ? 'warning' : 'error';
       var row = $('<tr class="' + rowClass + '"><td></td><td>' + id + '</td>');
       resultTableBody.append(row);
     });
