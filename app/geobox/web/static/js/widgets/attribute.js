@@ -242,16 +242,18 @@ gbi.widgets.AttributeEditor.prototype = {
         if(self.selectedFeatures.length > 0) {
             var layers = [];
             $.each(self.selectedFeatures, function(idx, feature) {
-                layers.push(feature.layer);
+                if(feature.layer) {
+                    layers.push(feature.layer);
+                }
             });
             $.unique(layers);
-            if(layers.length > 1) {
+            if(layers.length !== 1) {
                 return false;
             } else {
                 return layers[0].gbiLayer;
             }
         }
-        return -1
+        return -1;
     },
     renderInvalidFeatures: function(activeLayer) {
         var self = this;
