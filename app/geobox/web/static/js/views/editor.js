@@ -923,6 +923,7 @@ $(document).ready(function() {
       editor.map.olMap.zoomToExtent(extent);
     }
     createParcelSearchResultTable(parcelSearchResultLayer.features, requestedIds);
+    $('#server-search #parcel-search-result').show();
 
   };
 
@@ -1025,6 +1026,7 @@ $(document).ready(function() {
 
   $('#server-search #remove-parcel-search-result').click(function() {
     $('#server-search #parcel-search-result').hide();
+    $('#parcel-search-result-table tbody').empty();
     if(parcelSearchResultLayer !== undefined) {
       editor.removeLayer(parcelSearchResultLayer);
     }
