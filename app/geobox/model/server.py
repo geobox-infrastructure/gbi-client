@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and"
 # limitations under the License.
-
 import sqlalchemy as sa
 from flask import current_app
+from sqlalchemy import orm
 from geobox.model.meta import Base
 
 __all__ = ['GBIServer']
@@ -37,6 +37,8 @@ class GBIServer(Base):
 
     _context = None
     _app_state = None
+
+    parcel_search_source = orm.relationship("ParcelSearchSource", uselist=False, backref="gbi_server")
 
     @property
     def raster_prefix(self):
