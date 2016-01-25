@@ -877,14 +877,12 @@ $(document).ready(function() {
       selectCol.append(selectCheckbox);
       row.append(selectCol);
 
-      var idCol = $('<td>' + feature.attributes.id + '</td>');
+      var idCol = $('<td><label for="' + feature.attributes.id + '">' + feature.attributes.id + '</td>');
       var requestedIdIdx = requestedIds.indexOf(feature.attributes.id);
       if(requestedIdIdx !== -1) {
         requestedIds.splice(requestedIdIdx, 1);
       }
       row.append(idCol);
-      var actionCol = $('<td></td>');
-      row.append(actionCol);
       resultTableBody.append(row);
     });
     $.each(requestedIds, function(idx, id) {
