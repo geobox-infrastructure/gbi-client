@@ -900,7 +900,18 @@ $(document).ready(function() {
     parcelSearchResultLayer = new gbi.Layers.GeoJSON({
       featureCollection: featureCollection,
       displayInLayerSwitcher: false,
-      visibility: true
+      visibility: true,
+      symbolizers: {
+        "Point": {
+          cursor: "default"
+        },
+        "Line": {
+          cursor: "default"
+        },
+        "Polygon": {
+          cursor: "default"
+        }
+      }
     });
     editor.addLayer(parcelSearchResultLayer);
 
