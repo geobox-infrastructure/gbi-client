@@ -896,31 +896,34 @@ $(document).ready(function() {
 
   var beforeParcelSearch = function() {
     if(parcelSearchResultLayer !== undefined) {
-      editor.removeLayer(parcelSearchResultLayer);
-      parcelSearchResultLayer = undefined;
+      parcelSearchResultLayer.clear();
     }
     $('#parcel-search-result-table tbody').empty();
     $('#server-search #parcel-search-result').hide();
   }
 
   var handleParcelSearchResponse = function(featureCollection, requestedIds) {
-    parcelSearchResultLayer = new gbi.Layers.GeoJSON({
-      featureCollection: featureCollection,
-      displayInLayerSwitcher: false,
-      visibility: true,
-      symbolizers: {
-        "Point": {
-          cursor: "default"
-        },
-        "Line": {
-          cursor: "default"
-        },
-        "Polygon": {
-          cursor: "default"
+    if(parcelSearchResultLayer === undefined) {
+      parcelSearchResultLayer = new gbi.Layers.GeoJSON({
+        featureCollection: featureCollection,
+        displayInLayerSwitcher: false,
+        visibility: true,
+        symbolizers: {
+          "Point": {
+            cursor: "default"
+          },
+          "Line": {
+            cursor: "default"
+          },
+          "Polygon": {
+            cursor: "default"
+          }
         }
-      }
-    });
-    editor.addLayer(parcelSearchResultLayer);
+      });
+      editor.addLayer(parcelSearchResultLayer);
+    } else {
+      parcelSearchResultLayer.addFeatureCollection(featureCollection);
+    }
 
     var extent = parcelSearchResultLayer.olLayer.getDataExtent();
     if (extent) {
@@ -993,6 +996,7 @@ $(document).ready(function() {
     var searchFeatures = [];
     $.each(editor.layerManager.vectorLayers, function(id, layer) {
       searchFeatures = searchFeatures.concat(layer.selectedFeatures());
+      layer.unSelectAllFeatures();
     });
     if(searchFeatures.length === 0) {
       $('#server-search #parcel-search-feature-no-feature-error').show().fadeOut(3000);
@@ -1040,7 +1044,7 @@ $(document).ready(function() {
     $('#server-search #parcel-search-result').hide();
     $('#parcel-search-result-table tbody').empty();
     if(parcelSearchResultLayer !== undefined) {
-      editor.removeLayer(parcelSearchResultLayer);
+      parcelSearchResultLayer.clear();
     }
     parcelSearchResultLayer = undefined;
   });
