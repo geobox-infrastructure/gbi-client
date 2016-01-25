@@ -7,936 +7,1028 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-04 15:12+0100\n"
+"POT-Creation-Date: 2016-01-25 14:32+0100\n"
 "PO-Revision-Date: 2015-12-04 15:23+0100\n"
 "Last-Translator: \n"
 "Language: de\n"
 "Language-Team: de <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.1.1\n"
-"X-Generator: Poedit 1.5.4\n"
 
-#: geobox/defaults.py:56
+#: ../app/geobox/defaults.py:56
 msgid "WGS 84 (EPSG:4326)"
 msgstr "WGS 84 (EPSG:4326)"
 
-#: geobox/defaults.py:56
+#: ../app/geobox/defaults.py:56
 msgid "EPSG:4326 help text"
 msgstr "WGS 84"
 
-#: geobox/defaults.py:57
+#: ../app/geobox/defaults.py:57
 msgid "WGS 84 / Pseudo-Mercator (EPSG:3857)"
 msgstr "Pseudo-Mercator (EPSG:3857)"
 
-#: geobox/defaults.py:57
+#: ../app/geobox/defaults.py:57
 msgid "EPSG:3857 help text"
 msgstr "Pseudo-Mercator"
 
-#: geobox/defaults.py:58
+#: ../app/geobox/defaults.py:58
 msgid "Gauss-Kruger zone 3 (EPSG:31467)"
 msgstr "Gauß-Krüger Zone 3 (EPSG:31467)"
 
-#: geobox/defaults.py:58
+#: ../app/geobox/defaults.py:58
 msgid "EPSG:31467 help text"
 msgstr "Gauß-Krüger Zone 3"
 
-#: geobox/defaults.py:59
+#: ../app/geobox/defaults.py:59
 msgid "UTM zone 32N (EPSG:25832)"
 msgstr "UTM Zone 32 Nord (EPSG:25832)"
 
-#: geobox/defaults.py:59
+#: ../app/geobox/defaults.py:59
 msgid "EPSG:25832 help text"
 msgstr "UTM Zone 32 Nord"
 
-#: geobox/lib/trayicon.py:58
+#: ../app/geobox/lib/trayicon.py:58
 msgid "GeoBox"
 msgstr "GeoBox"
 
-#: geobox/lib/trayicon.py:112
+#: ../app/geobox/lib/trayicon.py:112
 msgid "Close"
 msgstr "Beenden"
 
-#: geobox/lib/trayicon.py:128
+#: ../app/geobox/lib/trayicon.py:128
 msgid "Open"
 msgstr "Öffnen"
 
-#: geobox/lib/vectorconvert.py:47
+#: ../app/geobox/lib/vectorconvert.py:47
 msgid "invalid geometry type"
 msgstr "Ungültiger Geometrietyp"
 
-#: geobox/lib/vectorconvert.py:49 geobox/lib/vectorconvert.py:56
-#: geobox/lib/vectorconvert.py:70
+#: ../app/geobox/lib/vectorconvert.py:49 ../app/geobox/lib/vectorconvert.py:56
+#: ../app/geobox/lib/vectorconvert.py:70
 msgid "invalid mapping"
 msgstr "Ungültiges Mapping"
 
-#: geobox/model/layer.py:24 geobox/model/tasks.py:116
+#: ../app/geobox/model/layer.py:24 ../app/geobox/model/tasks.py:116
 msgid "raster import"
 msgstr "Rasterimport"
 
-#: geobox/model/layer.py:35 geobox/model/tasks.py:135
+#: ../app/geobox/model/layer.py:35 ../app/geobox/model/tasks.py:135
 msgid "raster export"
 msgstr "Rasterexport"
 
-#: geobox/model/layer.py:47 geobox/model/tasks.py:90
+#: ../app/geobox/model/layer.py:47 ../app/geobox/model/tasks.py:90
 msgid "vector export"
 msgstr "Vektorexport"
 
-#: geobox/model/project.py:59
+#: ../app/geobox/model/project.py:59
 msgid "project export"
 msgstr "Exportprojekt"
 
-#: geobox/model/project.py:70
+#: ../app/geobox/model/project.py:70
 msgid "project import"
 msgstr "Importprojekt"
 
-#: geobox/model/tasks.py:78
+#: ../app/geobox/model/tasks.py:78
 msgid "vector import"
 msgstr "Vektorimport"
 
-#: geobox/model/tasks.py:103
+#: ../app/geobox/model/tasks.py:103
 msgid "replication"
 msgstr "Replikation"
 
-#: geobox/web/__init__.py:106
+#: ../app/geobox/web/__init__.py:106
 msgid "Sorry, method not allowed"
 msgstr "Keine Berechtigung."
 
-#: geobox/web/__init__.py:112
+#: ../app/geobox/web/__init__.py:112
 msgid "Sorry, page not found"
 msgstr "Die Seite wurde nicht gefunden"
 
-#: geobox/web/__init__.py:118
+#: ../app/geobox/web/__init__.py:118
 msgid "Sorry, not allowed"
 msgstr "Keine Berechtigung."
 
-#: geobox/web/__init__.py:119
+#: ../app/geobox/web/__init__.py:119
 msgid "Please log in first..."
 msgstr "Bitte loggen Sie sich ein"
 
-#: geobox/web/__init__.py:126
+#: ../app/geobox/web/__init__.py:126
 msgid "Sorry, an error has occurred"
 msgstr "Entschuldigen Sie bitte, es ist ein Fehler aufgetreten"
 
-#: geobox/web/__init__.py:132
+#: ../app/geobox/web/__init__.py:132
 msgid "Login required"
 msgstr "Einloggen erforderlich"
 
-#: geobox/web/__init__.py:133
+#: ../app/geobox/web/__init__.py:133
 msgid "Please login to see this page"
 msgstr "Sie müssen sich anmelden um diese Seite aufrufen zu können"
 
-#: geobox/web/forms.py:62
+#: ../app/geobox/web/forms.py:86
 #: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/ext/appengine/fields.py:90
 #: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/ext/django/fields.py:89
 #: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:125
 #: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:175
 #: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/ext/sqlalchemy/fields.py:180
-#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:419
+#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:420
 msgid "Not a valid choice"
 msgstr "Keine gültige Auswahl."
 
-#: geobox/web/forms.py:179 geobox/web/forms.py:319
-#: geobox/web/templates/downloads.html:12
-#: geobox/web/templates/admin/external_raster_list.html:40
-#: geobox/web/templates/admin/external_raster_list.html:123
-#: geobox/web/templates/projects/exports.html:12
-#: geobox/web/templates/projects/imports.html:12
-#: geobox/web/templates/tasks/task_list.html:87
+#: ../app/geobox/web/forms.py:203 ../app/geobox/web/forms.py:367
+#: ../app/geobox/web/templates/downloads.html:12
+#: ../app/geobox/web/templates/admin/external_raster_list.html:40
+#: ../app/geobox/web/templates/admin/external_raster_list.html:123
+#: ../app/geobox/web/templates/projects/exports.html:12
+#: ../app/geobox/web/templates/projects/imports.html:12
+#: ../app/geobox/web/templates/tasks/task_list.html:87
 msgid "title"
 msgstr "Titel"
 
-#: geobox/web/forms.py:184
+#: ../app/geobox/web/forms.py:208
 msgid "level needs to be bigger or equal to start level"
 msgstr "Das Endlevel muss größer oder gleich dem Startlevel sein"
 
-#: geobox/web/forms.py:204
+#: ../app/geobox/web/forms.py:244
 msgid "select coverage"
 msgstr "Geometrie aus Projekt laden"
 
-#: geobox/web/forms.py:207
+#: ../app/geobox/web/forms.py:247
 msgid "select couch"
 msgstr "Geometrie aus Editor laden"
 
-#: geobox/web/forms.py:211
+#: ../app/geobox/web/forms.py:251
 msgid "local"
 msgstr "Lokal"
 
-#: geobox/web/forms.py:222 geobox/web/forms.py:236
+#: ../app/geobox/web/forms.py:262 ../app/geobox/web/forms.py:277
 msgid "start level"
 msgstr "Startlevel"
 
-#: geobox/web/forms.py:223 geobox/web/forms.py:237
+#: ../app/geobox/web/forms.py:263 ../app/geobox/web/forms.py:278
 msgid "end level"
 msgstr "Endlevel"
 
-#: geobox/web/forms.py:225 geobox/web/forms.py:238
+#: ../app/geobox/web/forms.py:265 ../app/geobox/web/forms.py:279
 msgid "raster_source"
 msgstr "Rasterdatenquelle"
 
-#: geobox/web/forms.py:228
+#: ../app/geobox/web/forms.py:268
 msgid "update_tiles"
 msgstr "Kacheln aktualisieren"
 
-#: geobox/web/forms.py:234
-#: geobox/web/templates/admin/external_raster_list.html:13
+#: ../app/geobox/web/forms.py:274
+#: ../app/geobox/web/templates/admin/external_raster_list.html:13
 msgid "format"
 msgstr "Format"
 
-#: geobox/web/forms.py:235 geobox/web/forms.py:258 geobox/web/forms.py:263
-#: geobox/web/forms.py:275 geobox/web/forms.py:327
-#: geobox/web/templates/admin/external_raster_list.html:125
+#: ../app/geobox/web/forms.py:275 ../app/geobox/web/forms.py:299
+#: ../app/geobox/web/forms.py:305 ../app/geobox/web/forms.py:318
+#: ../app/geobox/web/forms.py:375
+#: ../app/geobox/web/templates/admin/external_raster_list.html:125
 msgid "srs"
 msgstr "Koordinatensystem"
 
-#: geobox/web/forms.py:245
+#: ../app/geobox/web/forms.py:286
 msgid "geojson file name"
 msgstr "geojson Dateiname"
 
-#: geobox/web/forms.py:247 geobox/web/forms.py:255 geobox/web/forms.py:264
+#: ../app/geobox/web/forms.py:288 ../app/geobox/web/forms.py:296
+#: ../app/geobox/web/forms.py:307
 msgid "select existing layer"
 msgstr "Bestehenden Layer auswählen"
 
-#: geobox/web/forms.py:249 geobox/web/forms.py:257 geobox/web/forms.py:265
+#: ../app/geobox/web/forms.py:290 ../app/geobox/web/forms.py:298
+#: ../app/geobox/web/forms.py:308
 msgid "new layer"
 msgstr "oder neuen Layer erstellen"
 
-#: geobox/web/forms.py:253
+#: ../app/geobox/web/forms.py:294
 msgid "gml file name"
 msgstr "GML-Datei"
 
-#: geobox/web/forms.py:262
+#: ../app/geobox/web/forms.py:304
 msgid "file name"
 msgstr "Shapefile"
 
-#: geobox/web/forms.py:268
+#: ../app/geobox/web/forms.py:311
 msgid "path"
 msgstr "Verzeichnis"
 
-#: geobox/web/forms.py:271
-#: geobox/web/templates/admin/external_raster_list.html:11
-#: geobox/web/templates/admin/external_raster_list.html:82
-#: geobox/web/templates/admin/server_list.html:11
+#: ../app/geobox/web/forms.py:314
+#: ../app/geobox/web/templates/admin/external_raster_list.html:11
+#: ../app/geobox/web/templates/admin/external_raster_list.html:82
+#: ../app/geobox/web/templates/admin/server_list.html:11
 msgid "name"
 msgstr "Name"
 
-#: geobox/web/forms.py:272
+#: ../app/geobox/web/forms.py:315
 msgid "geojson"
 msgstr "GeoJSON"
 
-#: geobox/web/forms.py:273 geobox/web/templates/boxes/base.html:34
+#: ../app/geobox/web/forms.py:316
+#: ../app/geobox/web/templates/boxes/base.html:34
 msgid "filename"
 msgstr "Dateiname"
 
-#: geobox/web/forms.py:274
+#: ../app/geobox/web/forms.py:317
 msgid "export_type"
 msgstr "Type"
 
-#: geobox/web/forms.py:276
+#: ../app/geobox/web/forms.py:320
 msgid "destination"
 msgstr "Ziel"
 
-#: geobox/web/forms.py:277
+#: ../app/geobox/web/forms.py:321
 msgid "odata_url"
 msgstr "OData URL"
 
-#: geobox/web/forms.py:280
+#: ../app/geobox/web/forms.py:324
 msgid "file"
 msgstr "Datei"
 
-#: geobox/web/forms.py:284 geobox/web/forms.py:289
+#: ../app/geobox/web/forms.py:328 ../app/geobox/web/forms.py:333
 msgid "rastersource_username"
 msgstr "Benutzername"
 
-#: geobox/web/forms.py:285 geobox/web/forms.py:290
+#: ../app/geobox/web/forms.py:329 ../app/geobox/web/forms.py:334
 msgid "rastersource_password"
 msgstr "Passwort"
 
-#: geobox/web/forms.py:288
+#: ../app/geobox/web/forms.py:332
 msgid "rastersource_url"
 msgstr "URL"
 
-#: geobox/web/forms.py:291
+#: ../app/geobox/web/forms.py:335
 msgid "rastersource_name"
 msgstr "Name"
 
-#: geobox/web/forms.py:292
+#: ../app/geobox/web/forms.py:336
 msgid "rastersource_title"
 msgstr "Title"
 
-#: geobox/web/forms.py:293
+#: ../app/geobox/web/forms.py:337
 msgid "rastersource_format"
 msgstr "Format"
 
-#: geobox/web/forms.py:294
+#: ../app/geobox/web/forms.py:338
 msgid "rastersource_llbox"
 msgstr "BoundingBox (Lat/Lon)"
 
-#: geobox/web/forms.py:297
+#: ../app/geobox/web/forms.py:341
 msgid "rastersource_srs_input"
 msgstr "SRS (manuell)"
 
-#: geobox/web/forms.py:298
+#: ../app/geobox/web/forms.py:342
 msgid "rastersource_layer_input"
 msgstr "Layer (manuell)"
 
-#: geobox/web/forms.py:299
+#: ../app/geobox/web/forms.py:343
 msgid "wms_version"
 msgstr "Version"
 
-#: geobox/web/forms.py:303
-msgid "layers"
-msgstr "Layer"
+#: ../app/geobox/web/forms.py:349
+msgid "source"
+msgstr "Suchdienst"
 
-#: geobox/web/forms.py:305
-msgid "search_string"
-msgstr "Suchanfrage"
-
-#: geobox/web/forms.py:308
+#: ../app/geobox/web/forms.py:356
 msgid "couchapp_couch_url"
 msgstr "URL der Ziel CouchDB"
 
-#: geobox/web/forms.py:312
+#: ../app/geobox/web/forms.py:360
 msgid "gbi server"
 msgstr "Server"
 
-#: geobox/web/forms.py:313
-#: geobox/web/templates/admin/external_raster_list.html:44
-#: geobox/web/templates/admin/external_raster_list.html:85
-#: geobox/web/templates/admin/server_list.html:26
+#: ../app/geobox/web/forms.py:361
+#: ../app/geobox/web/templates/admin/external_raster_list.html:44
+#: ../app/geobox/web/templates/admin/external_raster_list.html:85
+#: ../app/geobox/web/templates/admin/server_list.html:26
 msgid "username"
 msgstr "Benutzername"
 
-#: geobox/web/forms.py:314 geobox/web/templates/admin/server_list.html:27
+#: ../app/geobox/web/forms.py:362
+#: ../app/geobox/web/templates/admin/server_list.html:27
 msgid "Password"
 msgstr "Passwort"
 
-#: geobox/web/forms.py:320
+#: ../app/geobox/web/forms.py:368
 msgid "gbi server context document"
 msgstr "Server-URL"
 
-#: geobox/web/forms.py:325
+#: ../app/geobox/web/forms.py:373
 msgid "Choose gml"
 msgstr "GML Datei auswählen"
 
-#: geobox/web/forms.py:331
+#: ../app/geobox/web/forms.py:381
 msgid "only xml files allowed"
 msgstr "Es sind nur XML-Dateien zulässig"
 
-#: geobox/web/templates/admin.html:4 geobox/web/templates/index.html:65
-#: geobox/web/templates/js/translation.js:141
+#: ../app/geobox/web/templates/admin.html:4
+#: ../app/geobox/web/templates/index.html:65
+#: ../app/geobox/web/templates/js/translation.js:141
 msgid "settings"
 msgstr "Einstellungen"
 
-#: geobox/web/templates/admin.html:11
+#: ../app/geobox/web/templates/admin.html:11
 msgid "GML"
 msgstr "GML"
 
-#: geobox/web/templates/admin.html:15
+#: ../app/geobox/web/templates/admin.html:15
 msgid "upload authorization box"
 msgstr "Berechtigungsbox hochladen"
 
-#: geobox/web/templates/admin.html:21 geobox/web/templates/editor.html:406
+#: ../app/geobox/web/templates/admin.html:21
+#: ../app/geobox/web/templates/editor.html:475
 msgid "Server"
 msgstr "Server"
 
-#: geobox/web/templates/admin.html:25
+#: ../app/geobox/web/templates/admin.html:25
 msgid "server list"
 msgstr "Übersicht"
 
-#: geobox/web/templates/admin.html:30
+#: ../app/geobox/web/templates/admin.html:30
 msgid "add server"
 msgstr "Hinzufügen"
 
-#: geobox/web/templates/admin.html:34
+#: ../app/geobox/web/templates/admin.html:34
 msgid "Log"
 msgstr "Logs"
 
-#: geobox/web/templates/admin.html:39
+#: ../app/geobox/web/templates/admin.html:39
 msgid "Overview"
 msgstr "Übersicht"
 
-#: geobox/web/templates/admin.html:44 geobox/web/templates/admin.html:48
+#: ../app/geobox/web/templates/admin.html:44
+#: ../app/geobox/web/templates/admin.html:48
 msgid "Files"
 msgstr "Dateien"
 
-#: geobox/web/templates/admin.html:53 geobox/web/templates/admin.html:57
+#: ../app/geobox/web/templates/admin.html:53
+#: ../app/geobox/web/templates/admin.html:57
 msgid "Network"
 msgstr "Netzwerk"
 
-#: geobox/web/templates/admin.html:69
+#: ../app/geobox/web/templates/admin.html:69
 msgid "GeoBox Version"
 msgstr "GeoBox Version"
 
-#: geobox/web/templates/base.html:32 geobox/web/templates/index.html:3
+#: ../app/geobox/web/templates/base.html:32
+#: ../app/geobox/web/templates/index.html:3
 msgid "home"
 msgstr "Menü"
 
-#: geobox/web/templates/base.html:59
+#: ../app/geobox/web/templates/base.html:59
 msgid "new home server"
 msgstr "Neuen Home-Server festlegen"
 
-#: geobox/web/templates/base.html:62
+#: ../app/geobox/web/templates/base.html:62
 msgid ""
-"The server is a home server. Would you like to assign it as your home server?"
+"The server is a home server. Would you like to assign it as your home "
+"server?"
 msgstr ""
 "Der ausgewählte GeoBox-Server kann als Home-Server verwendet werden. An "
-"diesen Server werden Ihre Berechtigungsgeometrien und Dokumente übertragen "
-"die zum Tausch benötigt werden. <br><br> Bitte beachten Sie, dass der Home-"
-"Server nachträglich nicht mehr geändert werden kann.<br><br>Möchten Sie "
-"diesen GeoBox-Server als Ihren Home-Server festlegen?"
+"diesen Server werden Ihre Berechtigungsgeometrien und Dokumente "
+"übertragen die zum Tausch benötigt werden. <br><br> Bitte beachten Sie, "
+"dass der Home-Server nachträglich nicht mehr geändert werden "
+"kann.<br><br>Möchten Sie diesen GeoBox-Server als Ihren Home-Server "
+"festlegen?"
 
-#: geobox/web/templates/base.html:65
-#: geobox/web/templates/admin/external_raster_list.html:57
-#: geobox/web/templates/admin/external_raster_list.html:97
+#: ../app/geobox/web/templates/base.html:65
+#: ../app/geobox/web/templates/admin/external_raster_list.html:57
+#: ../app/geobox/web/templates/admin/external_raster_list.html:97
 msgid "no"
 msgstr "Nein"
 
-#: geobox/web/templates/base.html:66
-#: geobox/web/templates/admin/external_raster_list.html:55
-#: geobox/web/templates/admin/external_raster_list.html:95
+#: ../app/geobox/web/templates/base.html:66
+#: ../app/geobox/web/templates/admin/external_raster_list.html:55
+#: ../app/geobox/web/templates/admin/external_raster_list.html:95
 msgid "yes"
 msgstr "Ja"
 
-#: geobox/web/templates/base.html:69
+#: ../app/geobox/web/templates/base.html:69
 msgid "boxes are copied"
 msgstr "Boxen werden kopiert"
 
-#: geobox/web/templates/create_couch_app.html:14
-#: geobox/web/templates/create_couch_app.html:17
-#: geobox/web/templates/index.html:60
+#: ../app/geobox/web/templates/create_couch_app.html:14
+#: ../app/geobox/web/templates/create_couch_app.html:17
+#: ../app/geobox/web/templates/index.html:60
 msgid "export editor and data"
 msgstr "Editor und Daten exportieren"
 
-#: geobox/web/templates/create_couch_app.html:17
+#: ../app/geobox/web/templates/create_couch_app.html:17
 msgid "tooltip create couch app"
 msgstr ""
-"Erstellen der GeoBox CouchApp in einer von Ihnen anzugebenen CouchDB. Die "
-"GeoBox CouchApp entspricht dem Editor des GeoBox Client."
+"Erstellen der GeoBox CouchApp in einer von Ihnen anzugebenen CouchDB. Die"
+" GeoBox CouchApp entspricht dem Editor des GeoBox Client."
 
-#: geobox/web/templates/create_couch_app.html:21
-#: geobox/web/templates/projects/export_edit.html:18
+#: ../app/geobox/web/templates/create_couch_app.html:21
+#: ../app/geobox/web/templates/projects/export_edit.html:18
 msgid "raster layers"
 msgstr "Rasterlayer"
 
-#: geobox/web/templates/create_couch_app.html:21
+#: ../app/geobox/web/templates/create_couch_app.html:21
 msgid "tooltip couch app raster layers"
 msgstr ""
-"Wählen Sie aus den Ihren lokalen Rasterlayern aus, welche zusammen mit der "
-"GeoBox CouchApp in die CouchDB übertragen werden sollen"
+"Wählen Sie aus den Ihren lokalen Rasterlayern aus, welche zusammen mit "
+"der GeoBox CouchApp in die CouchDB übertragen werden sollen"
 
-#: geobox/web/templates/create_couch_app.html:27
+#: ../app/geobox/web/templates/create_couch_app.html:27
 msgid "vector layer"
 msgstr "Vektorlayer"
 
-#: geobox/web/templates/create_couch_app.html:27
+#: ../app/geobox/web/templates/create_couch_app.html:27
 msgid "tooltip couch app vector layers"
 msgstr ""
 "Wählen Sie aus Ihren Vektorlayern aus, welche zusammen mit der GeoBox "
 "CouchApp in die CouchDB übertragen werden sollen"
 
-#: geobox/web/templates/create_couch_app.html:33
+#: ../app/geobox/web/templates/create_couch_app.html:33
 msgid "create"
 msgstr "Erstellen"
 
-#: geobox/web/templates/create_couch_app_status.html:3
+#: ../app/geobox/web/templates/create_couch_app_status.html:3
 msgid "create couch app status"
 msgstr "Status des Erstellvorgangs der GeoBox CouchApp"
 
-#: geobox/web/templates/create_couch_app_status.html:12
+#: ../app/geobox/web/templates/create_couch_app_status.html:12
 msgid "Create couch app status"
 msgstr "Status des Erstellvorgangs der GeoBox CouchApp"
 
-#: geobox/web/templates/create_couch_app_status.html:13
+#: ../app/geobox/web/templates/create_couch_app_status.html:13
 msgid "Couchapp created"
 msgstr "GeoBox CouchApp erstellt"
 
-#: geobox/web/templates/create_couch_app_status.html:15
+#: ../app/geobox/web/templates/create_couch_app_status.html:15
 msgid "Layer copy status"
 msgstr "Kopierstatus der Layer"
 
-#: geobox/web/templates/create_couch_app_status.html:19
-#: geobox/web/templates/editor.html:407
+#: ../app/geobox/web/templates/create_couch_app_status.html:19
+#: ../app/geobox/web/templates/editor.html:476
 msgid "Layer"
 msgstr "Layer"
 
-#: geobox/web/templates/create_couch_app_status.html:20
+#: ../app/geobox/web/templates/create_couch_app_status.html:20
 msgid "Status"
 msgstr "Status"
 
-#: geobox/web/templates/create_couch_app_status.html:30
+#: ../app/geobox/web/templates/create_couch_app_status.html:30
 msgid "not processed"
 msgstr "Noch nicht bearbeitet"
 
-#: geobox/web/templates/create_couch_app_status.html:32
+#: ../app/geobox/web/templates/create_couch_app_status.html:32
 msgid "finished"
 msgstr "Beendet"
 
-#: geobox/web/templates/create_couch_app_status.html:34
+#: ../app/geobox/web/templates/create_couch_app_status.html:34
 msgid "an error occured"
 msgstr "Es ist ein Fehler aufgetreten"
 
-#: geobox/web/templates/create_couch_app_status.html:36
+#: ../app/geobox/web/templates/create_couch_app_status.html:36
 msgid "completed"
 msgstr "abgeschlossen"
 
-#: geobox/web/templates/downloads.html:4 geobox/web/templates/downloads.html:7
+#: ../app/geobox/web/templates/downloads.html:4
+#: ../app/geobox/web/templates/downloads.html:7
 msgid "Downloads"
 msgstr "Downloads"
 
-#: geobox/web/templates/downloads.html:13
-#: geobox/web/templates/projects/exports.html:14
-#: geobox/web/templates/projects/imports.html:13
-#: geobox/web/templates/tasks/task_list.html:25
+#: ../app/geobox/web/templates/downloads.html:13
+#: ../app/geobox/web/templates/projects/exports.html:14
+#: ../app/geobox/web/templates/projects/imports.html:13
+#: ../app/geobox/web/templates/tasks/task_list.html:25
 msgid "updated"
 msgstr "Aktualisiert"
 
-#: geobox/web/templates/downloads.html:14
-#: geobox/web/templates/admin/files.html:3
+#: ../app/geobox/web/templates/downloads.html:14
+#: ../app/geobox/web/templates/admin/files.html:3
 msgid "files"
 msgstr "Dateien"
 
-#: geobox/web/templates/downloads.html:24
+#: ../app/geobox/web/templates/downloads.html:24
 msgid "go to export details"
 msgstr "Zum Export"
 
-#: geobox/web/templates/downloads.html:26
+#: ../app/geobox/web/templates/downloads.html:26
 msgid "no project for export"
 msgstr "ohne Exportprojekt"
 
-#: geobox/web/templates/downloads.html:36
+#: ../app/geobox/web/templates/downloads.html:36
 msgid "as zip file"
 msgstr "als ZIP-Datei"
 
-#: geobox/web/templates/downloads.html:44
+#: ../app/geobox/web/templates/downloads.html:44
 msgid "open export on external explorer"
 msgstr "Export-Verzeichnis öffnen"
 
-#: geobox/web/templates/editor.html:4 geobox/web/templates/editor.html:83
-#: geobox/web/templates/index.html:57 geobox/web/templates/index.html:59
+#: ../app/geobox/web/templates/editor.html:4
+#: ../app/geobox/web/templates/editor.html:91
+#: ../app/geobox/web/templates/index.html:57
+#: ../app/geobox/web/templates/index.html:59
 msgid "editor"
 msgstr "Editor"
 
-#: geobox/web/templates/editor.html:84
+#: ../app/geobox/web/templates/editor.html:92
 msgid "tooltip - editor"
 msgstr "In dieser Ansicht können Sie Geometrien bearbeiten"
 
-#: geobox/web/templates/editor.html:89
+#: ../app/geobox/web/templates/editor.html:97
 msgid "Current changes"
 msgstr "Aktuelle Änderungen"
 
-#: geobox/web/templates/editor.html:91 geobox/web/templates/editor.html:237
-#: geobox/web/templates/editor.html:238
-#: geobox/web/templates/admin/external_unlock.html:20
-#: geobox/web/templates/admin/external_wms.html:51
-#: geobox/web/templates/admin/external_wmts.html:24
-#: geobox/web/templates/projects/export_edit.html:52
-#: geobox/web/templates/projects/import_edit.html:29
+#: ../app/geobox/web/templates/editor.html:99
+#: ../app/geobox/web/templates/editor.html:306
+#: ../app/geobox/web/templates/editor.html:307
+#: ../app/geobox/web/templates/admin/external_unlock.html:20
+#: ../app/geobox/web/templates/admin/external_wms.html:51
+#: ../app/geobox/web/templates/admin/external_wmts.html:24
+#: ../app/geobox/web/templates/projects/export_edit.html:52
+#: ../app/geobox/web/templates/projects/import_edit.html:29
 msgid "save"
 msgstr "Speichern"
 
-#: geobox/web/templates/editor.html:92 geobox/web/templates/editor.html:187
-#: geobox/web/templates/editor.html:239
+#: ../app/geobox/web/templates/editor.html:100
+#: ../app/geobox/web/templates/editor.html:195
+#: ../app/geobox/web/templates/editor.html:308
 msgid "discard"
 msgstr "Verwerfen"
 
-#: geobox/web/templates/editor.html:99
+#: ../app/geobox/web/templates/editor.html:107
 msgid "map layer"
 msgstr "Kartenebenen"
 
-#: geobox/web/templates/editor.html:102
+#: ../app/geobox/web/templates/editor.html:110
 msgid "look"
 msgstr "Aussehen"
 
-#: geobox/web/templates/editor.html:105
-#: geobox/web/templates/admin/external_raster_list.html:137
-#: geobox/web/templates/admin/external_raster_list.html:139
-#: geobox/web/templates/projects/exports.html:29
-#: geobox/web/templates/projects/imports.html:40
+#: ../app/geobox/web/templates/editor.html:113
+#: ../app/geobox/web/templates/admin/external_raster_list.html:137
+#: ../app/geobox/web/templates/admin/external_raster_list.html:139
+#: ../app/geobox/web/templates/projects/exports.html:29
+#: ../app/geobox/web/templates/projects/imports.html:40
 msgid "edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:108 geobox/web/templates/editor.html:193
+#: ../app/geobox/web/templates/editor.html:116
+#: ../app/geobox/web/templates/editor.html:201
 msgid "filter"
 msgstr "Filter"
 
-#: geobox/web/templates/editor.html:111
+#: ../app/geobox/web/templates/editor.html:119
 msgid "measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:115 geobox/web/templates/editor.html:208
-#: geobox/web/templates/editor.html:218
+#: ../app/geobox/web/templates/editor.html:123
+#: ../app/geobox/web/templates/editor.html:216
+#: ../app/geobox/web/templates/editor.html:241
 msgid "search"
 msgstr "Suche"
 
-#: geobox/web/templates/editor.html:119 geobox/web/templates/editor.html:279
+#: ../app/geobox/web/templates/editor.html:127
+#: ../app/geobox/web/templates/editor.html:348
 msgid "offline seeding"
 msgstr "Datenimport"
 
-#: geobox/web/templates/editor.html:123 geobox/web/templates/editor.html:228
+#: ../app/geobox/web/templates/editor.html:131
+#: ../app/geobox/web/templates/editor.html:297
 msgid "thematical map"
 msgstr "Thematische Karte"
 
-#: geobox/web/templates/editor.html:126
+#: ../app/geobox/web/templates/editor.html:134
 msgid "documents"
 msgstr "Dokumente"
 
-#: geobox/web/templates/editor.html:133
+#: ../app/geobox/web/templates/editor.html:141
 msgid "Selected area"
 msgstr "Selektierte Fläche"
 
-#: geobox/web/templates/editor.html:133
+#: ../app/geobox/web/templates/editor.html:141
 msgid "Drawn area"
 msgstr "Gezeichnete Fläche"
 
-#: geobox/web/templates/editor.html:143
+#: ../app/geobox/web/templates/editor.html:151
 msgid "Search wms"
 msgstr "WMS suchen"
 
-#: geobox/web/templates/editor.html:146
+#: ../app/geobox/web/templates/editor.html:154
 msgid "No search results"
 msgstr "Die Suchanfrage ergab kein Ergebnis"
 
-#: geobox/web/templates/editor.html:151
+#: ../app/geobox/web/templates/editor.html:159
 msgid "Styling"
 msgstr "Aussehen der Geometrien"
 
-#: geobox/web/templates/editor.html:152
+#: ../app/geobox/web/templates/editor.html:160
 msgid "infotext - edit styling"
 msgstr ""
 "Hier ändern Sie das Aussehen der Geometrien. In jeder Ebene kann ein "
-"bestimmtes Aussehen verwendet werden. Ohne Speichern gehen die Änderungen "
-"verloren."
+"bestimmtes Aussehen verwendet werden. Ohne Speichern gehen die Änderungen"
+" verloren."
 
-#: geobox/web/templates/editor.html:157
+#: ../app/geobox/web/templates/editor.html:165
 msgid "Edit"
 msgstr "Editieren"
 
-#: geobox/web/templates/editor.html:158
+#: ../app/geobox/web/templates/editor.html:166
 msgid "infotext - edit controls"
 msgstr "Wählen Sie ein Bearbeitungswerkzeug aus."
 
-#: geobox/web/templates/editor.html:162
+#: ../app/geobox/web/templates/editor.html:170
 msgid "select all features"
 msgstr "Alle Geometrien auswählen"
 
-#: geobox/web/templates/editor.html:163
+#: ../app/geobox/web/templates/editor.html:171
 msgid "unselect all features"
 msgstr "Auswahl aufheben"
 
-#: geobox/web/templates/editor.html:167
+#: ../app/geobox/web/templates/editor.html:175
 msgid "JSON Schema"
 msgstr "JSON Schema"
 
-#: geobox/web/templates/editor.html:167
+#: ../app/geobox/web/templates/editor.html:175
 msgid "tooltip - json schema"
 msgstr ""
 "Sie können die URL eines JSON Schema angeben, um dieses Schema auf die "
 "Attribute der Geometrien des Aktiven Layers anzuwenden"
 
-#: geobox/web/templates/editor.html:170
-#: geobox/web/templates/js/translation.js:69
+#: ../app/geobox/web/templates/editor.html:178
+#: ../app/geobox/web/templates/js/translation.js:69
 msgid "Add JSONSchema URL"
 msgstr "Schema laden"
 
-#: geobox/web/templates/editor.html:171
-#: geobox/web/templates/js/translation.js:71
+#: ../app/geobox/web/templates/editor.html:179
+#: ../app/geobox/web/templates/js/translation.js:71
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#: geobox/web/templates/editor.html:172
-#: geobox/web/templates/js/translation.js:72
+#: ../app/geobox/web/templates/editor.html:180
+#: ../app/geobox/web/templates/js/translation.js:72
 msgid "Remove"
 msgstr "Entfernen"
 
-#: geobox/web/templates/editor.html:173
+#: ../app/geobox/web/templates/editor.html:181
 msgid "Successful loaded"
 msgstr "Erfolgreich aktualisiert"
 
-#: geobox/web/templates/editor.html:174
-#: geobox/web/templates/js/translation.js:73
+#: ../app/geobox/web/templates/editor.html:182
+#: ../app/geobox/web/templates/js/translation.js:73
 msgid "Loading schema failed"
 msgstr "Laden des JSON-Schema fehlgeschlagen"
 
-#: geobox/web/templates/editor.html:175
-#: geobox/web/templates/js/translation.js:41
+#: ../app/geobox/web/templates/editor.html:183
+#: ../app/geobox/web/templates/js/translation.js:41
 msgid "Successful refreshed"
 msgstr "Erfolgreich aktualisiert"
 
-#: geobox/web/templates/editor.html:176
-#: geobox/web/templates/js/translation.js:74
+#: ../app/geobox/web/templates/editor.html:184
+#: ../app/geobox/web/templates/js/translation.js:74
 msgid "Refreshing schema failed"
 msgstr "Aktualisieren des JSON-Schema fehlgeschlagen"
 
-#: geobox/web/templates/editor.html:177 geobox/web/templates/editor.html:257
-#: geobox/web/templates/editor.html:265
+#: ../app/geobox/web/templates/editor.html:185
+#: ../app/geobox/web/templates/editor.html:326
+#: ../app/geobox/web/templates/editor.html:334
 msgid "No active layer"
 msgstr "Kein Layer aktiv"
 
-#: geobox/web/templates/editor.html:180
-#: geobox/web/templates/js/translation.js:108
+#: ../app/geobox/web/templates/editor.html:188
+#: ../app/geobox/web/templates/js/translation.js:108
 msgid "Attributes"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/editor.html:180
+#: ../app/geobox/web/templates/editor.html:188
 msgid "infotext - attributes"
 msgstr ""
-"Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie hierzu "
-"eine Geometrie mit dem Auswahlwerkezug aus."
+"Zu jeder Geometrie können Eigenschaften festgelegt werden. Wählen Sie "
+"hierzu eine Geometrie mit dem Auswahlwerkezug aus."
 
-#: geobox/web/templates/editor.html:183
+#: ../app/geobox/web/templates/editor.html:191
 msgid "tooltip - edit attributes"
 msgstr ""
-"Selektieren Sie eine oder mehrere Geometrien um deren Attribute zu bearbeiten"
+"Selektieren Sie eine oder mehrere Geometrien um deren Attribute zu "
+"bearbeiten"
 
-#: geobox/web/templates/editor.html:183
+#: ../app/geobox/web/templates/editor.html:191
 msgid "edit attributes"
 msgstr "Eigenschaften bearbeiten"
 
-#: geobox/web/templates/editor.html:186
+#: ../app/geobox/web/templates/editor.html:194
 msgid "apply"
 msgstr "Übernehmen"
 
-#: geobox/web/templates/editor.html:194
+#: ../app/geobox/web/templates/editor.html:202
 msgid "infotext - filter controls"
-msgstr ""
-"Hier können Sie Geometrien abhängig von Eigenschaft und Wert auswählen."
+msgstr "Hier können Sie Geometrien abhängig von Eigenschaft und Wert auswählen."
 
-#: geobox/web/templates/editor.html:199
+#: ../app/geobox/web/templates/editor.html:207
 msgid "Measure"
 msgstr "Messen"
 
-#: geobox/web/templates/editor.html:200
+#: ../app/geobox/web/templates/editor.html:208
 msgid "infotext - measure controls"
 msgstr ""
-"Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen, "
-"oder Strecken und Flächen messen."
+"Mit diesen Werkzeugen können Sie die Koordinaten eines Punktes bestimmen,"
+" oder Strecken und Flächen messen."
 
-#: geobox/web/templates/editor.html:210
+#: ../app/geobox/web/templates/editor.html:230
 msgid "infotext - search controls"
 msgstr ""
-"Sie können hier über die vom Server bereitgestellt Dienste suchen und die "
-"Geometrien anschließend über den Reiter 'Editieren' in Ihren Layer übertragen"
+"Sie können hier über die vom "
+"Server bereitgestellt Dienste suchen und "
+"die Geometrien anschließend über den "
+"Reiter 'Editieren' in Ihren Layer "
+"übertragen."
 
-#: geobox/web/templates/editor.html:213
+#: ../app/geobox/web/templates/editor.html:230
+msgid "tooltip - search"
+msgstr "Je nach ausgewähltem Suchdienst "
+"stehen Ihnen verschiedene Möglichkeiten der"
+"Suche zur Verfügung. Um die "
+"Suchergebnisse auszublenden, betätigen Sie den"
+" entsprechenden Knopf."
+
+#: ../app/geobox/web/templates/editor.html:236
 msgid "No features found"
 msgstr "Die Suche ergab keine Ergebnisse"
 
-#: geobox/web/templates/editor.html:216
+#: ../app/geobox/web/templates/editor.html:239
 msgid "search request is being processed"
 msgstr "Suchanfrage wird bearbeitet"
 
-#: geobox/web/templates/editor.html:219
+#: ../app/geobox/web/templates/editor.html:242
 msgid "remove search"
 msgstr "Suchstring entfernen"
 
-#: geobox/web/templates/editor.html:220
+#: ../app/geobox/web/templates/editor.html:243
 msgid "hide searchlayer"
 msgstr "Suchergebnis ausblenden"
 
-#: geobox/web/templates/editor.html:222
-msgid "infotext - no wfs search"
-msgstr "Der Server stellt keine Suchdienste zur Verfügung."
+#: ../app/geobox/web/templates/editor.html:246
+msgid "search parcel by"
+msgstr "Flurstücke suchen durch"
 
-#: geobox/web/templates/editor.html:229
+#: ../app/geobox/web/templates/editor.html:249
+msgid "Parcel id search"
+msgstr "Flurstücksnummer"
+
+#: ../app/geobox/web/templates/editor.html:250
+msgid "Parcel coordinate search"
+msgstr "Koordinate"
+
+#: ../app/geobox/web/templates/editor.html:251
+msgid "Parcel feature search"
+msgstr "Geometrien"
+
+#: ../app/geobox/web/templates/editor.html:258
+msgid "Start parcel id search"
+msgstr "Suchen"
+
+#: ../app/geobox/web/templates/editor.html:259
+msgid "No parcel ids given"
+msgstr "Bitte geben Sie eine oder mehrere Flurstücksnummern an"
+
+#: ../app/geobox/web/templates/editor.html:263
+msgid "Selected coordinate"
+msgstr "Ausgewählte Koordinate"
+
+#: ../app/geobox/web/templates/editor.html:266
+msgid "Start parcel coordinate search"
+msgstr "Suchen"
+
+#: ../app/geobox/web/templates/editor.html:267
+msgid "No search coordinate given"
+msgstr "Bitte wählen Sie eine Koordinate in der Karte aus"
+
+#: ../app/geobox/web/templates/editor.html:270
+msgid "Start parcel feature search"
+msgstr "Suchen"
+
+#: ../app/geobox/web/templates/editor.html:271
+msgid "No search feature(s) given"
+msgstr "Bitte wählen Sie eine oder mehrere Geometrien aus"
+
+#: ../app/geobox/web/templates/editor.html:273
+msgid "Search in progress"
+msgstr "Flurstückssuche im gange"
+
+#: ../app/geobox/web/templates/editor.html:275
+msgid "Last search results"
+msgstr "Ergebnisse der letzten Suche"
+
+#: ../app/geobox/web/templates/editor.html:276
+msgid "Remove parcel search results"
+msgstr "Suchergebnisse ausblenden"
+
+#: ../app/geobox/web/templates/editor.html:281
+msgid "parcel id"
+msgstr "Flurstücksnummer"
+
+#: ../app/geobox/web/templates/editor.html:298
 msgid "infotext - thematical map"
 msgstr ""
-"Erstellen Sie hier eine thematische Karte. So können Sie zum Beispiel die "
-"Geometrien klassifizieren oder die Daten als Liste exportieren."
+"Erstellen Sie hier eine thematische Karte. So können Sie zum Beispiel die"
+" Geometrien klassifizieren oder die Daten als Liste exportieren."
 
-#: geobox/web/templates/editor.html:234
+#: ../app/geobox/web/templates/editor.html:303
 msgid "save changes"
 msgstr "Änderungen speichern"
 
-#: geobox/web/templates/editor.html:235
+#: ../app/geobox/web/templates/editor.html:304
 msgid "infotext - editor save"
 msgstr ""
 "Speichern Sie hier Änderungen dauerhaft oder laden Sie Daten aus "
 "Speicherpunkten."
 
-#: geobox/web/templates/editor.html:241 geobox/web/templates/editor.html:244
+#: ../app/geobox/web/templates/editor.html:310
+#: ../app/geobox/web/templates/editor.html:313
 msgid "save as"
 msgstr "Speichern untern"
 
-#: geobox/web/templates/editor.html:246
+#: ../app/geobox/web/templates/editor.html:315
 msgid "No active layer or invalid layer name"
 msgstr "Ungültiger Layername oder kein Layer aktiv"
 
-#: geobox/web/templates/editor.html:247
+#: ../app/geobox/web/templates/editor.html:316
 msgid "Layer saved as"
 msgstr "Layer gespeichert als"
 
-#: geobox/web/templates/editor.html:250
+#: ../app/geobox/web/templates/editor.html:319
 msgid "Export"
 msgstr "Exportieren"
 
-#: geobox/web/templates/editor.html:252
+#: ../app/geobox/web/templates/editor.html:321
 msgid "Export layer"
 msgstr "Layer exportieren"
 
-#: geobox/web/templates/editor.html:255
+#: ../app/geobox/web/templates/editor.html:324
 msgid "Export selected geometries"
 msgstr "Ausgewählte Geometrien exportieren"
 
-#: geobox/web/templates/editor.html:258
+#: ../app/geobox/web/templates/editor.html:327
 msgid "Failed to export selected geometries"
 msgstr "Fehler beim exportieren der ausgewählten Geometrien"
 
-#: geobox/web/templates/editor.html:259
+#: ../app/geobox/web/templates/editor.html:328
 msgid "Selected geometries exported"
 msgstr "Ausgewählte Geometrien exportiert"
 
-#: geobox/web/templates/editor.html:262
+#: ../app/geobox/web/templates/editor.html:331
 msgid "savepoints"
 msgstr "Speicherpunkte"
 
-#: geobox/web/templates/editor.html:263
+#: ../app/geobox/web/templates/editor.html:332
 msgid "create savepoint"
 msgstr "Speicherpunkt erstellen"
 
-#: geobox/web/templates/editor.html:264
+#: ../app/geobox/web/templates/editor.html:333
 msgid "create new savepoint"
 msgstr "Erstellen"
 
-#: geobox/web/templates/editor.html:266
+#: ../app/geobox/web/templates/editor.html:335
 msgid "save point created"
 msgstr "Speicherpunkt wurde erstellt"
 
-#: geobox/web/templates/editor.html:267
+#: ../app/geobox/web/templates/editor.html:336
 msgid "error - could not create savepoint"
 msgstr "Fehler - Speicherpunkt konnte nicht wurde erstellt"
 
-#: geobox/web/templates/editor.html:269
+#: ../app/geobox/web/templates/editor.html:338
 msgid "load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:272
+#: ../app/geobox/web/templates/editor.html:341
 msgid "load"
 msgstr "Laden"
 
-#: geobox/web/templates/editor.html:273
-#: geobox/web/templates/boxes/base.html:61
+#: ../app/geobox/web/templates/editor.html:342
+#: ../app/geobox/web/templates/boxes/base.html:61
 msgid "delete"
 msgstr "Löschen"
 
-#: geobox/web/templates/editor.html:280
+#: ../app/geobox/web/templates/editor.html:349
 msgid "infotext - offline seeding"
 msgstr ""
-"Hier können Sie für Ihre lokalen Rasterlayer zusätzlich Daten importieren. "
-"Wählen Sie hierzu einen Layer aus und zeichnen Sie den Bereich, für den Sie "
-"Daten importieren möchten, in die Karte ein. Wählen Sie einen Start- und "
-"Endlevel für den Datenimport aus und starten Sie den Datenimport per "
-"Knopfdruck"
+"Hier können Sie für Ihre lokalen Rasterlayer zusätzlich Daten "
+"importieren. Wählen Sie hierzu einen Layer aus und zeichnen Sie den "
+"Bereich, für den Sie Daten importieren möchten, in die Karte ein. Wählen "
+"Sie einen Start- und Endlevel für den Datenimport aus und starten Sie den"
+" Datenimport per Knopfdruck"
 
-#: geobox/web/templates/editor.html:292
+#: ../app/geobox/web/templates/editor.html:361
 msgid "Sure you want load savepoint"
 msgstr "Speicherpunkt laden"
 
-#: geobox/web/templates/editor.html:295
+#: ../app/geobox/web/templates/editor.html:364
 msgid "infotext load savepoint"
 msgstr ""
-"Nach dem Laden des Speicherpunkts gehen alle nicht gespeicherte Änderungen "
-"verloren."
+"Nach dem Laden des Speicherpunkts gehen alle nicht gespeicherte "
+"Änderungen verloren."
 
-#: geobox/web/templates/editor.html:298 geobox/web/templates/editor.html:313
-#: geobox/web/templates/editor.html:328 geobox/web/templates/editor.html:344
-#: geobox/web/templates/editor.html:369 geobox/web/templates/editor.html:389
-#: geobox/web/templates/admin/external_wms.html:70
-#: geobox/web/templates/boxes/base.html:84
-#: geobox/web/templates/boxes/base.html:112
+#: ../app/geobox/web/templates/editor.html:367
+#: ../app/geobox/web/templates/editor.html:382
+#: ../app/geobox/web/templates/editor.html:397
+#: ../app/geobox/web/templates/editor.html:413
+#: ../app/geobox/web/templates/editor.html:438
+#: ../app/geobox/web/templates/editor.html:458
+#: ../app/geobox/web/templates/admin/external_wms.html:70
+#: ../app/geobox/web/templates/boxes/base.html:84
+#: ../app/geobox/web/templates/boxes/base.html:112
 msgid "abort"
 msgstr "Abbrechen"
 
-#: geobox/web/templates/editor.html:299
+#: ../app/geobox/web/templates/editor.html:368
 msgid "yes load"
 msgstr "Ja, laden!"
 
-#: geobox/web/templates/editor.html:307
+#: ../app/geobox/web/templates/editor.html:376
 msgid "Sure you want remove savepoint"
 msgstr "Speicherpunkt löschen"
 
-#: geobox/web/templates/editor.html:310
+#: ../app/geobox/web/templates/editor.html:379
 msgid "infotext remove savepoint"
 msgstr ""
-"Nach dem Löschen können Sie dne Speicherpunkt nicht wiederherstellen. Alle "
-"Änderungen gehen dabei verloren."
+"Nach dem Löschen können Sie dne Speicherpunkt nicht wiederherstellen. "
+"Alle Änderungen gehen dabei verloren."
 
-#: geobox/web/templates/editor.html:314 geobox/web/templates/editor.html:345
+#: ../app/geobox/web/templates/editor.html:383
+#: ../app/geobox/web/templates/editor.html:414
 msgid "yes delete"
 msgstr "Ja, Löschen"
 
-#: geobox/web/templates/editor.html:322
+#: ../app/geobox/web/templates/editor.html:391
 msgid "Sure you want change layer"
 msgstr "Sind Sie sicher, dass Sie die Karte wechseln möchten"
 
-#: geobox/web/templates/editor.html:325
+#: ../app/geobox/web/templates/editor.html:394
 msgid "infotext change layer"
 msgstr ""
-"Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer "
-"importieren."
+"Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer"
+" importieren."
 
-#: geobox/web/templates/editor.html:329
+#: ../app/geobox/web/templates/editor.html:398
 msgid "yes change and discard"
 msgstr "Änderungen verwefern"
 
-#: geobox/web/templates/editor.html:330
+#: ../app/geobox/web/templates/editor.html:399
 msgid "yes change and save"
 msgstr "Speichern und wechseln"
 
-#: geobox/web/templates/editor.html:338
+#: ../app/geobox/web/templates/editor.html:407
 msgid "Sure you want delete layer"
 msgstr "Löschen der Karte"
 
-#: geobox/web/templates/editor.html:341
+#: ../app/geobox/web/templates/editor.html:410
 msgid "infotext delete layer"
 msgstr ""
 "Achtung: Nach dem Löschen kann die Karte nicht wiederhergestellt werden. "
 "Alle in der Karte enthaltenen Geometrien werden ebenfalls gelöscht."
 
-#: geobox/web/templates/editor.html:354
+#: ../app/geobox/web/templates/editor.html:423
 msgid "export vector layer"
 msgstr "Vektorlayer exportieren"
 
-#: geobox/web/templates/editor.html:358
+#: ../app/geobox/web/templates/editor.html:427
 msgid "infotext export layer"
 msgstr "Exportieren Sie hier die aktuelle Karte in verschiedene Formate."
 
-#: geobox/web/templates/editor.html:366
+#: ../app/geobox/web/templates/editor.html:435
 msgid "infotext - odata export"
 msgstr ""
-"Binden Sie die angegebene URL in Ihren OData-Reader ein.<br>Alle Änderungen "
-"an den Attributen werden nach dem Speichern automatisch übertragen."
+"Binden Sie die angegebene URL in Ihren OData-Reader ein.<br>Alle "
+"Änderungen an den Attributen werden nach dem Speichern automatisch "
+"übertragen."
 
-#: geobox/web/templates/editor.html:370 geobox/web/templates/editor.html:390
-#: geobox/web/templates/index.html:42
+#: ../app/geobox/web/templates/editor.html:439
+#: ../app/geobox/web/templates/editor.html:459
+#: ../app/geobox/web/templates/index.html:42
 msgid "export"
 msgstr "Exportieren"
 
-#: geobox/web/templates/editor.html:379
+#: ../app/geobox/web/templates/editor.html:448
 msgid "export selected geometries"
 msgstr "Ausgewählte Geometrien exportieren"
 
-#: geobox/web/templates/editor.html:383
+#: ../app/geobox/web/templates/editor.html:452
 msgid "infotext export selected geometries"
 msgstr ""
-"Exportieren Sie hier Ihre ausgewählten Geometrien als GeoJSON direkt in Ihre "
-"Box."
+"Exportieren Sie hier Ihre ausgewählten Geometrien als GeoJSON direkt in "
+"Ihre Box."
 
-#: geobox/web/templates/editor.html:400
+#: ../app/geobox/web/templates/editor.html:469
 msgid "WMS search results"
 msgstr "WMS Suchergebnisse"
 
-#: geobox/web/templates/editor.html:414 geobox/web/templates/editor.html:430
+#: ../app/geobox/web/templates/editor.html:483
+#: ../app/geobox/web/templates/editor.html:499
 msgid "close"
 msgstr "Schließen"
 
-#: geobox/web/templates/editor.html:423
+#: ../app/geobox/web/templates/editor.html:492
 msgid "Attribute edit mode active"
 msgstr "Eigenschaften bearbeiten aktiv"
 
-#: geobox/web/templates/editor.html:426
+#: ../app/geobox/web/templates/editor.html:495
 msgid ""
 "Finish attribute editing by accepting or rejecting your changes before "
 "proceed"
@@ -944,1492 +1036,1499 @@ msgstr ""
 "Beenden Sie das Bearbeiten der Eigenschaften indem Sie Ihre Änderungen "
 "übernehmen oder verwerfen bevor Sie fortfahren"
 
-#: geobox/web/templates/form_macros.html:68
+#: ../app/geobox/web/templates/form_macros.html:75
 msgid "context document will be loaded and boxes are copied"
 msgstr "Daten werden vom Server geladen und kopiert"
 
-#: geobox/web/templates/form_macros.html:75
-#: geobox/web/templates/admin/initial_set_server.html:3
+#: ../app/geobox/web/templates/form_macros.html:82
+#: ../app/geobox/web/templates/admin/initial_set_server.html:3
 msgid "set gbi server"
 msgstr "Server auswählen"
 
-#: geobox/web/templates/form_macros.html:85
+#: ../app/geobox/web/templates/form_macros.html:92
 msgid "no auth required"
 msgstr "Für diesen Server ist keine Anmeldung erforderlich"
 
-#: geobox/web/templates/form_macros.html:88
+#: ../app/geobox/web/templates/form_macros.html:95
 msgid "set"
 msgstr "Benutzen"
 
-#: geobox/web/templates/form_macros.html:99
-#: geobox/web/templates/admin/add_server.html:4
+#: ../app/geobox/web/templates/form_macros.html:106
+#: ../app/geobox/web/templates/admin/add_server.html:4
 msgid "Add server"
 msgstr "Weiteren Server  hinzufügen"
 
-#: geobox/web/templates/form_macros.html:110
+#: ../app/geobox/web/templates/form_macros.html:117
 msgid "add"
 msgstr "Hinzufügen"
 
-#: geobox/web/templates/index.html:10
+#: ../app/geobox/web/templates/index.html:10
 msgid "Welcome to GeoBox"
 msgstr "Willkommen zur GeoBox"
 
-#: geobox/web/templates/index.html:12
+#: ../app/geobox/web/templates/index.html:12
 msgid "welcome info text"
 msgstr "Ausführliche Informationen zur Anwendung finden sie im "
 
-#: geobox/web/templates/index.html:12
+#: ../app/geobox/web/templates/index.html:12
 msgid "download usermanual"
 msgstr "Benutzerhandbuch"
 
-#: geobox/web/templates/index.html:16 geobox/web/templates/boxes/base.html:66
-#: geobox/web/templates/boxes/base.html:113
-#: geobox/web/templates/vector/geojson.html:37
-#: geobox/web/templates/vector/gml.html:38
-#: geobox/web/templates/vector/import.html:38
+#: ../app/geobox/web/templates/index.html:16
+#: ../app/geobox/web/templates/boxes/base.html:66
+#: ../app/geobox/web/templates/boxes/base.html:113
+#: ../app/geobox/web/templates/vector/geojson.html:37
+#: ../app/geobox/web/templates/vector/gml.html:38
+#: ../app/geobox/web/templates/vector/import.html:38
 msgid "import"
 msgstr "Importieren"
 
-#: geobox/web/templates/index.html:18
+#: ../app/geobox/web/templates/index.html:18
 msgid "import raster"
 msgstr "Rasterdaten importieren"
 
-#: geobox/web/templates/index.html:20
+#: ../app/geobox/web/templates/index.html:20
 msgid "import shape"
 msgstr "Shapedatei importieren"
 
-#: geobox/web/templates/index.html:21 geobox/web/templates/boxes/base.html:100
+#: ../app/geobox/web/templates/index.html:21
+#: ../app/geobox/web/templates/boxes/base.html:100
 msgid "import geojson"
 msgstr "GeoJSON-Datei importieren"
 
-#: geobox/web/templates/index.html:22
+#: ../app/geobox/web/templates/index.html:22
 msgid "import gml"
 msgstr "GML-Datei importieren"
 
-#: geobox/web/templates/index.html:29
+#: ../app/geobox/web/templates/index.html:29
 msgid "boxes"
 msgstr "Boxen"
 
-#: geobox/web/templates/index.html:32 geobox/web/views/editor.py:40
+#: ../app/geobox/web/templates/index.html:32
+#: ../app/geobox/web/views/editor.py:40
 msgid "filebox"
 msgstr "Beraterbox"
 
-#: geobox/web/templates/index.html:34
+#: ../app/geobox/web/templates/index.html:34
 msgid "downloadbox"
 msgstr "Download-Box"
 
-#: geobox/web/templates/index.html:35
+#: ../app/geobox/web/templates/index.html:35
 msgid "uploadbox"
 msgstr "Upload-Box"
 
-#: geobox/web/templates/index.html:44
+#: ../app/geobox/web/templates/index.html:44
 msgid "export raster"
 msgstr "Rasterdaten exportieren"
 
-#: geobox/web/templates/index.html:49 geobox/web/templates/index.html:51
-#: geobox/web/templates/tasks/task_list.html:83
+#: ../app/geobox/web/templates/index.html:49
+#: ../app/geobox/web/templates/index.html:51
+#: ../app/geobox/web/templates/tasks/task_list.html:83
 msgid "tasks"
 msgstr "Aufgaben"
 
-#: geobox/web/templates/index.html:52
+#: ../app/geobox/web/templates/index.html:52
 msgid "downloads"
 msgstr "Downloads"
 
-#: geobox/web/templates/index.html:67
+#: ../app/geobox/web/templates/index.html:67
 msgid "data sources"
 msgstr "Datenquellen"
 
-#: geobox/web/templates/index.html:68
+#: ../app/geobox/web/templates/index.html:68
 msgid "administation"
 msgstr "Administration"
 
-#: geobox/web/templates/macros.html:127
+#: ../app/geobox/web/templates/macros.html:127
 msgid "download coverage"
 msgstr "Downloadberecht."
 
-#: geobox/web/templates/admin/external_raster_list.html:3
-#: geobox/web/templates/projects/imports.html:3
+#: ../app/geobox/web/templates/admin/external_raster_list.html:3
+#: ../app/geobox/web/templates/projects/imports.html:3
 msgid "import project overview"
 msgstr "Übersicht über Rasterimporte"
 
-#: geobox/web/templates/admin/external_raster_list.html:6
+#: ../app/geobox/web/templates/admin/external_raster_list.html:6
 msgid "local raster sources"
 msgstr "Lokale Rasterquelle"
 
-#: geobox/web/templates/admin/external_raster_list.html:7
+#: ../app/geobox/web/templates/admin/external_raster_list.html:7
 msgid "tooltip - local raster source overview"
 msgstr ""
-"Hier sind alle Rasterquellen aufgelistet die auf Ihrem System zur Verfügung "
-"stehen."
+"Hier sind alle Rasterquellen aufgelistet die auf Ihrem System zur "
+"Verfügung stehen."
 
-#: geobox/web/templates/admin/external_raster_list.html:12
-#: geobox/web/templates/admin/external_raster_list.html:133
+#: ../app/geobox/web/templates/admin/external_raster_list.html:12
+#: ../app/geobox/web/templates/admin/external_raster_list.html:133
 msgid "layer"
 msgstr "Layer"
 
-#: geobox/web/templates/admin/external_raster_list.html:14
-#: geobox/web/templates/projects/imports.html:15
+#: ../app/geobox/web/templates/admin/external_raster_list.html:14
+#: ../app/geobox/web/templates/projects/imports.html:15
 msgid "zoom level"
 msgstr "Level"
 
-#: geobox/web/templates/admin/external_raster_list.html:26
-#: geobox/web/templates/admin/external_raster_list.html:141
-#: geobox/web/templates/admin/files.html:13
-#: geobox/web/templates/projects/exports.html:35
-#: geobox/web/templates/projects/imports.html:46
-#: geobox/web/templates/tasks/task_list.html:52
+#: ../app/geobox/web/templates/admin/external_raster_list.html:26
+#: ../app/geobox/web/templates/admin/external_raster_list.html:141
+#: ../app/geobox/web/templates/admin/files.html:13
+#: ../app/geobox/web/templates/projects/exports.html:35
+#: ../app/geobox/web/templates/projects/imports.html:46
+#: ../app/geobox/web/templates/tasks/task_list.html:52
 msgid "remove"
 msgstr "Entfernen"
 
-#: geobox/web/templates/admin/external_raster_list.html:34
+#: ../app/geobox/web/templates/admin/external_raster_list.html:34
 msgid "external raster source overview"
 msgstr "Externe Rasterquellen"
 
-#: geobox/web/templates/admin/external_raster_list.html:35
+#: ../app/geobox/web/templates/admin/external_raster_list.html:35
 msgid "tooltip - external raster source overview"
 msgstr ""
-"Alle Rasterquellen die vom Server zur Verfügung gestellt wurden. Definieren "
-"Sie hier Benutzername und Passwort falls diese geschützt sind"
+"Alle Rasterquellen die vom Server zur Verfügung gestellt wurden. "
+"Definieren Sie hier Benutzername und Passwort falls diese geschützt sind"
 
-#: geobox/web/templates/admin/external_raster_list.html:41
-#: geobox/web/templates/projects/imports.html:14
+#: ../app/geobox/web/templates/admin/external_raster_list.html:41
+#: ../app/geobox/web/templates/projects/imports.html:14
 msgid "layer name"
 msgstr "Layer Name"
 
-#: geobox/web/templates/admin/external_raster_list.html:42
+#: ../app/geobox/web/templates/admin/external_raster_list.html:42
 msgid "server"
 msgstr "Server"
 
-#: geobox/web/templates/admin/external_raster_list.html:43
-#: geobox/web/templates/admin/external_raster_list.html:84
+#: ../app/geobox/web/templates/admin/external_raster_list.html:43
+#: ../app/geobox/web/templates/admin/external_raster_list.html:84
 msgid "protected"
 msgstr "Abgesichert"
 
-#: geobox/web/templates/admin/external_raster_list.html:64
-#: geobox/web/templates/admin/external_raster_list.html:104
+#: ../app/geobox/web/templates/admin/external_raster_list.html:64
+#: ../app/geobox/web/templates/admin/external_raster_list.html:104
 msgid "no username defined"
 msgstr "Noch kein Benutzername vorhanden"
 
-#: geobox/web/templates/admin/external_raster_list.html:69
-#: geobox/web/templates/admin/external_raster_list.html:109
+#: ../app/geobox/web/templates/admin/external_raster_list.html:69
+#: ../app/geobox/web/templates/admin/external_raster_list.html:109
 msgid "unlock"
 msgstr "Entsperren"
 
-#: geobox/web/templates/admin/external_raster_list.html:76
+#: ../app/geobox/web/templates/admin/external_raster_list.html:76
 msgid "external vector source overview"
 msgstr "Externe Suchdienste"
 
-#: geobox/web/templates/admin/external_raster_list.html:77
+#: ../app/geobox/web/templates/admin/external_raster_list.html:77
 msgid "tooltip - external vector source overview"
 msgstr ""
-"Hier werden alle aktiven externen Suchedienste in einer Übersicht angezeigt. "
-"Hier haben Sie die Möglichkeit ggf. Benutzername und Passwort einzugeben."
+"Hier werden alle aktiven externen Suchedienste in einer Übersicht "
+"angezeigt. Hier haben Sie die Möglichkeit ggf. Benutzername und Passwort "
+"einzugeben."
 
-#: geobox/web/templates/admin/external_raster_list.html:83
+#: ../app/geobox/web/templates/admin/external_raster_list.html:83
 msgid "serach property"
 msgstr "Such-Attribut"
 
-#: geobox/web/templates/admin/external_raster_list.html:117
+#: ../app/geobox/web/templates/admin/external_raster_list.html:117
 msgid "internal raster source overview"
 msgstr "Eigene Rasterquellen"
 
-#: geobox/web/templates/admin/external_raster_list.html:118
+#: ../app/geobox/web/templates/admin/external_raster_list.html:118
 msgid "tooltip - internal raster source overview"
 msgstr "Definieren Sie hier eigene Rasterquellen zum Beispiel WMS oder WMTS"
 
-#: geobox/web/templates/admin/external_raster_list.html:124
+#: ../app/geobox/web/templates/admin/external_raster_list.html:124
 msgid "url (layer name)"
 msgstr "URL und Layer Name"
 
-#: geobox/web/templates/admin/external_raster_list.html:149
+#: ../app/geobox/web/templates/admin/external_raster_list.html:149
 msgid "new wmts source"
 msgstr "Neuen WMTS hinzufügen"
 
-#: geobox/web/templates/admin/external_raster_list.html:153
+#: ../app/geobox/web/templates/admin/external_raster_list.html:153
 msgid "new wms project"
 msgstr "Neuen WMS hinzufügen"
 
-#: geobox/web/templates/admin/external_unlock.html:3
+#: ../app/geobox/web/templates/admin/external_unlock.html:3
 msgid "unlock source"
 msgstr "Quelle Entsperren"
 
-#: geobox/web/templates/admin/external_unlock.html:8
+#: ../app/geobox/web/templates/admin/external_unlock.html:8
 msgid "unlock sources"
 msgstr "Quelle Entsperren"
 
-#: geobox/web/templates/admin/external_wms.html:3
-#: geobox/web/templates/admin/external_wmts.html:3
+#: ../app/geobox/web/templates/admin/external_wms.html:3
+#: ../app/geobox/web/templates/admin/external_wmts.html:3
 msgid "import raster edit"
 msgstr "Rasterquellen"
 
-#: geobox/web/templates/admin/external_wms.html:8
+#: ../app/geobox/web/templates/admin/external_wms.html:8
 msgid "wms sources"
 msgstr "WMS Quellen"
 
-#: geobox/web/templates/admin/external_wms.html:12
+#: ../app/geobox/web/templates/admin/external_wms.html:12
 msgid "WMS settings"
 msgstr "WMS Einstellungen"
 
-#: geobox/web/templates/admin/external_wms.html:13
+#: ../app/geobox/web/templates/admin/external_wms.html:13
 msgid "infotext add wms"
 msgstr ""
-"Fügen Sie hier eigene Rasterlayer hinzu die als Web Map Service (WMS) zur "
-"Verfügung stehen. In der Importansicht können Sie diese anschließend "
+"Fügen Sie hier eigene Rasterlayer hinzu die als Web Map Service (WMS) zur"
+" Verfügung stehen. In der Importansicht können Sie diese anschließend "
 "auswählen und den gewünchsten Bereich importieren."
 
-#: geobox/web/templates/admin/external_wms.html:19
+#: ../app/geobox/web/templates/admin/external_wms.html:19
 msgid "load Capabilites"
 msgstr "WMS Capabilites abrufen"
 
-#: geobox/web/templates/admin/external_wms.html:28
+#: ../app/geobox/web/templates/admin/external_wms.html:28
 msgid "layers_select"
 msgstr "Layerauswahl"
 
-#: geobox/web/templates/admin/external_wms.html:36
+#: ../app/geobox/web/templates/admin/external_wms.html:36
 msgid "select srs"
 msgstr "Auswahl Koordinatensysteme"
 
-#: geobox/web/templates/admin/external_wms.html:50
-#: geobox/web/templates/boxes/base.html:53
+#: ../app/geobox/web/templates/admin/external_wms.html:50
+#: ../app/geobox/web/templates/boxes/base.html:53
 msgid "preview"
 msgstr "Vorschau"
 
-#: geobox/web/templates/admin/external_wms.html:57
+#: ../app/geobox/web/templates/admin/external_wms.html:57
 msgid "preview map"
 msgstr "Vorschau"
 
-#: geobox/web/templates/admin/external_wms.html:58
+#: ../app/geobox/web/templates/admin/external_wms.html:58
 msgid "infotext preview map"
 msgstr "Vorschaukarte"
 
-#: geobox/web/templates/admin/external_wms.html:64
+#: ../app/geobox/web/templates/admin/external_wms.html:64
 msgid "Get capabilities"
 msgstr "WMS Capabilities laden"
 
-#: geobox/web/templates/admin/external_wms.html:67
+#: ../app/geobox/web/templates/admin/external_wms.html:67
 msgid "infotext wms capabilities reset form"
 msgstr ""
-"Wenn Sie das WMS-Capabilities Dokument abrufen, werden alle Eingaben aus dem "
-"Formular entfernt."
+"Wenn Sie das WMS-Capabilities Dokument abrufen, werden alle Eingaben aus "
+"dem Formular entfernt."
 
-#: geobox/web/templates/admin/external_wms.html:71
+#: ../app/geobox/web/templates/admin/external_wms.html:71
 msgid "load capabilities"
 msgstr "WMS Capabilites abrufen"
 
-#: geobox/web/templates/admin/external_wmts.html:9
+#: ../app/geobox/web/templates/admin/external_wmts.html:9
 msgid "wmts sources"
 msgstr "WMTS Quellen"
 
-#: geobox/web/templates/admin/external_wmts.html:17
+#: ../app/geobox/web/templates/admin/external_wmts.html:17
 msgid "tooltip - userdefined wmts source url"
 msgstr ""
 "Die WMTS-Quelle benötigt eine URL, die Platzhalter für Zoom-Level "
 "({TileMatrix}), Kachel-Spalte ({TileCol}) und -Zeile ({TileRow}) enthält."
 
-#: geobox/web/templates/admin/files.html:6
+#: ../app/geobox/web/templates/admin/files.html:6
 msgid "External tile box"
 msgstr "Externe TileBox einbinden"
 
-#: geobox/web/templates/admin/files.html:12
+#: ../app/geobox/web/templates/admin/files.html:12
 msgid "add and start tilebox"
 msgstr "Hinzufügen/Neustarten"
 
-#: geobox/web/templates/admin/files.html:17
+#: ../app/geobox/web/templates/admin/files.html:17
 msgid "open external file explorer"
 msgstr "GeoBox-Verzeichnis öffnen"
 
-#: geobox/web/templates/admin/files.html:18
+#: ../app/geobox/web/templates/admin/files.html:18
 msgid "open"
 msgstr "Öffnen"
 
-#: geobox/web/templates/admin/initial_set_server.html:9
+#: ../app/geobox/web/templates/admin/initial_set_server.html:9
 msgid "welcome title"
 msgstr "Willkommen zum GeoBox Client"
 
-#: geobox/web/templates/admin/initial_set_server.html:10
+#: ../app/geobox/web/templates/admin/initial_set_server.html:10
 msgid "welcome text"
 msgstr ""
-"Zur Einrichtung de GeoBox-Clients wählen Sie bitte einen GeoBox-Server aus."
-"<br>Sollte der gewünschte Server nicht in der Liste enthalten sein haben Sie "
-"die Möglichkeit diesen hinzuzufügen."
+"Zur Einrichtung de GeoBox-Clients wählen Sie bitte einen GeoBox-Server "
+"aus.<br>Sollte der gewünschte Server nicht in der Liste enthalten sein "
+"haben Sie die Möglichkeit diesen hinzuzufügen."
 
-#: geobox/web/templates/admin/log_view.html:3
+#: ../app/geobox/web/templates/admin/log_view.html:3
 msgid "log_view"
 msgstr "Log Übersicht"
 
-#: geobox/web/templates/admin/log_view.html:7
+#: ../app/geobox/web/templates/admin/log_view.html:7
 msgid "Log overview"
 msgstr "Log Übersicht"
 
-#: geobox/web/templates/admin/network.html:3
+#: ../app/geobox/web/templates/admin/network.html:3
 msgid "network"
 msgstr "Netzwerk"
 
-#: geobox/web/templates/admin/network.html:6
+#: ../app/geobox/web/templates/admin/network.html:6
 msgid "local net access"
 msgstr "Zugriff für lokales Netzwerk"
 
-#: geobox/web/templates/admin/network.html:8
-#: geobox/web/templates/tasks/task_list.html:28
-#: geobox/web/templates/tasks/task_list.html:88
+#: ../app/geobox/web/templates/admin/network.html:8
+#: ../app/geobox/web/templates/tasks/task_list.html:28
+#: ../app/geobox/web/templates/tasks/task_list.html:88
 msgid "status"
 msgstr "Status"
 
-#: geobox/web/templates/admin/network.html:10
+#: ../app/geobox/web/templates/admin/network.html:10
 msgid "activated"
 msgstr "Aktiv"
 
-#: geobox/web/templates/admin/network.html:12
+#: ../app/geobox/web/templates/admin/network.html:12
 msgid "deactivated"
 msgstr "Inaktiv"
 
-#: geobox/web/templates/admin/network.html:16
+#: ../app/geobox/web/templates/admin/network.html:16
 msgid "Change local net access"
 msgstr "Zugriff für lokales Netzwerk einstellen"
 
-#: geobox/web/templates/admin/network.html:19
+#: ../app/geobox/web/templates/admin/network.html:19
 msgid "deactivate"
 msgstr "Deaktivieren"
 
-#: geobox/web/templates/admin/network.html:21
+#: ../app/geobox/web/templates/admin/network.html:21
 msgid "activate"
 msgstr "Aktivieren"
 
-#: geobox/web/templates/admin/server_list.html:4
-#: geobox/web/templates/admin/server_list.html:7
+#: ../app/geobox/web/templates/admin/server_list.html:4
+#: ../app/geobox/web/templates/admin/server_list.html:7
 msgid "server overview"
 msgstr "Server Übersicht"
 
-#: geobox/web/templates/admin/server_list.html:12
+#: ../app/geobox/web/templates/admin/server_list.html:12
 msgid "last update"
 msgstr "Zuletzt aktualisiert"
 
-#: geobox/web/templates/admin/server_list.html:32
+#: ../app/geobox/web/templates/admin/server_list.html:32
 msgid "refresh"
 msgstr "Aktualisieren"
 
-#: geobox/web/templates/admin/upload_gml.html:5
-#: geobox/web/templates/admin/upload_gml.html:8
+#: ../app/geobox/web/templates/admin/upload_gml.html:5
+#: ../app/geobox/web/templates/admin/upload_gml.html:8
 msgid "GML import"
 msgstr "GML importieren"
 
-#: geobox/web/templates/admin/upload_gml.html:9
+#: ../app/geobox/web/templates/admin/upload_gml.html:9
 msgid "upload gml text"
 msgstr ""
-"Bitte wählen Sie das GML Dokument mit Ihren Schlägen aus und geben Sie das "
-"Koordinatensystem an.<br>Ihre Daten werden in die Anwendung importiert und "
-"können anschließend editiert werden."
+"Bitte wählen Sie das GML Dokument mit Ihren Schlägen aus und geben Sie "
+"das Koordinatensystem an.<br>Ihre Daten werden in die Anwendung "
+"importiert und können anschließend editiert werden."
 
-#: geobox/web/templates/admin/upload_gml.html:10
+#: ../app/geobox/web/templates/admin/upload_gml.html:10
 msgid "upload gml attention"
 msgstr "Hinweis: Der Import ersetzt alle Geometrien im %(auth_layer_title)s."
 
-#: geobox/web/templates/admin/upload_gml.html:15
-#: geobox/web/templates/vector/geojson.html:18
-#: geobox/web/templates/vector/gml.html:18
-#: geobox/web/templates/vector/import.html:18
+#: ../app/geobox/web/templates/admin/upload_gml.html:15
+#: ../app/geobox/web/templates/vector/geojson.html:18
+#: ../app/geobox/web/templates/vector/gml.html:18
+#: ../app/geobox/web/templates/vector/import.html:18
 msgid "upload"
 msgstr "Datei hochladen"
 
-#: geobox/web/templates/boxes/base.html:5
+#: ../app/geobox/web/templates/boxes/base.html:5
 msgid "box"
 msgstr "Box"
 
-#: geobox/web/templates/boxes/base.html:13
+#: ../app/geobox/web/templates/boxes/base.html:13
 msgid "upload file"
 msgstr "Datei hochladen"
 
-#: geobox/web/templates/boxes/base.html:19
+#: ../app/geobox/web/templates/boxes/base.html:19
 msgid "upload help text"
 msgstr ""
 "Bitte wählen Sie eine Datei aus die Sie in Ihre Box hochladen können. Es "
-"werden Bilddateien (jpeg, png, tif) sowie Textdateien (csv, xml, json) und "
-"PDF vom System unterstützt."
+"werden Bilddateien (jpeg, png, tif) sowie Textdateien (csv, xml, json) "
+"und PDF vom System unterstützt."
 
-#: geobox/web/templates/boxes/base.html:20
+#: ../app/geobox/web/templates/boxes/base.html:20
 msgid "Upload"
 msgstr "Hochladen"
 
-#: geobox/web/templates/boxes/base.html:30
+#: ../app/geobox/web/templates/boxes/base.html:30
 msgid "file overview"
 msgstr "Dateiübersicht"
 
-#: geobox/web/templates/boxes/base.html:35
+#: ../app/geobox/web/templates/boxes/base.html:35
 msgid "date"
 msgstr "Datum"
 
-#: geobox/web/templates/boxes/base.html:36
+#: ../app/geobox/web/templates/boxes/base.html:36
 msgid "size"
 msgstr "Dateigröße"
 
-#: geobox/web/templates/boxes/base.html:55
+#: ../app/geobox/web/templates/boxes/base.html:55
 msgid "preview only for json"
 msgstr "Vorschau nur für .json"
 
-#: geobox/web/templates/boxes/base.html:68
+#: ../app/geobox/web/templates/boxes/base.html:68
 msgid "import only for json"
 msgstr "Nur JSON import möglich"
 
-#: geobox/web/templates/boxes/base.html:82
+#: ../app/geobox/web/templates/boxes/base.html:82
 msgid "help text file exists, are you sure you want to overwrite it?"
 msgstr ""
 "Eine Datei mit diesem Dateinamen existiert bereits. Wollen Sie die Datei "
 "überschreiben?"
 
-#: geobox/web/templates/boxes/base.html:85
+#: ../app/geobox/web/templates/boxes/base.html:85
 msgid "ok"
 msgstr "Ja, überschreiben"
 
-#: geobox/web/templates/boxes/base.html:91
+#: ../app/geobox/web/templates/boxes/base.html:91
 msgid "file is uploading..."
 msgstr "Datei wird hochgeladen..."
 
-#: geobox/web/templates/boxes/base.html:105
+#: ../app/geobox/web/templates/boxes/base.html:105
 msgid "infotext geojson layer"
 msgstr ""
-"Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer "
-"importieren."
+"Sie können die Datei in einen vorhandenen Layer oder in einen neuen Layer"
+" importieren."
 
-#: geobox/web/templates/boxes/download.html:3
+#: ../app/geobox/web/templates/boxes/download.html:3
 msgid "download box title"
 msgstr "Download-Box"
 
-#: geobox/web/templates/boxes/download.html:7
+#: ../app/geobox/web/templates/boxes/download.html:7
 msgid "download box"
 msgstr "Download-Box"
 
-#: geobox/web/templates/boxes/download.html:7
+#: ../app/geobox/web/templates/boxes/download.html:7
 msgid "tooltip - download box "
 msgstr ""
-"Die Download-Box zeigt ihnen alle von Ihrem Berater zur Verfügung gestellten "
-"Dateien an. Sie können diese über eine Vorschau ansehen oder - wenn diese "
-"Dateien Geometrien erhalten – importieren."
+"Die Download-Box zeigt ihnen alle von Ihrem Berater zur Verfügung "
+"gestellten Dateien an. Sie können diese über eine Vorschau ansehen oder -"
+" wenn diese Dateien Geometrien erhalten – importieren."
 
-#: geobox/web/templates/boxes/file.html:3
+#: ../app/geobox/web/templates/boxes/file.html:3
 msgid "file box title"
 msgstr "Beraterbox"
 
-#: geobox/web/templates/boxes/file.html:7
+#: ../app/geobox/web/templates/boxes/file.html:7
 msgid "file box"
 msgstr "Beraterbox"
 
-#: geobox/web/templates/boxes/file.html:7
+#: ../app/geobox/web/templates/boxes/file.html:7
 msgid "tooltip - file box "
 msgstr ""
-"Hier können Sie Dateien aus Ihrer Beraterbox vom Server herunterladen oder "
-"dort zur Verfügung stellen"
+"Hier können Sie Dateien aus Ihrer Beraterbox vom Server herunterladen "
+"oder dort zur Verfügung stellen"
 
-#: geobox/web/templates/boxes/upload.html:3
+#: ../app/geobox/web/templates/boxes/upload.html:3
 msgid "upload box title"
 msgstr "Upload-Box"
 
-#: geobox/web/templates/boxes/upload.html:7
+#: ../app/geobox/web/templates/boxes/upload.html:7
 msgid "upload box"
 msgstr "Upload-Box"
 
-#: geobox/web/templates/boxes/upload.html:7
+#: ../app/geobox/web/templates/boxes/upload.html:7
 msgid "tooltip - upload box "
 msgstr "Stellen Sie hier Dokumente für Ihren Berater zur Verfügung."
 
-#: geobox/web/templates/errors/403.html:7
-#: geobox/web/templates/errors/403.html:9
+#: ../app/geobox/web/templates/errors/403.html:7
+#: ../app/geobox/web/templates/errors/403.html:9
 msgid "Not allowed."
 msgstr "Zugriff auf die Seite ohne Login nicht erlaubt."
 
-#: geobox/web/templates/errors/403.html:10
+#: ../app/geobox/web/templates/errors/403.html:10
 msgid ""
 "You will redirect automatically to the login page. \n"
 "\tIf this does not happen, please click on the following link"
 msgstr ""
 "Sie werden automatisch zur Login Seite weitergeleitet. \n"
-"\tFalls die Weiterleitung nicht funktioniert klicken Sie bitte auf den Link."
+"\tFalls die Weiterleitung nicht funktioniert klicken Sie bitte auf den "
+"Link."
 
-#: geobox/web/templates/errors/403.html:12
+#: ../app/geobox/web/templates/errors/403.html:12
 msgid "Login page"
 msgstr "Login"
 
-#: geobox/web/templates/errors/404.html:2
-#: geobox/web/templates/errors/404.html:4
+#: ../app/geobox/web/templates/errors/404.html:2
+#: ../app/geobox/web/templates/errors/404.html:4
 msgid "File not found."
 msgstr "Datei nicht gefunden."
 
-#: geobox/web/templates/errors/405.html:2
-#: geobox/web/templates/errors/405.html:4
+#: ../app/geobox/web/templates/errors/405.html:2
+#: ../app/geobox/web/templates/errors/405.html:4
 msgid "Method not allowed"
 msgstr "Zugriffsmethode nicht erlabut."
 
-#: geobox/web/templates/errors/500.html:2
-#: geobox/web/templates/errors/500.html:4
+#: ../app/geobox/web/templates/errors/500.html:2
+#: ../app/geobox/web/templates/errors/500.html:4
 msgid "Internal error."
 msgstr "Interner Fehler."
 
-#: geobox/web/templates/js/translation.js:3
+#: ../app/geobox/web/templates/js/translation.js:3
 msgid "Not defined"
 msgstr "Nicht definiert"
 
-#: geobox/web/templates/js/translation.js:4
+#: ../app/geobox/web/templates/js/translation.js:4
 msgid "Unsaved changes present. Sure, you want to leave the editor?"
 msgstr ""
 "Es existieren ungespeicherte Änderungen. Sind Sie sicher, dass Sie den "
 "Editor verlassen wollen?"
 
-#: geobox/web/templates/js/translation.js:5
+#: ../app/geobox/web/templates/js/translation.js:5
 msgid "This filed is required"
 msgstr "Dieses Feld muss ausgefüllt werden."
 
-#: geobox/web/templates/js/translation.js:6
+#: ../app/geobox/web/templates/js/translation.js:6
 msgid "Finish edit first"
 msgstr "Beenden Sie zuerst das Attribut-Bearbeiten"
 
-#: geobox/web/templates/js/translation.js:7
+#: ../app/geobox/web/templates/js/translation.js:7
 msgid "Add temporary"
 msgstr "Temporär hinzufügen"
 
-#: geobox/web/templates/js/translation.js:8
+#: ../app/geobox/web/templates/js/translation.js:8
 msgid "Add permanent"
 msgstr "Dauerhaft hinzufügen"
 
-#: geobox/web/templates/js/translation.js:9 geobox/web/views/editor.py:54
+#: ../app/geobox/web/templates/js/translation.js:9
+#: ../app/geobox/web/views/editor.py:54
 msgid "Temporary"
 msgstr "Temporär"
 
-#: geobox/web/templates/js/translation.js:12
+#: ../app/geobox/web/templates/js/translation.js:12
 msgid "add layer successful"
 msgstr "Karte hinzufgefügt"
 
-#: geobox/web/templates/js/translation.js:13
+#: ../app/geobox/web/templates/js/translation.js:13
 msgid "not possible to add layer"
 msgstr "Hinzufügen der Karte nicht möglich."
 
-#: geobox/web/templates/js/translation.js:14
+#: ../app/geobox/web/templates/js/translation.js:14
 msgid "background map"
 msgstr "Hintergrundkarten"
 
-#: geobox/web/templates/js/translation.js:15
+#: ../app/geobox/web/templates/js/translation.js:15
 msgid "raster map"
 msgstr "Lokale Rasterkarten"
 
-#: geobox/web/templates/js/translation.js:16
+#: ../app/geobox/web/templates/js/translation.js:16
 msgid "vector map"
 msgstr "Vektorkarten"
 
-#: geobox/web/templates/js/translation.js:17
+#: ../app/geobox/web/templates/js/translation.js:17
 msgid "add vector map"
 msgstr "Vektorlayer hinzufügen"
 
-#: geobox/web/templates/js/translation.js:18
+#: ../app/geobox/web/templates/js/translation.js:18
 msgid "active layer"
 msgstr "Ausgewählte Vektorkarte"
 
-#: geobox/web/templates/js/translation.js:19
+#: ../app/geobox/web/templates/js/translation.js:19
 msgid "no active layer"
 msgstr "Keine Vektorkarte ausgewählt"
 
-#: geobox/web/templates/js/translation.js:20
+#: ../app/geobox/web/templates/js/translation.js:20
 msgid "Given layer name is invalid"
 msgstr "Angegebener Layername ist ungültig"
 
-#: geobox/web/templates/js/translation.js:21
+#: ../app/geobox/web/templates/js/translation.js:21
 msgid "Layer up"
 msgstr "Layer nach oben verschieben"
 
-#: geobox/web/templates/js/translation.js:22
+#: ../app/geobox/web/templates/js/translation.js:22
 msgid "Layer down"
 msgstr "Layer nach unten verschieben"
 
-#: geobox/web/templates/js/translation.js:23
+#: ../app/geobox/web/templates/js/translation.js:23
 msgid "Zoom to layer extent"
 msgstr "Alle Geometrien des Layers in der Karte anzeigen"
 
-#: geobox/web/templates/js/translation.js:24
+#: ../app/geobox/web/templates/js/translation.js:24
 msgid "Remove layer"
 msgstr "Layer entfernen"
 
-#: geobox/web/templates/js/translation.js:25
+#: ../app/geobox/web/templates/js/translation.js:25
 msgid "On the fly seeding"
 msgstr "Fehlende Kacheln automatisch importieren"
 
-#: geobox/web/templates/js/translation.js:26
+#: ../app/geobox/web/templates/js/translation.js:26
 msgid "Zoom to layer max extent"
 msgstr "Ganzen Layer in der Karte anzeigen"
 
-#: geobox/web/templates/js/translation.js:27
+#: ../app/geobox/web/templates/js/translation.js:27
 msgid "Change visibility"
 msgstr "Sichtbarkeit ändern"
 
-#: geobox/web/templates/js/translation.js:28
+#: ../app/geobox/web/templates/js/translation.js:28
 msgid "Activate layer"
 msgstr "Layer aktivieren"
 
-#: geobox/web/templates/js/translation.js:31
+#: ../app/geobox/web/templates/js/translation.js:31
 msgid "coordinates"
 msgstr "Koordianten"
 
-#: geobox/web/templates/js/translation.js:32
+#: ../app/geobox/web/templates/js/translation.js:32
 msgid "mesasure result"
 msgstr "Messergebnis"
 
-#: geobox/web/templates/js/translation.js:35
+#: ../app/geobox/web/templates/js/translation.js:35
 msgid "no attributes"
 msgstr "Keine Eigenschaften gespeichert"
 
-#: geobox/web/templates/js/translation.js:36
+#: ../app/geobox/web/templates/js/translation.js:36
 msgid "key"
 msgstr "Schlüssel"
 
-#: geobox/web/templates/js/translation.js:37
+#: ../app/geobox/web/templates/js/translation.js:37
 msgid "value"
 msgstr "Wert"
 
-#: geobox/web/templates/js/translation.js:38
+#: ../app/geobox/web/templates/js/translation.js:38
 msgid "add "
 msgstr "Hinzufügen"
 
-#: geobox/web/templates/js/translation.js:39
+#: ../app/geobox/web/templates/js/translation.js:39
 msgid "add new attribute"
 msgstr "Neue Eigenschaft hinzufügen"
 
-#: geobox/web/templates/js/translation.js:40
+#: ../app/geobox/web/templates/js/translation.js:40
 msgid "Same attribute with different values"
 msgstr "Unterschiedliche Werte"
 
-#: geobox/web/templates/js/translation.js:42
+#: ../app/geobox/web/templates/js/translation.js:42
 msgid "Save attribute changes"
 msgstr "Änderungen speichern"
 
-#: geobox/web/templates/js/translation.js:43
+#: ../app/geobox/web/templates/js/translation.js:43
 msgid "Cannot display properties of Features across multiple layers"
 msgstr "Eigenschaften können nicht layerübergreifend angezeigt werden"
 
-#: geobox/web/templates/js/translation.js:46
+#: ../app/geobox/web/templates/js/translation.js:46
 msgid "line"
 msgstr "Linie"
 
-#: geobox/web/templates/js/translation.js:47
+#: ../app/geobox/web/templates/js/translation.js:47
 msgid "polygon"
 msgstr "Polygon"
 
-#: geobox/web/templates/js/translation.js:48
+#: ../app/geobox/web/templates/js/translation.js:48
 msgid "stroke width"
 msgstr "Linienstärke"
 
-#: geobox/web/templates/js/translation.js:49
+#: ../app/geobox/web/templates/js/translation.js:49
 msgid "stroke color"
 msgstr "Linienfarbe"
 
-#: geobox/web/templates/js/translation.js:50
+#: ../app/geobox/web/templates/js/translation.js:50
 msgid "fill color"
 msgstr "Flächenfarbe"
 
-#: geobox/web/templates/js/translation.js:51
+#: ../app/geobox/web/templates/js/translation.js:51
 msgid "fill opacity"
 msgstr "Flächentransparenz in \\%%"
 
-#: geobox/web/templates/js/translation.js:52
+#: ../app/geobox/web/templates/js/translation.js:52
 msgid "save styling"
 msgstr "Aussehen speichern"
 
-#: geobox/web/templates/js/translation.js:55
+#: ../app/geobox/web/templates/js/translation.js:55
 msgid "loadFilter"
 msgstr "Geometrien auswählen"
 
-#: geobox/web/templates/js/translation.js:58
+#: ../app/geobox/web/templates/js/translation.js:58
 msgid "point"
 msgstr "Punkt"
 
-#: geobox/web/templates/js/translation.js:59
+#: ../app/geobox/web/templates/js/translation.js:59
 msgid "color"
 msgstr "Farbe"
 
-#: geobox/web/templates/js/translation.js:60
+#: ../app/geobox/web/templates/js/translation.js:60
 msgid "infotext - point styling"
 msgstr ""
-"Ändern Sie das Aussehen des ausgewählten Punktes. Ohne Speichern gehen die "
-"Änderungen verloren."
+"Ändern Sie das Aussehen des ausgewählten Punktes. Ohne Speichern gehen "
+"die Änderungen verloren."
 
-#: geobox/web/templates/js/translation.js:61
+#: ../app/geobox/web/templates/js/translation.js:61
 msgid "radius"
 msgstr "Radius"
 
-#: geobox/web/templates/js/translation.js:62
+#: ../app/geobox/web/templates/js/translation.js:62
 msgid "set styling"
 msgstr "Aussehen speichern"
 
-#: geobox/web/templates/js/translation.js:63
+#: ../app/geobox/web/templates/js/translation.js:63
 msgid "Add attributes is not possible"
 msgstr "Das Hinzufügen von Attributen ist nicht möglich"
 
-#: geobox/web/templates/js/translation.js:64
+#: ../app/geobox/web/templates/js/translation.js:64
 msgid "Features with invalid attributes left"
 msgstr "Geometrien mit invaliden Attributen übrig"
 
-#: geobox/web/templates/js/translation.js:65
+#: ../app/geobox/web/templates/js/translation.js:65
 msgid "Next"
 msgstr "Nachstes"
 
-#: geobox/web/templates/js/translation.js:66
+#: ../app/geobox/web/templates/js/translation.js:66
 msgid "Previous"
 msgstr "Vorheriges"
 
-#: geobox/web/templates/js/translation.js:67
+#: ../app/geobox/web/templates/js/translation.js:67
 msgid "Additional attributes"
 msgstr "Zusätzliche Attribute"
 
-#: geobox/web/templates/js/translation.js:68
+#: ../app/geobox/web/templates/js/translation.js:68
 msgid "This attribute is not defined in given schema. Remove it!"
 msgstr "Attribut nicht im Schema definiert. Bitte entfernen!"
 
-#: geobox/web/templates/js/translation.js:70
+#: ../app/geobox/web/templates/js/translation.js:70
 msgid "URL of used JSONSchema"
 msgstr "URL des benutzten JSON-Schema"
 
-#: geobox/web/templates/js/translation.js:75
+#: ../app/geobox/web/templates/js/translation.js:75
 msgid "Show property in map"
 msgstr "Eigenschaft für alle Geometrien in der Karte anzeigen"
 
-#: geobox/web/templates/js/translation.js:76
+#: ../app/geobox/web/templates/js/translation.js:76
 msgid "Remove property from feature"
 msgstr "Eigenschaft für gewählte Geometrie(n) entfernen"
 
-#: geobox/web/templates/js/translation.js:77
+#: ../app/geobox/web/templates/js/translation.js:77
 msgid "Features with non valid attributes present"
 msgstr "Der Layer enthält Geometrien mit ungültigen Eigenschaften"
 
-#: geobox/web/templates/js/translation.js:82
+#: ../app/geobox/web/templates/js/translation.js:82
 msgid "Draw polygon"
 msgstr "Polygon zeichnen"
 
-#: geobox/web/templates/js/translation.js:83
+#: ../app/geobox/web/templates/js/translation.js:83
 msgid "Draw line"
 msgstr "Linie zeichnen"
 
-#: geobox/web/templates/js/translation.js:84
+#: ../app/geobox/web/templates/js/translation.js:84
 msgid "Draw rect"
 msgstr "Rechteck zeichnen"
 
-#: geobox/web/templates/js/translation.js:85
+#: ../app/geobox/web/templates/js/translation.js:85
 msgid "Draw point"
 msgstr "Punkt zeichnen"
 
-#: geobox/web/templates/js/translation.js:86
+#: ../app/geobox/web/templates/js/translation.js:86
 msgid "Edit feature"
 msgstr "Geometrie bearbeiten"
 
-#: geobox/web/templates/js/translation.js:87
+#: ../app/geobox/web/templates/js/translation.js:87
 msgid "Delete feature"
 msgstr "Geometrie(n) löschen"
 
-#: geobox/web/templates/js/translation.js:88
+#: ../app/geobox/web/templates/js/translation.js:88
 msgid "Split feature"
 msgstr "Geometrie teilen"
 
-#: geobox/web/templates/js/translation.js:89
+#: ../app/geobox/web/templates/js/translation.js:89
 msgid "Merge features"
 msgstr "Geometrien zusammenfügen"
 
-#: geobox/web/templates/js/translation.js:90
+#: ../app/geobox/web/templates/js/translation.js:90
 msgid "Unmerge features"
 msgstr "Geometrien trennen"
 
-#: geobox/web/templates/js/translation.js:91
+#: ../app/geobox/web/templates/js/translation.js:91
 msgid "Select feature(s)"
 msgstr "Geometrie(n) auswählen"
 
-#: geobox/web/templates/js/translation.js:92
+#: ../app/geobox/web/templates/js/translation.js:92
 msgid "Snap on features"
 msgstr "An Geometrien einrasten"
 
-#: geobox/web/templates/js/translation.js:93
+#: ../app/geobox/web/templates/js/translation.js:93
 msgid "Copy feature(s)"
 msgstr "Geometrie(n) kopieren"
 
-#: geobox/web/templates/js/translation.js:96
+#: ../app/geobox/web/templates/js/translation.js:96
 msgid "Measure point"
 msgstr "Punkt bestimmen"
 
-#: geobox/web/templates/js/translation.js:97
+#: ../app/geobox/web/templates/js/translation.js:97
 msgid "Measure path"
 msgstr "Strecke messen"
 
-#: geobox/web/templates/js/translation.js:98
+#: ../app/geobox/web/templates/js/translation.js:98
 msgid "Measure area"
 msgstr "Fläche messen"
 
-#: geobox/web/templates/js/translation.js:101
+#: ../app/geobox/web/templates/js/translation.js:101
 msgid "Bad JSON: "
 msgstr "Schlechtes JSON: "
 
-#: geobox/web/templates/js/translation.js:102
+#: ../app/geobox/web/templates/js/translation.js:102
 msgid "Only OpenLayers.Feature.Vector is supported."
 msgstr "Es werden nur Objekte des Typs OpenLayers.Feature.Vector unterstützt."
 
-#: geobox/web/templates/js/translation.js:103
+#: ../app/geobox/web/templates/js/translation.js:103
 msgid "Feature was"
 msgstr "Objekt war"
 
-#: geobox/web/templates/js/translation.js:106
+#: ../app/geobox/web/templates/js/translation.js:106
 msgid "Select a value"
 msgstr "Wert auswählen"
 
-#: geobox/web/templates/js/translation.js:107
+#: ../app/geobox/web/templates/js/translation.js:107
 msgid "Attribute"
 msgstr "Eigenschaften"
 
-#: geobox/web/templates/js/translation.js:109
+#: ../app/geobox/web/templates/js/translation.js:109
 msgid "Exact"
 msgstr "Exakte Werte"
 
-#: geobox/web/templates/js/translation.js:110
+#: ../app/geobox/web/templates/js/translation.js:110
 msgid "Range"
 msgstr "Wertebereich"
 
-#: geobox/web/templates/js/translation.js:111
+#: ../app/geobox/web/templates/js/translation.js:111
 msgid "Value"
 msgstr "Wert"
 
-#: geobox/web/templates/js/translation.js:112
+#: ../app/geobox/web/templates/js/translation.js:112
 msgid "Color"
 msgstr "Farbe"
 
-#: geobox/web/templates/js/translation.js:113
+#: ../app/geobox/web/templates/js/translation.js:113
 msgid "Min"
 msgstr "Minimum"
 
-#: geobox/web/templates/js/translation.js:114
+#: ../app/geobox/web/templates/js/translation.js:114
 msgid "Max"
 msgstr "Maximum"
 
-#: geobox/web/templates/js/translation.js:115
+#: ../app/geobox/web/templates/js/translation.js:115
 msgid "Execute"
 msgstr "Ausführen"
 
-#: geobox/web/templates/js/translation.js:116
+#: ../app/geobox/web/templates/js/translation.js:116
 msgid "Legend for"
 msgstr "Legende für"
 
-#: geobox/web/templates/js/translation.js:117
+#: ../app/geobox/web/templates/js/translation.js:117
 msgid "Area in"
 msgstr "Fläche in"
 
-#: geobox/web/templates/js/translation.js:118
+#: ../app/geobox/web/templates/js/translation.js:118
 msgid "No thematical map present for this layer"
 msgstr "Für diesen Layer existiert keine thematische Karte"
 
-#: geobox/web/templates/js/translation.js:119
+#: ../app/geobox/web/templates/js/translation.js:119
 msgid "Add input"
 msgstr "Wert hinzufügen"
 
-#: geobox/web/templates/js/translation.js:120
+#: ../app/geobox/web/templates/js/translation.js:120
 msgid "Remove input"
 msgstr "Eintrag entfernen"
 
-#: geobox/web/templates/js/translation.js:121
+#: ../app/geobox/web/templates/js/translation.js:121
 msgid "No layer selected"
 msgstr "Keine Ebene ausgewählt"
 
-#: geobox/web/templates/js/translation.js:122
+#: ../app/geobox/web/templates/js/translation.js:122
 msgid "No attributes selected"
 msgstr "Keine Eigenschaften ausgewählt"
 
-#: geobox/web/templates/js/translation.js:123
+#: ../app/geobox/web/templates/js/translation.js:123
 msgid "Show all features"
 msgstr "Alle Einträge anzeigen"
 
-#: geobox/web/templates/js/translation.js:124
+#: ../app/geobox/web/templates/js/translation.js:124
 msgid "Show in list"
 msgstr "In Liste anzeigen"
 
-#: geobox/web/templates/js/translation.js:125
+#: ../app/geobox/web/templates/js/translation.js:125
 msgid "Apply"
 msgstr "Übernehmen"
 
-#: geobox/web/templates/js/translation.js:126
+#: ../app/geobox/web/templates/js/translation.js:126
 msgid "Map settings"
 msgstr "Karteneinstellungen"
 
-#: geobox/web/templates/js/translation.js:127
+#: ../app/geobox/web/templates/js/translation.js:127
 msgid "Legend"
 msgstr "Legende"
 
-#: geobox/web/templates/js/translation.js:128
+#: ../app/geobox/web/templates/js/translation.js:128
 msgid "Short list"
 msgstr "Kurze Liste"
 
-#: geobox/web/templates/js/translation.js:129
+#: ../app/geobox/web/templates/js/translation.js:129
 msgid "Complete list"
 msgstr "Komplette Liste"
 
-#: geobox/web/templates/js/translation.js:130
+#: ../app/geobox/web/templates/js/translation.js:130
 msgid "List settings"
 msgstr "Liste/Popup Einstellungen"
 
-#: geobox/web/templates/js/translation.js:131
+#: ../app/geobox/web/templates/js/translation.js:131
 msgid "Active"
 msgstr "Aktivieren"
 
-#: geobox/web/templates/js/translation.js:132
+#: ../app/geobox/web/templates/js/translation.js:132
 msgid "Choose value"
 msgstr "Wert auswählen"
 
-#: geobox/web/templates/js/translation.js:133
+#: ../app/geobox/web/templates/js/translation.js:133
 msgid "No entries"
 msgstr "Keine Einträge"
 
-#: geobox/web/templates/js/translation.js:134
+#: ../app/geobox/web/templates/js/translation.js:134
 msgid "Apply changes"
 msgstr "Änderungen übernehmen"
 
-#: geobox/web/templates/js/translation.js:135
+#: ../app/geobox/web/templates/js/translation.js:135
 msgid "Discard changes"
 msgstr "Änderungen verwerfen"
 
-#: geobox/web/templates/js/translation.js:136
+#: ../app/geobox/web/templates/js/translation.js:136
 msgid "Show in popup"
 msgstr "In Popup anzeigen"
 
-#: geobox/web/templates/js/translation.js:137
+#: ../app/geobox/web/templates/js/translation.js:137
 msgid "csv"
 msgstr "CSV exportieren"
 
-#: geobox/web/templates/js/translation.js:138
+#: ../app/geobox/web/templates/js/translation.js:138
 msgid "odt"
 msgstr "ODT exportieren"
 
-#: geobox/web/templates/js/translation.js:139
+#: ../app/geobox/web/templates/js/translation.js:139
 msgid "create settings"
 msgstr "Zu den Einstellungen"
 
-#: geobox/web/templates/js/translation.js:140
+#: ../app/geobox/web/templates/js/translation.js:140
 msgid "legend"
 msgstr "Legende"
 
-#: geobox/web/templates/js/translation.js:142
+#: ../app/geobox/web/templates/js/translation.js:142
 msgid "list"
 msgstr "Liste"
 
-#: geobox/web/templates/js/translation.js:143
+#: ../app/geobox/web/templates/js/translation.js:143
 msgid "active"
 msgstr "Aktivieren"
 
-#: geobox/web/templates/js/translation.js:144
+#: ../app/geobox/web/templates/js/translation.js:144
 msgid "map settings"
 msgstr "Karte"
 
-#: geobox/web/templates/js/translation.js:145
+#: ../app/geobox/web/templates/js/translation.js:145
 msgid "list settings"
 msgstr "Liste"
 
-#: geobox/web/templates/js/translation.js:146
+#: ../app/geobox/web/templates/js/translation.js:146
 msgid "layer has not attributes"
 msgstr "Der Layer besitzt keine Attribute"
 
-#: geobox/web/templates/js/translation.js:147
+#: ../app/geobox/web/templates/js/translation.js:147
 msgid "Select filtered features"
 msgstr "Geometrien auswählen"
 
-#: geobox/web/templates/js/translation.js:148
+#: ../app/geobox/web/templates/js/translation.js:148
 msgid "Show feature list with user defined attributes"
 msgstr "Zeigt Liste mit ausgewählten Attributen"
 
-#: geobox/web/templates/js/translation.js:149
+#: ../app/geobox/web/templates/js/translation.js:149
 msgid "Show feature list with all attributes"
 msgstr "Zeigt Liste mit allen Attributen"
 
-#: geobox/web/templates/js/translation.js:150
+#: ../app/geobox/web/templates/js/translation.js:150
 msgid "Create thematical map using exact values"
 msgstr "Erstellt eine thematische Karte mit exakten Werten"
 
-#: geobox/web/templates/js/translation.js:151
+#: ../app/geobox/web/templates/js/translation.js:151
 msgid "Create thematical map using ranges"
 msgstr "Erstellt eine thematische Karte mit Wertbereichen"
 
-#: geobox/web/templates/js/translation.js:152
+#: ../app/geobox/web/templates/js/translation.js:152
 msgid "Add value field"
 msgstr "Fügt ein Legendenfeld hinzu"
 
-#: geobox/web/templates/js/translation.js:153
+#: ../app/geobox/web/templates/js/translation.js:153
 msgid "Select attribute"
 msgstr "Eigenschaft auswählen"
 
-#: geobox/web/templates/js/translation.js:154
+#: ../app/geobox/web/templates/js/translation.js:154
 msgid "Max autogenerated colors reached"
-msgstr ""
-"Maximale Anzahl an automatisch<br>generierten Wert-Farb-Paaren erreicht"
+msgstr "Maximale Anzahl an automatisch<br>generierten Wert-Farb-Paaren erreicht"
 
-#: geobox/web/templates/js/translation.js:155
+#: ../app/geobox/web/templates/js/translation.js:155
 msgid "Unselect filtered features"
 msgstr "Auswahl aufheben"
 
-#: geobox/web/templates/js/translation.js:158
+#: ../app/geobox/web/templates/js/translation.js:158
 msgid "load wms capabilities"
 msgstr "Capabilities wurden geladen"
 
-#: geobox/web/templates/js/translation.js:159
+#: ../app/geobox/web/templates/js/translation.js:159
 msgid "preview not possible"
 msgstr ""
-"Vorschau nicht möglich. Kein Layer gewählt oder Koordiantensystem wird nicht "
-"unterstützt."
+"Vorschau nicht möglich. Kein Layer gewählt oder Koordiantensystem wird "
+"nicht unterstützt."
 
-#: geobox/web/templates/js/translation.js:160
+#: ../app/geobox/web/templates/js/translation.js:160
 msgid "Show filtered features in list"
 msgstr "Zeige in Liste"
 
-#: geobox/web/templates/js/translation.js:163
+#: ../app/geobox/web/templates/js/translation.js:163
 msgid "Layer to seed"
 msgstr "Datenimport für Layer"
 
-#: geobox/web/templates/js/translation.js:164
+#: ../app/geobox/web/templates/js/translation.js:164
 msgid "Start level"
 msgstr "Startlevel"
 
-#: geobox/web/templates/js/translation.js:165
+#: ../app/geobox/web/templates/js/translation.js:165
 msgid "End level"
 msgstr "Endlevel"
 
-#: geobox/web/templates/js/translation.js:166
+#: ../app/geobox/web/templates/js/translation.js:166
 msgid "Start seeding"
 msgstr "Datenimport gestarten"
 
-#: geobox/web/templates/js/translation.js:167
+#: ../app/geobox/web/templates/js/translation.js:167
 msgid "Stop seeding"
 msgstr "Datenimport gestoppen"
 
-#: geobox/web/templates/js/translation.js:168
+#: ../app/geobox/web/templates/js/translation.js:168
 msgid "Seeding finished"
 msgstr "Datenimport beendet"
 
-#: geobox/web/templates/js/translation.js:169
+#: ../app/geobox/web/templates/js/translation.js:169
 msgid "No BBox given"
 msgstr "Kein Bereich für den Datenimport in der Karte markiert"
 
-#: geobox/web/templates/js/translation.js:170
+#: ../app/geobox/web/templates/js/translation.js:170
 msgid "Tiles estimated"
 msgstr "Kacheln werden importiert"
 
-#: geobox/web/templates/js/translation.js:171
+#: ../app/geobox/web/templates/js/translation.js:171
 msgid "Seeding stopped"
 msgstr "Datenimport gestoppt"
 
-#: geobox/web/templates/js/translation.js:172
+#: ../app/geobox/web/templates/js/translation.js:172
 msgid "No layer to seed"
 msgstr "Kein Layer für Datenimport vorhanden"
 
-#: geobox/web/templates/js/translation.js:174
+#: ../app/geobox/web/templates/js/translation.js:174
 msgid "Feature attributes violate schema"
 msgstr ""
 "Attribute der selektierten Geometrie(n) verletzen das Schema.<br>Bitte "
 "editieren Sie die Attribute."
 
-#: geobox/web/templates/projects/export_edit.html:3
+#: ../app/geobox/web/templates/projects/export_edit.html:3
 msgid "export project edit"
 msgstr "Exportprojekt editieren"
 
-#: geobox/web/templates/projects/export_edit.html:11
+#: ../app/geobox/web/templates/projects/export_edit.html:11
 msgid "projects exporteditor"
 msgstr "Exporteditor"
 
-#: geobox/web/templates/projects/export_edit.html:19
+#: ../app/geobox/web/templates/projects/export_edit.html:19
 msgid "tooltip - export rasterlayer"
 msgstr ""
-"Wählen Sie ein Dateiformat für den Export aus und fügen Sie anschließend die "
-"gewünschten Rasterlayer hinzu."
+"Wählen Sie ein Dateiformat für den Export aus und fügen Sie anschließend "
+"die gewünschten Rasterlayer hinzu."
 
-#: geobox/web/templates/projects/export_edit.html:27
-#: geobox/web/templates/projects/export_edit.html:36
-#: geobox/web/templates/projects/import_edit.html:20
+#: ../app/geobox/web/templates/projects/export_edit.html:27
+#: ../app/geobox/web/templates/projects/export_edit.html:36
+#: ../app/geobox/web/templates/projects/import_edit.html:20
 msgid "start level needs to be lower or equal to end level"
 msgstr "Startlevel muss kleiner oder gleich dem Endlevel sein"
 
-#: geobox/web/templates/projects/export_edit.html:30
-#: geobox/web/templates/projects/export_edit.html:40
+#: ../app/geobox/web/templates/projects/export_edit.html:30
+#: ../app/geobox/web/templates/projects/export_edit.html:40
 msgid "remove raster"
 msgstr "Rasterlayer entfernen"
 
-#: geobox/web/templates/projects/export_edit.html:44
+#: ../app/geobox/web/templates/projects/export_edit.html:44
 msgid "add raster"
 msgstr "Rasterlayer hinzufügen"
 
-#: geobox/web/templates/projects/export_edit.html:53
-#: geobox/web/templates/projects/import_edit.html:30
+#: ../app/geobox/web/templates/projects/export_edit.html:53
+#: ../app/geobox/web/templates/projects/import_edit.html:30
 msgid "start"
 msgstr "Speichern & Starten"
 
-#: geobox/web/templates/projects/export_edit.html:66
+#: ../app/geobox/web/templates/projects/export_edit.html:66
 msgid "remove vector"
 msgstr "Vektorlayer entfernen"
 
-#: geobox/web/templates/projects/export_edit.html:67
+#: ../app/geobox/web/templates/projects/export_edit.html:67
 msgid "add vector"
 msgstr "Vektorlayer hinzufügen"
 
-#: geobox/web/templates/projects/export_edit.html:69
+#: ../app/geobox/web/templates/projects/export_edit.html:69
 msgid "level"
 msgstr "Level"
 
-#: geobox/web/templates/projects/exports.html:3
+#: ../app/geobox/web/templates/projects/exports.html:3
 msgid "export project overview"
 msgstr "Projektübersicht"
 
-#: geobox/web/templates/projects/exports.html:6
+#: ../app/geobox/web/templates/projects/exports.html:6
 msgid "projects export"
 msgstr "Export"
 
-#: geobox/web/templates/projects/exports.html:7
+#: ../app/geobox/web/templates/projects/exports.html:7
 msgid "tooltip - overview over all raster export projects"
 msgstr ""
-"Hier finden Sie eine Übersicht über alle Exportprojekte. Um einen Export zu "
-"erstellen klicken Sie auf 'Neuer Export'. Über den Button 'Editieren' können "
-"Sie Exporte nachträglich bearbeiten."
+"Hier finden Sie eine Übersicht über alle Exportprojekte. Um einen Export "
+"zu erstellen klicken Sie auf 'Neuer Export'. Über den Button 'Editieren' "
+"können Sie Exporte nachträglich bearbeiten."
 
-#: geobox/web/templates/projects/exports.html:13
-#: geobox/web/templates/projects/imports.html:16
+#: ../app/geobox/web/templates/projects/exports.html:13
+#: ../app/geobox/web/templates/projects/imports.html:16
 msgid "download size"
 msgstr "Datenmenge"
 
-#: geobox/web/templates/projects/exports.html:24
-#: geobox/web/templates/projects/imports.html:36
-#: geobox/web/templates/projects/macros.html:41
-#: geobox/web/templates/projects/macros.html:43
+#: ../app/geobox/web/templates/projects/exports.html:24
+#: ../app/geobox/web/templates/projects/imports.html:36
+#: ../app/geobox/web/templates/projects/macros.html:41
+#: ../app/geobox/web/templates/projects/macros.html:43
 msgid "MB"
 msgstr "MB"
 
-#: geobox/web/templates/projects/exports.html:32
+#: ../app/geobox/web/templates/projects/exports.html:32
 msgid "start export"
 msgstr "Export Starten"
 
-#: geobox/web/templates/projects/exports.html:51
+#: ../app/geobox/web/templates/projects/exports.html:51
 msgid "export project has no layer"
 msgstr "Export beinhaltet keine Daten"
 
-#: geobox/web/templates/projects/exports.html:60
+#: ../app/geobox/web/templates/projects/exports.html:60
 msgid "new export project"
 msgstr "Neuer Export"
 
-#: geobox/web/templates/projects/import_edit.html:3
+#: ../app/geobox/web/templates/projects/import_edit.html:3
 msgid "import project edit"
 msgstr "Import editieren"
 
-#: geobox/web/templates/projects/import_edit.html:13
+#: ../app/geobox/web/templates/projects/import_edit.html:13
 msgid "Import Editor"
 msgstr "Raster Importeditor"
 
-#: geobox/web/templates/projects/imports.html:6
+#: ../app/geobox/web/templates/projects/imports.html:6
 msgid "projects import"
 msgstr "Rasterimporte"
 
-#: geobox/web/templates/projects/imports.html:7
+#: ../app/geobox/web/templates/projects/imports.html:7
 msgid "tooltip - overview over all raster import projects"
 msgstr ""
-"Übersicht über alle Rasterimporte. Um einen Import zu erstellen wählen Sie "
-"'Neuer Import' aus. Über die Funktion 'Editieren' können Sie den Import "
-"nachträglich bearbeiten."
+"Übersicht über alle Rasterimporte. Um einen Import zu erstellen wählen "
+"Sie 'Neuer Import' aus. Über die Funktion 'Editieren' können Sie den "
+"Import nachträglich bearbeiten."
 
-#: geobox/web/templates/projects/imports.html:43
+#: ../app/geobox/web/templates/projects/imports.html:43
 msgid "start import"
 msgstr "Import Starten"
 
-#: geobox/web/templates/projects/imports.html:54
+#: ../app/geobox/web/templates/projects/imports.html:54
 msgid "new import project"
 msgstr "Neuer Import"
 
-#: geobox/web/templates/projects/macros.html:6
+#: ../app/geobox/web/templates/projects/macros.html:6
 msgid "drawing options"
 msgstr "Zeichenfunktionen"
 
-#: geobox/web/templates/projects/macros.html:7
+#: ../app/geobox/web/templates/projects/macros.html:7
 msgid "tooltip - drawing options"
 msgstr ""
-"Sie haben die Möglichkeit ein Rechteck oder ein Polygon zu zeichnen. Um eine "
-"Geometrie zu bearbeiten aktivieren Sie das Editiermodul und wählen Sie die "
-"gewünschte Geometrie aus. "
+"Sie haben die Möglichkeit ein Rechteck oder ein Polygon zu zeichnen. Um "
+"eine Geometrie zu bearbeiten aktivieren Sie das Editiermodul und wählen "
+"Sie die gewünschte Geometrie aus. "
 
-#: geobox/web/templates/projects/macros.html:12
+#: ../app/geobox/web/templates/projects/macros.html:12
 msgid "delete all features"
 msgstr "Alle Geometrien löschen"
 
-#: geobox/web/templates/projects/macros.html:18
-#: geobox/web/templates/projects/macros.html:23
+#: ../app/geobox/web/templates/projects/macros.html:18
+#: ../app/geobox/web/templates/projects/macros.html:23
 msgid "load coverage"
 msgstr "Laden"
 
-#: geobox/web/templates/projects/macros.html:27
+#: ../app/geobox/web/templates/projects/macros.html:27
 msgid "load vectorimports as coverage"
 msgstr "Vektordaten aus Flächenbox laden"
 
-#: geobox/web/templates/projects/macros.html:38
+#: ../app/geobox/web/templates/projects/macros.html:38
 msgid "Information"
 msgstr "Informationen"
 
-#: geobox/web/templates/projects/macros.html:39
+#: ../app/geobox/web/templates/projects/macros.html:39
 msgid "tooltip - information about data volumen"
 msgstr ""
-"Der Speicherplatz wird beim Im- oder Export mindestens auf Ihrem PC benötigt."
+"Der Speicherplatz wird beim Im- oder Export mindestens auf Ihrem PC "
+"benötigt."
 
-#: geobox/web/templates/projects/macros.html:41
+#: ../app/geobox/web/templates/projects/macros.html:41
 msgid "Data volume"
 msgstr "Datenmenge"
 
-#: geobox/web/templates/projects/macros.html:42
+#: ../app/geobox/web/templates/projects/macros.html:42
 msgid "Data tiles"
 msgstr "Kachelanzahl (aktuell/maximal)"
 
-#: geobox/web/templates/projects/macros.html:43
+#: ../app/geobox/web/templates/projects/macros.html:43
 msgid "free disk space"
 msgstr "Freier Speicherplatz"
 
-#: geobox/web/templates/projects/verify_import_auth.html:3
-#: geobox/web/templates/projects/verify_import_auth.html:9
+#: ../app/geobox/web/templates/projects/verify_import_auth.html:3
+#: ../app/geobox/web/templates/projects/verify_import_auth.html:9
 msgid "verify authentification"
 msgstr "Anmeldung erforderlich"
 
-#: geobox/web/templates/projects/verify_import_auth.html:10
+#: ../app/geobox/web/templates/projects/verify_import_auth.html:10
 msgid "authentification for raster import required"
 msgstr ""
-"Die von Ihnen angefragte Karte erfordert eine Anmeldung.<br>Bitte geben Sie "
-"Ihre Anmeldedaten für den Server \"%(server)s\" ein."
+"Die von Ihnen angefragte Karte erfordert eine Anmeldung.<br>Bitte geben "
+"Sie Ihre Anmeldedaten für den Server \"%(server)s\" ein."
 
-#: geobox/web/templates/projects/verify_import_auth.html:19
+#: ../app/geobox/web/templates/projects/verify_import_auth.html:19
 msgid "authorize"
 msgstr "Anmelden"
 
-#: geobox/web/templates/tasks/detail.html:3
+#: ../app/geobox/web/templates/tasks/detail.html:3
 msgid "task detail"
 msgstr "Details über Aufgabe"
 
-#: geobox/web/templates/tasks/detail.html:9
+#: ../app/geobox/web/templates/tasks/detail.html:9
 msgid "id"
 msgstr "ID"
 
-#: geobox/web/templates/tasks/detail.html:10
+#: ../app/geobox/web/templates/tasks/detail.html:10
 msgid "error"
 msgstr "Fehler"
 
-#: geobox/web/templates/tasks/detail.html:11
+#: ../app/geobox/web/templates/tasks/detail.html:11
 msgid "is running"
 msgstr "läuft"
 
-#: geobox/web/templates/tasks/detail.html:12
+#: ../app/geobox/web/templates/tasks/detail.html:12
 msgid "is active"
 msgstr "aktiv"
 
-#: geobox/web/templates/tasks/detail.html:13
+#: ../app/geobox/web/templates/tasks/detail.html:13
 msgid "is paused"
 msgstr "pausiert"
 
-#: geobox/web/templates/tasks/task_list.html:3
+#: ../app/geobox/web/templates/tasks/task_list.html:3
 msgid "task overview"
 msgstr "Aufgabenübersicht"
 
-#: geobox/web/templates/tasks/task_list.html:32
+#: ../app/geobox/web/templates/tasks/task_list.html:32
 msgid "progress"
 msgstr "Fortschritt"
 
-#: geobox/web/templates/tasks/task_list.html:39
+#: ../app/geobox/web/templates/tasks/task_list.html:39
 msgid "tooltip - task the page reload every 5 second"
 msgstr "Der Status wird alle 5 Sekunden aktualisiert."
 
-#: geobox/web/templates/tasks/task_list.html:42
+#: ../app/geobox/web/templates/tasks/task_list.html:42
 msgid "type"
 msgstr "Typ"
 
-#: geobox/web/templates/tasks/task_list.html:46
+#: ../app/geobox/web/templates/tasks/task_list.html:46
 msgid "pause"
 msgstr "Pause"
 
-#: geobox/web/templates/tasks/task_list.html:49
+#: ../app/geobox/web/templates/tasks/task_list.html:49
 msgid "continue"
 msgstr "Fortfahren"
 
-#: geobox/web/templates/tasks/task_list.html:63
+#: ../app/geobox/web/templates/tasks/task_list.html:63
 msgid "running"
 msgstr "in Bearbeitung"
 
-#: geobox/web/templates/tasks/task_list.html:65
+#: ../app/geobox/web/templates/tasks/task_list.html:65
 msgid "not running"
 msgstr "gestoppt"
 
-#: geobox/web/templates/tasks/task_list.html:89
+#: ../app/geobox/web/templates/tasks/task_list.html:89
 msgid "date created"
 msgstr "Erstellt am:"
 
-#: geobox/web/templates/tasks/task_list.html:99
+#: ../app/geobox/web/templates/tasks/task_list.html:99
 msgid "tasks without project"
 msgstr "Aufgaben ohne Projekt"
 
-#: geobox/web/templates/vector/geojson.html:3
-#: geobox/web/templates/vector/geojson.html:8
+#: ../app/geobox/web/templates/vector/geojson.html:3
+#: ../app/geobox/web/templates/vector/geojson.html:8
 msgid "geojson import"
 msgstr "GeoJSON Import"
 
-#: geobox/web/templates/vector/geojson.html:11
+#: ../app/geobox/web/templates/vector/geojson.html:11
 msgid "Upload Geojson"
 msgstr "GeoJSON Datei hochladen"
 
-#: geobox/web/templates/vector/geojson.html:12
+#: ../app/geobox/web/templates/vector/geojson.html:12
 msgid "tooltip upload geojson"
 msgstr ""
-"Laden Sie hier Ihre GeoJSON-Dateien in das System. Dies ist erforderlich um "
-"im nächsten Schritt die Daten importieren zu können. Es können Dateien mit "
-"der Datei Endung .json hochgeladen werden."
+"Laden Sie hier Ihre GeoJSON-Dateien in das System. Dies ist erforderlich "
+"um im nächsten Schritt die Daten importieren zu können. Es können Dateien"
+" mit der Datei Endung .json hochgeladen werden."
 
-#: geobox/web/templates/vector/geojson.html:21
+#: ../app/geobox/web/templates/vector/geojson.html:21
 msgid ""
-"you can also save your geojson directly to the geobox import folder. Reload "
-"this site after this."
+"you can also save your geojson directly to the geobox import folder. "
+"Reload this site after this."
 msgstr ""
-"Sie können die GeoJSON-Datei auch direkt im Import-Verzeichnis ablegen. Nach "
-"dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur "
-"Auswahl bereit."
+"Sie können die GeoJSON-Datei auch direkt im Import-Verzeichnis ablegen. "
+"Nach dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt "
+"zur Auswahl bereit."
 
-#: geobox/web/templates/vector/geojson.html:24
-#: geobox/web/templates/vector/gml.html:24
-#: geobox/web/templates/vector/import.html:24
+#: ../app/geobox/web/templates/vector/geojson.html:24
+#: ../app/geobox/web/templates/vector/gml.html:24
+#: ../app/geobox/web/templates/vector/import.html:24
 msgid "open external explorer for import"
 msgstr "GeoBox Import-Verzeichnis öffnen"
 
-#: geobox/web/templates/vector/geojson.html:28
+#: ../app/geobox/web/templates/vector/geojson.html:28
 msgid "import geojsondata"
 msgstr "GeoJSON-Daten importieren"
 
-#: geobox/web/templates/vector/geojson.html:29
+#: ../app/geobox/web/templates/vector/geojson.html:29
 msgid "tooltip import geojson vectordata"
 msgstr ""
-"Damit die Vektordaten im System genutzt werden kann, müssen diese in einen "
-"Layer importiert werden. Bitte wählen Sie die gewünschte Datei und wählen "
-"Sie aus in welche Layer die Datei importiert werden soll. Zudem besteht die "
-"Möglichkeit einen neuen Layer anzulegen. Geben Sie hier zu einfach einen "
-"Namen ein"
+"Damit die Vektordaten im System genutzt werden kann, müssen diese in "
+"einen Layer importiert werden. Bitte wählen Sie die gewünschte Datei und "
+"wählen Sie aus in welche Layer die Datei importiert werden soll. Zudem "
+"besteht die Möglichkeit einen neuen Layer anzulegen. Geben Sie hier zu "
+"einfach einen Namen ein"
 
-#: geobox/web/templates/vector/gml.html:3
-#: geobox/web/templates/vector/gml.html:8
+#: ../app/geobox/web/templates/vector/gml.html:3
+#: ../app/geobox/web/templates/vector/gml.html:8
 msgid "gml import"
 msgstr "GML Import"
 
-#: geobox/web/templates/vector/gml.html:11
+#: ../app/geobox/web/templates/vector/gml.html:11
 msgid "Upload GML"
 msgstr "GML-Datei hochladen"
 
-#: geobox/web/templates/vector/gml.html:12
+#: ../app/geobox/web/templates/vector/gml.html:12
 msgid "tooltip upload gml"
 msgstr ""
-"Laden Sie hier Ihre GML-Dateien in das System. Dies ist erforderlich um im "
-"nächsten Schritt die Daten importieren zu können. Es können Dateien mit der "
-"Datei Endung .json hochgeladen werden."
+"Laden Sie hier Ihre GML-Dateien in das System. Dies ist erforderlich um "
+"im nächsten Schritt die Daten importieren zu können. Es können Dateien "
+"mit der Datei Endung .json hochgeladen werden."
 
-#: geobox/web/templates/vector/gml.html:21
+#: ../app/geobox/web/templates/vector/gml.html:21
 msgid ""
-"you can also save your gml directly to the geobox import folder. Reload this "
-"site after this."
+"you can also save your gml directly to the geobox import folder. Reload "
+"this site after this."
 msgstr ""
-"Sie können die GML-Datei auch direkt im Import-Verzeichnis ablegen. Nach dem "
-"Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur Auswahl "
-"bereit."
+"Sie können die GML-Datei auch direkt im Import-Verzeichnis ablegen. Nach "
+"dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur "
+"Auswahl bereit."
 
-#: geobox/web/templates/vector/gml.html:28
+#: ../app/geobox/web/templates/vector/gml.html:28
 msgid "import gmldata"
 msgstr "GML-Daten importieren"
 
-#: geobox/web/templates/vector/gml.html:29
+#: ../app/geobox/web/templates/vector/gml.html:29
 msgid "tooltip import gml vectordata"
 msgstr ""
-"Damit die Vektordaten im System genutzt werden kann, müssen diese importiert "
-"werden. Bitte wählen Sie das entsprechende GML, das Koordiantensystem und "
-"den dazu passenden Layer aus. "
+"Damit die Vektordaten im System genutzt werden kann, müssen diese "
+"importiert werden. Bitte wählen Sie das entsprechende GML, das "
+"Koordiantensystem und den dazu passenden Layer aus. "
 
-#: geobox/web/templates/vector/import.html:3
-#: geobox/web/templates/vector/import.html:8
+#: ../app/geobox/web/templates/vector/import.html:3
+#: ../app/geobox/web/templates/vector/import.html:8
 msgid "shapefile import"
 msgstr "Shapedateien importieren"
 
-#: geobox/web/templates/vector/import.html:11
+#: ../app/geobox/web/templates/vector/import.html:11
 msgid "Upload Shapefile"
 msgstr "Shapefile hochladen"
 
-#: geobox/web/templates/vector/import.html:12
+#: ../app/geobox/web/templates/vector/import.html:12
 msgid "tooltip upload shapefile"
 msgstr ""
 "Laden Sie hier Ihr Shapefile in das System. Dies ist erforderlich um im "
-"nächsten Schritt die Daten importieren zu können. Neben dem Shapefile (.shp) "
-"müssen auch die Dateien mit der Endung .shx und .dbf hochgeladen werden."
+"nächsten Schritt die Daten importieren zu können. Neben dem Shapefile "
+"(.shp) müssen auch die Dateien mit der Endung .shx und .dbf hochgeladen "
+"werden."
 
-#: geobox/web/templates/vector/import.html:21
+#: ../app/geobox/web/templates/vector/import.html:21
 msgid ""
 "you can also save your shapefile directly to the geobox import folder. "
 "Reload this site after this."
 msgstr ""
-"Sie können das Shapefile auch direkt im Import-Verzeichnis ablegen. Nach dem "
-"Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur Auswahl "
-"bereit."
+"Sie können das Shapefile auch direkt im Import-Verzeichnis ablegen. Nach "
+"dem Neuladen der Seite, steht Ihnen dieses dann im zweiten Schritt zur "
+"Auswahl bereit."
 
-#: geobox/web/templates/vector/import.html:28
+#: ../app/geobox/web/templates/vector/import.html:28
 msgid "import vectordata"
 msgstr "Daten importieren"
 
-#: geobox/web/templates/vector/import.html:29
+#: ../app/geobox/web/templates/vector/import.html:29
 msgid "tooltip import vectordata"
 msgstr ""
-"Damit die Vektordaten im System genutzt werden kann, müssen diese importiert "
-"werden. Bitte wählen Sie das entsprechende Shapefile, das Koordiantensystem "
-"und den dazu passenden Layer aus. "
+"Damit die Vektordaten im System genutzt werden kann, müssen diese "
+"importiert werden. Bitte wählen Sie das entsprechende Shapefile, das "
+"Koordiantensystem und den dazu passenden Layer aus. "
 
-#: geobox/web/views/admin.py:102 geobox/web/views/admin.py:165
-#: geobox/web/views/project.py:285
+#: ../app/geobox/web/views/admin.py:102 ../app/geobox/web/views/admin.py:166
+#: ../app/geobox/web/views/project.py:286
 msgid "username or password not correct"
 msgstr "Benutzername oder Passwort sind nicht korrekt."
 
-#: geobox/web/views/admin.py:105 geobox/web/views/admin.py:184
-#: geobox/web/views/project.py:287
+#: ../app/geobox/web/views/admin.py:105 ../app/geobox/web/views/admin.py:184
+#: ../app/geobox/web/views/project.py:288
 msgid "unable to fetch context document"
 msgstr "Kontextdokument konnte nicht aktualisiert werden"
 
-#: geobox/web/views/admin.py:108
+#: ../app/geobox/web/views/admin.py:108
 msgid "load context document successful"
 msgstr "Daten wurden erfolgreich aktualisiert."
 
-#: geobox/web/views/admin.py:129
+#: ../app/geobox/web/views/admin.py:130
 msgid "unable to determine selected server"
 msgstr "Ausgewählter Server kann nicht gefunden werden"
 
-#: geobox/web/views/admin.py:197
+#: ../app/geobox/web/views/admin.py:197
 msgid "server already exists"
 msgstr "Server ist bereits vorhanden"
 
-#: geobox/web/views/admin.py:199
+#: ../app/geobox/web/views/admin.py:199
 msgid "server added"
 msgstr "Server hinzugefügt. Sie können diesen nun auswählen"
 
-#: geobox/web/views/admin.py:202
+#: ../app/geobox/web/views/admin.py:202
 msgid "server could not added"
 msgstr "Server konnte nicht hinzugefügt werden"
 
-#: geobox/web/views/admin.py:213 geobox/web/views/admin.py:220
+#: ../app/geobox/web/views/admin.py:213 ../app/geobox/web/views/admin.py:220
 msgid "unable to set homeserver"
 msgstr "Home-Server kann nicht festgelegt werden"
 
-#: geobox/web/views/admin.py:236
+#: ../app/geobox/web/views/admin.py:236
 #, python-format
 msgid "assigned %(homeserver)s as homeserver"
 msgstr "\"%(homeserver)s\" als Home-Server festgelegt"
 
-#: geobox/web/views/admin.py:282
+#: ../app/geobox/web/views/admin.py:282
 msgid "delete sucessful"
 msgstr "Erfolgreich gelöscht"
 
-#: geobox/web/views/admin.py:284
+#: ../app/geobox/web/views/admin.py:284
 msgid "delete not sucessful"
 msgstr "Löschen nicht möglich"
 
-#: geobox/web/views/admin.py:302
+#: ../app/geobox/web/views/admin.py:302
 msgid "settings changed. restart required"
-msgstr ""
-"Die Einstellungen wurden verändert - bitte starten Sie die Anwendung neu"
+msgstr "Die Einstellungen wurden verändert - bitte starten Sie die Anwendung neu"
 
-#: geobox/web/views/admin.py:340 geobox/web/views/vector.py:77
-#: geobox/web/views/vector.py:212
+#: ../app/geobox/web/views/admin.py:340 ../app/geobox/web/views/vector.py:77
+#: ../app/geobox/web/views/vector.py:212
 msgid "-- select srs --"
 msgstr "Koordinatensystem auswählen"
 
-#: geobox/web/views/admin.py:372
+#: ../app/geobox/web/views/admin.py:372
 #, python-format
 msgid ""
 "gml file %(name)s successfully uploaded and geometries added to "
@@ -2438,156 +2537,157 @@ msgstr ""
 "GML Datei %(name)s erfolgreich hochgeladen. Geometrien wurden in den "
 "%(auth_layer_title)s übernommen"
 
-#: geobox/web/views/boxes.py:63
+#: ../app/geobox/web/views/boxes.py:62
 msgid "upload success"
 msgstr "Datei erfolgreich hochgeladen"
 
-#: geobox/web/views/boxes.py:65
+#: ../app/geobox/web/views/boxes.py:64
 msgid "file type not allowed"
 msgstr "Dateityp ist nich erlaubt"
 
-#: geobox/web/views/boxes.py:117 geobox/web/views/vector.py:113
-#: geobox/web/views/vector.py:234
+#: ../app/geobox/web/views/boxes.py:116 ../app/geobox/web/views/vector.py:113
+#: ../app/geobox/web/views/vector.py:233
 msgid "please select new layer or current layer to import"
 msgstr ""
-"Der Layer konnte nicht eindeutig zugeordnet werden. Bitte wählen Sie einen "
-"Layer aus der Liste oder geben Sie einen Namen für einen neuen Layer ein."
+"Der Layer konnte nicht eindeutig zugeordnet werden. Bitte wählen Sie "
+"einen Layer aus der Liste oder geben Sie einen Namen für einen neuen "
+"Layer ein."
 
-#: geobox/web/views/boxes.py:125 geobox/web/views/vector.py:125
-#: geobox/web/views/vector.py:244
+#: ../app/geobox/web/views/boxes.py:124 ../app/geobox/web/views/vector.py:125
+#: ../app/geobox/web/views/vector.py:243
 msgid "None of the characters used for the layer is allowed"
 msgstr "Angegebener Layername ist ungültig"
 
-#: geobox/web/views/boxes.py:137
+#: ../app/geobox/web/views/boxes.py:136
 msgid "file will be imported"
 msgstr "Datei wird importiert"
 
-#: geobox/web/views/boxes.py:145
+#: ../app/geobox/web/views/boxes.py:144
 msgid "file deleted"
 msgstr "Datei wurde gelöscht"
 
-#: geobox/web/views/editor.py:40
+#: ../app/geobox/web/views/editor.py:40
 msgid "upload_box"
 msgstr "Upload-Box"
 
-#: geobox/web/views/editor.py:42
+#: ../app/geobox/web/views/editor.py:42
 msgid "Filesystem"
 msgstr "Dateisystem"
 
-#: geobox/web/views/editor.py:129
+#: ../app/geobox/web/views/editor.py:135
 msgid "creating couch app"
 msgstr "Erstelle GeoBox CouchApp"
 
-#: geobox/web/views/editor.py:135
+#: ../app/geobox/web/views/editor.py:141
 msgid "Error creating couchapp. Check url and given target couchdb."
 msgstr ""
 "Fehler beim erstellen der GeoBox CouchApp. Bitte überprüfen Sie die "
 "angegebene URL und die Ziel-CouchDB."
 
-#: geobox/web/views/editor.py:168
+#: ../app/geobox/web/views/editor.py:174
 #, python-format
 msgid "couchapp ready %(couchapp_url)s"
 msgstr ""
-"Die GeoBox CouchApp wurde erfolgreich in Ihrer CouchDB erstellt und steht "
-"nun unter der URL %(couchapp_url)s für Sie bereit"
+"Die GeoBox CouchApp wurde erfolgreich in Ihrer CouchDB erstellt und steht"
+" nun unter der URL %(couchapp_url)s für Sie bereit"
 
-#: geobox/web/views/project.py:99 geobox/web/views/project.py:222
-#: geobox/web/views/vector.py:142 geobox/web/views/vector.py:258
+#: ../app/geobox/web/views/project.py:99 ../app/geobox/web/views/project.py:222
+#: ../app/geobox/web/views/vector.py:142 ../app/geobox/web/views/vector.py:257
 msgid "form error"
 msgstr "Fehler bei Eingaben"
 
-#: geobox/web/views/project.py:144
+#: ../app/geobox/web/views/project.py:144
 msgid "no coverage"
 msgstr "Keine Geometrie"
 
-#: geobox/web/views/project.py:152
+#: ../app/geobox/web/views/project.py:152
 msgid "no tiles"
 msgstr "Keine Kacheln"
 
-#: geobox/web/views/project.py:162
+#: ../app/geobox/web/views/project.py:162
 msgid "to many tiles"
 msgstr "Zu viele Kacheln"
 
-#: geobox/web/views/raster.py:51 geobox/web/views/raster.py:179
+#: ../app/geobox/web/views/raster.py:51 ../app/geobox/web/views/raster.py:179
 msgid "update WMTS"
 msgstr "WMTS aktualisiert"
 
-#: geobox/web/views/raster.py:77 geobox/web/views/raster.py:149
+#: ../app/geobox/web/views/raster.py:77 ../app/geobox/web/views/raster.py:149
 msgid "invalid bbox"
 msgstr "Ungültige BoundingBox"
 
-#: geobox/web/views/raster.py:99
+#: ../app/geobox/web/views/raster.py:99
 msgid "Save local WMS"
 msgstr "Lokaler WMS gespeichert"
 
-#: geobox/web/views/raster.py:113
+#: ../app/geobox/web/views/raster.py:113
 msgid "update WMS"
 msgstr "WMS aktualisiert"
 
-#: geobox/web/views/raster.py:124
+#: ../app/geobox/web/views/raster.py:124
 msgid "Need url for capabilities"
 msgstr "URL für Capabilites wird benötigt"
 
-#: geobox/web/views/raster.py:169
+#: ../app/geobox/web/views/raster.py:169
 msgid "Save local WMTS"
 msgstr "Lokaler WMTS gespeichert"
 
-#: geobox/web/views/raster.py:199
+#: ../app/geobox/web/views/raster.py:199
 msgid "delete local source successful"
 msgstr "Quelle erfolgreich gelöscht"
 
-#: geobox/web/views/raster.py:211
+#: ../app/geobox/web/views/raster.py:211
 msgid "delete source successful"
 msgstr "Quelle erfolgreich gelöscht"
 
-#: geobox/web/views/tasks.py:59
+#: ../app/geobox/web/views/tasks.py:59
 msgid "paused task successful"
 msgstr "Aufgabe wird angehalten"
 
-#: geobox/web/views/tasks.py:70
+#: ../app/geobox/web/views/tasks.py:70
 msgid "start task successful"
 msgstr "Aufgabe wurde gestartet"
 
-#: geobox/web/views/tasks.py:80
+#: ../app/geobox/web/views/tasks.py:80
 msgid "delete task successful"
 msgstr "Aufgabe gelöscht"
 
-#: geobox/web/views/vector.py:57 geobox/web/views/vector.py:216
+#: ../app/geobox/web/views/vector.py:57 ../app/geobox/web/views/vector.py:215
 msgid "-- select layer or add new --"
 msgstr "-- Layer auswählen -- "
 
-#: geobox/web/views/vector.py:64
+#: ../app/geobox/web/views/vector.py:64
 msgid "-- select a geojson --"
 msgstr "-- GEOJSON auswählen -- "
 
-#: geobox/web/views/vector.py:72
+#: ../app/geobox/web/views/vector.py:72
 msgid "-- select a gml file --"
 msgstr "GM- Datei auswählen"
 
-#: geobox/web/views/vector.py:94 geobox/web/views/vector.py:263
+#: ../app/geobox/web/views/vector.py:94 ../app/geobox/web/views/vector.py:262
 #, python-format
 msgid "failed to upload %(name)s"
 msgstr "Fehler beim Hochladen der Datei %(name)s"
 
-#: geobox/web/views/vector.py:98 geobox/web/views/vector.py:267
+#: ../app/geobox/web/views/vector.py:98 ../app/geobox/web/views/vector.py:266
 #, python-format
 msgid "file %(name)s uploaded"
 msgstr "Datei %(name)s hochgeladen"
 
-#: geobox/web/views/vector.py:102 geobox/web/views/vector.py:265
+#: ../app/geobox/web/views/vector.py:102 ../app/geobox/web/views/vector.py:264
 #, python-format
 msgid "filetype of %(name)s not allowed"
 msgstr "Dateityp der Datei %(name)s ist nicht erlaubt"
 
-#: geobox/web/views/vector.py:220
+#: ../app/geobox/web/views/vector.py:219
 msgid "-- select a shapefile --"
 msgstr "Shapefile auswählen"
 
-#: geobox/web/views/vector.py:230
+#: ../app/geobox/web/views/vector.py:229
 msgid "invalid shapefile"
 msgstr "Ungültiges Shapefile/fehlende Dateien"
 
-#: geobox/web/views/vector.py:261
+#: ../app/geobox/web/views/vector.py:260
 #, python-format
 msgid "file %(name)s missing"
 msgstr "Datei %(name)s fehlt"
@@ -2707,38 +2807,38 @@ msgstr "Ungültiger Datumswert."
 msgid "Already exists."
 msgstr "Bereits vorhanden."
 
-#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:412
+#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:413
 msgid "Invalid Choice: could not coerce"
 msgstr "Keine gültige Auswahl."
 
-#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:445
+#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:446
 msgid "Invalid choice(s): one or more data inputs could not be coerced"
 msgstr ""
 "Ungültige Auswahl: Einer oder mehrere Eingaben konnten nicht verarbeitet "
 "werden."
 
-#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:452
+#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:453
 #, python-format
 msgid "'%(value)s' is not a valid choice for this field"
 msgstr "'%(value)s' ist keine gültige Wahl für dieses Feld."
 
-#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:507
+#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:508
 msgid "Not a valid integer value"
 msgstr "Kein gültiger Integer-Zahlenwert angegeben."
 
-#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:554
+#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:555
 msgid "Not a valid decimal value"
 msgstr "Kein gültiger Dezimal-Zahlenwert angegeben."
 
-#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:581
+#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:582
 msgid "Not a valid float value"
 msgstr "Kein gültiger Float-Zahlenwert angegeben."
 
-#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:632
+#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:633
 msgid "Not a valid datetime value"
 msgstr "Kein gültigen Zeitpunkt angegeben."
 
-#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:649
+#: /home/kai/.virtualenvs/gbi-client/local/lib/python2.7/site-packages/wtforms/fields/core.py:650
 msgid "Not a valid date value"
 msgstr "Kein gültiges Datum angegeben."
 
@@ -2753,3 +2853,31 @@ msgstr "Kein gültiges Datum angegeben."
 
 #~ msgid "Set server"
 #~ msgstr "Server festlegen"
+
+#~ msgid "layers"
+#~ msgstr "Layer"
+
+#~ msgid "search_string"
+#~ msgstr "Suchanfrage"
+
+#~ msgid "infotext - no wfs search"
+#~ msgstr "Der Server stellt keine Suchdienste zur Verfügung."
+
+#~ msgid "Search in"
+#~ msgstr "Suche"
+
+#~ msgid "infotext - search controls"
+#~ msgstr ""
+
+#~ msgid "infotext - search"
+#~ msgstr ""
+#~ "Sie können hier über die vom "
+#~ "Server bereitgestellt Dienste suchen und "
+#~ "die Geometrien anschließend über den "
+#~ "Reiter 'Editieren' in Ihren Layer "
+#~ "übertragen.<br>Je nach ausgewähltem Suchdienst "
+#~ "stehen Ihnen verschiedene Möglichkeiten der"
+#~ " Suche zur Verfügung.<br>Um die "
+#~ "Suchergebnisse auszublenden, betätigen Sie den"
+#~ " entsprechenden Knopf."
+
