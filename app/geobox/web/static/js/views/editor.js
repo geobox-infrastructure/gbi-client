@@ -737,7 +737,7 @@ $(document).ready(function() {
   editor.addControl(parcelSearchFeatureControl);
 
   /* general search ui */
-    var leaveCoordinateSearch = function() {
+  var leaveCoordinateSearch = function() {
     parcelSearchCoordinateControl.deactivate();
   };
 
@@ -862,7 +862,7 @@ $(document).ready(function() {
       var row = $('<tr></tr>');
 
       var selectCol = $('<td></td>');
-      var selectCheckbox = $('<input type="checkbox" class="toggle-parcel-feature" />');
+      var selectCheckbox = $('<input type="checkbox" class="toggle-parcel-feature" id="' + feature.attributes.id + '"/>');
       selectCheckbox.click(function() {
         $('#server-search #parcel-search-result-table #toggle-all-results').prop('checked', allFeatureSelectCheckboxesChecked());
         if($(this).prop('checked')) {
@@ -973,6 +973,13 @@ $(document).ready(function() {
     var parcelSearchVisible = !$('#parcel-search-container').hasClass('hide');
     if(parcelSearchVisible) {
       var parcelSearchType = $('#server-search #parcel-search-container .select-parcel-search-group button.active').attr('id').split('-').splice(-1, 1).join('');
+      var selectedFeaturesIds = [];
+      $.each(parcelSearchResultLayer.selectedFeatures(), function(idx, feature) {
+        selectedFeaturesIds.push(feature.attributes.id)
+      });
+      $('#server-search #parcel-search-result-table .toggle-parcel-feature').each(function(idx, element) {
+        $(element).prop('checked', $.inArray(element.id, selectedFeaturesIds) !== -1);
+      });
       showParcelSearchType(parcelSearchType);
     }
   }
