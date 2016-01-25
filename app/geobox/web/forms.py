@@ -352,9 +352,6 @@ class ServerSearchForm(Form):
                                    get_pk=lambda a: a.value)
 
 
-class ServerSeachForm(Form):
-    target = QuerySelectField(lazy_gettext('Search in'), query_factory=get_server_search_sources)
-
 class CreateCouchAppForm(Form):
     couch_url = TextField(lazy_gettext('couchapp_couch_url'), validators=[Required()])
 
