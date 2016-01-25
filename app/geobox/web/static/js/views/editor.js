@@ -891,6 +891,7 @@ $(document).ready(function() {
       var row = $('<tr class="' + rowClass + '"><td></td><td>' + id + '</td>');
       resultTableBody.append(row);
     });
+    $('#server-search #parcel-search-result-table #toggle-all-results').prop('checked', false);
     $('#parcel-search-result').removeClass('hide');
   };
 
