@@ -258,8 +258,11 @@
                   <div class="alert alert-danger hide" id="parcel-search-id-no-ids-error">{{ _('No parcel ids given') }}</div>
                 </div>
                 <div id="parcel-search-coordinate" class="hide initial-hidden">
-                  <div>{{ _('Selected coordinate') }}: <span id="parcel-search-coordinate-coordinate"></span></div>
-                  <button class="btn btn-small initial-disabled" id="parcel-search-coordinate-start" disabled="disabled">{{ _('Start parcel coordinate search') }}</button>
+                  <div class="control-group">
+                    <span>{{ _('Selected coordinate') }}:</span>
+                    <span id="parcel-search-coordinate-coordinate"></span>
+                  </div>
+                  <button class="btn btn-small" id="parcel-search-coordinate-start">{{ _('Start parcel coordinate search') }}</button>
                   <div class="alert alert-danger hide" id="parcel-search-coordinate-no-coordinate-error">{{ _('No search coordinate given') }}</div>
                 </div>
                 <div id="parcel-search-feature" class="hide initial-hidden">
