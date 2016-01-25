@@ -781,6 +781,8 @@ $(document).ready(function() {
       case 'wfs':
         $('#server-search #parcel-search-container').hide();
         $('#server-search #wfs-search-container').show();
+        parcelSearchCoordinateControl.deactivate();
+        parcelSearchFeatureControl.deactivate();
       break;
       case 'parcel':
         var parcelSearchType = $('#server-search #parcel-search-container .select-parcel-search-group button.active')
