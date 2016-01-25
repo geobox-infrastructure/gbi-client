@@ -208,7 +208,7 @@
         {% if with_server %}
         <div class="tab-pane fade" id="search">
           <h4>{{ _('search') }}</h4>
-          <ul id="tabs" class="nav nav-tabs search-nav-tabs">
+          {#<ul id="tabs" class="nav nav-tabs search-nav-tabs">
             {% if wfs_search_sources or parcel_search_sources %}
             <li class="active">
               <a href="#server-search" data-toggle="tab">{{ _('server search') }}</a>
@@ -218,9 +218,9 @@
               <a href="#local-search" data-toggle="tab">{{ _('local search') }}</a>
             </li>
           </ul>
-          <div class="tab-content" id="search-tabs">
+          <div class="tab-content" id="search-tabs">#}
             {% if wfs_search_sources or parcel_search_sources %}
-            <div class="tab-pane fade in active" id="server-search">
+            <div {#class="tab-pane fade in active"#} id="server-search">
               <p>{{ _('infotext - search controls') }}</p>
               {{ input(server_search_form.search_source) }}
               <div id="wfs-search-container" class="initial-hidden search-container">
@@ -269,8 +269,8 @@
               </div>
             </div>
             {% endif %}
-            <div class="tab-pane fade" id="local-search">Local Search</div>
-          </div>
+            {#<div class="tab-pane fade" id="local-search">Local Search</div>
+          </div>#}
         </div>
         {% endif %}
         <!-- end search -->
