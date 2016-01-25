@@ -996,8 +996,24 @@ $(document).ready(function() {
   $('#server-search #parcel-search-result-table #toggle-all-results').click(function() {
     var checkboxes = $('#server-search #parcel-search-result-table .toggle-parcel-feature');
     var checked = allFeatureSelectCheckboxesChecked();
-    checkboxes.each(function() {
-      $(this).prop('checked', !checked);
+    checkboxes.each(function(idx, checkbox) {
+      $(checkbox).prop('checked', !checked);
+      var featureId = this.id;
+      var feature;
+      $.each(parcelSearchResultLayer.features, function(fidx, f) {
+        if('id' in f.attributes && f.attributes['id'] === checkbox.id) {
+            feature = f;
+            return false;
+        }
+      });
+      if(feature === undefined) {
+        return;
+      }
+      if($(checkbox).prop('checked')) {
+        parcelSearchResultLayer.selectFeature(feature);
+      } else {
+        parcelSearchResultLayer.unSelectFeature(feature);
+      }
     });
   });
 
