@@ -1001,6 +1001,14 @@ $(document).ready(function() {
     });
   });
 
+  $('#server-search #remove-parcel-search-result').click(function() {
+    $('#server-search #parcel-search-result').hide();
+    if(parcelSearchResultLayer !== undefined) {
+      editor.removeLayer(parcelSearchResultLayer);
+    }
+    parcelSearchResultLayer = undefined;
+  });
+
   var initSearchTab = function() {
     var parcelSearchVisible = !$('#parcel-search-container').hasClass('hide');
     if(parcelSearchVisible) {
