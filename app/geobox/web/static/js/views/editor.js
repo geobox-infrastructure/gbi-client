@@ -779,15 +779,16 @@ $(document).ready(function() {
     $('#server-search .initial-disabled').attr('disabled', 'disabled');
     switch(searchType) {
       case 'wfs':
-        $('#server-search #wfs-search-container').removeClass('hide');
+        $('#server-search #parcel-search-container').hide();
+        $('#server-search #wfs-search-container').show();
       break;
       case 'parcel':
-        $('#server-search #parcel-search-container .select-parcel-search-group button').removeClass('active');
-        var firstButtonId = $('#server-search #parcel-search-container .select-parcel-search-group button:first').addClass('active').attr('id');
-        var firstButtonId = firstButtonId.split('-');
-        showParcelSearchType(firstButtonId[firstButtonId.length - 1]);
+        var parcelSearchType = $('#server-search #parcel-search-container .select-parcel-search-group button.active')
+          .attr('id').split('-').slice(-1).join('');
+        showParcelSearchType(parcelSearchType);
 
-        $('#server-search #parcel-search-container').removeClass('hide');
+        $('#server-search #parcel-search-container').show();
+        $('#server-search #wfs-search-container').hide();
       break;
     };
   };
@@ -1029,6 +1030,7 @@ $(document).ready(function() {
   });
 
   var initSearchTab = function() {
+    showSearchTypeContainer($('#server-search #search_source').val().split('_')[0]);
     var parcelSearchVisible = !$('#parcel-search-container').hasClass('hide');
     if(parcelSearchVisible) {
       var parcelSearchType = $('#server-search #parcel-search-container .select-parcel-search-group button.active').attr('id').split('-').splice(-1, 1).join('');
