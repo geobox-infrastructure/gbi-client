@@ -810,7 +810,7 @@ msgstr "Bitte wählen Sie eine oder mehrere Geometrien aus"
 
 #: ../app/geobox/web/templates/editor.html:273
 msgid "Search in progress"
-msgstr "Flurstückssuche im gange"
+msgstr "Flurstückssuche wird ausgeführt"
 
 #: ../app/geobox/web/templates/editor.html:275
 msgid "Last search results"
