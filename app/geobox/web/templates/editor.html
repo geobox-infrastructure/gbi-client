@@ -62,6 +62,14 @@
         {{ generate_wfs_searchlayers(wfs_search_sources) }}
       {% endif %}
 
+      {% if parcel_search_sources %}
+        var parcelSearchSources = {
+          {% for parcel_search_source in parcel_search_sources %}
+            'parcel_{{ parcel_search_source.id }}': '{{parcel_search_source.url}}'{% if not loop.last %},{% endif %}
+          {% endfor %}
+        };
+      {% endif %}
+
       {% if preview_layername and preview_features %}
         {{ generate_temp_vectorlayer(preview_layername, preview_features)}}
       {% endif %}

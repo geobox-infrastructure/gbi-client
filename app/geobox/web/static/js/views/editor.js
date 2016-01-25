@@ -948,7 +948,8 @@ $(document).ready(function() {
       return;
     }
     $('#server-search #parcel-search-in-progress').show();
-    $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {'ids': requestIds.join(',')})
+    var url = parcelSearchSources[$('#server-search #search_source').val()];
+    $.get(url, {'ids': requestIds.join(',')})
       .done(function(response) {
         $('#server-search #parcel-search-in-progress').hide();
         handleParcelSearchResponse(response, requestIds);
@@ -961,7 +962,8 @@ $(document).ready(function() {
       return;
     }
     $('#server-search #parcel-search-in-progress').show();
-    $.get('http://localhost:8888/proxy/http://localhost:5000/search/12345/query', {
+    var url = parcelSearchSources[$('#server-search #search_source').val()];
+    $.get(url, {
       'lat': parcelSearchCoordinate[0],
       'lon': parcelSearchCoordinate[1]
     })
@@ -982,9 +984,10 @@ $(document).ready(function() {
     }
     var writer = new OpenLayers.Format.GeoJSON();
     $('#server-search #parcel-search-in-progress').show();
+    var url = parcelSearchSources[$('#server-search #search_source').val()];
     $.ajax({
       type: 'post',
-      url: 'http://localhost:8888/proxy/http://localhost:5000/search/12345/query',
+      url: url,
       data: writer.write(searchFeatures),
       contentType: 'application/json'
     }).done(function(response) {

@@ -108,6 +108,7 @@ def load_context(gbi_server, db_session, form, app_state):
         flash(_('load context document successful'), 'sucess')
         context.update_raster_sources(gbi_server, db_session)
         context.update_wfs_sources(gbi_server, db_session)
+        context.update_parcel_search_source(gbi_server, db_session)
 
         db_session.commit()
 

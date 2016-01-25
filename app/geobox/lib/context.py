@@ -63,6 +63,9 @@ class Context(object):
     def version(self):
         return self.doc.get('version')
 
+    def parcel_search_url(self):
+        return self.doc.get('parcel_search_url')
+
 
 class ContextModelUpdater(object):
     """
@@ -236,6 +239,23 @@ def update_wfs_sources(gbi_server, db_session):
         wfs_source = wfs_source_for_conf(db_session, source, gbi_server.prefix)
         wfs_source.gbi_server = gbi_server
         db_session.add(wfs_source)
+
+
+def update_parcel_search_source(gbi_server, db_session):
+    parcel_search_url = gbi_server.context.parcel_search_url()
+    if gbi_server.parcel_search_source:
+        if gbi_server.context.parcel_search_url:
+            gbi_server.parcel_search_source.url = parcel_search_url
+            gbi_server.parcel_search_source.active = True
+        else:
+            gbi_server.parcel_search_source.active = False
+    else:
+        if gbi_server.context.parcel_search_url:
+            parcel_search_source = model.ParcelSearchSource(
+                url=parcel_search_url,
+                gbi_server=gbi_server
+            )
+            db_session.add(parcel_search_source)
 
 
 def update_couchdb_sources(gbi_server, app_state):

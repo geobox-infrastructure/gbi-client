@@ -125,4 +125,4 @@ class ParcelSearchSource(Base):
     active = sa.Column(sa.String, default=True)
     gbi_server_id = sa.Column(sa.Integer, sa.ForeignKey('servers.id'),
                               nullable=False)
-    gbi_server = orm.relationship('GBIServer', backref='parcel_search_sources')
+    gbi_server = orm.relationship('GBIServer', backref='parcel_search_source')

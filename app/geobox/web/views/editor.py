@@ -18,7 +18,7 @@ from flaskext.babel import _
 
 import json
 
-from geobox.model import ExternalWMTSSource, ExternalWFSSource, User
+from geobox.model import ExternalWMTSSource, ExternalWFSSource, User, ParcelSearchSource
 from geobox.lib import offline
 from geobox.lib.couchdb import CouchFileBox, all_layers, replication_status, CouchDBBase, CouchDB
 from geobox.lib.tabular import geojson_to_rows, csv_export, ods_export
@@ -60,6 +60,10 @@ def editor():
     wfs_search_sources = g.db.query(ExternalWFSSource).filter_by(active=True).all()
     if not wfs_search_sources:
         wfs_search_sources = False
+
+    parcel_search_sources = g.db.query(ParcelSearchSource).filter_by(active=True).all()
+    if not parcel_search_sources:
+        parcel_search_sources = False
     server_search_form = ServerSearchForm()
 
     return render_template('editor.html',
@@ -69,7 +73,7 @@ def editor():
         preview_features=preview_features,
         parcel_service=True,
         wfs_search_sources=wfs_search_sources,
-        parcel_search_sources=[('TestPacelSearch', 'http://localhost:8888/proxy/http://localhost:5000/search/12345/query')],
+        parcel_search_sources=parcel_search_sources,
         server_search_form=server_search_form,
         with_server=True,
         wms_search_url=current_app.config.geobox_state.config.get('web', 'wms_search_url'),
