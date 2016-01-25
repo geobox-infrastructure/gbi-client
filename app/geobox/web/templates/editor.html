@@ -211,8 +211,6 @@
           <div id="measure-output"></div>
         </div>
 
-        <!-- start search -->
-
         {% if with_server %}
         <div class="tab-pane fade" id="search">
           <h4>{{ _('search') }}</h4>
@@ -229,7 +227,7 @@
           <div class="tab-content" id="search-tabs">#}
             {% if wfs_search_sources or parcel_search_sources %}
             <div {#class="tab-pane fade in active"#} id="server-search">
-              <p>{{ _('infotext - search controls') }}</p>
+              <p>{{ _('infotext - search controls') }}{{ generate_tooltip(_('tooltip - search') ) }}</p>
               {{ input(server_search_form.search_source) }}
               <div id="wfs-search-container" class="initial-hidden search-container">
                 <div class="control-group">
@@ -290,7 +288,6 @@
           </div>#}
         </div>
         {% endif %}
-        <!-- end search -->
 
         <div class="tab-pane fade" id="thematical">
           <h4>{{ _('thematical map') }}</h4>
