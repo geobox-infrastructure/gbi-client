@@ -232,7 +232,9 @@
               <p>{{ _('infotext - search controls') }}</p>
               {{ input(server_search_form.search_source) }}
               <div id="wfs-search-container" class="initial-hidden search-container">
-                <textarea id="wfs-search-value"></textarea>
+                <div class="control-group">
+                  <textarea id="wfs-search-value"></textarea>
+                </div>
                 <div id="wfs-no-features-found" class="alert alert-error hide initial-hidden">{{ _('No features found') }}</div>
                 <div id="wfs-search-in-progress" class="alert hide initial-hidden">
                   <img src="{{ url_for('static', filename='img/loader.gif')}}">
@@ -251,7 +253,9 @@
                   </div>
                 </div>
                 <div id="parcel-search-id" class="hide initial-hidden">
-                  <textarea id="parcel-search-id-input"></textarea>
+                  <div class="control-group">
+                    <textarea id="parcel-search-id-input"></textarea>
+                  </div>
                   <button class="btn btn-small" id="parcel-search-id-start">{{ _('Start parcel id search') }}</button>
                   <div class="alert alert-danger hide" id="parcel-search-id-no-ids-error">{{ _('No parcel ids given') }}</div>
                 </div>
