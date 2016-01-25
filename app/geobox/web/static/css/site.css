@@ -402,3 +402,8 @@ hr#save_dividing_line {
     overflow: auto;
     margin-bottom: 15px;
 }
+
+#parcel-search-id-input {
+    width: 275px;
+    height: 80px;
+}
