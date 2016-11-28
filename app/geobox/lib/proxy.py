@@ -154,3 +154,41 @@ def proxy_couchdb_request(request, url):
         resp_iter = response_iterator(resp)
     return Response(resp_iter, direct_passthrough=True,
         headers=headers, status=resp.status_code)
+
+
+def proxy_cors(request, url):
+    headers = end_to_end_headers(request.headers)
+
+    content_length = request.headers.get('content-length')
+    if not content_length:
+        data = None
+    else:
+        data = LimitedStream(request.stream)
+
+    try:
+        resp = requests.request(request.method, url, data=data,
+                                headers=headers, params=request.args,
+                                stream=True)
+        chunked_response = resp.headers.get('Transfer-Encoding') == 'chunked'
+        line_based = resp.headers.get('Content-type', '').startswith(
+            ('text/plain', 'application/json'))
+    except requests.exceptions.RequestException, ex:
+        raise exceptions.BadGateway('source returned: %s' % ex)
+
+    if chunked_response:
+        # gunicorn/werkzeug supports chunked encoding, no need to
+        # encode it manually
+        native_chunk_support = (
+            'gunicorn' in request.environ['SERVER_SOFTWARE'] or
+            'Werkzeug' in request.environ['SERVER_SOFTWARE']
+        )
+        if not native_chunk_support:
+            headers.append(('Transfer-Encoding', 'chunked'))
+
+        resp_iter = chunked_response_iterator(resp, native_chunk_support,
+                                              line_based)
+    else:
+        resp_iter = response_iterator(resp)
+
+    return Response(resp_iter, direct_passthrough=True,
+                    headers=headers, status=resp.status_code)

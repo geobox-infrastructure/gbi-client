@@ -17,7 +17,7 @@ import json
 import requests
 from flask import Blueprint, request, current_app
 
-from geobox.lib.proxy import proxy_couchdb_request
+from geobox.lib.proxy import proxy_couchdb_request, proxy_cors
 from geobox.lib.couchdb import VectorCouchDB
 from geobox.model.sources import ExternalWMTSSource
 
@@ -58,3 +58,9 @@ def proxy_request(url):
                 requests.get(app_state.home_server.update_coverage_url)
 
     return response
+
+
+@proxy.route('/cors/<path:url>', methods=['GET', 'POST'])
+@proxy.route('/cors/', build_only=True)
+def cors_proxy(url):
+    return proxy_cors(request, url)
