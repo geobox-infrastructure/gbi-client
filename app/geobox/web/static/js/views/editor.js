@@ -994,15 +994,23 @@ $(document).ready(function() {
   $('#server-search #parcel-search-feature-start').click(function() {
     beforeParcelSearch();
 
-    var searchFeatures = [];
+    var _searchFeatures = [];
+
     $.each(editor.layerManager.vectorLayers, function(id, layer) {
-      searchFeatures = searchFeatures.concat(layer.selectedFeatures());
+      _searchFeatures = _searchFeatures.concat(layer.selectedFeatures());
       layer.unSelectAllFeatures();
     });
-    if(searchFeatures.length === 0) {
+    if(_searchFeatures.length === 0) {
       $('#server-search #parcel-search-feature-no-feature-error').show().fadeOut(3000);
       return;
     }
+
+    var searchFeatures = [];
+    $.each(_searchFeatures, function(idx, _feature) {
+      var feature = _feature.clone();
+      feature.geometry.transform(editor.map.olMap.getProjection(), 'EPSG:4326');
+      searchFeatures.push(feature);
+    });
     var writer = new OpenLayers.Format.GeoJSON();
     $('#server-search #parcel-search-in-progress').show();
     var url = parcelSearchSources[$('#server-search #search_source').val()];
