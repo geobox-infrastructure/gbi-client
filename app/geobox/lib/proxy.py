@@ -18,7 +18,7 @@ import requests
 from flask import current_app, g
 from werkzeug import exceptions
 from werkzeug.wrappers import Response
-from geobox.model import ExternalWFSSource
+from geobox.model import ExternalWFSSource, ParcelSearchSource
 
 # headers to remove as of HTTP 1.1 RFC2616
 # http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html
@@ -157,6 +157,14 @@ def proxy_couchdb_request(request, url):
 
 
 def proxy_cors(request, url):
+    found = False
+    for allowed_host in g.db.query(ParcelSearchSource).filter_by(active=True).all():
+        if url.startswith(allowed_host.url):
+            found = True
+
+    if not found:
+        raise exceptions.Forbidden()
+
     headers = end_to_end_headers(request.headers)
 
     content_length = request.headers.get('content-length')
