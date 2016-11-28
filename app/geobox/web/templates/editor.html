@@ -65,7 +65,7 @@
       {% if parcel_search_sources %}
         var parcelSearchSources = {
           {% for parcel_search_source in parcel_search_sources %}
-            'parcel_{{ parcel_search_source.id }}': '{{url_for("proxy.cors_proxy") + parcel_search_source.url}}'{% if not loop.last %},{% endif %}
+            'parcel_{{ parcel_search_source.id }}': '{{url_for("proxy.search_proxy") + parcel_search_source.url}}'{% if not loop.last %},{% endif %}
           {% endfor %}
         };
       {% endif %}

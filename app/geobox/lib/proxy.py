@@ -156,7 +156,7 @@ def proxy_couchdb_request(request, url):
         headers=headers, status=resp.status_code)
 
 
-def proxy_cors(request, url):
+def proxy_search(request, url):
     found = False
     for allowed_host in g.db.query(ParcelSearchSource).filter_by(active=True).all():
         if url.startswith(allowed_host.url):
