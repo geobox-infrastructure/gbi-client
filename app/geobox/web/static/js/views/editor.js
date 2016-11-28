@@ -982,8 +982,8 @@ $(document).ready(function() {
     $('#server-search #parcel-search-in-progress').show();
     var url = parcelSearchSources[$('#server-search #search_source').val()];
     $.get(url, {
-      'lat': parcelSearchCoordinate[0],
-      'lon': parcelSearchCoordinate[1]
+      'lon': parcelSearchCoordinate[0],
+      'lat': parcelSearchCoordinate[1]
     })
       .done(function(response) {
         $('#server-search #parcel-search-in-progress').hide();
