@@ -20,7 +20,7 @@ import logging
 import threading
 import webbrowser
 
-version = '0.7.0'
+version = '0.8.2'
 
 
 def app_server_thread(app_state):

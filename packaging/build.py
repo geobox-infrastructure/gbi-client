@@ -82,22 +82,22 @@ keep_erl_libs = [
     'xmerl-*',
 ]
 
+rm_erl_libs = [
+    'megaco-*',
+    'wx-*',
+]
+
 def prepare_command():
     log.mark('preparing couchdb')
     log.info('removing unneeded erlang packages')
     with config['couchdb_dir'].as_working_dir():
-        dest = path('lib_new')
-        dest.ensure_dir()
         lib_dir = path('lib')
-        for lib_name in keep_erl_libs:
+        for lib_name in rm_erl_libs:
             lib = lib_dir.dirs(lib_name)
             if lib:
-                lib[0].move(dest)
+                lib[0].rmtree()
             else:
                 log.warn('could not find %s' % lib_name)
-
-        lib_dir.rmtree()
-        dest.move(lib_dir)
 
         for rm in [
             'erts-*/src', 'erts-*/include', 'erts-*/man', 'erts-*/doc',

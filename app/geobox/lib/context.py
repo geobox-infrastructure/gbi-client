@@ -243,16 +243,17 @@ def update_wfs_sources(gbi_server, db_session):
 
 def update_parcel_search_source(gbi_server, db_session):
     parcel_search_url = gbi_server.context.parcel_search_url()
-    if gbi_server.parcel_search_source:
-        if gbi_server.context.parcel_search_url:
+    if gbi_server.parcel_search_source: # existing source
+        if parcel_search_url:
             gbi_server.parcel_search_source.url = parcel_search_url
             gbi_server.parcel_search_source.active = True
         else:
             gbi_server.parcel_search_source.active = False
     else:
-        if gbi_server.context.parcel_search_url:
+        if parcel_search_url:
             parcel_search_source = model.ParcelSearchSource(
                 url=parcel_search_url,
+                active=True,
                 gbi_server=gbi_server
             )
             db_session.add(parcel_search_source)

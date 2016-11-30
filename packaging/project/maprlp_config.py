@@ -41,7 +41,7 @@ except ImportError:
                 'port': 8090,
                 'server_list': [
                     {
-                        "title": "GeoBox-Server",
+                        "title": "MapRLP GeoBox-Server",
                         "url": "https://map.rlp.de/context",
                         "auth": True
                     }
