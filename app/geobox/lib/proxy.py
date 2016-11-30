@@ -183,6 +183,9 @@ def proxy_search(request, url):
     except requests.exceptions.RequestException, ex:
         raise exceptions.BadGateway('source returned: %s' % ex)
 
+    # requests handles content-encoding like gzip, drop this header as well
+    headers = end_to_end_headers(resp.headers, ('content-encoding', ))
+
     if chunked_response:
         # gunicorn/werkzeug supports chunked encoding, no need to
         # encode it manually
